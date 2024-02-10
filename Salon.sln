@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalonSystemProject", "TriforceSalon\SalonSystemProject.csproj", "{AA9482C6-459C-4D42-AB81-8A6A2B5F959C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA9482C6-459C-4D42-AB81-8A6A2B5F959C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9482C6-459C-4D42-AB81-8A6A2B5F959C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9482C6-459C-4D42-AB81-8A6A2B5F959C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9482C6-459C-4D42-AB81-8A6A2B5F959C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCA72922-FB21-463C-BE02-CE53208C2FD6}
+	EndGlobalSection
+EndGlobal
