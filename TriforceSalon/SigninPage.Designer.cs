@@ -67,6 +67,7 @@
             this.SigninBtn.TabIndex = 3;
             this.SigninBtn.Text = "button1";
             this.SigninBtn.UseVisualStyleBackColor = true;
+            this.SigninBtn.Click += new System.EventHandler(this.SigninBtn_Click);
             // 
             // CreateAccountLnk
             // 

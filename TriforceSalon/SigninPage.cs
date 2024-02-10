@@ -19,7 +19,19 @@ namespace TriforceSalon
 
         public void SigninPage_Load(object sender, EventArgs e)
         {
+            UsernameTxtbox.Text = "";
+            PasswordTxtbox.Text = "";
+            TogglePassword.Checked = false;
+        }
 
+        private void SigninBtn_Click(object sender, EventArgs e)
+        {
+            string Username = UsernameTxtbox.Text;
+            string Password = PasswordTxtbox.Text;
+            if (Method.Login(Username, Password))
+            {
+                MessageBox.Show("Hi");
+            }
         }
     }
 }

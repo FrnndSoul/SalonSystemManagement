@@ -98,17 +98,14 @@ namespace TriforceSalon
             }
         }
 
-        public static bool Login()
+        public static bool Login(string UsernameInput, string PasswordInput)
         {
-            if (string.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
+            if (string.Equals(UsernameInput, "Admin", StringComparison.OrdinalIgnoreCase)
                 && string.Equals(PasswordInput, "Admin123", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Admin log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                /*
-                 * returning false because it is not user login
-                 * put the show admin above before returning false
-                 */
+                return false;
             }
             else if (FailedLogIn != 3)
             {
@@ -119,7 +116,15 @@ namespace TriforceSalon
                 }
                 else
                 {
-                    WrongPassword(Username);
+                    if (DuplicateChecker(UsernameInput, "Username"))
+                    {
+                        WrongPassword(Username);
+                        MessageBox.Show("Dup");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Dup");
+                    }
                 }
             }
             else
@@ -149,10 +154,6 @@ namespace TriforceSalon
                         {
                             MessageBox.Show($"Wrong Password!\nYou have {attemptsLeft} attempts left", "Wrong Password",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No rows changed\nWrongPassword(string InputUsername)");
                         }
                     }
                 }
