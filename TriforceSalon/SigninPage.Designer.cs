@@ -37,14 +37,14 @@
             // 
             // UsernameTxtbox
             // 
-            this.UsernameTxtbox.Location = new System.Drawing.Point(79, 209);
+            this.UsernameTxtbox.Location = new System.Drawing.Point(113, 383);
             this.UsernameTxtbox.Name = "UsernameTxtbox";
             this.UsernameTxtbox.Size = new System.Drawing.Size(228, 20);
             this.UsernameTxtbox.TabIndex = 0;
             // 
             // PasswordTxtbox
             // 
-            this.PasswordTxtbox.Location = new System.Drawing.Point(79, 248);
+            this.PasswordTxtbox.Location = new System.Drawing.Point(113, 422);
             this.PasswordTxtbox.Name = "PasswordTxtbox";
             this.PasswordTxtbox.Size = new System.Drawing.Size(228, 20);
             this.PasswordTxtbox.TabIndex = 1;
@@ -52,7 +52,7 @@
             // TogglePassword
             // 
             this.TogglePassword.AutoSize = true;
-            this.TogglePassword.Location = new System.Drawing.Point(79, 283);
+            this.TogglePassword.Location = new System.Drawing.Point(113, 457);
             this.TogglePassword.Name = "TogglePassword";
             this.TogglePassword.Size = new System.Drawing.Size(80, 17);
             this.TogglePassword.TabIndex = 2;
@@ -61,7 +61,7 @@
             // 
             // SigninBtn
             // 
-            this.SigninBtn.Location = new System.Drawing.Point(79, 322);
+            this.SigninBtn.Location = new System.Drawing.Point(113, 496);
             this.SigninBtn.Name = "SigninBtn";
             this.SigninBtn.Size = new System.Drawing.Size(75, 23);
             this.SigninBtn.TabIndex = 3;
@@ -72,7 +72,7 @@
             // CreateAccountLnk
             // 
             this.CreateAccountLnk.AutoSize = true;
-            this.CreateAccountLnk.Location = new System.Drawing.Point(187, 381);
+            this.CreateAccountLnk.Location = new System.Drawing.Point(221, 555);
             this.CreateAccountLnk.Name = "CreateAccountLnk";
             this.CreateAccountLnk.Size = new System.Drawing.Size(55, 13);
             this.CreateAccountLnk.TabIndex = 4;
@@ -89,7 +89,7 @@
             this.Controls.Add(this.PasswordTxtbox);
             this.Controls.Add(this.UsernameTxtbox);
             this.Name = "SigninPage";
-            this.Size = new System.Drawing.Size(392, 473);
+            this.Size = new System.Drawing.Size(500, 1060);
             this.Load += new System.EventHandler(this.SigninPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

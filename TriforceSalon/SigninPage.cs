@@ -31,7 +31,9 @@ namespace TriforceSalon
             if (Method.Login(Username, Password))
             {
                 MessageBox.Show("Hi");
+                return;
             }
+            this.Hide();
         }
     }
 }
