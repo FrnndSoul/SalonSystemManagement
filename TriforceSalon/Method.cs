@@ -9,29 +9,19 @@ using System.Windows;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using static Mysqlx.Datatypes.Scalar.Types;
+using System.Data;
 
 namespace TriforceSalon
 {
     public class Method
     {
         public static byte[] Photo;
-        public static int FailedLogIn;
+        public static int AccountStatus;
         public static string ID, Name, Username, Email, Password, Birthdate,
             newID, newName, newEmail, newPassword,
             UsernameInput, PasswordInput;
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-
-        public static string HashString(string input)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                string hashedString = BitConverter.ToString(hashBytes).Replace("-", "");
-                return hashedString;
-            }
-        }
 
         public static void ReadUserData(string InputUsername, string InputPassword) //reads data in db via username
         {
@@ -51,7 +41,7 @@ namespace TriforceSalon
                             Username = reader["Username"].ToString();
                             Email = reader["Email"].ToString();
                             Password = reader["Password"].ToString();
-                            FailedLogIn = Convert.ToInt32(reader["FailedAttempts"]);
+                            AccountStatus = Convert.ToInt32(reader["FailedAttempts"]);
                             Birthdate = reader["Birthdate"].ToString();
 
                             PasswordInput = HashString(InputPassword);
@@ -105,9 +95,17 @@ namespace TriforceSalon
             {
                 MessageBox.Show("Admin log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Form openForm in Application.OpenForms)
+                {
+                    if (openForm is MainForm mainForm)
+                    {
+                        mainForm.ShowAdmin();
+                        break;
+                    }
+                }
                 return false;
             }
-            else if (FailedLogIn != 3)
+            else if (AccountStatus != 3)
             {
                 if (PasswordInput == Password)
                 {
@@ -137,8 +135,8 @@ namespace TriforceSalon
 
         public static void WrongPassword(string InputUsername)
         {
-            FailedLogIn++;
-            int attemptsLeft = 3 - FailedLogIn;
+            AccountStatus++;
+            int attemptsLeft = 3 - AccountStatus;
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
@@ -148,7 +146,7 @@ namespace TriforceSalon
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@username", InputUsername);
-                        querycmd.Parameters.AddWithValue("@failedAttempts", FailedLogIn);
+                        querycmd.Parameters.AddWithValue("@failedAttempts", AccountStatus);
                         int rowsAffected = querycmd.ExecuteNonQuery();
                         if (rowsAffected != 0)
                         {
@@ -160,13 +158,46 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat FailedLogin()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat AccountStatus()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static void ClearFields()
+        public static string HashString(string input)
         {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                string hashedString = BitConverter.ToString(hashBytes).Replace("-", "");
+                return hashedString;
+            }
+        }
 
+        public static int GenerateID()
+        {
+            Random random = new Random();
+            ReadUserData(Username, PasswordInput);
+            int IDNumber = Convert.ToInt32(ID);
+            int NewID;
+            string IDstring;
+            if (999999 > IDNumber && IDNumber > 100000)
+            {
+                do
+                {
+                    NewID = random.Next(1000, 9999);
+                    IDstring = newID.ToString();
+                }
+                while (DuplicateChecker(newID, "ID") == true);
+            }
+            else
+            {
+                do
+                {
+                    NewID = random.Next(100000, 999999);
+                    IDstring = newID.ToString();
+                } while (DuplicateChecker(IDstring, "ID") == true);
+            }
+            return NewID;
         }
 
         public byte[] GetImageDataByUsername(string username)
@@ -200,34 +231,6 @@ namespace TriforceSalon
             }
         }
 
-        public static int GenerateID()
-        {
-            Random random = new Random();
-            ReadUserData(Username, PasswordInput);
-            int IDNumber = Convert.ToInt32(ID);
-            int NewID;
-            string IDstring;
-            if (999999 > IDNumber && IDNumber > 100000)
-            {
-                do
-                {
-                    NewID = random.Next(1000, 9999);
-                    IDstring = newID.ToString();
-                }
-                while (DuplicateChecker(newID, "ID") == true);
-            }
-            else
-            {
-                do
-                {
-                    NewID = random.Next(100000, 999999);
-                    IDstring = newID.ToString();
-                } while (DuplicateChecker(IDstring, "ID") == true);
-            }
-            return NewID;
-        }
-
-
         public static bool DuplicateChecker(string Data, string Column)
         {
             try
@@ -260,5 +263,9 @@ namespace TriforceSalon
                 return false;
             }
         }
+
+        
+
+
     }
 }

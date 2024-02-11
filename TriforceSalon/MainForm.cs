@@ -28,5 +28,17 @@ namespace TriforceSalon
         {
 
         }
+
+        public void ShowLogin()
+        {
+            adminForm1.Visible = false;
+            signinPage1.Visible = true;
+        }
+
+        public void ShowAdmin()
+        {
+            adminForm1.Visible = true;
+            signinPage1.Visible = false;
+        }
     }
 }

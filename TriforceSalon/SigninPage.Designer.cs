@@ -58,6 +58,7 @@
             this.TogglePassword.TabIndex = 2;
             this.TogglePassword.Text = "checkBox1";
             this.TogglePassword.UseVisualStyleBackColor = true;
+            this.TogglePassword.CheckedChanged += new System.EventHandler(this.TogglePassword_CheckedChanged);
             // 
             // SigninBtn
             // 
@@ -78,6 +79,7 @@
             this.CreateAccountLnk.TabIndex = 4;
             this.CreateAccountLnk.TabStop = true;
             this.CreateAccountLnk.Text = "linkLabel1";
+            this.CreateAccountLnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateAccountLnk_LinkClicked);
             // 
             // SigninPage
             // 
