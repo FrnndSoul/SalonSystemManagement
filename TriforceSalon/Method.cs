@@ -16,10 +16,9 @@ namespace TriforceSalon
     {
         public static byte[] Photo;
         public static int FailedLogIn;
-        public static string ID, Name, Username, Email, Password, Birthdate;
-        public static string newID, newName, newEmail, newPassword;
-        public static string UsernameInput, PasswordInput;
-
+        public static string ID, Name, Username, Email, Password, Birthdate,
+            newID, newName, newEmail, newPassword,
+            UsernameInput, PasswordInput;
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
@@ -68,7 +67,6 @@ namespace TriforceSalon
 
         public static void ChangeUserData() //changes user data via username
         {
-            //get the values in the textbox then read them on the strings above
             if (string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newName) ||
                 string.IsNullOrEmpty(newEmail) || string.IsNullOrEmpty(newPassword))
             {
@@ -100,17 +98,14 @@ namespace TriforceSalon
             }
         }
 
-        public static bool Login()
+        public static bool Login(string UsernameInput, string PasswordInput)
         {
-            if (String.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
-                && String.Equals(PasswordInput, "Admin123", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(UsernameInput, "Admin", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(PasswordInput, "Admin123", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Admin log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                /*
-                 * returning false because it is not user login
-                 * put the show admin above before returning false
-                 */
+                return false;
             }
             else if (FailedLogIn != 3)
             {
@@ -121,7 +116,15 @@ namespace TriforceSalon
                 }
                 else
                 {
-                    WrongPassword(Username);
+                    if (DuplicateChecker(UsernameInput, "Username"))
+                    {
+                        WrongPassword(Username);
+                        MessageBox.Show("Dup");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Dup");
+                    }
                 }
             }
             else
@@ -151,10 +154,6 @@ namespace TriforceSalon
                         {
                             MessageBox.Show($"Wrong Password!\nYou have {attemptsLeft} attempts left", "Wrong Password",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No rows changed\nWrongPassword(string InputUsername)");
                         }
                     }
                 }

@@ -10,21 +10,14 @@ using System.Windows.Forms;
 
 namespace TriforceSalon
 {
-    public partial class MainForm : Form
+    public partial class AdminForm : UserControl
     {
-        public MainForm()
+        public AdminForm()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
-        public void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        public void signinPage1_Load(object sender, EventArgs e)
+        private void AdminForm_Load(object sender, EventArgs e)
         {
 
         }

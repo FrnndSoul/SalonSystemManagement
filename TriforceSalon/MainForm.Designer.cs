@@ -28,22 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.signinPage1 = new TriforceSalon.SigninPage();
             this.SuspendLayout();
             // 
-            // Form1
+            // signinPage1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this.signinPage1, "signinPage1");
+            this.signinPage1.Name = "signinPage1";
+            this.signinPage1.Load += new System.EventHandler(this.signinPage1_Load);
+            // 
+            // MainForm
+            // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Window";
+            this.Controls.Add(this.signinPage1);
+            this.Name = "MainForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private SigninPage signinPage1;
     }
 }
 
