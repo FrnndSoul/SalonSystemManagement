@@ -44,7 +44,7 @@
             // 
             resources.ApplyResources(this.signinPage1, "signinPage1");
             this.signinPage1.Name = "signinPage1";
-            this.signinPage1.Load += new System.EventHandler(this.signinPage1_Load);
+            this.signinPage1.Load += new System.EventHandler(this.SigninPage1_Load);
             // 
             // signUpForm1
             // 

@@ -24,7 +24,7 @@ namespace TriforceSalon
 
         }
 
-        public void signinPage1_Load(object sender, EventArgs e)
+        public void SigninPage1_Load(object sender, EventArgs e)
         {
 
         }

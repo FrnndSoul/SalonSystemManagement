@@ -27,7 +27,7 @@ namespace TriforceSalon
 
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void TabPage1_Click(object sender, EventArgs e)
         {
 
         }

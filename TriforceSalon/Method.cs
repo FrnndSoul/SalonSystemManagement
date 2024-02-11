@@ -23,8 +23,7 @@ namespace TriforceSalon
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public static void ReadUserData(string user, string pass)
-        {
+        public static void ReadUserData(string user) {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
@@ -59,7 +58,6 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         public static void ChangeUserData() //changes user data via username
         {
@@ -98,7 +96,7 @@ namespace TriforceSalon
         public static bool Login(string inputUsername, string inputPassword)
         {
 
-            ReadUserData(inputUsername, inputPassword);
+            ReadUserData(inputUsername);
 
             if (string.Equals(inputUsername, "Admin", StringComparison.OrdinalIgnoreCase)
                 && string.Equals(inputPassword, "Admin123", StringComparison.OrdinalIgnoreCase))
