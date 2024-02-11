@@ -79,12 +79,13 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@Email", newEmail);
                         querycmd.Parameters.AddWithValue("@Password", newPassword);
                         querycmd.Parameters.AddWithValue("@Username", Username);
+                        querycmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -117,11 +118,10 @@ namespace TriforceSalon
                     if (DuplicateChecker(UsernameInput, "Username"))
                     {
                         WrongPassword(Username);
-                        MessageBox.Show("Dup");
                     }
                     else
                     {
-                        MessageBox.Show("No Dup");
+                        MessageBox.Show("Username incorrect, please try again");
                     }
                 }
             }
@@ -176,16 +176,15 @@ namespace TriforceSalon
         public static int GenerateID()
         {
             Random random = new Random();
-            ReadUserData(Username, PasswordInput);
+            //ReadUserData(Username, PasswordInput);
             int IDNumber = Convert.ToInt32(ID);
             int NewID;
-            string IDstring;
             if (999999 > IDNumber && IDNumber > 100000)
             {
                 do
                 {
                     NewID = random.Next(1000, 9999);
-                    IDstring = newID.ToString();
+                    IDNumber = NewID;
                 }
                 while (DuplicateChecker(newID, "ID") == true);
             }
@@ -194,10 +193,10 @@ namespace TriforceSalon
                 do
                 {
                     NewID = random.Next(100000, 999999);
-                    IDstring = newID.ToString();
-                } while (DuplicateChecker(IDstring, "ID") == true);
+                    IDNumber = NewID;
+                } while (DuplicateChecker(newID, "ID") == true);
             }
-            return NewID;
+            return IDNumber;
         }
 
         public byte[] GetImageDataByUsername(string username)
@@ -238,34 +237,61 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "SELECT * from users WHERE @column = @data";
+                    string query = $"SELECT COUNT(*) FROM users WHERE {Column} = @data";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@data", Data);
-                        querycmd.Parameters.AddWithValue("@column", Column);
-                        using (MySqlDataReader reader = querycmd.ExecuteReader())
+                        int count = Convert.ToInt32(querycmd.ExecuteScalar());
+                        if (count != 0)
                         {
-                            if (reader.HasRows)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
+                            MessageBox.Show("Duplicate entry found.");
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat DuplicateChecker()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
 
-        
+        public static void UploadData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `users`" +
+                        "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
+                        "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        int ID = GenerateID();
+                        int status = 0;
+                        querycmd.Parameters.AddWithValue("@id", ID);
+                        querycmd.Parameters.AddWithValue("@name", Name);
+                        querycmd.Parameters.AddWithValue("@username", Username);
+                        querycmd.Parameters.AddWithValue("@email", Email);
+                        querycmd.Parameters.AddWithValue("@password", Password);
+                        querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
+                        querycmd.Parameters.AddWithValue("@photo", Photo);
+                        querycmd.Parameters.AddWithValue("@accountStatus", status);
 
-
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+            }
+        }
     }
 }

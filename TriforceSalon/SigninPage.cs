@@ -20,7 +20,7 @@ namespace TriforceSalon
 
         public void SigninPage_Load(object sender, EventArgs e)
         {
-
+            Clear();
         }
 
         public void Clear()
@@ -43,6 +43,14 @@ namespace TriforceSalon
 
         private void CreateAccountLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowSignUp();
+                    break;
+                }
+            }
             Clear();
         }
 

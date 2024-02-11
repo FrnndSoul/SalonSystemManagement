@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
-using MySql.Data.MySqlClient;
 
 namespace TriforceSalon
 {
@@ -44,7 +42,7 @@ namespace TriforceSalon
             try
             {
                 connection.Open();
-                string sql = "SELECT `ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `AccountStatus` FROM `users`";
+                string sql = "SELECT `ID`, `Name`, `Username`, `Email`, `Birthdate`, `AccountStatus` FROM `users`";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
