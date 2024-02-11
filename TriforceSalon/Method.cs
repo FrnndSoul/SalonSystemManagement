@@ -23,7 +23,7 @@ namespace TriforceSalon
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public static void ReadUserData(string InputUsername, string InputPassword) //reads data in db via username
+        public static void ReadUserData(string user, string pass)
         {
             try
             {
@@ -33,27 +33,33 @@ namespace TriforceSalon
                     string query = "SELECT * from users WHERE Username = @username";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", InputUsername);
+                        querycmd.Parameters.AddWithValue("@username", user);
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
-                            ID = reader["ID"].ToString();
-                            Name = reader["Name"].ToString();
-                            Username = reader["Username"].ToString();
-                            Email = reader["Email"].ToString();
-                            Password = reader["Password"].ToString();
-                            AccountStatus = Convert.ToInt32(reader["FailedAttempts"]);
-                            Birthdate = reader["Birthdate"].ToString();
-
-                            PasswordInput = HashString(InputPassword);
+                            if (reader.Read())
+                            {
+                                ID = reader["ID"].ToString();
+                                Name = reader["Name"].ToString();
+                                Username = reader["Username"].ToString();
+                                Email = reader["Email"].ToString();
+                                Password = reader["Password"].ToString();
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                                Birthdate = reader["Birthdate"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         public static void ChangeUserData() //changes user data via username
         {
@@ -89,10 +95,13 @@ namespace TriforceSalon
             }
         }
 
-        public static bool Login(string UsernameInput, string PasswordInput)
+        public static bool Login(string inputUsername, string inputPassword)
         {
-            if (string.Equals(UsernameInput, "Admin", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(PasswordInput, "Admin123", StringComparison.OrdinalIgnoreCase))
+
+            ReadUserData(inputUsername, inputPassword);
+
+            if (string.Equals(inputUsername, "Admin", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(inputPassword, "Admin123", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Admin log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -108,14 +117,15 @@ namespace TriforceSalon
             }
             else if (AccountStatus != 3)
             {
-                if (PasswordInput == Password)
+                string HashedPass = HashString(inputPassword);
+                if (HashedPass == Password)
                 {
                     MessageBox.Show($"Login Success, {Username}.");
                     return true;
                 }
                 else
                 {
-                    if (DuplicateChecker(UsernameInput, "Username"))
+                    if (DuplicateChecker(inputUsername, "Username"))
                     {
                         WrongPassword(Username);
                     }
@@ -142,11 +152,11 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users` SET `FailedAttempts` = @failedAttempts WHERE `Username` = @username";
+                    string query = "UPDATE `users` SET `AccountStatus` = @AccountStatus WHERE `Username` = @username";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@username", InputUsername);
-                        querycmd.Parameters.AddWithValue("@failedAttempts", AccountStatus);
+                        querycmd.Parameters.AddWithValue("@AccountStatus", AccountStatus);
                         int rowsAffected = querycmd.ExecuteNonQuery();
                         if (rowsAffected != 0)
                         {
@@ -244,7 +254,6 @@ namespace TriforceSalon
                         int count = Convert.ToInt32(querycmd.ExecuteScalar());
                         if (count != 0)
                         {
-                            MessageBox.Show("Duplicate entry found.");
                             return true;
                         }
                         else

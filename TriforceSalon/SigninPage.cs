@@ -34,10 +34,15 @@ namespace TriforceSalon
         {
             string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;
-            if (Method.Login(Username, Password))
+
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Hi");
+                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            Method.Login(Username, Password);
             Clear();
         }
 
