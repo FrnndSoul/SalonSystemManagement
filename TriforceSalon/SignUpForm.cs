@@ -26,6 +26,8 @@ namespace TriforceSalon
 
             PasswordBox.PasswordChar = '*';
             PasswordBox1.PasswordChar = '*';
+
+            Method.EclipsePhotoBox(Photo);
         }
 
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
@@ -175,7 +177,10 @@ namespace TriforceSalon
 
         private void EmailBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == (char)Keys.Space)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

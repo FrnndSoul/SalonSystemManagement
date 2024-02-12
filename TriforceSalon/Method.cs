@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using static Mysqlx.Datatypes.Scalar.Types;
 using System.Data;
+using System.Drawing;
 
 namespace TriforceSalon
 {
@@ -299,6 +300,17 @@ namespace TriforceSalon
             {
                 MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        public static void EclipsePhotoBox(PictureBox Photo)
+        {
+            System.Drawing.Drawing2D.GraphicsPath obj = new System.Drawing.Drawing2D.GraphicsPath();
+            obj.AddEllipse(0, 0, Photo.Width, Photo.Height);
+            Region rg = new Region(obj);
+            Photo.Region = rg;
+
+
+
         }
     }
 }
