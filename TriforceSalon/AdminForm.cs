@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace TriforceSalon
     public partial class AdminForm : UserControl
     {
         public static byte[] PhotoLocal, PhotoDB;
-        public static int AccountStatusReader, IDReader;
+        public static int AccountStatusReader, IDReader, UserRow;
         public static string NameReader, UsernameReader, EmailReader,
             SelectedUsername;
         public static DateTime BirthdateReader;
@@ -31,15 +32,15 @@ namespace TriforceSalon
         {
             InitializeComponent();
             Method.EclipsePhotoBox(Photo);
-            
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
             LoadUserData();
+            
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1,3);
-            UserDGV_CellContentClick_1(select, args);
+            UserDGV_CellContentClick_1(select, args);  
         }
 
         public void LoadUserData()
@@ -58,7 +59,7 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show("An error occurred: " + e.Message);
+                MessageBox.Show(e.Message + "\n\nat LoadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -73,12 +74,128 @@ namespace TriforceSalon
 
         private void SignoutBtn_Click(object sender, EventArgs e)
         {
+            DiscardFunc();
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
                     mainForm.ShowLogin();
                     break;
+                }
+            }
+        }
+
+        private void ChangeRoleBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            if (1000000 < IDReader && IDReader < 9999)
+            {
+                result = MessageBox.Show
+                    ($"Promoting the user {UsernameReader}.\n" +
+                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                                
+            } else
+            {
+                result = MessageBox.Show
+                    ($"Demoting the user {UsernameReader}.\n" +
+                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            }
+
+            if (result == DialogResult.Yes)
+            {
+                int newID = Method.GenerateID(IDReader);
+                ChangeUserID(UsernameReader, newID);
+                LoadUserData();
+
+                object select = UserDGV;
+                DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
+                UserDGV_CellContentClick_1(select, args);
+                DiscardFunc();   
+            }
+        }
+
+        public static void ChangeUserID(string User, int ID)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query =
+                        "UPDATE users SET ID = @ID " +
+                        "WHERE Username = @Username";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@ID", ID);
+                        querycmd.Parameters.AddWithValue("@Username", User);
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ChangeUserID()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DiscardBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Discard changes for the user?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.No)
+            {
+                checkBox1.CheckState = CheckState.Checked;
+                return;
+            }
+            DiscardFunc();
+        }
+
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            ReadUserData(UsernameReader);
+            string tempName = NameBox.Text;
+            string tempUsername = UsernameBox.Text;
+            string tempEmail = EmailBox.Text;
+
+            if (!Method.ValidEmail(tempEmail))
+            {
+                MessageBox.Show("Please provide a valid email address.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Save the current changes for user {UsernameReader}?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            Method.ChangeUserData(tempName, tempUsername, PhotoLocal, IDReader);
+            LoadUserData();
+
+            object select = UserDGV;
+            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
+            UserDGV_CellContentClick_1(select, args);
+            DiscardFunc();
+        }
+
+
+
+        private void UploadBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+                Image image = Image.FromFile(selectedFile);
+                Photo.Image = image;
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, image.RawFormat);
+                    PhotoLocal = ms.ToArray();
                 }
             }
         }
@@ -100,26 +217,18 @@ namespace TriforceSalon
             IDBox.Text = IDInput.ToString();
         }
 
+
         private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = UserDGV.SelectedCells[0].RowIndex;
+            UserRow = UserDGV.SelectedCells[0].RowIndex;
 
-            if (selectedRowIndex < 0 || selectedRowIndex >= UserDGV.Rows.Count)
+            if (UserRow < 0 || UserRow >= UserDGV.Rows.Count)
             {
                 return;
             }
-            
-            string username = UserDGV.Rows[selectedRowIndex].Cells["Username"].Value.ToString();
-            if (username != SelectedUsername)
-            {
-                ReadUserData(SelectedUsername);
-                DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader);
-            }
-        }
-
-        public static void Timer()
-        {
-
+            string SelectedUsername = UserDGV.Rows[UserRow].Cells["Username"].Value.ToString();    
+            ReadUserData(SelectedUsername);
+            DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader);
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -130,15 +239,31 @@ namespace TriforceSalon
                 UsernameBox.Enabled = true;
                 EmailBox.Enabled = true;
                 UploadBtn.Enabled = true;
+                SaveBtn.Visible = true;
+                ChangeRoleBtn.Visible = true;
+                DiscardBtn.Visible = true;
+                checkBox1.Enabled = false;
             }
-            else
-            {
-                NameBox.Enabled = false;
-                UsernameBox.Enabled = false;
-                EmailBox.Enabled = false;
-                UploadBtn.Enabled = false;
-                //UserDGV.SelectionMode = DataGridViewSelectionMode(null);
-            }
+        }
+
+        public void DiscardFunc()
+        {
+            checkBox1.CheckState = CheckState.Unchecked;
+
+            checkBox1.Enabled = true;
+            NameBox.Enabled = false;
+            UsernameBox.Enabled = false;
+            EmailBox.Enabled = false;
+            UploadBtn.Enabled = false;
+            SaveBtn.Visible = false;
+            ChangeRoleBtn.Visible = false;
+            DiscardBtn.Visible = false;
+
+            LoadUserData();
+
+            object select = UserDGV;
+            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
+            UserDGV_CellContentClick_1(select, args);
         }
 
         public static void ReadUserData(string user)
