@@ -79,12 +79,19 @@ namespace TriforceSalon
                 MessageBox.Show("Your passwords do not match.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if(!StrongPassword(Password))
+            } else if (!StrongPassword(Password))
             {
                 MessageBox.Show("Your passwords is weak." +
                     "\nYour password should include the following:" +
                     "\n     Upper and Lower Case Letters," +
                     "\n     Numbers, and Special Characters", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!ValidEmail(Email))
+            {
+                MessageBox.Show("Please provide a valid email address.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -116,6 +123,14 @@ namespace TriforceSalon
             string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
             Regex regex = new Regex(pattern);
             return regex.IsMatch(password);
+        }
+
+        public static bool ValidEmail(string Email)
+        {
+            string email = Email.ToLower();
+            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+com$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
         }
 
         private void UploadBtn_Click(object sender, EventArgs e)
