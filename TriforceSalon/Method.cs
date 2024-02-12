@@ -9,33 +9,22 @@ using System.Windows;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using static Mysqlx.Datatypes.Scalar.Types;
+using System.Data;
+using System.Drawing;
 
 namespace TriforceSalon
 {
     public class Method
     {
         public static byte[] Photo;
-        public static int FailedLogIn;
-        public static string ID, Name, Username, Email, Password, Birthdate;
-        public static string newID, newName, newEmail, newPassword;
-        public static string UsernameInput, PasswordInput;
-
+        public static int AccountStatus;
+        public static string ID, Name, Username, Email, Password, Birthdate,
+            newID, newName, newEmail, newPassword,
+            UsernameInput, PasswordInput;
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public static string HashString(string input)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                string hashedString = BitConverter.ToString(hashBytes).Replace("-", "");
-                return hashedString;
-            }
-        }
-
-        public static void ReadUserData(string InputUsername, string InputPassword) //reads data in db via username
-        {
+        public static void ReadUserData(string user) {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
@@ -44,31 +33,35 @@ namespace TriforceSalon
                     string query = "SELECT * from users WHERE Username = @username";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", InputUsername);
+                        querycmd.Parameters.AddWithValue("@username", user);
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
-                            ID = reader["ID"].ToString();
-                            Name = reader["Name"].ToString();
-                            Username = reader["Username"].ToString();
-                            Email = reader["Email"].ToString();
-                            Password = reader["Password"].ToString();
-                            FailedLogIn = Convert.ToInt32(reader["FailedAttempts"]);
-                            Birthdate = reader["Birthdate"].ToString();
-
-                            PasswordInput = HashString(InputPassword);
+                            if (reader.Read())
+                            {
+                                ID = reader["ID"].ToString();
+                                Name = reader["Name"].ToString();
+                                Username = reader["Username"].ToString();
+                                Email = reader["Email"].ToString();
+                                Password = reader["Password"].ToString();
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                                Birthdate = reader["Birthdate"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public static void ChangeUserData() //changes user data via username
         {
-            //get the values in the textbox then read them on the strings above
             if (string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newName) ||
                 string.IsNullOrEmpty(newEmail) || string.IsNullOrEmpty(newPassword))
             {
@@ -91,37 +84,54 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@Email", newEmail);
                         querycmd.Parameters.AddWithValue("@Password", newPassword);
                         querycmd.Parameters.AddWithValue("@Username", Username);
+                        querycmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static bool Login()
+        public static bool Login(string inputUsername, string inputPassword)
         {
-            if (String.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
-                && String.Equals(PasswordInput, "Admin123", StringComparison.OrdinalIgnoreCase))
+
+            ReadUserData(inputUsername);
+
+            if (string.Equals(inputUsername, "Admin", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(inputPassword, "Admin123", StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Admin log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                /*
-                 * returning false because it is not user login
-                 * put the show admin above before returning false
-                 */
+                foreach (Form openForm in Application.OpenForms)
+                {
+                    if (openForm is MainForm mainForm)
+                    {
+                        mainForm.ShowAdmin();
+                        break;
+                    }
+                }
+                return false;
             }
-            else if (FailedLogIn != 3)
+            else if (AccountStatus != 3)
             {
-                if (PasswordInput == Password)
+                string HashedPass = HashString(inputPassword);
+                if (HashedPass == Password)
                 {
                     MessageBox.Show($"Login Success, {Username}.");
                     return true;
                 }
                 else
                 {
-                    WrongPassword(Username);
+                    if (DuplicateChecker(inputUsername, "Username"))
+                    {
+                        WrongPassword(Username);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username incorrect, please try again");
+                    }
                 }
             }
             else
@@ -134,40 +144,68 @@ namespace TriforceSalon
 
         public static void WrongPassword(string InputUsername)
         {
-            FailedLogIn++;
-            int attemptsLeft = 3 - FailedLogIn;
+            AccountStatus++;
+            int attemptsLeft = 3 - AccountStatus;
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users` SET `FailedAttempts` = @failedAttempts WHERE `Username` = @username";
+                    string query = "UPDATE `users` SET `AccountStatus` = @AccountStatus WHERE `Username` = @username";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@username", InputUsername);
-                        querycmd.Parameters.AddWithValue("@failedAttempts", FailedLogIn);
+                        querycmd.Parameters.AddWithValue("@AccountStatus", AccountStatus);
                         int rowsAffected = querycmd.ExecuteNonQuery();
                         if (rowsAffected != 0)
                         {
                             MessageBox.Show($"Wrong Password!\nYou have {attemptsLeft} attempts left", "Wrong Password",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                        else
-                        {
-                            MessageBox.Show("No rows changed\nWrongPassword(string InputUsername)");
-                        }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat FailedLogin()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat AccountStatus()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static void ClearFields()
+        public static string HashString(string input)
         {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                string hashedString = BitConverter.ToString(hashBytes).Replace("-", "");
+                return hashedString;
+            }
+        }
 
+        public static int GenerateID()
+        {
+            Random random = new Random();
+            //ReadUserData(Username, PasswordInput);
+            int IDNumber = Convert.ToInt32(ID);
+            int NewID;
+            if (999999 > IDNumber && IDNumber > 100000)
+            {
+                do
+                {
+                    NewID = random.Next(1000, 9999);
+                    IDNumber = NewID;
+                }
+                while (DuplicateChecker(newID, "ID") == true);
+            }
+            else
+            {
+                do
+                {
+                    NewID = random.Next(100000, 999999);
+                    IDNumber = NewID;
+                } while (DuplicateChecker(newID, "ID") == true);
+            }
+            return IDNumber;
         }
 
         public byte[] GetImageDataByUsername(string username)
@@ -201,34 +239,6 @@ namespace TriforceSalon
             }
         }
 
-        public static int GenerateID()
-        {
-            Random random = new Random();
-            ReadUserData(Username, PasswordInput);
-            int IDNumber = Convert.ToInt32(ID);
-            int NewID;
-            string IDstring;
-            if (999999 > IDNumber && IDNumber > 100000)
-            {
-                do
-                {
-                    NewID = random.Next(1000, 9999);
-                    IDstring = newID.ToString();
-                }
-                while (DuplicateChecker(newID, "ID") == true);
-            }
-            else
-            {
-                do
-                {
-                    NewID = random.Next(100000, 999999);
-                    IDstring = newID.ToString();
-                } while (DuplicateChecker(IDstring, "ID") == true);
-            }
-            return NewID;
-        }
-
-
         public static bool DuplicateChecker(string Data, string Column)
         {
             try
@@ -236,30 +246,71 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "SELECT * from users WHERE @column = @data";
+                    string query = $"SELECT COUNT(*) FROM users WHERE {Column} = @data";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@data", Data);
-                        querycmd.Parameters.AddWithValue("@column", Column);
-                        using (MySqlDataReader reader = querycmd.ExecuteReader())
+                        int count = Convert.ToInt32(querycmd.ExecuteScalar());
+                        if (count != 0)
                         {
-                            if (reader.HasRows)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat DuplicateChecker()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        public static void UploadData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `users`" +
+                        "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
+                        "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        int ID = GenerateID();
+                        int status = 0;
+                        querycmd.Parameters.AddWithValue("@id", ID);
+                        querycmd.Parameters.AddWithValue("@name", Name);
+                        querycmd.Parameters.AddWithValue("@username", Username);
+                        querycmd.Parameters.AddWithValue("@email", Email);
+                        querycmd.Parameters.AddWithValue("@password", Password);
+                        querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
+                        querycmd.Parameters.AddWithValue("@photo", Photo);
+                        querycmd.Parameters.AddWithValue("@accountStatus", status);
+
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        public static void EclipsePhotoBox(PictureBox Photo)
+        {
+            System.Drawing.Drawing2D.GraphicsPath obj = new System.Drawing.Drawing2D.GraphicsPath();
+            obj.AddEllipse(0, 0, Photo.Width, Photo.Height);
+            Region rg = new Region(obj);
+            Photo.Region = rg;
+
+
+
         }
     }
 }
