@@ -98,7 +98,7 @@ namespace TriforceSalon
 
             if (Method.DuplicateChecker(Username, "Username") || Method.DuplicateChecker(Email, "Email"))
             {
-                MessageBox.Show("The username ad/or email is already registered.", "Warning",
+                MessageBox.Show("The username and/or email is already registered.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -111,11 +111,25 @@ namespace TriforceSalon
                     return;
                 }
             }
-            string hashedPassword = Method.HashString(Password);
-            Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder);
 
-            object BackFunction = BackBtn;
-            BackBtn_Click(BackFunction, e);
+            DialogResult result = MessageBox.Show($"Please review your information below:\n\n" +
+                $"Name: {Name}\n" +
+                $"Username: {Username}\n" +
+                $"Email: {Email}\n" +
+                $"Birthdate: {Birthdate}",
+                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (result == DialogResult.Yes)
+            {
+                string hashedPassword = Method.HashString(Password);
+                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder);
+
+                MessageBox.Show($"Account Identification Number: {Method.ID}", "Account Created!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                object BackFunction = BackBtn;
+                BackBtn_Click(BackFunction, e);
+            }
         }
 
         public static bool StrongPassword(string password)
@@ -155,6 +169,11 @@ namespace TriforceSalon
         }
 
         private void SignUpForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EmailBox_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }
