@@ -81,7 +81,7 @@ namespace TriforceSalon
                 MessageBox.Show("Your passwords do not match.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if (!StrongPassword(Password))
+            } else if (!Method.StrongPassword(Password))
             {
                 MessageBox.Show("Your passwords is weak." +
                     "\nYour password should include the following:" +
@@ -91,7 +91,7 @@ namespace TriforceSalon
                 return;
             }
 
-            if (!ValidEmail(Email))
+            if (!Method.ValidEmail(Email))
             {
                 MessageBox.Show("Please provide a valid email address.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -107,11 +107,8 @@ namespace TriforceSalon
 
             if (PhotoByteHolder == null)
             {
-                DialogResult option = MessageBox.Show("No profile photo selected.\nDo you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (option == DialogResult.No)
-                {
-                    return;
-                }
+                MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             DialogResult result = MessageBox.Show($"Please review your information below:\n\n" +
@@ -126,28 +123,14 @@ namespace TriforceSalon
                 string hashedPassword = Method.HashString(Password);
                 Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder);
 
-                MessageBox.Show($"Account Identification Number: {Method.ID}", "Account Created!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show($"Account Identification Number: {Method.ID}", "Account Created!",
+                  //  MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 object BackFunction = BackBtn;
                 BackBtn_Click(BackFunction, e);
             }
         }
 
-        public static bool StrongPassword(string password)
-        {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(password);
-        }
-
-        public static bool ValidEmail(string Email)
-        {
-            string email = Email.ToLower();
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+com$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(email);
-        }
 
         private void UploadBtn_Click(object sender, EventArgs e)
         {

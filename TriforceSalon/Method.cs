@@ -11,16 +11,18 @@ using System.Windows.Forms;
 using static Mysqlx.Datatypes.Scalar.Types;
 using System.Data;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace TriforceSalon
 {
     public class Method
     {
         public static byte[] Photo;
-        public static int AccountStatus;
-        public static string ID, Name, Username, Email, Password, Birthdate,
+        public static int AccountStatus, ID;
+        public static string Name, Username, Email, Password,
             newID, newName, newEmail, newPassword,
             UsernameInput, PasswordInput;
+        public static DateTime Birthdate;
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
@@ -38,17 +40,31 @@ namespace TriforceSalon
                         {
                             if (reader.Read())
                             {
-                                ID = reader["ID"].ToString();
+                                ID = Convert.ToInt32(reader["ID"]);
                                 Name = reader["Name"].ToString();
                                 Username = reader["Username"].ToString();
                                 Email = reader["Email"].ToString();
                                 Password = reader["Password"].ToString();
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
-                                Birthdate = reader["Birthdate"].ToString();
+                                Birthdate = (DateTime)reader["Birthdate"];
+                                if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
+                                {
+                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
+                                    byte[] photoBytes = new byte[byteSize];
+                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
+                                    Photo = photoBytes;
+                                }
+                                else
+                                {
+                                    Photo = null;
+                                }
                             }
                             else
                             {
+                                if (user != "admin")
+                                {
                                 MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                         }
                     }
@@ -205,6 +221,7 @@ namespace TriforceSalon
                     IDNumber = NewID;
                 } while (DuplicateChecker(newID, "ID") == true);
             }
+            MessageBox.Show($"This is your ID for reference: {IDNumber}");
             return IDNumber;
         }
 
@@ -308,9 +325,26 @@ namespace TriforceSalon
             obj.AddEllipse(0, 0, Photo.Width, Photo.Height);
             Region rg = new Region(obj);
             Photo.Region = rg;
-
-
-
         }
+
+
+        public static bool ValidEmail(string Email)
+        {
+            string email = Email.ToLower();
+            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+com$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
+
+        public static bool StrongPassword(string password)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(password);
+        }
+
+
+
+
     }
 }
