@@ -200,25 +200,34 @@ namespace TriforceSalon
         public static int GenerateID(int IDinput)
         {
             Random random = new Random();
-            //ReadUserData(Username, PasswordInput);
             int IDNumber = Convert.ToInt32(IDinput);
             int NewID;
-            if (999999 > IDNumber && IDNumber > 100000)
+            if (99999 < IDNumber && IDNumber < 1000000)
             {
+                MessageBox.Show("Generate Manager");
                 do
                 {
-                    NewID = random.Next(1000, 9999);
+                    NewID = random.Next(99999, 1000000);
+                    IDNumber = NewID;
+                } while (DuplicateChecker(newID, "ID") == true);
+            }
+            else if (999 < IDNumber && IDNumber < 10000)
+            {
+                MessageBox.Show("Generate Staff");
+                do
+                {
+                    NewID = random.Next(999, 10000);
+                    IDNumber = NewID;
+                } while (DuplicateChecker(newID, "ID") == true);
+            } else
+            {
+                MessageBox.Show("Generate Member");
+                do
+                {
+                    NewID = random.Next(9999999, 100000000);
                     IDNumber = NewID;
                 }
                 while (DuplicateChecker(newID, "ID") == true);
-            }
-            else
-            {
-                do
-                {
-                    NewID = random.Next(100000, 999999);
-                    IDNumber = NewID;
-                } while (DuplicateChecker(newID, "ID") == true);
             }
             MessageBox.Show($"This is your ID for reference: {IDNumber}");
             return IDNumber;
@@ -287,6 +296,41 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
+        public static void MemberData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "UPDATE `users`" +
+                        "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
+                        "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        int ID = GenerateID(0);
+                        int status = 0;
+                        querycmd.Parameters.AddWithValue("@id", ID);
+                        querycmd.Parameters.AddWithValue("@name", Name);
+                        querycmd.Parameters.AddWithValue("@username", Username);
+                        querycmd.Parameters.AddWithValue("@email", Email);
+                        querycmd.Parameters.AddWithValue("@password", Password);
+                        querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
+                        querycmd.Parameters.AddWithValue("@photo", Photo);
+                        querycmd.Parameters.AddWithValue("@accountStatus", status);
+
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+
+
 
         public static void EclipsePhotoBox(PictureBox Photo)
         {
