@@ -12,6 +12,8 @@ using static Mysqlx.Datatypes.Scalar.Types;
 using System.Data;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using Org.BouncyCastle.Ocsp;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace TriforceSalon
 {
@@ -127,19 +129,22 @@ namespace TriforceSalon
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (1000000 > ID && ID > 9999)
+                    if (99999 < ID && ID < 1000000)
                     {
-                        MessageBox.Show($"Login Success, {Username}.\nStaff");
-                        return true;
-                    } else
+                        MessageBox.Show("Staff");
+                    }
+                    else if (999 < ID && ID < 10000)
                     {
-                        MessageBox.Show($"Login Success, {Username}.\nManager");
-                        return true;
+                        MessageBox.Show("Manager");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Member");
                     }
                 }
                 else
                 {
-                    if (DuplicateChecker(inputUsername, "Username"))
+                    if (DuplicateChecker(inputUsername, "Username", "users"))
                     {
                         WrongPassword(Username);
                     }
@@ -204,44 +209,42 @@ namespace TriforceSalon
             int NewID;
             if (99999 < IDNumber && IDNumber < 1000000)
             {
-                MessageBox.Show("Generate Manager");
-                do
-                {
-                    NewID = random.Next(99999, 1000000);
-                    IDNumber = NewID;
-                } while (DuplicateChecker(newID, "ID") == true);
-            }
-            else if (999 < IDNumber && IDNumber < 10000)
-            {
-                MessageBox.Show("Generate Staff");
                 do
                 {
                     NewID = random.Next(999, 10000);
                     IDNumber = NewID;
-                } while (DuplicateChecker(newID, "ID") == true);
+                } while (DuplicateChecker(newID, "ID", "users") == true);
+                MessageBox.Show($"Generate Manager ID: {IDNumber}");
+            }
+            else if (999 < IDNumber && IDNumber < 10000)
+            {
+                do
+                {
+                    NewID = random.Next(99999, 1000000);
+                    IDNumber = NewID;
+                } while (DuplicateChecker(newID, "ID", "users") == true);
+                MessageBox.Show($"Generate Staff ID: {IDNumber}");
             } else
             {
-                MessageBox.Show("Generate Member");
                 do
                 {
                     NewID = random.Next(9999999, 100000000);
                     IDNumber = NewID;
                 }
-                while (DuplicateChecker(newID, "ID") == true);
+                while (DuplicateChecker(newID, "ID", "users") == true);
+                MessageBox.Show($"Generate Member ID: {IDNumber}");
             }
-            MessageBox.Show($"This is your ID for reference: {IDNumber}");
             return IDNumber;
         }
-        
 
-        public static bool DuplicateChecker(string Data, string Column)
+        public static bool DuplicateChecker(string Data, string Column, string Table)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = $"SELECT COUNT(*) FROM users WHERE {Column} = @data";
+                    string query = $"SELECT COUNT(*) FROM {Table} WHERE {Column} = @data";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@data", Data);
@@ -264,19 +267,19 @@ namespace TriforceSalon
             }
         }
 
-        public static void UploadData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
+        public static void UploadData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, int inputID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users`" +
+                    string query = "INSERT INTO `users`" +
                         "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
                         "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        int ID = GenerateID(0);
+                        int ID = GenerateID(inputID);
                         int status = 0;
                         querycmd.Parameters.AddWithValue("@id", ID);
                         querycmd.Parameters.AddWithValue("@name", Name);
@@ -296,6 +299,7 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
+
         public static void MemberData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
         {
             try
@@ -303,7 +307,7 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users`" +
+                    string query = "INSERT INTO `users`" +
                         "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
                         "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
@@ -328,9 +332,6 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
-
-
-
 
         public static void EclipsePhotoBox(PictureBox Photo)
         {
@@ -339,7 +340,6 @@ namespace TriforceSalon
             Region rg = new Region(obj);
             Photo.Region = rg;
         }
-
 
         public static bool ValidEmail(string Email)
         {
@@ -356,8 +356,40 @@ namespace TriforceSalon
             return regex.IsMatch(password);
         }
 
+        public static void LogUser(int IDlog)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `logs`(`SessionID`, `ID`, `TimeIn`)" +
+                        "VALUES (@sessionID,@id,@timeIn)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@sessionID", GenerateLog());
+                        querycmd.Parameters.AddWithValue("@id", IDlog);
+                        querycmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
 
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+            }
+        }
 
-
+        public static int GenerateLog()
+        {
+            Random random = new Random();
+            int Ref;
+            do
+            {
+                Ref = random.Next(99999999, 1000000000);
+            } while (DuplicateChecker(Ref.ToString(), "SessionID", "logs") == true);
+            return Ref;
+        }
     }
 }

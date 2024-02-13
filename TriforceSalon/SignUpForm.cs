@@ -98,7 +98,7 @@ namespace TriforceSalon
                 return;
             }
 
-            if (Method.DuplicateChecker(Username, "Username") || Method.DuplicateChecker(Email, "Email"))
+            if (Method.DuplicateChecker(Username, "Username", "users") || Method.DuplicateChecker(Email, "Email", "users"))
             {
                 MessageBox.Show("The username and/or email is already registered.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -121,10 +121,19 @@ namespace TriforceSalon
             if (result == DialogResult.Yes)
             {
                 string hashedPassword = Method.HashString(Password);
-                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder);
 
-                //MessageBox.Show($"Account Identification Number: {Method.ID}", "Account Created!",
-                  //  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int RoleID;
+                if (RoleBox.Text == "Member")
+                {
+                    RoleID = 0;
+                } else if (RoleBox.Text == "Staff")
+                {
+                    RoleID = 123456;
+                } else
+                {
+                    RoleID = 1234;
+                }
+                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
 
                 object BackFunction = BackBtn;
                 BackBtn_Click(BackFunction, e);
