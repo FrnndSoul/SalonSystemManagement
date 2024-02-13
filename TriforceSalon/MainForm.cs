@@ -17,7 +17,6 @@ namespace TriforceSalon
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-            //add
         }
 
         public void Form1_Load(object sender, EventArgs e)
