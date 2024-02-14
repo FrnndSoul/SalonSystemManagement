@@ -54,10 +54,11 @@
             this.TogglePassword.AutoSize = true;
             this.TogglePassword.Location = new System.Drawing.Point(113, 457);
             this.TogglePassword.Name = "TogglePassword";
-            this.TogglePassword.Size = new System.Drawing.Size(80, 17);
+            this.TogglePassword.Size = new System.Drawing.Size(102, 17);
             this.TogglePassword.TabIndex = 2;
-            this.TogglePassword.Text = "checkBox1";
+            this.TogglePassword.Text = "Show Password";
             this.TogglePassword.UseVisualStyleBackColor = true;
+            this.TogglePassword.CheckedChanged += new System.EventHandler(this.TogglePassword_CheckedChanged);
             // 
             // SigninBtn
             // 
@@ -65,19 +66,20 @@
             this.SigninBtn.Name = "SigninBtn";
             this.SigninBtn.Size = new System.Drawing.Size(75, 23);
             this.SigninBtn.TabIndex = 3;
-            this.SigninBtn.Text = "button1";
+            this.SigninBtn.Text = "Sign In";
             this.SigninBtn.UseVisualStyleBackColor = true;
             this.SigninBtn.Click += new System.EventHandler(this.SigninBtn_Click);
             // 
             // CreateAccountLnk
             // 
             this.CreateAccountLnk.AutoSize = true;
-            this.CreateAccountLnk.Location = new System.Drawing.Point(221, 555);
+            this.CreateAccountLnk.Location = new System.Drawing.Point(296, 501);
             this.CreateAccountLnk.Name = "CreateAccountLnk";
-            this.CreateAccountLnk.Size = new System.Drawing.Size(55, 13);
+            this.CreateAccountLnk.Size = new System.Drawing.Size(45, 13);
             this.CreateAccountLnk.TabIndex = 4;
             this.CreateAccountLnk.TabStop = true;
-            this.CreateAccountLnk.Text = "linkLabel1";
+            this.CreateAccountLnk.Text = "Sign Up";
+            this.CreateAccountLnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateAccountLnk_LinkClicked);
             // 
             // SigninPage
             // 

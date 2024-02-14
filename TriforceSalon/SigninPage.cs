@@ -15,9 +15,15 @@ namespace TriforceSalon
         public SigninPage()
         {
             InitializeComponent();
+            PasswordTxtbox.PasswordChar = '*';
         }
 
         public void SigninPage_Load(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        public void Clear()
         {
             UsernameTxtbox.Text = "";
             PasswordTxtbox.Text = "";
@@ -28,12 +34,34 @@ namespace TriforceSalon
         {
             string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;
-            if (Method.Login(Username, Password))
+
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Hi");
+                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.Hide();
+
+            Method.Login(Username, Password);
+            Clear();
+        }
+
+        private void CreateAccountLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowSignUp();
+                    break;
+                }
+            }
+            Clear();
+        }
+
+        private void TogglePassword_CheckedChanged(object sender, EventArgs e)
+        {
+            PasswordTxtbox.PasswordChar = TogglePassword.Checked ? '\0' : '*';
         }
     }
 }
