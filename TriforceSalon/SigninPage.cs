@@ -58,6 +58,7 @@ namespace TriforceSalon
             }
             Clear();
         }
+
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
         {
             PasswordTxtbox.PasswordChar = TogglePassword.Checked ? '\0' : '*';

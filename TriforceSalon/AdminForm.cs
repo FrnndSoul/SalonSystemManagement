@@ -177,8 +177,6 @@ namespace TriforceSalon
             DiscardFunc();
         }
 
-
-
         private void UploadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -216,7 +214,6 @@ namespace TriforceSalon
             StatusBox.Text = Status.ToString();
             IDBox.Text = IDInput.ToString();
         }
-
 
         private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
