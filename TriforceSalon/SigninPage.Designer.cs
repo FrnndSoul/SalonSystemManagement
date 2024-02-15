@@ -91,7 +91,7 @@
             this.Controls.Add(this.PasswordTxtbox);
             this.Controls.Add(this.UsernameTxtbox);
             this.Name = "SigninPage";
-            this.Size = new System.Drawing.Size(500, 1060);
+            this.Size = new System.Drawing.Size(1900, 1060);
             this.Load += new System.EventHandler(this.SigninPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

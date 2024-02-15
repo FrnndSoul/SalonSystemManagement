@@ -49,5 +49,10 @@ namespace TriforceSalon
             signinPage1.Visible = false;
             signUpForm1.Visible = true;
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Method.LogOutUser();
+        }
     }
 }

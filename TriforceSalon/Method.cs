@@ -20,7 +20,7 @@ namespace TriforceSalon
     public class Method
     {
         public static byte[] Photo;
-        public static int AccountStatus, ID;
+        public static int AccountStatus, ID, LogReference;
         public static string Name, Username, Email, Password,
             newID, newName, newEmail, newPassword,
             UsernameInput, PasswordInput;
@@ -141,6 +141,7 @@ namespace TriforceSalon
                     {
                         MessageBox.Show("Member");
                     }
+                    LogUser(ID);
                 }
                 else
                 {
@@ -367,7 +368,8 @@ namespace TriforceSalon
                         "VALUES (@sessionID,@id,@timeIn)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@sessionID", GenerateLog());
+                        LogReference = GenerateLog();
+                        querycmd.Parameters.AddWithValue("@sessionID", LogReference);
                         querycmd.Parameters.AddWithValue("@id", IDlog);
                         querycmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
 
@@ -390,6 +392,31 @@ namespace TriforceSalon
                 Ref = random.Next(99999999, 1000000000);
             } while (DuplicateChecker(Ref.ToString(), "SessionID", "logs") == true);
             return Ref;
+        }
+
+        public static void LogOutUser()
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "UPDATE `logs`(`TimeOut`)" +
+                        "VALUES (@timeOut)" +
+                        "WHERE SessionID = @sessionID";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@sessionID", LogReference);
+                        querycmd.Parameters.AddWithValue("@timeOut", DateTime.Now);
+
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+            }
         }
     }
 }

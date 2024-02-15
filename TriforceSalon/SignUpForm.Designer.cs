@@ -246,7 +246,7 @@
             this.Controls.Add(this.UsernameBox);
             this.Controls.Add(this.NameBox);
             this.Name = "SignUpForm";
-            this.Size = new System.Drawing.Size(1400, 1060);
+            this.Size = new System.Drawing.Size(1900, 1060);
             this.Load += new System.EventHandler(this.SignUpForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);

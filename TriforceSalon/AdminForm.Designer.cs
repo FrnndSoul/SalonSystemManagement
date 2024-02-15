@@ -313,7 +313,7 @@
             this.Controls.Add(this.SignoutBtn);
             this.Controls.Add(this.tabControl1);
             this.Name = "AdminForm";
-            this.Size = new System.Drawing.Size(1400, 1060);
+            this.Size = new System.Drawing.Size(1900, 1060);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.UserTab.ResumeLayout(false);
