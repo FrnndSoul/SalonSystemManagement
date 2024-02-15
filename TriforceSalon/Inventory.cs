@@ -15,6 +15,7 @@ namespace TriforceSalon
     {
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+        public static int ShipmentReference;
 
         public static void CheckStatus()
         {
@@ -40,11 +41,39 @@ namespace TriforceSalon
             {
                 MessageBox.Show(e.Message + "\n\nat CheckStatus()", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
 
+        public static int ShipmentID()
+        {
+            Random random = new Random();
+            do
+            {
+                ShipmentReference = random.Next(100000, 1000000);
 
+            } while (Method.DuplicateChecker(ShipmentReference.ToString(), "ShipmentID", "shipments") == true);
+            return ShipmentReference;
+        }
 
-
-
+        public static void AddShippedItems(int ID, int Stock)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "UPDATE `inventory` SET `Stock` = `Stock` + @newStock WHERE `ItemID` = @itemID";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@newStock", Stock);
+                        querycmd.Parameters.AddWithValue("@itemID", ID);
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat AddShippedItems()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
