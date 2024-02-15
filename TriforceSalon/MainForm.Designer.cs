@@ -29,16 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.adminForm1 = new TriforceSalon.AdminForm();
             this.signinPage1 = new TriforceSalon.SigninPage();
             this.signUpForm1 = new TriforceSalon.SignUpForm();
+            this.adminForm1 = new TriforceSalon.AdminForm();
             this.SuspendLayout();
-            // 
-            // adminForm1
-            // 
-            this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
-            resources.ApplyResources(this.adminForm1, "adminForm1");
-            this.adminForm1.Name = "adminForm1";
             // 
             // signinPage1
             // 
@@ -51,6 +45,12 @@
             resources.ApplyResources(this.signUpForm1, "signUpForm1");
             this.signUpForm1.Name = "signUpForm1";
             // 
+            // adminForm1
+            // 
+            this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            resources.ApplyResources(this.adminForm1, "adminForm1");
+            this.adminForm1.Name = "adminForm1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -59,6 +59,7 @@
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
             this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
