@@ -135,7 +135,15 @@ namespace TriforceSalon
                     }
                     else if (999 < ID && ID < 10000)
                     {
-                        MessageBox.Show("Manager");
+                        MessageBox.Show($"Welcome Manager {Name}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                mainForm.ShowInventory();
+                                break;
+                            }
+                        }
                     }
                     else
                     {
@@ -237,11 +245,6 @@ namespace TriforceSalon
             }
             return IDNumber;
         }
-
-
-
-
-
 
         public static bool DuplicateChecker(string Data, string Column, string Table)
         {
