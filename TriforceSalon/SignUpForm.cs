@@ -125,13 +125,13 @@ namespace TriforceSalon
                 int RoleID;
                 if (RoleBox.Text == "Member")
                 {
-                    RoleID = 0;
+                    RoleID = 0; //using 0 to generate member id
                 } else if (RoleBox.Text == "Staff")
                 {
-                    RoleID = 123456;
+                    RoleID = 123456; //using 6 digit to generate 4 digit
                 } else
                 {
-                    RoleID = 1234;
+                    RoleID = 1234; //using 4 digit to generate 6 digit
                 }
                 Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
 
