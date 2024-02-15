@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2024 at 02:40 AM
+-- Generation Time: Feb 15, 2024 at 11:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -33,8 +33,24 @@ CREATE TABLE `inventory` (
   `Stock` int(255) NOT NULL,
   `Cost` int(255) NOT NULL,
   `Aggregate` int(255) NOT NULL,
-  `Status` varchar(255) NOT NULL
+  `Status` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`) VALUES
+(10001, 'Product 1', 15, 20, 15, 0),
+(10002, 'Product 2', 0, 30, 20, 3),
+(10003, 'Product 3', 0, 25, 10, 3),
+(10004, 'Product 4', 15, 30, 15, 0),
+(10005, 'Product 5', 0, 40, 10, 3),
+(10006, 'Product 6', 0, 10, 20, 3),
+(10007, 'Product 7', 20, 15, 20, 0),
+(10008, 'Product 8', 0, 25, 15, 3),
+(10009, 'Product 9', 10, 50, 10, 0),
+(10010, 'Product 10', 0, 15, 20, 3);
 
 -- --------------------------------------------------------
 
@@ -48,6 +64,15 @@ CREATE TABLE `logs` (
   `TimeIn` datetime NOT NULL,
   `TimeOut` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`SessionID`, `ID`, `TimeIn`, `TimeOut`) VALUES
+(216899054, 1687, '2024-02-16 04:38:26', '2024-02-16 04:38:28'),
+(519070912, 1687, '2024-02-16 06:47:56', '2024-02-16 06:48:26'),
+(824827782, 1687, '2024-02-16 06:48:35', '2024-02-16 06:48:39');
 
 -- --------------------------------------------------------
 
