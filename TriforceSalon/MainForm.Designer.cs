@@ -55,9 +55,9 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.adminForm1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
+            this.Controls.Add(this.adminForm1);
             this.Name = "MainForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

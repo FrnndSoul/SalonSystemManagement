@@ -141,6 +141,7 @@ namespace TriforceSalon
                     {
                         MessageBox.Show("Member");
                     }
+                    LogUser(ID);
                 }
                 else
                 {
