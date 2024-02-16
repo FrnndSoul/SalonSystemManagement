@@ -33,11 +33,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.ShipmentDGV = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShipmentDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // InventoryDGV
@@ -92,6 +95,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ShipmentDGV);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -99,6 +103,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Shipment History";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1886, 999);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Transaction History";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -110,15 +125,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // tabPage3
+            // ShipmentDGV
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1886, 999);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Transaction History";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.ShipmentDGV.AllowUserToAddRows = false;
+            this.ShipmentDGV.AllowUserToDeleteRows = false;
+            this.ShipmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ShipmentDGV.Location = new System.Drawing.Point(45, 37);
+            this.ShipmentDGV.Name = "ShipmentDGV";
+            this.ShipmentDGV.ReadOnly = true;
+            this.ShipmentDGV.Size = new System.Drawing.Size(722, 412);
+            this.ShipmentDGV.TabIndex = 0;
             // 
             // InventoryPage
             // 
@@ -132,6 +148,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShipmentDGV)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -145,5 +163,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView ShipmentDGV;
     }
 }

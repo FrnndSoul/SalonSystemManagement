@@ -36,10 +36,16 @@ namespace TriforceSalon
             }
         }
 
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            LoadShipments();
+        }
+
         private void InventoryPage_Load(object sender, EventArgs e)
         {
             Inventory.CheckStatus();
             LoadInventory();
+            LoadShipments();
         }
 
         public void LoadInventory()
@@ -58,7 +64,31 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat LoadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat LoadInventory()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void LoadShipments()
+        {
+            try
+            {
+                connection.Open();
+                string sql = "SELECT * FROM `shipments`";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                {
+                    adapter.Fill(dataTable);
+                }
+                ShipmentDGV.DataSource = dataTable;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat LoadShipments()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -95,8 +125,8 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `shipments`(`ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
-                        "VALUES (@shipmentID, @itemID, @itemName, @quantity, @cost)";
+                    string query = "INSERT INTO `shipments`(`DateShipped`,`ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                        "VALUES (@dateShipped, @shipmentID, @itemID, @itemName, @quantity, @cost)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         int itemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
@@ -104,6 +134,7 @@ namespace TriforceSalon
                         int cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
                         int totalCost = cost * aggregate;
 
+                        querycmd.Parameters.AddWithValue("@dateShipped", DateTime.Now);
                         querycmd.Parameters.AddWithValue("@shipmentID", Inventory.ShipmentID());
                         querycmd.Parameters.AddWithValue("@itemID", itemID);
                         querycmd.Parameters.AddWithValue("@itemName", itemName);
@@ -113,6 +144,7 @@ namespace TriforceSalon
                         Inventory.AddShippedItems(itemID, aggregate);
                         Inventory.CheckStatus();
                         LoadInventory();
+                        LoadShipments();
                     }
                 }
             }
