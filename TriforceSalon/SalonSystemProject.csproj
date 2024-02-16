@@ -107,6 +107,13 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventory.cs" />
+    <Compile Include="InventoryPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InventoryPage.Designer.cs">
+      <DependentUpon>InventoryPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryPage.resx">
+      <DependentUpon>InventoryPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

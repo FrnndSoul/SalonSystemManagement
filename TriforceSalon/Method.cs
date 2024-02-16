@@ -20,7 +20,7 @@ namespace TriforceSalon
     public class Method
     {
         public static byte[] Photo;
-        public static int AccountStatus, ID;
+        public static int AccountStatus, ID, LogReference;
         public static string Name, Username, Email, Password,
             newID, newName, newEmail, newPassword,
             UsernameInput, PasswordInput;
@@ -135,12 +135,21 @@ namespace TriforceSalon
                     }
                     else if (999 < ID && ID < 10000)
                     {
-                        MessageBox.Show("Manager");
+                        MessageBox.Show($"Welcome Manager {Name}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                mainForm.ShowInventory();
+                                break;
+                            }
+                        }
                     }
                     else
                     {
                         MessageBox.Show("Member");
                     }
+                    LogUser(ID);
                 }
                 else
                 {
@@ -207,20 +216,20 @@ namespace TriforceSalon
             Random random = new Random();
             int IDNumber = Convert.ToInt32(IDinput);
             int NewID;
-            if (99999 < IDNumber && IDNumber < 1000000)
+            if (100000 < IDNumber && IDNumber < 1000000)
             {
                 do
                 {
-                    NewID = random.Next(999, 10000);
+                    NewID = random.Next(1000, 10000);
                     IDNumber = NewID;
                 } while (DuplicateChecker(newID, "ID", "users") == true);
                 MessageBox.Show($"Generate Manager ID: {IDNumber}");
             }
-            else if (999 < IDNumber && IDNumber < 10000)
+            else if (1000 < IDNumber && IDNumber < 10000)
             {
                 do
                 {
-                    NewID = random.Next(99999, 1000000);
+                    NewID = random.Next(100000, 1000000);
                     IDNumber = NewID;
                 } while (DuplicateChecker(newID, "ID", "users") == true);
                 MessageBox.Show($"Generate Staff ID: {IDNumber}");
@@ -228,7 +237,7 @@ namespace TriforceSalon
             {
                 do
                 {
-                    NewID = random.Next(9999999, 100000000);
+                    NewID = random.Next(10000000, 100000000);
                     IDNumber = NewID;
                 }
                 while (DuplicateChecker(newID, "ID", "users") == true);
@@ -367,7 +376,8 @@ namespace TriforceSalon
                         "VALUES (@sessionID,@id,@timeIn)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@sessionID", GenerateLog());
+                        LogReference = GenerateLog();
+                        querycmd.Parameters.AddWithValue("@sessionID", LogReference);
                         querycmd.Parameters.AddWithValue("@id", IDlog);
                         querycmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
 
@@ -390,6 +400,28 @@ namespace TriforceSalon
                 Ref = random.Next(99999999, 1000000000);
             } while (DuplicateChecker(Ref.ToString(), "SessionID", "logs") == true);
             return Ref;
+        }
+
+        public static void LogOutUser()
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "UPDATE logs SET TimeOut = @timeOut WHERE SessionID = @sessionID";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@sessionID", LogReference);
+                        querycmd.Parameters.AddWithValue("@timeOut", DateTime.Now);
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat LogOutUser()", "SQL ERROR", MessageBoxButtons.OK);
+            }
         }
     }
 }
