@@ -179,5 +179,10 @@ namespace TriforceSalon
             }
 
         }
+
+        private void PasswordBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
