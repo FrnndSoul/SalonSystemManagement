@@ -51,7 +51,7 @@
             this.TogglePassword.AutoSize = true;
             this.TogglePassword.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TogglePassword.ForeColor = System.Drawing.Color.White;
-            this.TogglePassword.Location = new System.Drawing.Point(100, 615);
+            this.TogglePassword.Location = new System.Drawing.Point(114, 614);
             this.TogglePassword.Name = "TogglePassword";
             this.TogglePassword.Size = new System.Drawing.Size(180, 27);
             this.TogglePassword.TabIndex = 2;
@@ -64,7 +64,7 @@
             this.CreateAccountLnk.AutoSize = true;
             this.CreateAccountLnk.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateAccountLnk.LinkColor = System.Drawing.Color.White;
-            this.CreateAccountLnk.Location = new System.Drawing.Point(277, 864);
+            this.CreateAccountLnk.Location = new System.Drawing.Point(276, 864);
             this.CreateAccountLnk.Name = "CreateAccountLnk";
             this.CreateAccountLnk.Size = new System.Drawing.Size(183, 37);
             this.CreateAccountLnk.TabIndex = 4;
@@ -93,7 +93,6 @@
             // guna2PictureBox2
             // 
             this.guna2PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox2.Image = global::TriforceSalon.Properties.Resources.SignInDesignLogo;
             this.guna2PictureBox2.ImageRotate = 0F;
             this.guna2PictureBox2.Location = new System.Drawing.Point(5, 0);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
@@ -108,7 +107,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(107, 864);
+            this.label3.Location = new System.Drawing.Point(102, 864);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(178, 37);
@@ -120,7 +119,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(93, 518);
+            this.label2.Location = new System.Drawing.Point(102, 518);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 37);
@@ -132,7 +131,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(93, 375);
+            this.label1.Location = new System.Drawing.Point(107, 363);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 37);
@@ -148,12 +147,12 @@
             this.SigninBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.SigninBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.SigninBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.SigninBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SigninBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.SigninBtn.ForeColor = System.Drawing.Color.White;
-            this.SigninBtn.Location = new System.Drawing.Point(100, 742);
+            this.SigninBtn.Location = new System.Drawing.Point(109, 742);
             this.SigninBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SigninBtn.Name = "SigninBtn";
-            this.SigninBtn.Size = new System.Drawing.Size(316, 51);
+            this.SigninBtn.Size = new System.Drawing.Size(350, 50);
             this.SigninBtn.TabIndex = 3;
             this.SigninBtn.Text = "Log In";
             this.SigninBtn.Click += new System.EventHandler(this.SigninBtn_Click_1);
@@ -170,13 +169,13 @@
             this.PasswordTxtbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PasswordTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTxtbox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PasswordTxtbox.Location = new System.Drawing.Point(100, 558);
+            this.PasswordTxtbox.Location = new System.Drawing.Point(109, 558);
             this.PasswordTxtbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PasswordTxtbox.Name = "PasswordTxtbox";
             this.PasswordTxtbox.PasswordChar = '\0';
             this.PasswordTxtbox.PlaceholderText = "";
             this.PasswordTxtbox.SelectedText = "";
-            this.PasswordTxtbox.Size = new System.Drawing.Size(316, 51);
+            this.PasswordTxtbox.Size = new System.Drawing.Size(350, 50);
             this.PasswordTxtbox.TabIndex = 1;
             // 
             // UsernameTxtbox
@@ -192,20 +191,19 @@
             this.UsernameTxtbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.UsernameTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsernameTxtbox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.UsernameTxtbox.Location = new System.Drawing.Point(100, 415);
+            this.UsernameTxtbox.Location = new System.Drawing.Point(109, 415);
             this.UsernameTxtbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.UsernameTxtbox.Name = "UsernameTxtbox";
             this.UsernameTxtbox.PasswordChar = '\0';
             this.UsernameTxtbox.PlaceholderText = "";
             this.UsernameTxtbox.SelectedText = "";
-            this.UsernameTxtbox.Size = new System.Drawing.Size(316, 51);
+            this.UsernameTxtbox.Size = new System.Drawing.Size(350, 50);
             this.UsernameTxtbox.TabIndex = 0;
             // 
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox1.FillColor = System.Drawing.Color.Empty;
-            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.SignInDesign;
             this.guna2PictureBox1.ImageRotate = 0F;
             this.guna2PictureBox1.Location = new System.Drawing.Point(0, 0);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
@@ -218,7 +216,6 @@
             // guna2PictureBox3
             // 
             this.guna2PictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox3.Image = global::TriforceSalon.Properties.Resources.SignInDesignGradient;
             this.guna2PictureBox3.ImageRotate = 0F;
             this.guna2PictureBox3.Location = new System.Drawing.Point(199, 0);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
