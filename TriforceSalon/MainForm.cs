@@ -15,11 +15,55 @@ namespace TriforceSalon
         public MainForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void SigninPage1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void ShowLogin()
+        {
+            adminForm1.Visible = false;
+            inventoryPage1.Visible = false;
+            signinPage1.Visible = true;
+            signUpForm1.Visible = false;
+        }
+
+        public void ShowAdmin()
+        {
+            adminForm1.Visible = true;
+            inventoryPage1.Visible = false;
+            signinPage1.Visible = false;
+            signUpForm1.Visible = false;
+        }
+
+        public void ShowSignUp()
+        {
+            adminForm1.Visible = false;
+            inventoryPage1.Visible = false;
+            signinPage1.Visible = false;
+            signUpForm1.Visible = true;
+        }
+
+        public void ShowInventory()
+        {
+            adminForm1.Visible = false;
+            inventoryPage1.Visible = true;
+            signinPage1.Visible = false;
+            signUpForm1.Visible = false;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Method.LogOutUser();
         }
     }
 }

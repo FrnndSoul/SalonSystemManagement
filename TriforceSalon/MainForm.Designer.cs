@@ -28,22 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.inventoryPage1 = new TriforceSalon.InventoryPage();
+            this.signinPage1 = new TriforceSalon.SigninPage();
+            this.signUpForm1 = new TriforceSalon.SignUpForm();
+            this.adminForm1 = new TriforceSalon.AdminForm();
             this.SuspendLayout();
             // 
-            // Form1
+            // inventoryPage1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
+            this.inventoryPage1.Name = "inventoryPage1";
+            // 
+            // signinPage1
+            // 
+            resources.ApplyResources(this.signinPage1, "signinPage1");
+            this.signinPage1.Name = "signinPage1";
+            this.signinPage1.Load += new System.EventHandler(this.SigninPage1_Load);
+            // 
+            // signUpForm1
+            // 
+            resources.ApplyResources(this.signUpForm1, "signUpForm1");
+            this.signUpForm1.Name = "signUpForm1";
+            // 
+            // adminForm1
+            // 
+            this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            resources.ApplyResources(this.adminForm1, "adminForm1");
+            this.adminForm1.Name = "adminForm1";
+            // 
+            // MainForm
+            // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Window";
+            this.Controls.Add(this.signinPage1);
+            this.Controls.Add(this.signUpForm1);
+            this.Controls.Add(this.adminForm1);
+            this.Controls.Add(this.inventoryPage1);
+            this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private SigninPage signinPage1;
+        private AdminForm adminForm1;
+        private SignUpForm signUpForm1;
+        private InventoryPage inventoryPage1;
     }
 }
 
