@@ -58,7 +58,43 @@ namespace TriforceSalon
             }
         }
 
-        private void CreateBtn_Click(object sender, EventArgs e)
+       
+
+        private void UploadBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+                Image image = Image.FromFile(selectedFile);
+                Photo.Image = image;
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, image.RawFormat);
+                    PhotoByteHolder = ms.ToArray();
+                }
+            }
+        }
+
+        private void SignUpForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EmailBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void CreateBtn_Click_1(object sender, EventArgs e)
         {
             string Name, Username, Email, Password, Password1;
             DateTime Birthdate = BirthdayPicker.Value;
@@ -75,13 +111,14 @@ namespace TriforceSalon
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-             
+
             if (Password != Password1)
             {
                 MessageBox.Show("Your passwords do not match.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if (!Method.StrongPassword(Password))
+            }
+            else if (!Method.StrongPassword(Password))
             {
                 MessageBox.Show("Your passwords is weak." +
                     "\nYour password should include the following:" +
@@ -126,10 +163,12 @@ namespace TriforceSalon
                 if (RoleBox.Text == "Member")
                 {
                     RoleID = 0; //using 0 to generate member id
-                } else if (RoleBox.Text == "Staff")
+                }
+                else if (RoleBox.Text == "Staff")
                 {
                     RoleID = 123456; //using 6 digit to generate 4 digit
-                } else
+                }
+                else
                 {
                     RoleID = 1234; //using 4 digit to generate 6 digit
                 }
@@ -138,41 +177,12 @@ namespace TriforceSalon
                 object BackFunction = BackBtn;
                 BackBtn_Click(BackFunction, e);
             }
-        }
-
-
-        private void UploadBtn_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFile = openFileDialog.FileName;
-                Image image = Image.FromFile(selectedFile);
-                Photo.Image = image;
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    image.Save(ms, image.RawFormat);
-                    PhotoByteHolder = ms.ToArray();
-                }
-            }
-        }
-
-        private void SignUpForm_Load(object sender, EventArgs e)
-        {
 
         }
 
-        private void EmailBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void PasswordBox_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Space)
-            {
-                e.Handled = true;
-            }
+
         }
     }
 }
