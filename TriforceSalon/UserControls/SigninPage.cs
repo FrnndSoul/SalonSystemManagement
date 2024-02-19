@@ -62,6 +62,7 @@ namespace TriforceSalon
             }
 
             Method.Login(Username, Password);
+
             Clear();
         }
     }
