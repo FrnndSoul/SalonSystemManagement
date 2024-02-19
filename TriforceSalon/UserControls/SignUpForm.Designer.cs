@@ -358,7 +358,9 @@
             // 
             // RoleBox
             // 
-            this.RoleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.RoleBox.AutoCompleteCustomSource.AddRange(new string[] {
+            ""});
+            this.RoleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.RoleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.RoleBox.AutoRoundedCorners = true;
             this.RoleBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
@@ -369,7 +371,7 @@
             this.RoleBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(75)))), ((int)(((byte)(164)))));
             this.RoleBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.RoleBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RoleBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RoleBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.RoleBox.ForeColor = System.Drawing.Color.White;
             this.RoleBox.FormattingEnabled = true;
             this.RoleBox.ItemHeight = 30;

@@ -26,8 +26,8 @@ namespace TriforceSalon
 
             PasswordBox.PasswordChar = '*';
             PasswordBox1.PasswordChar = '*';
-
             Method.EclipsePhotoBox(Photo);
+            RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
         }
 
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
