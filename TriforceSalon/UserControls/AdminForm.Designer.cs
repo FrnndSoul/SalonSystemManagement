@@ -42,7 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BirthdayPicker = new System.Windows.Forms.DateTimePicker();
             this.UploadBtn = new System.Windows.Forms.Button();
-            this.Photo = new System.Windows.Forms.PictureBox();
             this.StatusBox = new System.Windows.Forms.TextBox();
             this.IDBox = new System.Windows.Forms.TextBox();
             this.EmailBox = new System.Windows.Forms.TextBox();
@@ -51,10 +50,11 @@
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.Inventory = new System.Windows.Forms.TabPage();
             this.SignoutBtn = new System.Windows.Forms.Button();
+            this.Photo = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -218,15 +218,6 @@
             this.UploadBtn.UseVisualStyleBackColor = true;
             this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
             // 
-            // Photo
-            // 
-            this.Photo.Location = new System.Drawing.Point(1057, 54);
-            this.Photo.Name = "Photo";
-            this.Photo.Size = new System.Drawing.Size(250, 250);
-            this.Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Photo.TabIndex = 28;
-            this.Photo.TabStop = false;
-            // 
             // StatusBox
             // 
             this.StatusBox.Enabled = false;
@@ -274,6 +265,7 @@
             this.UserDGV.AllowUserToResizeColumns = false;
             this.UserDGV.AllowUserToResizeRows = false;
             this.UserDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.UserDGV.BackgroundColor = System.Drawing.Color.White;
             this.UserDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UserDGV.Location = new System.Drawing.Point(3, 3);
             this.UserDGV.MultiSelect = false;
@@ -305,6 +297,15 @@
             this.SignoutBtn.UseVisualStyleBackColor = true;
             this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
             // 
+            // Photo
+            // 
+            this.Photo.Location = new System.Drawing.Point(1057, 54);
+            this.Photo.Name = "Photo";
+            this.Photo.Size = new System.Drawing.Size(250, 250);
+            this.Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Photo.TabIndex = 28;
+            this.Photo.TabStop = false;
+            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -318,8 +319,8 @@
             this.tabControl1.ResumeLayout(false);
             this.UserTab.ResumeLayout(false);
             this.UserTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);
 
         }
