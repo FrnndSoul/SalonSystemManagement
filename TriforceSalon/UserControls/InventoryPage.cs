@@ -48,6 +48,89 @@ namespace TriforceSalon
             LoadShipments();
         }
 
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+
+            int itemRow = InventoryDGV.SelectedCells[0].RowIndex;
+            if (itemRow < 0)
+            {
+                MessageBox.Show("Select a product first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string itemName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
+            int status = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Status"].Value);
+
+            if (status <= 1)
+            {
+                MessageBox.Show($"There is still ample supply of\n{itemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (Convert.ToInt32(RequestBox.Text)==0)
+            {
+                MessageBox.Show("Cannot ship zero quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DialogResult result = MessageBox.Show($"Do you want to ship a new batch of {itemName}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `shipments`(`DateShipped`,`ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                        "VALUES (@dateShipped, @shipmentID, @itemID, @itemName, @quantity, @cost)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        int itemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
+                        int aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);
+                        int cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
+                        int totalCost = cost * aggregate;
+
+                        querycmd.Parameters.AddWithValue("@dateShipped", DateTime.Now);
+                        querycmd.Parameters.AddWithValue("@shipmentID", Inventory.ShipmentID());
+                        querycmd.Parameters.AddWithValue("@itemID", itemID);
+                        querycmd.Parameters.AddWithValue("@itemName", itemName);
+                        querycmd.Parameters.AddWithValue("@quantity", Convert.ToInt32(RequestBox.Text));
+                        querycmd.Parameters.AddWithValue("@cost", totalCost);
+                        querycmd.ExecuteNonQuery();
+                        Inventory.AddShippedItems(itemID, Convert.ToInt32(RequestBox.Text));
+                        Inventory.CheckStatus();
+                        LoadInventory();
+                        LoadShipments();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\nat OrderShipmentBtn()", "SQL ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        private void Add_Click(object sender, EventArgs e)
+        {
+            int x = Convert.ToInt32(RequestBox.Text);
+            if (x != Convert.ToInt32(AggregateBox.Text))
+            {
+                x++;
+                RequestBox.Text = x.ToString();
+            }
+        }
+
+        private void Less_Click(object sender, EventArgs e)
+        {
+            int x = Convert.ToInt32(RequestBox.Text);
+            if (x>0)
+            {
+                x--;
+                RequestBox.Text = x.ToString();
+            }
+        }
+
         public void LoadInventory()
         {
             try
@@ -113,12 +196,14 @@ namespace TriforceSalon
                 MessageBox.Show($"There is still ample supply of\n{itemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            
             DialogResult result = MessageBox.Show($"Do you want to ship a new batch of {itemName}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes)
             {
                 return;
             }
+
+            RequestBox.Text = "0";
 
             try
             {
@@ -152,7 +237,6 @@ namespace TriforceSalon
             {
                 MessageBox.Show(ex.Message + "\n\nat OrderShipmentBtn()", "SQL ERROR", MessageBoxButtons.OK);
             }
-
         }
 
         private void InventoryDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -171,11 +255,29 @@ namespace TriforceSalon
                     if (reader.Read())
                     {
                         ItemName = reader["ItemName"].ToString();
+                            NameBox.Text = ItemName;
                         Stock = Convert.ToInt32(reader["Stock"]);
+                            StockBox.Text = Stock.ToString();
                         Cost = Convert.ToInt32(reader["Cost"]);
+                            CostBox.Text = Cost.ToString();
                         Aggregate = Convert.ToInt32(reader["Aggregate"]);
+                            AggregateBox.Text = Aggregate.ToString();
                         Status = Convert.ToInt32(reader["Status"]);
+                            if (Status == 0)
+                            {
+                                StatusBox.Text = "Good";
+                            } else if (Status == 1)
+                            {
+                                StatusBox.Text = "Fair";
+                            } else if (Status == 2)
+                            {
+                                StatusBox.Text = "Critical";
+                            } else
+                            {
+                                StatusBox.Text = "Empty";
+                            }
                         ItemID = Convert.ToInt32(selectedItem);
+                            CodeBox.Text = ItemID.ToString();
                     }
                     else
                     {
