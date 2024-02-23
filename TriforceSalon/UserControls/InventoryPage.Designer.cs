@@ -109,7 +109,7 @@
             this.InventoryDGV.ReadOnly = true;
             this.InventoryDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.InventoryDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.InventoryDGV.Size = new System.Drawing.Size(698, 452);
+            this.InventoryDGV.Size = new System.Drawing.Size(720, 611);
             this.InventoryDGV.TabIndex = 0;
             this.InventoryDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventoryDGV_CellContentClick);
             // 
@@ -153,9 +153,9 @@
             this.EditPanel.Controls.Add(this.EditIDBox);
             this.EditPanel.Controls.Add(this.EditStockBox);
             this.EditPanel.Controls.Add(this.EditNameBox);
-            this.EditPanel.Location = new System.Drawing.Point(3, 3);
+            this.EditPanel.Location = new System.Drawing.Point(738, 3);
             this.EditPanel.Name = "EditPanel";
-            this.EditPanel.Size = new System.Drawing.Size(704, 420);
+            this.EditPanel.Size = new System.Drawing.Size(729, 945);
             this.EditPanel.TabIndex = 33;
             this.EditPanel.Visible = false;
             // 
@@ -362,14 +362,14 @@
             this.InventoryPanel.Controls.Add(this.InventoryDGV);
             this.InventoryPanel.Controls.Add(this.EditProductBtn);
             this.InventoryPanel.Controls.Add(this.ReqShipBtn);
-            this.InventoryPanel.Location = new System.Drawing.Point(6, 432);
+            this.InventoryPanel.Location = new System.Drawing.Point(6, 6);
             this.InventoryPanel.Name = "InventoryPanel";
-            this.InventoryPanel.Size = new System.Drawing.Size(704, 519);
+            this.InventoryPanel.Size = new System.Drawing.Size(726, 945);
             this.InventoryPanel.TabIndex = 4;
             // 
             // EditProductBtn
             // 
-            this.EditProductBtn.Location = new System.Drawing.Point(176, 461);
+            this.EditProductBtn.Location = new System.Drawing.Point(176, 620);
             this.EditProductBtn.Name = "EditProductBtn";
             this.EditProductBtn.Size = new System.Drawing.Size(167, 23);
             this.EditProductBtn.TabIndex = 2;
@@ -379,7 +379,7 @@
             // 
             // ReqShipBtn
             // 
-            this.ReqShipBtn.Location = new System.Drawing.Point(3, 461);
+            this.ReqShipBtn.Location = new System.Drawing.Point(3, 620);
             this.ReqShipBtn.Name = "ReqShipBtn";
             this.ReqShipBtn.Size = new System.Drawing.Size(167, 23);
             this.ReqShipBtn.TabIndex = 1;
@@ -408,7 +408,7 @@
             this.ShipmentPanel.Controls.Add(this.RequestBox);
             this.ShipmentPanel.Controls.Add(this.NameBox);
             this.ShipmentPanel.Controls.Add(this.StatusBox);
-            this.ShipmentPanel.Location = new System.Drawing.Point(3, 3);
+            this.ShipmentPanel.Location = new System.Drawing.Point(738, 3);
             this.ShipmentPanel.Name = "ShipmentPanel";
             this.ShipmentPanel.Size = new System.Drawing.Size(729, 945);
             this.ShipmentPanel.TabIndex = 3;
@@ -937,7 +937,7 @@
             // 
             // AddNewBtn
             // 
-            this.AddNewBtn.Location = new System.Drawing.Point(349, 461);
+            this.AddNewBtn.Location = new System.Drawing.Point(349, 620);
             this.AddNewBtn.Name = "AddNewBtn";
             this.AddNewBtn.Size = new System.Drawing.Size(167, 23);
             this.AddNewBtn.TabIndex = 3;
