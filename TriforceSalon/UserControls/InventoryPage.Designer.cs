@@ -976,7 +976,7 @@
             this.SupplierBox.PasswordChar = '\0';
             this.SupplierBox.PlaceholderText = "";
             this.SupplierBox.SelectedText = "";
-            this.SupplierBox.Size = new System.Drawing.Size(175, 36);
+            this.SupplierBox.Size = new System.Drawing.Size(356, 36);
             this.SupplierBox.TabIndex = 33;
             // 
             // InventoryPage
