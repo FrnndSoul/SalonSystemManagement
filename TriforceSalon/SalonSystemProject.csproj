@@ -124,7 +124,7 @@
     <Compile Include="UserControls\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inventory.cs" />
+    <Compile Include="Class Components\Inventory.cs" />
     <Compile Include="UserControls\InventoryPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
