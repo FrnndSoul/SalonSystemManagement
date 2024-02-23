@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
@@ -124,7 +125,7 @@
     <Compile Include="UserControls\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inventory.cs" />
+    <Compile Include="Class Components\Inventory.cs" />
     <Compile Include="UserControls\InventoryPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +153,12 @@
     <Compile Include="UserControls\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WalkInTransactionForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
+      <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WalkInTransactionForm.resx">
+      <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -197,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SignInDesignLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignUpDesignBackGround.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

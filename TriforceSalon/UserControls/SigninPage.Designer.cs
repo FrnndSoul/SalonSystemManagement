@@ -130,6 +130,7 @@
             // 
             this.SigninBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.SigninBtn.BorderRadius = 20;
+            this.SigninBtn.BorderThickness = 1;
             this.SigninBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.SigninBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.SigninBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -148,6 +149,7 @@
             // PasswordTxtbox
             // 
             this.PasswordTxtbox.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.PasswordTxtbox.BorderColor = System.Drawing.Color.Black;
             this.PasswordTxtbox.BorderRadius = 20;
             this.PasswordTxtbox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PasswordTxtbox.DefaultText = "";
@@ -156,7 +158,8 @@
             this.PasswordTxtbox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PasswordTxtbox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PasswordTxtbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PasswordTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.PasswordTxtbox.ForeColor = System.Drawing.Color.Black;
             this.PasswordTxtbox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PasswordTxtbox.Location = new System.Drawing.Point(109, 558);
             this.PasswordTxtbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -170,6 +173,7 @@
             // UsernameTxtbox
             // 
             this.UsernameTxtbox.AutoRoundedCorners = true;
+            this.UsernameTxtbox.BorderColor = System.Drawing.Color.Black;
             this.UsernameTxtbox.BorderRadius = 24;
             this.UsernameTxtbox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.UsernameTxtbox.DefaultText = "";
@@ -178,7 +182,8 @@
             this.UsernameTxtbox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.UsernameTxtbox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.UsernameTxtbox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.UsernameTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameTxtbox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.UsernameTxtbox.ForeColor = System.Drawing.Color.Black;
             this.UsernameTxtbox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.UsernameTxtbox.Location = new System.Drawing.Point(109, 415);
             this.UsernameTxtbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -236,9 +241,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.guna2PictureBox3);
             this.Controls.Add(this.guna2PictureBox2);
-            this.Controls.Add(this.panel1);
             this.Name = "SigninPage";
             this.Size = new System.Drawing.Size(1900, 1060);
             this.Load += new System.EventHandler(this.SigninPage_Load);

@@ -131,10 +131,12 @@ namespace TriforceSalon
                 {
                     if (99999 < ID && ID < 1000000)
                     {
+                        ResetAttempt(UsernameInput);
                         MessageBox.Show("Staff");
                     }
                     else if (999 < ID && ID < 10000)
                     {
+                        ResetAttempt(UsernameInput);
                         MessageBox.Show($"Welcome Manager {Name}!");
                         foreach (Form openForm in Application.OpenForms)
                         {
@@ -197,6 +199,28 @@ namespace TriforceSalon
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n\nat AccountStatus()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ResetAttempt(string InputUsername)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "UPDATE `users` SET `AccountStatus` = @AccountStatus WHERE `Username` = @username";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@username", InputUsername);
+                        querycmd.Parameters.AddWithValue("@AccountStatus", 0);
+                        querycmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ResetAttempt()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
