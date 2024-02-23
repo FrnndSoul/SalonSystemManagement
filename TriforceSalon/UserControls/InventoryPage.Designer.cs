@@ -975,7 +975,6 @@
             this.SupplierBox.Name = "SupplierBox";
             this.SupplierBox.PasswordChar = '\0';
             this.SupplierBox.PlaceholderText = "";
-            this.SupplierBox.ReadOnly = true;
             this.SupplierBox.SelectedText = "";
             this.SupplierBox.Size = new System.Drawing.Size(175, 36);
             this.SupplierBox.TabIndex = 33;
