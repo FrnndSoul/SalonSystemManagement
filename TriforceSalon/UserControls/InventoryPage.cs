@@ -8,7 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TriforceSalon
 {
@@ -185,9 +188,15 @@ namespace TriforceSalon
             EditAggregateBox.Text = "";
             EditIDBox.Text = "";
 
+            AddIDBox.Text = "";
+            AddNameBox.Text = "";
+            AddCostBox.Text = "";
+            AddAggregateBox.Text = "";
+
             InventoryPanel.Visible = true;
             ShipmentPanel.Visible = false;
             EditPanel.Visible = false;
+            AddPanel.Visible = false;
 
             Inventory.CheckStatus();
             LoadInventory();
@@ -264,6 +273,88 @@ namespace TriforceSalon
             {
                 e.Handled = true;
             }
+        }
+
+        private void guna2Button1_Click_1(object sender, EventArgs e)
+        {
+            DefaultLoad();
+        }
+
+        private void AddCostBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void AddAggregateBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+            public static int GenerateRandomID()
+            {
+                Random random = new Random();
+                int id;
+                do
+                {
+                    id = random.Next(10000, 100000);
+                }
+                while (Method.DuplicateChecker(id.ToString(), "ItemID", "inventory") == true);
+                return id;
+            }
+
+
+        private void AddBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show($"Do you want to add this new product?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO `inventory`" +
+                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`) VALUES" +
+                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status)";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                    {
+                        querycmd.Parameters.AddWithValue("@itemID", AddIDBox.Text);
+                        querycmd.Parameters.AddWithValue("@itemName", AddNameBox.Text);
+                        querycmd.Parameters.AddWithValue("@stock", 0);
+                        querycmd.Parameters.AddWithValue("@cost", AddCostBox.Text);
+                        querycmd.Parameters.AddWithValue("@aggregate", AddAggregateBox.Text);
+                        querycmd.Parameters.AddWithValue("@status", 3);
+                        querycmd.ExecuteNonQuery();
+                        DefaultLoad();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\nat AddBtn_Click", "SQL ERROR", MessageBoxButtons.OK);
+            }
+
+        }
+
+        private void AddNewBtn_Click(object sender, EventArgs e)
+        {
+            AddPanel.Visible = true;
+            InventoryPanel.Visible = false;
+            int randomID = GenerateRandomID();
+            AddIDBox.Text = randomID.ToString();
+        }
+
+        private void AddPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         public void LoadInventory()
