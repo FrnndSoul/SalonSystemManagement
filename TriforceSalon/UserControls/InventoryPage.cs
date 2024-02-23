@@ -70,6 +70,13 @@ namespace TriforceSalon
                 MessageBox.Show($"There is still ample supply of\n{itemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (string.IsNullOrEmpty(SupplierBox.Text))
+            {
+                MessageBox.Show($"No supplier indicated.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (Convert.ToInt32(RequestBox.Text)==0)
             {
                 MessageBox.Show("Cannot ship zero quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -86,17 +93,17 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `shipments`(`DateShipped`,`ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
-                        "VALUES (@dateShipped, @shipmentID, @itemID, @itemName, @quantity, @cost)";
+                    string query = "INSERT INTO `shipments`(`DateShipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                        "VALUES (@dateShipped, @shipmentID, @supplier, @itemID, @itemName, @quantity, @cost)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         int itemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
                         int aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);
                         int cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
                         int totalCost = cost * aggregate;
-
                         querycmd.Parameters.AddWithValue("@dateShipped", DateTime.Now);
                         querycmd.Parameters.AddWithValue("@shipmentID", Inventory.ShipmentID());
+                        querycmd.Parameters.AddWithValue("@supplier", SupplierBox.Text);
                         querycmd.Parameters.AddWithValue("@itemID", itemID);
                         querycmd.Parameters.AddWithValue("@itemName", itemName);
                         querycmd.Parameters.AddWithValue("@quantity", Convert.ToInt32(RequestBox.Text));
