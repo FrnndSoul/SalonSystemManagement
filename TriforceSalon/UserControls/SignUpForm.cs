@@ -26,8 +26,8 @@ namespace TriforceSalon
 
             PasswordBox.PasswordChar = '*';
             PasswordBox1.PasswordChar = '*';
-
             Method.EclipsePhotoBox(Photo);
+            this.RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
         }
 
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
@@ -57,8 +57,6 @@ namespace TriforceSalon
                 }
             }
         }
-
-       
 
         private void UploadBtn_Click(object sender, EventArgs e)
         {
@@ -126,23 +124,17 @@ namespace TriforceSalon
                     "\n     Numbers, and Special Characters", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (!Method.ValidEmail(Email))
+            } else if (!Method.ValidEmail(Email))
             {
                 MessageBox.Show("Please provide a valid email address.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (Method.DuplicateChecker(Username, "Username", "users") || Method.DuplicateChecker(Email, "Email", "users"))
+            } else if (Method.DuplicateChecker(Username, "Username", "accounts") || Method.DuplicateChecker(Email, "Email", "salon_employees"))
             {
                 MessageBox.Show("The username and/or email is already registered.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (PhotoByteHolder == null)
+            } else if (PhotoByteHolder == null)
             {
                 MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -160,23 +152,29 @@ namespace TriforceSalon
                 string hashedPassword = Method.HashString(Password);
 
                 int RoleID;
-                if (RoleBox.Text == "Member")
+                if (RoleBox.Text == "Staff")
                 {
-                    RoleID = 0; //using 0 to generate member id
-                }
-                else if (RoleBox.Text == "Staff")
-                {
-                    RoleID = 123456; //using 6 digit to generate 4 digit
+                    RoleID = 1234;
                 }
                 else
                 {
-                    RoleID = 1234; //using 4 digit to generate 6 digit
+                    RoleID = 12345;
                 }
-                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
+                Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
 
                 object BackFunction = BackBtn;
                 BackBtn_Click(BackFunction, e);
             }
+
+        }
+
+        public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Guna2PictureBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }

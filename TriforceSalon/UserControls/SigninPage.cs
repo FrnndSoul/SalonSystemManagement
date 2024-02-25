@@ -61,6 +61,22 @@ namespace TriforceSalon
                 return;
             }
 
+            if (string.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(Password, "Admin123", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Admin log in success", "Welcome",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Form openForm in Application.OpenForms)
+                {
+                    if (openForm is MainForm mainForm)
+                    {
+                        mainForm.ShowAdmin();
+                        break;
+                    }
+                }
+                Clear();
+                return;
+            }
             Method.Login(Username, Password);
             Clear();
         }
