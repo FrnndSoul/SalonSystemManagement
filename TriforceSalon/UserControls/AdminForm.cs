@@ -177,6 +177,19 @@ namespace TriforceSalon
             DiscardFunc();
         }
 
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+            DiscardFunc();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
+            }
+        }
+
         private void UploadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
