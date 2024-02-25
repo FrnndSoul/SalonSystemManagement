@@ -33,11 +33,9 @@
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
-            this.SignoutBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ChangeRoleBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.UploadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.EditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -46,11 +44,15 @@
             this.UsernameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.EmailBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.BirthdayPicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.SignoutBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
             this.ServiceTypesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +70,8 @@
             // UserTab
             // 
             this.UserTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.UserTab.Controls.Add(this.guna2PictureBox1);
+            this.UserTab.Controls.Add(this.SignoutBtn);
             this.UserTab.Controls.Add(this.BirthdayPicker);
             this.UserTab.Controls.Add(this.EmailBox);
             this.UserTab.Controls.Add(this.StatusBox);
@@ -75,7 +79,6 @@
             this.UserTab.Controls.Add(this.IDBox);
             this.UserTab.Controls.Add(this.NameBox);
             this.UserTab.Controls.Add(this.EditBtn);
-            this.UserTab.Controls.Add(this.SignoutBtn);
             this.UserTab.Controls.Add(this.UploadBtn);
             this.UserTab.Controls.Add(this.Photo);
             this.UserTab.Controls.Add(this.DiscardBtn);
@@ -105,7 +108,7 @@
             this.UserDGV.ReadOnly = true;
             this.UserDGV.RowHeadersWidth = 51;
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserDGV.Size = new System.Drawing.Size(937, 800);
+            this.UserDGV.Size = new System.Drawing.Size(937, 819);
             this.UserDGV.TabIndex = 0;
             this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick_1);
             // 
@@ -116,7 +119,7 @@
             this.ServiceTypesTab.Location = new System.Drawing.Point(4, 35);
             this.ServiceTypesTab.Name = "ServiceTypesTab";
             this.ServiceTypesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ServiceTypesTab.Size = new System.Drawing.Size(1386, 839);
+            this.ServiceTypesTab.Size = new System.Drawing.Size(1792, 961);
             this.ServiceTypesTab.TabIndex = 1;
             this.ServiceTypesTab.Text = "Service Types";
             // 
@@ -138,16 +141,6 @@
             this.ServiceTypesGDV.Size = new System.Drawing.Size(952, 697);
             this.ServiceTypesGDV.TabIndex = 1;
             // 
-            // SignoutBtn
-            // 
-            this.SignoutBtn.Location = new System.Drawing.Point(1680, 20);
-            this.SignoutBtn.Name = "SignoutBtn";
-            this.SignoutBtn.Size = new System.Drawing.Size(96, 23);
-            this.SignoutBtn.TabIndex = 1;
-            this.SignoutBtn.Text = "Signout";
-            this.SignoutBtn.UseVisualStyleBackColor = true;
-            this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
-            // 
             // SaveBtn
             // 
             this.SaveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -160,7 +153,7 @@
             this.SaveBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.SaveBtn.Font = new System.Drawing.Font("Chinacat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveBtn.ForeColor = System.Drawing.Color.White;
-            this.SaveBtn.Location = new System.Drawing.Point(18, 841);
+            this.SaveBtn.Location = new System.Drawing.Point(18, 876);
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(225, 45);
@@ -178,9 +171,9 @@
             this.ChangeRoleBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.ChangeRoleBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.ChangeRoleBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.ChangeRoleBtn.Font = new System.Drawing.Font("Chinacat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeRoleBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.ChangeRoleBtn.ForeColor = System.Drawing.Color.White;
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(258, 841);
+            this.ChangeRoleBtn.Location = new System.Drawing.Point(258, 876);
             this.ChangeRoleBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ChangeRoleBtn.Name = "ChangeRoleBtn";
             this.ChangeRoleBtn.Size = new System.Drawing.Size(225, 45);
@@ -200,23 +193,13 @@
             this.DiscardBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.DiscardBtn.Font = new System.Drawing.Font("Chinacat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscardBtn.ForeColor = System.Drawing.Color.White;
-            this.DiscardBtn.Location = new System.Drawing.Point(494, 841);
+            this.DiscardBtn.Location = new System.Drawing.Point(494, 876);
             this.DiscardBtn.Margin = new System.Windows.Forms.Padding(2);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(225, 45);
             this.DiscardBtn.TabIndex = 51;
             this.DiscardBtn.Text = "Discard";
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
-            // 
-            // Photo
-            // 
-            this.Photo.ImageRotate = 0F;
-            this.Photo.Location = new System.Drawing.Point(1237, 20);
-            this.Photo.Name = "Photo";
-            this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.Photo.Size = new System.Drawing.Size(400, 400);
-            this.Photo.TabIndex = 52;
-            this.Photo.TabStop = false;
             // 
             // UploadBtn
             // 
@@ -230,7 +213,7 @@
             this.UploadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.UploadBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.UploadBtn.ForeColor = System.Drawing.Color.White;
-            this.UploadBtn.Location = new System.Drawing.Point(1291, 436);
+            this.UploadBtn.Location = new System.Drawing.Point(1224, 425);
             this.UploadBtn.Margin = new System.Windows.Forms.Padding(2);
             this.UploadBtn.Name = "UploadBtn";
             this.UploadBtn.Size = new System.Drawing.Size(300, 35);
@@ -250,7 +233,7 @@
             this.EditBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.EditBtn.Font = new System.Drawing.Font("Chinacat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditBtn.ForeColor = System.Drawing.Color.White;
-            this.EditBtn.Location = new System.Drawing.Point(730, 841);
+            this.EditBtn.Location = new System.Drawing.Point(730, 876);
             this.EditBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(225, 45);
@@ -404,6 +387,48 @@
             this.BirthdayPicker.UseTransparentBackground = true;
             this.BirthdayPicker.Value = new System.DateTime(2024, 2, 25, 0, 0, 0, 0);
             // 
+            // SignoutBtn
+            // 
+            this.SignoutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SignoutBtn.BorderColor = System.Drawing.Color.Transparent;
+            this.SignoutBtn.BorderRadius = 15;
+            this.SignoutBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SignoutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SignoutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SignoutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SignoutBtn.FillColor = System.Drawing.Color.Transparent;
+            this.SignoutBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
+            this.SignoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.SignoutBtn.Location = new System.Drawing.Point(1627, 6);
+            this.SignoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.SignoutBtn.Name = "SignoutBtn";
+            this.SignoutBtn.Size = new System.Drawing.Size(163, 35);
+            this.SignoutBtn.TabIndex = 61;
+            this.SignoutBtn.Text = "Log Out";
+            this.SignoutBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.back_icon__1_;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(1656, 9);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(25, 30);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 62;
+            this.guna2PictureBox1.TabStop = false;
+            // 
+            // Photo
+            // 
+            this.Photo.ImageRotate = 0F;
+            this.Photo.Location = new System.Drawing.Point(1166, 16);
+            this.Photo.Name = "Photo";
+            this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.Photo.Size = new System.Drawing.Size(400, 400);
+            this.Photo.TabIndex = 52;
+            this.Photo.TabStop = false;
+            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -419,6 +444,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).EndInit();
             this.ServiceTypesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);
 
@@ -430,7 +456,6 @@
         private System.Windows.Forms.TabPage UserTab;
         private System.Windows.Forms.TabPage ServiceTypesTab;
         private System.Windows.Forms.DataGridView UserDGV;
-        private System.Windows.Forms.Button SignoutBtn;
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
         private Guna.UI2.WinForms.Guna2Button SaveBtn;
         private Guna.UI2.WinForms.Guna2Button DiscardBtn;
@@ -444,5 +469,7 @@
         private Guna.UI2.WinForms.Guna2TextBox IDBox;
         private Guna.UI2.WinForms.Guna2TextBox NameBox;
         private Guna.UI2.WinForms.Guna2DateTimePicker BirthdayPicker;
+        private Guna.UI2.WinForms.Guna2Button SignoutBtn;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
     }
 }
