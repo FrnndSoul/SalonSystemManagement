@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.UserTab = new System.Windows.Forms.TabPage();
+            this.EditBtn = new System.Windows.Forms.Button();
             this.DiscardBtn = new System.Windows.Forms.Button();
             this.ChangeRoleBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
@@ -51,7 +52,6 @@
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
             this.SignoutBtn = new System.Windows.Forms.Button();
-            this.EditBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
@@ -64,14 +64,16 @@
             // 
             this.tabControl1.Controls.Add(this.UserTab);
             this.tabControl1.Controls.Add(this.ServiceTypesTab);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(50, 30);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1394, 878);
+            this.tabControl1.Size = new System.Drawing.Size(1800, 1000);
             this.tabControl1.TabIndex = 0;
             // 
             // UserTab
             // 
+            this.UserTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.UserTab.Controls.Add(this.EditBtn);
             this.UserTab.Controls.Add(this.DiscardBtn);
             this.UserTab.Controls.Add(this.ChangeRoleBtn);
@@ -91,14 +93,23 @@
             this.UserTab.Controls.Add(this.UsernameBox);
             this.UserTab.Controls.Add(this.NameBox);
             this.UserTab.Controls.Add(this.UserDGV);
-            this.UserTab.Location = new System.Drawing.Point(4, 22);
+            this.UserTab.Location = new System.Drawing.Point(4, 35);
             this.UserTab.Name = "UserTab";
             this.UserTab.Padding = new System.Windows.Forms.Padding(3);
-            this.UserTab.Size = new System.Drawing.Size(1386, 852);
+            this.UserTab.Size = new System.Drawing.Size(1792, 961);
             this.UserTab.TabIndex = 0;
             this.UserTab.Text = "List of Users";
-            this.UserTab.UseVisualStyleBackColor = true;
             this.UserTab.Click += new System.EventHandler(this.UserTab_Click);
+            // 
+            // EditBtn
+            // 
+            this.EditBtn.Location = new System.Drawing.Point(1262, 623);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(84, 23);
+            this.EditBtn.TabIndex = 48;
+            this.EditBtn.Text = "Edit User";
+            this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
             // DiscardBtn
             // 
@@ -138,7 +149,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1191, 571);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.Size = new System.Drawing.Size(155, 26);
             this.label6.TabIndex = 37;
             this.label6.Text = "Account Status";
             // 
@@ -147,7 +158,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(1013, 570);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.Size = new System.Drawing.Size(109, 26);
             this.label5.TabIndex = 36;
             this.label5.Text = "ID Number";
             // 
@@ -156,7 +167,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(1013, 500);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.Size = new System.Drawing.Size(94, 26);
             this.label4.TabIndex = 35;
             this.label4.Text = "Birthday";
             // 
@@ -165,7 +176,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(1013, 448);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(62, 26);
             this.label3.TabIndex = 34;
             this.label3.Text = "Email";
             // 
@@ -174,7 +185,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1013, 396);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.Size = new System.Drawing.Size(108, 26);
             this.label2.TabIndex = 33;
             this.label2.Text = "Username";
             // 
@@ -183,7 +194,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1013, 344);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(64, 26);
             this.label1.TabIndex = 32;
             this.label1.Text = "Name";
             // 
@@ -194,7 +205,7 @@
             this.BirthdayPicker.MaxDate = new System.DateTime(2024, 2, 12, 0, 0, 0, 0);
             this.BirthdayPicker.MinDate = new System.DateTime(1753, 12, 21, 0, 0, 0, 0);
             this.BirthdayPicker.Name = "BirthdayPicker";
-            this.BirthdayPicker.Size = new System.Drawing.Size(330, 20);
+            this.BirthdayPicker.Size = new System.Drawing.Size(330, 34);
             this.BirthdayPicker.TabIndex = 30;
             this.BirthdayPicker.Value = new System.DateTime(2024, 2, 12, 0, 0, 0, 0);
             this.BirthdayPicker.ValueChanged += new System.EventHandler(this.BirthdayPicker_ValueChanged);
@@ -224,7 +235,7 @@
             this.StatusBox.Enabled = false;
             this.StatusBox.Location = new System.Drawing.Point(1277, 568);
             this.StatusBox.Name = "StatusBox";
-            this.StatusBox.Size = new System.Drawing.Size(69, 20);
+            this.StatusBox.Size = new System.Drawing.Size(69, 34);
             this.StatusBox.TabIndex = 27;
             // 
             // IDBox
@@ -232,7 +243,7 @@
             this.IDBox.Enabled = false;
             this.IDBox.Location = new System.Drawing.Point(1073, 568);
             this.IDBox.Name = "IDBox";
-            this.IDBox.Size = new System.Drawing.Size(97, 20);
+            this.IDBox.Size = new System.Drawing.Size(97, 34);
             this.IDBox.TabIndex = 26;
             // 
             // EmailBox
@@ -240,7 +251,7 @@
             this.EmailBox.Enabled = false;
             this.EmailBox.Location = new System.Drawing.Point(1016, 464);
             this.EmailBox.Name = "EmailBox";
-            this.EmailBox.Size = new System.Drawing.Size(330, 20);
+            this.EmailBox.Size = new System.Drawing.Size(330, 34);
             this.EmailBox.TabIndex = 25;
             // 
             // UsernameBox
@@ -248,7 +259,7 @@
             this.UsernameBox.Enabled = false;
             this.UsernameBox.Location = new System.Drawing.Point(1016, 412);
             this.UsernameBox.Name = "UsernameBox";
-            this.UsernameBox.Size = new System.Drawing.Size(330, 20);
+            this.UsernameBox.Size = new System.Drawing.Size(330, 34);
             this.UsernameBox.TabIndex = 24;
             // 
             // NameBox
@@ -256,7 +267,7 @@
             this.NameBox.Enabled = false;
             this.NameBox.Location = new System.Drawing.Point(1016, 360);
             this.NameBox.Name = "NameBox";
-            this.NameBox.Size = new System.Drawing.Size(330, 20);
+            this.NameBox.Size = new System.Drawing.Size(330, 34);
             this.NameBox.TabIndex = 23;
             // 
             // UserDGV
@@ -280,14 +291,14 @@
             // 
             // ServiceTypesTab
             // 
+            this.ServiceTypesTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.ServiceTypesTab.Controls.Add(this.ServiceTypesGDV);
-            this.ServiceTypesTab.Location = new System.Drawing.Point(4, 22);
+            this.ServiceTypesTab.Location = new System.Drawing.Point(4, 35);
             this.ServiceTypesTab.Name = "ServiceTypesTab";
             this.ServiceTypesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ServiceTypesTab.Size = new System.Drawing.Size(1386, 852);
+            this.ServiceTypesTab.Size = new System.Drawing.Size(1386, 839);
             this.ServiceTypesTab.TabIndex = 1;
             this.ServiceTypesTab.Text = "Service Types";
-            this.ServiceTypesTab.UseVisualStyleBackColor = true;
             // 
             // ServiceTypesGDV
             // 
@@ -317,21 +328,12 @@
             this.SignoutBtn.UseVisualStyleBackColor = true;
             this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
             // 
-            // EditBtn
-            // 
-            this.EditBtn.Location = new System.Drawing.Point(1262, 623);
-            this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(84, 23);
-            this.EditBtn.TabIndex = 48;
-            this.EditBtn.Text = "Edit User";
-            this.EditBtn.UseVisualStyleBackColor = true;
-            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
-            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
             this.Controls.Add(this.SignoutBtn);
             this.Controls.Add(this.tabControl1);
             this.Name = "AdminForm";
