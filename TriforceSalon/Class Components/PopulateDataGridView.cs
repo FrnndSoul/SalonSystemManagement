@@ -15,6 +15,7 @@ namespace TriforceSalon.Class_Components
         public int EmployeeID { get; set; }
         public DateTime TimeEnd { get; set; }
     }
+
     public class PopulateDataGridView
     {
         public readonly string mysqlcon;
@@ -22,7 +23,7 @@ namespace TriforceSalon.Class_Components
 
         public PopulateDataGridView()
         {
-            mysqlcon = "server=localhost;user=root;database=testdb;password=";
+            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
             busyEmployees = GetEmployees();
         }
 
@@ -153,7 +154,7 @@ namespace TriforceSalon.Class_Components
 
             }
         }
-        public void filterEmployees(string serviceName)
+        public void FilterEmployees(string serviceName)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {

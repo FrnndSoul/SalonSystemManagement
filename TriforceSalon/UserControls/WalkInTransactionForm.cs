@@ -24,7 +24,7 @@ namespace TriforceSalon.UserControls
         private void ServicesComBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string value = ServicesComBox.SelectedItem.ToString();
-            populateMethods.filterEmployees(value);
+            populateMethods.FilterEmployees(value);
         }
 
         private void ProcessBtn_Click(object sender, EventArgs e)
