@@ -70,7 +70,8 @@ namespace TriforceSalon
                 {
                     if (openForm is MainForm mainForm)
                     {
-                        mainForm.ShowAdmin();
+                        //mainForm.ShowAdmin();
+                        mainForm.ShowAddService();
                         break;
                     }
                 }
