@@ -26,8 +26,8 @@ namespace TriforceSalon
 
             PasswordBox.PasswordChar = '*';
             PasswordBox1.PasswordChar = '*';
-
             Method.EclipsePhotoBox(Photo);
+            this.RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
         }
 
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
@@ -56,97 +56,6 @@ namespace TriforceSalon
                     break;
                 }
             }
-        }
-
-        private void CreateBtn_Click(object sender, EventArgs e)
-        {
-            string Name, Username, Email, Password, Password1;
-            DateTime Birthdate = BirthdayPicker.Value;
-
-            Name = NameBox.Text;
-            Username = UsernameBox.Text;
-            Email = EmailBox.Text;
-            Password = PasswordBox.Text;
-            Password1 = PasswordBox1.Text;
-
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password1))
-            {
-                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-             
-            if (Password != Password1)
-            {
-                MessageBox.Show("Your passwords do not match.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            } else if (!StrongPassword(Password))
-            {
-                MessageBox.Show("Your passwords is weak." +
-                    "\nYour password should include the following:" +
-                    "\n     Upper and Lower Case Letters," +
-                    "\n     Numbers, and Special Characters", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!ValidEmail(Email))
-            {
-                MessageBox.Show("Please provide a valid email address.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (Method.DuplicateChecker(Username, "Username") || Method.DuplicateChecker(Email, "Email"))
-            {
-                MessageBox.Show("The username and/or email is already registered.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (PhotoByteHolder == null)
-            {
-                DialogResult option = MessageBox.Show("No profile photo selected.\nDo you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (option == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            DialogResult result = MessageBox.Show($"Please review your information below:\n\n" +
-                $"Name: {Name}\n" +
-                $"Username: {Username}\n" +
-                $"Email: {Email}\n" +
-                $"Birthdate: {Birthdate}",
-                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-            if (result == DialogResult.Yes)
-            {
-                string hashedPassword = Method.HashString(Password);
-                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder);
-
-                MessageBox.Show($"Account Identification Number: {Method.ID}", "Account Created!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                object BackFunction = BackBtn;
-                BackBtn_Click(BackFunction, e);
-            }
-        }
-
-        public static bool StrongPassword(string password)
-        {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(password);
-        }
-
-        public static bool ValidEmail(string Email)
-        {
-            string email = Email.ToLower();
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+com$";
-            Regex regex = new Regex(pattern);
-            return regex.IsMatch(email);
         }
 
         private void UploadBtn_Click(object sender, EventArgs e)
@@ -181,6 +90,92 @@ namespace TriforceSalon
             {
                 e.Handled = true;
             }
+        }
+
+        private void CreateBtn_Click_1(object sender, EventArgs e)
+        {
+            string Name, Username, Email, Password, Password1;
+            DateTime Birthdate = BirthdayPicker.Value;
+
+            Name = NameBox.Text;
+            Username = UsernameBox.Text;
+            Email = EmailBox.Text;
+            Password = PasswordBox.Text;
+            Password1 = PasswordBox1.Text;
+
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password1))
+            {
+                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Password != Password1)
+            {
+                MessageBox.Show("Your passwords do not match.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!Method.StrongPassword(Password))
+            {
+                MessageBox.Show("Your passwords is weak." +
+                    "\nYour password should include the following:" +
+                    "\n     Upper and Lower Case Letters," +
+                    "\n     Numbers, and Special Characters", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } else if (!Method.ValidEmail(Email))
+            {
+                MessageBox.Show("Please provide a valid email address.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } else if (Method.DuplicateChecker(Username, "Username", "accounts") || Method.DuplicateChecker(Email, "Email", "salon_employees"))
+            {
+                MessageBox.Show("The username and/or email is already registered.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } else if (PhotoByteHolder == null)
+            {
+                MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Please review your information below:\n\n" +
+                $"Name: {Name}\n" +
+                $"Username: {Username}\n" +
+                $"Email: {Email}\n" +
+                $"Birthdate: {Birthdate}",
+                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (result == DialogResult.Yes)
+            {
+                string hashedPassword = Method.HashString(Password);
+
+                int RoleID;
+                if (RoleBox.Text == "Staff")
+                {
+                    RoleID = 1234;
+                }
+                else
+                {
+                    RoleID = 12345;
+                }
+                Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
+
+                object BackFunction = BackBtn;
+                BackBtn_Click(BackFunction, e);
+            }
+
+        }
+
+        public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
