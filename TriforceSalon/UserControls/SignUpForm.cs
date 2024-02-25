@@ -58,12 +58,6 @@ namespace TriforceSalon
             }
         }
 
-
-        public void Reset()
-        {
-            RoleBox.Text = null;
-        }
-
         private void UploadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -130,23 +124,17 @@ namespace TriforceSalon
                     "\n     Numbers, and Special Characters", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (!Method.ValidEmail(Email))
+            } else if (!Method.ValidEmail(Email))
             {
                 MessageBox.Show("Please provide a valid email address.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (Method.DuplicateChecker(Username, "Username", "users") || Method.DuplicateChecker(Email, "Email", "users"))
+            } else if (Method.DuplicateChecker(Username, "Username", "accounts") || Method.DuplicateChecker(Email, "Email", "salon_employees"))
             {
                 MessageBox.Show("The username and/or email is already registered.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (PhotoByteHolder == null)
+            } else if (PhotoByteHolder == null)
             {
                 MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -164,19 +152,15 @@ namespace TriforceSalon
                 string hashedPassword = Method.HashString(Password);
 
                 int RoleID;
-                if (RoleBox.Text == "Member")
+                if (RoleBox.Text == "Staff")
                 {
-                    RoleID = 0; //using 0 to generate member id
-                }
-                else if (RoleBox.Text == "Staff")
-                {
-                    RoleID = 123456; //using 6 digit to generate 4 digit
+                    RoleID = 1234;
                 }
                 else
                 {
-                    RoleID = 1234; //using 4 digit to generate 6 digit
+                    RoleID = 12345;
                 }
-                Method.UploadData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
+                Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, RoleID);
 
                 object BackFunction = BackBtn;
                 BackBtn_Click(BackFunction, e);
@@ -184,12 +168,12 @@ namespace TriforceSalon
 
         }
 
-        private void PasswordBox_TextChanged(object sender, EventArgs e)
+        public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void Guna2PictureBox1_Click(object sender, EventArgs e)
         {
 
         }

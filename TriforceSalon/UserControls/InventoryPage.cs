@@ -20,10 +20,15 @@ namespace TriforceSalon
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
-        public static int ItemID, Stock, Cost, Aggregate, Status;
+        public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public InventoryPage()
         {
             InitializeComponent();
+        }
+
+        public static void StoreID(int InputID)
+        {
+            EmployeeID = InputID;
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -70,6 +75,13 @@ namespace TriforceSalon
                 MessageBox.Show($"There is still ample supply of\n{itemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (string.IsNullOrEmpty(SupplierBox.Text))
+            {
+                MessageBox.Show($"No supplier indicated.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (Convert.ToInt32(RequestBox.Text)==0)
             {
                 MessageBox.Show("Cannot ship zero quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -86,17 +98,18 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `shipments`(`DateShipped`,`ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
-                        "VALUES (@dateShipped, @shipmentID, @itemID, @itemName, @quantity, @cost)";
+                    string query = "INSERT INTO `shipments`(`ManagerID`,`DateShipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                        "VALUES (@managerID, @dateShipped, @shipmentID, @supplier, @itemID, @itemName, @quantity, @cost)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         int itemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
                         int aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);
                         int cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
                         int totalCost = cost * aggregate;
-
-                        querycmd.Parameters.AddWithValue("@dateShipped", DateTime.Now);
+                        querycmd.Parameters.AddWithValue("@managerID", EmployeeID);
+                        querycmd.Parameters.AddWithValue("@DateShipped", DateTime.Now);
                         querycmd.Parameters.AddWithValue("@shipmentID", Inventory.ShipmentID());
+                        querycmd.Parameters.AddWithValue("@supplier", SupplierBox.Text);
                         querycmd.Parameters.AddWithValue("@itemID", itemID);
                         querycmd.Parameters.AddWithValue("@itemName", itemName);
                         querycmd.Parameters.AddWithValue("@quantity", Convert.ToInt32(RequestBox.Text));
@@ -296,7 +309,7 @@ namespace TriforceSalon
             }
         }
 
-            public static int GenerateRandomID()
+        public static int GenerateRandomID()
             {
                 Random random = new Random();
                 int id;
@@ -307,7 +320,6 @@ namespace TriforceSalon
                 while (Method.DuplicateChecker(id.ToString(), "ItemID", "inventory") == true);
                 return id;
             }
-
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
@@ -481,6 +493,5 @@ namespace TriforceSalon
                 connection.Close();
             }
         }
-
     }
 }
