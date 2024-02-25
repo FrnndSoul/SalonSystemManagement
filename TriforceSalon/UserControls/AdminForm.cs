@@ -17,7 +17,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TriforceSalon
-{
+{ //Hi
     public partial class AdminForm : UserControl
     {
         public static byte[] PhotoLocal, PhotoDB;
