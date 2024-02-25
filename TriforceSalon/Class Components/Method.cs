@@ -19,36 +19,47 @@ namespace TriforceSalon
 {
     public class Method
     {
-        public static byte[] Photo;
-        public static int AccountStatus, ID, LogReference;
+        /*
+         * accounts - Username, Password, AccountlD, Status
+         * salon_employees - AccountlD, Name, Email, Birthdate, Photo, AccountStatus, ServicelD, Availability
+         */
+
+        public static byte[] Photo, newPhoto;
+        public static int AccountStatus, Status, LogReference, AccountID, ServiceID;
         public static string Name, Username, Email, Password,
-            newID, newName, newEmail, newPassword,
-            UsernameInput, PasswordInput;
+            newAccountID, newName, newUsername, newEmail, newPassword,
+            UsernameInput, PasswordInput,
+            Availability;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public static void ReadUserData(string user) {
+        public static void ReadUserData(string user)
+        {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "SELECT * from users WHERE Username = @username";
+                    string query = "SELECT * FROM `accounts` JOIN `salon_employees` ON accounts.AccountID = salon_employees.AccountID WHERE accounts.AccountID = @accountID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", user);
+                        querycmd.Parameters.AddWithValue("@accountID", user);
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                ID = Convert.ToInt32(reader["ID"]);
-                                Name = reader["Name"].ToString();
                                 Username = reader["Username"].ToString();
-                                Email = reader["Email"].ToString();
                                 Password = reader["Password"].ToString();
-                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                                AccountID = Convert.ToInt32(reader["AccountID"]);
+                                Status = Convert.ToInt32(reader["Status"]);
+                                Name = reader["Name"].ToString();
+                                Email = reader["Email"].ToString();
                                 Birthdate = (DateTime)reader["Birthdate"];
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                                ServiceID = Convert.ToInt32(reader["ServiceID"]);
+                                Availability = reader["Availability"].ToString();
+
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
                                     long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
@@ -65,7 +76,7 @@ namespace TriforceSalon
                             {
                                 if (user != "admin")
                                 {
-                                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("UserID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                         }
@@ -80,64 +91,23 @@ namespace TriforceSalon
 
         public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, int newID)
         {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
-                {
-                    connection.Open();
-                    string query =
-                        "UPDATE users SET Name = @Name, Username = @Username, Photo = @Photo " +
-                        "WHERE ID = @ID";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
-                    {
-                        querycmd.Parameters.AddWithValue("@Name", newName);
-                        querycmd.Parameters.AddWithValue("@Username", newUsername);
-                        querycmd.Parameters.AddWithValue("@Photo", newPhoto);
-                        querycmd.Parameters.AddWithValue("@ID", newID);
-                        querycmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        public static bool Login(string inputUsername, string inputPassword)
+        } //empty
+
+        public static bool Login(string inputID, string inputPassword)
         {
+            ReadUserData(inputID);
 
-            ReadUserData(inputUsername);
-
-            if (string.Equals(inputUsername, "Admin", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(inputPassword, "Admin123", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show("Admin log in success", "Welcome",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForm mainForm)
-                    {
-                        mainForm.ShowAdmin();
-                        break;
-                    }
-                }
-                return false;
-            }
-            else if (AccountStatus != 3)
+            if (AccountStatus != 3)
             {
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (99999 < ID && ID < 1000000)
+                    if (10000 <= AccountID && AccountID < 100000)
                     {
-                        ResetAttempt(UsernameInput);
-                        MessageBox.Show("Staff");
-                    }
-                    else if (999 < ID && ID < 10000)
-                    {
-                        ResetAttempt(UsernameInput);
-                        MessageBox.Show($"Welcome Manager {Name}!");
+                        ResetAttempt(inputID);
+                        InventoryPage.StoreID(Convert.ToInt32(inputID));
+                        MessageBox.Show($"Welcome Manager, {Username}!");
                         foreach (Form openForm in Application.OpenForms)
                         {
                             if (openForm is MainForm mainForm)
@@ -147,21 +117,22 @@ namespace TriforceSalon
                             }
                         }
                     }
-                    else
+                    else if (1000 <= AccountID && AccountID < 10000)
                     {
-                        MessageBox.Show("Member");
+                        ResetAttempt(inputID);
+                        MessageBox.Show("Staff");
                     }
-                    LogUser(ID);
+                    LogUser(AccountID);
                 }
                 else
                 {
-                    if (DuplicateChecker(inputUsername, "Username", "users"))
+                    if (DuplicateChecker(inputID, "AccountID", "salon_employees"))
                     {
-                        WrongPassword(Username);
+                        WrongPassword(inputID);
                     }
                     else
                     {
-                        MessageBox.Show("Username incorrect, please try again");
+                        MessageBox.Show("ID incorrect, please try again");
                     }
                 }
             }
@@ -173,47 +144,38 @@ namespace TriforceSalon
             return false;
         }
 
-        public static void WrongPassword(string InputUsername)
+        public static void WrongPassword(string wrongID)
         {
-            AccountStatus++;
-            int attemptsLeft = 3 - AccountStatus;
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users` SET `AccountStatus` = @AccountStatus WHERE `Username` = @username";
+                    string query = "UPDATE salon_employees SET AccountStatus = AccountStatus + 1 WHERE AccountID = @wrongID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", InputUsername);
-                        querycmd.Parameters.AddWithValue("@AccountStatus", AccountStatus);
-                        int rowsAffected = querycmd.ExecuteNonQuery();
-                        if (rowsAffected != 0)
-                        {
-                            MessageBox.Show($"Wrong Password!\nYou have {attemptsLeft} attempts left", "Wrong Password",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        querycmd.Parameters.AddWithValue("@wrongID", wrongID);
+                        querycmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat AccountStatus()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat WrongPassword()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static void ResetAttempt(string InputUsername)
+        public static void ResetAttempt(string correctID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `users` SET `AccountStatus` = @AccountStatus WHERE `Username` = @username";
+                    string query = "UPDATE salon_employees SET AccountStatus = 0 WHERE AccountID = @correctID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", InputUsername);
-                        querycmd.Parameters.AddWithValue("@AccountStatus", 0);
+                        querycmd.Parameters.AddWithValue("@correctID", correctID);
                         querycmd.ExecuteNonQuery();
                     }
                 }
@@ -238,36 +200,27 @@ namespace TriforceSalon
         public static int GenerateID(int IDinput)
         {
             Random random = new Random();
-            int IDNumber = Convert.ToInt32(IDinput);
             int NewID;
-            if (100000 < IDNumber && IDNumber < 1000000)
+
+            if (1000 <= IDinput && IDinput <= 9999)
+            {
+                do
+                {
+                    NewID = random.Next(10000, 100000);
+                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
+            }
+            else if (10000 <= IDinput && IDinput <= 99999)
             {
                 do
                 {
                     NewID = random.Next(1000, 10000);
-                    IDNumber = NewID;
-                } while (DuplicateChecker(newID, "ID", "users") == true);
-                MessageBox.Show($"Generate Manager ID: {IDNumber}");
+                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
             }
-            else if (1000 < IDNumber && IDNumber < 10000)
+            else
             {
-                do
-                {
-                    NewID = random.Next(100000, 1000000);
-                    IDNumber = NewID;
-                } while (DuplicateChecker(newID, "ID", "users") == true);
-                MessageBox.Show($"Generate Staff ID: {IDNumber}");
-            } else
-            {
-                do
-                {
-                    NewID = random.Next(10000000, 100000000);
-                    IDNumber = NewID;
-                }
-                while (DuplicateChecker(newID, "ID", "users") == true);
-                MessageBox.Show($"Generate Member ID: {IDNumber}");
+                throw new ArgumentException("Input ID must be either 4 or 5 digits.");
             }
-            return IDNumber;
+            return NewID;
         }
 
         public static bool DuplicateChecker(string Data, string Column, string Table)
@@ -300,69 +253,63 @@ namespace TriforceSalon
             }
         }
 
-        public static void UploadData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, int inputID)
+        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, int inputID)
         {
+            int accountID = GenerateID(inputID);
+            UploadMemberData(Username, accountID, Password);
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `users`" +
-                        "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
-                        "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
+                    string query = "INSERT INTO `salon_employees`" +
+                        "(`AccountID`, `Name`, `Email`, `Birthdate`, `Photo`, `AccountStatus`, `ServiceID`, `Availability`) VALUES" +
+                        "(@accountID, @name, @email, @birthdate, @photo, @accountStatus, @serviceID, @availability)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        int ID = GenerateID(inputID);
-                        int status = 0;
-                        querycmd.Parameters.AddWithValue("@id", ID);
+                        querycmd.Parameters.AddWithValue("@accountID", accountID);
                         querycmd.Parameters.AddWithValue("@name", Name);
-                        querycmd.Parameters.AddWithValue("@username", Username);
                         querycmd.Parameters.AddWithValue("@email", Email);
                         querycmd.Parameters.AddWithValue("@password", Password);
                         querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
                         querycmd.Parameters.AddWithValue("@photo", Photo);
-                        querycmd.Parameters.AddWithValue("@accountStatus", status);
+                        querycmd.Parameters.AddWithValue("@accountStatus", 0);
+                        querycmd.Parameters.AddWithValue("@serviceID", 1); //no service ID yet
+                        querycmd.Parameters.AddWithValue("@availability", "Offline");
 
-                        querycmd.ExecuteNonQuery();
+                        int rowsaffected = querycmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message + "\n\nat UploadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
 
-        public static void MemberData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo)
+        public static void UploadMemberData(string Username, int AccountID, string Password)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `users`" +
-                        "(`ID`, `Name`, `Username`, `Email`, `Password`, `Birthdate`, `Photo`, `AccountStatus`) VALUES" +
-                        "(@id, @name, @username, @email, @password, @birthdate, @photo, @accountStatus)";
+                    string query = "INSERT INTO `accounts` (`Username`, `Password`, `AccountID`, `Status`)" +
+                        "VALUES (@username, @password, @AccountID, @status)";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        int ID = GenerateID(0);
-                        int status = 0;
-                        querycmd.Parameters.AddWithValue("@id", ID);
-                        querycmd.Parameters.AddWithValue("@name", Name);
                         querycmd.Parameters.AddWithValue("@username", Username);
-                        querycmd.Parameters.AddWithValue("@email", Email);
                         querycmd.Parameters.AddWithValue("@password", Password);
-                        querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
-                        querycmd.Parameters.AddWithValue("@photo", Photo);
-                        querycmd.Parameters.AddWithValue("@accountStatus", status);
-
+                        querycmd.Parameters.AddWithValue("@AccountID", AccountID);
+                        querycmd.Parameters.AddWithValue("@status", 0);
                         querycmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message + "\n\nat InsertMemberData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
 
@@ -411,7 +358,7 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat UploadData()", "SQL ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message + "\n\nat LogUser()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
 

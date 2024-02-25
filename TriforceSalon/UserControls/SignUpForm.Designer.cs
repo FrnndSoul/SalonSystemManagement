@@ -376,7 +376,6 @@ namespace TriforceSalon
             this.RoleBox.ItemHeight = 30;
             this.RoleBox.Items.AddRange(new object[] {
             "Manager",
-            "Member",
             "Staff"});
             this.RoleBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 21.75F);
             this.RoleBox.Location = new System.Drawing.Point(1274, 357);
@@ -398,6 +397,7 @@ namespace TriforceSalon
             this.guna2PictureBox1.TabIndex = 37;
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
+            this.guna2PictureBox1.Click += new System.EventHandler(this.Guna2PictureBox1_Click);
             // 
             // Photo
             // 
