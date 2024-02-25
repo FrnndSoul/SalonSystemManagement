@@ -31,9 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.UserTab = new System.Windows.Forms.TabPage();
             this.EditBtn = new System.Windows.Forms.Button();
-            this.DiscardBtn = new System.Windows.Forms.Button();
-            this.ChangeRoleBtn = new System.Windows.Forms.Button();
-            this.SaveBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,8 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.BirthdayPicker = new System.Windows.Forms.DateTimePicker();
-            this.UploadBtn = new System.Windows.Forms.Button();
-            this.Photo = new System.Windows.Forms.PictureBox();
             this.StatusBox = new System.Windows.Forms.TextBox();
             this.IDBox = new System.Windows.Forms.TextBox();
             this.EmailBox = new System.Windows.Forms.TextBox();
@@ -52,12 +47,17 @@
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
             this.SignoutBtn = new System.Windows.Forms.Button();
+            this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ChangeRoleBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.UploadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
             this.ServiceTypesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -74,10 +74,12 @@
             // UserTab
             // 
             this.UserTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.UserTab.Controls.Add(this.EditBtn);
+            this.UserTab.Controls.Add(this.UploadBtn);
+            this.UserTab.Controls.Add(this.Photo);
             this.UserTab.Controls.Add(this.DiscardBtn);
             this.UserTab.Controls.Add(this.ChangeRoleBtn);
             this.UserTab.Controls.Add(this.SaveBtn);
+            this.UserTab.Controls.Add(this.EditBtn);
             this.UserTab.Controls.Add(this.label6);
             this.UserTab.Controls.Add(this.label5);
             this.UserTab.Controls.Add(this.label4);
@@ -85,8 +87,6 @@
             this.UserTab.Controls.Add(this.label2);
             this.UserTab.Controls.Add(this.label1);
             this.UserTab.Controls.Add(this.BirthdayPicker);
-            this.UserTab.Controls.Add(this.UploadBtn);
-            this.UserTab.Controls.Add(this.Photo);
             this.UserTab.Controls.Add(this.StatusBox);
             this.UserTab.Controls.Add(this.IDBox);
             this.UserTab.Controls.Add(this.EmailBox);
@@ -103,7 +103,7 @@
             // 
             // EditBtn
             // 
-            this.EditBtn.Location = new System.Drawing.Point(1262, 623);
+            this.EditBtn.Location = new System.Drawing.Point(1553, 775);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(84, 23);
             this.EditBtn.TabIndex = 48;
@@ -111,43 +111,10 @@
             this.EditBtn.UseVisualStyleBackColor = true;
             this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
-            // DiscardBtn
-            // 
-            this.DiscardBtn.Location = new System.Drawing.Point(1262, 681);
-            this.DiscardBtn.Name = "DiscardBtn";
-            this.DiscardBtn.Size = new System.Drawing.Size(84, 23);
-            this.DiscardBtn.TabIndex = 44;
-            this.DiscardBtn.Text = "Discard";
-            this.DiscardBtn.UseVisualStyleBackColor = true;
-            this.DiscardBtn.Visible = false;
-            this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
-            // 
-            // ChangeRoleBtn
-            // 
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(1132, 681);
-            this.ChangeRoleBtn.Name = "ChangeRoleBtn";
-            this.ChangeRoleBtn.Size = new System.Drawing.Size(124, 23);
-            this.ChangeRoleBtn.TabIndex = 43;
-            this.ChangeRoleBtn.Text = "Promote/Demote";
-            this.ChangeRoleBtn.UseVisualStyleBackColor = true;
-            this.ChangeRoleBtn.Visible = false;
-            this.ChangeRoleBtn.Click += new System.EventHandler(this.ChangeRoleBtn_Click);
-            // 
-            // SaveBtn
-            // 
-            this.SaveBtn.Location = new System.Drawing.Point(1016, 681);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(110, 23);
-            this.SaveBtn.TabIndex = 41;
-            this.SaveBtn.Text = "Save Changes";
-            this.SaveBtn.UseVisualStyleBackColor = true;
-            this.SaveBtn.Visible = false;
-            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1191, 571);
+            this.label6.Location = new System.Drawing.Point(1482, 723);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(155, 26);
             this.label6.TabIndex = 37;
@@ -156,7 +123,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1013, 570);
+            this.label5.Location = new System.Drawing.Point(1304, 722);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 26);
             this.label5.TabIndex = 36;
@@ -165,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1013, 500);
+            this.label4.Location = new System.Drawing.Point(1304, 652);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 26);
             this.label4.TabIndex = 35;
@@ -174,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1013, 448);
+            this.label3.Location = new System.Drawing.Point(1304, 600);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 26);
             this.label3.TabIndex = 34;
@@ -183,7 +150,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1013, 396);
+            this.label2.Location = new System.Drawing.Point(1304, 548);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 26);
             this.label2.TabIndex = 33;
@@ -192,7 +159,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1013, 344);
+            this.label1.Location = new System.Drawing.Point(1304, 496);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 26);
             this.label1.TabIndex = 32;
@@ -201,7 +168,7 @@
             // BirthdayPicker
             // 
             this.BirthdayPicker.Enabled = false;
-            this.BirthdayPicker.Location = new System.Drawing.Point(1016, 516);
+            this.BirthdayPicker.Location = new System.Drawing.Point(1307, 668);
             this.BirthdayPicker.MaxDate = new System.DateTime(2024, 2, 12, 0, 0, 0, 0);
             this.BirthdayPicker.MinDate = new System.DateTime(1753, 12, 21, 0, 0, 0, 0);
             this.BirthdayPicker.Name = "BirthdayPicker";
@@ -210,30 +177,10 @@
             this.BirthdayPicker.Value = new System.DateTime(2024, 2, 12, 0, 0, 0, 0);
             this.BirthdayPicker.ValueChanged += new System.EventHandler(this.BirthdayPicker_ValueChanged);
             // 
-            // UploadBtn
-            // 
-            this.UploadBtn.Enabled = false;
-            this.UploadBtn.Location = new System.Drawing.Point(1108, 310);
-            this.UploadBtn.Name = "UploadBtn";
-            this.UploadBtn.Size = new System.Drawing.Size(148, 23);
-            this.UploadBtn.TabIndex = 29;
-            this.UploadBtn.Text = "Update Profile Photo";
-            this.UploadBtn.UseVisualStyleBackColor = true;
-            this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
-            // 
-            // Photo
-            // 
-            this.Photo.Location = new System.Drawing.Point(1057, 54);
-            this.Photo.Name = "Photo";
-            this.Photo.Size = new System.Drawing.Size(250, 250);
-            this.Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Photo.TabIndex = 28;
-            this.Photo.TabStop = false;
-            // 
             // StatusBox
             // 
             this.StatusBox.Enabled = false;
-            this.StatusBox.Location = new System.Drawing.Point(1277, 568);
+            this.StatusBox.Location = new System.Drawing.Point(1568, 720);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.Size = new System.Drawing.Size(69, 34);
             this.StatusBox.TabIndex = 27;
@@ -241,7 +188,7 @@
             // IDBox
             // 
             this.IDBox.Enabled = false;
-            this.IDBox.Location = new System.Drawing.Point(1073, 568);
+            this.IDBox.Location = new System.Drawing.Point(1364, 720);
             this.IDBox.Name = "IDBox";
             this.IDBox.Size = new System.Drawing.Size(97, 34);
             this.IDBox.TabIndex = 26;
@@ -249,7 +196,7 @@
             // EmailBox
             // 
             this.EmailBox.Enabled = false;
-            this.EmailBox.Location = new System.Drawing.Point(1016, 464);
+            this.EmailBox.Location = new System.Drawing.Point(1307, 616);
             this.EmailBox.Name = "EmailBox";
             this.EmailBox.Size = new System.Drawing.Size(330, 34);
             this.EmailBox.TabIndex = 25;
@@ -257,7 +204,7 @@
             // UsernameBox
             // 
             this.UsernameBox.Enabled = false;
-            this.UsernameBox.Location = new System.Drawing.Point(1016, 412);
+            this.UsernameBox.Location = new System.Drawing.Point(1307, 564);
             this.UsernameBox.Name = "UsernameBox";
             this.UsernameBox.Size = new System.Drawing.Size(330, 34);
             this.UsernameBox.TabIndex = 24;
@@ -265,7 +212,7 @@
             // NameBox
             // 
             this.NameBox.Enabled = false;
-            this.NameBox.Location = new System.Drawing.Point(1016, 360);
+            this.NameBox.Location = new System.Drawing.Point(1307, 512);
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(330, 34);
             this.NameBox.TabIndex = 23;
@@ -279,13 +226,13 @@
             this.UserDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserDGV.BackgroundColor = System.Drawing.Color.White;
             this.UserDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UserDGV.Location = new System.Drawing.Point(3, 3);
+            this.UserDGV.Location = new System.Drawing.Point(18, 20);
             this.UserDGV.MultiSelect = false;
             this.UserDGV.Name = "UserDGV";
             this.UserDGV.ReadOnly = true;
             this.UserDGV.RowHeadersWidth = 51;
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserDGV.Size = new System.Drawing.Size(952, 697);
+            this.UserDGV.Size = new System.Drawing.Size(937, 800);
             this.UserDGV.TabIndex = 0;
             this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick_1);
             // 
@@ -328,6 +275,96 @@
             this.SignoutBtn.UseVisualStyleBackColor = true;
             this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
             // 
+            // SaveBtn
+            // 
+            this.SaveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SaveBtn.BorderRadius = 20;
+            this.SaveBtn.BorderThickness = 1;
+            this.SaveBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SaveBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SaveBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SaveBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SaveBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.SaveBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.SaveBtn.ForeColor = System.Drawing.Color.White;
+            this.SaveBtn.Location = new System.Drawing.Point(18, 841);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(300, 45);
+            this.SaveBtn.TabIndex = 49;
+            this.SaveBtn.Text = "Save";
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // ChangeRoleBtn
+            // 
+            this.ChangeRoleBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.ChangeRoleBtn.BorderRadius = 20;
+            this.ChangeRoleBtn.BorderThickness = 1;
+            this.ChangeRoleBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ChangeRoleBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ChangeRoleBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ChangeRoleBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ChangeRoleBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ChangeRoleBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.ChangeRoleBtn.ForeColor = System.Drawing.Color.White;
+            this.ChangeRoleBtn.Location = new System.Drawing.Point(337, 841);
+            this.ChangeRoleBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ChangeRoleBtn.Name = "ChangeRoleBtn";
+            this.ChangeRoleBtn.Size = new System.Drawing.Size(300, 45);
+            this.ChangeRoleBtn.TabIndex = 50;
+            this.ChangeRoleBtn.Text = "Promote/Demote";
+            this.ChangeRoleBtn.Click += new System.EventHandler(this.ChangeRoleBtn_Click);
+            // 
+            // DiscardBtn
+            // 
+            this.DiscardBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.DiscardBtn.BorderRadius = 20;
+            this.DiscardBtn.BorderThickness = 1;
+            this.DiscardBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.DiscardBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.DiscardBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.DiscardBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.DiscardBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.DiscardBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.DiscardBtn.ForeColor = System.Drawing.Color.White;
+            this.DiscardBtn.Location = new System.Drawing.Point(655, 841);
+            this.DiscardBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.DiscardBtn.Name = "DiscardBtn";
+            this.DiscardBtn.Size = new System.Drawing.Size(300, 45);
+            this.DiscardBtn.TabIndex = 51;
+            this.DiscardBtn.Text = "Discard";
+            this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
+            // 
+            // Photo
+            // 
+            this.Photo.ImageRotate = 0F;
+            this.Photo.Location = new System.Drawing.Point(1237, 20);
+            this.Photo.Name = "Photo";
+            this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.Photo.Size = new System.Drawing.Size(400, 400);
+            this.Photo.TabIndex = 52;
+            this.Photo.TabStop = false;
+            // 
+            // UploadBtn
+            // 
+            this.UploadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.UploadBtn.BorderRadius = 15;
+            this.UploadBtn.BorderThickness = 1;
+            this.UploadBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.UploadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.UploadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.UploadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.UploadBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
+            this.UploadBtn.ForeColor = System.Drawing.Color.White;
+            this.UploadBtn.Location = new System.Drawing.Point(1276, 444);
+            this.UploadBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.UploadBtn.Name = "UploadBtn";
+            this.UploadBtn.Size = new System.Drawing.Size(300, 35);
+            this.UploadBtn.TabIndex = 53;
+            this.UploadBtn.Text = "Upload Photo";
+            this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
+            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -342,10 +379,10 @@
             this.tabControl1.ResumeLayout(false);
             this.UserTab.ResumeLayout(false);
             this.UserTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).EndInit();
             this.ServiceTypesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -357,7 +394,6 @@
         private System.Windows.Forms.TabPage ServiceTypesTab;
         private System.Windows.Forms.DataGridView UserDGV;
         private System.Windows.Forms.Button SignoutBtn;
-        private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -365,16 +401,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker BirthdayPicker;
-        private System.Windows.Forms.Button UploadBtn;
-        private System.Windows.Forms.PictureBox Photo;
         private System.Windows.Forms.TextBox StatusBox;
         private System.Windows.Forms.TextBox IDBox;
         private System.Windows.Forms.TextBox EmailBox;
         private System.Windows.Forms.TextBox UsernameBox;
         private System.Windows.Forms.TextBox NameBox;
-        private System.Windows.Forms.Button DiscardBtn;
-        private System.Windows.Forms.Button ChangeRoleBtn;
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
         private System.Windows.Forms.Button EditBtn;
+        private Guna.UI2.WinForms.Guna2Button SaveBtn;
+        private Guna.UI2.WinForms.Guna2Button DiscardBtn;
+        private Guna.UI2.WinForms.Guna2Button ChangeRoleBtn;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox Photo;
+        private Guna.UI2.WinForms.Guna2Button UploadBtn;
     }
 }
