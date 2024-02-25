@@ -189,7 +189,7 @@ namespace TriforceSalon
                 }
             }
         }
-
+        //Hi
         private void UploadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
