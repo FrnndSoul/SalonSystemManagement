@@ -32,7 +32,6 @@
             this.UserTab = new System.Windows.Forms.TabPage();
             this.DiscardBtn = new System.Windows.Forms.Button();
             this.ChangeRoleBtn = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,8 +49,9 @@
             this.NameBox = new System.Windows.Forms.TextBox();
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
-            this.SignoutBtn = new System.Windows.Forms.Button();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
+            this.SignoutBtn = new System.Windows.Forms.Button();
+            this.EditBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
@@ -72,9 +72,9 @@
             // 
             // UserTab
             // 
+            this.UserTab.Controls.Add(this.EditBtn);
             this.UserTab.Controls.Add(this.DiscardBtn);
             this.UserTab.Controls.Add(this.ChangeRoleBtn);
-            this.UserTab.Controls.Add(this.checkBox1);
             this.UserTab.Controls.Add(this.SaveBtn);
             this.UserTab.Controls.Add(this.label6);
             this.UserTab.Controls.Add(this.label5);
@@ -102,7 +102,7 @@
             // 
             // DiscardBtn
             // 
-            this.DiscardBtn.Location = new System.Drawing.Point(1257, 677);
+            this.DiscardBtn.Location = new System.Drawing.Point(1262, 681);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(84, 23);
             this.DiscardBtn.TabIndex = 44;
@@ -113,7 +113,7 @@
             // 
             // ChangeRoleBtn
             // 
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(1127, 677);
+            this.ChangeRoleBtn.Location = new System.Drawing.Point(1132, 681);
             this.ChangeRoleBtn.Name = "ChangeRoleBtn";
             this.ChangeRoleBtn.Size = new System.Drawing.Size(124, 23);
             this.ChangeRoleBtn.TabIndex = 43;
@@ -122,21 +122,9 @@
             this.ChangeRoleBtn.Visible = false;
             this.ChangeRoleBtn.Click += new System.EventHandler(this.ChangeRoleBtn_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(1016, 626);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(105, 17);
-            this.checkBox1.TabIndex = 42;
-            this.checkBox1.Text = "Toggle Edit User";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(1011, 677);
+            this.SaveBtn.Location = new System.Drawing.Point(1016, 681);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(110, 23);
             this.SaveBtn.TabIndex = 41;
@@ -209,6 +197,7 @@
             this.BirthdayPicker.Size = new System.Drawing.Size(330, 20);
             this.BirthdayPicker.TabIndex = 30;
             this.BirthdayPicker.Value = new System.DateTime(2024, 2, 12, 0, 0, 0, 0);
+            this.BirthdayPicker.ValueChanged += new System.EventHandler(this.BirthdayPicker_ValueChanged);
             // 
             // UploadBtn
             // 
@@ -300,16 +289,6 @@
             this.ServiceTypesTab.Text = "Service Types";
             this.ServiceTypesTab.UseVisualStyleBackColor = true;
             // 
-            // SignoutBtn
-            // 
-            this.SignoutBtn.Location = new System.Drawing.Point(1298, 1034);
-            this.SignoutBtn.Name = "SignoutBtn";
-            this.SignoutBtn.Size = new System.Drawing.Size(96, 23);
-            this.SignoutBtn.TabIndex = 1;
-            this.SignoutBtn.Text = "Signout";
-            this.SignoutBtn.UseVisualStyleBackColor = true;
-            this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
-            // 
             // ServiceTypesGDV
             // 
             this.ServiceTypesGDV.AllowUserToAddRows = false;
@@ -327,6 +306,26 @@
             this.ServiceTypesGDV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ServiceTypesGDV.Size = new System.Drawing.Size(952, 697);
             this.ServiceTypesGDV.TabIndex = 1;
+            // 
+            // SignoutBtn
+            // 
+            this.SignoutBtn.Location = new System.Drawing.Point(1298, 1034);
+            this.SignoutBtn.Name = "SignoutBtn";
+            this.SignoutBtn.Size = new System.Drawing.Size(96, 23);
+            this.SignoutBtn.TabIndex = 1;
+            this.SignoutBtn.Text = "Signout";
+            this.SignoutBtn.UseVisualStyleBackColor = true;
+            this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
+            // 
+            // EditBtn
+            // 
+            this.EditBtn.Location = new System.Drawing.Point(1262, 623);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(84, 23);
+            this.EditBtn.TabIndex = 48;
+            this.EditBtn.Text = "Edit User";
+            this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
             // AdminForm
             // 
@@ -371,9 +370,9 @@
         private System.Windows.Forms.TextBox EmailBox;
         private System.Windows.Forms.TextBox UsernameBox;
         private System.Windows.Forms.TextBox NameBox;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button DiscardBtn;
         private System.Windows.Forms.Button ChangeRoleBtn;
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
+        private System.Windows.Forms.Button EditBtn;
     }
 }

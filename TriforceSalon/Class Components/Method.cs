@@ -98,22 +98,7 @@ namespace TriforceSalon
         {
             ReadUserData(inputID);
 
-            if (string.Equals(inputID, "Admin", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(inputPassword, "Admin123", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show("Admin log in success", "Welcome",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForm mainForm)
-                    {
-                        mainForm.ShowAdmin();
-                        break;
-                    }
-                }
-                return false;
-            }
-            else if (AccountStatus != 3)
+            if (AccountStatus != 3)
             {
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
@@ -121,6 +106,7 @@ namespace TriforceSalon
                     if (10000 <= AccountID && AccountID < 100000)
                     {
                         ResetAttempt(inputID);
+                        InventoryPage.StoreID(Convert.ToInt32(inputID));
                         MessageBox.Show($"Welcome Manager, {Username}!");
                         foreach (Form openForm in Application.OpenForms)
                         {
