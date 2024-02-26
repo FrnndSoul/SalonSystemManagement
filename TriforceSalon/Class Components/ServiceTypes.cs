@@ -129,6 +129,12 @@ namespace TriforceSalon.Class_Components
 
                         ManagerServices.managerServicesInstance.ServiceTypePicB.Image = resizedImage;
                         isNewServiceImageSelected = true; //flag ito para sa image
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ManagerServices.managerServicesInstance.ServiceTypePicB.Image.Save(ms, ImageFormat.Jpeg);
+                            imageData = ms.ToArray();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -145,8 +151,8 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            if (string.IsNullOrWhiteSpace(ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text) || ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text == "Service Type Name")
+            
+            if (imageData == null || string.IsNullOrWhiteSpace(ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text) || ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text == "Service Type Name")
             {
                 MessageBox.Show("Please fill out all the required data", "Missing Informations", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -161,12 +167,6 @@ namespace TriforceSalon.Class_Components
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
                         conn.Open();
-
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            ManagerServices.managerServicesInstance.ServiceTypePicB.Image.Save(ms, ImageFormat.Jpeg);
-                            imageData = ms.ToArray();
-                        }
 
                         string query = "Insert into service_type (ServiceTypeName, ServiceTypeImage) values (@service_name, @service_image)";
 

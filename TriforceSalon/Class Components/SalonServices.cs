@@ -45,7 +45,6 @@ namespace TriforceSalon.Class_Components
                     {
                         Image selectedImage = Image.FromFile(openFileDialog.FileName);
 
-                        // Resize the selected image
                         int newWidth = 163;
                         int newHeight = 128;
 

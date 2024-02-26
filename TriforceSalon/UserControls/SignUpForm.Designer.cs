@@ -374,9 +374,6 @@ namespace TriforceSalon
             this.RoleBox.ForeColor = System.Drawing.Color.White;
             this.RoleBox.FormattingEnabled = true;
             this.RoleBox.ItemHeight = 30;
-            this.RoleBox.Items.AddRange(new object[] {
-            "Manager",
-            "Staff"});
             this.RoleBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 21.75F);
             this.RoleBox.Location = new System.Drawing.Point(1274, 357);
             this.RoleBox.Name = "RoleBox";

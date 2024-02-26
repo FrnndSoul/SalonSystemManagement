@@ -26,9 +26,19 @@ namespace TriforceSalon.UserControls
             serviceType.AddServiceType(serviceTypeName);
         }
 
+        public void Clear()
+        {
+            ServiceTypeTxtB.Text = "";
+        }
+
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
             serviceType.EditServiceTypes();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

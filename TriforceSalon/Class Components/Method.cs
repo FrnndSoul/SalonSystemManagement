@@ -98,7 +98,7 @@ namespace TriforceSalon
         {
             ReadUserData(inputID);
 
-            if (AccountStatus != 3)
+            if (AccountStatus < 3)
             {
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
@@ -120,7 +120,8 @@ namespace TriforceSalon
                     else if (1000 <= AccountID && AccountID < 10000)
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show("Staff");
+                        MessageBox.Show("Call walk-in transaction at\nLine 123: Method.cs","Staff",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     LogUser(AccountID);
                 }
@@ -136,7 +137,11 @@ namespace TriforceSalon
                     }
                 }
             }
-            else
+            else if (AccountStatus == 4)
+            {
+                MessageBox.Show($"Your account has already been archived", "Account Archived",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            } else 
             {
                 MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -202,14 +207,7 @@ namespace TriforceSalon
             Random random = new Random();
             int NewID;
 
-            if (1000 <= IDinput && IDinput <= 9999)
-            {
-                do
-                {
-                    NewID = random.Next(10000, 100000);
-                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
-            }
-            else if (10000 <= IDinput && IDinput <= 99999)
+            if (10000 <= IDinput && IDinput <= 99999)
             {
                 do
                 {
@@ -218,7 +216,10 @@ namespace TriforceSalon
             }
             else
             {
-                throw new ArgumentException("Input ID must be either 4 or 5 digits.");
+                do
+                {
+                    NewID = random.Next(10000, 100000);
+                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
             }
             return NewID;
         }
@@ -253,10 +254,53 @@ namespace TriforceSalon
             }
         }
 
-        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, int inputID)
+        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, string Role)
         {
-            int accountID = GenerateID(inputID);
+            int accountID = GenerateID(0);
             UploadMemberData(Username, accountID, Password);
+
+            List<Tuple<string, int>> serviceTypes = new List<Tuple<string, int>>();
+
+            using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT ServiceTypeName, ServiceID FROM service_type";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string serviceTypeName = reader["ServiceTypeName"].ToString();
+                            int serviceID = Convert.ToInt32(reader["ServiceID"]);
+                            serviceTypes.Add(new Tuple<string, int>(serviceTypeName, serviceID));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            int selectedServiceID = -1;
+            foreach (Tuple<string, int> serviceType in serviceTypes)
+            {
+                if (serviceType.Item1 == Role)
+                {
+                    selectedServiceID = serviceType.Item2;
+                    break;
+                }
+            }
+
+            if (selectedServiceID == -1)
+            {
+                MessageBox.Show("Selected role not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
@@ -274,7 +318,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@birthdate", Birthdate);
                         querycmd.Parameters.AddWithValue("@photo", Photo);
                         querycmd.Parameters.AddWithValue("@accountStatus", 0);
-                        querycmd.Parameters.AddWithValue("@serviceID", 1); //no service ID yet
+                        querycmd.Parameters.AddWithValue("@serviceID", selectedServiceID);
                         querycmd.Parameters.AddWithValue("@availability", "Offline");
 
                         int rowsaffected = querycmd.ExecuteNonQuery();
@@ -286,6 +330,7 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
+
 
         public static void UploadMemberData(string Username, int AccountID, string Password)
         {

@@ -216,7 +216,7 @@
             this.guna2PictureBox3.ImageRotate = 0F;
             this.guna2PictureBox3.Location = new System.Drawing.Point(0, 0);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
-            this.guna2PictureBox3.Size = new System.Drawing.Size(1900, 1060);
+            this.guna2PictureBox3.Size = new System.Drawing.Size(1920, 1080);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox3.TabIndex = 7;
             this.guna2PictureBox3.TabStop = false;

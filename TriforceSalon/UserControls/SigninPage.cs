@@ -82,7 +82,7 @@ namespace TriforceSalon
             if (string.Equals(Username, "Manager", StringComparison.OrdinalIgnoreCase)
                 && string.Equals(Password, "Manager123", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Admin log in success", "Welcome",
+                MessageBox.Show("Manager log in success", "Welcome",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                 foreach (Form openForm in Application.OpenForms)
                 {
@@ -96,7 +96,6 @@ namespace TriforceSalon
                 Clear();
                 return;
             }
-
             Method.Login(Username, Password);
             Clear();
         }
