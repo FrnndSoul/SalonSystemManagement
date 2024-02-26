@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.UserControls;
 
 namespace TriforceSalon
 {
@@ -59,6 +60,11 @@ namespace TriforceSalon
             inventoryPage1.Visible = true;
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
+        }
+        //temporary lang ito
+        public void ShowAddService()
+        {
+            managerServices1.Visible = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

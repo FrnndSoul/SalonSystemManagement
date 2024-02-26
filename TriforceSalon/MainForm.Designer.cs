@@ -33,6 +33,7 @@
             this.signinPage1 = new TriforceSalon.SigninPage();
             this.signUpForm1 = new TriforceSalon.SignUpForm();
             this.adminForm1 = new TriforceSalon.AdminForm();
+            this.managerServices1 = new TriforceSalon.UserControls.ManagerServices();
             this.SuspendLayout();
             // 
             // inventoryPage1
@@ -42,12 +43,14 @@
             // 
             // signinPage1
             // 
+            this.signinPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             resources.ApplyResources(this.signinPage1, "signinPage1");
             this.signinPage1.Name = "signinPage1";
             this.signinPage1.Load += new System.EventHandler(this.SigninPage1_Load);
             // 
             // signUpForm1
             // 
+            this.signUpForm1.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.signUpForm1, "signUpForm1");
             this.signUpForm1.Name = "signUpForm1";
             // 
@@ -57,10 +60,17 @@
             resources.ApplyResources(this.adminForm1, "adminForm1");
             this.adminForm1.Name = "adminForm1";
             // 
+            // managerServices1
+            // 
+            this.managerServices1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.managerServices1, "managerServices1");
+            this.managerServices1.Name = "managerServices1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.managerServices1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
@@ -78,6 +88,7 @@
         private AdminForm adminForm1;
         private SignUpForm signUpForm1;
         private InventoryPage inventoryPage1;
+        private UserControls.ManagerServices managerServices1;
     }
 }
 
