@@ -61,7 +61,7 @@ namespace TriforceSalon
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
         }
-
+        //temporary lang ito
         public void ShowAddService()
         {
             managerServices1.Visible = true;

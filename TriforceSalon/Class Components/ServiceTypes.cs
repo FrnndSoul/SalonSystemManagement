@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -18,10 +19,12 @@ namespace TriforceSalon.Class_Components
     }
     public class ServiceTypes
     {
+        LoadImages loadImages = new LoadImages();
         ChangeImageSize newImageSIze = new ChangeImageSize();
         private readonly string mysqlcon;
         public byte[] imageData;
         private bool isNewServiceImageSelected = false;
+        public int serviceTypeID;
 
         public List<ServiceTypesInfo> serviceTypes;
 
@@ -29,6 +32,33 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
             serviceTypes = GetServiceTypeInfo();
+        }
+        public void ServiceTypeInfoDGV()
+        {
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "Select ServiceTypeImage, ServiceTypeName, ServiceID from service_type";
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using(MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                DataTable dt = new DataTable();
+                                dt.Load(reader);
+                                ManagerServices.managerServicesInstance.ServiceTypeDGV.DataSource = dt;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public List<ServiceTypesInfo> GetServiceTypeInfo()
         {
@@ -169,6 +199,50 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public void EditServiceTypes()
+        {
+            if (ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DialogResult result = MessageBox.Show("Are you sure you want to edit this service type?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(result == DialogResult.Yes)
+            {
+                if(ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows.Count == 1)
+                {
+                    DataGridViewRow selectedRow = ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows[0];
+
+                    string ServiceTypeName = selectedRow.Cells["ServiceTypeName"].Value.ToString();
+                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceID"].Value);
+
+                    loadImages.ServiceTypeImage(serviceTypeID);
+
+                    try
+                    {
+                        using(var conn = new MySqlConnection(mysqlcon))
+                        {
+                            conn.Open();
+                            string query = "select ServiceTypeName from service_type where ServiceID = @service_ID";
+
+                            using(MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@service_ID", serviceTypeID);
+
+                                MySqlDataReader reader = command.ExecuteReader();
+
+                            }
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
+            serviceTypeID = 0;
+        }
+
         public void UpdateServiceType()
         {
             string serviceType = ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text;
@@ -243,3 +317,4 @@ namespace TriforceSalon.Class_Components
         }
     }
 }
+ 

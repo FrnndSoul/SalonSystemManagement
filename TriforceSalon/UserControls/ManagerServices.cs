@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -19,6 +12,7 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
             managerServicesInstance = this;
+            serviceType.ServiceTypeInfoDGV();
         }
 
         private void AddImageServiceTypeBtn_Click(object sender, EventArgs e)
@@ -30,6 +24,11 @@ namespace TriforceSalon.UserControls
         {
             string serviceTypeName = ServiceTypeTxtB.Text;
             serviceType.AddServiceType(serviceTypeName);
+        }
+
+        private void EditServiceTBtn_Click(object sender, EventArgs e)
+        {
+            serviceType.EditServiceTypes();
         }
     }
 }

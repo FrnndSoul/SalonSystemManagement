@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Components\ChangeImageSize.cs" />
+    <Compile Include="Class Components\LoadImages.cs" />
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
     <Compile Include="Class Components\ServiceTypes.cs" />
@@ -144,6 +145,12 @@
     <Compile Include="Class Components\Method.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ManagerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManagerPage.Designer.cs">
+      <DependentUpon>ManagerPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ManagerServices.cs">
       <SubType>UserControl</SubType>
     </Compile>
