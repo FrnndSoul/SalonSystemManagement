@@ -17,7 +17,7 @@ namespace TriforceSalon
 {
     public partial class InventoryPage : UserControl
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;

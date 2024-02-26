@@ -13,7 +13,7 @@ namespace TriforceSalon
 {
     internal class Inventory
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static int ShipmentReference;
 
