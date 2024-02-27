@@ -264,7 +264,6 @@ namespace TriforceSalon.Class_Components
                     {
                         conn.Open();
                         string query = "UPDATE service_type SET ServiceTypeName = @service_name";
-                        byte[] imageDatae = null;
 
                         if (isNewServiceImageSelected)
                         {

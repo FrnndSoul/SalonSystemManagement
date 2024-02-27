@@ -51,6 +51,10 @@
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
             this.SignoutBtn = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.EditBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
@@ -72,6 +76,10 @@
             // 
             // UserTab
             // 
+            this.UserTab.Controls.Add(this.label8);
+            this.UserTab.Controls.Add(this.textBox2);
+            this.UserTab.Controls.Add(this.label7);
+            this.UserTab.Controls.Add(this.textBox1);
             this.UserTab.Controls.Add(this.EditBtn);
             this.UserTab.Controls.Add(this.DiscardBtn);
             this.UserTab.Controls.Add(this.ChangeRoleBtn);
@@ -102,7 +110,7 @@
             // 
             // DiscardBtn
             // 
-            this.DiscardBtn.Location = new System.Drawing.Point(1262, 681);
+            this.DiscardBtn.Location = new System.Drawing.Point(1262, 701);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(84, 23);
             this.DiscardBtn.TabIndex = 44;
@@ -113,7 +121,7 @@
             // 
             // ChangeRoleBtn
             // 
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(1132, 681);
+            this.ChangeRoleBtn.Location = new System.Drawing.Point(1132, 701);
             this.ChangeRoleBtn.Name = "ChangeRoleBtn";
             this.ChangeRoleBtn.Size = new System.Drawing.Size(124, 23);
             this.ChangeRoleBtn.TabIndex = 43;
@@ -124,7 +132,7 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(1016, 681);
+            this.SaveBtn.Location = new System.Drawing.Point(1016, 701);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(110, 23);
             this.SaveBtn.TabIndex = 41;
@@ -317,9 +325,43 @@
             this.SignoutBtn.UseVisualStyleBackColor = true;
             this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1013, 623);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "Email";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(1051, 620);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(119, 20);
+            this.textBox1.TabIndex = 50;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1198, 623);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.TabIndex = 53;
+            this.label8.Text = "Email";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(1236, 620);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(110, 20);
+            this.textBox2.TabIndex = 52;
+            // 
             // EditBtn
             // 
-            this.EditBtn.Location = new System.Drawing.Point(1262, 623);
+            this.EditBtn.Location = new System.Drawing.Point(1016, 672);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(84, 23);
             this.EditBtn.TabIndex = 48;
@@ -373,6 +415,10 @@
         private System.Windows.Forms.Button DiscardBtn;
         private System.Windows.Forms.Button ChangeRoleBtn;
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button EditBtn;
     }
 }
