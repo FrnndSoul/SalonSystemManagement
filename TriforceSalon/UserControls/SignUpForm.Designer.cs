@@ -50,6 +50,8 @@ namespace TriforceSalon
             this.RoleBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.AccessBox = new Guna.UI2.WinForms.Guna2ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +62,7 @@ namespace TriforceSalon
             this.TogglePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.TogglePassword.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TogglePassword.ForeColor = System.Drawing.Color.White;
-            this.TogglePassword.Location = new System.Drawing.Point(1274, 626);
+            this.TogglePassword.Location = new System.Drawing.Point(1274, 735);
             this.TogglePassword.Name = "TogglePassword";
             this.TogglePassword.Size = new System.Drawing.Size(180, 27);
             this.TogglePassword.TabIndex = 13;
@@ -110,7 +112,7 @@ namespace TriforceSalon
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.label4.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(989, 667);
+            this.label4.Location = new System.Drawing.Point(722, 635);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 37);
             this.label4.TabIndex = 18;
@@ -122,7 +124,7 @@ namespace TriforceSalon
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.label5.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(1267, 423);
+            this.label5.Location = new System.Drawing.Point(1267, 524);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(144, 37);
             this.label5.TabIndex = 19;
@@ -134,7 +136,7 @@ namespace TriforceSalon
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.label6.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1267, 526);
+            this.label6.Location = new System.Drawing.Point(1267, 635);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(260, 37);
             this.label6.TabIndex = 20;
@@ -303,7 +305,7 @@ namespace TriforceSalon
             this.PasswordBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.PasswordBox.ForeColor = System.Drawing.Color.Black;
             this.PasswordBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PasswordBox.Location = new System.Drawing.Point(1274, 465);
+            this.PasswordBox.Location = new System.Drawing.Point(1274, 566);
             this.PasswordBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.PasswordBox.Name = "PasswordBox";
             this.PasswordBox.PasswordChar = '\0';
@@ -328,7 +330,7 @@ namespace TriforceSalon
             this.PasswordBox1.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.PasswordBox1.ForeColor = System.Drawing.Color.Black;
             this.PasswordBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PasswordBox1.Location = new System.Drawing.Point(1274, 568);
+            this.PasswordBox1.Location = new System.Drawing.Point(1274, 677);
             this.PasswordBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.PasswordBox1.Name = "PasswordBox1";
             this.PasswordBox1.PasswordChar = '\0';
@@ -349,7 +351,7 @@ namespace TriforceSalon
             this.BirthdayPicker.ForeColor = System.Drawing.Color.Black;
             this.BirthdayPicker.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.BirthdayPicker.IndicateFocus = true;
-            this.BirthdayPicker.Location = new System.Drawing.Point(995, 713);
+            this.BirthdayPicker.Location = new System.Drawing.Point(728, 681);
             this.BirthdayPicker.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.BirthdayPicker.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.BirthdayPicker.Name = "BirthdayPicker";
@@ -364,7 +366,7 @@ namespace TriforceSalon
             this.RoleBox.AutoRoundedCorners = true;
             this.RoleBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.RoleBox.BorderColor = System.Drawing.Color.Black;
-            this.RoleBox.BorderRadius = 17;
+            this.RoleBox.BorderRadius = 21;
             this.RoleBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.RoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RoleBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(75)))), ((int)(((byte)(164)))));
@@ -409,11 +411,51 @@ namespace TriforceSalon
             this.Photo.TabStop = false;
             this.Photo.UseTransparentBackground = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.label8.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(1267, 421);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(218, 37);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "Account Access";
+            // 
+            // AccessBox
+            // 
+            this.AccessBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.AccessBox.AutoRoundedCorners = true;
+            this.AccessBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.AccessBox.BorderColor = System.Drawing.Color.Black;
+            this.AccessBox.BorderRadius = 17;
+            this.AccessBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.AccessBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AccessBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(75)))), ((int)(((byte)(164)))));
+            this.AccessBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.Font = new System.Drawing.Font("Stanberry", 21.75F);
+            this.AccessBox.ForeColor = System.Drawing.Color.White;
+            this.AccessBox.FormattingEnabled = true;
+            this.AccessBox.ItemHeight = 30;
+            this.AccessBox.Items.AddRange(new object[] {
+            "Manager",
+            "Receptionist",
+            "Staff"});
+            this.AccessBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 21.75F);
+            this.AccessBox.Location = new System.Drawing.Point(1274, 463);
+            this.AccessBox.Name = "AccessBox";
+            this.AccessBox.Size = new System.Drawing.Size(450, 36);
+            this.AccessBox.TabIndex = 39;
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.AccessBox);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.RoleBox);
             this.Controls.Add(this.BirthdayPicker);
             this.Controls.Add(this.label7);
@@ -465,5 +507,7 @@ namespace TriforceSalon
         private Guna.UI2.WinForms.Guna2DateTimePicker BirthdayPicker;
         private Guna.UI2.WinForms.Guna2ComboBox RoleBox;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Label label8;
+        private Guna.UI2.WinForms.Guna2ComboBox AccessBox;
     }
 }

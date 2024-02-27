@@ -29,7 +29,7 @@ namespace TriforceSalon
         public static string Name, Username, Email, Password,
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
-            Availability;
+            Availability, Access;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
@@ -59,6 +59,7 @@ namespace TriforceSalon
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
                                 ServiceID = Convert.ToInt32(reader["ServiceID"]);
                                 Availability = reader["Availability"].ToString();
+                                Access = reader["AccountAccess"].ToString();
 
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
@@ -103,7 +104,7 @@ namespace TriforceSalon
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (10000 <= AccountID && AccountID < 100000)
+                    if (string.Equals(Access, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
                         InventoryPage.StoreID(Convert.ToInt32(inputID));
@@ -117,10 +118,16 @@ namespace TriforceSalon
                             }
                         }
                     }
-                    else if (1000 <= AccountID && AccountID < 10000)
+                    else if (string.Equals(Access, "Receptionist", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show("Call walk-in transaction at\nLine 123: Method.cs","Staff",
+                        MessageBox.Show("Call receptionist's transaction at\nLine 124: Method.cs", "receptionist",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (string.Equals(Access, "Staff", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ResetAttempt(inputID);
+                        MessageBox.Show("Call staff's transaction at\nLine 130: Method.cs", "Staff",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     LogUser(AccountID);
@@ -254,7 +261,7 @@ namespace TriforceSalon
             }
         }
 
-        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, string Role)
+        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, string Role, string Access)
         {
             int accountID = GenerateID(0);
             UploadMemberData(Username, accountID, Password);
@@ -307,8 +314,8 @@ namespace TriforceSalon
                 {
                     connection.Open();
                     string query = "INSERT INTO `salon_employees`" +
-                        "(`AccountID`, `Name`, `Email`, `Birthdate`, `Photo`, `AccountStatus`, `ServiceID`, `Availability`) VALUES" +
-                        "(@accountID, @name, @email, @birthdate, @photo, @accountStatus, @serviceID, @availability)";
+                        "(`AccountID`, `Name`, `Email`, `Birthdate`, `Photo`, `AccountStatus`, `ServiceID`, `Availability`, `AccountAccess`) VALUES" +
+                        "(@accountID, @name, @email, @birthdate, @photo, @accountStatus, @serviceID, @availability, @access)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@accountID", accountID);
@@ -320,6 +327,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@accountStatus", 0);
                         querycmd.Parameters.AddWithValue("@serviceID", selectedServiceID);
                         querycmd.Parameters.AddWithValue("@availability", "Offline");
+                        querycmd.Parameters.AddWithValue("@access", Access);
 
                         int rowsaffected = querycmd.ExecuteNonQuery();
                     }
