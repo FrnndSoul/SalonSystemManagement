@@ -25,7 +25,7 @@ namespace TriforceSalon
         public static string NameReader, UsernameReader, EmailReader,
             SelectedUsername;
         public static DateTime BirthdateReader;
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public AdminForm()

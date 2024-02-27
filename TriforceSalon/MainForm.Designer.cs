@@ -42,12 +42,14 @@
             // 
             // signinPage1
             // 
+            this.signinPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             resources.ApplyResources(this.signinPage1, "signinPage1");
             this.signinPage1.Name = "signinPage1";
             this.signinPage1.Load += new System.EventHandler(this.SigninPage1_Load);
             // 
             // signUpForm1
             // 
+            this.signUpForm1.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.signUpForm1, "signUpForm1");
             this.signUpForm1.Name = "signUpForm1";
             // 

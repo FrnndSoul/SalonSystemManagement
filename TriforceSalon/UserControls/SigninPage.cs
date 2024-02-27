@@ -71,6 +71,25 @@ namespace TriforceSalon
                     if (openForm is MainForm mainForm)
                     {
                         mainForm.ShowAdmin();
+                        //mainForm.ShowAddService();
+                        break;
+                    }
+                }
+                Clear();
+                return;
+            }
+
+            if (string.Equals(Username, "Manager", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(Password, "Manager123", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Manager log in success", "Welcome",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Form openForm in Application.OpenForms)
+                {
+                    if (openForm is MainForm mainForm)
+                    {
+                        mainForm.ShowInventory();
+                        //mainForm.ShowAddService();
                         break;
                     }
                 }
