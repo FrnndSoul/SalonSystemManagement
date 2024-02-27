@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,11 @@ namespace TriforceSalon
 {
     public partial class InventoryPage : UserControl
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+        public static byte[] PhotoByteHolder;
         public InventoryPage()
         {
             InitializeComponent();
@@ -98,7 +100,7 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `shipments`(`ManagerID`,`DateShipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                    string query = "INSERT INTO `shipments`(`ManagerID`,`Date Shipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
                         "VALUES (@managerID, @dateShipped, @shipmentID, @supplier, @itemID, @itemName, @quantity, @cost)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
@@ -116,9 +118,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@cost", totalCost);
                         querycmd.ExecuteNonQuery();
                         Inventory.AddShippedItems(itemID, Convert.ToInt32(RequestBox.Text));
-                        Inventory.CheckStatus();
-                        LoadInventory();
-                        LoadShipments();
+                        DefaultLoad();
                     }
                 }
             }
@@ -323,6 +323,16 @@ namespace TriforceSalon
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+            if (PhotoByteHolder == null)
+            {
+                MessageBox.Show("No photo selected, please upload a photo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(AddIDBox.Text) || string.IsNullOrEmpty(AddNameBox.Text) || string.IsNullOrEmpty(AddCostBox.Text) || string.IsNullOrEmpty(AddAggregateBox.Text))
+            {
+                MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             DialogResult result = MessageBox.Show($"Do you want to add this new product?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes)
             {
@@ -334,8 +344,8 @@ namespace TriforceSalon
                 {
                     connection.Open();
                     string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status)";
+                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`,`Photo`) VALUES" +
+                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status, @photo)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", AddIDBox.Text);
@@ -344,6 +354,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@cost", AddCostBox.Text);
                         querycmd.Parameters.AddWithValue("@aggregate", AddAggregateBox.Text);
                         querycmd.Parameters.AddWithValue("@status", 3);
+                        querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
                         querycmd.ExecuteNonQuery();
                         DefaultLoad();
                     }
@@ -362,6 +373,32 @@ namespace TriforceSalon
             InventoryPanel.Visible = false;
             int randomID = GenerateRandomID();
             AddIDBox.Text = randomID.ToString();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Guna2Button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+                Image image = Image.FromFile(selectedFile);
+                pictureBox1.Image = image;
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, image.RawFormat);
+                    PhotoByteHolder = ms.ToArray();
+                }
+            }
         }
 
         private void AddPanel_Paint(object sender, PaintEventArgs e)

@@ -13,7 +13,7 @@ namespace TriforceSalon
 {
     internal class Inventory
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static int ShipmentReference;
 
@@ -27,10 +27,10 @@ namespace TriforceSalon
                     string query = "UPDATE `inventory` SET `Status` = " +
                         "CASE " +
                             "WHEN `Stock` = 0 THEN 3 " +
-                            "WHEN `Stock` = 0.25 * `Aggregate` THEN 2 " +
-                            "WHEN `Stock` = 0.5 * `Aggregate` THEN 1 " +
-                            "ELSE 0 " +
-                            "END; ";
+                            "WHEN `Stock` <= 0.25 * `Aggregate` THEN 2 " + 
+                            "WHEN `Stock` <= 0.5 * `Aggregate` THEN 1 " + 
+                            "ELSE 0 " + 
+                            "END;";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.ExecuteNonQuery();
@@ -42,6 +42,8 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat CheckStatus()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
+
+
 
         public static int ShipmentID()
         {

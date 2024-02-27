@@ -18,7 +18,7 @@ namespace TriforceSalon
     public partial class SignUpForm : UserControl
     {
         public static byte[] PhotoByteHolder;
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public SignUpForm()
         {
@@ -173,7 +173,7 @@ namespace TriforceSalon
                 return;
             } else if (PhotoByteHolder == null)
             {
-                MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No profile photo selected, please upload a photo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
