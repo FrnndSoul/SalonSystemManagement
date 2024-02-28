@@ -123,6 +123,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AddProduct Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddProduct Inventory.Designer.cs">
+      <DependentUpon>AddProduct Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +136,12 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class Components\Inventory.cs" />
+    <Compile Include="UserControls\EditProduct Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EditProduct Inventory.Designer.cs">
+      <DependentUpon>EditProduct Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,8 +199,14 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\AddProduct Inventory.resx">
+      <DependentUpon>AddProduct Inventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EditProduct Inventory.resx">
+      <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
@@ -280,6 +298,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back icon %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\savekita icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discard icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add icon %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

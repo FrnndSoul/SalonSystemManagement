@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
-            this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
             this.IDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.CurentBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -49,6 +47,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // guna2Shapes1
@@ -57,7 +57,7 @@
             this.guna2Shapes1.BorderColor = System.Drawing.Color.Black;
             this.guna2Shapes1.BorderThickness = 1;
             this.guna2Shapes1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.guna2Shapes1.Location = new System.Drawing.Point(-166, -114);
+            this.guna2Shapes1.Location = new System.Drawing.Point(-150, -75);
             this.guna2Shapes1.Name = "guna2Shapes1";
             this.guna2Shapes1.PolygonSkip = 1;
             this.guna2Shapes1.Rotate = 0F;
@@ -67,50 +67,6 @@
             this.guna2Shapes1.Text = "guna2Shapes1";
             this.guna2Shapes1.UseTransparentBackground = true;
             this.guna2Shapes1.Zoom = 80;
-            // 
-            // RequestBtn
-            // 
-            this.RequestBtn.Animated = true;
-            this.RequestBtn.BackColor = System.Drawing.Color.Transparent;
-            this.RequestBtn.BorderRadius = 20;
-            this.RequestBtn.BorderThickness = 1;
-            this.RequestBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.RequestBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.RequestBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.RequestBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.RequestBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.RequestBtn.Font = new System.Drawing.Font("Chinacat", 20.25F);
-            this.RequestBtn.ForeColor = System.Drawing.Color.White;
-            this.RequestBtn.Image = global::TriforceSalon.Properties.Resources.request1_icon;
-            this.RequestBtn.Location = new System.Drawing.Point(119, 750);
-            this.RequestBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.RequestBtn.Name = "RequestBtn";
-            this.RequestBtn.Size = new System.Drawing.Size(600, 70);
-            this.RequestBtn.TabIndex = 53;
-            this.RequestBtn.Text = " Request Shipment";
-            this.RequestBtn.UseTransparentBackground = true;
-            // 
-            // BackBtn
-            // 
-            this.BackBtn.Animated = true;
-            this.BackBtn.BackColor = System.Drawing.Color.Transparent;
-            this.BackBtn.BorderRadius = 20;
-            this.BackBtn.BorderThickness = 1;
-            this.BackBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.BackBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.BackBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.BackBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.BackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.BackBtn.Font = new System.Drawing.Font("Chinacat", 20.25F);
-            this.BackBtn.ForeColor = System.Drawing.Color.White;
-            this.BackBtn.Image = global::TriforceSalon.Properties.Resources.request1_icon;
-            this.BackBtn.Location = new System.Drawing.Point(782, 750);
-            this.BackBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(600, 70);
-            this.BackBtn.TabIndex = 54;
-            this.BackBtn.Text = "Back To Inventory";
-            this.BackBtn.UseTransparentBackground = true;
             // 
             // IDBox
             // 
@@ -451,6 +407,50 @@
             this.label8.Size = new System.Drawing.Size(281, 37);
             this.label8.TabIndex = 73;
             this.label8.Text = "Quantity to Request";
+            // 
+            // BackBtn
+            // 
+            this.BackBtn.Animated = true;
+            this.BackBtn.BackColor = System.Drawing.Color.Transparent;
+            this.BackBtn.BorderRadius = 20;
+            this.BackBtn.BorderThickness = 1;
+            this.BackBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.BackBtn.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.BackBtn.ForeColor = System.Drawing.Color.White;
+            this.BackBtn.Image = global::TriforceSalon.Properties.Resources.back_icon__2_;
+            this.BackBtn.Location = new System.Drawing.Point(782, 750);
+            this.BackBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(600, 70);
+            this.BackBtn.TabIndex = 54;
+            this.BackBtn.Text = " Back To Inventory";
+            this.BackBtn.UseTransparentBackground = true;
+            // 
+            // RequestBtn
+            // 
+            this.RequestBtn.Animated = true;
+            this.RequestBtn.BackColor = System.Drawing.Color.Transparent;
+            this.RequestBtn.BorderRadius = 20;
+            this.RequestBtn.BorderThickness = 1;
+            this.RequestBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RequestBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RequestBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RequestBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RequestBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.RequestBtn.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.RequestBtn.ForeColor = System.Drawing.Color.White;
+            this.RequestBtn.Image = global::TriforceSalon.Properties.Resources.request1_icon;
+            this.RequestBtn.Location = new System.Drawing.Point(119, 750);
+            this.RequestBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.RequestBtn.Name = "RequestBtn";
+            this.RequestBtn.Size = new System.Drawing.Size(600, 70);
+            this.RequestBtn.TabIndex = 53;
+            this.RequestBtn.Text = " Request Shipment";
+            this.RequestBtn.UseTransparentBackground = true;
             // 
             // RequestShipment_Inventory
             // 
