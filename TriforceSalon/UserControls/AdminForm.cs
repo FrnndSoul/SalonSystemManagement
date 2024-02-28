@@ -17,7 +17,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 //hi
 namespace TriforceSalon
-{
+{ //Hi
     public partial class AdminForm : UserControl
     {
         public static byte[] PhotoLocal, PhotoDB;
@@ -25,7 +25,7 @@ namespace TriforceSalon
         public static string NameReader, UsernameReader, EmailReader,
             SelectedUsername;
         public static DateTime BirthdateReader;
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public AdminForm()
@@ -48,7 +48,11 @@ namespace TriforceSalon
             try
             {
                 connection.Open();
-                string sql = "SELECT `ID`, `Name`, `Username`, `Email`, `Birthdate`, `AccountStatus` FROM `users`";
+                string sql = "SELECT accounts.AccountID, accounts.Username, accounts.Status, " +
+                             "salon_employees.Name, salon_employees.Email, salon_employees.Birthdate, " +
+                             "salon_employees.AccountStatus, salon_employees.ServiceID, salon_employees.Availability " +
+                             "FROM accounts " +
+                             "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -66,6 +70,7 @@ namespace TriforceSalon
                 connection.Close();
             }
         }
+
 
         private void UserTab_Click(object sender, EventArgs e)
         {
@@ -88,12 +93,13 @@ namespace TriforceSalon
         private void ChangeRoleBtn_Click(object sender, EventArgs e)
         {
             DialogResult result;
-            if (1000000 < IDReader && IDReader < 9999)
+            if (IDReader < 10000)
             {
                 result = MessageBox.Show
                     ($"Promoting the user {UsernameReader}.\n" +
-                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                                
-            } else
+                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            }
+            else
             {
                 result = MessageBox.Show
                     ($"Demoting the user {UsernameReader}.\n" +
@@ -113,21 +119,38 @@ namespace TriforceSalon
             }
         }
 
-        public static void ChangeUserID(string User, int ID)
+        public static void ChangeUserID(string user, int newID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query =
-                        "UPDATE users SET ID = @ID " +
-                        "WHERE Username = @Username";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+
+                    MySqlCommand cmd = connection.CreateCommand();
+                    MySqlTransaction transaction;
+                    transaction = connection.BeginTransaction();
+                    cmd.Transaction = transaction;
+
+                    try
                     {
-                        querycmd.Parameters.AddWithValue("@ID", ID);
-                        querycmd.Parameters.AddWithValue("@Username", User);
-                        querycmd.ExecuteNonQuery();
+                        string query =
+                            "UPDATE salon_employees " +
+                            "JOIN accounts ON salon_employees.AccountID = accounts.AccountID " +
+                            "SET salon_employees.AccountID = @NewAccountID, accounts.AccountID = @NewAccountID " +
+                            "WHERE salon_employees.AccountID = @OldAccountID;";
+
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@NewAccountID", newID);
+                        cmd.Parameters.AddWithValue("@OldAccountID", user); // Use user parameter instead of IDReader
+                        cmd.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -137,20 +160,19 @@ namespace TriforceSalon
             }
         }
 
+
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Discard changes for the user?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.No)
+            if (result == DialogResult.Yes)
             {
-                checkBox1.CheckState = CheckState.Checked;
-                return;
+                DiscardFunc();
             }
-            DiscardFunc();
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            ReadUserData(UsernameReader);
+            ReadUserData(IDReader);
             string tempName = NameBox.Text;
             string tempUsername = UsernameBox.Text;
             string tempEmail = EmailBox.Text;
@@ -171,10 +193,26 @@ namespace TriforceSalon
             Method.ChangeUserData(tempName, tempUsername, PhotoLocal, IDReader);
             LoadUserData();
 
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
-            UserDGV_CellContentClick_1(select, args);
+            UserDGV_CellContentClick_1(null, null);
             DiscardFunc();
+        }
+
+
+        private void BirthdayPicker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+            NameBox.Enabled = true;
+            UsernameBox.Enabled = true;
+            EmailBox.Enabled = true;
+            UploadBtn.Enabled = true;
+            SaveBtn.Visible = true;
+            ChangeRoleBtn.Visible = true;
+            DiscardBtn.Visible = true;
+            EditBtn.Visible = false;
         }
 
         private void UploadBtn_Click(object sender, EventArgs e)
@@ -217,37 +255,30 @@ namespace TriforceSalon
 
         private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            UserRow = UserDGV.SelectedCells[0].RowIndex;
-
-            if (UserRow < 0 || UserRow >= UserDGV.Rows.Count)
+            if (UserDGV.Rows.Count == 0)
             {
                 return;
             }
-            string SelectedUsername = UserDGV.Rows[UserRow].Cells["Username"].Value.ToString();    
-            ReadUserData(SelectedUsername);
-            DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader);
+            if (UserDGV.SelectedCells.Count > 0)
+            {
+                int userRow = UserDGV.SelectedCells[0].RowIndex;
+                if (userRow >= 0 && userRow < UserDGV.Rows.Count)
+                {
+                    int selectedAccountID = Convert.ToInt32(UserDGV.Rows[userRow].Cells["AccountID"].Value);
+                    ReadUserData(selectedAccountID);
+                    DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader);
+                }
+            }
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                NameBox.Enabled = true;
-                UsernameBox.Enabled = true;
-                EmailBox.Enabled = true;
-                UploadBtn.Enabled = true;
-                SaveBtn.Visible = true;
-                ChangeRoleBtn.Visible = true;
-                DiscardBtn.Visible = true;
-                checkBox1.Enabled = false;
-            }
+           
         }
 
         public void DiscardFunc()
         {
-            checkBox1.CheckState = CheckState.Unchecked;
-
-            checkBox1.Enabled = true;
+            EditBtn.Visible = true;
             NameBox.Enabled = false;
             UsernameBox.Enabled = false;
             EmailBox.Enabled = false;
@@ -263,22 +294,28 @@ namespace TriforceSalon
             UserDGV_CellContentClick_1(select, args);
         }
 
-        public static void ReadUserData(string user)
+        public static void ReadUserData(int accountID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "SELECT * from users WHERE Username = @username";
+                    string query = "SELECT accounts.AccountID, accounts.Username, accounts.Password, accounts.Status, " +
+                                    "salon_employees.Name, salon_employees.Photo, salon_employees.Email, salon_employees.Birthdate, " +
+                                    "salon_employees.AccountStatus, salon_employees.ServiceID, salon_employees.Availability " +
+                                    "FROM accounts " +
+                                    "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID " +
+                                    "WHERE accounts.AccountID = @accountID";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", user);
+                        querycmd.Parameters.AddWithValue("@accountID", accountID);
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                IDReader = Convert.ToInt32(reader["ID"]);
+                                IDReader = Convert.ToInt32(reader["AccountID"]);
                                 NameReader = reader["Name"].ToString();
                                 UsernameReader = reader["Username"].ToString();
                                 EmailReader = reader["Email"].ToString();
@@ -298,10 +335,7 @@ namespace TriforceSalon
                             }
                             else
                             {
-                                if (user != "admin")
-                                {
-                                    MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -312,6 +346,5 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

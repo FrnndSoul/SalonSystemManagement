@@ -109,6 +109,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Components\ChangeImageSize.cs" />
+    <Compile Include="Class Components\LoadImages.cs" />
+    <Compile Include="Class Components\PopulateDataGridView.cs" />
+    <Compile Include="Class Components\SalonServices.cs" />
+    <Compile Include="Class Components\ServiceTypes.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
@@ -124,7 +129,13 @@
     <Compile Include="UserControls\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inventory.cs" />
+    <Compile Include="Class Components\Inventory.cs" />
+    <Compile Include="UserControls\GeneralView Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\GeneralView Inventory.Designer.cs">
+      <DependentUpon>GeneralView Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\InventoryPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,6 +151,18 @@
     <Compile Include="Class Components\Method.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ManagerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManagerPage.Designer.cs">
+      <DependentUpon>ManagerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ManagerServices.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ManagerServices.Designer.cs">
+      <DependentUpon>ManagerServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,8 +175,17 @@
     <Compile Include="UserControls\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WalkInTransactionForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
+      <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
+      <DependentUpon>GeneralView Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventoryPage.resx">
       <DependentUpon>InventoryPage.cs</DependentUpon>
@@ -166,11 +198,20 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManagerPage.resx">
+      <DependentUpon>ManagerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ManagerServices.resx">
+      <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SigninPage.resx">
       <DependentUpon>SigninPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WalkInTransactionForm.resx">
+      <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -197,6 +238,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SignInDesignLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignUpDesignBackGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default user icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

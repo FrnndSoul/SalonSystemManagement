@@ -63,6 +63,26 @@ namespace TriforceSalon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_icon__1_ {
+            get {
+                object obj = ResourceManager.GetObject("back icon (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap default_user_icon {
+            get {
+                object obj = ResourceManager.GetObject("default user icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SignInDesign {
             get {
                 object obj = ResourceManager.GetObject("SignInDesign", resourceCulture);
@@ -86,6 +106,16 @@ namespace TriforceSalon.Properties {
         internal static System.Drawing.Bitmap SignInDesignLogo {
             get {
                 object obj = ResourceManager.GetObject("SignInDesignLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUpDesignBackGround {
+            get {
+                object obj = ResourceManager.GetObject("SignUpDesignBackGround", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
