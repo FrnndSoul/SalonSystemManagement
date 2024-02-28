@@ -163,6 +163,12 @@
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\RequestShipment Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RequestShipment Inventory.Designer.cs">
+      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerServices.resx">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RequestShipment Inventory.resx">
+      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SigninPage.resx">
       <DependentUpon>SigninPage.cs</DependentUpon>
