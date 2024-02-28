@@ -248,5 +248,29 @@
   <ItemGroup>
     <None Include="Resources\default user icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request1 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request2 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request2 icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request3 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\access icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

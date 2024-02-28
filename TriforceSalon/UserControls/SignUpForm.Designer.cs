@@ -156,6 +156,7 @@ namespace TriforceSalon
             // 
             // CreateBtn
             // 
+            this.CreateBtn.Animated = true;
             this.CreateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.CreateBtn.BorderRadius = 20;
             this.CreateBtn.BorderThickness = 1;
@@ -176,6 +177,7 @@ namespace TriforceSalon
             // 
             // BackBtn
             // 
+            this.BackBtn.Animated = true;
             this.BackBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.BackBtn.BorderRadius = 20;
             this.BackBtn.BorderThickness = 1;
@@ -196,6 +198,7 @@ namespace TriforceSalon
             // 
             // UploadBtn
             // 
+            this.UploadBtn.Animated = true;
             this.UploadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.UploadBtn.BorderRadius = 15;
             this.UploadBtn.BorderThickness = 1;
@@ -216,6 +219,7 @@ namespace TriforceSalon
             // 
             // NameBox
             // 
+            this.NameBox.Animated = true;
             this.NameBox.AutoRoundedCorners = true;
             this.NameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.NameBox.BorderColor = System.Drawing.Color.Black;
@@ -241,6 +245,7 @@ namespace TriforceSalon
             // 
             // UsernameBox
             // 
+            this.UsernameBox.Animated = true;
             this.UsernameBox.AutoRoundedCorners = true;
             this.UsernameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.UsernameBox.BorderColor = System.Drawing.Color.Black;
@@ -266,6 +271,7 @@ namespace TriforceSalon
             // 
             // EmailBox
             // 
+            this.EmailBox.Animated = true;
             this.EmailBox.AutoRoundedCorners = true;
             this.EmailBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.EmailBox.BorderColor = System.Drawing.Color.Black;
@@ -291,6 +297,7 @@ namespace TriforceSalon
             // 
             // PasswordBox
             // 
+            this.PasswordBox.Animated = true;
             this.PasswordBox.AutoRoundedCorners = true;
             this.PasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.PasswordBox.BorderColor = System.Drawing.Color.Black;
@@ -316,6 +323,7 @@ namespace TriforceSalon
             // 
             // PasswordBox1
             // 
+            this.PasswordBox1.Animated = true;
             this.PasswordBox1.AutoRoundedCorners = true;
             this.PasswordBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.PasswordBox1.BorderColor = System.Drawing.Color.Black;
@@ -341,6 +349,7 @@ namespace TriforceSalon
             // 
             // BirthdayPicker
             // 
+            this.BirthdayPicker.Animated = true;
             this.BirthdayPicker.AutoRoundedCorners = true;
             this.BirthdayPicker.BackColor = System.Drawing.Color.Transparent;
             this.BirthdayPicker.BorderRadius = 24;
