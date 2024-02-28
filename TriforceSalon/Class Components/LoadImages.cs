@@ -102,5 +102,77 @@ namespace TriforceSalon.Class_Components
             }
             return null;
         }
+
+
+
+        public void ServicesImage(int serviceVarID)
+        {
+            byte[] imageData = GetServiceVarID(serviceVarID); // Call a new method to get image data
+
+            try
+            {
+                if (imageData != null && imageData.Length > 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(imageData))
+                    {
+                        Image image = Image.FromStream(ms);
+
+                        // Set the PictureBox image only if the conversion succeeds
+                        ManagerServices.managerServicesInstance.ServiceImagePicB.Image = image;
+                    }
+                }
+                else
+                {
+                    // Set PictureBox image to a default image or null if there's no image data
+                    ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle the exception if the byte array does not represent a valid image format
+                MessageBox.Show("Error loading image: Invalid image data format.");
+                MessageBox.Show("Exception Details: " + ex.Message);
+
+                // Set PictureBox image to a default image or show an error image
+                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                MessageBox.Show("Error loading image: " + ex.Message);
+
+                // Set PictureBox image to a default image or show an error image
+                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+            }
+        }
+
+        public byte[] GetServiceVarID(int serviceVarID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "SELECT ServiceImage FROM salon_services WHERE ServiceVariationID   = @servicevar_ID";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@servicevar_ID", serviceVarID);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            return (byte[])result;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ito?: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return null;
+        }
     }
 }

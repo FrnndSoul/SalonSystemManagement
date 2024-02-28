@@ -8,11 +8,14 @@ namespace TriforceSalon.UserControls
     {
         public static ManagerServices managerServicesInstance;
         private ServiceTypes serviceType = new ServiceTypes();
+        private SalonServices salonServices = new SalonServices();
         public ManagerServices()
         {
             InitializeComponent();
             managerServicesInstance = this;
             serviceType.ServiceTypeInfoDGV();
+            salonServices.PopulateServiceType();
+            salonServices.GetSalonServices();
         }
 
         private void AddImageServiceTypeBtn_Click(object sender, EventArgs e)
@@ -39,6 +42,33 @@ namespace TriforceSalon.UserControls
         private void Back_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void EditServBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.EditSalonServices();
+        }
+
+        private void UpdateServBtn_Click(object sender, EventArgs e)
+        {
+            int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
+            salonServices.UpdateSalonServices(servarID);
+        }
+
+        private void UpdateServiceTBtn_Click(object sender, EventArgs e)
+        {
+            int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
+            serviceType.UpdateServiceType(sID);
+        }
+
+        private void CancelEditBtn_Click(object sender, EventArgs e)
+        {
+            serviceType.ClearServiceTypes();
+        }
+
+        private void CancelEditServiceBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.ClearServices();
         }
     }
 }
