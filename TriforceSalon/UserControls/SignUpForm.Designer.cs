@@ -407,6 +407,7 @@ namespace TriforceSalon
             this.Photo.Name = "Photo";
             this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.Photo.Size = new System.Drawing.Size(400, 400);
+            this.Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Photo.TabIndex = 26;
             this.Photo.TabStop = false;
             this.Photo.UseTransparentBackground = true;

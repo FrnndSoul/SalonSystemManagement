@@ -249,7 +249,6 @@ namespace TriforceSalon
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
             return serviceTypeName;
         }
 
