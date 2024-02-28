@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="inventoryPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="inventoryPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 1060</value>
+    <value>2533, 1305</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="inventoryPage1.TabIndex" type="System.Int32, mscorlib">
@@ -145,16 +145,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;inventoryPage1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="signinPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="signinPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="signinPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 1060</value>
+    <value>2533, 1305</value>
   </data>
   <data name="signinPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -169,16 +169,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;signinPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="signUpForm1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="signUpForm1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="signUpForm1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 1060</value>
+    <value>2533, 1305</value>
   </data>
   <data name="signUpForm1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -196,16 +196,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;signUpForm1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="adminForm1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="adminForm1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="adminForm1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 1060</value>
+    <value>2533, 1305</value>
   </data>
   <data name="adminForm1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -223,16 +223,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;adminForm1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="walkInTransactionForm1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="walkInTransactionForm1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="walkInTransactionForm1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 878</value>
+    <value>1859, 1081</value>
   </data>
   <data name="walkInTransactionForm1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -250,16 +250,46 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;walkInTransactionForm1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="managerPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="managerPage1.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1920, 1080</value>
+  </data>
+  <data name="managerPage1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1920, 1080</value>
+  </data>
+  <data name="managerPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1920, 1080</value>
+  </data>
+  <data name="managerPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;managerPage1.Name" xml:space="preserve">
+    <value>managerPage1</value>
+  </data>
+  <data name="&gt;&gt;managerPage1.Type" xml:space="preserve">
+    <value>TriforceSalon.UserControls.ManagerPage, TriforceSalon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;managerPage1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;managerPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1904, 1041</value>
+    <value>1924, 1055</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

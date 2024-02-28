@@ -47,6 +47,7 @@ namespace TriforceSalon
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
             walkInTransactionForm1.Visible = false;
+            
 
         }
 
