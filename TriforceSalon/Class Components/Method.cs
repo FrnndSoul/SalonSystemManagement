@@ -86,14 +86,43 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ReadUserData() method", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, int newID)
+        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, string newAccess, int ID)
         {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
 
-        } //empty
+                    string query = "UPDATE accounts SET Username = @newUsername WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newUsername", newUsername);
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+
+                    query = "UPDATE salon_employees SET Name = @newName, Photo = @newPhoto, AccountAccess = @newAccess WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newName", newName);
+                        cmd.Parameters.AddWithValue("@newPhoto", newPhoto);
+                        cmd.Parameters.AddWithValue("@newAccess", newAccess);
+
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static bool Login(string inputID, string inputPassword)
         {
@@ -214,20 +243,11 @@ namespace TriforceSalon
             Random random = new Random();
             int NewID;
 
-            if (10000 <= IDinput && IDinput <= 99999)
+            do
             {
-                do
-                {
-                    NewID = random.Next(1000, 10000);
-                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
-            }
-            else
-            {
-                do
-                {
-                    NewID = random.Next(10000, 100000);
-                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
-            }
+                NewID = random.Next(10000, 100000);
+            } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
+            
             return NewID;
         }
 
@@ -282,6 +302,7 @@ namespace TriforceSalon
                             string serviceTypeName = reader["ServiceTypeName"].ToString();
                             int serviceID = Convert.ToInt32(reader["ServiceID"]);
                             serviceTypes.Add(new Tuple<string, int>(serviceTypeName, serviceID));
+
                         }
                     }
                 }
@@ -330,6 +351,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@access", Access);
 
                         int rowsaffected = querycmd.ExecuteNonQuery();
+                        MessageBox.Show($"Employee Data Uploaded.\nUse this ID to login: {accountID}");
                     }
                 }
             }
@@ -338,7 +360,6 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
-
 
         public static void UploadMemberData(string Username, int AccountID, string Password)
         {

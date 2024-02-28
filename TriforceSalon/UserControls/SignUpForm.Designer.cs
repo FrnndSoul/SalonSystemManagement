@@ -366,7 +366,7 @@ namespace TriforceSalon
             this.RoleBox.AutoRoundedCorners = true;
             this.RoleBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.RoleBox.BorderColor = System.Drawing.Color.Black;
-            this.RoleBox.BorderRadius = 21;
+            this.RoleBox.BorderRadius = 17;
             this.RoleBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.RoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RoleBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(75)))), ((int)(((byte)(164)))));

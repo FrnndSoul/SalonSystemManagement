@@ -30,8 +30,12 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.UserTab = new System.Windows.Forms.TabPage();
+            this.AccessBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.RoleBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.EditBtn = new System.Windows.Forms.Button();
             this.DiscardBtn = new System.Windows.Forms.Button();
-            this.ChangeRoleBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,11 +55,6 @@
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
             this.SignoutBtn = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.EditBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
@@ -76,13 +75,12 @@
             // 
             // UserTab
             // 
+            this.UserTab.Controls.Add(this.AccessBox);
+            this.UserTab.Controls.Add(this.RoleBox);
             this.UserTab.Controls.Add(this.label8);
-            this.UserTab.Controls.Add(this.textBox2);
             this.UserTab.Controls.Add(this.label7);
-            this.UserTab.Controls.Add(this.textBox1);
             this.UserTab.Controls.Add(this.EditBtn);
             this.UserTab.Controls.Add(this.DiscardBtn);
-            this.UserTab.Controls.Add(this.ChangeRoleBtn);
             this.UserTab.Controls.Add(this.SaveBtn);
             this.UserTab.Controls.Add(this.label6);
             this.UserTab.Controls.Add(this.label5);
@@ -108,9 +106,73 @@
             this.UserTab.UseVisualStyleBackColor = true;
             this.UserTab.Click += new System.EventHandler(this.UserTab_Click);
             // 
+            // AccessBox
+            // 
+            this.AccessBox.BackColor = System.Drawing.Color.Transparent;
+            this.AccessBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.AccessBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AccessBox.Enabled = false;
+            this.AccessBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.AccessBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.AccessBox.ItemHeight = 30;
+            this.AccessBox.Items.AddRange(new object[] {
+            "Manager",
+            "Receptionist",
+            "Staff"});
+            this.AccessBox.Location = new System.Drawing.Point(1015, 694);
+            this.AccessBox.Name = "AccessBox";
+            this.AccessBox.Size = new System.Drawing.Size(331, 36);
+            this.AccessBox.TabIndex = 55;
+            // 
+            // RoleBox
+            // 
+            this.RoleBox.BackColor = System.Drawing.Color.Transparent;
+            this.RoleBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.RoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RoleBox.Enabled = false;
+            this.RoleBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RoleBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RoleBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.RoleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.RoleBox.ItemHeight = 30;
+            this.RoleBox.Location = new System.Drawing.Point(1016, 623);
+            this.RoleBox.Name = "RoleBox";
+            this.RoleBox.Size = new System.Drawing.Size(331, 36);
+            this.RoleBox.TabIndex = 54;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1013, 678);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(85, 13);
+            this.label8.TabIndex = 53;
+            this.label8.Text = "Account Access";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1013, 607);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 13);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "Services Offered";
+            // 
+            // EditBtn
+            // 
+            this.EditBtn.Location = new System.Drawing.Point(1016, 794);
+            this.EditBtn.Name = "EditBtn";
+            this.EditBtn.Size = new System.Drawing.Size(110, 23);
+            this.EditBtn.TabIndex = 48;
+            this.EditBtn.Text = "Edit User";
+            this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            // 
             // DiscardBtn
             // 
-            this.DiscardBtn.Location = new System.Drawing.Point(1262, 701);
+            this.DiscardBtn.Location = new System.Drawing.Point(1262, 794);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(84, 23);
             this.DiscardBtn.TabIndex = 44;
@@ -119,20 +181,9 @@
             this.DiscardBtn.Visible = false;
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
             // 
-            // ChangeRoleBtn
-            // 
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(1132, 701);
-            this.ChangeRoleBtn.Name = "ChangeRoleBtn";
-            this.ChangeRoleBtn.Size = new System.Drawing.Size(124, 23);
-            this.ChangeRoleBtn.TabIndex = 43;
-            this.ChangeRoleBtn.Text = "Promote/Demote";
-            this.ChangeRoleBtn.UseVisualStyleBackColor = true;
-            this.ChangeRoleBtn.Visible = false;
-            this.ChangeRoleBtn.Click += new System.EventHandler(this.ChangeRoleBtn_Click);
-            // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(1016, 701);
+            this.SaveBtn.Location = new System.Drawing.Point(1146, 794);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(110, 23);
             this.SaveBtn.TabIndex = 41;
@@ -209,13 +260,13 @@
             // 
             // UploadBtn
             // 
-            this.UploadBtn.Enabled = false;
             this.UploadBtn.Location = new System.Drawing.Point(1108, 310);
             this.UploadBtn.Name = "UploadBtn";
             this.UploadBtn.Size = new System.Drawing.Size(148, 23);
             this.UploadBtn.TabIndex = 29;
             this.UploadBtn.Text = "Update Profile Photo";
             this.UploadBtn.UseVisualStyleBackColor = true;
+            this.UploadBtn.Visible = false;
             this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
             // 
             // Photo
@@ -325,50 +376,6 @@
             this.SignoutBtn.UseVisualStyleBackColor = true;
             this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1013, 623);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 51;
-            this.label7.Text = "Email";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(1051, 620);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(119, 20);
-            this.textBox1.TabIndex = 50;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1198, 623);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 13);
-            this.label8.TabIndex = 53;
-            this.label8.Text = "Email";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(1236, 620);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(110, 20);
-            this.textBox2.TabIndex = 52;
-            // 
-            // EditBtn
-            // 
-            this.EditBtn.Location = new System.Drawing.Point(1016, 672);
-            this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(84, 23);
-            this.EditBtn.TabIndex = 48;
-            this.EditBtn.Text = "Edit User";
-            this.EditBtn.UseVisualStyleBackColor = true;
-            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
-            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -397,7 +404,6 @@
         private System.Windows.Forms.TabPage ServiceTypesTab;
         private System.Windows.Forms.DataGridView UserDGV;
         private System.Windows.Forms.Button SignoutBtn;
-        private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -412,13 +418,13 @@
         private System.Windows.Forms.TextBox EmailBox;
         private System.Windows.Forms.TextBox UsernameBox;
         private System.Windows.Forms.TextBox NameBox;
-        private System.Windows.Forms.Button DiscardBtn;
-        private System.Windows.Forms.Button ChangeRoleBtn;
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private Guna.UI2.WinForms.Guna2ComboBox RoleBox;
+        private Guna.UI2.WinForms.Guna2ComboBox AccessBox;
         private System.Windows.Forms.Button EditBtn;
+        private System.Windows.Forms.Button DiscardBtn;
+        private System.Windows.Forms.Button SaveBtn;
     }
 }

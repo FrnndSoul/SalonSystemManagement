@@ -20,6 +20,7 @@ namespace TriforceSalon
         public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+
         public SignUpForm()
         {
             InitializeComponent();
@@ -191,7 +192,6 @@ namespace TriforceSalon
             string hashedPassword = Method.HashString(Password);
 
             Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, Role, Access);
-            MessageBox.Show($"Employee Data Uploaded");
             object BackFunction = BackBtn;
             BackBtn_Click(BackFunction, e);
         }
