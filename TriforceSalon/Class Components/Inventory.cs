@@ -8,12 +8,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace TriforceSalon
 {
     internal class Inventory
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static int ShipmentReference;
 
@@ -52,6 +53,13 @@ namespace TriforceSalon
 
             } while (Method.DuplicateChecker(ShipmentReference.ToString(), "ShipmentID", "shipments") == true);
             return ShipmentReference;
+        }
+
+        public static int GenerateID()
+        {
+            Random random = new Random();
+            int id = random.Next(10000, 100000);
+            return id;
         }
 
         public static void AddShippedItems(int ID, int Stock)

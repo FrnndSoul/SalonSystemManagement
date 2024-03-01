@@ -31,7 +31,12 @@
             this.InventoryDGV = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.InventoryPanel = new System.Windows.Forms.Panel();
+            this.AddNewBtn = new System.Windows.Forms.Button();
+            this.EditProductBtn = new System.Windows.Forms.Button();
+            this.ReqShipBtn = new System.Windows.Forms.Button();
             this.ShipmentPanel = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.SupplierBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.ShipmentBackBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -54,6 +59,8 @@
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.StatusBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.EditPanel = new System.Windows.Forms.Panel();
+            this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -67,11 +74,8 @@
             this.EditIDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.EditStockBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.EditNameBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.InventoryPanel = new System.Windows.Forms.Panel();
-            this.AddNewBtn = new System.Windows.Forms.Button();
-            this.EditProductBtn = new System.Windows.Forms.Button();
-            this.ReqShipBtn = new System.Windows.Forms.Button();
             this.AddPanel = new System.Windows.Forms.Panel();
+            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel17 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -83,22 +87,28 @@
             this.AddCostBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.AddIDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.AddNameBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.ShipmentDGV = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
+            this.managerServices1 = new TriforceSalon.UserControls.ManagerServices();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.ShipmentPanel.SuspendLayout();
-            this.EditPanel.SuspendLayout();
             this.InventoryPanel.SuspendLayout();
+            this.ShipmentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.EditPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.AddPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShipmentDGV)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // InventoryDGV
@@ -112,6 +122,7 @@
             this.InventoryDGV.Location = new System.Drawing.Point(3, 3);
             this.InventoryDGV.Name = "InventoryDGV";
             this.InventoryDGV.ReadOnly = true;
+            this.InventoryDGV.RowHeadersWidth = 51;
             this.InventoryDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.InventoryDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.InventoryDGV.Size = new System.Drawing.Size(720, 611);
@@ -132,20 +143,65 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.InventoryPanel);
             this.tabPage1.Controls.Add(this.ShipmentPanel);
             this.tabPage1.Controls.Add(this.EditPanel);
-            this.tabPage1.Controls.Add(this.InventoryPanel);
             this.tabPage1.Controls.Add(this.AddPanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage1.Size = new System.Drawing.Size(1886, 999);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Inventory";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // InventoryPanel
+            // 
+            this.InventoryPanel.Controls.Add(this.AddNewBtn);
+            this.InventoryPanel.Controls.Add(this.InventoryDGV);
+            this.InventoryPanel.Controls.Add(this.EditProductBtn);
+            this.InventoryPanel.Controls.Add(this.ReqShipBtn);
+            this.InventoryPanel.Location = new System.Drawing.Point(4, 5);
+            this.InventoryPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InventoryPanel.Name = "InventoryPanel";
+            this.InventoryPanel.Size = new System.Drawing.Size(544, 765);
+            this.InventoryPanel.TabIndex = 4;
+            // 
+            // AddNewBtn
+            // 
+            this.AddNewBtn.Location = new System.Drawing.Point(359, 619);
+            this.AddNewBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddNewBtn.Name = "AddNewBtn";
+            this.AddNewBtn.Size = new System.Drawing.Size(125, 19);
+            this.AddNewBtn.TabIndex = 3;
+            this.AddNewBtn.Text = "Add New Product";
+            this.AddNewBtn.UseVisualStyleBackColor = true;
+            this.AddNewBtn.Click += new System.EventHandler(this.AddNewBtn_Click);
+            // 
+            // EditProductBtn
+            // 
+            this.EditProductBtn.Location = new System.Drawing.Point(176, 620);
+            this.EditProductBtn.Name = "EditProductBtn";
+            this.EditProductBtn.Size = new System.Drawing.Size(167, 23);
+            this.EditProductBtn.TabIndex = 2;
+            this.EditProductBtn.Text = "Edit Product";
+            this.EditProductBtn.UseVisualStyleBackColor = true;
+            this.EditProductBtn.Click += new System.EventHandler(this.EditProductBtn_Click);
+            // 
+            // ReqShipBtn
+            // 
+            this.ReqShipBtn.Location = new System.Drawing.Point(3, 620);
+            this.ReqShipBtn.Name = "ReqShipBtn";
+            this.ReqShipBtn.Size = new System.Drawing.Size(167, 23);
+            this.ReqShipBtn.TabIndex = 1;
+            this.ReqShipBtn.Text = " Request Shipment";
+            this.ReqShipBtn.UseVisualStyleBackColor = true;
+            this.ReqShipBtn.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // ShipmentPanel
             // 
+            this.ShipmentPanel.Controls.Add(this.pictureBox2);
             this.ShipmentPanel.Controls.Add(this.guna2HtmlLabel9);
             this.ShipmentPanel.Controls.Add(this.SupplierBox);
             this.ShipmentPanel.Controls.Add(this.ShipmentBackBtn);
@@ -174,6 +230,16 @@
             this.ShipmentPanel.Visible = false;
             this.ShipmentPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ShipmentPanel_Paint);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(61, 34);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(150, 162);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 35;
+            this.pictureBox2.TabStop = false;
+            // 
             // guna2HtmlLabel9
             // 
             this.guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent;
@@ -197,6 +263,7 @@
             this.SupplierBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SupplierBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SupplierBox.Location = new System.Drawing.Point(267, 377);
+            this.SupplierBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SupplierBox.Name = "SupplierBox";
             this.SupplierBox.PasswordChar = '\0';
             this.SupplierBox.PlaceholderText = "";
@@ -324,6 +391,7 @@
             this.AggregateBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AggregateBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AggregateBox.Location = new System.Drawing.Point(448, 293);
+            this.AggregateBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AggregateBox.Name = "AggregateBox";
             this.AggregateBox.PasswordChar = '\0';
             this.AggregateBox.PlaceholderText = "";
@@ -346,6 +414,7 @@
             this.CostBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CostBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CostBox.Location = new System.Drawing.Point(267, 293);
+            this.CostBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CostBox.Name = "CostBox";
             this.CostBox.PasswordChar = '\0';
             this.CostBox.PlaceholderText = "";
@@ -368,6 +437,7 @@
             this.CodeBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CodeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CodeBox.Location = new System.Drawing.Point(86, 209);
+            this.CodeBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CodeBox.Name = "CodeBox";
             this.CodeBox.PasswordChar = '\0';
             this.CodeBox.PlaceholderText = "";
@@ -390,6 +460,7 @@
             this.StockBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.StockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.StockBox.Location = new System.Drawing.Point(86, 293);
+            this.StockBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.StockBox.Name = "StockBox";
             this.StockBox.PasswordChar = '\0';
             this.StockBox.PlaceholderText = "";
@@ -444,6 +515,7 @@
             this.RequestBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.RequestBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.RequestBox.Location = new System.Drawing.Point(128, 461);
+            this.RequestBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RequestBox.Name = "RequestBox";
             this.RequestBox.PasswordChar = '\0';
             this.RequestBox.PlaceholderText = "";
@@ -466,6 +538,7 @@
             this.NameBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.NameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Location = new System.Drawing.Point(267, 209);
+            this.NameBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.NameBox.Name = "NameBox";
             this.NameBox.PasswordChar = '\0';
             this.NameBox.PlaceholderText = "";
@@ -488,6 +561,7 @@
             this.StatusBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.StatusBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.StatusBox.Location = new System.Drawing.Point(86, 377);
+            this.StatusBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.PasswordChar = '\0';
             this.StatusBox.PlaceholderText = "";
@@ -498,6 +572,8 @@
             // 
             // EditPanel
             // 
+            this.EditPanel.Controls.Add(this.guna2Button3);
+            this.EditPanel.Controls.Add(this.pictureBox3);
             this.EditPanel.Controls.Add(this.DiscardBtn);
             this.EditPanel.Controls.Add(this.guna2HtmlLabel10);
             this.EditPanel.Controls.Add(this.guna2HtmlLabel11);
@@ -511,25 +587,56 @@
             this.EditPanel.Controls.Add(this.EditIDBox);
             this.EditPanel.Controls.Add(this.EditStockBox);
             this.EditPanel.Controls.Add(this.EditNameBox);
-            this.EditPanel.Location = new System.Drawing.Point(738, 3);
+            this.EditPanel.Location = new System.Drawing.Point(554, 2);
+            this.EditPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditPanel.Name = "EditPanel";
-            this.EditPanel.Size = new System.Drawing.Size(729, 945);
+            this.EditPanel.Size = new System.Drawing.Size(547, 768);
             this.EditPanel.TabIndex = 33;
             this.EditPanel.Visible = false;
+            this.EditPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.EditPanel_Paint);
+            // 
+            // guna2Button3
+            // 
+            this.guna2Button3.AutoRoundedCorners = true;
+            this.guna2Button3.BorderRadius = 17;
+            this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button3.ForeColor = System.Drawing.Color.White;
+            this.guna2Button3.Location = new System.Drawing.Point(215, 160);
+            this.guna2Button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2Button3.Name = "guna2Button3";
+            this.guna2Button3.Size = new System.Drawing.Size(135, 37);
+            this.guna2Button3.TabIndex = 36;
+            this.guna2Button3.Text = "Upload New Photo";
+            this.guna2Button3.Click += new System.EventHandler(this.guna2Button3_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(61, 34);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(150, 162);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 35;
+            this.pictureBox3.TabStop = false;
             // 
             // DiscardBtn
             // 
             this.DiscardBtn.AutoRoundedCorners = true;
-            this.DiscardBtn.BorderRadius = 21;
+            this.DiscardBtn.BorderRadius = 17;
             this.DiscardBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.DiscardBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.DiscardBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.DiscardBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.DiscardBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DiscardBtn.ForeColor = System.Drawing.Color.White;
-            this.DiscardBtn.Location = new System.Drawing.Point(267, 242);
+            this.DiscardBtn.Location = new System.Drawing.Point(200, 385);
+            this.DiscardBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DiscardBtn.Name = "DiscardBtn";
-            this.DiscardBtn.Size = new System.Drawing.Size(180, 45);
+            this.DiscardBtn.Size = new System.Drawing.Size(135, 37);
             this.DiscardBtn.TabIndex = 32;
             this.DiscardBtn.Text = "Discard";
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
@@ -537,7 +644,8 @@
             // guna2HtmlLabel10
             // 
             this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel10.Location = new System.Drawing.Point(448, 145);
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(336, 306);
+            this.guna2HtmlLabel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             this.guna2HtmlLabel10.Size = new System.Drawing.Size(52, 15);
             this.guna2HtmlLabel10.TabIndex = 30;
@@ -546,7 +654,8 @@
             // guna2HtmlLabel11
             // 
             this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel11.Location = new System.Drawing.Point(267, 145);
+            this.guna2HtmlLabel11.Location = new System.Drawing.Point(200, 306);
+            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
             this.guna2HtmlLabel11.Size = new System.Drawing.Size(73, 15);
             this.guna2HtmlLabel11.TabIndex = 29;
@@ -555,7 +664,8 @@
             // guna2HtmlLabel13
             // 
             this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(86, 145);
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(64, 306);
+            this.guna2HtmlLabel13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
             this.guna2HtmlLabel13.Size = new System.Drawing.Size(68, 15);
             this.guna2HtmlLabel13.TabIndex = 27;
@@ -564,7 +674,8 @@
             // guna2HtmlLabel14
             // 
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(267, 61);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(200, 238);
+            this.guna2HtmlLabel14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             this.guna2HtmlLabel14.Size = new System.Drawing.Size(31, 15);
             this.guna2HtmlLabel14.TabIndex = 26;
@@ -573,7 +684,8 @@
             // guna2HtmlLabel15
             // 
             this.guna2HtmlLabel15.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel15.Location = new System.Drawing.Point(86, 61);
+            this.guna2HtmlLabel15.Location = new System.Drawing.Point(64, 238);
+            this.guna2HtmlLabel15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(14, 15);
             this.guna2HtmlLabel15.TabIndex = 25;
@@ -582,7 +694,8 @@
             // guna2HtmlLabel16
             // 
             this.guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel16.Location = new System.Drawing.Point(86, 21);
+            this.guna2HtmlLabel16.Location = new System.Drawing.Point(64, 17);
+            this.guna2HtmlLabel16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             this.guna2HtmlLabel16.Size = new System.Drawing.Size(75, 15);
             this.guna2HtmlLabel16.TabIndex = 24;
@@ -591,16 +704,17 @@
             // SaveBtn
             // 
             this.SaveBtn.AutoRoundedCorners = true;
-            this.SaveBtn.BorderRadius = 21;
+            this.SaveBtn.BorderRadius = 17;
             this.SaveBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.SaveBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.SaveBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.SaveBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.SaveBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SaveBtn.ForeColor = System.Drawing.Color.White;
-            this.SaveBtn.Location = new System.Drawing.Point(81, 242);
+            this.SaveBtn.Location = new System.Drawing.Point(61, 385);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(180, 45);
+            this.SaveBtn.Size = new System.Drawing.Size(135, 37);
             this.SaveBtn.TabIndex = 23;
             this.SaveBtn.Text = "Save Changes";
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
@@ -608,7 +722,7 @@
             // EditAggregateBox
             // 
             this.EditAggregateBox.AutoRoundedCorners = true;
-            this.EditAggregateBox.BorderRadius = 17;
+            this.EditAggregateBox.BorderRadius = 13;
             this.EditAggregateBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EditAggregateBox.DefaultText = "";
             this.EditAggregateBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -618,19 +732,20 @@
             this.EditAggregateBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditAggregateBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EditAggregateBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditAggregateBox.Location = new System.Drawing.Point(448, 166);
+            this.EditAggregateBox.Location = new System.Drawing.Point(336, 323);
+            this.EditAggregateBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditAggregateBox.Name = "EditAggregateBox";
             this.EditAggregateBox.PasswordChar = '\0';
             this.EditAggregateBox.PlaceholderText = "";
             this.EditAggregateBox.SelectedText = "";
-            this.EditAggregateBox.Size = new System.Drawing.Size(175, 36);
+            this.EditAggregateBox.Size = new System.Drawing.Size(131, 29);
             this.EditAggregateBox.TabIndex = 22;
             this.EditAggregateBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditAggregateBox_KeyPress);
             // 
             // EditCostBox
             // 
             this.EditCostBox.AutoRoundedCorners = true;
-            this.EditCostBox.BorderRadius = 17;
+            this.EditCostBox.BorderRadius = 13;
             this.EditCostBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EditCostBox.DefaultText = "";
             this.EditCostBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -640,19 +755,20 @@
             this.EditCostBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditCostBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EditCostBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditCostBox.Location = new System.Drawing.Point(267, 166);
+            this.EditCostBox.Location = new System.Drawing.Point(200, 323);
+            this.EditCostBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditCostBox.Name = "EditCostBox";
             this.EditCostBox.PasswordChar = '\0';
             this.EditCostBox.PlaceholderText = "";
             this.EditCostBox.SelectedText = "";
-            this.EditCostBox.Size = new System.Drawing.Size(175, 36);
+            this.EditCostBox.Size = new System.Drawing.Size(131, 29);
             this.EditCostBox.TabIndex = 21;
             this.EditCostBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditCostBox_KeyPress);
             // 
             // EditIDBox
             // 
             this.EditIDBox.AutoRoundedCorners = true;
-            this.EditIDBox.BorderRadius = 17;
+            this.EditIDBox.BorderRadius = 13;
             this.EditIDBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EditIDBox.DefaultText = "";
             this.EditIDBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -662,19 +778,20 @@
             this.EditIDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditIDBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EditIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditIDBox.Location = new System.Drawing.Point(86, 82);
+            this.EditIDBox.Location = new System.Drawing.Point(64, 255);
+            this.EditIDBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditIDBox.Name = "EditIDBox";
             this.EditIDBox.PasswordChar = '\0';
             this.EditIDBox.PlaceholderText = "";
             this.EditIDBox.ReadOnly = true;
             this.EditIDBox.SelectedText = "";
-            this.EditIDBox.Size = new System.Drawing.Size(175, 36);
+            this.EditIDBox.Size = new System.Drawing.Size(131, 29);
             this.EditIDBox.TabIndex = 20;
             // 
             // EditStockBox
             // 
             this.EditStockBox.AutoRoundedCorners = true;
-            this.EditStockBox.BorderRadius = 17;
+            this.EditStockBox.BorderRadius = 13;
             this.EditStockBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EditStockBox.DefaultText = "";
             this.EditStockBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -684,19 +801,20 @@
             this.EditStockBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditStockBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EditStockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditStockBox.Location = new System.Drawing.Point(86, 166);
+            this.EditStockBox.Location = new System.Drawing.Point(64, 323);
+            this.EditStockBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditStockBox.Name = "EditStockBox";
             this.EditStockBox.PasswordChar = '\0';
             this.EditStockBox.PlaceholderText = "";
             this.EditStockBox.ReadOnly = true;
             this.EditStockBox.SelectedText = "";
-            this.EditStockBox.Size = new System.Drawing.Size(175, 36);
+            this.EditStockBox.Size = new System.Drawing.Size(131, 29);
             this.EditStockBox.TabIndex = 17;
             // 
             // EditNameBox
             // 
             this.EditNameBox.AutoRoundedCorners = true;
-            this.EditNameBox.BorderRadius = 17;
+            this.EditNameBox.BorderRadius = 13;
             this.EditNameBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EditNameBox.DefaultText = "";
             this.EditNameBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -706,57 +824,19 @@
             this.EditNameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditNameBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EditNameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditNameBox.Location = new System.Drawing.Point(267, 82);
+            this.EditNameBox.Location = new System.Drawing.Point(200, 255);
+            this.EditNameBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditNameBox.Name = "EditNameBox";
             this.EditNameBox.PasswordChar = '\0';
             this.EditNameBox.PlaceholderText = "";
             this.EditNameBox.SelectedText = "";
-            this.EditNameBox.Size = new System.Drawing.Size(356, 36);
+            this.EditNameBox.Size = new System.Drawing.Size(267, 29);
             this.EditNameBox.TabIndex = 4;
-            // 
-            // InventoryPanel
-            // 
-            this.InventoryPanel.Controls.Add(this.AddNewBtn);
-            this.InventoryPanel.Controls.Add(this.InventoryDGV);
-            this.InventoryPanel.Controls.Add(this.EditProductBtn);
-            this.InventoryPanel.Controls.Add(this.ReqShipBtn);
-            this.InventoryPanel.Location = new System.Drawing.Point(6, 6);
-            this.InventoryPanel.Name = "InventoryPanel";
-            this.InventoryPanel.Size = new System.Drawing.Size(726, 942);
-            this.InventoryPanel.TabIndex = 4;
-            // 
-            // AddNewBtn
-            // 
-            this.AddNewBtn.Location = new System.Drawing.Point(349, 620);
-            this.AddNewBtn.Name = "AddNewBtn";
-            this.AddNewBtn.Size = new System.Drawing.Size(167, 23);
-            this.AddNewBtn.TabIndex = 3;
-            this.AddNewBtn.Text = "Add New Product";
-            this.AddNewBtn.UseVisualStyleBackColor = true;
-            this.AddNewBtn.Click += new System.EventHandler(this.AddNewBtn_Click);
-            // 
-            // EditProductBtn
-            // 
-            this.EditProductBtn.Location = new System.Drawing.Point(176, 620);
-            this.EditProductBtn.Name = "EditProductBtn";
-            this.EditProductBtn.Size = new System.Drawing.Size(167, 23);
-            this.EditProductBtn.TabIndex = 2;
-            this.EditProductBtn.Text = "Edit Product";
-            this.EditProductBtn.UseVisualStyleBackColor = true;
-            this.EditProductBtn.Click += new System.EventHandler(this.EditProductBtn_Click);
-            // 
-            // ReqShipBtn
-            // 
-            this.ReqShipBtn.Location = new System.Drawing.Point(3, 620);
-            this.ReqShipBtn.Name = "ReqShipBtn";
-            this.ReqShipBtn.Size = new System.Drawing.Size(167, 23);
-            this.ReqShipBtn.TabIndex = 1;
-            this.ReqShipBtn.Text = " Request Shipment";
-            this.ReqShipBtn.UseVisualStyleBackColor = true;
-            this.ReqShipBtn.Click += new System.EventHandler(this.Button1_Click);
             // 
             // AddPanel
             // 
+            this.AddPanel.Controls.Add(this.guna2Button2);
+            this.AddPanel.Controls.Add(this.pictureBox1);
             this.AddPanel.Controls.Add(this.guna2Button1);
             this.AddPanel.Controls.Add(this.guna2HtmlLabel12);
             this.AddPanel.Controls.Add(this.guna2HtmlLabel17);
@@ -774,6 +854,24 @@
             this.AddPanel.TabIndex = 33;
             this.AddPanel.Visible = false;
             this.AddPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.AddPanel_Paint);
+            // 
+            // guna2Button2
+            // 
+            this.guna2Button2.AutoRoundedCorners = true;
+            this.guna2Button2.BorderRadius = 17;
+            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button2.ForeColor = System.Drawing.Color.White;
+            this.guna2Button2.Location = new System.Drawing.Point(219, 160);
+            this.guna2Button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2Button2.Name = "guna2Button2";
+            this.guna2Button2.Size = new System.Drawing.Size(135, 37);
+            this.guna2Button2.TabIndex = 34;
+            this.guna2Button2.Text = "Upload Photo";
+            this.guna2Button2.Click += new System.EventHandler(this.Guna2Button2_Click);
             // 
             // guna2Button1
             // 
@@ -868,6 +966,7 @@
             this.AddAggregateBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AddAggregateBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddAggregateBox.Location = new System.Drawing.Point(267, 293);
+            this.AddAggregateBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddAggregateBox.Name = "AddAggregateBox";
             this.AddAggregateBox.PasswordChar = '\0';
             this.AddAggregateBox.PlaceholderText = "";
@@ -890,6 +989,7 @@
             this.AddCostBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AddCostBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddCostBox.Location = new System.Drawing.Point(86, 293);
+            this.AddCostBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddCostBox.Name = "AddCostBox";
             this.AddCostBox.PasswordChar = '\0';
             this.AddCostBox.PlaceholderText = "";
@@ -912,6 +1012,7 @@
             this.AddIDBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AddIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddIDBox.Location = new System.Drawing.Point(86, 209);
+            this.AddIDBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddIDBox.Name = "AddIDBox";
             this.AddIDBox.PasswordChar = '\0';
             this.AddIDBox.PlaceholderText = "";
@@ -933,12 +1034,24 @@
             this.AddNameBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.AddNameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddNameBox.Location = new System.Drawing.Point(267, 209);
+            this.AddNameBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddNameBox.Name = "AddNameBox";
             this.AddNameBox.PasswordChar = '\0';
             this.AddNameBox.PlaceholderText = "";
             this.AddNameBox.SelectedText = "";
             this.AddNameBox.Size = new System.Drawing.Size(356, 36);
             this.AddNameBox.TabIndex = 4;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(64, 34);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 162);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 33;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // tabPage2
             // 
@@ -947,53 +1060,21 @@
             this.tabPage2.Controls.Add(this.ShipmentDGV);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage2.Size = new System.Drawing.Size(1886, 999);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "History";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.TabPage2_Click);
             // 
-            // ShipmentDGV
+            // label2
             // 
-            this.ShipmentDGV.AllowUserToAddRows = false;
-            this.ShipmentDGV.AllowUserToDeleteRows = false;
-            this.ShipmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ShipmentDGV.Location = new System.Drawing.Point(6, 38);
-            this.ShipmentDGV.Name = "ShipmentDGV";
-            this.ShipmentDGV.ReadOnly = true;
-            this.ShipmentDGV.Size = new System.Drawing.Size(441, 660);
-            this.ShipmentDGV.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1886, 999);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Services";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1822, 1034);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Logout";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1886, 999);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(497, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Transaction History";
             // 
             // label1
             // 
@@ -1004,14 +1085,57 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Shipment Hiistory";
             // 
-            // label2
+            // ShipmentDGV
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(497, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Transaction History";
+            this.ShipmentDGV.AllowUserToAddRows = false;
+            this.ShipmentDGV.AllowUserToDeleteRows = false;
+            this.ShipmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ShipmentDGV.Location = new System.Drawing.Point(6, 38);
+            this.ShipmentDGV.Name = "ShipmentDGV";
+            this.ShipmentDGV.ReadOnly = true;
+            this.ShipmentDGV.RowHeadersWidth = 51;
+            this.ShipmentDGV.Size = new System.Drawing.Size(441, 660);
+            this.ShipmentDGV.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.managerServices1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Size = new System.Drawing.Size(1886, 999);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Services";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // managerServices1
+            // 
+            this.managerServices1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.managerServices1.Location = new System.Drawing.Point(2, 2);
+            this.managerServices1.Margin = new System.Windows.Forms.Padding(2);
+            this.managerServices1.Name = "managerServices1";
+            this.managerServices1.Size = new System.Drawing.Size(1046, 713);
+            this.managerServices1.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage4.Size = new System.Drawing.Size(1886, 999);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1822, 1034);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Logout";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // InventoryPage
             // 
@@ -1025,16 +1149,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.InventoryPanel.ResumeLayout(false);
             this.ShipmentPanel.ResumeLayout(false);
             this.ShipmentPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.EditPanel.ResumeLayout(false);
             this.EditPanel.PerformLayout();
-            this.InventoryPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.AddPanel.ResumeLayout(false);
             this.AddPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShipmentDGV)).EndInit();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1103,5 +1231,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage4;
+        private UserControls.ManagerServices managerServices1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

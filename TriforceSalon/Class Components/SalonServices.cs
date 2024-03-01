@@ -7,30 +7,36 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 using TriforceSalon.UserControls;
+using System.Data;
 
 namespace TriforceSalon.Class_Components
 {
-    public class Services
-    {
-        public int ServiceTypeID { get; set; }
-        public byte[] ServiceImage { get; set; }
-        public string ServiceName { get; set; }
-        public decimal ServiceAmount { get; set; }
+    /* public class Services
+     {
+         public int ServiceTypeID { get; set; }
+         public byte[] ServiceImage { get; set; }
+         public string ServiceName { get; set; }
+         public decimal ServiceAmount { get; set; }
 
-    }
+     }*/
     public class SalonServices
     {
         ChangeImageSize newImageSIze = new ChangeImageSize();
         private readonly string mysqlcon;
         private byte[] imageData;
         private bool isNewServiceImageSelected = false;
+        private int serviceInt;
+        LoadImages loadImages = new LoadImages();
 
-        public List<Services> services;
+        int serviceVariationID;
+        int serviceTypeID;
+
+        //public List<Services> services;
 
         public SalonServices()
         {
-            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
-            services = GetServiceInfo();
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            //services = GetServiceInfo();
         }
         public void AddServiceImage()
         {
@@ -61,9 +67,41 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-        public int GetServiceID(string serviceName)
+
+        public void PopulateServiceType()
         {
-            int serviceID = -1;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "select ServiceTypeName from service_type";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    string serviceTypes = reader["ServiceTypeName"].ToString();
+                                    ManagerServices.managerServicesInstance.ServiceTypesComB.Items.Add(serviceTypes);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("2222222. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public int GetServiceTypeID(string serviceType)
+        {
+            serviceInt = -1;
+
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -72,22 +110,80 @@ namespace TriforceSalon.Class_Components
                     string query = "select ServiceID from service_type where ServiceTypeName = @service_name";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@service_name", serviceName);
+                        command.Parameters.AddWithValue("@service_name", serviceType);
+
 
                         object result = command.ExecuteScalar();
-                        if (result != null && int.TryParse(result.ToString(), out serviceID))
+                        if (result != null && int.TryParse(result.ToString(), out serviceInt))
                         {
-                            return serviceID;
+                            return serviceInt;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("GetServiceTypeID Error", ex.Message);
             }
-            return serviceID;
+            return serviceInt;
+        }
+
+        /* public int GetServiceID(string serviceName)
+         {
+             int serviceID = -1;
+             try
+             {
+                 using (var conn = new MySqlConnection(mysqlcon))
+                 {
+                     conn.Open();
+                     string query = "select ServiceID from service_type where ServiceTypeName = @service_name";
+                     using (MySqlCommand command = new MySqlCommand(query, conn))
+                     {
+                         command.Parameters.AddWithValue("@service_name", serviceName);
+
+                         object result = command.ExecuteScalar();
+                         if (result != null && int.TryParse(result.ToString(), out serviceID))
+                         {
+                             return serviceID;
+                         }
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+             }
+             return serviceID;
+         }*/
+
+        public void GetSalonServices()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "select ServiceTypeID, ServiceImage, ServiceName, ServiceAmount, ServiceVariationID from salon_services";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                DataTable dt = new DataTable();
+                                dt.Load(reader);
+                                ManagerServices.managerServicesInstance.SalonServicesDGV.DataSource = dt;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in GetSalonService()", ex.Message);
+            }
         }
         public void AddSalonServices()
         {
@@ -96,22 +192,102 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
+
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        ManagerServices.managerServicesInstance.ServiceImagePicB.Image.Save(ms, ImageFormat.Jpeg);
+                        imageData = ms.ToArray();
+                    }
+
                     string query = "Insert into salon_services (ServiceTypeID, ServiceImage, ServiceName, ServiceAmount)" +
                         "Values(@service_type_ID, @service_image, @service_name, @service_ammount)";
 
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
+                        command.Parameters.AddWithValue("@service_type_ID", serviceInt);
+                        command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
+                        //command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance);
+                        command.Parameters.AddWithValue("@service_ammount", ManagerServices.managerServicesInstance.ServiceAmountTxtb);
+                        command.Parameters.AddWithValue("@service_image", imageData);
 
                         command.ExecuteNonQuery();
+                        GetSalonServices();
+                        ClearServices();
                     }
                 }
             }
-            catch(Exception ex)
+            catch (MySqlException a)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (a.Number == 1062)
+                {
+                    MessageBox.Show("Service type already exists", "Add Service Type", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Database Error: " + a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("AddSalonServices() Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public List<Services> GetServiceInfo()
+        public void EditSalonServices()
+        {
+            if (ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DialogResult result = MessageBox.Show("Are you sure you want to edit this service type?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                if (ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows.Count == 1)
+                {
+                    DataGridViewRow selectedRow = ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows[0];
+
+                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceTypeID"].Value);
+                    serviceVariationID = Convert.ToInt32(selectedRow.Cells["ServiceVariationID"].Value);
+                    string serviceName = Convert.ToString(selectedRow.Cells["ServiceName"].Value);
+                    decimal serviceAmount = Convert.ToDecimal(selectedRow.Cells["ServiceAmount"].Value);
+                    loadImages.ServicesImage(serviceVariationID);
+
+                    ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = serviceName;
+                    ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = Convert.ToString(serviceAmount);
+
+                    try
+                    {
+                        using (var conn = new MySqlConnection(mysqlcon))
+                        {
+                            conn.Open();
+                            string query = "select ServiceTypeName from service_type where ServiceID = @service_ID";
+
+                            using (MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@service_ID", serviceTypeID);
+
+                                using (MySqlDataReader reader = command.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        string servTypeName = reader.GetString(0);
+                                        ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = servTypeName;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("EditSalonServices() Error: " + ex.Message);
+                    }
+                }
+            }
+        }
+        /*public List<Services> GetServiceInfo()
         {
             List<Services> services = new List<Services>();
 
@@ -161,19 +337,21 @@ namespace TriforceSalon.Class_Components
             }
 
             return services;
-        }
-        public void UpdateSalonServices()
+        }*/
+        public void UpdateSalonServices(int variationID)
         {
+            string serviceType = ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem.ToString();
+            int serviceTypeID = GetServiceTypeID(serviceType);
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "Update salon_services set ServiceName = @service_name, ServiceAmount = @service_amount";
+                    string query = "Update salon_services set ServiceName = @service_name, ServiceAmount = @service_amount, ServiceTypeID = @servicetype_ID";
 
                     byte[] imageData = null;
 
-                    if(isNewServiceImageSelected)
+                    if (isNewServiceImageSelected)
                     {
                         using (Bitmap bmp = new Bitmap(ManagerServices.managerServicesInstance.ServiceImagePicB.Image))
                         {
@@ -185,39 +363,39 @@ namespace TriforceSalon.Class_Components
                             }
                         }
                     }
-                    query += " where ServiceTypeID = @service_ID";
+                    query += " where ServiceVariationID = @servicevar_ID";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        foreach(Services service in services)
+                        command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
+                        command.Parameters.AddWithValue("@servicetype_ID", serviceTypeID);
+                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text));
+                        command.Parameters.AddWithValue("@servicevar_ID", variationID);
+
+                        if (isNewServiceImageSelected)
                         {
-                            command.Parameters.Clear(); // Clear previous parameters
-                            command.Parameters.AddWithValue("@service_name", service.ServiceName);
-                            command.Parameters.AddWithValue("@service_amount", service.ServiceAmount);
-
-                            if (isNewServiceImageSelected)
-                            {
-                                if (service.ServiceImage != null)
-                                {
-                                    command.Parameters.AddWithValue("@service_image", service.ServiceImage);
-                                }
-                                else
-                                {
-                                    command.Parameters.AddWithValue("@service_image", DBNull.Value);
-                                }
-                            }
-                            command.Parameters.AddWithValue("@service_ID", service.ServiceTypeID);
-
-                            command.ExecuteNonQuery();
-
+                            command.Parameters.AddWithValue(" @service_image", imageData);
                         }
+                        command.ExecuteNonQuery();
+                        GetSalonServices();
+                        ClearServices();
                     }
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void ClearServices()
+        {
+            ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = null;
+            ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = null;
+            ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = null;
+
+            ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
+
         }
 
     }

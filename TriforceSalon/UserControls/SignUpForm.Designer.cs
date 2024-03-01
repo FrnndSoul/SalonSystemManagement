@@ -50,6 +50,8 @@ namespace TriforceSalon
             this.RoleBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
@@ -154,6 +156,7 @@ namespace TriforceSalon
             // 
             // CreateBtn
             // 
+            this.CreateBtn.Animated = true;
             this.CreateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.CreateBtn.BorderRadius = 20;
             this.CreateBtn.BorderThickness = 1;
@@ -174,6 +177,7 @@ namespace TriforceSalon
             // 
             // BackBtn
             // 
+            this.BackBtn.Animated = true;
             this.BackBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.BackBtn.BorderRadius = 20;
             this.BackBtn.BorderThickness = 1;
@@ -194,6 +198,7 @@ namespace TriforceSalon
             // 
             // UploadBtn
             // 
+            this.UploadBtn.Animated = true;
             this.UploadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.UploadBtn.BorderRadius = 15;
             this.UploadBtn.BorderThickness = 1;
@@ -214,6 +219,7 @@ namespace TriforceSalon
             // 
             // NameBox
             // 
+            this.NameBox.Animated = true;
             this.NameBox.AutoRoundedCorners = true;
             this.NameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.NameBox.BorderColor = System.Drawing.Color.Black;
@@ -239,6 +245,7 @@ namespace TriforceSalon
             // 
             // UsernameBox
             // 
+            this.UsernameBox.Animated = true;
             this.UsernameBox.AutoRoundedCorners = true;
             this.UsernameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.UsernameBox.BorderColor = System.Drawing.Color.Black;
@@ -264,6 +271,7 @@ namespace TriforceSalon
             // 
             // EmailBox
             // 
+            this.EmailBox.Animated = true;
             this.EmailBox.AutoRoundedCorners = true;
             this.EmailBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.EmailBox.BorderColor = System.Drawing.Color.Black;
@@ -289,6 +297,7 @@ namespace TriforceSalon
             // 
             // PasswordBox
             // 
+            this.PasswordBox.Animated = true;
             this.PasswordBox.AutoRoundedCorners = true;
             this.PasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.PasswordBox.BorderColor = System.Drawing.Color.Black;
@@ -314,6 +323,7 @@ namespace TriforceSalon
             // 
             // PasswordBox1
             // 
+            this.PasswordBox1.Animated = true;
             this.PasswordBox1.AutoRoundedCorners = true;
             this.PasswordBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.PasswordBox1.BorderColor = System.Drawing.Color.Black;
@@ -339,6 +349,7 @@ namespace TriforceSalon
             // 
             // BirthdayPicker
             // 
+            this.BirthdayPicker.Animated = true;
             this.BirthdayPicker.AutoRoundedCorners = true;
             this.BirthdayPicker.BackColor = System.Drawing.Color.Transparent;
             this.BirthdayPicker.BorderRadius = 24;
@@ -374,9 +385,6 @@ namespace TriforceSalon
             this.RoleBox.ForeColor = System.Drawing.Color.White;
             this.RoleBox.FormattingEnabled = true;
             this.RoleBox.ItemHeight = 30;
-            this.RoleBox.Items.AddRange(new object[] {
-            "Manager",
-            "Staff"});
             this.RoleBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 21.75F);
             this.RoleBox.Location = new System.Drawing.Point(1274, 357);
             this.RoleBox.Name = "RoleBox";
@@ -412,11 +420,42 @@ namespace TriforceSalon
             this.Photo.TabStop = false;
             this.Photo.UseTransparentBackground = true;
             // 
+            // guna2Shapes1
+            // 
+            this.guna2Shapes1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Shapes1.BorderColor = System.Drawing.Color.Black;
+            this.guna2Shapes1.BorderThickness = 1;
+            this.guna2Shapes1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.guna2Shapes1.Location = new System.Drawing.Point(450, 95);
+            this.guna2Shapes1.Name = "guna2Shapes1";
+            this.guna2Shapes1.PolygonSkip = 1;
+            this.guna2Shapes1.Rotate = 0F;
+            this.guna2Shapes1.Shape = Guna.UI2.WinForms.Enums.ShapeType.Rounded;
+            this.guna2Shapes1.Size = new System.Drawing.Size(1000, 140);
+            this.guna2Shapes1.TabIndex = 38;
+            this.guna2Shapes1.Text = "guna2Shapes1";
+            this.guna2Shapes1.UseTransparentBackground = true;
+            this.guna2Shapes1.Zoom = 80;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label8.Font = new System.Drawing.Font("Chinacat", 59.99999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(596, 116);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(709, 96);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "Account Creation";
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.guna2Shapes1);
             this.Controls.Add(this.RoleBox);
             this.Controls.Add(this.BirthdayPicker);
             this.Controls.Add(this.label7);
@@ -468,5 +507,7 @@ namespace TriforceSalon
         private Guna.UI2.WinForms.Guna2DateTimePicker BirthdayPicker;
         private Guna.UI2.WinForms.Guna2ComboBox RoleBox;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2Shapes guna2Shapes1;
+        private Label label8;
     }
 }
