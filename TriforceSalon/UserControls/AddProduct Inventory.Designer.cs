@@ -38,7 +38,10 @@
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.IDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.AddProduct = new Guna.UI2.WinForms.Guna2Button();
+            this.PhotoBox = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.UploadPhoto = new Guna.UI2.WinForms.Guna2Button();
+            ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Shapes1
@@ -131,6 +134,7 @@
             this.AggregateBox.SelectedText = "";
             this.AggregateBox.Size = new System.Drawing.Size(400, 50);
             this.AggregateBox.TabIndex = 84;
+            this.AggregateBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AggregateBox_KeyPress);
             // 
             // CostBox
             // 
@@ -157,6 +161,7 @@
             this.CostBox.SelectedText = "";
             this.CostBox.Size = new System.Drawing.Size(400, 50);
             this.CostBox.TabIndex = 83;
+            this.CostBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CostBox_KeyPress);
             // 
             // NameBox
             // 
@@ -206,6 +211,7 @@
             this.IDBox.Name = "IDBox";
             this.IDBox.PasswordChar = '\0';
             this.IDBox.PlaceholderText = "";
+            this.IDBox.ReadOnly = true;
             this.IDBox.SelectedText = "";
             this.IDBox.Size = new System.Drawing.Size(550, 50);
             this.IDBox.TabIndex = 81;
@@ -231,36 +237,73 @@
             this.BackBtn.TabIndex = 90;
             this.BackBtn.Text = " Back To Inventory";
             this.BackBtn.UseTransparentBackground = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
-            // RequestBtn
+            // AddProduct
             // 
-            this.RequestBtn.Animated = true;
-            this.RequestBtn.BackColor = System.Drawing.Color.Transparent;
-            this.RequestBtn.BorderRadius = 20;
-            this.RequestBtn.BorderThickness = 1;
-            this.RequestBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.RequestBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.RequestBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.RequestBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.RequestBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.RequestBtn.Font = new System.Drawing.Font("Chinacat", 20.25F);
-            this.RequestBtn.ForeColor = System.Drawing.Color.White;
-            this.RequestBtn.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
-            this.RequestBtn.Location = new System.Drawing.Point(119, 750);
-            this.RequestBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.RequestBtn.Name = "RequestBtn";
-            this.RequestBtn.Size = new System.Drawing.Size(600, 70);
-            this.RequestBtn.TabIndex = 89;
-            this.RequestBtn.Text = " Add Product";
-            this.RequestBtn.UseTransparentBackground = true;
+            this.AddProduct.Animated = true;
+            this.AddProduct.BackColor = System.Drawing.Color.Transparent;
+            this.AddProduct.BorderRadius = 20;
+            this.AddProduct.BorderThickness = 1;
+            this.AddProduct.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AddProduct.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AddProduct.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AddProduct.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AddProduct.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.AddProduct.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.AddProduct.ForeColor = System.Drawing.Color.White;
+            this.AddProduct.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
+            this.AddProduct.Location = new System.Drawing.Point(119, 750);
+            this.AddProduct.Margin = new System.Windows.Forms.Padding(2);
+            this.AddProduct.Name = "AddProduct";
+            this.AddProduct.Size = new System.Drawing.Size(600, 70);
+            this.AddProduct.TabIndex = 89;
+            this.AddProduct.Text = " Add Product";
+            this.AddProduct.UseTransparentBackground = true;
+            this.AddProduct.Click += new System.EventHandler(this.AddProduct_Click);
+            // 
+            // PhotoBox
+            // 
+            this.PhotoBox.ImageRotate = 0F;
+            this.PhotoBox.Location = new System.Drawing.Point(119, 77);
+            this.PhotoBox.Name = "PhotoBox";
+            this.PhotoBox.Size = new System.Drawing.Size(200, 200);
+            this.PhotoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PhotoBox.TabIndex = 91;
+            this.PhotoBox.TabStop = false;
+            // 
+            // UploadPhoto
+            // 
+            this.UploadPhoto.Animated = true;
+            this.UploadPhoto.BackColor = System.Drawing.Color.Transparent;
+            this.UploadPhoto.BorderRadius = 20;
+            this.UploadPhoto.BorderThickness = 1;
+            this.UploadPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.UploadPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadPhoto.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.UploadPhoto.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.UploadPhoto.ForeColor = System.Drawing.Color.White;
+            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
+            this.UploadPhoto.Location = new System.Drawing.Point(344, 207);
+            this.UploadPhoto.Margin = new System.Windows.Forms.Padding(2);
+            this.UploadPhoto.Name = "UploadPhoto";
+            this.UploadPhoto.Size = new System.Drawing.Size(238, 70);
+            this.UploadPhoto.TabIndex = 92;
+            this.UploadPhoto.Text = "Upload Photo";
+            this.UploadPhoto.UseTransparentBackground = true;
+            this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
             // 
             // AddProduct_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.UploadPhoto);
+            this.Controls.Add(this.PhotoBox);
             this.Controls.Add(this.BackBtn);
-            this.Controls.Add(this.RequestBtn);
+            this.Controls.Add(this.AddProduct);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -272,6 +315,7 @@
             this.Controls.Add(this.guna2Shapes1);
             this.Name = "AddProduct_Inventory";
             this.Size = new System.Drawing.Size(1500, 950);
+            ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +333,8 @@
         private Guna.UI2.WinForms.Guna2TextBox NameBox;
         private Guna.UI2.WinForms.Guna2TextBox IDBox;
         private Guna.UI2.WinForms.Guna2Button BackBtn;
-        private Guna.UI2.WinForms.Guna2Button RequestBtn;
+        private Guna.UI2.WinForms.Guna2Button AddProduct;
+        private Guna.UI2.WinForms.Guna2PictureBox PhotoBox;
+        private Guna.UI2.WinForms.Guna2Button UploadPhoto;
     }
 }

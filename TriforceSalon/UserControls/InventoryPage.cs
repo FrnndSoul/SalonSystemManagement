@@ -18,7 +18,7 @@ namespace TriforceSalon
 {
     public partial class InventoryPage : UserControl
     {
-        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
@@ -84,7 +84,7 @@ namespace TriforceSalon
                 return;
             }
 
-            if (Convert.ToInt32(RequestBox.Text)==0)
+            if (Convert.ToInt32(RequestBox.Text) == 0)
             {
                 MessageBox.Show("Cannot ship zero quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -141,7 +141,7 @@ namespace TriforceSalon
         private void Less_Click(object sender, EventArgs e)
         {
             int x = Convert.ToInt32(RequestBox.Text);
-            if (x>0)
+            if (x > 0)
             {
                 x--;
                 RequestBox.Text = x.ToString();
@@ -150,7 +150,7 @@ namespace TriforceSalon
 
         private void ShipmentPanel_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
 
@@ -344,16 +344,16 @@ namespace TriforceSalon
         }
 
         public static int GenerateRandomID()
+        {
+            Random random = new Random();
+            int id;
+            do
             {
-                Random random = new Random();
-                int id;
-                do
-                {
-                    id = random.Next(10000, 100000);
-                }
-                while (Method.DuplicateChecker(id.ToString(), "ItemID", "inventory") == true);
-                return id;
+                id = random.Next(10000, 100000);
             }
+            while (Method.DuplicateChecker(id.ToString(), "ItemID", "inventory") == true);
+            return id;
+        }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
@@ -594,29 +594,32 @@ namespace TriforceSalon
                     if (reader.Read())
                     {
                         ItemName = reader["ItemName"].ToString();
-                            NameBox.Text = ItemName;
+                        NameBox.Text = ItemName;
                         Stock = Convert.ToInt32(reader["Stock"]);
-                            StockBox.Text = Stock.ToString();
+                        StockBox.Text = Stock.ToString();
                         Cost = Convert.ToInt32(reader["Cost"]);
-                            CostBox.Text = Cost.ToString();
+                        CostBox.Text = Cost.ToString();
                         Aggregate = Convert.ToInt32(reader["Aggregate"]);
-                            AggregateBox.Text = Aggregate.ToString();
+                        AggregateBox.Text = Aggregate.ToString();
                         Status = Convert.ToInt32(reader["Status"]);
-                            if (Status == 0)
-                            {
-                                StatusBox.Text = "Good";
-                            } else if (Status == 1)
-                            {
-                                StatusBox.Text = "Fair";
-                            } else if (Status == 2)
-                            {
-                                StatusBox.Text = "Critical";
-                            } else
-                            {
-                                StatusBox.Text = "Empty";
-                            }
+                        if (Status == 0)
+                        {
+                            StatusBox.Text = "Good";
+                        }
+                        else if (Status == 1)
+                        {
+                            StatusBox.Text = "Fair";
+                        }
+                        else if (Status == 2)
+                        {
+                            StatusBox.Text = "Critical";
+                        }
+                        else
+                        {
+                            StatusBox.Text = "Empty";
+                        }
                         ItemID = Convert.ToInt32(selectedItem);
-                            CodeBox.Text = ItemID.ToString();
+                        CodeBox.Text = ItemID.ToString();
                     }
                     else
                     {

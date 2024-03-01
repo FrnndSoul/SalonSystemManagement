@@ -110,11 +110,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Components\ChangeImageSize.cs" />
-    <Compile Include="Class Components\FlowlayoutMethods.cs" />
     <Compile Include="Class Components\LoadImages.cs" />
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
     <Compile Include="Class Components\ServiceTypes.cs" />
+    <Compile Include="Class Components\TransactionMethods.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
@@ -181,7 +181,7 @@
     </Compile>
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
-    </Compile>      
+    </Compile>
     <Compile Include="UserControls\Receptionist Controls\ServicesUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -192,7 +192,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\RequestShipment Inventory.Designer.cs">
-      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>    
+      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
@@ -213,7 +213,7 @@
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
-      <DependentUpon>CustomerTicket.cs</DependentUpon>      
+      <DependentUpon>CustomerTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>

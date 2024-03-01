@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class ServicesUserControl : UserControl
     {
-        public ServicesUserControl servicesUserControlInstance;
+        public static ServicesUserControl servicesUserControlInstance;
         public readonly string mysqlcon;
         private PictureBox pic;
         private Label serviceTypeLbl;
+        TransactionMethods transactionMethods = new TransactionMethods();
 
         public ServicesUserControl()
         {
@@ -71,6 +73,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
                 }
             }
+        }
+
+        private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
+        {
+            string serviceName = ServiceTxtB.Text;
+            transactionMethods.GetServiceTypeID(serviceName);
+            transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName)); 
         }
     }
 }

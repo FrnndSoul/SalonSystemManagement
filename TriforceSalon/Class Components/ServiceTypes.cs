@@ -30,8 +30,7 @@ namespace TriforceSalon.Class_Components
 
         public ServiceTypes()
         {
-            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            serviceTypes = GetServiceTypeInfo();
+            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         }
         public void ServiceTypeInfoDGV()
         {
@@ -61,55 +60,7 @@ namespace TriforceSalon.Class_Components
 
             }
         }
-        public List<ServiceTypesInfo> GetServiceTypeInfo()
-        {
-            List<ServiceTypesInfo> service_type = new List<ServiceTypesInfo>();
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    string query = "Select ServiceID, ServiceTypeImage, ServiceTypeName from service_type where ServiceID = @service_ID";
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                ServiceTypesInfo service_types = new ServiceTypesInfo
-                                {
-                                    ServiceTypeName = Convert.ToString(reader["ServiceTypeName"]),
-                                    ServiceID = Convert.ToInt32(reader["ServiceID"]),
-
-                                };
-
-                                int imageColumnIndex = reader.GetOrdinal("ServiceImage");
-                                if (!reader.IsDBNull(imageColumnIndex))
-                                {
-                                    byte[] buffer = new byte[4096];
-
-                                    long bytesRead = reader.GetBytes(imageColumnIndex, 0, buffer, 0, buffer.Length);
-
-                                    if (bytesRead < buffer.Length)
-                                    {
-                                        byte[] finalBuffer = new byte[bytesRead];
-                                        Array.Copy(buffer, finalBuffer, bytesRead);
-                                        buffer = finalBuffer;
-                                    }
-                                    service_types.ServiceTypeImage = buffer;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error in GetServiceTypeInfo()(): " + ex.Message);
-
-            }
-            return service_type;
-        }
-
+        
         public void AddServiceTypeImage()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -326,5 +277,6 @@ namespace TriforceSalon.Class_Components
             ManagerServices.managerServicesInstance.ServiceTypePicB.Image = null;
 
         }
+
     }
 }

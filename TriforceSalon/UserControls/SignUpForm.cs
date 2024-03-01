@@ -18,9 +18,8 @@ namespace TriforceSalon
     public partial class SignUpForm : UserControl
     {
         public static byte[] PhotoByteHolder;
-        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-
         public SignUpForm()
         {
             InitializeComponent();
@@ -77,13 +76,6 @@ namespace TriforceSalon
             TogglePassword.Checked = false;
             BirthdayPicker.Value = BirthdayPicker.MaxDate;
 
-
-            this.RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
-            RoleBox.SelectedIndex = -1;
-
-            this.AccessBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
-            AccessBox.SelectedIndex = -1;
-
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
@@ -130,7 +122,7 @@ namespace TriforceSalon
 
         private void CreateBtn_Click_1(object sender, EventArgs e)
         {
-            string Name, Username, Email, Password, Password1, Role, Access;
+            string Name, Username, Email, Password, Password1, Role;
             DateTime Birthdate = BirthdayPicker.Value;
 
             Name = NameBox.Text;
@@ -139,9 +131,8 @@ namespace TriforceSalon
             Password = PasswordBox.Text;
             Password1 = PasswordBox1.Text;
             Role = RoleBox.Text;
-            Access = AccessBox.Text;
 
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password1) || string.IsNullOrEmpty(Role) || string.IsNullOrEmpty(Access))
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password1) || string.IsNullOrEmpty(Role))
             {
                 MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -162,19 +153,22 @@ namespace TriforceSalon
                     "\n     Numbers, and Special Characters", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if (!Method.ValidEmail(Email))
+            }
+            else if (!Method.ValidEmail(Email))
             {
                 MessageBox.Show("Please provide a valid email address.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if (Method.DuplicateChecker(Username, "Username", "accounts") || Method.DuplicateChecker(Email, "Email", "salon_employees"))
+            }
+            else if (Method.DuplicateChecker(Username, "Username", "accounts") || Method.DuplicateChecker(Email, "Email", "salon_employees"))
             {
                 MessageBox.Show("The username and/or email is already registered.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            } else if (PhotoByteHolder == null)
+            }
+            else if (PhotoByteHolder == null)
             {
-                MessageBox.Show("No profile photo selected, please upload a photo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No profile photo selected, please upload a photo?", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -185,15 +179,14 @@ namespace TriforceSalon
                 $"Birthdate: {Birthdate}",
                 "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-            if (result != DialogResult.Yes)
-            {
-                return;
-            }
             string hashedPassword = Method.HashString(Password);
 
-            Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, Role, Access);
+            Method.UploadEmployeeData(Name, Username, Email, hashedPassword, Birthdate, PhotoByteHolder, Role);
+
             object BackFunction = BackBtn;
             BackBtn_Click(BackFunction, e);
+
+
         }
 
         public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)

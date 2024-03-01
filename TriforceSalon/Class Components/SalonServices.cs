@@ -11,14 +11,7 @@ using System.Data;
 
 namespace TriforceSalon.Class_Components
 {
-    /* public class Services
-     {
-         public int ServiceTypeID { get; set; }
-         public byte[] ServiceImage { get; set; }
-         public string ServiceName { get; set; }
-         public decimal ServiceAmount { get; set; }
-
-     }*/
+    
     public class SalonServices
     {
         ChangeImageSize newImageSIze = new ChangeImageSize();
@@ -31,12 +24,10 @@ namespace TriforceSalon.Class_Components
         int serviceVariationID;
         int serviceTypeID;
 
-        //public List<Services> services;
 
         public SalonServices()
         {
-            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            services = GetServiceInfo();
+            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         }
         public void AddServiceImage()
         {

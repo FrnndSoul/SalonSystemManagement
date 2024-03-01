@@ -8,12 +8,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace TriforceSalon
 {
     internal class Inventory
     {
-        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static int ShipmentReference;
 
@@ -27,10 +28,10 @@ namespace TriforceSalon
                     string query = "UPDATE `inventory` SET `Status` = " +
                         "CASE " +
                             "WHEN `Stock` = 0 THEN 3 " +
-                            "WHEN `Stock` <= 0.25 * `Aggregate` THEN 2 " + 
-                            "WHEN `Stock` <= 0.5 * `Aggregate` THEN 1 " + 
-                            "ELSE 0 " + 
-                            "END;";
+                            "WHEN `Stock` = 0.25 * `Aggregate` THEN 2 " +
+                            "WHEN `Stock` = 0.5 * `Aggregate` THEN 1 " +
+                            "ELSE 0 " +
+                            "END; ";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.ExecuteNonQuery();
@@ -43,8 +44,6 @@ namespace TriforceSalon
             }
         }
 
-
-
         public static int ShipmentID()
         {
             Random random = new Random();
@@ -54,6 +53,13 @@ namespace TriforceSalon
 
             } while (Method.DuplicateChecker(ShipmentReference.ToString(), "ShipmentID", "shipments") == true);
             return ShipmentReference;
+        }
+
+        public static int GenerateID()
+        {
+            Random random = new Random();
+            int id = random.Next(10000, 100000);
+            return id;
         }
 
         public static void AddShippedItems(int ID, int Stock)
@@ -78,33 +84,18 @@ namespace TriforceSalon
             }
         }
 
-        public static void LessUsedProduct(int ID, int Deductions)
+        public static void LessUsedProduct(int ID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-
-                    string checkQuery = "SELECT `Stock` FROM `inventory` WHERE `ItemID` = @itemID";
-                    using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, connection))
+                    string query = "UPDATE `inventory` SET `Stock` = `Stock` - 1 WHERE `ItemID` = @itemID";
+                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        checkCmd.Parameters.AddWithValue("@itemID", ID);
-                        int currentStock = Convert.ToInt32(checkCmd.ExecuteScalar());
-
-                        if (currentStock < Deductions)
-                        {
-                            MessageBox.Show("Insufficient stock.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                    }
-
-                    string query = "UPDATE `inventory` SET `Stock` = `Stock` - @deductions WHERE `ItemID` = @itemID";
-                    using (MySqlCommand queryCmd = new MySqlCommand(query, connection))
-                    {
-                        queryCmd.Parameters.AddWithValue("@itemID", ID);
-                        queryCmd.Parameters.AddWithValue("@deductions", Deductions);
-                        queryCmd.ExecuteNonQuery();
+                        querycmd.Parameters.AddWithValue("@itemID", ID);
+                        querycmd.ExecuteNonQuery();
                     }
                 }
             }
@@ -113,5 +104,7 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat LessUsedProduct()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
     }
 }

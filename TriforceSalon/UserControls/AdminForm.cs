@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TriforceSalon.Class_Components;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -26,17 +25,26 @@ namespace TriforceSalon
         public static string NameReader, UsernameReader, EmailReader,
             SelectedUsername, AccountAccessReader, AvailabilityReader;
         public static DateTime BirthdateReader;
-        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public AdminForm()
         {
             InitializeComponent();
             Method.EclipsePhotoBox(Photo);
-
             this.RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
             this.RoleBox.Items.Clear();
             SetRoles(RoleBox);
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+            LoadUserData();
+
+            object select = UserDGV;
+            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
+            UserDGV_CellContentClick_1(select, args);
+
         }
 
         public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
@@ -62,15 +70,6 @@ namespace TriforceSalon
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-
-        private void AdminForm_Load(object sender, EventArgs e)
-        {
-            LoadUserData();
-            
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1,3);
-            UserDGV_CellContentClick_1(select, args);  
         }
 
         public void LoadUserData()
@@ -120,11 +119,6 @@ namespace TriforceSalon
             }
         }
 
-        private void ChangeRoleBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Discard changes for the user?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -172,11 +166,11 @@ namespace TriforceSalon
             NameBox.Enabled = true;
             UsernameBox.Enabled = true;
             EmailBox.Enabled = true;
-            UploadBtn.Visible = true;
+            UploadBtn.Enabled = true;
             SaveBtn.Visible = true;
             DiscardBtn.Visible = true;
-            AccessBox.Enabled = true;
             EditBtn.Visible = false;
+            UserDGV.Enabled = false;
         }
 
         private void UploadBtn_Click(object sender, EventArgs e)
@@ -197,7 +191,8 @@ namespace TriforceSalon
                     image.Save(ms, image.RawFormat);
                     newUpload = ms.ToArray();
                 }
-            } else
+            }
+            else
             {
                 newUpload = PhotoDB;
             }
@@ -224,41 +219,13 @@ namespace TriforceSalon
             RoleBox.Text = roleName;
         }
 
-        private string GetServiceTypeName(int serviceID)
-        {
-            string serviceTypeName = "";
-
-            using (MySqlConnection connection = new MySqlConnection(mysqlcon))
-            {
-                try
-                {
-                    connection.Open();
-                    string query = "SELECT ServiceTypeName FROM service_type WHERE ServiceID = @serviceID";
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@serviceID", serviceID);
-                        object result = cmd.ExecuteScalar();
-                        if (result != null)
-                        {
-                            serviceTypeName = result.ToString();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            return serviceTypeName;
-        }
-
-
         private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (UserDGV.Rows.Count <= 0)
             {
                 return;
             }
+
             if (UserDGV.SelectedCells.Count > 0)
             {
                 int userRow = UserDGV.SelectedCells[0].RowIndex;
@@ -277,10 +244,10 @@ namespace TriforceSalon
             NameBox.Enabled = false;
             UsernameBox.Enabled = false;
             EmailBox.Enabled = false;
-            UploadBtn.Visible = false;
+            UploadBtn.Enabled = false;
             SaveBtn.Visible = false;
-            AccessBox.Enabled = false;
             DiscardBtn.Visible = false;
+            UserDGV.Enabled = true;
 
             LoadUserData();
 
@@ -348,6 +315,33 @@ namespace TriforceSalon
             {
                 MessageBox.Show(e.Message + "\n\nat ReadUserData() admin form", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private string GetServiceTypeName(int serviceID)
+        {
+            string serviceTypeName = "";
+
+            using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT ServiceTypeName FROM service_type WHERE ServiceID = @serviceID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@serviceID", serviceID);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            serviceTypeName = result.ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return serviceTypeName;
         }
     }
 }
