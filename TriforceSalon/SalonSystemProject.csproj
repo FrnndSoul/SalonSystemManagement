@@ -149,6 +149,12 @@
     <Compile Include="UserControls\EditProduct Inventory.Designer.cs">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\EmployeeUserConrols.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\EditProduct Inventory.resx">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>

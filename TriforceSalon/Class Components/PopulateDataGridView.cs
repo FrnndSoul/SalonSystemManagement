@@ -17,10 +17,11 @@ namespace TriforceSalon.Class_Components
 
         public PopulateDataGridView()
         {
-            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+
         }
 
-        public void PopulateServiceComboBox()
+        /*public void PopulateServiceComboBox()
         {
             WalkInTransactionForm.walkInTransactionFormInstance.ServiceTypeComBox.Items.Clear();
 
@@ -52,9 +53,9 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("2. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
-        public void FilterServices(int serviceType)
+        /*public void FilterServices(int serviceType)
         {
             WalkInTransactionForm.walkInTransactionFormInstance.ServiceListComB.Items.Clear();
             try
@@ -81,7 +82,8 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("Error in FilterServices: ", ex.Message);
             }
-        }
+        }*/
+
         public int GetServiceTypeID(string serviceName)
         {
             int serviceID = -1;
@@ -140,7 +142,7 @@ namespace TriforceSalon.Class_Components
             return serviceID;
         }
 
-        public void InsertTransaction(int serviceVarID)
+       /* public void InsertTransaction(int serviceVarID)
         {
             try
             {
@@ -168,7 +170,7 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("Error in InsertTransaction in: ", ex.Message);
             }
-        }
+        }*/
 
         /* public void LoadCustomers()
          {
