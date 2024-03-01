@@ -70,5 +70,17 @@ namespace TriforceSalon.UserControls
         {
             salonServices.ClearServices();
         }
+
+        private void AddServiceImageBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.AddServiceImage();
+        }
+
+        private void AddServiceBtn_Click(object sender, EventArgs e)
+        {
+            string serviceTypeName = AddSalonServices.SelectedItem.ToString();
+            salonServices.GetServiceTypeID(serviceTypeName);
+            salonServices.AddSalonServices();
+        }
     }
 }

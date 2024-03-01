@@ -123,6 +123,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ticket System\CustomerTicket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticket System\CustomerTicket.Designer.cs">
+      <DependentUpon>CustomerTicket.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +136,12 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class Components\Inventory.cs" />
+    <Compile Include="UserControls\EmployeeUserConrols.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,6 +175,12 @@
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\ServicesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\ServicesUserControl.Designer.cs">
+      <DependentUpon>ServicesUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,8 +199,14 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
+      <DependentUpon>CustomerTicket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
@@ -203,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerServices.resx">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\ServicesUserControl.resx">
+      <DependentUpon>ServicesUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SigninPage.resx">
       <DependentUpon>SigninPage.cs</DependentUpon>

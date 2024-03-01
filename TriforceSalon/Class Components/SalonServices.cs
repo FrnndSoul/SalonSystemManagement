@@ -86,7 +86,7 @@ namespace TriforceSalon.Class_Components
                                 while (reader.Read())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
-                                    ManagerServices.managerServicesInstance.ServiceTypesComB.Items.Add(serviceTypes);
+                                    ManagerServices.managerServicesInstance.AddSalonServices.Items.Add(serviceTypes);
                                 }
                             }
                         }
@@ -128,34 +128,7 @@ namespace TriforceSalon.Class_Components
             return serviceInt;
         }
 
-        /* public int GetServiceID(string serviceName)
-         {
-             int serviceID = -1;
-             try
-             {
-                 using (var conn = new MySqlConnection(mysqlcon))
-                 {
-                     conn.Open();
-                     string query = "select ServiceID from service_type where ServiceTypeName = @service_name";
-                     using (MySqlCommand command = new MySqlCommand(query, conn))
-                     {
-                         command.Parameters.AddWithValue("@service_name", serviceName);
-
-                         object result = command.ExecuteScalar();
-                         if (result != null && int.TryParse(result.ToString(), out serviceID))
-                         {
-                             return serviceID;
-                         }
-                     }
-                 }
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-             }
-             return serviceID;
-         }*/
+        
 
         public void GetSalonServices()
         {
@@ -206,11 +179,11 @@ namespace TriforceSalon.Class_Components
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
                         command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
-                        //command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance);
-                        command.Parameters.AddWithValue("@service_ammount", ManagerServices.managerServicesInstance.ServiceAmountTxtb);
+                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ManagerServices.managerServicesInstance.ServiceAmountTxtb));
                         command.Parameters.AddWithValue("@service_image", imageData);
 
                         command.ExecuteNonQuery();
+
                         GetSalonServices();
                         ClearServices();
                     }
@@ -273,7 +246,7 @@ namespace TriforceSalon.Class_Components
                                     if (reader.Read())
                                     {
                                         string servTypeName = reader.GetString(0);
-                                        ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = servTypeName;
+                                        ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = servTypeName;
                                     }
                                 }
 
@@ -340,7 +313,7 @@ namespace TriforceSalon.Class_Components
         }*/
         public void UpdateSalonServices(int variationID)
         {
-            string serviceType = ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem.ToString();
+            string serviceType = ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
             try
             {
@@ -392,7 +365,7 @@ namespace TriforceSalon.Class_Components
         {
             ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = null;
             ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = null;
-            ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = null;
+            ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = null;
 
             ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
 

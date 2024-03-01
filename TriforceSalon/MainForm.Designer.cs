@@ -29,18 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.signinPage1 = new TriforceSalon.SigninPage();
             this.signUpForm1 = new TriforceSalon.SignUpForm();
             this.adminForm1 = new TriforceSalon.AdminForm();
+            this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
-            this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
+            this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
             this.SuspendLayout();
-            // 
-            // inventoryPage1
-            // 
-            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
-            this.inventoryPage1.Name = "inventoryPage1";
             // 
             // signinPage1
             // 
@@ -58,8 +53,14 @@
             // adminForm1
             // 
             this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            this.adminForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
             resources.ApplyResources(this.adminForm1, "adminForm1");
             this.adminForm1.Name = "adminForm1";
+            // 
+            // inventoryPage1
+            // 
+            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
+            this.inventoryPage1.Name = "inventoryPage1";
             // 
             // walkInTransactionForm1
             // 
@@ -67,17 +68,17 @@
             resources.ApplyResources(this.walkInTransactionForm1, "walkInTransactionForm1");
             this.walkInTransactionForm1.Name = "walkInTransactionForm1";
             // 
-            // managerPage1
+            // employeeUserConrols1
             // 
-            this.managerPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.managerPage1, "managerPage1");
-            this.managerPage1.Name = "managerPage1";
+            this.employeeUserConrols1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
+            this.employeeUserConrols1.Name = "employeeUserConrols1";
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.managerPage1);
+            this.Controls.Add(this.employeeUserConrols1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
@@ -97,7 +98,7 @@
         private SignUpForm signUpForm1;
         private InventoryPage inventoryPage1;
         private UserControls.WalkInTransactionForm walkInTransactionForm1;
-        private UserControls.ManagerPage managerPage1;
+        private UserControls.EmployeeUserConrols employeeUserConrols1;
     }
 }
 
