@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,29 @@ namespace TriforceSalon.UserControls
 {
     public partial class RequestShipment_Inventory : UserControl
     {
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public MySqlConnection connection = new MySqlConnection(mysqlcon);
+        public static string ItemName;
+        public static int ItemRow, ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+        public static byte[] PhotoByteHolder;
         public RequestShipment_Inventory()
         {
             InitializeComponent();
+        }
+
+        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
+        {
+            Name = name;
+            ItemID = id;
+            Cost = cost;
+            Aggregate = aggregate;
+            Status = status;
+            EmployeeID = userID;
+
+            NameBox.Text = name;
+            IDBox.Text = id.ToString();
+            CostBox.Text = cost.ToString();
+            AggregateBox.Text = aggregate.ToString();
         }
 
         private void AddQtyBtn_Click(object sender, EventArgs e)
@@ -57,6 +78,11 @@ namespace TriforceSalon.UserControls
                 return;
             }
             Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }
     }
 }

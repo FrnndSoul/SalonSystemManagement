@@ -29,18 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.signinPage1 = new TriforceSalon.SigninPage();
             this.signUpForm1 = new TriforceSalon.SignUpForm();
             this.adminForm1 = new TriforceSalon.AdminForm();
+            this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
             this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
             this.SuspendLayout();
-            // 
-            // inventoryPage1
-            // 
-            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
-            this.inventoryPage1.Name = "inventoryPage1";
             // 
             // signinPage1
             // 
@@ -61,6 +56,11 @@
             this.adminForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
             resources.ApplyResources(this.adminForm1, "adminForm1");
             this.adminForm1.Name = "adminForm1";
+            // 
+            // inventoryPage1
+            // 
+            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
+            this.inventoryPage1.Name = "inventoryPage1";
             // 
             // walkInTransactionForm1
             // 
