@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.InventoryDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.EditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AddBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.editProduct_Inventory1 = new TriforceSalon.UserControls.EditProduct_Inventory();
             this.addProduct_Inventory1 = new TriforceSalon.UserControls.AddProduct_Inventory();
             this.requestShipment_Inventory1 = new TriforceSalon.UserControls.RequestShipment_Inventory();
-            this.editProduct_Inventory1 = new TriforceSalon.UserControls.EditProduct_Inventory();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,35 +47,35 @@
             this.InventoryDGV.AllowUserToDeleteRows = false;
             this.InventoryDGV.AllowUserToResizeColumns = false;
             this.InventoryDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.InventoryDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.InventoryDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.InventoryDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.InventoryDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.InventoryDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.InventoryDGV.ColumnHeadersHeight = 80;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InventoryDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InventoryDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.InventoryDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.InventoryDGV.Location = new System.Drawing.Point(25, 33);
-            this.InventoryDGV.Margin = new System.Windows.Forms.Padding(5);
+            this.InventoryDGV.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
             this.InventoryDGV.Name = "InventoryDGV";
             this.InventoryDGV.ReadOnly = true;
             this.InventoryDGV.RowHeadersVisible = false;
             this.InventoryDGV.RowHeadersWidth = 51;
             this.InventoryDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.InventoryDGV.RowTemplate.Height = 24;
+            this.InventoryDGV.RowTemplate.Height = 40;
             this.InventoryDGV.Size = new System.Drawing.Size(1450, 800);
             this.InventoryDGV.TabIndex = 0;
             this.InventoryDGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -96,8 +96,8 @@
             this.InventoryDGV.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.InventoryDGV.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InventoryDGV.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.InventoryDGV.ThemeStyle.RowsStyle.Height = 24;
-            this.InventoryDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.InventoryDGV.ThemeStyle.RowsStyle.Height = 40;
+            this.InventoryDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.InventoryDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
             // EditBtn
@@ -166,6 +166,16 @@
             this.AddBtn.Text = " Add";
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
+            // editProduct_Inventory1
+            // 
+            this.editProduct_Inventory1.BackColor = System.Drawing.Color.Transparent;
+            this.editProduct_Inventory1.Location = new System.Drawing.Point(0, 0);
+            this.editProduct_Inventory1.Name = "editProduct_Inventory1";
+            this.editProduct_Inventory1.Size = new System.Drawing.Size(1500, 950);
+            this.editProduct_Inventory1.TabIndex = 58;
+            this.editProduct_Inventory1.Visible = false;
+            this.editProduct_Inventory1.VisibleChanged += new System.EventHandler(this.editProduct_Inventory1_VisibleChanged);
+            // 
             // addProduct_Inventory1
             // 
             this.addProduct_Inventory1.BackColor = System.Drawing.Color.Transparent;
@@ -185,16 +195,6 @@
             this.requestShipment_Inventory1.TabIndex = 59;
             this.requestShipment_Inventory1.Visible = false;
             this.requestShipment_Inventory1.VisibleChanged += new System.EventHandler(this.requestShipment_Inventory1_VisibleChanged);
-            // 
-            // editProduct_Inventory1
-            // 
-            this.editProduct_Inventory1.BackColor = System.Drawing.Color.Transparent;
-            this.editProduct_Inventory1.Location = new System.Drawing.Point(0, 0);
-            this.editProduct_Inventory1.Name = "editProduct_Inventory1";
-            this.editProduct_Inventory1.Size = new System.Drawing.Size(1500, 950);
-            this.editProduct_Inventory1.TabIndex = 58;
-            this.editProduct_Inventory1.Visible = false;
-            this.editProduct_Inventory1.VisibleChanged += new System.EventHandler(this.editProduct_Inventory1_VisibleChanged);
             // 
             // GeneralView_Inventory
             // 

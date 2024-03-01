@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +39,11 @@ namespace TriforceSalon.UserControls
             CostBox.Text = cost.ToString();
             AggregateBox.Text = aggregate.ToString();
             StockBox.Text = Stock.ToString();
+
+            using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
+            {
+                PhotoBox.Image = Image.FromStream(ms);
+            }
         }
 
         private void UploadPhoto_Click(object sender, EventArgs e)
@@ -103,6 +109,37 @@ namespace TriforceSalon.UserControls
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\nat SaveBtn_Click() InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public byte[] LoadPhoto(int itemID)
+        {
+            try
+            {
+                string query = "SELECT `Photo` FROM `inventory` WHERE `ItemID` = @ItemID";
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ItemID", itemID);
+
+                        object result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return (byte[])result;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nat LoadPhoto InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 

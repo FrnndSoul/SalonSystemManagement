@@ -26,10 +26,6 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
             LoadInventory();
             InventoryDGV.Font = new Font("Chinacat", 18f);
-            foreach (DataGridViewRow column in InventoryDGV.Rows)
-            {
-                column.Height = 50;
-            }
         }
 
         private void RequestBtn_Click(object sender, EventArgs e)
