@@ -188,6 +188,24 @@
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.Designer.cs">
+      <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.Designer.cs">
+      <DependentUpon>PaymentsUserControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\SellProductsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\SellProductsUserControls.Designer.cs">
+      <DependentUpon>SellProductsUserControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Receptionist Controls\ServiceUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +270,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerServices.resx">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
+      <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\PaymentsUserControls.resx">
+      <DependentUpon>PaymentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\SellProductsUserControls.resx">
+      <DependentUpon>SellProductsUserControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\ServiceUserControl.resx">
       <DependentUpon>ServiceUserControl.cs</DependentUpon>

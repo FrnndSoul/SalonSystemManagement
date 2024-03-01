@@ -36,7 +36,9 @@
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            this.servicesUserControl1 = new TriforceSalon.UserControls.Receptionist_Controls.ServicesUserControl();
             this.guna2Panel1.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -65,6 +67,7 @@
             // 
             // guna2Panel2
             // 
+            this.guna2Panel2.Controls.Add(this.servicesUserControl1);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.guna2Panel2.Location = new System.Drawing.Point(0, 229);
             this.guna2Panel2.Name = "guna2Panel2";
@@ -171,6 +174,14 @@
             this.guna2Button4.Text = "Log-Out";
             this.guna2Button4.UseTransparentBackground = true;
             // 
+            // servicesUserControl1
+            // 
+            this.servicesUserControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.servicesUserControl1.Location = new System.Drawing.Point(4, 4);
+            this.servicesUserControl1.Name = "servicesUserControl1";
+            this.servicesUserControl1.Size = new System.Drawing.Size(1920, 843);
+            this.servicesUserControl1.TabIndex = 0;
+            // 
             // WalkInTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,6 +200,7 @@
             this.Load += new System.EventHandler(this.WalkInTransactionForm_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            this.guna2Panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -202,5 +214,6 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Receptionist_Controls.ServicesUserControl servicesUserControl1;
     }
 }

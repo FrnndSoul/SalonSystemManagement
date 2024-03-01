@@ -35,6 +35,11 @@ namespace TriforceSalon.Test
         {
 
         }
+
+        private void ProcessCustomerBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class ScheduleSelectedEventArgs
