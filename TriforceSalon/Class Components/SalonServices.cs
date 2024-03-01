@@ -11,14 +11,7 @@ using System.Data;
 
 namespace TriforceSalon.Class_Components
 {
-    /* public class Services
-     {
-         public int ServiceTypeID { get; set; }
-         public byte[] ServiceImage { get; set; }
-         public string ServiceName { get; set; }
-         public decimal ServiceAmount { get; set; }
 
-     }*/
     public class SalonServices
     {
         ChangeImageSize newImageSIze = new ChangeImageSize();
@@ -31,12 +24,10 @@ namespace TriforceSalon.Class_Components
         int serviceVariationID;
         int serviceTypeID;
 
-        //public List<Services> services;
 
         public SalonServices()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            //services = GetServiceInfo();
         }
         public void AddServiceImage()
         {
@@ -86,7 +77,7 @@ namespace TriforceSalon.Class_Components
                                 while (reader.Read())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
-                                    ManagerServices.managerServicesInstance.ServiceTypesComB.Items.Add(serviceTypes);
+                                    ManagerServices.managerServicesInstance.AddSalonServices.Items.Add(serviceTypes);
                                 }
                             }
                         }
@@ -128,34 +119,7 @@ namespace TriforceSalon.Class_Components
             return serviceInt;
         }
 
-        /* public int GetServiceID(string serviceName)
-         {
-             int serviceID = -1;
-             try
-             {
-                 using (var conn = new MySqlConnection(mysqlcon))
-                 {
-                     conn.Open();
-                     string query = "select ServiceID from service_type where ServiceTypeName = @service_name";
-                     using (MySqlCommand command = new MySqlCommand(query, conn))
-                     {
-                         command.Parameters.AddWithValue("@service_name", serviceName);
 
-                         object result = command.ExecuteScalar();
-                         if (result != null && int.TryParse(result.ToString(), out serviceID))
-                         {
-                             return serviceID;
-                         }
-                     }
-                 }
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-             }
-             return serviceID;
-         }*/
 
         public void GetSalonServices()
         {
@@ -206,11 +170,11 @@ namespace TriforceSalon.Class_Components
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
                         command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
-                        //command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance);
-                        command.Parameters.AddWithValue("@service_ammount", ManagerServices.managerServicesInstance.ServiceAmountTxtb);
+                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ManagerServices.managerServicesInstance.ServiceAmountTxtb));
                         command.Parameters.AddWithValue("@service_image", imageData);
 
                         command.ExecuteNonQuery();
+
                         GetSalonServices();
                         ClearServices();
                     }
@@ -273,7 +237,7 @@ namespace TriforceSalon.Class_Components
                                     if (reader.Read())
                                     {
                                         string servTypeName = reader.GetString(0);
-                                        ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = servTypeName;
+                                        ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = servTypeName;
                                     }
                                 }
 
@@ -287,60 +251,10 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-        /*public List<Services> GetServiceInfo()
-        {
-            List<Services> services = new List<Services>();
-
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    conn.Open();
-                    string query = "Select ServiceTypeID, ServiceImage, ServiceName, ServiceAmount from salon_services" +
-                        "Where ServiceTypeID = @service_ID";
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        using(MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Services service = new Services 
-                                { 
-                                    ServiceTypeID = Convert.ToInt32(reader["ServiceTypeID"]),
-                                    ServiceName = Convert.ToString(reader["ServiceName"]),
-                                    ServiceAmount = Convert.ToDecimal(reader["ServiceAmount"]),
-                                };
-
-                                int imageColumnIndex = reader.GetOrdinal("ServiceImage");
-                                if (!reader.IsDBNull(imageColumnIndex))
-                                {
-                                    byte[] buffer = new byte[4096];
-
-                                    long bytesRead = reader.GetBytes(imageColumnIndex, 0, buffer, 0, buffer.Length);
-
-                                    if (bytesRead < buffer.Length)
-                                    {
-                                        byte[] finalBuffer = new byte[bytesRead];
-                                        Array.Copy(buffer, finalBuffer, bytesRead);
-                                        buffer = finalBuffer;
-                                    }
-                                    service.ServiceImage = buffer;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch( Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return services;
-        }*/
+       
         public void UpdateSalonServices(int variationID)
         {
-            string serviceType = ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem.ToString();
+            string serviceType = ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
             try
             {
@@ -392,7 +306,7 @@ namespace TriforceSalon.Class_Components
         {
             ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = null;
             ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = null;
-            ManagerServices.managerServicesInstance.ServiceTypesComB.SelectedItem = null;
+            ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = null;
 
             ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
 
