@@ -142,6 +142,7 @@
             // 
             // SigninBtn
             // 
+            this.SigninBtn.Animated = true;
             this.SigninBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.SigninBtn.BorderRadius = 20;
             this.SigninBtn.BorderThickness = 1;
@@ -162,6 +163,7 @@
             // 
             // PasswordTxtbox
             // 
+            this.PasswordTxtbox.Animated = true;
             this.PasswordTxtbox.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.PasswordTxtbox.BorderColor = System.Drawing.Color.Black;
             this.PasswordTxtbox.BorderRadius = 20;
@@ -186,6 +188,7 @@
             // 
             // UsernameTxtbox
             // 
+            this.UsernameTxtbox.Animated = true;
             this.UsernameTxtbox.AutoRoundedCorners = true;
             this.UsernameTxtbox.BorderColor = System.Drawing.Color.Black;
             this.UsernameTxtbox.BorderRadius = 24;
