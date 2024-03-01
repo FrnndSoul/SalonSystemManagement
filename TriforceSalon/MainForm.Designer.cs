@@ -78,12 +78,12 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.managerPage1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
             this.Controls.Add(this.inventoryPage1);
             this.Controls.Add(this.walkInTransactionForm1);
+            this.Controls.Add(this.managerPage1);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
