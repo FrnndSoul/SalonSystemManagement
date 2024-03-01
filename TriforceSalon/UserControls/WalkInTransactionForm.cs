@@ -14,11 +14,13 @@ namespace TriforceSalon.UserControls
     public partial class WalkInTransactionForm : UserControl
     {
         public static WalkInTransactionForm walkInTransactionFormInstance;
-        public PopulateDataGridView populateMethods;
+        public PopulateDataGridView populateMethods = new PopulateDataGridView();
         public WalkInTransactionForm()
         {
             InitializeComponent();
             walkInTransactionFormInstance = this;
+            populateMethods.EmployeeDetails();
+            populateMethods.PopulateServiceComboBox();
         }
 
         private void ServicesComBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -29,14 +31,15 @@ namespace TriforceSalon.UserControls
 
         private void ProcessBtn_Click(object sender, EventArgs e)
         {
-            int empID = Convert.ToInt32(EmployeeListDGV.SelectedRows[0].Cells["Emp_ID"].Value);
+            int empID = Convert.ToInt32(EmployeeListDGV.SelectedRows[0].Cells["AccountID"].Value);
             populateMethods.SetEmployeeStatus(empID);
         }
 
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
-            populateMethods.UpdateEmployees(populateMethods.GetEmployees());
-            populateMethods.EmployeeDetails();
+            //populateMethods.UpdateEmployees(populateMethods.GetEmployees());
+            populateMethods.UpdateEmployees();
+            //populateMethods.EmployeeDetails();
         }
     }
 }
