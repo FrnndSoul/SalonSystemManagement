@@ -78,18 +78,33 @@ namespace TriforceSalon
             }
         }
 
-        public static void LessUsedProduct(int ID)
+        public static void LessUsedProduct(int ID, int Deductions)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `inventory` SET `Stock` = `Stock` - 1 WHERE `ItemID` = @itemID";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+
+                    string checkQuery = "SELECT `Stock` FROM `inventory` WHERE `ItemID` = @itemID";
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@itemID", ID);
-                        querycmd.ExecuteNonQuery();
+                        checkCmd.Parameters.AddWithValue("@itemID", ID);
+                        int currentStock = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (currentStock < Deductions)
+                        {
+                            MessageBox.Show("Insufficient stock.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
+                    string query = "UPDATE `inventory` SET `Stock` = `Stock` - @deductions WHERE `ItemID` = @itemID";
+                    using (MySqlCommand queryCmd = new MySqlCommand(query, connection))
+                    {
+                        queryCmd.Parameters.AddWithValue("@itemID", ID);
+                        queryCmd.Parameters.AddWithValue("@deductions", Deductions);
+                        queryCmd.ExecuteNonQuery();
                     }
                 }
             }
@@ -98,7 +113,5 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat LessUsedProduct()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }
