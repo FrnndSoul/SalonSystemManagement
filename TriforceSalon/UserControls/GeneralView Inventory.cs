@@ -50,20 +50,8 @@ namespace TriforceSalon.UserControls
                 MessageBox.Show($"There is still ample supply of\n{ItemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    foreach (Control control in mainForm.Controls)
-                    {
-                        if (control is RequestShipment_Inventory)
-                        {
-                            ((RequestShipment_Inventory)control).InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
-                            return;
-                        }
-                    }
-                }
-            }
+            requestShipment_Inventory1.Visible = true;
+            requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock);
         }
 
         private void addProduct_Inventory1_VisibleChanged(object sender, EventArgs e)
@@ -95,7 +83,7 @@ namespace TriforceSalon.UserControls
             if (!editProduct_Inventory1.Visible)
             {
                 ShowButtons();
-            } 
+            }
             else
             {
                 HideButtons();
@@ -119,28 +107,7 @@ namespace TriforceSalon.UserControls
 
             ReadRow(itemRow);
             editProduct_Inventory1.Visible = true;
-
-            foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    foreach (Control control in mainForm.Controls)
-                    {
-                        if (control is ManagerPage managerPage)
-                        {
-                            foreach (Control control1 in managerPage.Controls)
-                            {
-                                if (control1 is EditProduct_Inventory editProductControl)
-                                {
-                                    editProductControl.Visible = true;
-                                    editProductControl.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
         }
 
         private void AddBtn_Click(object sender, EventArgs e)

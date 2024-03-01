@@ -23,7 +23,7 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
         }
 
-        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
+        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID, int stock)
         {
             Name = name;
             ItemID = id;
@@ -36,6 +36,21 @@ namespace TriforceSalon.UserControls
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
             AggregateBox.Text = aggregate.ToString();
+            StockBox.Text = stock.ToString();
+
+            if(status == 0)
+            {
+                StatusBox.Text = "Great";
+            } else if (status == 1)
+            {
+                StatusBox.Text = "Half";
+            } else if (status == 2)
+            {
+                StatusBox.Text = "Critical";
+            } else
+            {
+                StatusBox.Text = "Empty";
+            }
         }
 
         private void AddQtyBtn_Click(object sender, EventArgs e)

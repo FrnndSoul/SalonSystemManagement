@@ -24,6 +24,22 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
         }
 
+        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
+        {
+            Name = name;
+            ItemID = id;
+            Cost = cost;
+            Aggregate = aggregate;
+            Status = status;
+            EmployeeID = userID;
+
+            NameBox.Text = name;
+            IDBox.Text = id.ToString();
+            CostBox.Text = cost.ToString();
+            AggregateBox.Text = aggregate.ToString();
+            StockBox.Text = Stock.ToString();
+        }
+
         private void UploadPhoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -43,22 +59,6 @@ namespace TriforceSalon.UserControls
                     PhotoByteHolder = ms.ToArray();
                 }
             }
-        }
-
-        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
-        {
-            MessageBox.Show(id.ToString());
-            Name = name;
-            ItemID = id;
-            Cost = cost;
-            Aggregate = aggregate;
-            Status = status;
-            EmployeeID = userID;
-
-            NameBox.Text = Name;
-            IDBox.Text = ItemID.ToString();
-            CostBox.Text = Cost.ToString();
-            AggregateBox.Text = Aggregate.ToString();
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -124,10 +124,7 @@ namespace TriforceSalon.UserControls
 
         private void AggregateBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            e.Handled = true;
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
