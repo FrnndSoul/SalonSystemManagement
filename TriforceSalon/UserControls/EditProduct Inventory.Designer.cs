@@ -39,10 +39,10 @@
             this.StockBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.IDBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UploadPhoto = new Guna.UI2.WinForms.Guna2Button();
             this.PhotoBox = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -257,6 +257,39 @@
             this.IDBox.Size = new System.Drawing.Size(550, 50);
             this.IDBox.TabIndex = 71;
             // 
+            // UploadPhoto
+            // 
+            this.UploadPhoto.Animated = true;
+            this.UploadPhoto.BackColor = System.Drawing.Color.Transparent;
+            this.UploadPhoto.BorderRadius = 20;
+            this.UploadPhoto.BorderThickness = 1;
+            this.UploadPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.UploadPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadPhoto.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.UploadPhoto.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.UploadPhoto.ForeColor = System.Drawing.Color.White;
+            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.upload_icon;
+            this.UploadPhoto.Location = new System.Drawing.Point(341, 230);
+            this.UploadPhoto.Margin = new System.Windows.Forms.Padding(2);
+            this.UploadPhoto.Name = "UploadPhoto";
+            this.UploadPhoto.Size = new System.Drawing.Size(238, 70);
+            this.UploadPhoto.TabIndex = 94;
+            this.UploadPhoto.Text = " Upload Photo";
+            this.UploadPhoto.UseTransparentBackground = true;
+            this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
+            // 
+            // PhotoBox
+            // 
+            this.PhotoBox.ImageRotate = 0F;
+            this.PhotoBox.Location = new System.Drawing.Point(116, 100);
+            this.PhotoBox.Name = "PhotoBox";
+            this.PhotoBox.Size = new System.Drawing.Size(200, 200);
+            this.PhotoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PhotoBox.TabIndex = 93;
+            this.PhotoBox.TabStop = false;
+            // 
             // DiscardBtn
             // 
             this.DiscardBtn.Animated = true;
@@ -302,39 +335,6 @@
             this.SaveBtn.Text = " Save Changes";
             this.SaveBtn.UseTransparentBackground = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
-            // UploadPhoto
-            // 
-            this.UploadPhoto.Animated = true;
-            this.UploadPhoto.BackColor = System.Drawing.Color.Transparent;
-            this.UploadPhoto.BorderRadius = 20;
-            this.UploadPhoto.BorderThickness = 1;
-            this.UploadPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.UploadPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.UploadPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.UploadPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.UploadPhoto.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.UploadPhoto.Font = new System.Drawing.Font("Chinacat", 20.25F);
-            this.UploadPhoto.ForeColor = System.Drawing.Color.White;
-            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
-            this.UploadPhoto.Location = new System.Drawing.Point(341, 230);
-            this.UploadPhoto.Margin = new System.Windows.Forms.Padding(2);
-            this.UploadPhoto.Name = "UploadPhoto";
-            this.UploadPhoto.Size = new System.Drawing.Size(238, 70);
-            this.UploadPhoto.TabIndex = 94;
-            this.UploadPhoto.Text = "Upload Photo";
-            this.UploadPhoto.UseTransparentBackground = true;
-            this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
-            // 
-            // PhotoBox
-            // 
-            this.PhotoBox.ImageRotate = 0F;
-            this.PhotoBox.Location = new System.Drawing.Point(116, 100);
-            this.PhotoBox.Name = "PhotoBox";
-            this.PhotoBox.Size = new System.Drawing.Size(200, 200);
-            this.PhotoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PhotoBox.TabIndex = 93;
-            this.PhotoBox.TabStop = false;
             // 
             // EditProduct_Inventory
             // 

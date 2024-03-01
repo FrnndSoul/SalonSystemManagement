@@ -285,13 +285,13 @@
             this.UploadPhoto.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.UploadPhoto.Font = new System.Drawing.Font("Chinacat", 20.25F);
             this.UploadPhoto.ForeColor = System.Drawing.Color.White;
-            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
+            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.upload_icon;
             this.UploadPhoto.Location = new System.Drawing.Point(344, 207);
             this.UploadPhoto.Margin = new System.Windows.Forms.Padding(2);
             this.UploadPhoto.Name = "UploadPhoto";
             this.UploadPhoto.Size = new System.Drawing.Size(238, 70);
             this.UploadPhoto.TabIndex = 92;
-            this.UploadPhoto.Text = "Upload Photo";
+            this.UploadPhoto.Text = " Upload Photo";
             this.UploadPhoto.UseTransparentBackground = true;
             this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
             // 
