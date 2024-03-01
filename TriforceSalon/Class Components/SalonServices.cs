@@ -27,7 +27,7 @@ namespace TriforceSalon.Class_Components
 
         public SalonServices()
         {
-            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
         public void AddServiceImage()
         {
@@ -251,57 +251,7 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-        /*public List<Services> GetServiceInfo()
-        {
-            List<Services> services = new List<Services>();
-
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    conn.Open();
-                    string query = "Select ServiceTypeID, ServiceImage, ServiceName, ServiceAmount from salon_services" +
-                        "Where ServiceTypeID = @service_ID";
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        using(MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Services service = new Services 
-                                { 
-                                    ServiceTypeID = Convert.ToInt32(reader["ServiceTypeID"]),
-                                    ServiceName = Convert.ToString(reader["ServiceName"]),
-                                    ServiceAmount = Convert.ToDecimal(reader["ServiceAmount"]),
-                                };
-
-                                int imageColumnIndex = reader.GetOrdinal("ServiceImage");
-                                if (!reader.IsDBNull(imageColumnIndex))
-                                {
-                                    byte[] buffer = new byte[4096];
-
-                                    long bytesRead = reader.GetBytes(imageColumnIndex, 0, buffer, 0, buffer.Length);
-
-                                    if (bytesRead < buffer.Length)
-                                    {
-                                        byte[] finalBuffer = new byte[bytesRead];
-                                        Array.Copy(buffer, finalBuffer, bytesRead);
-                                        buffer = finalBuffer;
-                                    }
-                                    service.ServiceImage = buffer;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch( Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return services;
-        }*/
+       
         public void UpdateSalonServices(int variationID)
         {
             string serviceType = ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem.ToString();
