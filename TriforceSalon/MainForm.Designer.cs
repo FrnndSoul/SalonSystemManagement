@@ -58,6 +58,7 @@
             // adminForm1
             // 
             this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            this.adminForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
             resources.ApplyResources(this.adminForm1, "adminForm1");
             this.adminForm1.Name = "adminForm1";
             // 

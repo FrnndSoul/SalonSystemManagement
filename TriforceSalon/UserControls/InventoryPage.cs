@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,11 @@ namespace TriforceSalon
 {
     public partial class InventoryPage : UserControl
     {
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+        public static byte[] PhotoByteHolder;
         public InventoryPage()
         {
             InitializeComponent();
@@ -98,7 +100,7 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `shipments`(`ManagerID`,`DateShipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
+                    string query = "INSERT INTO `shipments`(`ManagerID`,`Date Shipped`,`ShipmentID`, `Supplier`, `ItemID`, `ItemName`, `Quantity`, `Cost`)" +
                         "VALUES (@managerID, @dateShipped, @shipmentID, @supplier, @itemID, @itemName, @quantity, @cost)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
@@ -116,9 +118,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@cost", totalCost);
                         querycmd.ExecuteNonQuery();
                         Inventory.AddShippedItems(itemID, Convert.ToInt32(RequestBox.Text));
-                        Inventory.CheckStatus();
-                        LoadInventory();
-                        LoadShipments();
+                        DefaultLoad();
                     }
                 }
             }
@@ -150,36 +150,55 @@ namespace TriforceSalon
 
         private void ShipmentPanel_Paint(object sender, PaintEventArgs e)
         {
-            int itemRow = InventoryDGV.SelectedCells[0].RowIndex;
-            string selectedID = InventoryDGV.Rows[itemRow].Cells["ItemID"].Value.ToString();
-            string selectedName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
-            string selectedStock = InventoryDGV.Rows[itemRow].Cells["Stock"].Value.ToString();
-            string selectedCost = InventoryDGV.Rows[itemRow].Cells["Cost"].Value.ToString();
-            string selectedAggregate = InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value.ToString();
-            string selectedStatus = InventoryDGV.Rows[itemRow].Cells["Status"].Value.ToString();
+            
+        }
 
-            NameBox.Text = selectedName;
-            StockBox.Text = selectedStock;
-            CostBox.Text = selectedCost;
-            AggregateBox.Text = selectedAggregate;
-            CodeBox.Text = selectedID;
-            if (Convert.ToInt32(selectedStatus) == 0)
+
+        public static byte[] ReadPhoto(string photoID)
+        {
+            try
             {
-                StatusBox.Text = "Good";
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    string query = "SELECT `Photo` FROM `inventory` WHERE ItemID = @itemID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@itemID", photoID);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
+                                {
+                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
+                                    byte[] photoBytes = new byte[byteSize];
+                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
+                                    return photoBytes;
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"Photo cannot be loaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return null;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Photo not found for item with ID {photoID}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return null;
+                            }
+                        }
+                    }
+                }
             }
-            else if (Convert.ToInt32(selectedStatus) == 1)
+            catch (Exception ex)
             {
-                StatusBox.Text = "Fair";
-            }
-            else if (Convert.ToInt32(selectedStatus) == 2)
-            {
-                StatusBox.Text = "Critical";
-            }
-            else
-            {
-                StatusBox.Text = "Empty";
+                MessageBox.Show(ex.Message + "\nat ReadPhoto() InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
+
+
 
         private void ShipmentBackBtn_Click(object sender, EventArgs e)
         {
@@ -205,6 +224,8 @@ namespace TriforceSalon
             AddNameBox.Text = "";
             AddCostBox.Text = "";
             AddAggregateBox.Text = "";
+
+            PhotoByteHolder = null;
 
             InventoryPanel.Visible = true;
             ShipmentPanel.Visible = false;
@@ -233,12 +254,24 @@ namespace TriforceSalon
             EditCostBox.Text = selectedCost;
             EditAggregateBox.Text = selectedAggregate;
             EditIDBox.Text = selectedID;
+
+            byte[] tempByte = ReadPhoto(selectedID);
+            if (tempByte != null && tempByte.Length > 0)
+            {
+                using (MemoryStream stream = new MemoryStream(tempByte))
+                {
+                    PhotoByteHolder = tempByte;
+                    pictureBox3.Image = Image.FromStream(stream);
+                    return;
+                }
+            }
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             DefaultLoad();
         }
+
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
@@ -253,7 +286,7 @@ namespace TriforceSalon
                 {
                     connection.Open();
                     string query =
-                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Aggregate = @aggregate " +
+                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Aggregate = @aggregate, Photo = @photo " +
                         "WHERE ItemID = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
@@ -261,6 +294,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@cost", EditCostBox.Text);
                         querycmd.Parameters.AddWithValue("@aggregate", EditAggregateBox.Text);
                         querycmd.Parameters.AddWithValue("@itemID", EditIDBox.Text);
+                        querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
                         querycmd.ExecuteNonQuery();
                         DefaultLoad();
                     }
@@ -323,6 +357,16 @@ namespace TriforceSalon
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+            if (PhotoByteHolder == null)
+            {
+                MessageBox.Show("No photo selected, please upload a photo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(AddIDBox.Text) || string.IsNullOrEmpty(AddNameBox.Text) || string.IsNullOrEmpty(AddCostBox.Text) || string.IsNullOrEmpty(AddAggregateBox.Text))
+            {
+                MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             DialogResult result = MessageBox.Show($"Do you want to add this new product?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes)
             {
@@ -334,8 +378,8 @@ namespace TriforceSalon
                 {
                     connection.Open();
                     string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status)";
+                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`,`Photo`) VALUES" +
+                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status, @photo)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", AddIDBox.Text);
@@ -344,6 +388,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@cost", AddCostBox.Text);
                         querycmd.Parameters.AddWithValue("@aggregate", AddAggregateBox.Text);
                         querycmd.Parameters.AddWithValue("@status", 3);
+                        querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
                         querycmd.ExecuteNonQuery();
                         DefaultLoad();
                     }
@@ -364,6 +409,60 @@ namespace TriforceSalon
             AddIDBox.Text = randomID.ToString();
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Guna2Button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+                Image image = Image.FromFile(selectedFile);
+                pictureBox1.Image = image;
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, image.RawFormat);
+                    PhotoByteHolder = ms.ToArray();
+                }
+            }
+        }
+
+        private void EditPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.bmp; *.png)|*.jpg; *.jpeg; *.bmp; *.png|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = false;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBox3.Image = new Bitmap(openFileDialog.FileName);
+                    PhotoByteHolder = File.ReadAllBytes(openFileDialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+
         private void AddPanel_Paint(object sender, PaintEventArgs e)
         {
 
@@ -374,7 +473,7 @@ namespace TriforceSalon
             try
             {
                 connection.Open();
-                string sql = "SELECT * FROM `inventory`";
+                string sql = "SELECT `ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status` FROM `inventory`";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -429,13 +528,54 @@ namespace TriforceSalon
             string itemName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
             int status = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Status"].Value);
 
-            if (status <= 1)
+            if (status <= 2)
             {
                 MessageBox.Show($"There is still ample supply of\n{itemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             ShipmentPanel.Visible = true;
             InventoryPanel.Visible = false;
+
+            string selectedID = InventoryDGV.Rows[itemRow].Cells["ItemID"].Value.ToString();
+            string selectedName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
+            string selectedStock = InventoryDGV.Rows[itemRow].Cells["Stock"].Value.ToString();
+            string selectedCost = InventoryDGV.Rows[itemRow].Cells["Cost"].Value.ToString();
+            string selectedAggregate = InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value.ToString();
+            string selectedStatus = InventoryDGV.Rows[itemRow].Cells["Status"].Value.ToString();
+
+            NameBox.Text = selectedName;
+            StockBox.Text = selectedStock;
+            CostBox.Text = selectedCost;
+            AggregateBox.Text = selectedAggregate;
+            CodeBox.Text = selectedID;
+            if (Convert.ToInt32(selectedStatus) == 0)
+            {
+                StatusBox.Text = "Good";
+            }
+            else if (Convert.ToInt32(selectedStatus) == 1)
+            {
+                StatusBox.Text = "Fair";
+            }
+            else if (Convert.ToInt32(selectedStatus) == 2)
+            {
+                StatusBox.Text = "Critical";
+            }
+            else
+            {
+                StatusBox.Text = "Empty";
+            }
+
+            byte[] tempByte = ReadPhoto(selectedID);
+            if (tempByte != null && tempByte.Length > 0)
+            {
+                using (MemoryStream stream = new MemoryStream(tempByte))
+                {
+                    PhotoByteHolder = tempByte;
+                    pictureBox2.Image = Image.FromStream(stream);
+                    return;
+                }
+            }
         }
 
         private void InventoryDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
