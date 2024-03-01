@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -71,7 +71,6 @@ namespace TriforceSalon
                     if (openForm is MainForm mainForm)
                     {
                         mainForm.ShowAdmin();
-                        //mainForm.ShowAddService();
                         break;
                     }
                 }
@@ -79,42 +78,6 @@ namespace TriforceSalon
                 return;
             }
 
-            if (string.Equals(Username, "Manager", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(Password, "Manager123", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show("Manager log in success", "Welcome",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForm mainForm)
-                    {
-                        mainForm.ShowInventory();
-                        //mainForm.ShowAddService();
-                        break;
-                    }
-                }
-                Clear();
-                return;
-            }
-
-            if (string.Equals(Username, "Staff", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(Password, "Staff123", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show("Staff log in success", "Welcome",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForm mainForm)
-                    {
-                        //mainForm.ShowInventory();
-                        //mainForm.ShowAddService();
-                        mainForm.ShowWalkIn();
-                        break;
-                    }
-                }
-                Clear();
-                return;
-            }
             Method.Login(Username, Password);
             Clear();
         }

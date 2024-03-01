@@ -129,6 +129,12 @@
     <Compile Include="Ticket System\CustomerTicket.Designer.cs">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AddProduct Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddProduct Inventory.Designer.cs">
+      <DependentUpon>AddProduct Inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,6 +147,12 @@
     </Compile>
     <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\EditProduct Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EditProduct Inventory.Designer.cs">
+      <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
@@ -174,12 +186,18 @@
     </Compile>
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
-    </Compile>
+    </Compile>      
     <Compile Include="UserControls\Receptionist Controls\ServicesUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Receptionist Controls\ServicesUserControl.Designer.cs">
       <DependentUpon>ServicesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RequestShipment Inventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RequestShipment Inventory.Designer.cs">
+      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>    
     </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
@@ -200,13 +218,19 @@
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
-      <DependentUpon>CustomerTicket.cs</DependentUpon>
+      <DependentUpon>CustomerTicket.cs</DependentUpon>      
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AddProduct Inventory.resx">
+      <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EditProduct Inventory.resx">
+      <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
@@ -230,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\ServicesUserControl.resx">
       <DependentUpon>ServicesUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RequestShipment Inventory.resx">
+      <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SigninPage.resx">
       <DependentUpon>SigninPage.cs</DependentUpon>
@@ -274,6 +301,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default user icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request1 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request2 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request2 icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\request3 icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\access icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back icon %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\savekita icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discard icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add icon %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
