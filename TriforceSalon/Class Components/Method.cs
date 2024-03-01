@@ -29,9 +29,9 @@ namespace TriforceSalon
         public static string Name, Username, Email, Password,
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
-            Availability;
+            Availability, Access;
         public static DateTime Birthdate;
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public static void ReadUserData(string user)
@@ -59,6 +59,7 @@ namespace TriforceSalon
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
                                 ServiceID = Convert.ToInt32(reader["ServiceID"]);
                                 Availability = reader["Availability"].ToString();
+                                Access = reader["AccountAccess"].ToString();
 
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
@@ -85,14 +86,43 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ReadUserData() method", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, int newID)
+        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, string newAccess, int ID)
         {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
 
-        } //empty
+                    string query = "UPDATE accounts SET Username = @newUsername WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newUsername", newUsername);
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+
+                    query = "UPDATE salon_employees SET Name = @newName, Photo = @newPhoto, AccountAccess = @newAccess WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newName", newName);
+                        cmd.Parameters.AddWithValue("@newPhoto", newPhoto);
+                        cmd.Parameters.AddWithValue("@newAccess", newAccess);
+
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static bool Login(string inputID, string inputPassword)
         {
@@ -103,7 +133,7 @@ namespace TriforceSalon
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (10000 <= AccountID && AccountID < 100000)
+                    if (string.Equals(Access, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
                         InventoryPage.StoreID(Convert.ToInt32(inputID));
@@ -117,10 +147,16 @@ namespace TriforceSalon
                             }
                         }
                     }
-                    else if (1000 <= AccountID && AccountID < 10000)
+                    else if (string.Equals(Access, "Receptionist", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show("Call walk-in transaction at\nLine 123: Method.cs","Staff",
+                        MessageBox.Show("Call receptionist's transaction at\nLine 124: Method.cs", "receptionist",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (string.Equals(Access, "Staff", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ResetAttempt(inputID);
+                        MessageBox.Show("Call staff's transaction at\nLine 130: Method.cs", "Staff",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     LogUser(AccountID);
@@ -207,20 +243,11 @@ namespace TriforceSalon
             Random random = new Random();
             int NewID;
 
-            if (10000 <= IDinput && IDinput <= 99999)
+            do
             {
-                do
-                {
-                    NewID = random.Next(1000, 10000);
-                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
-            }
-            else
-            {
-                do
-                {
-                    NewID = random.Next(10000, 100000);
-                } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
-            }
+                NewID = random.Next(10000, 100000);
+            } while (DuplicateChecker(NewID.ToString(), "AccountID", "accounts") || DuplicateChecker(NewID.ToString(), "AccountID", "salon_employees"));
+            
             return NewID;
         }
 
@@ -254,7 +281,7 @@ namespace TriforceSalon
             }
         }
 
-        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, string Role)
+        public static void UploadEmployeeData(string Name, string Username, string Email, string Password, DateTime Birthdate, byte[] Photo, string Role, string Access)
         {
             int accountID = GenerateID(0);
             UploadMemberData(Username, accountID, Password);
@@ -275,6 +302,7 @@ namespace TriforceSalon
                             string serviceTypeName = reader["ServiceTypeName"].ToString();
                             int serviceID = Convert.ToInt32(reader["ServiceID"]);
                             serviceTypes.Add(new Tuple<string, int>(serviceTypeName, serviceID));
+
                         }
                     }
                 }
@@ -307,8 +335,8 @@ namespace TriforceSalon
                 {
                     connection.Open();
                     string query = "INSERT INTO `salon_employees`" +
-                        "(`AccountID`, `Name`, `Email`, `Birthdate`, `Photo`, `AccountStatus`, `ServiceID`, `Availability`) VALUES" +
-                        "(@accountID, @name, @email, @birthdate, @photo, @accountStatus, @serviceID, @availability)";
+                        "(`AccountID`, `Name`, `Email`, `Birthdate`, `Photo`, `AccountStatus`, `ServiceID`, `Availability`, `AccountAccess`) VALUES" +
+                        "(@accountID, @name, @email, @birthdate, @photo, @accountStatus, @serviceID, @availability, @access)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@accountID", accountID);
@@ -320,8 +348,10 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@accountStatus", 0);
                         querycmd.Parameters.AddWithValue("@serviceID", selectedServiceID);
                         querycmd.Parameters.AddWithValue("@availability", "Offline");
+                        querycmd.Parameters.AddWithValue("@access", Access);
 
                         int rowsaffected = querycmd.ExecuteNonQuery();
+                        MessageBox.Show($"Employee Data Uploaded.\nUse this ID to login: {accountID}");
                     }
                 }
             }
@@ -330,7 +360,6 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat UploadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK);
             }
         }
-
 
         public static void UploadMemberData(string Username, int AccountID, string Password)
         {

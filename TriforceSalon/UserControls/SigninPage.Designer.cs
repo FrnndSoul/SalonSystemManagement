@@ -136,12 +136,13 @@
             this.label1.Location = new System.Drawing.Point(107, 363);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 37);
+            this.label1.Size = new System.Drawing.Size(44, 37);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Username";
+            this.label1.Text = "ID";
             // 
             // SigninBtn
             // 
+            this.SigninBtn.Animated = true;
             this.SigninBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.SigninBtn.BorderRadius = 20;
             this.SigninBtn.BorderThickness = 1;
@@ -162,6 +163,7 @@
             // 
             // PasswordTxtbox
             // 
+            this.PasswordTxtbox.Animated = true;
             this.PasswordTxtbox.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.PasswordTxtbox.BorderColor = System.Drawing.Color.Black;
             this.PasswordTxtbox.BorderRadius = 20;
@@ -186,6 +188,7 @@
             // 
             // UsernameTxtbox
             // 
+            this.UsernameTxtbox.Animated = true;
             this.UsernameTxtbox.AutoRoundedCorners = true;
             this.UsernameTxtbox.BorderColor = System.Drawing.Color.Black;
             this.UsernameTxtbox.BorderRadius = 24;

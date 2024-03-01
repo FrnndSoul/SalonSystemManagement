@@ -30,8 +30,8 @@ namespace TriforceSalon.Class_Components
 
         public ServiceTypes()
         {
-            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
-            //serviceTypes = GetServiceTypeInfo();
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            serviceTypes = GetServiceTypeInfo();
         }
         public void ServiceTypeInfoDGV()
         {
@@ -269,7 +269,6 @@ namespace TriforceSalon.Class_Components
                         conn.Open();
                         string query = "UPDATE service_type SET ServiceTypeName = @service_name";
                         byte[] imageData = null;
-
                         if (isNewServiceImageSelected)
                         {
                             using (Bitmap bmp = new Bitmap(ManagerServices.managerServicesInstance.ServiceTypePicB.Image))
