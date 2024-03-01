@@ -30,12 +30,12 @@
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.LogoutBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ReportsBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServicesBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.InventoryBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.ManagerPanel = new System.Windows.Forms.Panel();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -46,10 +46,10 @@
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 100;
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
-            this.guna2Panel1.Controls.Add(this.guna2Button4);
-            this.guna2Panel1.Controls.Add(this.guna2Button3);
-            this.guna2Panel1.Controls.Add(this.guna2Button2);
-            this.guna2Panel1.Controls.Add(this.guna2Button1);
+            this.guna2Panel1.Controls.Add(this.LogoutBtn);
+            this.guna2Panel1.Controls.Add(this.ReportsBtn);
+            this.guna2Panel1.Controls.Add(this.ServicesBtn);
+            this.guna2Panel1.Controls.Add(this.InventoryBtn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel1.Location = new System.Drawing.Point(-69, 0);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -71,92 +71,93 @@
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
             // 
-            // guna2Button4
+            // LogoutBtn
             // 
-            this.guna2Button4.Animated = true;
-            this.guna2Button4.AutoRoundedCorners = true;
-            this.guna2Button4.BorderRadius = 28;
-            this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button4.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button4.ForeColor = System.Drawing.Color.White;
-            this.guna2Button4.Image = global::TriforceSalon.Properties.Resources.logout_icon;
-            this.guna2Button4.Location = new System.Drawing.Point(84, 784);
-            this.guna2Button4.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2Button4.Name = "guna2Button4";
-            this.guna2Button4.Size = new System.Drawing.Size(197, 58);
-            this.guna2Button4.TabIndex = 3;
-            this.guna2Button4.Text = " Log-Out";
-            this.guna2Button4.UseTransparentBackground = true;
+            this.LogoutBtn.Animated = true;
+            this.LogoutBtn.AutoRoundedCorners = true;
+            this.LogoutBtn.BorderRadius = 28;
+            this.LogoutBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.LogoutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.LogoutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.LogoutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.LogoutBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.LogoutBtn.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogoutBtn.ForeColor = System.Drawing.Color.White;
+            this.LogoutBtn.Image = global::TriforceSalon.Properties.Resources.logout_icon;
+            this.LogoutBtn.Location = new System.Drawing.Point(84, 784);
+            this.LogoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.LogoutBtn.Name = "LogoutBtn";
+            this.LogoutBtn.Size = new System.Drawing.Size(197, 58);
+            this.LogoutBtn.TabIndex = 3;
+            this.LogoutBtn.Text = " Log-Out";
+            this.LogoutBtn.UseTransparentBackground = true;
+            this.LogoutBtn.Click += new System.EventHandler(this.LogoutBtn_Click);
             // 
-            // guna2Button3
+            // ReportsBtn
             // 
-            this.guna2Button3.Animated = true;
-            this.guna2Button3.AutoRoundedCorners = true;
-            this.guna2Button3.BorderRadius = 48;
-            this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button3.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(84, 498);
-            this.guna2Button3.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2Button3.Name = "guna2Button3";
-            this.guna2Button3.Size = new System.Drawing.Size(197, 98);
-            this.guna2Button3.TabIndex = 2;
-            this.guna2Button3.Text = "Reports";
-            this.guna2Button3.UseTransparentBackground = true;
+            this.ReportsBtn.Animated = true;
+            this.ReportsBtn.AutoRoundedCorners = true;
+            this.ReportsBtn.BorderRadius = 48;
+            this.ReportsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ReportsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ReportsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ReportsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ReportsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ReportsBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReportsBtn.ForeColor = System.Drawing.Color.White;
+            this.ReportsBtn.Location = new System.Drawing.Point(84, 498);
+            this.ReportsBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ReportsBtn.Name = "ReportsBtn";
+            this.ReportsBtn.Size = new System.Drawing.Size(197, 98);
+            this.ReportsBtn.TabIndex = 2;
+            this.ReportsBtn.Text = "Reports";
+            this.ReportsBtn.UseTransparentBackground = true;
             // 
-            // guna2Button2
+            // ServicesBtn
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.AutoRoundedCorners = true;
-            this.guna2Button2.BorderRadius = 48;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(82, 357);
-            this.guna2Button2.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(200, 98);
-            this.guna2Button2.TabIndex = 1;
-            this.guna2Button2.Text = "Services";
-            this.guna2Button2.UseTransparentBackground = true;
+            this.ServicesBtn.Animated = true;
+            this.ServicesBtn.AutoRoundedCorners = true;
+            this.ServicesBtn.BorderRadius = 48;
+            this.ServicesBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ServicesBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ServicesBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ServicesBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ServicesBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ServicesBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicesBtn.ForeColor = System.Drawing.Color.White;
+            this.ServicesBtn.Location = new System.Drawing.Point(82, 357);
+            this.ServicesBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ServicesBtn.Name = "ServicesBtn";
+            this.ServicesBtn.Size = new System.Drawing.Size(200, 98);
+            this.ServicesBtn.TabIndex = 1;
+            this.ServicesBtn.Text = "Services";
+            this.ServicesBtn.UseTransparentBackground = true;
             // 
-            // guna2Button1
+            // InventoryBtn
             // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.AutoRoundedCorners = true;
-            this.guna2Button1.BorderRadius = 48;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 21.75F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(82, 213);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(2);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(200, 98);
-            this.guna2Button1.TabIndex = 0;
-            this.guna2Button1.Text = "Inventory";
-            this.guna2Button1.UseTransparentBackground = true;
+            this.InventoryBtn.Animated = true;
+            this.InventoryBtn.AutoRoundedCorners = true;
+            this.InventoryBtn.BorderRadius = 48;
+            this.InventoryBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.InventoryBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.InventoryBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.InventoryBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.InventoryBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.InventoryBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.InventoryBtn.ForeColor = System.Drawing.Color.White;
+            this.InventoryBtn.Location = new System.Drawing.Point(82, 213);
+            this.InventoryBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.InventoryBtn.Name = "InventoryBtn";
+            this.InventoryBtn.Size = new System.Drawing.Size(200, 98);
+            this.InventoryBtn.TabIndex = 0;
+            this.InventoryBtn.Text = "Inventory";
+            this.InventoryBtn.UseTransparentBackground = true;
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel2.BorderRadius = 100;
-            this.guna2Panel2.Controls.Add(this.panel1);
+            this.guna2Panel2.Controls.Add(this.ManagerPanel);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel2.Location = new System.Drawing.Point(245, 14);
             this.guna2Panel2.Margin = new System.Windows.Forms.Padding(2);
@@ -164,13 +165,13 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1662, 1065);
             this.guna2Panel2.TabIndex = 1;
             // 
-            // panel1
+            // ManagerPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(81, 57);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1500, 950);
-            this.panel1.TabIndex = 0;
+            this.ManagerPanel.BackColor = System.Drawing.Color.White;
+            this.ManagerPanel.Location = new System.Drawing.Point(81, 57);
+            this.ManagerPanel.Name = "ManagerPanel";
+            this.ManagerPanel.Size = new System.Drawing.Size(1500, 950);
+            this.ManagerPanel.TabIndex = 0;
             // 
             // ManagerPage
             // 
@@ -195,11 +196,11 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button LogoutBtn;
+        private Guna.UI2.WinForms.Guna2Button ReportsBtn;
+        private Guna.UI2.WinForms.Guna2Button ServicesBtn;
+        private Guna.UI2.WinForms.Guna2Button InventoryBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel ManagerPanel;
     }
 }

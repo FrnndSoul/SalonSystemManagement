@@ -16,5 +16,20 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
         }
+
+        private void RequestBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AccessBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

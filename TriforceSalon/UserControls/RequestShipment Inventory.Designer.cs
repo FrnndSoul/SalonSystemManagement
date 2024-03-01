@@ -31,7 +31,7 @@
             this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
             this.IDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.CurentBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.StockBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.CostBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.AggregateBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.StatusBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -90,6 +90,7 @@
             this.IDBox.Name = "IDBox";
             this.IDBox.PasswordChar = '\0';
             this.IDBox.PlaceholderText = "";
+            this.IDBox.ReadOnly = true;
             this.IDBox.SelectedText = "";
             this.IDBox.Size = new System.Drawing.Size(550, 50);
             this.IDBox.TabIndex = 56;
@@ -116,35 +117,37 @@
             this.NameBox.Name = "NameBox";
             this.NameBox.PasswordChar = '\0';
             this.NameBox.PlaceholderText = "";
+            this.NameBox.ReadOnly = true;
             this.NameBox.SelectedText = "";
             this.NameBox.Size = new System.Drawing.Size(650, 50);
             this.NameBox.TabIndex = 57;
             // 
-            // CurentBox
+            // StockBox
             // 
-            this.CurentBox.Animated = true;
-            this.CurentBox.AutoRoundedCorners = true;
-            this.CurentBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CurentBox.BorderColor = System.Drawing.Color.Black;
-            this.CurentBox.BorderRadius = 24;
-            this.CurentBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CurentBox.DefaultText = "";
-            this.CurentBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CurentBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CurentBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CurentBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CurentBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CurentBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.CurentBox.ForeColor = System.Drawing.Color.Black;
-            this.CurentBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CurentBox.Location = new System.Drawing.Point(119, 325);
-            this.CurentBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.CurentBox.Name = "CurentBox";
-            this.CurentBox.PasswordChar = '\0';
-            this.CurentBox.PlaceholderText = "";
-            this.CurentBox.SelectedText = "";
-            this.CurentBox.Size = new System.Drawing.Size(400, 50);
-            this.CurentBox.TabIndex = 58;
+            this.StockBox.Animated = true;
+            this.StockBox.AutoRoundedCorners = true;
+            this.StockBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.StockBox.BorderColor = System.Drawing.Color.Black;
+            this.StockBox.BorderRadius = 24;
+            this.StockBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.StockBox.DefaultText = "";
+            this.StockBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.StockBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.StockBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.StockBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.StockBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.StockBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.StockBox.ForeColor = System.Drawing.Color.Black;
+            this.StockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.StockBox.Location = new System.Drawing.Point(119, 325);
+            this.StockBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.StockBox.Name = "StockBox";
+            this.StockBox.PasswordChar = '\0';
+            this.StockBox.PlaceholderText = "";
+            this.StockBox.ReadOnly = true;
+            this.StockBox.SelectedText = "";
+            this.StockBox.Size = new System.Drawing.Size(400, 50);
+            this.StockBox.TabIndex = 58;
             // 
             // CostBox
             // 
@@ -168,6 +171,7 @@
             this.CostBox.Name = "CostBox";
             this.CostBox.PasswordChar = '\0';
             this.CostBox.PlaceholderText = "";
+            this.CostBox.ReadOnly = true;
             this.CostBox.SelectedText = "";
             this.CostBox.Size = new System.Drawing.Size(400, 50);
             this.CostBox.TabIndex = 59;
@@ -194,6 +198,7 @@
             this.AggregateBox.Name = "AggregateBox";
             this.AggregateBox.PasswordChar = '\0';
             this.AggregateBox.PlaceholderText = "";
+            this.AggregateBox.ReadOnly = true;
             this.AggregateBox.SelectedText = "";
             this.AggregateBox.Size = new System.Drawing.Size(400, 50);
             this.AggregateBox.TabIndex = 60;
@@ -220,6 +225,7 @@
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.PasswordChar = '\0';
             this.StatusBox.PlaceholderText = "";
+            this.StatusBox.ReadOnly = true;
             this.StatusBox.SelectedText = "";
             this.StatusBox.Size = new System.Drawing.Size(550, 50);
             this.StatusBox.TabIndex = 61;
@@ -258,7 +264,7 @@
             this.QuantityBox.BorderColor = System.Drawing.Color.Black;
             this.QuantityBox.BorderRadius = 24;
             this.QuantityBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.QuantityBox.DefaultText = "";
+            this.QuantityBox.DefaultText = "0";
             this.QuantityBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.QuantityBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.QuantityBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -272,9 +278,11 @@
             this.QuantityBox.Name = "QuantityBox";
             this.QuantityBox.PasswordChar = '\0';
             this.QuantityBox.PlaceholderText = "";
+            this.QuantityBox.ReadOnly = true;
             this.QuantityBox.SelectedText = "";
             this.QuantityBox.Size = new System.Drawing.Size(450, 50);
             this.QuantityBox.TabIndex = 63;
+            this.QuantityBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AddQtyBtn
             // 
@@ -293,6 +301,7 @@
             this.AddQtyBtn.TabIndex = 64;
             this.AddQtyBtn.Text = "+";
             this.AddQtyBtn.UseTransparentBackground = true;
+            this.AddQtyBtn.Click += new System.EventHandler(this.AddQtyBtn_Click);
             // 
             // SubQtyBtn
             // 
@@ -311,6 +320,7 @@
             this.SubQtyBtn.TabIndex = 65;
             this.SubQtyBtn.Text = "-";
             this.SubQtyBtn.UseTransparentBackground = true;
+            this.SubQtyBtn.Click += new System.EventHandler(this.SubQtyBtn_Click);
             // 
             // label3
             // 
@@ -451,6 +461,7 @@
             this.RequestBtn.TabIndex = 53;
             this.RequestBtn.Text = " Request Shipment";
             this.RequestBtn.UseTransparentBackground = true;
+            this.RequestBtn.Click += new System.EventHandler(this.RequestBtn_Click);
             // 
             // RequestShipment_Inventory
             // 
@@ -472,7 +483,7 @@
             this.Controls.Add(this.StatusBox);
             this.Controls.Add(this.AggregateBox);
             this.Controls.Add(this.CostBox);
-            this.Controls.Add(this.CurentBox);
+            this.Controls.Add(this.StockBox);
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.IDBox);
             this.Controls.Add(this.BackBtn);
@@ -492,7 +503,7 @@
         private Guna.UI2.WinForms.Guna2Button BackBtn;
         private Guna.UI2.WinForms.Guna2TextBox IDBox;
         private Guna.UI2.WinForms.Guna2TextBox NameBox;
-        private Guna.UI2.WinForms.Guna2TextBox CurentBox;
+        private Guna.UI2.WinForms.Guna2TextBox StockBox;
         private Guna.UI2.WinForms.Guna2TextBox CostBox;
         private Guna.UI2.WinForms.Guna2TextBox AggregateBox;
         private Guna.UI2.WinForms.Guna2TextBox StatusBox;

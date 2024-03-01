@@ -36,11 +36,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.AggregateBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.CostBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.CurentBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.StockBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.IDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.UploadPhoto = new Guna.UI2.WinForms.Guna2Button();
+            this.PhotoBox = new Guna.UI2.WinForms.Guna2PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Shapes1
@@ -145,6 +148,7 @@
             this.AggregateBox.SelectedText = "";
             this.AggregateBox.Size = new System.Drawing.Size(400, 50);
             this.AggregateBox.TabIndex = 75;
+            this.AggregateBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AggregateBox_KeyPress);
             // 
             // CostBox
             // 
@@ -171,32 +175,34 @@
             this.CostBox.SelectedText = "";
             this.CostBox.Size = new System.Drawing.Size(400, 50);
             this.CostBox.TabIndex = 74;
+            this.CostBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CostBox_KeyPress);
             // 
-            // CurentBox
+            // StockBox
             // 
-            this.CurentBox.Animated = true;
-            this.CurentBox.AutoRoundedCorners = true;
-            this.CurentBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CurentBox.BorderColor = System.Drawing.Color.Black;
-            this.CurentBox.BorderRadius = 24;
-            this.CurentBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CurentBox.DefaultText = "";
-            this.CurentBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CurentBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CurentBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CurentBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CurentBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CurentBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.CurentBox.ForeColor = System.Drawing.Color.Black;
-            this.CurentBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CurentBox.Location = new System.Drawing.Point(120, 563);
-            this.CurentBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.CurentBox.Name = "CurentBox";
-            this.CurentBox.PasswordChar = '\0';
-            this.CurentBox.PlaceholderText = "";
-            this.CurentBox.SelectedText = "";
-            this.CurentBox.Size = new System.Drawing.Size(400, 50);
-            this.CurentBox.TabIndex = 73;
+            this.StockBox.Animated = true;
+            this.StockBox.AutoRoundedCorners = true;
+            this.StockBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.StockBox.BorderColor = System.Drawing.Color.Black;
+            this.StockBox.BorderRadius = 24;
+            this.StockBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.StockBox.DefaultText = "";
+            this.StockBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.StockBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.StockBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.StockBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.StockBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.StockBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.StockBox.ForeColor = System.Drawing.Color.Black;
+            this.StockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.StockBox.Location = new System.Drawing.Point(120, 563);
+            this.StockBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.StockBox.Name = "StockBox";
+            this.StockBox.PasswordChar = '\0';
+            this.StockBox.PlaceholderText = "";
+            this.StockBox.SelectedText = "";
+            this.StockBox.Size = new System.Drawing.Size(400, 50);
+            this.StockBox.TabIndex = 73;
+            this.StockBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CurentBox_KeyPress);
             // 
             // NameBox
             // 
@@ -246,6 +252,7 @@
             this.IDBox.Name = "IDBox";
             this.IDBox.PasswordChar = '\0';
             this.IDBox.PlaceholderText = "";
+            this.IDBox.ReadOnly = true;
             this.IDBox.SelectedText = "";
             this.IDBox.Size = new System.Drawing.Size(550, 50);
             this.IDBox.TabIndex = 71;
@@ -271,6 +278,7 @@
             this.DiscardBtn.TabIndex = 82;
             this.DiscardBtn.Text = " Discard";
             this.DiscardBtn.UseTransparentBackground = true;
+            this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
             // 
             // SaveBtn
             // 
@@ -293,12 +301,48 @@
             this.SaveBtn.TabIndex = 81;
             this.SaveBtn.Text = " Save Changes";
             this.SaveBtn.UseTransparentBackground = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // UploadPhoto
+            // 
+            this.UploadPhoto.Animated = true;
+            this.UploadPhoto.BackColor = System.Drawing.Color.Transparent;
+            this.UploadPhoto.BorderRadius = 20;
+            this.UploadPhoto.BorderThickness = 1;
+            this.UploadPhoto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.UploadPhoto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.UploadPhoto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadPhoto.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.UploadPhoto.Font = new System.Drawing.Font("Chinacat", 20.25F);
+            this.UploadPhoto.ForeColor = System.Drawing.Color.White;
+            this.UploadPhoto.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
+            this.UploadPhoto.Location = new System.Drawing.Point(341, 230);
+            this.UploadPhoto.Margin = new System.Windows.Forms.Padding(2);
+            this.UploadPhoto.Name = "UploadPhoto";
+            this.UploadPhoto.Size = new System.Drawing.Size(238, 70);
+            this.UploadPhoto.TabIndex = 94;
+            this.UploadPhoto.Text = "Upload Photo";
+            this.UploadPhoto.UseTransparentBackground = true;
+            this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
+            // 
+            // PhotoBox
+            // 
+            this.PhotoBox.ImageRotate = 0F;
+            this.PhotoBox.Location = new System.Drawing.Point(116, 100);
+            this.PhotoBox.Name = "PhotoBox";
+            this.PhotoBox.Size = new System.Drawing.Size(200, 200);
+            this.PhotoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PhotoBox.TabIndex = 93;
+            this.PhotoBox.TabStop = false;
             // 
             // EditProduct_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.UploadPhoto);
+            this.Controls.Add(this.PhotoBox);
             this.Controls.Add(this.DiscardBtn);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.label5);
@@ -308,12 +352,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.AggregateBox);
             this.Controls.Add(this.CostBox);
-            this.Controls.Add(this.CurentBox);
+            this.Controls.Add(this.StockBox);
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.IDBox);
             this.Controls.Add(this.guna2Shapes1);
             this.Name = "EditProduct_Inventory";
             this.Size = new System.Drawing.Size(1500, 950);
+            ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,10 +374,12 @@
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2TextBox AggregateBox;
         private Guna.UI2.WinForms.Guna2TextBox CostBox;
-        private Guna.UI2.WinForms.Guna2TextBox CurentBox;
+        private Guna.UI2.WinForms.Guna2TextBox StockBox;
         private Guna.UI2.WinForms.Guna2TextBox NameBox;
         private Guna.UI2.WinForms.Guna2TextBox IDBox;
         private Guna.UI2.WinForms.Guna2Button DiscardBtn;
         private Guna.UI2.WinForms.Guna2Button SaveBtn;
+        private Guna.UI2.WinForms.Guna2Button UploadPhoto;
+        private Guna.UI2.WinForms.Guna2PictureBox PhotoBox;
     }
 }

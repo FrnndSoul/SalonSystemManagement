@@ -30,6 +30,12 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.UserTab = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.BirthdayPicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.EmailBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.StatusBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -38,22 +44,25 @@
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.EditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UploadBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.ChangeRoleBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.ServiceTypesTab = new System.Windows.Forms.TabPage();
             this.ServiceTypesGDV = new System.Windows.Forms.DataGridView();
             this.SignoutBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.Photo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.RoleBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.AccessBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.tabControl1.SuspendLayout();
             this.UserTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
             this.ServiceTypesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -70,6 +79,16 @@
             // UserTab
             // 
             this.UserTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.UserTab.Controls.Add(this.AccessBox);
+            this.UserTab.Controls.Add(this.label8);
+            this.UserTab.Controls.Add(this.RoleBox);
+            this.UserTab.Controls.Add(this.label7);
+            this.UserTab.Controls.Add(this.label6);
+            this.UserTab.Controls.Add(this.label5);
+            this.UserTab.Controls.Add(this.label4);
+            this.UserTab.Controls.Add(this.label3);
+            this.UserTab.Controls.Add(this.label2);
+            this.UserTab.Controls.Add(this.label1);
             this.UserTab.Controls.Add(this.BirthdayPicker);
             this.UserTab.Controls.Add(this.EmailBox);
             this.UserTab.Controls.Add(this.StatusBox);
@@ -80,7 +99,6 @@
             this.UserTab.Controls.Add(this.UploadBtn);
             this.UserTab.Controls.Add(this.Photo);
             this.UserTab.Controls.Add(this.DiscardBtn);
-            this.UserTab.Controls.Add(this.ChangeRoleBtn);
             this.UserTab.Controls.Add(this.SaveBtn);
             this.UserTab.Controls.Add(this.UserDGV);
             this.UserTab.Location = new System.Drawing.Point(4, 35);
@@ -91,6 +109,60 @@
             this.UserTab.Text = "List of Users";
             this.UserTab.Click += new System.EventHandler(this.UserTab_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1370, 678);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 26);
+            this.label6.TabIndex = 66;
+            this.label6.Text = "Role";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1370, 592);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 26);
+            this.label5.TabIndex = 65;
+            this.label5.Text = "Status";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1371, 506);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 26);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "ID";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(961, 678);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 26);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "Email";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(961, 592);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 26);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "Username";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(961, 506);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 26);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Name";
+            // 
             // BirthdayPicker
             // 
             this.BirthdayPicker.Animated = true;
@@ -99,16 +171,17 @@
             this.BirthdayPicker.BorderRadius = 24;
             this.BirthdayPicker.BorderThickness = 1;
             this.BirthdayPicker.Checked = true;
+            this.BirthdayPicker.Enabled = false;
             this.BirthdayPicker.FillColor = System.Drawing.Color.White;
             this.BirthdayPicker.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.BirthdayPicker.ForeColor = System.Drawing.Color.Black;
             this.BirthdayPicker.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.BirthdayPicker.IndicateFocus = true;
-            this.BirthdayPicker.Location = new System.Drawing.Point(1384, 664);
+            this.BirthdayPicker.Location = new System.Drawing.Point(968, 793);
             this.BirthdayPicker.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.BirthdayPicker.MinDate = new System.DateTime(1753, 12, 21, 0, 0, 0, 0);
             this.BirthdayPicker.Name = "BirthdayPicker";
-            this.BirthdayPicker.Size = new System.Drawing.Size(400, 50);
+            this.BirthdayPicker.Size = new System.Drawing.Size(395, 50);
             this.BirthdayPicker.TabIndex = 60;
             this.BirthdayPicker.UseTransparentBackground = true;
             this.BirthdayPicker.Value = new System.DateTime(2024, 2, 25, 0, 0, 0, 0);
@@ -126,11 +199,12 @@
             this.EmailBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.EmailBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.EmailBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EmailBox.Enabled = false;
             this.EmailBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EmailBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.EmailBox.ForeColor = System.Drawing.Color.Black;
             this.EmailBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EmailBox.Location = new System.Drawing.Point(963, 664);
+            this.EmailBox.Location = new System.Drawing.Point(963, 709);
             this.EmailBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.EmailBox.Name = "EmailBox";
             this.EmailBox.PasswordChar = '\0';
@@ -152,11 +226,12 @@
             this.StatusBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.StatusBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.StatusBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.StatusBox.Enabled = false;
             this.StatusBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.StatusBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.StatusBox.ForeColor = System.Drawing.Color.Black;
             this.StatusBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.StatusBox.Location = new System.Drawing.Point(1384, 580);
+            this.StatusBox.Location = new System.Drawing.Point(1376, 623);
             this.StatusBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.PasswordChar = '\0';
@@ -178,11 +253,12 @@
             this.UsernameBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.UsernameBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.UsernameBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.UsernameBox.Enabled = false;
             this.UsernameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.UsernameBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.UsernameBox.ForeColor = System.Drawing.Color.Black;
             this.UsernameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.UsernameBox.Location = new System.Drawing.Point(963, 580);
+            this.UsernameBox.Location = new System.Drawing.Point(966, 623);
             this.UsernameBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.UsernameBox.Name = "UsernameBox";
             this.UsernameBox.PasswordChar = '\0';
@@ -204,11 +280,12 @@
             this.IDBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.IDBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.IDBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.IDBox.Enabled = false;
             this.IDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.IDBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.IDBox.ForeColor = System.Drawing.Color.Black;
             this.IDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.IDBox.Location = new System.Drawing.Point(1384, 506);
+            this.IDBox.Location = new System.Drawing.Point(1376, 537);
             this.IDBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.IDBox.Name = "IDBox";
             this.IDBox.PasswordChar = '\0';
@@ -230,11 +307,12 @@
             this.NameBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.NameBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.NameBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.NameBox.Enabled = false;
             this.NameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.NameBox.ForeColor = System.Drawing.Color.Black;
             this.NameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.NameBox.Location = new System.Drawing.Point(963, 506);
+            this.NameBox.Location = new System.Drawing.Point(966, 537);
             this.NameBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.NameBox.Name = "NameBox";
             this.NameBox.PasswordChar = '\0';
@@ -285,6 +363,16 @@
             this.UploadBtn.Text = "Upload Photo";
             this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click);
             // 
+            // Photo
+            // 
+            this.Photo.ImageRotate = 0F;
+            this.Photo.Location = new System.Drawing.Point(1166, 16);
+            this.Photo.Name = "Photo";
+            this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.Photo.Size = new System.Drawing.Size(400, 400);
+            this.Photo.TabIndex = 52;
+            this.Photo.TabStop = false;
+            // 
             // DiscardBtn
             // 
             this.DiscardBtn.Animated = true;
@@ -305,27 +393,6 @@
             this.DiscardBtn.TabIndex = 51;
             this.DiscardBtn.Text = "Discard";
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
-            // 
-            // ChangeRoleBtn
-            // 
-            this.ChangeRoleBtn.Animated = true;
-            this.ChangeRoleBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.ChangeRoleBtn.BorderRadius = 20;
-            this.ChangeRoleBtn.BorderThickness = 1;
-            this.ChangeRoleBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.ChangeRoleBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.ChangeRoleBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.ChangeRoleBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.ChangeRoleBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.ChangeRoleBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
-            this.ChangeRoleBtn.ForeColor = System.Drawing.Color.White;
-            this.ChangeRoleBtn.Location = new System.Drawing.Point(258, 876);
-            this.ChangeRoleBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.ChangeRoleBtn.Name = "ChangeRoleBtn";
-            this.ChangeRoleBtn.Size = new System.Drawing.Size(225, 45);
-            this.ChangeRoleBtn.TabIndex = 50;
-            this.ChangeRoleBtn.Text = "Promote/Demote";
-            this.ChangeRoleBtn.Click += new System.EventHandler(this.ChangeRoleBtn_Click);
             // 
             // SaveBtn
             // 
@@ -363,7 +430,7 @@
             this.UserDGV.ReadOnly = true;
             this.UserDGV.RowHeadersWidth = 51;
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserDGV.Size = new System.Drawing.Size(937, 819);
+            this.UserDGV.Size = new System.Drawing.Size(937, 823);
             this.UserDGV.TabIndex = 0;
             this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick_1);
             // 
@@ -431,15 +498,65 @@
             this.guna2PictureBox1.TabIndex = 62;
             this.guna2PictureBox1.TabStop = false;
             // 
-            // Photo
+            // label7
             // 
-            this.Photo.ImageRotate = 0F;
-            this.Photo.Location = new System.Drawing.Point(1166, 16);
-            this.Photo.Name = "Photo";
-            this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.Photo.Size = new System.Drawing.Size(400, 400);
-            this.Photo.TabIndex = 52;
-            this.Photo.TabStop = false;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(963, 764);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(62, 26);
+            this.label7.TabIndex = 67;
+            this.label7.Text = "Email";
+            // 
+            // RoleBox
+            // 
+            this.RoleBox.AutoRoundedCorners = true;
+            this.RoleBox.BackColor = System.Drawing.Color.Transparent;
+            this.RoleBox.BorderColor = System.Drawing.Color.Black;
+            this.RoleBox.BorderRadius = 17;
+            this.RoleBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.RoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RoleBox.Enabled = false;
+            this.RoleBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RoleBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RoleBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RoleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.RoleBox.ItemHeight = 30;
+            this.RoleBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RoleBox.ItemsAppearance.SelectedFont = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RoleBox.Location = new System.Drawing.Point(1371, 709);
+            this.RoleBox.Name = "RoleBox";
+            this.RoleBox.Size = new System.Drawing.Size(405, 36);
+            this.RoleBox.TabIndex = 68;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1371, 764);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 26);
+            this.label8.TabIndex = 69;
+            this.label8.Text = "Access";
+            // 
+            // AccessBox
+            // 
+            this.AccessBox.AutoRoundedCorners = true;
+            this.AccessBox.BackColor = System.Drawing.Color.Transparent;
+            this.AccessBox.BorderColor = System.Drawing.Color.Black;
+            this.AccessBox.BorderRadius = 17;
+            this.AccessBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.AccessBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AccessBox.Enabled = false;
+            this.AccessBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.AccessBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.AccessBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.AccessBox.ItemHeight = 30;
+            this.AccessBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.AccessBox.ItemsAppearance.SelectedFont = new System.Drawing.Font("Stanberry", 15.75F);
+            this.AccessBox.Location = new System.Drawing.Point(1369, 793);
+            this.AccessBox.Name = "AccessBox";
+            this.AccessBox.Size = new System.Drawing.Size(405, 36);
+            this.AccessBox.TabIndex = 70;
             // 
             // AdminForm
             // 
@@ -455,11 +572,12 @@
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.UserTab.ResumeLayout(false);
+            this.UserTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).EndInit();
             this.ServiceTypesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypesGDV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -473,7 +591,6 @@
         private System.Windows.Forms.DataGridView ServiceTypesGDV;
         private Guna.UI2.WinForms.Guna2Button SaveBtn;
         private Guna.UI2.WinForms.Guna2Button DiscardBtn;
-        private Guna.UI2.WinForms.Guna2Button ChangeRoleBtn;
         private Guna.UI2.WinForms.Guna2CirclePictureBox Photo;
         private Guna.UI2.WinForms.Guna2Button UploadBtn;
         private Guna.UI2.WinForms.Guna2Button EditBtn;
@@ -485,5 +602,15 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker BirthdayPicker;
         private Guna.UI2.WinForms.Guna2Button SignoutBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2ComboBox AccessBox;
+        private System.Windows.Forms.Label label8;
+        private Guna.UI2.WinForms.Guna2ComboBox RoleBox;
+        private System.Windows.Forms.Label label7;
     }
 }

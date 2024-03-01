@@ -31,7 +31,7 @@ namespace TriforceSalon
             UsernameInput, PasswordInput,
             Availability;
         public static DateTime Birthdate;
-        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public static void ReadUserData(string user)
@@ -89,10 +89,39 @@ namespace TriforceSalon
             }
         }
 
-        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, int newID)
+        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, string newAccess, int ID)
         {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
 
-        } //empty
+                    string query = "UPDATE accounts SET Username = @newUsername WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newUsername", newUsername);
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+
+                    query = "UPDATE salon_employees SET Name = @newName, Photo = @newPhoto, AccountAccess = @newAccess WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@newName", newName);
+                        cmd.Parameters.AddWithValue("@newPhoto", newPhoto);
+                        cmd.Parameters.AddWithValue("@newAccess", newAccess);
+
+                        cmd.Parameters.AddWithValue("@accountID", ID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static bool Login(string inputID, string inputPassword)
         {
