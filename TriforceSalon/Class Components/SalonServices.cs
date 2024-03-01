@@ -164,7 +164,7 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "select ServiceTypeID, ServiceImage, ServiceName, ServiceAmount, ServiceVariationID from salon_services";
+                    string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemID` FROM `salon_services`";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -182,9 +182,10 @@ namespace TriforceSalon.Class_Components
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in GetSalonService()", ex.Message);
+                MessageBox.Show(ex.Message, "Error in GetSalonService()");
             }
         }
+
         public void AddSalonServices()
         {
             try
