@@ -114,6 +114,7 @@
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
     <Compile Include="Class Components\ServiceTypes.cs" />
+    <Compile Include="Class Components\TransactionMethods.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
@@ -122,6 +123,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket System\CustomerTicket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticket System\CustomerTicket.Designer.cs">
+      <DependentUpon>CustomerTicket.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AddProduct Inventory.cs">
       <SubType>UserControl</SubType>
@@ -175,6 +182,12 @@
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\ServiceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\ServiceUserControl.Designer.cs">
+      <DependentUpon>ServiceUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RequestShipment Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,6 +212,9 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
+      <DependentUpon>CustomerTicket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerServices.resx">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\ServiceUserControl.resx">
+      <DependentUpon>ServiceUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
