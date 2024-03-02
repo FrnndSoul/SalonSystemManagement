@@ -105,13 +105,13 @@
             this.AccessBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.AccessBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccessBtn.ForeColor = System.Drawing.Color.White;
-            this.AccessBtn.Image = global::TriforceSalon.Properties.Resources.access_icon;
+            this.AccessBtn.Image = global::TriforceSalon.Properties.Resources.add_icon__1_;
             this.AccessBtn.Location = new System.Drawing.Point(996, 863);
             this.AccessBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AccessBtn.Name = "AccessBtn";
             this.AccessBtn.Size = new System.Drawing.Size(300, 70);
             this.AccessBtn.TabIndex = 54;
-            this.AccessBtn.Text = " Access";
+            this.AccessBtn.Text = " Add New Product";
             this.AccessBtn.Click += new System.EventHandler(this.AccessBtn_Click);
             // 
             // EditBtn
