@@ -194,6 +194,12 @@
     <Compile Include="UserControls\RequestShipment Inventory.Designer.cs">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ServiceType&amp;ServicePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ServiceType&amp;ServicePage.Designer.cs">
+      <DependentUpon>ServiceType&amp;ServicePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SigninPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ServiceType&amp;ServicePage.resx">
+      <DependentUpon>ServiceType&amp;ServicePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SigninPage.resx">
       <DependentUpon>SigninPage.cs</DependentUpon>
@@ -338,6 +347,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\upload icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\service type icon %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\service black icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\service icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\service type black icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
