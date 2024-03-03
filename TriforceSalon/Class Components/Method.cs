@@ -137,7 +137,6 @@ namespace TriforceSalon
                     {
                         ResetAttempt(inputID);
                         Method.LogUser(Convert.ToInt32(inputID));
-                        InventoryPage.StoreID(Convert.ToInt32(inputID));
                         MessageBox.Show($"Welcome Manager, {Username}!");
                         foreach (Form openForm in Application.OpenForms)
                         {

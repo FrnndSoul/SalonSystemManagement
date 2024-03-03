@@ -32,8 +32,8 @@
             this.signinPage1 = new TriforceSalon.SigninPage();
             this.signUpForm1 = new TriforceSalon.SignUpForm();
             this.adminForm1 = new TriforceSalon.AdminForm();
-            this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
+            this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
             this.SuspendLayout();
             // 
             // signinPage1
@@ -56,16 +56,17 @@
             resources.ApplyResources(this.adminForm1, "adminForm1");
             this.adminForm1.Name = "adminForm1";
             // 
-            // inventoryPage1
-            // 
-            resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
-            this.inventoryPage1.Name = "inventoryPage1";
-            // 
             // walkInTransactionForm1
             // 
             this.walkInTransactionForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             resources.ApplyResources(this.walkInTransactionForm1, "walkInTransactionForm1");
             this.walkInTransactionForm1.Name = "walkInTransactionForm1";
+            // 
+            // managerPage1
+            // 
+            this.managerPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.managerPage1, "managerPage1");
+            this.managerPage1.Name = "managerPage1";
             // 
             // MainForm
             // 
@@ -74,7 +75,6 @@
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
-            this.Controls.Add(this.inventoryPage1);
             this.Controls.Add(this.walkInTransactionForm1);
             this.Controls.Add(this.managerPage1);
             this.Name = "MainForm";
@@ -89,8 +89,8 @@
         private SigninPage signinPage1;
         private AdminForm adminForm1;
         private SignUpForm signUpForm1;
-        private InventoryPage inventoryPage1;
         private UserControls.WalkInTransactionForm walkInTransactionForm1;
+        private UserControls.ManagerPage managerPage1;
     }
 }
 

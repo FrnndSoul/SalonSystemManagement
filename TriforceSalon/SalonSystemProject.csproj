@@ -132,10 +132,10 @@
     <Compile Include="Ticket System\CustomerTicket.Designer.cs">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AddProduct Inventory.cs">
+    <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\AddProduct Inventory.Designer.cs">
+    <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.Designer.cs">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AdminForm.cs">
@@ -145,10 +145,10 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class Components\Inventory.cs" />
-    <Compile Include="UserControls\EditProduct Inventory.cs">
+    <Compile Include="UserControls\Inventory Controls\EditProduct Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\EditProduct Inventory.Designer.cs">
+    <Compile Include="UserControls\Inventory Controls\EditProduct Inventory.Designer.cs">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\EmployeeUserConrols.cs">
@@ -157,17 +157,11 @@
     <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\GeneralView Inventory.cs">
+    <Compile Include="UserControls\Inventory Controls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\GeneralView Inventory.Designer.cs">
+    <Compile Include="UserControls\Inventory Controls\GeneralView Inventory.Designer.cs">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\InventoryPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\InventoryPage.Designer.cs">
-      <DependentUpon>InventoryPage.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -214,10 +208,10 @@
     <Compile Include="UserControls\Receptionist Controls\ServiceUserControl.Designer.cs">
       <DependentUpon>ServiceUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\RequestShipment Inventory.cs">
+    <Compile Include="UserControls\Inventory Controls\RequestShipment Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\RequestShipment Inventory.Designer.cs">
+    <Compile Include="UserControls\Inventory Controls\RequestShipment Inventory.Designer.cs">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ServiceType&amp;ServicePage.cs">
@@ -247,23 +241,20 @@
     <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AddProduct Inventory.resx">
+    <EmbeddedResource Include="UserControls\Inventory Controls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\EditProduct Inventory.resx">
+    <EmbeddedResource Include="UserControls\Inventory Controls\EditProduct Inventory.resx">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
+    <EmbeddedResource Include="UserControls\Inventory Controls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\InventoryPage.resx">
-      <DependentUpon>InventoryPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -292,7 +283,7 @@
     <EmbeddedResource Include="UserControls\Receptionist Controls\ServiceUserControl.resx">
       <DependentUpon>ServiceUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\RequestShipment Inventory.resx">
+    <EmbeddedResource Include="UserControls\Inventory Controls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ServiceType&amp;ServicePage.resx">

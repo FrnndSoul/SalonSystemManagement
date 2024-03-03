@@ -31,7 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.AccessBtn = new Guna.UI2.WinForms.Guna2Button();
             this.InventoryDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.EditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
