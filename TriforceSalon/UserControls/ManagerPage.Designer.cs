@@ -36,6 +36,7 @@
             this.InventoryBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.generalView_Inventory1 = new TriforceSalon.UserControls.GeneralView_Inventory();
+            this.serviceType_ServicePage1 = new TriforceSalon.UserControls.ServiceType_ServicePage();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -132,6 +133,7 @@
             this.ServicesBtn.TabIndex = 1;
             this.ServicesBtn.Text = "Services";
             this.ServicesBtn.UseTransparentBackground = true;
+            this.ServicesBtn.Click += new System.EventHandler(this.ServicesBtn_Click);
             // 
             // InventoryBtn
             // 
@@ -158,6 +160,7 @@
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel2.BorderRadius = 100;
+            this.guna2Panel2.Controls.Add(this.serviceType_ServicePage1);
             this.guna2Panel2.Controls.Add(this.generalView_Inventory1);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel2.Location = new System.Drawing.Point(245, 14);
@@ -175,6 +178,15 @@
             this.generalView_Inventory1.Size = new System.Drawing.Size(1500, 950);
             this.generalView_Inventory1.TabIndex = 1;
             this.generalView_Inventory1.Visible = false;
+            // 
+            // serviceType_ServicePage1
+            // 
+            this.serviceType_ServicePage1.BackColor = System.Drawing.Color.Transparent;
+            this.serviceType_ServicePage1.Location = new System.Drawing.Point(81, 57);
+            this.serviceType_ServicePage1.Name = "serviceType_ServicePage1";
+            this.serviceType_ServicePage1.Size = new System.Drawing.Size(1500, 950);
+            this.serviceType_ServicePage1.TabIndex = 2;
+            this.serviceType_ServicePage1.Visible = false;
             // 
             // ManagerPage
             // 
@@ -205,5 +217,6 @@
         private Guna.UI2.WinForms.Guna2Button InventoryBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private GeneralView_Inventory generalView_Inventory1;
+        private ServiceType_ServicePage serviceType_ServicePage1;
     }
 }
