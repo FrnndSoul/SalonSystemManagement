@@ -1,4 +1,4 @@
-﻿namespace TriforceSalon.UserControls
+namespace TriforceSalon.UserControls
 {
     partial class EmployeeUserConrols
     {
