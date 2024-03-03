@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +37,6 @@ namespace TriforceSalon
             signinPage1.Visible = true;
             signUpForm1.Visible = false;
             walkInTransactionForm1.Visible = false;
-
         }
 
         public void ShowAdmin()
@@ -47,8 +46,6 @@ namespace TriforceSalon
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
             walkInTransactionForm1.Visible = false;
-            
-
         }
 
         public void ShowSignUp()
@@ -58,7 +55,6 @@ namespace TriforceSalon
             signinPage1.Visible = false;
             signUpForm1.Visible = true;
             walkInTransactionForm1.Visible = false;
-
         }
 
         public void ShowManager()
