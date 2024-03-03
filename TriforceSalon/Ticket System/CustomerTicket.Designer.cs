@@ -43,33 +43,33 @@
             // NameLbl
             // 
             this.NameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.NameLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLbl.ForeColor = System.Drawing.Color.White;
-            this.NameLbl.Location = new System.Drawing.Point(36, 34);
-            this.NameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.NameLbl.Location = new System.Drawing.Point(48, 42);
             this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(248, 35);
+            this.NameLbl.Size = new System.Drawing.Size(331, 43);
             this.NameLbl.TabIndex = 0;
             this.NameLbl.Text = "Name";
             this.NameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TicketLbl
             // 
+            this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TicketLbl.ForeColor = System.Drawing.Color.White;
-            this.TicketLbl.Location = new System.Drawing.Point(1056, 28);
-            this.TicketLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TicketLbl.Location = new System.Drawing.Point(1408, 34);
             this.TicketLbl.Name = "TicketLbl";
-            this.TicketLbl.Size = new System.Drawing.Size(76, 35);
+            this.TicketLbl.Size = new System.Drawing.Size(101, 43);
             this.TicketLbl.TabIndex = 1;
             this.TicketLbl.Text = "TicketID";
             this.TicketLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ServiceVarLbl
             // 
+            this.ServiceVarLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceVarLbl.ForeColor = System.Drawing.Color.White;
-            this.ServiceVarLbl.Location = new System.Drawing.Point(615, 28);
-            this.ServiceVarLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ServiceVarLbl.Location = new System.Drawing.Point(820, 34);
             this.ServiceVarLbl.Name = "ServiceVarLbl";
-            this.ServiceVarLbl.Size = new System.Drawing.Size(119, 35);
+            this.ServiceVarLbl.Size = new System.Drawing.Size(159, 43);
             this.ServiceVarLbl.TabIndex = 3;
             this.ServiceVarLbl.Text = "Service";
             this.ServiceVarLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +79,7 @@
             this.ProcessCustomerBtn.Animated = true;
             this.ProcessCustomerBtn.AutoRoundedCorners = true;
             this.ProcessCustomerBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ProcessCustomerBtn.BorderRadius = 17;
+            this.ProcessCustomerBtn.BorderRadius = 22;
             this.ProcessCustomerBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -87,10 +87,10 @@
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.ProcessCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
-            this.ProcessCustomerBtn.Location = new System.Drawing.Point(1161, 27);
-            this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ProcessCustomerBtn.Location = new System.Drawing.Point(1548, 33);
+            this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
-            this.ProcessCustomerBtn.Size = new System.Drawing.Size(135, 37);
+            this.ProcessCustomerBtn.Size = new System.Drawing.Size(180, 46);
             this.ProcessCustomerBtn.TabIndex = 5;
             this.ProcessCustomerBtn.Text = "Serve";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
@@ -109,61 +109,70 @@
             this.guna2Panel1.Controls.Add(this.ServiceVarLbl);
             this.guna2Panel1.Controls.Add(this.TicketLbl);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(8, 4);
+            this.guna2Panel1.Location = new System.Drawing.Point(11, 5);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1319, 94);
+            this.guna2Panel1.Size = new System.Drawing.Size(1759, 116);
             this.guna2Panel1.TabIndex = 6;
             // 
             // PrioStatusLbl
             // 
+            this.PrioStatusLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrioStatusLbl.ForeColor = System.Drawing.Color.White;
-            this.PrioStatusLbl.Location = new System.Drawing.Point(930, 27);
+            this.PrioStatusLbl.Location = new System.Drawing.Point(1240, 33);
+            this.PrioStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PrioStatusLbl.Name = "PrioStatusLbl";
-            this.PrioStatusLbl.Size = new System.Drawing.Size(110, 37);
+            this.PrioStatusLbl.Size = new System.Drawing.Size(147, 46);
             this.PrioStatusLbl.TabIndex = 5;
             this.PrioStatusLbl.Text = "Priority Status";
             this.PrioStatusLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PreferredEmpLbl
             // 
+            this.PreferredEmpLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PreferredEmpLbl.ForeColor = System.Drawing.Color.White;
-            this.PreferredEmpLbl.Location = new System.Drawing.Point(749, 27);
+            this.PreferredEmpLbl.Location = new System.Drawing.Point(999, 33);
+            this.PreferredEmpLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PreferredEmpLbl.Name = "PreferredEmpLbl";
-            this.PreferredEmpLbl.Size = new System.Drawing.Size(168, 37);
+            this.PreferredEmpLbl.Size = new System.Drawing.Size(224, 46);
             this.PreferredEmpLbl.TabIndex = 4;
             this.PreferredEmpLbl.Text = "Preferred Employee";
             this.PreferredEmpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PhoneNumberLbl
             // 
+            this.PhoneNumberLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PhoneNumberLbl.ForeColor = System.Drawing.Color.White;
-            this.PhoneNumberLbl.Location = new System.Drawing.Point(382, 27);
+            this.PhoneNumberLbl.Location = new System.Drawing.Point(509, 33);
+            this.PhoneNumberLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PhoneNumberLbl.Name = "PhoneNumberLbl";
-            this.PhoneNumberLbl.Size = new System.Drawing.Size(217, 37);
+            this.PhoneNumberLbl.Size = new System.Drawing.Size(289, 46);
             this.PhoneNumberLbl.TabIndex = 3;
             this.PhoneNumberLbl.Text = "Phone Number";
             this.PhoneNumberLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AgeLbl
             // 
+            this.AgeLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AgeLbl.ForeColor = System.Drawing.Color.White;
-            this.AgeLbl.Location = new System.Drawing.Point(298, 28);
+            this.AgeLbl.Location = new System.Drawing.Point(397, 34);
+            this.AgeLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AgeLbl.Name = "AgeLbl";
-            this.AgeLbl.Size = new System.Drawing.Size(64, 35);
+            this.AgeLbl.Size = new System.Drawing.Size(85, 43);
             this.AgeLbl.TabIndex = 0;
             this.AgeLbl.Text = "Age";
             this.AgeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CustomerTicket
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.NameLbl);
             this.Controls.Add(this.guna2Panel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CustomerTicket";
-            this.Size = new System.Drawing.Size(1337, 101);
+            this.Size = new System.Drawing.Size(1783, 124);
             this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
