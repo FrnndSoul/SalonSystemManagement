@@ -138,6 +138,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 return;
             }
             ChangePaymentStatus("VOIDED");
+            DefaultLoad();
         }
 
         public void ChangePaymentStatus(string newStatus)
