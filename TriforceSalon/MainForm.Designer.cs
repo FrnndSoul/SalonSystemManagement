@@ -35,6 +35,7 @@
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
             this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
             this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
+            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.SuspendLayout();
             // 
             // signinPage1
@@ -75,6 +76,12 @@
             resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
             this.employeeUserConrols1.Name = "employeeUserConrols1";
             // 
+            // cardProcess1
+            // 
+            this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.cardProcess1, "cardProcess1");
+            this.cardProcess1.Name = "cardProcess1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -100,6 +107,7 @@
         private UserControls.WalkInTransactionForm walkInTransactionForm1;
         private UserControls.ManagerPage managerPage1;
         private UserControls.EmployeeUserConrols employeeUserConrols1;
+        private UserControls.Receptionist_Controls.CardProcess cardProcess1;
     }
 }
 

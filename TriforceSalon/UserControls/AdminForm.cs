@@ -40,11 +40,10 @@ namespace TriforceSalon
         private void AdminForm_Load(object sender, EventArgs e)
         {
             LoadUserData();
-/*
+
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
-            UserDGV_CellContentClick_1(select, args);
-*/
+            UserDGV_CellContentClick(select, args);
         }
 
         public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
@@ -74,6 +73,10 @@ namespace TriforceSalon
 
         public void LoadUserData()
         {
+            foreach (DataGridViewRow row in UserDGV.SelectedRows)
+            {
+                UserDGV.Rows.Remove(row);
+            }
             try
             {
                 connection.Open();
@@ -100,12 +103,6 @@ namespace TriforceSalon
             }
         }
 
-
-        private void UserTab_Click(object sender, EventArgs e)
-        {
-            LoadUserData();
-        }
-
         private void SignoutBtn_Click(object sender, EventArgs e)
         {
             DiscardFunc();
@@ -126,6 +123,7 @@ namespace TriforceSalon
             {
                 DiscardFunc();
             }
+            LoadUserData();
         }
 
         private void UserDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -169,7 +167,7 @@ namespace TriforceSalon
             }
 
             Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
-
+            LoadUserData();
         }
 
         private void DiscardBtn_Click_1(object sender, EventArgs e)
