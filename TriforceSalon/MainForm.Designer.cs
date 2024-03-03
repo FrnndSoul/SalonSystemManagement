@@ -33,7 +33,6 @@
             this.signUpForm1 = new TriforceSalon.SignUpForm();
             this.adminForm1 = new TriforceSalon.AdminForm();
             this.inventoryPage1 = new TriforceSalon.InventoryPage();
-            this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
             this.SuspendLayout();
             // 
             // signinPage1
@@ -61,17 +60,10 @@
             resources.ApplyResources(this.inventoryPage1, "inventoryPage1");
             this.inventoryPage1.Name = "inventoryPage1";
             // 
-            // employeeUserConrols1
-            // 
-            this.employeeUserConrols1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
-            this.employeeUserConrols1.Name = "employeeUserConrols1";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.employeeUserConrols1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
@@ -89,7 +81,6 @@
         private AdminForm adminForm1;
         private SignUpForm signUpForm1;
         private InventoryPage inventoryPage1;
-        private UserControls.EmployeeUserConrols employeeUserConrols1;
     }
 }
 
