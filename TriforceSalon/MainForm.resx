@@ -225,21 +225,19 @@
   <data name="&gt;&gt;inventoryPage1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="inventoryPage1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="walkInTransactionForm1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="inventoryPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="walkInTransactionForm1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
-  <data name="inventoryPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 1060</value>
+  <data name="walkInTransactionForm1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1920, 1072</value>
   </data>
-  <data name="inventoryPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="walkInTransactionForm1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="inventoryPage1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
+
   <data name="&gt;&gt;inventoryPage1.Name" xml:space="preserve">
     <value>inventoryPage1</value>
   </data>
@@ -282,6 +280,7 @@
   <data name="inventoryPage1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+
   <data name="&gt;&gt;walkInTransactionForm1.Name" xml:space="preserve">
     <value>walkInTransactionForm1</value>
   </data>
@@ -294,6 +293,7 @@
   <data name="&gt;&gt;walkInTransactionForm1.Type" xml:space="preserve">
     <value>TriforceSalon.UserControls.WalkInTransactionForm, TriforceSalon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+
   <data name="&gt;&gt;walkInTransactionForm1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -303,6 +303,7 @@
   <data name="&gt;&gt;managerPage1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

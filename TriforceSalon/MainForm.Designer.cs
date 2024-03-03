@@ -34,7 +34,6 @@
             this.adminForm1 = new TriforceSalon.AdminForm();
             this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
-
             this.SuspendLayout();
             // 
             // signinPage1

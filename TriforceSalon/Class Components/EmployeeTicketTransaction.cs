@@ -21,7 +21,8 @@ namespace TriforceSalon.Class_Components
         public void ProcessTicket(int ticketID)
         {
             DateTime startTIme = DateTime.Now;
-            int accountID = 13018;
+            //int accountID = 13018;
+            int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text);
 
 
             DialogResult choices = MessageBox.Show("Are you sure you want to serve this customer?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
