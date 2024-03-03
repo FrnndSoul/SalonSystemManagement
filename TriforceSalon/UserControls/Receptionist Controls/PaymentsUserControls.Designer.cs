@@ -57,14 +57,14 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LoadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
-            this.gcashProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods.GcashProcess();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.CashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.DiscountBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.gcashProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods.GcashProcess();
+            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
@@ -303,13 +303,13 @@
             this.AmountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AmountBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.AmountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AmountBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AmountBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.AmountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AmountBox.Location = new System.Drawing.Point(267, 508);
             this.AmountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.AmountBox.Name = "AmountBox";
             this.AmountBox.PasswordChar = '\0';
-            this.AmountBox.PlaceholderText = "";
+            this.AmountBox.PlaceholderText = "Balance";
             this.AmountBox.ReadOnly = true;
             this.AmountBox.SelectedText = "";
             this.AmountBox.Size = new System.Drawing.Size(408, 44);
@@ -374,13 +374,13 @@
             this.ServiceVariationIDBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceVariationIDBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ServiceVariationIDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceVariationIDBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceVariationIDBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.ServiceVariationIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceVariationIDBox.Location = new System.Drawing.Point(1025, 328);
             this.ServiceVariationIDBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.ServiceVariationIDBox.Name = "ServiceVariationIDBox";
             this.ServiceVariationIDBox.PasswordChar = '\0';
-            this.ServiceVariationIDBox.PlaceholderText = "";
+            this.ServiceVariationIDBox.PlaceholderText = "Service ID";
             this.ServiceVariationIDBox.ReadOnly = true;
             this.ServiceVariationIDBox.SelectedText = "";
             this.ServiceVariationIDBox.Size = new System.Drawing.Size(408, 44);
@@ -401,13 +401,13 @@
             this.EmployeeIDBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.EmployeeIDBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.EmployeeIDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EmployeeIDBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmployeeIDBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.EmployeeIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EmployeeIDBox.Location = new System.Drawing.Point(1025, 402);
             this.EmployeeIDBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.EmployeeIDBox.Name = "EmployeeIDBox";
             this.EmployeeIDBox.PasswordChar = '\0';
-            this.EmployeeIDBox.PlaceholderText = "";
+            this.EmployeeIDBox.PlaceholderText = "Employee";
             this.EmployeeIDBox.ReadOnly = true;
             this.EmployeeIDBox.SelectedText = "";
             this.EmployeeIDBox.Size = new System.Drawing.Size(408, 44);
@@ -428,13 +428,13 @@
             this.ServiceVariationBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceVariationBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ServiceVariationBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceVariationBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceVariationBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.ServiceVariationBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceVariationBox.Location = new System.Drawing.Point(1025, 254);
             this.ServiceVariationBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.ServiceVariationBox.Name = "ServiceVariationBox";
             this.ServiceVariationBox.PasswordChar = '\0';
-            this.ServiceVariationBox.PlaceholderText = "";
+            this.ServiceVariationBox.PlaceholderText = "Service Provided";
             this.ServiceVariationBox.ReadOnly = true;
             this.ServiceVariationBox.SelectedText = "";
             this.ServiceVariationBox.Size = new System.Drawing.Size(408, 44);
@@ -455,13 +455,13 @@
             this.ServiceTypeBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceTypeBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ServiceTypeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceTypeBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.ServiceTypeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTypeBox.Location = new System.Drawing.Point(1025, 180);
             this.ServiceTypeBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.ServiceTypeBox.Name = "ServiceTypeBox";
             this.ServiceTypeBox.PasswordChar = '\0';
-            this.ServiceTypeBox.PlaceholderText = "";
+            this.ServiceTypeBox.PlaceholderText = "Service Type";
             this.ServiceTypeBox.ReadOnly = true;
             this.ServiceTypeBox.SelectedText = "";
             this.ServiceTypeBox.Size = new System.Drawing.Size(408, 44);
@@ -482,13 +482,13 @@
             this.PhoneNumberBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PhoneNumberBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.PhoneNumberBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PhoneNumberBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PhoneNumberBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.PhoneNumberBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumberBox.Location = new System.Drawing.Point(267, 328);
             this.PhoneNumberBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.PhoneNumberBox.Name = "PhoneNumberBox";
             this.PhoneNumberBox.PasswordChar = '\0';
-            this.PhoneNumberBox.PlaceholderText = "";
+            this.PhoneNumberBox.PlaceholderText = "Phone Number";
             this.PhoneNumberBox.ReadOnly = true;
             this.PhoneNumberBox.SelectedText = "";
             this.PhoneNumberBox.Size = new System.Drawing.Size(408, 44);
@@ -509,13 +509,13 @@
             this.AgeBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AgeBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.AgeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AgeBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AgeBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.AgeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AgeBox.Location = new System.Drawing.Point(267, 254);
             this.AgeBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.AgeBox.Name = "AgeBox";
             this.AgeBox.PasswordChar = '\0';
-            this.AgeBox.PlaceholderText = "";
+            this.AgeBox.PlaceholderText = "Age";
             this.AgeBox.ReadOnly = true;
             this.AgeBox.SelectedText = "";
             this.AgeBox.Size = new System.Drawing.Size(239, 44);
@@ -536,13 +536,13 @@
             this.NameBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.NameBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.NameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.NameBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameBox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.NameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Location = new System.Drawing.Point(267, 180);
             this.NameBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.NameBox.Name = "NameBox";
             this.NameBox.PasswordChar = '\0';
-            this.NameBox.PlaceholderText = "";
+            this.NameBox.PlaceholderText = "Name";
             this.NameBox.ReadOnly = true;
             this.NameBox.SelectedText = "";
             this.NameBox.Size = new System.Drawing.Size(408, 44);
@@ -588,25 +588,6 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(417, 767);
             this.guna2Panel2.TabIndex = 29;
-            // 
-            // cardProcess1
-            // 
-            this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.cardProcess1.Location = new System.Drawing.Point(1488, 57);
-            this.cardProcess1.Name = "cardProcess1";
-            this.cardProcess1.Size = new System.Drawing.Size(417, 767);
-            this.cardProcess1.TabIndex = 29;
-            this.cardProcess1.Visible = false;
-            this.cardProcess1.VisibleChanged += new System.EventHandler(this.cardProcess1_VisibleChanged);
-            // 
-            // gcashProcess1
-            // 
-            this.gcashProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.gcashProcess1.Location = new System.Drawing.Point(1488, 57);
-            this.gcashProcess1.Name = "gcashProcess1";
-            this.gcashProcess1.Size = new System.Drawing.Size(417, 767);
-            this.gcashProcess1.TabIndex = 30;
-            this.gcashProcess1.VisibleChanged += new System.EventHandler(this.gcashProcess1_VisibleChanged);
             // 
             // GcashPayment
             // 
@@ -713,6 +694,25 @@
             this.DiscountBox.SelectedText = "";
             this.DiscountBox.Size = new System.Drawing.Size(306, 44);
             this.DiscountBox.TabIndex = 30;
+            // 
+            // gcashProcess1
+            // 
+            this.gcashProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.gcashProcess1.Location = new System.Drawing.Point(1488, 57);
+            this.gcashProcess1.Name = "gcashProcess1";
+            this.gcashProcess1.Size = new System.Drawing.Size(417, 767);
+            this.gcashProcess1.TabIndex = 30;
+            this.gcashProcess1.VisibleChanged += new System.EventHandler(this.gcashProcess1_VisibleChanged);
+            // 
+            // cardProcess1
+            // 
+            this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.cardProcess1.Location = new System.Drawing.Point(1488, 57);
+            this.cardProcess1.Name = "cardProcess1";
+            this.cardProcess1.Size = new System.Drawing.Size(417, 767);
+            this.cardProcess1.TabIndex = 29;
+            this.cardProcess1.Visible = false;
+            this.cardProcess1.VisibleChanged += new System.EventHandler(this.cardProcess1_VisibleChanged);
             // 
             // PaymentsUserControls
             // 
