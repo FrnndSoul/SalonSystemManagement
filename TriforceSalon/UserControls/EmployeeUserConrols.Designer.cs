@@ -29,27 +29,28 @@ namespace TriforceSalon.UserControls
         private void InitializeComponent()
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.TimerLbl = new System.Windows.Forms.Label();
             this.EmpAccNumberTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.EmpNumberLbl = new System.Windows.Forms.Label();
             this.EmpNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.EmpNameLbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.EmployeePicturePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.ServiceTypeNameLbl = new System.Windows.Forms.Label();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.TimerLbl = new System.Windows.Forms.Label();
+            this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).BeginInit();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@ namespace TriforceSalon.UserControls
             this.guna2Panel1.Controls.Add(this.EmpNameTxtB);
             this.guna2Panel1.Controls.Add(this.EmpNameLbl);
             this.guna2Panel1.Controls.Add(this.label2);
-            this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
+            this.guna2Panel1.Controls.Add(this.EmployeePicturePicB);
             this.guna2Panel1.Controls.Add(this.ServiceTypeNameLbl);
             this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
@@ -70,6 +71,18 @@ namespace TriforceSalon.UserControls
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(446, 1080);
             this.guna2Panel1.TabIndex = 0;
+            // 
+            // TimerLbl
+            // 
+            this.TimerLbl.BackColor = System.Drawing.Color.Transparent;
+            this.TimerLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerLbl.ForeColor = System.Drawing.Color.Transparent;
+            this.TimerLbl.Location = new System.Drawing.Point(42, 40);
+            this.TimerLbl.Name = "TimerLbl";
+            this.TimerLbl.Size = new System.Drawing.Size(338, 127);
+            this.TimerLbl.TabIndex = 11;
+            this.TimerLbl.Text = "label10";
+            this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EmpAccNumberTxtB
             // 
@@ -82,10 +95,12 @@ namespace TriforceSalon.UserControls
             this.EmpAccNumberTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.EmpAccNumberTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.EmpAccNumberTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EmpAccNumberTxtB.Enabled = false;
             this.EmpAccNumberTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EmpAccNumberTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpAccNumberTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EmpAccNumberTxtB.Location = new System.Drawing.Point(42, 722);
+            this.EmpAccNumberTxtB.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.EmpAccNumberTxtB.Name = "EmpAccNumberTxtB";
             this.EmpAccNumberTxtB.PasswordChar = '\0';
             this.EmpAccNumberTxtB.PlaceholderText = "";
@@ -116,6 +131,7 @@ namespace TriforceSalon.UserControls
             this.EmpNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.EmpNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.EmpNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EmpNameTxtB.Enabled = false;
             this.EmpNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EmpNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EmpNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -151,17 +167,17 @@ namespace TriforceSalon.UserControls
             this.label2.Text = "Employee Details";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // guna2PictureBox1
+            // EmployeePicturePicB
             // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.BorderRadius = 20;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(42, 272);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(338, 278);
-            this.guna2PictureBox1.TabIndex = 3;
-            this.guna2PictureBox1.TabStop = false;
-            this.guna2PictureBox1.UseTransparentBackground = true;
+            this.EmployeePicturePicB.BackColor = System.Drawing.Color.Transparent;
+            this.EmployeePicturePicB.BorderRadius = 20;
+            this.EmployeePicturePicB.ImageRotate = 0F;
+            this.EmployeePicturePicB.Location = new System.Drawing.Point(42, 272);
+            this.EmployeePicturePicB.Name = "EmployeePicturePicB";
+            this.EmployeePicturePicB.Size = new System.Drawing.Size(338, 278);
+            this.EmployeePicturePicB.TabIndex = 3;
+            this.EmployeePicturePicB.TabStop = false;
+            this.EmployeePicturePicB.UseTransparentBackground = true;
             // 
             // ServiceTypeNameLbl
             // 
@@ -206,12 +222,97 @@ namespace TriforceSalon.UserControls
             this.guna2Panel2.Controls.Add(this.label4);
             this.guna2Panel2.Controls.Add(this.label3);
             this.guna2Panel2.Controls.Add(this.label1);
+            this.guna2Panel2.Controls.Add(this.EmployeeLockPanel);
             this.guna2Panel2.Controls.Add(this.CustomerListFLowLayout);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel2.Location = new System.Drawing.Point(-41, 0);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1462, 1080);
             this.guna2Panel2.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Transparent;
+            this.label9.Location = new System.Drawing.Point(1180, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(91, 50);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "ID";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Transparent;
+            this.label8.Location = new System.Drawing.Point(886, 162);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 63);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Employee Request";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Transparent;
+            this.label7.Location = new System.Drawing.Point(1065, 175);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 50);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Status";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(683, 175);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 50);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Service";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Transparent;
+            this.label5.Location = new System.Drawing.Point(497, 156);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 69);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Phone Number";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(327, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 50);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Age";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Transparent;
+            this.label3.Location = new System.Drawing.Point(156, 156);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(127, 69);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Customer Name";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -235,101 +336,15 @@ namespace TriforceSalon.UserControls
             this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
             this.CustomerListFLowLayout.TabIndex = 0;
             // 
-            // label3
+            // EmployeeLockPanel
             // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(156, 156);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 69);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Customer Name";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(327, 175);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 50);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Age";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(497, 156);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 69);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Phone Number";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(683, 175);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 50);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Service";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(1065, 175);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 50);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Status";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(886, 162);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 63);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Employee Request";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Transparent;
-            this.label9.Location = new System.Drawing.Point(1180, 175);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 50);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "ID";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TimerLbl
-            // 
-            this.TimerLbl.BackColor = System.Drawing.Color.Transparent;
-            this.TimerLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.TimerLbl.ForeColor = System.Drawing.Color.Transparent;
-            this.TimerLbl.Location = new System.Drawing.Point(34, 43);
-            this.TimerLbl.Name = "TimerLbl";
-            this.TimerLbl.Size = new System.Drawing.Size(343, 127);
-            this.TimerLbl.TabIndex = 11;
-            this.TimerLbl.Text = "label10";
-            this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EmployeeLockPanel.BackColor = System.Drawing.Color.Transparent;
+            this.EmployeeLockPanel.BorderRadius = 50;
+            this.EmployeeLockPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.EmployeeLockPanel.Location = new System.Drawing.Point(78, 228);
+            this.EmployeeLockPanel.Name = "EmployeeLockPanel";
+            this.EmployeeLockPanel.Size = new System.Drawing.Size(1337, 790);
+            this.EmployeeLockPanel.TabIndex = 10;
             // 
             // EmployeeUserConrols
             // 
@@ -341,7 +356,7 @@ namespace TriforceSalon.UserControls
             this.Name = "EmployeeUserConrols";
             this.Size = new System.Drawing.Size(1920, 1080);
             this.guna2Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -350,16 +365,13 @@ namespace TriforceSalon.UserControls
         #endregion
 
 
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private System.Windows.Forms.Label label1;
+        public Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        public Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        public Guna.UI2.WinForms.Guna2Button guna2Button1;
+        public System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel CustomerListFLowLayout;
-        private System.Windows.Forms.Label ServiceTypeNameLbl;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label EmpNameLbl;
-        private Guna.UI2.WinForms.Guna2TextBox EmpNameTxtB;
         private System.Windows.Forms.Label EmpNumberLbl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -370,5 +382,9 @@ namespace TriforceSalon.UserControls
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label TimerLbl;
+        public Guna.UI2.WinForms.Guna2TextBox EmpNameTxtB;
+        public Guna.UI2.WinForms.Guna2PictureBox EmployeePicturePicB;
+        public System.Windows.Forms.Label ServiceTypeNameLbl;
+        private Guna.UI2.WinForms.Guna2Panel EmployeeLockPanel;
     }
 }

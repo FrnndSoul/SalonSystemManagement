@@ -14,6 +14,9 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using Org.BouncyCastle.Ocsp;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using TriforceSalon.UserControls;
+using TriforceSalon.Class_Components;
+using System.IO;
 
 namespace TriforceSalon
 {
@@ -29,7 +32,7 @@ namespace TriforceSalon
         public static string Name, Username, Email, Password,
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
-            Availability, AccountAccess;
+            Availability, AccountAccess, ServiceType;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
@@ -51,15 +54,17 @@ namespace TriforceSalon
                             {
                                 Username = reader["Username"].ToString();
                                 Password = reader["Password"].ToString();
-                                AccountID = Convert.ToInt32(reader["AccountID"]);
-                                Status = Convert.ToInt32(reader["Status"]);
                                 Name = reader["Name"].ToString();
                                 Email = reader["Email"].ToString();
-                                Birthdate = (DateTime)reader["Birthdate"];
-                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
-                                ServiceID = Convert.ToInt32(reader["ServiceID"]);
                                 Availability = reader["Availability"].ToString();
                                 AccountAccess = reader["AccountAccess"].ToString();
+
+                                Birthdate = (DateTime)reader["Birthdate"];
+
+                                AccountID = Convert.ToInt32(reader["AccountID"]);
+                                Status = Convert.ToInt32(reader["Status"]);
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                                ServiceID = Convert.ToInt32(reader["ServiceID"]);
 
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
@@ -75,7 +80,7 @@ namespace TriforceSalon
                             }
                             else
                             {
-                                if (user != "admin")
+                                if (string.Equals(user, "Admin", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("UserID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
@@ -90,7 +95,7 @@ namespace TriforceSalon
             }
         }
 
-        public static void ChangeUserData(string newName, string newUsername, byte[] newPhoto, string newAccess, int ID)
+        public static void ChangeUserData(string newName, string newUsername, string newEmail, string newServiceType, string newAccess, byte[] newPhoto, int accountID)
         {
             try
             {
@@ -98,31 +103,75 @@ namespace TriforceSalon
                 {
                     connection.Open();
 
-                    string query = "UPDATE accounts SET Username = @newUsername WHERE AccountID = @accountID";
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    string accountsQuery = "UPDATE accounts SET Username = @newUsername WHERE AccountID = @accountID";
+                    using (MySqlCommand accountsCmd = new MySqlCommand(accountsQuery, connection))
                     {
-                        cmd.Parameters.AddWithValue("@newUsername", newUsername);
-                        cmd.Parameters.AddWithValue("@accountID", ID);
-                        int rowsAffected = cmd.ExecuteNonQuery();
+                        accountsCmd.Parameters.AddWithValue("@newUsername", newUsername);
+                        accountsCmd.Parameters.AddWithValue("@accountID", accountID);
+                        int accountsRowsAffected = accountsCmd.ExecuteNonQuery();
+                        if (accountsRowsAffected <= 0)
+                        {
+                            MessageBox.Show($"Error updating accounts", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
 
-                    query = "UPDATE salon_employees SET Name = @newName, Photo = @newPhoto, AccountAccess = @newAccess WHERE AccountID = @accountID";
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@newName", newName);
-                        cmd.Parameters.AddWithValue("@newPhoto", newPhoto);
-                        cmd.Parameters.AddWithValue("@newAccess", newAccess);
+                    int serviceID = GetServiceIDByName(newServiceType, connection);
 
-                        cmd.Parameters.AddWithValue("@accountID", ID);
-                        int rowsAffected = cmd.ExecuteNonQuery();
+                    string employeesQuery = "UPDATE salon_employees SET Name = @newName, Photo = @newPhoto, AccountAccess = @newAccess, ServiceID = @serviceID WHERE AccountID = @accountID";
+                    using (MySqlCommand employeesCmd = new MySqlCommand(employeesQuery, connection))
+                    {
+                        employeesCmd.Parameters.AddWithValue("@newName", newName);
+                        employeesCmd.Parameters.AddWithValue("@newPhoto", newPhoto);
+                        employeesCmd.Parameters.AddWithValue("@newAccess", newAccess);
+                        employeesCmd.Parameters.AddWithValue("@accountID", accountID);
+                        employeesCmd.Parameters.AddWithValue("@serviceID", serviceID);
+                        int employeesRowsAffected = employeesCmd.ExecuteNonQuery();
+                        if (employeesRowsAffected <= 0)
+                        {
+                            MessageBox.Show($"Error updating salon_employees", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
+
+                    AccountAccess = newAccess;
+                    Username = newUsername;
+                    ServiceID = serviceID;
+                    Photo = newPhoto;
+                    Name = newName;
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ChangeUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error updating user data: {e.Message}", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private static int GetServiceIDByName(string serviceTypeName, MySqlConnection connection)
+        {
+            try
+            {
+                string query = "SELECT ServiceID FROM service_type WHERE ServiceTypeName = @serviceTypeName";
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@serviceTypeName", serviceTypeName);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        throw new Exception("Service type not found in the database.");
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Error GetServiceIDByName: {ex.Message}", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception("Service type not found in the database.");
+            }
+        }
+
 
         public static bool Login(string inputID, string inputPassword)
         {
@@ -133,7 +182,7 @@ namespace TriforceSalon
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (AccountAccess == "Manager")
+                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
                         Method.LogUser(Convert.ToInt32(inputID));
@@ -147,11 +196,30 @@ namespace TriforceSalon
                             }
                         }
                     }
-                    else if (AccountAccess == "Staff")
+                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show("Call walk-in transaction at\nLine 123: Method.cs","Staff",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Welcome Receptionist, {Username}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                mainForm.ShowWalkIn();
+                                break;
+                            }
+                        }
+                    } else
+                    {
+                        ResetAttempt(inputID);
+                        MessageBox.Show($"Welcome Staff, {Username}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                mainForm.ShowEmployee();
+                                break;
+                            }
+                        }
                     }
                     LogUser(AccountID);
                 }
@@ -468,6 +536,23 @@ namespace TriforceSalon
             {
                 MessageBox.Show(e.Message + "\n\nat LogOutUser()", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        TransactionMethods transaction = new TransactionMethods();
+        public  void GetEmployeeInfo()
+        {
+            byte[] photoBytes = Photo;
+
+            EmployeeUserConrols.employeeUserConrolsInstance.EmpNameTxtB.Text = Name;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text = Convert.ToString(AccountID);
+            EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text = transaction.GetServiceTypeName(AccountID);
+            //EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Photo;
+
+            using (MemoryStream ms = new MemoryStream(photoBytes))
+            {
+                EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Image.FromStream(ms);
+            }
+
         }
     }
 }
