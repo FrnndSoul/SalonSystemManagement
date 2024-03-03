@@ -190,6 +190,12 @@
     <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.Designer.cs">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.Designer.cs">
+      <DependentUpon>CardProcess.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.resx">
+      <DependentUpon>CardProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\PaymentsUserControls.resx">
       <DependentUpon>PaymentsUserControls.cs</DependentUpon>
@@ -389,6 +398,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\service type black icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Card.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gcash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
