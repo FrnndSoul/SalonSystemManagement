@@ -152,7 +152,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        
-
+        public void DefaultLoad()
+        {
+            CardNumberBox.Text = "";
+            CVCBox.Text = "";
+            CardNameBox.Text = "";
+            ExpirationDatePicker.Value = DateTime.Now.AddDays(3);
+        }
     }
 }

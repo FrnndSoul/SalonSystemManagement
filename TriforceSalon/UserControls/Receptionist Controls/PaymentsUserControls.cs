@@ -76,6 +76,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceVariationIDBox.Text = ServiceVariationIDBox.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
             AmountBox.Text = Amount.ToString();
+
+            TransactionIDBox.Enabled = false;
+            LoadBtn.Enabled = false;
+            CardPayment.Enabled = true;
+            CashPayment.Enabled = true;
+            GcashPayment.Enabled = true;
+            VoidBtn.Enabled = true;
         }
 
         private void PaymentsUserControls_Load(object sender, EventArgs e)
@@ -128,7 +135,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
 
+
+            TransactionIDBox.Enabled = true;
+            LoadBtn.Enabled = true;
+            CardPayment.Enabled = false;
+            CashPayment.Enabled = false;
+            GcashPayment.Enabled = false;
+            VoidBtn.Enabled = false;
+
             cardProcess1.Visible = false;
+        }
+
+        private void cardProcess1_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cardProcess1.Visible == false)
+            {
+                cardProcess1.DefaultLoad();
+            }
         }
     }
 }
