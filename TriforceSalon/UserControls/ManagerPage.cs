@@ -29,5 +29,11 @@ namespace TriforceSalon.UserControls
                 }
             }
         }
+
+        private void InventoryBtn_Click(object sender, EventArgs e)
+        {
+            generalView_Inventory1.Visible = true;
+            //set visible niyo dito yung iba
+        }
     }
 }

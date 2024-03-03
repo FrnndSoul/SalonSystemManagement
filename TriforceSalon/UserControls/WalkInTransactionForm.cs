@@ -24,7 +24,7 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
             walkInTransactionFormInstance = this;
             //populateMethods.EmployeeDetails();
-            populateMethods.PopulateServiceComboBox();
+            //populateMethods.PopulateServiceComboBox();
             //LoadCustomers();
         }
 
@@ -92,35 +92,24 @@ namespace TriforceSalon.UserControls
 
 
 
-        private void ServicesComBox_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void ServicesComBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string value = ServiceTypeComBox.SelectedItem.ToString();
             int value2 = populateMethods.GetServiceTypeID(value);
             //populateMethods.FilterEmployees(value);
             populateMethods.FilterServices(value2);
-        }
-
-        private void ProcessBtn_Click(object sender, EventArgs e)
-        {
-            /*int empID = Convert.ToInt32(EmployeeListDGV.SelectedRows[0].Cells["AccountID"].Value);
-            populateMethods.SetEmployeeStatus(empID);*/
-
-            string serviceVariation = ServiceListComB.SelectedItem.ToString();
-            int serviceVarID = populateMethods.GetServiceID(serviceVariation);
-            populateMethods.InsertTransaction(serviceVarID);
-            //LoadCustomers();
-        }
+        }*/
 
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             //populateMethods.UpdateEmployees();
         }
 
-        private void ServiceListComB_SelectedIndexChanged(object sender, EventArgs e)
+       /* private void ServiceListComB_SelectedIndexChanged(object sender, EventArgs e)
         {
             string serviceName = ServiceListComB.SelectedItem.ToString();
             int serviceNameValue = populateMethods.GetServiceID(serviceName);
-        }
+        }*/
 
         private void label1_Click(object sender, EventArgs e)
         {

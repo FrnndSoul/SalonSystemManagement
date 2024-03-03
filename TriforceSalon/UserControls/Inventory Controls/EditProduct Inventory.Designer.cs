@@ -145,6 +145,7 @@
             this.AggregateBox.Name = "AggregateBox";
             this.AggregateBox.PasswordChar = '\0';
             this.AggregateBox.PlaceholderText = "";
+            this.AggregateBox.ReadOnly = true;
             this.AggregateBox.SelectedText = "";
             this.AggregateBox.Size = new System.Drawing.Size(400, 50);
             this.AggregateBox.TabIndex = 75;
@@ -199,6 +200,7 @@
             this.StockBox.Name = "StockBox";
             this.StockBox.PasswordChar = '\0';
             this.StockBox.PlaceholderText = "";
+            this.StockBox.ReadOnly = true;
             this.StockBox.SelectedText = "";
             this.StockBox.Size = new System.Drawing.Size(400, 50);
             this.StockBox.TabIndex = 73;

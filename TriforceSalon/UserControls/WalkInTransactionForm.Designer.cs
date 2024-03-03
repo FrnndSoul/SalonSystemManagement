@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label4 = new System.Windows.Forms.Label();
-            this.ServiceListComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.RefreshBtn = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ServiceTypeComBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
@@ -43,129 +36,10 @@
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            this.servicesUserControl1 = new TriforceSalon.UserControls.Receptionist_Controls.ServicesUserControl();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Stanberry", 23.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(213, 221);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 39);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Services";
-            // 
-            // ServiceListComB
-            // 
-            this.ServiceListComB.AutoRoundedCorners = true;
-            this.ServiceListComB.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceListComB.BorderRadius = 17;
-            this.ServiceListComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ServiceListComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ServiceListComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceListComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceListComB.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.ServiceListComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.ServiceListComB.ItemHeight = 30;
-            this.ServiceListComB.Location = new System.Drawing.Point(219, 263);
-            this.ServiceListComB.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceListComB.Name = "ServiceListComB";
-            this.ServiceListComB.Size = new System.Drawing.Size(309, 36);
-            this.ServiceListComB.TabIndex = 8;
-            this.ServiceListComB.SelectedIndexChanged += new System.EventHandler(this.ServiceListComB_SelectedIndexChanged);
-            // 
-            // RefreshBtn
-            // 
-            this.RefreshBtn.BackColor = System.Drawing.Color.Transparent;
-            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.RefreshBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.RefreshBtn.ForeColor = System.Drawing.Color.White;
-            this.RefreshBtn.Location = new System.Drawing.Point(547, 53);
-            this.RefreshBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.RefreshBtn.Name = "RefreshBtn";
-            this.RefreshBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.RefreshBtn.Size = new System.Drawing.Size(47, 51);
-            this.RefreshBtn.TabIndex = 7;
-            this.RefreshBtn.Text = "R";
-            this.RefreshBtn.UseTransparentBackground = true;
-            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
-            // 
-            // CustomerNameTxtB
-            // 
-            this.CustomerNameTxtB.AutoRoundedCorners = true;
-            this.CustomerNameTxtB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.CustomerNameTxtB.BorderRadius = 18;
-            this.CustomerNameTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CustomerNameTxtB.DefaultText = "";
-            this.CustomerNameTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CustomerNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Location = new System.Drawing.Point(218, 95);
-            this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.CustomerNameTxtB.Name = "CustomerNameTxtB";
-            this.CustomerNameTxtB.PasswordChar = '\0';
-            this.CustomerNameTxtB.PlaceholderText = "";
-            this.CustomerNameTxtB.SelectedText = "";
-            this.CustomerNameTxtB.Size = new System.Drawing.Size(308, 39);
-            this.CustomerNameTxtB.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Stanberry", 23.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(212, 53);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(258, 39);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Customer\'s Name";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Stanberry", 23.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(212, 137);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(213, 39);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Service Types";
-            // 
-            // ServiceTypeComBox
-            // 
-            this.ServiceTypeComBox.AutoRoundedCorners = true;
-            this.ServiceTypeComBox.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceTypeComBox.BorderRadius = 17;
-            this.ServiceTypeComBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ServiceTypeComBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ServiceTypeComBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeComBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeComBox.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.ServiceTypeComBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.ServiceTypeComBox.ItemHeight = 30;
-            this.ServiceTypeComBox.Location = new System.Drawing.Point(218, 178);
-            this.ServiceTypeComBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceTypeComBox.Name = "ServiceTypeComBox";
-            this.ServiceTypeComBox.Size = new System.Drawing.Size(309, 36);
-            this.ServiceTypeComBox.TabIndex = 2;
-            this.ServiceTypeComBox.SelectedIndexChanged += new System.EventHandler(this.ServicesComBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -193,13 +67,7 @@
             // 
             // guna2Panel2
             // 
-            this.guna2Panel2.Controls.Add(this.ServiceListComB);
-            this.guna2Panel2.Controls.Add(this.label4);
-            this.guna2Panel2.Controls.Add(this.label2);
-            this.guna2Panel2.Controls.Add(this.CustomerNameTxtB);
-            this.guna2Panel2.Controls.Add(this.RefreshBtn);
-            this.guna2Panel2.Controls.Add(this.label3);
-            this.guna2Panel2.Controls.Add(this.ServiceTypeComBox);
+            this.guna2Panel2.Controls.Add(this.servicesUserControl1);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.guna2Panel2.Location = new System.Drawing.Point(0, 229);
             this.guna2Panel2.Name = "guna2Panel2";
@@ -306,6 +174,14 @@
             this.guna2Button4.Text = "Log-Out";
             this.guna2Button4.UseTransparentBackground = true;
             // 
+            // servicesUserControl1
+            // 
+            this.servicesUserControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.servicesUserControl1.Location = new System.Drawing.Point(4, 4);
+            this.servicesUserControl1.Name = "servicesUserControl1";
+            this.servicesUserControl1.Size = new System.Drawing.Size(1920, 843);
+            this.servicesUserControl1.TabIndex = 0;
+            // 
             // WalkInTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,20 +201,12 @@
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        public Guna.UI2.WinForms.Guna2ComboBox ServiceTypeComBox;
         private System.Windows.Forms.Label label1;
-        public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
-        private System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2CircleButton RefreshBtn;
-        private System.Windows.Forms.Label label4;
-        public Guna.UI2.WinForms.Guna2ComboBox ServiceListComB;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Button NServicesBtn;
@@ -346,5 +214,6 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Receptionist_Controls.ServicesUserControl servicesUserControl1;
     }
 }

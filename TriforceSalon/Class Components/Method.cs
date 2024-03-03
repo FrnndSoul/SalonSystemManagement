@@ -29,10 +29,9 @@ namespace TriforceSalon
         public static string Name, Username, Email, Password,
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
-            Availability;
+            Availability, AccountAccess;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-        //server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public static void ReadUserData(string user)
@@ -60,6 +59,7 @@ namespace TriforceSalon
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
                                 ServiceID = Convert.ToInt32(reader["ServiceID"]);
                                 Availability = reader["Availability"].ToString();
+                                AccountAccess = reader["AccountAccess"].ToString();
 
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
@@ -133,21 +133,21 @@ namespace TriforceSalon
                 string HashedPass = HashString(inputPassword);
                 if (HashedPass == Password)
                 {
-                    if (10000 <= AccountID && AccountID < 100000)
+                    if (AccountAccess == "Manager")
                     {
                         ResetAttempt(inputID);
-                        InventoryPage.StoreID(Convert.ToInt32(inputID));
+                        Method.LogUser(Convert.ToInt32(inputID));
                         MessageBox.Show($"Welcome Manager, {Username}!");
                         foreach (Form openForm in Application.OpenForms)
                         {
                             if (openForm is MainForm mainForm)
                             {
-                                mainForm.ShowInventory();
+                                mainForm.ShowManager();
                                 break;
                             }
                         }
                     }
-                    else if (1000 <= AccountID && AccountID < 10000)
+                    else if (AccountAccess == "Staff")
                     {
                         ResetAttempt(inputID);
                         MessageBox.Show("Call walk-in transaction at\nLine 123: Method.cs","Staff",
