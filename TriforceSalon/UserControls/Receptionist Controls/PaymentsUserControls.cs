@@ -13,7 +13,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     public partial class PaymentsUserControls : UserControl
     {
         //UNPAID, PAID, VOID
-        public static string Name, ServiceType, ServiceVariation, PriorityStatus;
+        public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus;
         public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
 
 

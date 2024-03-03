@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
+        public static ManagerServices managerServicesInstance;
+        private ServiceTypes serviceType = new ServiceTypes();
+        private SalonServices salonServices = new SalonServices();
+
         public ServiceType_ServicePage()
         {
             InitializeComponent();
@@ -44,6 +49,67 @@ namespace TriforceSalon.UserControls
             SetButtonProperties(ServiceTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_type_black_icon);
             ServiceTypeBtn.SendToBack();
             ServiceTypePanel.Visible = false;
+        }
+
+
+        //For service type
+        private void AddServiceTypeBtn_Click(object sender, EventArgs e)
+        {
+            string serviceTypeName = ServiceTypeTxtB.Text;
+            serviceType.AddServiceType(serviceTypeName);
+        }
+
+        private void AddImageServiceTypeBtn_Click(object sender, EventArgs e)
+        {
+            serviceType.AddServiceTypeImage();
+
+        }
+
+        private void UpdateServiceTBtn_Click(object sender, EventArgs e)
+        {
+            int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
+            serviceType.UpdateServiceType(sID);
+        }
+
+        private void EditServiceTBtn_Click(object sender, EventArgs e)
+        {
+            serviceType.EditServiceTypes();
+
+        }
+
+        private void CancelEditBtn_Click(object sender, EventArgs e)
+        {
+            serviceType.ClearServiceTypes();
+        }
+
+
+        //For services
+        private void AddServiceImageBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.AddServiceImage();
+        }
+
+        private void AddServiceBtn_Click(object sender, EventArgs e)
+        {
+            string serviceTypeName = AddSalonServices.SelectedItem.ToString();
+            salonServices.GetServiceTypeID(serviceTypeName);
+            salonServices.AddSalonServices();
+        }
+
+        private void UpdateServBtn_Click(object sender, EventArgs e)
+        {
+            int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
+            salonServices.UpdateSalonServices(servarID);
+        }
+
+        private void EditServBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.EditSalonServices();
+        }
+
+        private void CancelEditServiceBtn_Click(object sender, EventArgs e)
+        {
+            salonServices.ClearServices();
         }
     }
 }
