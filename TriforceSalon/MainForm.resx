@@ -242,23 +242,12 @@
   <data name="inventoryPage1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  
-  //Start ng akin dito
 
-  <data name="&gt;&gt;inventoryPage1.Name" xml:space="preserve">
-    <value>inventoryPage1</value>
-  </data>
-  <data name="&gt;&gt;inventoryPage1.Type" xml:space="preserve">
-    <value>TriforceSalon.InventoryPage, TriforceSalon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;inventoryPage1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;inventoryPage1.ZOrder" xml:space="preserve">
-    <value>3</value>
-    //End ng akin ay nandito
-    
-    //start ng nasa error ay dito
+	<!--Start ng akin ay dito-->
+  
+	  <!--End ng akin ay nandito-->
+
+	  <!--start ng nasa error ay dito-->
   <data name="&gt;&gt;walkInTransactionForm1.Name" xml:space="preserve">
     <value>walkInTransactionForm1</value>
   </data>
@@ -270,8 +259,8 @@
   </data>
   <data name="&gt;&gt;walkInTransactionForm1.ZOrder" xml:space="preserve">
     <value>4</value>
-    //end ng error ay nandito
-
+	   <!--end ng error ay nandito-->
+  
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
