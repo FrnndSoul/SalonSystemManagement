@@ -71,6 +71,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         {
                             if (reader.Read())
                             {
+                                string paymentstatus = reader["PaymentStatus"].ToString();
+                                if (string.Equals(paymentstatus, "PAID",StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                } else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
                                 CustomerName = reader["Password"].ToString();
                                 ServiceType = reader["ServiceType"].ToString();
                                 ServiceVariation = reader["ServiceVariation"].ToString();
