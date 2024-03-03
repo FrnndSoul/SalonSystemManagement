@@ -439,6 +439,7 @@
             this.BackBtn.TabIndex = 54;
             this.BackBtn.Text = " Back To Inventory";
             this.BackBtn.UseTransparentBackground = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
             // RequestBtn
             // 

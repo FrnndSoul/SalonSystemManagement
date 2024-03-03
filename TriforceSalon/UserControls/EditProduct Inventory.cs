@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,13 +15,35 @@ namespace TriforceSalon.UserControls
 {
     public partial class EditProduct_Inventory : UserControl
     {
-        public static byte[] PhotoBytes;
-        public static int ItemID;
+        public static string ItemName;
+        public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+        public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public EditProduct_Inventory()
         {
             InitializeComponent();
+        }
+
+        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
+        {
+            Name = name;
+            ItemID = id;
+            Cost = cost;
+            Aggregate = aggregate;
+            Status = status;
+            EmployeeID = userID;
+
+            NameBox.Text = name;
+            IDBox.Text = id.ToString();
+            CostBox.Text = cost.ToString();
+            AggregateBox.Text = aggregate.ToString();
+            StockBox.Text = Stock.ToString();
+
+            using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
+            {
+                PhotoBox.Image = Image.FromStream(ms);
+            }
         }
 
         private void UploadPhoto_Click(object sender, EventArgs e)
@@ -39,20 +62,20 @@ namespace TriforceSalon.UserControls
                 using (MemoryStream ms = new MemoryStream())
                 {
                     image.Save(ms, image.RawFormat);
-                    PhotoBytes = ms.ToArray();
+                    PhotoByteHolder = ms.ToArray();
                 }
             }
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            string Name = NameBox.Text;
-            string Cost = CostBox.Text;
-            string Aggregate = AggregateBox.Text;
-            string ID = IDBox.Text;
-            string Stock = StockBox.Text;
+            string newName = NameBox.Text;
+            string newCost = CostBox.Text;
+            string newAggregate = AggregateBox.Text;
+            string newID = IDBox.Text;
+            string newStock = StockBox.Text;
 
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Stock))
+            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -74,12 +97,12 @@ namespace TriforceSalon.UserControls
                         "WHERE ItemID = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@itemName", Name);
-                        querycmd.Parameters.AddWithValue("@cost", Cost);
-                        querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
-                        querycmd.Parameters.AddWithValue("@itemID", ID);
-                        querycmd.Parameters.AddWithValue("@stock", Stock);
-                        querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
+                        querycmd.Parameters.AddWithValue("@itemName", newName);
+                        querycmd.Parameters.AddWithValue("@cost", newCost);
+                        querycmd.Parameters.AddWithValue("@aggregate", newAggregate);
+                        querycmd.Parameters.AddWithValue("@itemID", newID);
+                        querycmd.Parameters.AddWithValue("@stock", newStock);
+                        querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
                         querycmd.ExecuteNonQuery();
                     }
                 }
@@ -88,6 +111,38 @@ namespace TriforceSalon.UserControls
                 MessageBox.Show(ex.Message + "\nat SaveBtn_Click() InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public byte[] LoadPhoto(int itemID)
+        {
+            try
+            {
+                string query = "SELECT `Photo` FROM `inventory` WHERE `ItemID` = @ItemID";
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ItemID", itemID);
+
+                        object result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return (byte[])result;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nat LoadPhoto InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
         private void CurentBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
@@ -106,15 +161,12 @@ namespace TriforceSalon.UserControls
 
         private void AggregateBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            e.Handled = true;
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
-
+            this.Visible = false;
         }
     }
 }

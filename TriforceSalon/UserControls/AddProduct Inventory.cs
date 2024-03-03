@@ -109,7 +109,7 @@ namespace TriforceSalon.UserControls
 
         private void BackBtn_Click(object sender, EventArgs e)
         {
-
+            this.Visible = false;
         }
     }
 }

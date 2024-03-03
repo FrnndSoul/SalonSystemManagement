@@ -35,7 +35,7 @@
             this.ServicesBtn = new Guna.UI2.WinForms.Guna2Button();
             this.InventoryBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.ManagerPanel = new System.Windows.Forms.Panel();
+            this.generalView_Inventory1 = new TriforceSalon.UserControls.GeneralView_Inventory();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -152,12 +152,13 @@
             this.InventoryBtn.TabIndex = 0;
             this.InventoryBtn.Text = "Inventory";
             this.InventoryBtn.UseTransparentBackground = true;
+            this.InventoryBtn.Click += new System.EventHandler(this.InventoryBtn_Click);
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel2.BorderRadius = 100;
-            this.guna2Panel2.Controls.Add(this.ManagerPanel);
+            this.guna2Panel2.Controls.Add(this.generalView_Inventory1);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel2.Location = new System.Drawing.Point(245, 14);
             this.guna2Panel2.Margin = new System.Windows.Forms.Padding(2);
@@ -165,13 +166,15 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1662, 1065);
             this.guna2Panel2.TabIndex = 1;
             // 
-            // ManagerPanel
+            // generalView_Inventory1
             // 
-            this.ManagerPanel.BackColor = System.Drawing.Color.White;
-            this.ManagerPanel.Location = new System.Drawing.Point(81, 57);
-            this.ManagerPanel.Name = "ManagerPanel";
-            this.ManagerPanel.Size = new System.Drawing.Size(1500, 950);
-            this.ManagerPanel.TabIndex = 0;
+            this.generalView_Inventory1.BackColor = System.Drawing.Color.Transparent;
+            this.generalView_Inventory1.Location = new System.Drawing.Point(81, 57);
+            this.generalView_Inventory1.Margin = new System.Windows.Forms.Padding(2);
+            this.generalView_Inventory1.Name = "generalView_Inventory1";
+            this.generalView_Inventory1.Size = new System.Drawing.Size(1500, 950);
+            this.generalView_Inventory1.TabIndex = 1;
+            this.generalView_Inventory1.Visible = false;
             // 
             // ManagerPage
             // 
@@ -201,6 +204,6 @@
         private Guna.UI2.WinForms.Guna2Button ServicesBtn;
         private Guna.UI2.WinForms.Guna2Button InventoryBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private System.Windows.Forms.Panel ManagerPanel;
+        private GeneralView_Inventory generalView_Inventory1;
     }
 }
