@@ -15,7 +15,7 @@ namespace TriforceSalon.Class_Components
         private string mysqlcon;
         public EmployeeTicketTransaction()
         {
-            mysqlcon = "153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
 
         public void ProcessTicket(int ticketID)

@@ -30,7 +30,7 @@ namespace TriforceSalon.Class_Components
 
         public ServiceTypes()
         {
-            mysqlcon = "153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
         public void ServiceTypeInfoDGV()
         {
