@@ -80,25 +80,10 @@ namespace TriforceSalon
                             }
                             else
                             {
-                                if (user != "admin")
+                                if (string.Equals(user, "Admin", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("UserID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-                            }
-                        }
-                    }
-
-                    query = "SELECT service_type.ServiceTypeName, service_type.ServiceTypeID \r\nFROM service_type " +
-                        "\r\nJOIN salon_employees ON service_type.ServiceID = salon_employees.ServiceID " +
-                        "\r\nWHERE salon_employees.AccountID = @accountID";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
-                    {                   
-                        querycmd.Parameters.AddWithValue("@accountID", user);
-                        using (MySqlDataReader reader = querycmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                ServiceType = reader["ServiceTypeName"].ToString();
                             }
                         }
                     }
