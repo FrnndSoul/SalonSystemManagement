@@ -36,7 +36,6 @@ namespace TriforceSalon
             inventoryPage1.Visible = false;
             signinPage1.Visible = true;
             signUpForm1.Visible = false;
-            walkInTransactionForm1.Visible = false;
 
         }
 
@@ -46,7 +45,6 @@ namespace TriforceSalon
             inventoryPage1.Visible = false;
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
-            walkInTransactionForm1.Visible = false;
             
 
         }
@@ -57,7 +55,6 @@ namespace TriforceSalon
             inventoryPage1.Visible = false;
             signinPage1.Visible = false;
             signUpForm1.Visible = true;
-            walkInTransactionForm1.Visible = false;
 
         }
 
@@ -67,7 +64,6 @@ namespace TriforceSalon
             inventoryPage1.Visible = true;
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
-            walkInTransactionForm1.Visible = false;
 
         }
 
@@ -77,7 +73,6 @@ namespace TriforceSalon
             inventoryPage1.Visible = false;
             signinPage1.Visible = false;
             signUpForm1.Visible = false;
-            walkInTransactionForm1.Visible = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

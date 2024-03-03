@@ -1,4 +1,4 @@
-﻿namespace TriforceSalon.UserControls
+namespace TriforceSalon.UserControls
 {
     partial class EmployeeUserConrols
     {
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ServiceTypeNameLbl = new System.Windows.Forms.Label();
+            this.AccountIDLbl = new System.Windows.Forms.Label();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,12 +42,32 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.ServiceTypeNameLbl);
+            this.guna2Panel1.Controls.Add(this.AccountIDLbl);
             this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel1.Location = new System.Drawing.Point(1516, 0);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(446, 1080);
             this.guna2Panel1.TabIndex = 0;
+            // 
+            // ServiceTypeNameLbl
+            // 
+            this.ServiceTypeNameLbl.AutoSize = true;
+            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(82, 432);
+            this.ServiceTypeNameLbl.Name = "ServiceTypeNameLbl";
+            this.ServiceTypeNameLbl.Size = new System.Drawing.Size(24, 13);
+            this.ServiceTypeNameLbl.TabIndex = 2;
+            this.ServiceTypeNameLbl.Text = "test";
+            // 
+            // AccountIDLbl
+            // 
+            this.AccountIDLbl.AutoSize = true;
+            this.AccountIDLbl.Location = new System.Drawing.Point(101, 348);
+            this.AccountIDLbl.Name = "AccountIDLbl";
+            this.AccountIDLbl.Size = new System.Drawing.Size(37, 13);
+            this.AccountIDLbl.TabIndex = 1;
+            this.AccountIDLbl.Text = "13018";
             // 
             // guna2Button1
             // 
@@ -110,6 +132,7 @@
             this.Name = "EmployeeUserConrols";
             this.Size = new System.Drawing.Size(1920, 1080);
             this.guna2Panel1.ResumeLayout(false);
+            this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -122,5 +145,7 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel CustomerListFLowLayout;
+        private System.Windows.Forms.Label AccountIDLbl;
+        private System.Windows.Forms.Label ServiceTypeNameLbl;
     }
 }

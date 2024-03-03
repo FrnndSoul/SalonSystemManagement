@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Linq;
@@ -10,32 +10,56 @@ namespace TriforceSalon.UserControls
     public partial class EmployeeUserConrols : UserControl
     {
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
-        public EmployeeUserConrols employeeUserConrolsInstance;
+        public static EmployeeUserConrols employeeUserConrolsInstance;
         public EmployeeUserConrols()
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
-            LoadCustomers();
+            string serviceTypeName = ServiceTypeNameLbl.Text;
+            LoadCustomers(serviceTypeName);
         }
 
-        public void LoadCustomers()
+        public void LoadCustomers(string serviceTypeName)
         {
+
             try
             {
-                using (var conn = new MySqlConnection("server=localhost;user=root;database=salondatabase;password="))
+                using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     conn.Open();
-                    
-                    string query = "Select CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, PreferredEmployee, PriorityStatus, TransactionID from transaction";
+
+                    /* string query = "SELECT t.CustomerName," +
+                                     " t.CustomerAge, " +
+                                     " t.CustomerPhoneNumber, " +
+                                     " t.ServiceVariation, " +
+                                     " t.PreferredEmployee," +
+                                     " t.PriorityStatus, " +
+                                     " t.TransactionID" +
+                                     " FROM transaction t" +
+                                     " WHERE ServiceType = @service_type " +
+                                     "AND PaymentStatus = 'UNPAID";*/
+
+                    string query = "SELECT t.CustomerName," +
+                                      " t.CustomerAge, " +
+                                      " t.CustomerPhoneNumber, " +
+                                      " t.ServiceVariation, " +
+                                      " t.PreferredEmployee," +
+                                      " t.PriorityStatus, " +
+                                      " t.TransactionID" +
+                                      " FROM transaction t" +
+                                      " WHERE ServiceType = @service_type" +
+                                      " AND PaymentStatus = 'UNPAID'" +  
+                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
+                        command.Parameters.AddWithValue("@service_type", serviceTypeName);
                         using (var adapter = new MySqlDataAdapter(command))
                         {
                             var dataTable = new DataTable();
                             adapter.Fill(dataTable);
 
-                           CustomerListFLowLayout.Controls.Clear();
+                            CustomerListFLowLayout.Controls.Clear();
 
                             foreach (DataRow row in dataTable.Rows)
                             {

@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.Test
 {
     public partial class CustomerTicket : UserControl
     {
+        EmployeeTicketTransaction empTransaction = new EmployeeTicketTransaction();
+
+
+
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
         public string CustomerName => NameLbl.Text;
         public string CustomerAge => AgeLbl.Text;
@@ -34,6 +39,12 @@ namespace TriforceSalon.Test
         internal class CustomerSelectedEventArgs
         {
 
+        }
+
+        private void ProcessCustomerBtn_Click(object sender, EventArgs e)
+        {
+            int ticketID = Convert.ToInt32(TicketLbl.Text);
+            empTransaction.ProcessTicket(ticketID);
         }
     }
 

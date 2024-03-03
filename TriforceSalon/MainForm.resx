@@ -197,6 +197,7 @@
   </data>
   <data name="&gt;&gt;adminForm1.ZOrder" xml:space="preserve">
     <value>2</value>
+
   </data>
   <data name="inventoryPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -224,22 +225,29 @@
   </data>
   <data name="&gt;&gt;inventoryPage1.ZOrder" xml:space="preserve">
     <value>3</value>
+
   </data>
-  <data name="walkInTransactionForm1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="inventoryPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="walkInTransactionForm1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="inventoryPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="walkInTransactionForm1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 878</value>
+  <data name="inventoryPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1900, 1060</value>
   </data>
-  <data name="walkInTransactionForm1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="inventoryPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="walkInTransactionForm1.Visible" type="System.Boolean, mscorlib">
+  <data name="inventoryPage1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+
+	<!--Start ng akin ay dito-->
+  
+	  <!--End ng akin ay nandito-->
+
+	  <!--start ng nasa error ay dito-->
   <data name="&gt;&gt;walkInTransactionForm1.Name" xml:space="preserve">
     <value>walkInTransactionForm1</value>
   </data>
@@ -251,6 +259,8 @@
   </data>
   <data name="&gt;&gt;walkInTransactionForm1.ZOrder" xml:space="preserve">
     <value>4</value>
+	   <!--end ng error ay nandito-->
+  
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

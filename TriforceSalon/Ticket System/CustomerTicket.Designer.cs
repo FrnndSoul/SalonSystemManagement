@@ -31,7 +31,7 @@
             this.NameLbl = new System.Windows.Forms.Label();
             this.TicketLbl = new System.Windows.Forms.Label();
             this.ServiceVarLbl = new System.Windows.Forms.Label();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.PrioStatusLbl = new System.Windows.Forms.Label();
             this.PreferredEmpLbl = new System.Windows.Forms.Label();
@@ -43,6 +43,7 @@
             // NameLbl
             // 
             this.NameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.NameLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLbl.ForeColor = System.Drawing.Color.White;
             this.NameLbl.Location = new System.Drawing.Point(48, 42);
             this.NameLbl.Name = "NameLbl";
@@ -53,6 +54,7 @@
             // 
             // TicketLbl
             // 
+            this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TicketLbl.ForeColor = System.Drawing.Color.White;
             this.TicketLbl.Location = new System.Drawing.Point(1408, 34);
             this.TicketLbl.Name = "TicketLbl";
@@ -63,6 +65,7 @@
             // 
             // ServiceVarLbl
             // 
+            this.ServiceVarLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceVarLbl.ForeColor = System.Drawing.Color.White;
             this.ServiceVarLbl.Location = new System.Drawing.Point(820, 34);
             this.ServiceVarLbl.Name = "ServiceVarLbl";
@@ -71,33 +74,34 @@
             this.ServiceVarLbl.Text = "Service";
             this.ServiceVarLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // guna2Button1
+            // ProcessCustomerBtn
             // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.AutoRoundedCorners = true;
-            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.BorderRadius = 22;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(1548, 33);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(180, 46);
-            this.guna2Button1.TabIndex = 5;
-            this.guna2Button1.Text = "Serve";
-            this.guna2Button1.UseTransparentBackground = true;
+            this.ProcessCustomerBtn.Animated = true;
+            this.ProcessCustomerBtn.AutoRoundedCorners = true;
+            this.ProcessCustomerBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ProcessCustomerBtn.BorderRadius = 22;
+            this.ProcessCustomerBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ProcessCustomerBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ProcessCustomerBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ProcessCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
+            this.ProcessCustomerBtn.Location = new System.Drawing.Point(1548, 33);
+            this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
+            this.ProcessCustomerBtn.Size = new System.Drawing.Size(180, 46);
+            this.ProcessCustomerBtn.TabIndex = 5;
+            this.ProcessCustomerBtn.Text = "Serve";
+            this.ProcessCustomerBtn.UseTransparentBackground = true;
+            this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderColor = System.Drawing.Color.Black;
             this.guna2Panel1.BorderRadius = 30;
-            this.guna2Panel1.Controls.Add(this.guna2Button1);
+            this.guna2Panel1.Controls.Add(this.ProcessCustomerBtn);
             this.guna2Panel1.Controls.Add(this.PrioStatusLbl);
             this.guna2Panel1.Controls.Add(this.PreferredEmpLbl);
             this.guna2Panel1.Controls.Add(this.PhoneNumberLbl);
@@ -113,6 +117,7 @@
             // 
             // PrioStatusLbl
             // 
+            this.PrioStatusLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrioStatusLbl.ForeColor = System.Drawing.Color.White;
             this.PrioStatusLbl.Location = new System.Drawing.Point(1240, 33);
             this.PrioStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -124,6 +129,7 @@
             // 
             // PreferredEmpLbl
             // 
+            this.PreferredEmpLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PreferredEmpLbl.ForeColor = System.Drawing.Color.White;
             this.PreferredEmpLbl.Location = new System.Drawing.Point(999, 33);
             this.PreferredEmpLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -135,6 +141,7 @@
             // 
             // PhoneNumberLbl
             // 
+            this.PhoneNumberLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PhoneNumberLbl.ForeColor = System.Drawing.Color.White;
             this.PhoneNumberLbl.Location = new System.Drawing.Point(509, 33);
             this.PhoneNumberLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -146,6 +153,7 @@
             // 
             // AgeLbl
             // 
+            this.AgeLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AgeLbl.ForeColor = System.Drawing.Color.White;
             this.AgeLbl.Location = new System.Drawing.Point(397, 34);
             this.AgeLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -175,7 +183,7 @@
         private System.Windows.Forms.Label NameLbl;
         private System.Windows.Forms.Label TicketLbl;
         private System.Windows.Forms.Label ServiceVarLbl;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label PhoneNumberLbl;
         private System.Windows.Forms.Label AgeLbl;

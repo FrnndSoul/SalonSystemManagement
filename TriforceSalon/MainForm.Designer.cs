@@ -34,6 +34,7 @@
             this.adminForm1 = new TriforceSalon.AdminForm();
             this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
+
             this.SuspendLayout();
             // 
             // signinPage1
@@ -75,7 +76,6 @@
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
             this.Controls.Add(this.inventoryPage1);
-            this.Controls.Add(this.walkInTransactionForm1);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);

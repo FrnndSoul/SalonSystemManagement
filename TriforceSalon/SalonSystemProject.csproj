@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Components\ChangeImageSize.cs" />
+    <Compile Include="Class Components\EmployeeTicketTransaction.cs" />
     <Compile Include="Class Components\LoadImages.cs" />
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
@@ -149,6 +150,12 @@
     <Compile Include="UserControls\EditProduct Inventory.Designer.cs">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\EmployeeUserConrols.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GeneralView Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +188,24 @@
     </Compile>
     <Compile Include="UserControls\ManagerServices.Designer.cs">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.Designer.cs">
+      <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.Designer.cs">
+      <DependentUpon>PaymentsUserControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\SellProductsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\SellProductsUserControls.Designer.cs">
+      <DependentUpon>SellProductsUserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Receptionist Controls\ServiceUserControl.cs">
       <SubType>UserControl</SubType>
@@ -230,6 +255,9 @@
     <EmbeddedResource Include="UserControls\EditProduct Inventory.resx">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
+      <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GeneralView Inventory.resx">
       <DependentUpon>GeneralView Inventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +266,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -249,6 +278,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerServices.resx">
       <DependentUpon>ManagerServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
+      <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\PaymentsUserControls.resx">
+      <DependentUpon>PaymentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\SellProductsUserControls.resx">
+      <DependentUpon>SellProductsUserControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\ServiceUserControl.resx">
       <DependentUpon>ServiceUserControl.cs</DependentUpon>
