@@ -34,10 +34,7 @@
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.CashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -62,6 +59,12 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.gcashProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods.GcashProcess();
+            this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.CashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.DiscountBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
@@ -119,6 +122,9 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel16);
+            this.guna2Panel1.Controls.Add(this.DiscountBox);
+            this.guna2Panel1.Controls.Add(this.PWDCheckbox);
             this.guna2Panel1.Controls.Add(this.VoidBtn);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel14);
             this.guna2Panel1.Controls.Add(this.GcashPayment);
@@ -178,43 +184,11 @@
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel14.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(87, 601);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(870, 509);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             this.guna2HtmlLabel14.Size = new System.Drawing.Size(219, 31);
             this.guna2HtmlLabel14.TabIndex = 27;
             this.guna2HtmlLabel14.Text = "Payment Options:";
-            // 
-            // GcashPayment
-            // 
-            this.GcashPayment.BackColor = System.Drawing.Color.Transparent;
-            this.GcashPayment.Enabled = false;
-            this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
-            this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(517, 579);
-            this.GcashPayment.Name = "GcashPayment";
-            this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.GcashPayment.Size = new System.Drawing.Size(80, 80);
-            this.GcashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.GcashPayment.TabIndex = 26;
-            this.GcashPayment.TabStop = false;
-            this.GcashPayment.UseTransparentBackground = true;
-            this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
-            // 
-            // CardPayment
-            // 
-            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
-            this.CardPayment.Enabled = false;
-            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
-            this.CardPayment.ImageRotate = 0F;
-            this.CardPayment.Location = new System.Drawing.Point(345, 579);
-            this.CardPayment.Name = "CardPayment";
-            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.CardPayment.Size = new System.Drawing.Size(80, 80);
-            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CardPayment.TabIndex = 24;
-            this.CardPayment.TabStop = false;
-            this.CardPayment.UseTransparentBackground = true;
-            this.CardPayment.Click += new System.EventHandler(this.CardPayment_Click);
             // 
             // guna2HtmlLabel15
             // 
@@ -226,22 +200,6 @@
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(494, 40);
             this.guna2HtmlLabel15.TabIndex = 23;
             this.guna2HtmlLabel15.Text = "‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ Balance Information ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ";
-            // 
-            // CashPayment
-            // 
-            this.CashPayment.BackColor = System.Drawing.Color.Transparent;
-            this.CashPayment.Enabled = false;
-            this.CashPayment.Image = global::TriforceSalon.Properties.Resources.Cash;
-            this.CashPayment.ImageRotate = 0F;
-            this.CashPayment.Location = new System.Drawing.Point(431, 579);
-            this.CashPayment.Name = "CashPayment";
-            this.CashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.CashPayment.Size = new System.Drawing.Size(80, 80);
-            this.CashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CashPayment.TabIndex = 25;
-            this.CashPayment.TabStop = false;
-            this.CashPayment.UseTransparentBackground = true;
-            this.CashPayment.Click += new System.EventHandler(this.CashPayment_Click);
             // 
             // guna2HtmlLabel11
             // 
@@ -269,7 +227,7 @@
             this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.IndicateFocus = true;
-            this.guna2Button1.Location = new System.Drawing.Point(335, 572);
+            this.guna2Button1.Location = new System.Drawing.Point(1118, 480);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(273, 95);
             this.guna2Button1.TabIndex = 23;
@@ -352,6 +310,7 @@
             this.AmountBox.Name = "AmountBox";
             this.AmountBox.PasswordChar = '\0';
             this.AmountBox.PlaceholderText = "";
+            this.AmountBox.ReadOnly = true;
             this.AmountBox.SelectedText = "";
             this.AmountBox.Size = new System.Drawing.Size(408, 44);
             this.AmountBox.TabIndex = 12;
@@ -422,6 +381,7 @@
             this.ServiceVariationIDBox.Name = "ServiceVariationIDBox";
             this.ServiceVariationIDBox.PasswordChar = '\0';
             this.ServiceVariationIDBox.PlaceholderText = "";
+            this.ServiceVariationIDBox.ReadOnly = true;
             this.ServiceVariationIDBox.SelectedText = "";
             this.ServiceVariationIDBox.Size = new System.Drawing.Size(408, 44);
             this.ServiceVariationIDBox.TabIndex = 10;
@@ -448,6 +408,7 @@
             this.EmployeeIDBox.Name = "EmployeeIDBox";
             this.EmployeeIDBox.PasswordChar = '\0';
             this.EmployeeIDBox.PlaceholderText = "";
+            this.EmployeeIDBox.ReadOnly = true;
             this.EmployeeIDBox.SelectedText = "";
             this.EmployeeIDBox.Size = new System.Drawing.Size(408, 44);
             this.EmployeeIDBox.TabIndex = 9;
@@ -474,6 +435,7 @@
             this.ServiceVariationBox.Name = "ServiceVariationBox";
             this.ServiceVariationBox.PasswordChar = '\0';
             this.ServiceVariationBox.PlaceholderText = "";
+            this.ServiceVariationBox.ReadOnly = true;
             this.ServiceVariationBox.SelectedText = "";
             this.ServiceVariationBox.Size = new System.Drawing.Size(408, 44);
             this.ServiceVariationBox.TabIndex = 8;
@@ -500,6 +462,7 @@
             this.ServiceTypeBox.Name = "ServiceTypeBox";
             this.ServiceTypeBox.PasswordChar = '\0';
             this.ServiceTypeBox.PlaceholderText = "";
+            this.ServiceTypeBox.ReadOnly = true;
             this.ServiceTypeBox.SelectedText = "";
             this.ServiceTypeBox.Size = new System.Drawing.Size(408, 44);
             this.ServiceTypeBox.TabIndex = 7;
@@ -526,6 +489,7 @@
             this.PhoneNumberBox.Name = "PhoneNumberBox";
             this.PhoneNumberBox.PasswordChar = '\0';
             this.PhoneNumberBox.PlaceholderText = "";
+            this.PhoneNumberBox.ReadOnly = true;
             this.PhoneNumberBox.SelectedText = "";
             this.PhoneNumberBox.Size = new System.Drawing.Size(408, 44);
             this.PhoneNumberBox.TabIndex = 6;
@@ -552,8 +516,9 @@
             this.AgeBox.Name = "AgeBox";
             this.AgeBox.PasswordChar = '\0';
             this.AgeBox.PlaceholderText = "";
+            this.AgeBox.ReadOnly = true;
             this.AgeBox.SelectedText = "";
-            this.AgeBox.Size = new System.Drawing.Size(408, 44);
+            this.AgeBox.Size = new System.Drawing.Size(239, 44);
             this.AgeBox.TabIndex = 5;
             // 
             // NameBox
@@ -578,6 +543,7 @@
             this.NameBox.Name = "NameBox";
             this.NameBox.PasswordChar = '\0';
             this.NameBox.PlaceholderText = "";
+            this.NameBox.ReadOnly = true;
             this.NameBox.SelectedText = "";
             this.NameBox.Size = new System.Drawing.Size(408, 44);
             this.NameBox.TabIndex = 4;
@@ -642,6 +608,112 @@
             this.gcashProcess1.TabIndex = 30;
             this.gcashProcess1.VisibleChanged += new System.EventHandler(this.gcashProcess1_VisibleChanged);
             // 
+            // GcashPayment
+            // 
+            this.GcashPayment.BackColor = System.Drawing.Color.Transparent;
+            this.GcashPayment.Enabled = false;
+            this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
+            this.GcashPayment.ImageRotate = 0F;
+            this.GcashPayment.Location = new System.Drawing.Point(1300, 487);
+            this.GcashPayment.Name = "GcashPayment";
+            this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.GcashPayment.Size = new System.Drawing.Size(80, 80);
+            this.GcashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GcashPayment.TabIndex = 26;
+            this.GcashPayment.TabStop = false;
+            this.GcashPayment.UseTransparentBackground = true;
+            this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
+            // 
+            // CardPayment
+            // 
+            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
+            this.CardPayment.Enabled = false;
+            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
+            this.CardPayment.ImageRotate = 0F;
+            this.CardPayment.Location = new System.Drawing.Point(1128, 487);
+            this.CardPayment.Name = "CardPayment";
+            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.CardPayment.Size = new System.Drawing.Size(80, 80);
+            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CardPayment.TabIndex = 24;
+            this.CardPayment.TabStop = false;
+            this.CardPayment.UseTransparentBackground = true;
+            this.CardPayment.Click += new System.EventHandler(this.CardPayment_Click);
+            // 
+            // CashPayment
+            // 
+            this.CashPayment.BackColor = System.Drawing.Color.Transparent;
+            this.CashPayment.Enabled = false;
+            this.CashPayment.Image = global::TriforceSalon.Properties.Resources.Cash;
+            this.CashPayment.ImageRotate = 0F;
+            this.CashPayment.Location = new System.Drawing.Point(1214, 487);
+            this.CashPayment.Name = "CashPayment";
+            this.CashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.CashPayment.Size = new System.Drawing.Size(80, 80);
+            this.CashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CashPayment.TabIndex = 25;
+            this.CashPayment.TabStop = false;
+            this.CashPayment.UseTransparentBackground = true;
+            this.CashPayment.Click += new System.EventHandler(this.CashPayment_Click);
+            // 
+            // PWDCheckbox
+            // 
+            this.PWDCheckbox.AutoSize = true;
+            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.CheckedState.BorderRadius = 0;
+            this.PWDCheckbox.CheckedState.BorderThickness = 0;
+            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.Enabled = false;
+            this.PWDCheckbox.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.PWDCheckbox.Location = new System.Drawing.Point(525, 260);
+            this.PWDCheckbox.Name = "PWDCheckbox";
+            this.PWDCheckbox.Size = new System.Drawing.Size(150, 33);
+            this.PWDCheckbox.TabIndex = 29;
+            this.PWDCheckbox.Text = "is Senior?";
+            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
+            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
+            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
+            // 
+            // guna2HtmlLabel16
+            // 
+            this.guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel16.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel16.ForeColor = System.Drawing.Color.Black;
+            this.guna2HtmlLabel16.Location = new System.Drawing.Point(145, 582);
+            this.guna2HtmlLabel16.Name = "guna2HtmlLabel16";
+            this.guna2HtmlLabel16.Size = new System.Drawing.Size(205, 31);
+            this.guna2HtmlLabel16.TabIndex = 31;
+            this.guna2HtmlLabel16.Text = "Discount (if any):";
+            // 
+            // DiscountBox
+            // 
+            this.DiscountBox.Animated = true;
+            this.DiscountBox.AutoRoundedCorners = true;
+            this.DiscountBox.BackColor = System.Drawing.Color.Transparent;
+            this.DiscountBox.BorderColor = System.Drawing.Color.Black;
+            this.DiscountBox.BorderRadius = 21;
+            this.DiscountBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.DiscountBox.DefaultText = "";
+            this.DiscountBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.DiscountBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.DiscountBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.DiscountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.DiscountBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.DiscountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DiscountBox.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.DiscountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DiscountBox.Location = new System.Drawing.Point(369, 582);
+            this.DiscountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
+            this.DiscountBox.Name = "DiscountBox";
+            this.DiscountBox.PasswordChar = '\0';
+            this.DiscountBox.PlaceholderText = "0.00";
+            this.DiscountBox.ReadOnly = true;
+            this.DiscountBox.SelectedText = "";
+            this.DiscountBox.Size = new System.Drawing.Size(306, 44);
+            this.DiscountBox.TabIndex = 30;
+            // 
             // PaymentsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -705,5 +777,8 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Payment_Methods.GcashProcess gcashProcess1;
+        private Guna.UI2.WinForms.Guna2CheckBox PWDCheckbox;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
+        private Guna.UI2.WinForms.Guna2TextBox DiscountBox;
     }
 }

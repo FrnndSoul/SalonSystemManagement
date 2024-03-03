@@ -21,6 +21,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public PaymentsUserControls()
         {
             InitializeComponent();
+            AdjustCheckBoxSize(PWDCheckbox);
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
@@ -34,6 +35,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 cardProcess1.DefaultLoad();
             }
+        }
+
+        private void AdjustCheckBoxSize(CheckBox checkBox)
+        {
+            int largerCheckBoxSize = 20;
+            checkBox.Width = largerCheckBoxSize;
+            checkBox.Height = largerCheckBoxSize;
+            checkBox.Invalidate();
+        }
+
+        private void PWDCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void CardPayment_Click(object sender, EventArgs e)
@@ -91,8 +105,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceVariationBox.Text = ServiceVariation;
             ServiceVariationIDBox.Text = ServiceVariationIDBox.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
-            AmountBox.Text = Amount.ToString();
 
+            if (Age >= 60)
+            {
+                PWDCheckbox.Checked = true;
+                int amountValue = Convert.ToInt32(Amount);
+                Amount = (int)(amountValue * 0.8);
+                int discount = (int)(amountValue * 0.2);
+                DiscountBox.Text = discount.ToString();
+            }
+            
+            AmountBox.Text = Amount.ToString();
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
             CardPayment.Enabled = true;
@@ -150,7 +173,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceVariationIDBox.Text = "";
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
+            DiscountBox.Text = "";
 
+            PWDCheckbox.Checked = false;
 
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
