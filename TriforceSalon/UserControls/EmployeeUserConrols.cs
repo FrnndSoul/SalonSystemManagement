@@ -20,8 +20,7 @@ namespace TriforceSalon.UserControls
             employeeUserConrolsInstance = this;
             string serviceTypeName = ServiceTypeNameLbl.Text;
             LoadCustomers(serviceTypeName);
-            //userClock = new RealTimeClock(TimerLbl, "dddd, MMMM d yyyy (HH:mm:ss)");
-            userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (HH:mm:ss)");
+            userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
 
         }
 
@@ -45,7 +44,9 @@ namespace TriforceSalon.UserControls
                                      " WHERE ServiceType = @service_type " +
                                      "AND PaymentStatus = 'UNPAID";*/
 
-                    string query = "SELECT t.CustomerName," +
+
+                    //nandito pa yung preferred Employee for backup purposes
+                   /* string query = "SELECT t.CustomerName," +
                                       " t.CustomerAge, " +
                                       " t.CustomerPhoneNumber, " +
                                       " t.ServiceVariation, " +
@@ -55,7 +56,19 @@ namespace TriforceSalon.UserControls
                                       " FROM transaction t" +
                                       " WHERE ServiceType = @service_type" +
                                       " AND PaymentStatus = 'UNPAID'" +  
-                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    //removed na dito yung pref employee
+                    string query = "SELECT t.CustomerName," +
+                                     " t.CustomerAge, " +
+                                     " t.CustomerPhoneNumber, " +
+                                     " t.ServiceVariation, " +
+                                     " t.PriorityStatus, " +
+                                     " t.TransactionID" +
+                                     " FROM transaction t" +
+                                     " WHERE ServiceType = @service_type" +
+                                     " AND PaymentStatus = 'UNPAID'" +
+                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {

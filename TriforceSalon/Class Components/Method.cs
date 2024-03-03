@@ -14,6 +14,9 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using Org.BouncyCastle.Ocsp;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using TriforceSalon.UserControls;
+using TriforceSalon.Class_Components;
+using System.IO;
 
 namespace TriforceSalon
 {
@@ -468,6 +471,23 @@ namespace TriforceSalon
             {
                 MessageBox.Show(e.Message + "\n\nat LogOutUser()", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        TransactionMethods transaction = new TransactionMethods();
+        public  void GetEmployeeInfo()
+        {
+            byte[] photoBytes = Photo;
+
+            EmployeeUserConrols.employeeUserConrolsInstance.EmpNameTxtB.Text = Name;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text = Convert.ToString(AccountID);
+            EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text = transaction.GetServiceTypeName(AccountID);
+            //EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Photo;
+
+            using (MemoryStream ms = new MemoryStream(photoBytes))
+            {
+                EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Image.FromStream(ms);
+            }
+
         }
     }
 }
