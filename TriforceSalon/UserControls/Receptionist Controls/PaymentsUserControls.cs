@@ -13,6 +13,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class PaymentsUserControls : UserControl
     {
+        //UNPAID, PAID, VOID
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus;
         public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
