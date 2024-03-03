@@ -12,9 +12,26 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class PaymentsUserControls : UserControl
     {
+        //UNPAID, PAID, VOID
+        public static string Name, ServiceType, ServiceVariation, PriorityStatus;
+        public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
+
+
+        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        DateTime Time;
+
         public PaymentsUserControls()
         {
             InitializeComponent();
+        }
+
+        private void PaymentsUserControls_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
