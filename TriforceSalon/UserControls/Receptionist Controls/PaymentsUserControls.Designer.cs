@@ -58,6 +58,7 @@
             this.TransactionIDBox.SelectedText = "";
             this.TransactionIDBox.Size = new System.Drawing.Size(408, 54);
             this.TransactionIDBox.TabIndex = 0;
+            this.TransactionIDBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransactionIDBox_KeyPress);
             // 
             // guna2HtmlLabel1
             // 
@@ -69,7 +70,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(760, 79);
             this.guna2HtmlLabel1.TabIndex = 1;
             this.guna2HtmlLabel1.Text = "Transaction Information";
-            this.guna2HtmlLabel1.Click += new System.EventHandler(this.guna2HtmlLabel1_Click);
             // 
             // guna2HtmlLabel2
             // 
