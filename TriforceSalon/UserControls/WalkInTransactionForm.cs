@@ -33,7 +33,7 @@ namespace TriforceSalon.UserControls
             //int testId = 6;
             try
             {
-                using (var conn = new MySqlConnection("server=localhost;user=root;database=salondatabase;password="))
+                using (var conn = new MySqlConnection("153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     conn.Open();
                     //string query = "Select CustomerName, TransactionID, ServiceType, ServiceVariation, ServiceVariationID from transaction where TransactionID = @transaction_ID";
