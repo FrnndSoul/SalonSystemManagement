@@ -13,16 +13,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class PaymentsUserControls : UserControl
     {
-        //UNPAID, PAID, VOID
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus;
         public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
-
-        private void guna2CirclePictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        DateTime TimeTaken;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
@@ -65,6 +57,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message + "\nat TransactionIDBox Key Press","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+
+        private void LoadBtn_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void PaymentsUserControls_Load(object sender, EventArgs e)
