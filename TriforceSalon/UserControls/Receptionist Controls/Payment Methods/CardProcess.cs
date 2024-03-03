@@ -20,13 +20,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         public static string CustomerName, EmployeeName, ServiceVariation, PaymentStatus,
             CardHolder, CardNumber;
-        public static int Age, PhoneNumber, Balance,
+        public static int Age, PhoneNumber, Balance, TransactionID, 
             CVC;
         public static DateTime CardExpiration;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public void ThrowData(string customerName, string employeeName, string serviceVariation, string paymentStatus, int age, int phoneNumber, int balance)
+        public void ThrowData(string customerName, string employeeName, string serviceVariation, string paymentStatus, int age, int phoneNumber, int balance, int transactionID)
         {
             CustomerName = customerName;
             EmployeeName = employeeName;
@@ -35,6 +35,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             Age = age;
             PhoneNumber = phoneNumber;
             Balance = balance;
+            TransactionID = transactionID;
         }
 
         private void CardNumberBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -105,8 +106,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CardHolder = CardNameBox.Text;
             CardExpiration = ExpirationDatePicker.Value;
 
-            RecordInCardTransactions();
-
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
@@ -116,10 +115,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         if (control is PaymentsUserControls paymentUserControl)
                         {
                             paymentUserControl.ChangePaymentStatus("PAID");
+                            break;
+                        } else
+                        {
+                            return;
                         }
                     }
                 }
             }
+
+            RecordInCardTransactions();
         }
 
         private void RecordInCardTransactions()
@@ -129,9 +134,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `card_transactions` (`CardName`, `CardNumber`, `CVC`, `Expiration`, `Amount`) VALUES (@CardName, @CardNumber, @CVC, @Expiration, @Amount)";
+                    string query = "INSERT INTO `card_transactions` (`TransactionID`, `CardName`, `CardNumber`, `CVC`, `Expiration`, `Amount`) VALUES (@TransactionID, @CardName, @CardNumber, @CVC, @Expiration, @Amount)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
+                        querycmd.Parameters.AddWithValue("@TransactionID", TransactionID);
                         querycmd.Parameters.AddWithValue("@CardName", CustomerName);
                         querycmd.Parameters.AddWithValue("@CardNumber", CardNumber);
                         querycmd.Parameters.AddWithValue("@CVC", CVC);
@@ -139,6 +145,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         querycmd.Parameters.AddWithValue("@Amount", Balance);
 
                         int rowsAffected = querycmd.ExecuteNonQuery();
+
                         if(rowsAffected > 0)
                         {
                             MessageBox.Show("Payment Received", "TriCharm Salon", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -150,6 +157,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(e.Message + "\n\nat RecordInCardTransactions()", "SQL ERROR", MessageBoxButtons.OK);
             }
+            this.Visible = false;
         }
 
         public void DefaultLoad()

@@ -642,8 +642,8 @@
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.TransactionIDBox);
-            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.cardProcess1);
+            this.Controls.Add(this.guna2Panel2);
             this.Name = "PaymentsUserControls";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.PaymentsUserControls_Load);
