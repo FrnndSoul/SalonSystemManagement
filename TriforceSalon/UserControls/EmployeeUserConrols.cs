@@ -2,7 +2,9 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Linq;
+using System.Web.WebSockets;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
 
 namespace TriforceSalon.UserControls
@@ -11,12 +13,16 @@ namespace TriforceSalon.UserControls
     {
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
+        private RealTimeClock userClock;
         public EmployeeUserConrols()
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
             string serviceTypeName = ServiceTypeNameLbl.Text;
             LoadCustomers(serviceTypeName);
+            //userClock = new RealTimeClock(TimerLbl, "dddd, MMMM d yyyy (HH:mm:ss)");
+            userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (HH:mm:ss)");
+
         }
 
         public void LoadCustomers(string serviceTypeName)
@@ -24,7 +30,7 @@ namespace TriforceSalon.UserControls
 
             try
             {
-                using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
+                using (var conn = new MySqlConnection("server=localhost;user=root;database=salondatabase;password="))
                 {
                     conn.Open();
 

@@ -116,6 +116,7 @@
     <Compile Include="Class Components\SalonServices.cs" />
     <Compile Include="Class Components\ServiceTypes.cs" />
     <Compile Include="Class Components\TransactionMethods.cs" />
+    <Compile Include="Class Components\RealTimeClock.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>

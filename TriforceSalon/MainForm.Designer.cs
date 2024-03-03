@@ -34,7 +34,7 @@
             this.adminForm1 = new TriforceSalon.AdminForm();
             this.inventoryPage1 = new TriforceSalon.InventoryPage();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
-
+            this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
             this.SuspendLayout();
             // 
             // signinPage1
@@ -68,10 +68,17 @@
             resources.ApplyResources(this.walkInTransactionForm1, "walkInTransactionForm1");
             this.walkInTransactionForm1.Name = "walkInTransactionForm1";
             // 
+            // employeeUserConrols1
+            // 
+            this.employeeUserConrols1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
+            this.employeeUserConrols1.Name = "employeeUserConrols1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.employeeUserConrols1);
             this.Controls.Add(this.signinPage1);
             this.Controls.Add(this.signUpForm1);
             this.Controls.Add(this.adminForm1);
@@ -90,6 +97,7 @@
         private SignUpForm signUpForm1;
         private InventoryPage inventoryPage1;
         private UserControls.WalkInTransactionForm walkInTransactionForm1;
+        private UserControls.EmployeeUserConrols employeeUserConrols1;
     }
 }
 

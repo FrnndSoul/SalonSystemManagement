@@ -15,13 +15,14 @@ namespace TriforceSalon.Class_Components
         private string mysqlcon;
         public EmployeeTicketTransaction()
         {
-            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         }
 
         public void ProcessTicket(int ticketID)
         {
             DateTime startTIme = DateTime.Now;
-            int accountID = 13018;
+            //int accountID = 13018;
+            int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text);
 
 
             DialogResult choices = MessageBox.Show("Are you sure you want to serve this customer?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

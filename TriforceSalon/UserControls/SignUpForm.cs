@@ -18,7 +18,7 @@ namespace TriforceSalon
     public partial class SignUpForm : UserControl
     {
         public static byte[] PhotoByteHolder;
-        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        public static string mysqlcon = "server=localhost;user=root;database=salondatabase;password=";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public SignUpForm()
         {
