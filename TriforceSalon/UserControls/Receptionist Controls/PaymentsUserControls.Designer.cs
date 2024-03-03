@@ -39,7 +39,6 @@
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.CashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -59,8 +58,9 @@
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LoadBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
@@ -143,6 +143,7 @@
             this.guna2Panel1.Controls.Add(this.PhoneNumberBox);
             this.guna2Panel1.Controls.Add(this.AgeBox);
             this.guna2Panel1.Controls.Add(this.NameBox);
+            this.guna2Panel1.Enabled = false;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2Panel1.Location = new System.Drawing.Point(24, 128);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -238,6 +239,7 @@
             this.CashPayment.TabIndex = 25;
             this.CashPayment.TabStop = false;
             this.CashPayment.UseTransparentBackground = true;
+            this.CashPayment.Click += new System.EventHandler(this.CashPayment_Click);
             // 
             // guna2HtmlLabel11
             // 
@@ -249,26 +251,6 @@
             this.guna2HtmlLabel11.Size = new System.Drawing.Size(129, 31);
             this.guna2HtmlLabel11.TabIndex = 19;
             this.guna2HtmlLabel11.Text = "Served by:";
-            // 
-            // guna2Button1
-            // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.AutoRoundedCorners = true;
-            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.BorderRadius = 46;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.DarkOrchid;
-            this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.IndicateFocus = true;
-            this.guna2Button1.Location = new System.Drawing.Point(335, 572);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(273, 95);
-            this.guna2Button1.TabIndex = 23;
-            this.guna2Button1.UseTransparentBackground = true;
             // 
             // guna2HtmlLabel8
             // 
@@ -610,6 +592,35 @@
             this.LoadBtn.UseTransparentBackground = true;
             this.LoadBtn.Click += new System.EventHandler(this.LoadBtn_Click);
             // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Panel2.Location = new System.Drawing.Point(1488, 57);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(417, 767);
+            this.guna2Panel2.TabIndex = 29;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.Animated = true;
+            this.guna2Button1.AutoRoundedCorners = true;
+            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button1.BorderRadius = 46;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Enabled = false;
+            this.guna2Button1.FillColor = System.Drawing.Color.DarkOrchid;
+            this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.IndicateFocus = true;
+            this.guna2Button1.Location = new System.Drawing.Point(335, 572);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(273, 95);
+            this.guna2Button1.TabIndex = 23;
+            this.guna2Button1.UseTransparentBackground = true;
+            // 
             // cardProcess1
             // 
             this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -619,14 +630,6 @@
             this.cardProcess1.TabIndex = 29;
             this.cardProcess1.Visible = false;
             this.cardProcess1.VisibleChanged += new System.EventHandler(this.cardProcess1_VisibleChanged);
-            // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.guna2Panel2.Location = new System.Drawing.Point(1488, 57);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(417, 767);
-            this.guna2Panel2.TabIndex = 29;
             // 
             // PaymentsUserControls
             // 
@@ -639,8 +642,8 @@
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.TransactionIDBox);
-            this.Controls.Add(this.cardProcess1);
             this.Controls.Add(this.guna2Panel2);
+            this.Controls.Add(this.cardProcess1);
             this.Name = "PaymentsUserControls";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.PaymentsUserControls_Load);
@@ -679,7 +682,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox CardPayment;
         private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
         private Guna.UI2.WinForms.Guna2CirclePictureBox CashPayment;
@@ -689,5 +691,6 @@
         private CardProcess cardProcess1;
         private Guna.UI2.WinForms.Guna2Button VoidBtn;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
