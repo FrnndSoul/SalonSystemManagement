@@ -47,11 +47,13 @@ namespace TriforceSalon.UserControls
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.EmployeeDoneBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).BeginInit();
             this.guna2Panel2.SuspendLayout();
+            this.EmployeeLockPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Panel1
@@ -325,6 +327,18 @@ namespace TriforceSalon.UserControls
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer Queue";
             // 
+            // EmployeeLockPanel
+            // 
+            this.EmployeeLockPanel.BackColor = System.Drawing.Color.Transparent;
+            this.EmployeeLockPanel.BorderRadius = 50;
+            this.EmployeeLockPanel.Controls.Add(this.EmployeeDoneBtn);
+            this.EmployeeLockPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.EmployeeLockPanel.Location = new System.Drawing.Point(78, 228);
+            this.EmployeeLockPanel.Name = "EmployeeLockPanel";
+            this.EmployeeLockPanel.Size = new System.Drawing.Size(1337, 790);
+            this.EmployeeLockPanel.TabIndex = 10;
+            this.EmployeeLockPanel.Visible = false;
+            // 
             // CustomerListFLowLayout
             // 
             this.CustomerListFLowLayout.AutoScroll = true;
@@ -336,15 +350,24 @@ namespace TriforceSalon.UserControls
             this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
             this.CustomerListFLowLayout.TabIndex = 0;
             // 
-            // EmployeeLockPanel
+            // EmployeeDoneBtn
             // 
-            this.EmployeeLockPanel.BackColor = System.Drawing.Color.Transparent;
-            this.EmployeeLockPanel.BorderRadius = 50;
-            this.EmployeeLockPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.EmployeeLockPanel.Location = new System.Drawing.Point(78, 228);
-            this.EmployeeLockPanel.Name = "EmployeeLockPanel";
-            this.EmployeeLockPanel.Size = new System.Drawing.Size(1337, 790);
-            this.EmployeeLockPanel.TabIndex = 10;
+            this.EmployeeDoneBtn.Animated = true;
+            this.EmployeeDoneBtn.AutoRoundedCorners = true;
+            this.EmployeeDoneBtn.BorderRadius = 34;
+            this.EmployeeDoneBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.EmployeeDoneBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.EmployeeDoneBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.EmployeeDoneBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.EmployeeDoneBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.EmployeeDoneBtn.ForeColor = System.Drawing.Color.White;
+            this.EmployeeDoneBtn.Location = new System.Drawing.Point(316, 665);
+            this.EmployeeDoneBtn.Name = "EmployeeDoneBtn";
+            this.EmployeeDoneBtn.Size = new System.Drawing.Size(725, 71);
+            this.EmployeeDoneBtn.TabIndex = 0;
+            this.EmployeeDoneBtn.Text = "Customer Served";
+            this.EmployeeDoneBtn.UseTransparentBackground = true;
+            this.EmployeeDoneBtn.Click += new System.EventHandler(this.EmployeeDoneBtn_Click);
             // 
             // EmployeeUserConrols
             // 
@@ -358,6 +381,7 @@ namespace TriforceSalon.UserControls
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
+            this.EmployeeLockPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -373,18 +397,19 @@ namespace TriforceSalon.UserControls
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label EmpNameLbl;
         private System.Windows.Forms.Label EmpNumberLbl;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         public Guna.UI2.WinForms.Guna2TextBox EmpAccNumberTxtB;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label TimerLbl;
         public Guna.UI2.WinForms.Guna2TextBox EmpNameTxtB;
         public Guna.UI2.WinForms.Guna2PictureBox EmployeePicturePicB;
         public System.Windows.Forms.Label ServiceTypeNameLbl;
-        private Guna.UI2.WinForms.Guna2Panel EmployeeLockPanel;
+        private Guna.UI2.WinForms.Guna2Button EmployeeDoneBtn;
+        public Guna.UI2.WinForms.Guna2Panel EmployeeLockPanel;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label label9;
+        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Label label6;
     }
 }

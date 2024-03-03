@@ -13,6 +13,7 @@ namespace TriforceSalon.UserControls
     {
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
+        public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
         private RealTimeClock userClock;
         public EmployeeUserConrols()
         {
@@ -32,18 +33,6 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     conn.Open();
-
-                    /* string query = "SELECT t.CustomerName," +
-                                     " t.CustomerAge, " +
-                                     " t.CustomerPhoneNumber, " +
-                                     " t.ServiceVariation, " +
-                                     " t.PreferredEmployee," +
-                                     " t.PriorityStatus, " +
-                                     " t.TransactionID" +
-                                     " FROM transaction t" +
-                                     " WHERE ServiceType = @service_type " +
-                                     "AND PaymentStatus = 'UNPAID";*/
-
 
                     //nandito pa yung preferred Employee for backup purposes
                    /* string query = "SELECT t.CustomerName," +
@@ -108,6 +97,11 @@ namespace TriforceSalon.UserControls
             {
                 MessageBox.Show(ex.Message, "Error in LoadCustomer()");
             }
+        }
+
+        private void EmployeeDoneBtn_Click(object sender, EventArgs e)
+        {
+            transaction.ShowCustomerList();
         }
     }
 }

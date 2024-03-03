@@ -45,6 +45,7 @@ namespace TriforceSalon.Test
         {
             int ticketID = Convert.ToInt32(TicketLbl.Text);
             empTransaction.ProcessTicket(ticketID);
+
         }
     }
 

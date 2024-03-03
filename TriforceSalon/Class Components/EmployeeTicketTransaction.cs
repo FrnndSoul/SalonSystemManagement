@@ -12,6 +12,7 @@ namespace TriforceSalon.Class_Components
 {
     public class EmployeeTicketTransaction
     {
+        private EmployeeUserConrols empUserControls = new EmployeeUserConrols();
         private string mysqlcon;
         public EmployeeTicketTransaction()
         {
@@ -44,8 +45,8 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("customerID", ticketID);
 
                             command.ExecuteNonQuery();
-                            MessageBox.Show("Nakaabot Dito, check the database");
-
+                            MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ShowEmpLock();
                         }
                     }
                 }
@@ -54,6 +55,36 @@ namespace TriforceSalon.Class_Components
                     MessageBox.Show(ex.Message, "Error in ProcessTicket()");
                 }
             }
+        }
+
+        public void ShowEmpLock()
+        {
+            EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = true;
+
+            EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = false;
+
+        }
+        public void ShowCustomerList()
+        {
+            EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
+            empUserControls.LoadCustomers(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text);
+
+            EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = true;
+
         }
     }
 }
