@@ -28,22 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.PaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ReferenceBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.photo_2024_03_04_03_03_561;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(58, 24);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(300, 530);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2PictureBox1.TabIndex = 0;
-            this.guna2PictureBox1.TabStop = false;
             // 
             // PaymentBtn
             // 
@@ -96,6 +85,17 @@
             this.ReferenceBox.TabIndex = 30;
             this.ReferenceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ReferenceBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ReferenceBox_KeyPress);
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.photo_2024_03_04_03_03_561;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(58, 61);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(300, 530);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox1.TabIndex = 0;
+            this.guna2PictureBox1.TabStop = false;
             // 
             // GcashProcess
             // 
