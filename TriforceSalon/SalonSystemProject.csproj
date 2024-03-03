@@ -121,6 +121,7 @@
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Microsoft\VisualBasic\Interaction.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,6 +196,12 @@
     </Compile>
     <Compile Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.Designer.cs">
       <DependentUpon>CardProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\GcashProcess.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\GcashProcess.Designer.cs">
+      <DependentUpon>GcashProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Receptionist Controls\PaymentsUserControls.cs">
       <SubType>UserControl</SubType>
@@ -282,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.resx">
       <DependentUpon>CardProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\GcashProcess.resx">
+      <DependentUpon>GcashProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\PaymentsUserControls.resx">
       <DependentUpon>PaymentsUserControls.cs</DependentUpon>
@@ -407,6 +417,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Gcash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo_2024-03-04_03-03-56.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo_2024-03-04_03-03-561.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
