@@ -23,10 +23,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             InitializeComponent();
         }
 
+        private void GcashPayment_Click(object sender, EventArgs e)
+        {
+            gcashProcess1.Visible = true;
+        }
+
+        private void gcashProcess1_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cardProcess1.Visible == false)
+            {
+                cardProcess1.DefaultLoad();
+            }
+        }
+
         private void CardPayment_Click(object sender, EventArgs e)
         {
             cardProcess1.Visible = true;
-            cardProcess1.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount);
+            cardProcess1.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount, Convert.ToInt32(TransactionIDBox.Text));
         }
 
         private void LoadBtn_Click(object sender, EventArgs e)
@@ -147,6 +160,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             VoidBtn.Enabled = false;
 
             cardProcess1.Visible = false;
+            gcashProcess1.Visible = false;
         }
 
         private void cardProcess1_VisibleChanged(object sender, EventArgs e)

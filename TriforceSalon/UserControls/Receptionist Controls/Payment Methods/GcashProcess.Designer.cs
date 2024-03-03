@@ -36,7 +36,6 @@
             // 
             // guna2PictureBox1
             // 
-            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.photo_2024_03_04_03_03_56;
             this.guna2PictureBox1.ImageRotate = 0F;
             this.guna2PictureBox1.Location = new System.Drawing.Point(58, 24);
             this.guna2PictureBox1.Name = "guna2PictureBox1";

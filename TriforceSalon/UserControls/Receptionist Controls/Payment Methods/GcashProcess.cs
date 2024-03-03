@@ -88,7 +88,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
             {
                 MessageBox.Show(ex.Message + "\n\nat RecordInCardTransactions()", "SQL ERROR", MessageBoxButtons.OK);
             }
-
             this.Visible = false;
         }
     }

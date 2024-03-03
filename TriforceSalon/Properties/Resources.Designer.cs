@@ -195,20 +195,7 @@ namespace TriforceSalon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap photo_2024_03_04_03_03_56 {
-            get {
-                object obj = ResourceManager.GetObject("photo_2024-03-04_03-03-56", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
+        /// 
         internal static System.Drawing.Bitmap request_icon {
             get {
                 object obj = ResourceManager.GetObject("request icon", resourceCulture);
