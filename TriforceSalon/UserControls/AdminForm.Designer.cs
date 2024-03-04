@@ -32,7 +32,7 @@
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.AccessBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.RoleBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.ServiceTypeBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -106,6 +106,10 @@
             this.AccessBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.AccessBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.AccessBox.ItemHeight = 30;
+            this.AccessBox.Items.AddRange(new object[] {
+            "Manager",
+            "Receptionist",
+            "Staff"});
             this.AccessBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.AccessBox.ItemsAppearance.SelectedFont = new System.Drawing.Font("Stanberry", 15.75F);
             this.AccessBox.Location = new System.Drawing.Point(1422, 855);
@@ -119,30 +123,30 @@
             this.label8.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.label8.Location = new System.Drawing.Point(1424, 826);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 26);
+            this.label8.Size = new System.Drawing.Size(158, 26);
             this.label8.TabIndex = 91;
-            this.label8.Text = "Access";
+            this.label8.Text = "Account Access";
             // 
-            // RoleBox
+            // ServiceTypeBox
             // 
-            this.RoleBox.AutoRoundedCorners = true;
-            this.RoleBox.BackColor = System.Drawing.Color.Transparent;
-            this.RoleBox.BorderColor = System.Drawing.Color.Black;
-            this.RoleBox.BorderRadius = 17;
-            this.RoleBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.RoleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.RoleBox.Enabled = false;
-            this.RoleBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RoleBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RoleBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.RoleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.RoleBox.ItemHeight = 30;
-            this.RoleBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.RoleBox.ItemsAppearance.SelectedFont = new System.Drawing.Font("Stanberry", 15.75F);
-            this.RoleBox.Location = new System.Drawing.Point(1424, 771);
-            this.RoleBox.Name = "RoleBox";
-            this.RoleBox.Size = new System.Drawing.Size(405, 36);
-            this.RoleBox.TabIndex = 90;
+            this.ServiceTypeBox.AutoRoundedCorners = true;
+            this.ServiceTypeBox.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceTypeBox.BorderColor = System.Drawing.Color.Black;
+            this.ServiceTypeBox.BorderRadius = 17;
+            this.ServiceTypeBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ServiceTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ServiceTypeBox.Enabled = false;
+            this.ServiceTypeBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceTypeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceTypeBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ServiceTypeBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ServiceTypeBox.ItemHeight = 30;
+            this.ServiceTypeBox.ItemsAppearance.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ServiceTypeBox.ItemsAppearance.SelectedFont = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ServiceTypeBox.Location = new System.Drawing.Point(1424, 771);
+            this.ServiceTypeBox.Name = "ServiceTypeBox";
+            this.ServiceTypeBox.Size = new System.Drawing.Size(405, 36);
+            this.ServiceTypeBox.TabIndex = 90;
             // 
             // label7
             // 
@@ -160,9 +164,9 @@
             this.label6.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.label6.Location = new System.Drawing.Point(1423, 740);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 26);
+            this.label6.Size = new System.Drawing.Size(135, 26);
             this.label6.TabIndex = 88;
-            this.label6.Text = "Role";
+            this.label6.Text = "Service Type";
             // 
             // label5
             // 
@@ -391,6 +395,7 @@
             this.EditBtn.Size = new System.Drawing.Size(225, 45);
             this.EditBtn.TabIndex = 76;
             this.EditBtn.Text = "Edit User";
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click_1);
             // 
             // UploadBtn
             // 
@@ -411,6 +416,7 @@
             this.UploadBtn.Size = new System.Drawing.Size(300, 35);
             this.UploadBtn.TabIndex = 75;
             this.UploadBtn.Text = "Upload Photo";
+            this.UploadBtn.Click += new System.EventHandler(this.UploadBtn_Click_1);
             // 
             // Photo
             // 
@@ -419,6 +425,7 @@
             this.Photo.Name = "Photo";
             this.Photo.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.Photo.Size = new System.Drawing.Size(400, 400);
+            this.Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Photo.TabIndex = 74;
             this.Photo.TabStop = false;
             // 
@@ -441,6 +448,7 @@
             this.DiscardBtn.Size = new System.Drawing.Size(225, 45);
             this.DiscardBtn.TabIndex = 73;
             this.DiscardBtn.Text = "Discard";
+            this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click_1);
             // 
             // SaveBtn
             // 
@@ -461,6 +469,7 @@
             this.SaveBtn.Size = new System.Drawing.Size(225, 45);
             this.SaveBtn.TabIndex = 72;
             this.SaveBtn.Text = "Save";
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click_1);
             // 
             // UserDGV
             // 
@@ -479,6 +488,7 @@
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.UserDGV.Size = new System.Drawing.Size(937, 823);
             this.UserDGV.TabIndex = 71;
+            this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick);
             // 
             // AdminForm
             // 
@@ -488,7 +498,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
             this.Controls.Add(this.AccessBox);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.RoleBox);
+            this.Controls.Add(this.ServiceTypeBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -526,7 +536,7 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2ComboBox AccessBox;
         private System.Windows.Forms.Label label8;
-        private Guna.UI2.WinForms.Guna2ComboBox RoleBox;
+        private Guna.UI2.WinForms.Guna2ComboBox ServiceTypeBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

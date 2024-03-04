@@ -389,10 +389,10 @@ namespace TriforceSalon.UserControls
         #endregion
 
 
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private System.Windows.Forms.Label label1;
+        public Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        public Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        public Guna.UI2.WinForms.Guna2Button guna2Button1;
+        public System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel CustomerListFLowLayout;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label EmpNameLbl;
