@@ -48,6 +48,7 @@ namespace TriforceSalon.UserControls
 
         private void ServiceBtn_Click(object sender, EventArgs e)
         {
+            salonServices.GetItemInInventory();
             SetButtonProperties(ServiceBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
             ServiceBtn.BringToFront();
             ServicePanel.Visible = true;

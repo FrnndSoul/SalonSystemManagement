@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using TriforceSalon.UserControls;
 using System.Data;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace TriforceSalon.Class_Components
 {
@@ -19,6 +20,7 @@ namespace TriforceSalon.Class_Components
         private byte[] imageData;
         private bool isNewServiceImageSelected = false;
         private int serviceInt;
+        private int item_id;
         LoadImages loadImages = new LoadImages();
 
         int serviceVariationID;
@@ -107,6 +109,7 @@ namespace TriforceSalon.Class_Components
                         object result = command.ExecuteScalar();
                         if (result != null && int.TryParse(result.ToString(), out serviceInt))
                         {
+
                             return serviceInt;
                         }
                     }
@@ -164,15 +167,17 @@ namespace TriforceSalon.Class_Components
                         imageData = ms.ToArray();
                     }
 
-                    string query = "Insert into salon_services (ServiceTypeID, ServiceImage, ServiceName, ServiceAmount)" +
-                        "Values(@service_type_ID, @service_image, @service_name, @service_ammount)";
+                    string query = "Insert into salon_services (ServiceTypeID, ServiceImage, ServiceName, ServiceAmount, ItemID)" +
+                        "Values(@service_type_ID, @service_image, @service_name, @service_ammount, @itemId)";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
                         command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
-                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb));
+                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
                         command.Parameters.AddWithValue("@service_image", imageData);
+                        command.Parameters.AddWithValue("@itemId", GetItemId(Convert.ToString(ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem)));
+
 
                         command.ExecuteNonQuery();
 
@@ -185,7 +190,8 @@ namespace TriforceSalon.Class_Components
             {
                 if (a.Number == 1062)
                 {
-                    MessageBox.Show("Service type already exists", "Add Service Type", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Service type already exists", "Add Service Type", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(a.Message);
                 }
                 else
                 {
@@ -198,6 +204,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("AddSalonServices() Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         public void EditSalonServices()
         {
             if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 0)
@@ -307,6 +314,71 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public void GetItemInInventory()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "Select ItemName from inventory";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using(MySqlDataReader reader =  command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    string serviceTypes = reader["ItemName"].ToString();
+                                    ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.Items.Add(serviceTypes);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error in GetItemInInventory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        public int GetItemId(string itemName)
+        {
+            item_id = -1;
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "select ItemID from inventory where ItemName = @item_name";
+
+                    using(MySqlCommand command = new MySqlCommand( query, conn))
+                    {
+                        command.Parameters.AddWithValue("@item_name", itemName);
+
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out item_id))
+                        {
+
+                            return item_id;
+                        }
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error in GetItemId", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            return item_id;
+        }
+
         public void HideButton(bool add, bool edit, bool cancel, bool update)
         {
             ServiceType_ServicePage.servicePageInstance.UpdateServBtn.Visible = update;
@@ -316,13 +388,12 @@ namespace TriforceSalon.Class_Components
 
         }
 
-
-
         public void ClearServices()
         {
             ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = null;
             ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = null;
             ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = null;
+            ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem = null;
 
             ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
 

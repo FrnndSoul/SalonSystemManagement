@@ -172,12 +172,7 @@ namespace TriforceSalon.Class_Components
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
 
-                                EventHandler clickHandler = (sender, e) =>
-                                {
-                                    string serviceID = ((Control)sender).Tag.ToString();
-                                    AddEmployeesComB(Convert.ToInt32(serviceID), mysqlcon);
-                                    updateServiceFL?.Invoke(serviceID);
-                                };
+                                
 
                                 panel.Controls.Add(picBox);
                                 panel.Controls.Add(labelTitle);
