@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ServiceTypeFL = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.CServiceTxtB = new System.Windows.Forms.Label();
             this.ServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -55,13 +55,13 @@
             this.ServiceTypeFL.Size = new System.Drawing.Size(1493, 140);
             this.ServiceTypeFL.TabIndex = 0;
             // 
-            // flowLayoutPanel2
+            // ServiceFL
             // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(14, 246);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1493, 577);
-            this.flowLayoutPanel2.TabIndex = 1;
+            this.ServiceFL.BackColor = System.Drawing.Color.White;
+            this.ServiceFL.Location = new System.Drawing.Point(14, 246);
+            this.ServiceFL.Name = "ServiceFL";
+            this.ServiceFL.Size = new System.Drawing.Size(1493, 577);
+            this.ServiceFL.TabIndex = 1;
             // 
             // guna2Panel1
             // 
@@ -280,7 +280,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2TextBox1);
             this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.ServiceFL);
             this.Controls.Add(this.ServiceTypeFL);
             this.Name = "ServicesUserControl";
             this.Size = new System.Drawing.Size(1920, 843);
@@ -292,7 +292,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel ServiceTypeFL;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;

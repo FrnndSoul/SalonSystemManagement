@@ -10,6 +10,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     public partial class ServicesUserControl : UserControl
     {
         public static ServicesUserControl servicesUserControlInstance;
+        private readonly GetServiceType_ServiceData serviceTypeService;
         public readonly string mysqlcon;
         private PictureBox pic;
         private Label serviceTypeLbl;
@@ -21,58 +22,24 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             servicesUserControlInstance = this;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
+            serviceTypeService = new GetServiceType_ServiceData();
             GetServiceTypeData();
+            GetServiceData();
         }
 
         public void GetServiceTypeData()
         {
-            using (var conn = new MySqlConnection(mysqlcon))
-            {
-                conn.Open();
-                string query = "SELECT ServiceTypeName, ServiceTypeImage, ServiceID FROM service_type";
+            serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
+        }
 
-                using (MySqlCommand command = new MySqlCommand(query, conn))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        List<Control> controls = new List<Control>();
+        public void GetServiceData()
+        {
+            serviceTypeService.GetServiceData(ServiceFL, mysqlcon);
+        }
 
-                        while (reader.Read())
-                        {
-                            byte[] imageBytes = (byte[])reader["ServiceTypeImage"];
-
-                            using (MemoryStream ms = new MemoryStream(imageBytes))
-                            {
-                                Image mealImage = Image.FromStream(ms);
-                                pic = new PictureBox
-                                {
-                                    Width = 100,
-                                    Height = 100,
-                                    BackgroundImage = mealImage,
-                                    BackgroundImageLayout = ImageLayout.Stretch,
-                                    Tag = reader["ServiceID"].ToString(),
-                                    Margin = new Padding(20)
-                                };
-
-                                serviceTypeLbl = new Label
-                                {
-                                    Text = reader["ServiceTypeName"].ToString(),
-                                    Width = 25,
-                                    Height = 15,
-                                    TextAlign = ContentAlignment.MiddleCenter,
-                                    Dock = DockStyle.Right,
-                                    BackColor = Color.White,
-                                };
-
-                                pic.Controls.Add(serviceTypeLbl);
-                                controls.Add(pic);
-                            }
-                        }
-                        ServiceTypeFL.Controls.Clear();
-                        ServiceTypeFL.Controls.AddRange(controls.ToArray());
-                    }
-                }
-            }
+        private void UpdateServiceFL(string serviceTypeID)
+        {
+            serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon);
         }
 
         private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
