@@ -33,6 +33,7 @@ namespace TriforceSalon.UserControls
         {
             SetButtonProperties(ServiceTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_type_icon__2_);
             ServiceTypeBtn.BringToFront();
+            ServiceTypePanel.BringToFront();
             ServiceTypePanel.Visible = true;
 
             SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
