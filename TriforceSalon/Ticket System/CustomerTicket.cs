@@ -7,7 +7,7 @@ namespace TriforceSalon.Test
     public partial class CustomerTicket : UserControl
     {
         EmployeeTicketTransaction empTransaction = new EmployeeTicketTransaction();
-
+        public static CustomerTicket customerTicketInstance;
 
 
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
@@ -15,19 +15,20 @@ namespace TriforceSalon.Test
         public string CustomerAge => AgeLbl.Text;
         public string CustomerNumber => PhoneNumberLbl.Text;
         public string Service => ServiceVarLbl.Text;
-        public string PredEmp => PreferredEmpLbl.Text;
+        //public string PredEmp => PreferredEmpLbl.Text;
         public string Status => PrioStatusLbl.Text;
         public string Ticket => TicketLbl.Text;
 
-        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string PredEmp, string Status, string Ticket)
+        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket)
         {
             InitializeComponent();
+            customerTicketInstance = this;
 
             NameLbl.Text = CustomerName;
             AgeLbl.Text = CustomerAge;
             PhoneNumberLbl.Text = CustomerNumber;
             ServiceVarLbl.Text = Service;
-            PreferredEmpLbl.Text = PredEmp;
+            //PreferredEmpLbl.Text = PredEmp;
             PrioStatusLbl.Text = Status;
             TicketLbl.Text = Ticket;
 
@@ -44,7 +45,10 @@ namespace TriforceSalon.Test
         private void ProcessCustomerBtn_Click(object sender, EventArgs e)
         {
             int ticketID = Convert.ToInt32(TicketLbl.Text);
+            string serviceName = ServiceVarLbl.Text;
             empTransaction.ProcessTicket(ticketID);
+            empTransaction.FetchServiceImage(serviceName);
+            empTransaction.PassValueToLock();
 
         }
     }
@@ -55,17 +59,17 @@ namespace TriforceSalon.Test
         public string CustomerAge { get; }
         public string CustomerNumber { get; }
         public string Service { get; }
-        public string PredEmp { get; }
+        //public string PredEmp { get; }
         public string Status { get; }
         public string Ticket { get; }
 
-        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string predEmp, string status, string ticket)
+        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket)
         {
             CustomerName = customerName;
             CustomerAge = customerAge;
             CustomerNumber = customerNumber;
             Service = service;
-            PredEmp = predEmp;
+            //PredEmp = predEmp;
             Status = status;
             Ticket = ticket;
 

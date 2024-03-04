@@ -48,12 +48,28 @@ namespace TriforceSalon.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.EmployeeDoneBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.CustomerIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CustomerPNumTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CustomerServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ServicePicPicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).BeginInit();
             this.guna2Panel2.SuspendLayout();
             this.EmployeeLockPanel.SuspendLayout();
+            this.guna2Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ServicePicPicB)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Panel1
@@ -83,7 +99,7 @@ namespace TriforceSalon.UserControls
             this.TimerLbl.Name = "TimerLbl";
             this.TimerLbl.Size = new System.Drawing.Size(338, 127);
             this.TimerLbl.TabIndex = 11;
-            this.TimerLbl.Text = "label10";
+            this.TimerLbl.Text = "TIme";
             this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EmpAccNumberTxtB
@@ -92,7 +108,7 @@ namespace TriforceSalon.UserControls
             this.EmpAccNumberTxtB.BackColor = System.Drawing.Color.Transparent;
             this.EmpAccNumberTxtB.BorderRadius = 20;
             this.EmpAccNumberTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.EmpAccNumberTxtB.DefaultText = "13018";
+            this.EmpAccNumberTxtB.DefaultText = "";
             this.EmpAccNumberTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.EmpAccNumberTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.EmpAccNumberTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -186,11 +202,11 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTypeNameLbl.ForeColor = System.Drawing.Color.Transparent;
-            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(167, 767);
+            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(129, 770);
             this.ServiceTypeNameLbl.Name = "ServiceTypeNameLbl";
-            this.ServiceTypeNameLbl.Size = new System.Drawing.Size(91, 50);
+            this.ServiceTypeNameLbl.Size = new System.Drawing.Size(155, 50);
             this.ServiceTypeNameLbl.TabIndex = 2;
-            this.ServiceTypeNameLbl.Text = "test";
+            this.ServiceTypeNameLbl.Text = "Placeholder";
             this.ServiceTypeNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2Button1
@@ -237,7 +253,7 @@ namespace TriforceSalon.UserControls
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Transparent;
-            this.label9.Location = new System.Drawing.Point(1180, 175);
+            this.label9.Location = new System.Drawing.Point(1180, 200);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 50);
             this.label9.TabIndex = 9;
@@ -249,7 +265,7 @@ namespace TriforceSalon.UserControls
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(886, 162);
+            this.label8.Location = new System.Drawing.Point(886, 187);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(123, 63);
             this.label8.TabIndex = 8;
@@ -261,7 +277,7 @@ namespace TriforceSalon.UserControls
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(1065, 175);
+            this.label7.Location = new System.Drawing.Point(1065, 200);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 50);
             this.label7.TabIndex = 7;
@@ -273,7 +289,7 @@ namespace TriforceSalon.UserControls
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(683, 175);
+            this.label6.Location = new System.Drawing.Point(688, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 50);
             this.label6.TabIndex = 6;
@@ -285,7 +301,7 @@ namespace TriforceSalon.UserControls
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(497, 156);
+            this.label5.Location = new System.Drawing.Point(501, 181);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 69);
             this.label5.TabIndex = 5;
@@ -297,7 +313,7 @@ namespace TriforceSalon.UserControls
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(327, 175);
+            this.label4.Location = new System.Drawing.Point(339, 200);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 50);
             this.label4.TabIndex = 4;
@@ -309,7 +325,7 @@ namespace TriforceSalon.UserControls
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(156, 156);
+            this.label3.Location = new System.Drawing.Point(164, 181);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 69);
             this.label3.TabIndex = 3;
@@ -319,11 +335,11 @@ namespace TriforceSalon.UserControls
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(44, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(434, 62);
+            this.label1.Size = new System.Drawing.Size(535, 62);
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer Queue";
             // 
@@ -331,24 +347,15 @@ namespace TriforceSalon.UserControls
             // 
             this.EmployeeLockPanel.BackColor = System.Drawing.Color.Transparent;
             this.EmployeeLockPanel.BorderRadius = 50;
+            this.EmployeeLockPanel.Controls.Add(this.guna2Panel3);
+            this.EmployeeLockPanel.Controls.Add(this.label10);
             this.EmployeeLockPanel.Controls.Add(this.EmployeeDoneBtn);
             this.EmployeeLockPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.EmployeeLockPanel.Location = new System.Drawing.Point(78, 228);
+            this.EmployeeLockPanel.Location = new System.Drawing.Point(78, 253);
             this.EmployeeLockPanel.Name = "EmployeeLockPanel";
             this.EmployeeLockPanel.Size = new System.Drawing.Size(1337, 790);
             this.EmployeeLockPanel.TabIndex = 10;
             this.EmployeeLockPanel.Visible = false;
-            // 
-            // CustomerListFLowLayout
-            // 
-            this.CustomerListFLowLayout.AutoScroll = true;
-            this.CustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.CustomerListFLowLayout.Location = new System.Drawing.Point(78, 228);
-            this.CustomerListFLowLayout.Name = "CustomerListFLowLayout";
-            this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
-            this.CustomerListFLowLayout.TabIndex = 0;
             // 
             // EmployeeDoneBtn
             // 
@@ -369,6 +376,248 @@ namespace TriforceSalon.UserControls
             this.EmployeeDoneBtn.UseTransparentBackground = true;
             this.EmployeeDoneBtn.Click += new System.EventHandler(this.EmployeeDoneBtn_Click);
             // 
+            // CustomerListFLowLayout
+            // 
+            this.CustomerListFLowLayout.AutoScroll = true;
+            this.CustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.CustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.CustomerListFLowLayout.Location = new System.Drawing.Point(78, 253);
+            this.CustomerListFLowLayout.Name = "CustomerListFLowLayout";
+            this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
+            this.CustomerListFLowLayout.TabIndex = 0;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label10.Location = new System.Drawing.Point(345, 44);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(650, 75);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Customer Details";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel3.BorderRadius = 50;
+            this.guna2Panel3.Controls.Add(this.ServicePicPicB);
+            this.guna2Panel3.Controls.Add(this.CustomerServiceTxtB);
+            this.guna2Panel3.Controls.Add(this.CustomerPNumTxtB);
+            this.guna2Panel3.Controls.Add(this.CustomerAgeTxtB);
+            this.guna2Panel3.Controls.Add(this.CustomerNameTxtB);
+            this.guna2Panel3.Controls.Add(this.CustomerIDTxtB);
+            this.guna2Panel3.Controls.Add(this.label12);
+            this.guna2Panel3.Controls.Add(this.label11);
+            this.guna2Panel3.Controls.Add(this.label16);
+            this.guna2Panel3.Controls.Add(this.label15);
+            this.guna2Panel3.Controls.Add(this.label13);
+            this.guna2Panel3.Controls.Add(this.label14);
+            this.guna2Panel3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Panel3.Location = new System.Drawing.Point(56, 122);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(1223, 513);
+            this.guna2Panel3.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label11.Location = new System.Drawing.Point(54, 84);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(200, 50);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "Transaction ID:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label13.Location = new System.Drawing.Point(630, 84);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(205, 50);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Service:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label14.Location = new System.Drawing.Point(54, 359);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(200, 69);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "Phone Number:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label15.Location = new System.Drawing.Point(54, 281);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(200, 50);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Age:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label16.Location = new System.Drawing.Point(49, 174);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(205, 69);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "Customer Name:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.label12.Location = new System.Drawing.Point(630, 174);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(205, 50);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Service Image:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // CustomerIDTxtB
+            // 
+            this.CustomerIDTxtB.AutoRoundedCorners = true;
+            this.CustomerIDTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerIDTxtB.BorderRadius = 20;
+            this.CustomerIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerIDTxtB.DefaultText = "";
+            this.CustomerIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerIDTxtB.Enabled = false;
+            this.CustomerIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerIDTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerIDTxtB.Location = new System.Drawing.Point(260, 87);
+            this.CustomerIDTxtB.Name = "CustomerIDTxtB";
+            this.CustomerIDTxtB.PasswordChar = '\0';
+            this.CustomerIDTxtB.PlaceholderText = "";
+            this.CustomerIDTxtB.SelectedText = "";
+            this.CustomerIDTxtB.Size = new System.Drawing.Size(350, 42);
+            this.CustomerIDTxtB.TabIndex = 18;
+            // 
+            // CustomerNameTxtB
+            // 
+            this.CustomerNameTxtB.AutoRoundedCorners = true;
+            this.CustomerNameTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerNameTxtB.BorderRadius = 20;
+            this.CustomerNameTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerNameTxtB.DefaultText = "";
+            this.CustomerNameTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerNameTxtB.Enabled = false;
+            this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerNameTxtB.Location = new System.Drawing.Point(260, 187);
+            this.CustomerNameTxtB.Name = "CustomerNameTxtB";
+            this.CustomerNameTxtB.PasswordChar = '\0';
+            this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.SelectedText = "";
+            this.CustomerNameTxtB.Size = new System.Drawing.Size(350, 42);
+            this.CustomerNameTxtB.TabIndex = 19;
+            // 
+            // CustomerAgeTxtB
+            // 
+            this.CustomerAgeTxtB.AutoRoundedCorners = true;
+            this.CustomerAgeTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerAgeTxtB.BorderRadius = 20;
+            this.CustomerAgeTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerAgeTxtB.DefaultText = "";
+            this.CustomerAgeTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerAgeTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerAgeTxtB.Enabled = false;
+            this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerAgeTxtB.Location = new System.Drawing.Point(259, 289);
+            this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
+            this.CustomerAgeTxtB.PasswordChar = '\0';
+            this.CustomerAgeTxtB.PlaceholderText = "";
+            this.CustomerAgeTxtB.SelectedText = "";
+            this.CustomerAgeTxtB.Size = new System.Drawing.Size(350, 42);
+            this.CustomerAgeTxtB.TabIndex = 20;
+            // 
+            // CustomerPNumTxtB
+            // 
+            this.CustomerPNumTxtB.AutoRoundedCorners = true;
+            this.CustomerPNumTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerPNumTxtB.BorderRadius = 20;
+            this.CustomerPNumTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerPNumTxtB.DefaultText = "";
+            this.CustomerPNumTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerPNumTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerPNumTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerPNumTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerPNumTxtB.Enabled = false;
+            this.CustomerPNumTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerPNumTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerPNumTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerPNumTxtB.Location = new System.Drawing.Point(259, 374);
+            this.CustomerPNumTxtB.Name = "CustomerPNumTxtB";
+            this.CustomerPNumTxtB.PasswordChar = '\0';
+            this.CustomerPNumTxtB.PlaceholderText = "";
+            this.CustomerPNumTxtB.SelectedText = "";
+            this.CustomerPNumTxtB.Size = new System.Drawing.Size(350, 42);
+            this.CustomerPNumTxtB.TabIndex = 21;
+            // 
+            // CustomerServiceTxtB
+            // 
+            this.CustomerServiceTxtB.AutoRoundedCorners = true;
+            this.CustomerServiceTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerServiceTxtB.BorderRadius = 20;
+            this.CustomerServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerServiceTxtB.DefaultText = "";
+            this.CustomerServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerServiceTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerServiceTxtB.Enabled = false;
+            this.CustomerServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerServiceTxtB.Location = new System.Drawing.Point(831, 87);
+            this.CustomerServiceTxtB.Name = "CustomerServiceTxtB";
+            this.CustomerServiceTxtB.PasswordChar = '\0';
+            this.CustomerServiceTxtB.PlaceholderText = "";
+            this.CustomerServiceTxtB.SelectedText = "";
+            this.CustomerServiceTxtB.Size = new System.Drawing.Size(350, 42);
+            this.CustomerServiceTxtB.TabIndex = 22;
+            // 
+            // ServicePicPicB
+            // 
+            this.ServicePicPicB.BorderRadius = 20;
+            this.ServicePicPicB.ImageRotate = 0F;
+            this.ServicePicPicB.Location = new System.Drawing.Point(831, 174);
+            this.ServicePicPicB.Name = "ServicePicPicB";
+            this.ServicePicPicB.Size = new System.Drawing.Size(350, 254);
+            this.ServicePicPicB.TabIndex = 23;
+            this.ServicePicPicB.TabStop = false;
+            // 
             // EmployeeUserConrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,6 +631,8 @@ namespace TriforceSalon.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
             this.EmployeeLockPanel.ResumeLayout(false);
+            this.guna2Panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ServicePicPicB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -411,5 +662,19 @@ namespace TriforceSalon.UserControls
         public System.Windows.Forms.Label label8;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label10;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        public System.Windows.Forms.Label label11;
+        public System.Windows.Forms.Label label16;
+        public System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Label label13;
+        public System.Windows.Forms.Label label14;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerServiceTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerPNumTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerAgeTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerIDTxtB;
+        public System.Windows.Forms.Label label12;
+        public Guna.UI2.WinForms.Guna2PictureBox ServicePicPicB;
     }
 }

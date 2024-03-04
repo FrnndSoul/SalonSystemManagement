@@ -75,7 +75,7 @@ namespace TriforceSalon.UserControls
                                 var Age = row["CustomerAge"].ToString();
                                 var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
-                                var PrefEmp = row["PreferredEmployee"].ToString();
+                                //var PrefEmp = row["PreferredEmployee"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
@@ -83,7 +83,7 @@ namespace TriforceSalon.UserControls
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrefEmp, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
                                 CustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -101,7 +101,9 @@ namespace TriforceSalon.UserControls
 
         private void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
+            int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
             transaction.ShowCustomerList();
+            transaction.EmployeeProcessComplete(CustID);
         }
     }
 }
