@@ -138,5 +138,17 @@ namespace TriforceSalon.UserControls
                 }
             }
         }
+
+        private void NPaymentBtn_Click(object sender, EventArgs e)
+        {
+            paymentsUserControls1.Visible = true;
+            servicesUserControl1.Visible = false;
+        }
+
+        private void NServicesBtn_Click(object sender, EventArgs e)
+        {
+            paymentsUserControls1.Visible = false;
+            servicesUserControl1.Visible = true;
+        }
     }
 }
