@@ -34,12 +34,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         public void GetServiceData()
         {
-            serviceTypeService.GetServiceData(ServiceFL, mysqlcon);
+            serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
 
         private void UpdateServiceFL(string serviceTypeID)
         {
-            serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon);
+            serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
 
         private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)

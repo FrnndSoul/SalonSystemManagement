@@ -138,5 +138,10 @@ namespace TriforceSalon.UserControls
                 }
             }
         }
+
+        private void NPaymentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
