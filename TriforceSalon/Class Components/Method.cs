@@ -27,6 +27,9 @@ namespace TriforceSalon
          * salon_employees - AccountlD, Name, Email, Birthdate, Photo, AccountStatus, ServicelD, Availability
          */
 
+        public static TransactionMethods transaction = new TransactionMethods();
+
+
         public static byte[] Photo, newPhoto;
         public static int AccountStatus, Status, LogReference, AccountID, ServiceID;
         public static string Name, Username, Email, Password,
@@ -216,6 +219,8 @@ namespace TriforceSalon
                         {
                             if (openForm is MainForm mainForm)
                             {
+                                //tanggalin ito as much as possible
+                                GetEmployeeInfo();
                                 mainForm.ShowEmployee();
                                 break;
                             }
@@ -538,15 +543,13 @@ namespace TriforceSalon
             }
         }
 
-        TransactionMethods transaction = new TransactionMethods();
-        public  void GetEmployeeInfo()
+        public static void GetEmployeeInfo()
         {
             byte[] photoBytes = Photo;
 
             EmployeeUserConrols.employeeUserConrolsInstance.EmpNameTxtB.Text = Name;
             EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text = Convert.ToString(AccountID);
-            EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text = transaction.GetServiceTypeName(AccountID);
-            //EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Photo;
+            EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text = transaction.GetServiceTypeName(ServiceID);
 
             using (MemoryStream ms = new MemoryStream(photoBytes))
             {

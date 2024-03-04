@@ -91,7 +91,7 @@
             this.ProcessCustomerBtn.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
             this.ProcessCustomerBtn.Location = new System.Drawing.Point(1161, 27);
-            this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
             this.ProcessCustomerBtn.Size = new System.Drawing.Size(135, 37);
             this.ProcessCustomerBtn.TabIndex = 5;
@@ -168,7 +168,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.NameLbl);
             this.Controls.Add(this.guna2Panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CustomerTicket";
             this.Size = new System.Drawing.Size(1337, 101);
             this.guna2Panel1.ResumeLayout(false);
@@ -177,15 +177,14 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label NameLbl;
-        private System.Windows.Forms.Label TicketLbl;
-        private System.Windows.Forms.Label ServiceVarLbl;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private System.Windows.Forms.Label PhoneNumberLbl;
-        private System.Windows.Forms.Label AgeLbl;
-        private System.Windows.Forms.Label PrioStatusLbl;
-        private System.Windows.Forms.Label PreferredEmpLbl;
+        public System.Windows.Forms.Label NameLbl;
+        public System.Windows.Forms.Label TicketLbl;
+        public System.Windows.Forms.Label ServiceVarLbl;
+        public System.Windows.Forms.Label PhoneNumberLbl;
+        public System.Windows.Forms.Label AgeLbl;
+        public System.Windows.Forms.Label PrioStatusLbl;
+        public System.Windows.Forms.Label PreferredEmpLbl;
     }
 }

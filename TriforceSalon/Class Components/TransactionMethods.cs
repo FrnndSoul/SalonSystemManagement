@@ -15,6 +15,7 @@ namespace TriforceSalon.Class_Components
         private string mysqlcon;
         private int TypeID;
         private int VariationID;
+        private int EmpID;
         public TransactionMethods()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -32,16 +33,50 @@ namespace TriforceSalon.Class_Components
                     command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
                     command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                     command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
-                    command.Parameters.AddWithValue("@pref_emp", Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem));
+
+                    //palitan ito
+                    command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
                     command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
                     command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
                     command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
 
                     command.ExecuteNonQuery();
-                    MessageBox.Show("Yehey");
+                    MessageBox.Show("Customer Added to the Queue", "Customer Process", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }
+        }
+        public int GetEmployeeID(string name)
+        {
+            EmpID = -1;
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "Select AccountID from salon_employee where Name = @name";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@name", name);
+
+                        using(MySqlDataReader reader =  command.ExecuteReader())
+                        {
+                            object result = command.ExecuteScalar();
+                            if (result != null && int.TryParse(result.ToString(), out EmpID))
+                            {
+                                return EmpID;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetEmployeeID");
+            }
+            return EmpID;
         }
 
         public int GetServiceTypeID(string serviceName)
