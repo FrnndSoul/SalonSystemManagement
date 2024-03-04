@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="Class Components\ChangeImageSize.cs" />
     <Compile Include="Class Components\EmployeeTicketTransaction.cs" />
+    <Compile Include="Class Components\GetServiceType&amp;ServiceData.cs" />
     <Compile Include="Class Components\LoadImages.cs" />
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
