@@ -13,13 +13,18 @@ namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
-        public static ManagerServices managerServicesInstance;
+        public static ServiceType_ServicePage servicePageInstance;
         private ServiceTypes serviceType = new ServiceTypes();
         private SalonServices salonServices = new SalonServices();
 
         public ServiceType_ServicePage()
         {
             InitializeComponent();
+            servicePageInstance = this;
+            serviceType.ServiceTypeInfoDGV();
+            salonServices.PopulateServiceType();
+            salonServices.GetSalonServices();
+            ServiceTypePanel.BringToFront();
         }
 
         private void SetButtonProperties(Guna.UI2.WinForms.Guna2Button button, Color fillColor, Color foreColor, Image image)
@@ -33,6 +38,7 @@ namespace TriforceSalon.UserControls
         {
             SetButtonProperties(ServiceTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_type_icon__2_);
             ServiceTypeBtn.BringToFront();
+            ServiceTypePanel.BringToFront();
             ServiceTypePanel.Visible = true;
 
             SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
@@ -42,6 +48,7 @@ namespace TriforceSalon.UserControls
 
         private void ServiceBtn_Click(object sender, EventArgs e)
         {
+            salonServices.GetItemInInventory();
             SetButtonProperties(ServiceBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
             ServiceBtn.BringToFront();
             ServicePanel.Visible = true;
@@ -80,6 +87,7 @@ namespace TriforceSalon.UserControls
         private void CancelEditBtn_Click(object sender, EventArgs e)
         {
             serviceType.ClearServiceTypes();
+            serviceType.HideButton(true, true, false, false);
         }
 
 
@@ -110,6 +118,8 @@ namespace TriforceSalon.UserControls
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
             salonServices.ClearServices();
+            salonServices.HideButton(true, true, false, false);
+
         }
     }
 }

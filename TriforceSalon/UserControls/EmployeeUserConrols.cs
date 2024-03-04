@@ -13,6 +13,7 @@ namespace TriforceSalon.UserControls
     {
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
+        public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
         private RealTimeClock userClock;
         public EmployeeUserConrols()
         {
@@ -32,18 +33,6 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     conn.Open();
-
-                    /* string query = "SELECT t.CustomerName," +
-                                     " t.CustomerAge, " +
-                                     " t.CustomerPhoneNumber, " +
-                                     " t.ServiceVariation, " +
-                                     " t.PreferredEmployee," +
-                                     " t.PriorityStatus, " +
-                                     " t.TransactionID" +
-                                     " FROM transaction t" +
-                                     " WHERE ServiceType = @service_type " +
-                                     "AND PaymentStatus = 'UNPAID";*/
-
 
                     //nandito pa yung preferred Employee for backup purposes
                    /* string query = "SELECT t.CustomerName," +
@@ -86,7 +75,7 @@ namespace TriforceSalon.UserControls
                                 var Age = row["CustomerAge"].ToString();
                                 var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
-                                var PrefEmp = row["PreferredEmployee"].ToString();
+                                //var PrefEmp = row["PreferredEmployee"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
@@ -94,7 +83,7 @@ namespace TriforceSalon.UserControls
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrefEmp, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
                                 CustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -107,6 +96,26 @@ namespace TriforceSalon.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in LoadCustomer()");
+            }
+        }
+
+        private void EmployeeDoneBtn_Click(object sender, EventArgs e)
+        {
+            int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
+            transaction.ShowCustomerList();
+            transaction.EmployeeProcessComplete(CustID);
+        }
+
+        private void EmployeeLogOutBtn_Click(object sender, EventArgs e)
+        {
+            Method.LogOutUser();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
             }
         }
     }
