@@ -105,5 +105,18 @@ namespace TriforceSalon.UserControls
             transaction.ShowCustomerList();
             transaction.EmployeeProcessComplete(CustID);
         }
+
+        private void EmployeeLogOutBtn_Click(object sender, EventArgs e)
+        {
+            Method.LogOutUser();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
+            }
+        }
     }
 }

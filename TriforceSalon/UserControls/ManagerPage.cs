@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
         public ManagerPage()
         {
             InitializeComponent();
+            generalView_Inventory1.Visible = true;
         }
 
         private void LogoutBtn_Click(object sender, EventArgs e)

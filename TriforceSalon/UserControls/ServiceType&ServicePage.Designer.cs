@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
             this.backgroundShape = new Guna.UI2.WinForms.Guna2Shapes();
             this.ServiceTypeBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServiceBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -57,6 +57,7 @@
             this.ServiceNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.SalonServicesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.ServiceTypePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).BeginInit();
@@ -134,9 +135,9 @@
             // ServiceTypePanel
             // 
             this.ServiceTypePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServiceTypePanel.Controls.Add(this.EditServiceTBtn);
             this.ServiceTypePanel.Controls.Add(this.CancelEditBtn);
             this.ServiceTypePanel.Controls.Add(this.UpdateServiceTBtn);
-            this.ServiceTypePanel.Controls.Add(this.EditServiceTBtn);
             this.ServiceTypePanel.Controls.Add(this.AddImageServiceTypeBtn);
             this.ServiceTypePanel.Controls.Add(this.ServiceTypePicB);
             this.ServiceTypePanel.Controls.Add(this.AddServiceTypeBtn);
@@ -161,10 +162,10 @@
             this.CancelEditBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.CancelEditBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.CancelEditBtn.ForeColor = System.Drawing.Color.Black;
-            this.CancelEditBtn.Location = new System.Drawing.Point(668, 736);
+            this.CancelEditBtn.Location = new System.Drawing.Point(477, 736);
             this.CancelEditBtn.Margin = new System.Windows.Forms.Padding(2);
             this.CancelEditBtn.Name = "CancelEditBtn";
-            this.CancelEditBtn.Size = new System.Drawing.Size(250, 50);
+            this.CancelEditBtn.Size = new System.Drawing.Size(440, 50);
             this.CancelEditBtn.TabIndex = 22;
             this.CancelEditBtn.Text = "Cancel Edit";
             this.CancelEditBtn.UseTransparentBackground = true;
@@ -187,7 +188,7 @@
             this.UpdateServiceTBtn.Location = new System.Drawing.Point(18, 736);
             this.UpdateServiceTBtn.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateServiceTBtn.Name = "UpdateServiceTBtn";
-            this.UpdateServiceTBtn.Size = new System.Drawing.Size(250, 50);
+            this.UpdateServiceTBtn.Size = new System.Drawing.Size(440, 50);
             this.UpdateServiceTBtn.TabIndex = 21;
             this.UpdateServiceTBtn.Text = "Update";
             this.UpdateServiceTBtn.UseTransparentBackground = true;
@@ -207,10 +208,10 @@
             this.EditServiceTBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditServiceTBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.EditServiceTBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditServiceTBtn.Location = new System.Drawing.Point(339, 736);
+            this.EditServiceTBtn.Location = new System.Drawing.Point(17, 736);
             this.EditServiceTBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditServiceTBtn.Name = "EditServiceTBtn";
-            this.EditServiceTBtn.Size = new System.Drawing.Size(250, 50);
+            this.EditServiceTBtn.Size = new System.Drawing.Size(900, 50);
             this.EditServiceTBtn.TabIndex = 20;
             this.EditServiceTBtn.Text = "Edit ";
             this.EditServiceTBtn.UseTransparentBackground = true;
@@ -230,7 +231,7 @@
             this.AddImageServiceTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddImageServiceTypeBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddImageServiceTypeBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(961, 299);
+            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(1075, 339);
             this.AddImageServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddImageServiceTypeBtn.Name = "AddImageServiceTypeBtn";
             this.AddImageServiceTypeBtn.Size = new System.Drawing.Size(210, 50);
@@ -243,7 +244,7 @@
             // 
             this.ServiceTypePicB.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypePicB.ImageRotate = 0F;
-            this.ServiceTypePicB.Location = new System.Drawing.Point(1075, 15);
+            this.ServiceTypePicB.Location = new System.Drawing.Point(1075, 125);
             this.ServiceTypePicB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceTypePicB.Name = "ServiceTypePicB";
             this.ServiceTypePicB.Size = new System.Drawing.Size(210, 210);
@@ -264,7 +265,7 @@
             this.AddServiceTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceTypeBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceTypeBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceTypeBtn.Location = new System.Drawing.Point(1180, 299);
+            this.AddServiceTypeBtn.Location = new System.Drawing.Point(1075, 479);
             this.AddServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceTypeBtn.Name = "AddServiceTypeBtn";
             this.AddServiceTypeBtn.Size = new System.Drawing.Size(210, 50);
@@ -289,7 +290,7 @@
             this.ServiceTypeTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceTypeTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceTypeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1075, 236);
+            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1075, 424);
             this.ServiceTypeTxtB.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ServiceTypeTxtB.Name = "ServiceTypeTxtB";
             this.ServiceTypeTxtB.PasswordChar = '\0';
@@ -302,27 +303,27 @@
             // 
             this.ServiceTypeDGV.AllowUserToAddRows = false;
             this.ServiceTypeDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            this.ServiceTypeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.White;
+            this.ServiceTypeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
             this.ServiceTypeDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServiceTypeDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServiceTypeDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle50;
             this.ServiceTypeDGV.ColumnHeadersHeight = 4;
             this.ServiceTypeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServiceTypeDGV.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle51.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle51.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle51.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle51.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServiceTypeDGV.DefaultCellStyle = dataGridViewCellStyle51;
             this.ServiceTypeDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceTypeDGV.Location = new System.Drawing.Point(17, 15);
             this.ServiceTypeDGV.Margin = new System.Windows.Forms.Padding(2);
@@ -358,9 +359,10 @@
             // ServicePanel
             // 
             this.ServicePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServicePanel.Controls.Add(this.EditServBtn);
+            this.ServicePanel.Controls.Add(this.guna2ComboBox1);
             this.ServicePanel.Controls.Add(this.CancelEditServiceBtn);
             this.ServicePanel.Controls.Add(this.UpdateServBtn);
-            this.ServicePanel.Controls.Add(this.EditServBtn);
             this.ServicePanel.Controls.Add(this.AddServiceBtn);
             this.ServicePanel.Controls.Add(this.AddServiceImageBtn);
             this.ServicePanel.Controls.Add(this.AddSalonServices);
@@ -387,10 +389,10 @@
             this.CancelEditServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.CancelEditServiceBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.CancelEditServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.CancelEditServiceBtn.Location = new System.Drawing.Point(668, 736);
+            this.CancelEditServiceBtn.Location = new System.Drawing.Point(476, 733);
             this.CancelEditServiceBtn.Margin = new System.Windows.Forms.Padding(2);
             this.CancelEditServiceBtn.Name = "CancelEditServiceBtn";
-            this.CancelEditServiceBtn.Size = new System.Drawing.Size(250, 50);
+            this.CancelEditServiceBtn.Size = new System.Drawing.Size(441, 50);
             this.CancelEditServiceBtn.TabIndex = 42;
             this.CancelEditServiceBtn.Text = "Cancel Edit";
             this.CancelEditServiceBtn.UseTransparentBackground = true;
@@ -408,10 +410,10 @@
             this.UpdateServBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.UpdateServBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateServBtn.ForeColor = System.Drawing.Color.Black;
-            this.UpdateServBtn.Location = new System.Drawing.Point(18, 736);
+            this.UpdateServBtn.Location = new System.Drawing.Point(17, 733);
             this.UpdateServBtn.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateServBtn.Name = "UpdateServBtn";
-            this.UpdateServBtn.Size = new System.Drawing.Size(250, 50);
+            this.UpdateServBtn.Size = new System.Drawing.Size(440, 50);
             this.UpdateServBtn.TabIndex = 41;
             this.UpdateServBtn.Text = "Update ";
             this.UpdateServBtn.Click += new System.EventHandler(this.UpdateServBtn_Click);
@@ -430,10 +432,10 @@
             this.EditServBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditServBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.EditServBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditServBtn.Location = new System.Drawing.Point(339, 736);
+            this.EditServBtn.Location = new System.Drawing.Point(17, 733);
             this.EditServBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditServBtn.Name = "EditServBtn";
-            this.EditServBtn.Size = new System.Drawing.Size(250, 50);
+            this.EditServBtn.Size = new System.Drawing.Size(900, 50);
             this.EditServBtn.TabIndex = 40;
             this.EditServBtn.Text = "Edit ";
             this.EditServBtn.UseTransparentBackground = true;
@@ -453,7 +455,7 @@
             this.AddServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceBtn.Location = new System.Drawing.Point(1180, 371);
+            this.AddServiceBtn.Location = new System.Drawing.Point(1075, 613);
             this.AddServiceBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceBtn.Name = "AddServiceBtn";
             this.AddServiceBtn.Size = new System.Drawing.Size(210, 50);
@@ -476,7 +478,7 @@
             this.AddServiceImageBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceImageBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceImageBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceImageBtn.Location = new System.Drawing.Point(961, 371);
+            this.AddServiceImageBtn.Location = new System.Drawing.Point(1075, 312);
             this.AddServiceImageBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceImageBtn.Name = "AddServiceImageBtn";
             this.AddServiceImageBtn.Size = new System.Drawing.Size(210, 50);
@@ -498,7 +500,7 @@
             this.AddSalonServices.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.AddSalonServices.ForeColor = System.Drawing.Color.Black;
             this.AddSalonServices.ItemHeight = 30;
-            this.AddSalonServices.Location = new System.Drawing.Point(1180, 302);
+            this.AddSalonServices.Location = new System.Drawing.Point(950, 528);
             this.AddSalonServices.Margin = new System.Windows.Forms.Padding(2);
             this.AddSalonServices.Name = "AddSalonServices";
             this.AddSalonServices.Size = new System.Drawing.Size(210, 36);
@@ -520,7 +522,7 @@
             this.ServiceAmountTxtb.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceAmountTxtb.ForeColor = System.Drawing.Color.Black;
             this.ServiceAmountTxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtb.Location = new System.Drawing.Point(961, 302);
+            this.ServiceAmountTxtb.Location = new System.Drawing.Point(1181, 420);
             this.ServiceAmountTxtb.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.ServiceAmountTxtb.Name = "ServiceAmountTxtb";
             this.ServiceAmountTxtb.PasswordChar = '\0';
@@ -545,7 +547,7 @@
             this.ServiceNameTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceNameTxtB.Location = new System.Drawing.Point(1075, 236);
+            this.ServiceNameTxtB.Location = new System.Drawing.Point(950, 420);
             this.ServiceNameTxtB.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.ServiceNameTxtB.Name = "ServiceNameTxtB";
             this.ServiceNameTxtB.PasswordChar = '\0';
@@ -557,7 +559,7 @@
             // ServiceImagePicB
             // 
             this.ServiceImagePicB.ImageRotate = 0F;
-            this.ServiceImagePicB.Location = new System.Drawing.Point(1075, 15);
+            this.ServiceImagePicB.Location = new System.Drawing.Point(1075, 94);
             this.ServiceImagePicB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceImagePicB.Name = "ServiceImagePicB";
             this.ServiceImagePicB.Size = new System.Drawing.Size(210, 210);
@@ -568,27 +570,27 @@
             // 
             this.SalonServicesDGV.AllowUserToAddRows = false;
             this.SalonServicesDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            this.SalonServicesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle52.BackColor = System.Drawing.Color.White;
+            this.SalonServicesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle52;
             this.SalonServicesDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SalonServicesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SalonServicesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle53;
             this.SalonServicesDGV.ColumnHeadersHeight = 4;
             this.SalonServicesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.SalonServicesDGV.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle54.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SalonServicesDGV.DefaultCellStyle = dataGridViewCellStyle54;
             this.SalonServicesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.Location = new System.Drawing.Point(17, 15);
             this.SalonServicesDGV.Margin = new System.Windows.Forms.Padding(2);
@@ -621,16 +623,35 @@
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // guna2ComboBox1
+            // 
+            this.guna2ComboBox1.AutoRoundedCorners = true;
+            this.guna2ComboBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox1.BorderColor = System.Drawing.Color.Black;
+            this.guna2ComboBox1.BorderRadius = 17;
+            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2ComboBox1.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.guna2ComboBox1.ForeColor = System.Drawing.Color.Black;
+            this.guna2ComboBox1.ItemHeight = 30;
+            this.guna2ComboBox1.Location = new System.Drawing.Point(1181, 528);
+            this.guna2ComboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2ComboBox1.Name = "guna2ComboBox1";
+            this.guna2ComboBox1.Size = new System.Drawing.Size(210, 36);
+            this.guna2ComboBox1.TabIndex = 43;
+            // 
             // ServiceType_ServicePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.ServiceTypePanel);
             this.Controls.Add(this.ServiceTypeBtn);
-            this.Controls.Add(this.ServiceBtn);
+            this.Controls.Add(this.ServiceTypePanel);
             this.Controls.Add(this.ServicePanel);
             this.Controls.Add(this.backgroundShape);
+            this.Controls.Add(this.ServiceBtn);
             this.Name = "ServiceType_ServicePage";
             this.Size = new System.Drawing.Size(1500, 950);
             this.ServiceTypePanel.ResumeLayout(false);
@@ -668,5 +689,6 @@
         public Guna.UI2.WinForms.Guna2TextBox ServiceNameTxtB;
         public Guna.UI2.WinForms.Guna2PictureBox ServiceImagePicB;
         public Guna.UI2.WinForms.Guna2DataGridView SalonServicesDGV;
+        public Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
     }
 }

@@ -125,5 +125,18 @@ namespace TriforceSalon.UserControls
         {
 
         }
+
+        private void RecepLogOutBtn_Click(object sender, EventArgs e)
+        {
+            Method.LogOutUser();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
+            }
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace TriforceSalon.Class_Components
 
                         Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
 
-                        ManagerServices.managerServicesInstance.ServiceImagePicB.Image = resizedImage;
+                        ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = resizedImage;
                         isNewServiceImageSelected = true; //flag ito para sa image
                     }
                     catch (Exception ex)
@@ -77,7 +77,7 @@ namespace TriforceSalon.Class_Components
                                 while (reader.Read())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
-                                    ManagerServices.managerServicesInstance.AddSalonServices.Items.Add(serviceTypes);
+                                    ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Add(serviceTypes);
                                 }
                             }
                         }
@@ -138,7 +138,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 DataTable dt = new DataTable();
                                 dt.Load(reader);
-                                ManagerServices.managerServicesInstance.SalonServicesDGV.DataSource = dt;
+                                ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.DataSource = dt;
                             }
                         }
                     }
@@ -160,7 +160,7 @@ namespace TriforceSalon.Class_Components
 
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        ManagerServices.managerServicesInstance.ServiceImagePicB.Image.Save(ms, ImageFormat.Jpeg);
+                        ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image.Save(ms, ImageFormat.Jpeg);
                         imageData = ms.ToArray();
                     }
 
@@ -170,8 +170,8 @@ namespace TriforceSalon.Class_Components
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
-                        command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
-                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ManagerServices.managerServicesInstance.ServiceAmountTxtb));
+                        command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
+                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb));
                         command.Parameters.AddWithValue("@service_image", imageData);
 
                         command.ExecuteNonQuery();
@@ -200,7 +200,7 @@ namespace TriforceSalon.Class_Components
         }
         public void EditSalonServices()
         {
-            if (ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows.Count == 0)
+            if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -209,9 +209,9 @@ namespace TriforceSalon.Class_Components
 
             if (result == DialogResult.Yes)
             {
-                if (ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows.Count == 1)
+                if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 1)
                 {
-                    DataGridViewRow selectedRow = ManagerServices.managerServicesInstance.SalonServicesDGV.SelectedRows[0];
+                    DataGridViewRow selectedRow = ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows[0];
 
                     serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceTypeID"].Value);
                     serviceVariationID = Convert.ToInt32(selectedRow.Cells["ServiceVariationID"].Value);
@@ -219,8 +219,11 @@ namespace TriforceSalon.Class_Components
                     decimal serviceAmount = Convert.ToDecimal(selectedRow.Cells["ServiceAmount"].Value);
                     loadImages.ServicesImage(serviceVariationID);
 
-                    ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = serviceName;
-                    ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = Convert.ToString(serviceAmount);
+                    ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = serviceName;
+                    ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = Convert.ToString(serviceAmount);
+
+                    HideButton(false, false, true, true);
+
 
                     try
                     {
@@ -238,7 +241,7 @@ namespace TriforceSalon.Class_Components
                                     if (reader.Read())
                                     {
                                         string servTypeName = reader.GetString(0);
-                                        ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = servTypeName;
+                                        ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = servTypeName;
                                     }
                                 }
 
@@ -255,7 +258,7 @@ namespace TriforceSalon.Class_Components
        
         public void UpdateSalonServices(int variationID)
         {
-            string serviceType = ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem.ToString();
+            string serviceType = ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
             try
             {
@@ -268,7 +271,7 @@ namespace TriforceSalon.Class_Components
 
                     if (isNewServiceImageSelected)
                     {
-                        using (Bitmap bmp = new Bitmap(ManagerServices.managerServicesInstance.ServiceImagePicB.Image))
+                        using (Bitmap bmp = new Bitmap(ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image))
                         {
                             using (MemoryStream ms = new MemoryStream())
                             {
@@ -282,9 +285,9 @@ namespace TriforceSalon.Class_Components
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceNameTxtB.Text);
+                        command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
                         command.Parameters.AddWithValue("@servicetype_ID", serviceTypeID);
-                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text));
+                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
                         command.Parameters.AddWithValue("@servicevar_ID", variationID);
 
                         if (isNewServiceImageSelected)
@@ -294,6 +297,7 @@ namespace TriforceSalon.Class_Components
                         command.ExecuteNonQuery();
                         GetSalonServices();
                         ClearServices();
+                        HideButton(true, true, false, false);
                     }
                 }
             }
@@ -303,13 +307,24 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public void HideButton(bool add, bool edit, bool cancel, bool update)
+        {
+            ServiceType_ServicePage.servicePageInstance.UpdateServBtn.Visible = update;
+            ServiceType_ServicePage.servicePageInstance.EditServBtn.Visible = edit;
+            ServiceType_ServicePage.servicePageInstance.CancelEditServiceBtn.Visible = cancel;
+            ServiceType_ServicePage.servicePageInstance.AddServiceBtn.Enabled = add;
+
+        }
+
+
+
         public void ClearServices()
         {
-            ManagerServices.managerServicesInstance.ServiceNameTxtB.Text = null;
-            ManagerServices.managerServicesInstance.ServiceAmountTxtb.Text = null;
-            ManagerServices.managerServicesInstance.AddSalonServices.SelectedItem = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = null;
+            ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = null;
 
-            ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
 
         }
 

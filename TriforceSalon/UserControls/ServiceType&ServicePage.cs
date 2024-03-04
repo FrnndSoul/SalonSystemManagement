@@ -13,13 +13,18 @@ namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
-        public static ManagerServices managerServicesInstance;
+        public static ServiceType_ServicePage servicePageInstance;
         private ServiceTypes serviceType = new ServiceTypes();
         private SalonServices salonServices = new SalonServices();
 
         public ServiceType_ServicePage()
         {
             InitializeComponent();
+            servicePageInstance = this;
+            serviceType.ServiceTypeInfoDGV();
+            salonServices.PopulateServiceType();
+            salonServices.GetSalonServices();
+            ServiceTypePanel.BringToFront();
         }
 
         private void SetButtonProperties(Guna.UI2.WinForms.Guna2Button button, Color fillColor, Color foreColor, Image image)
@@ -81,6 +86,7 @@ namespace TriforceSalon.UserControls
         private void CancelEditBtn_Click(object sender, EventArgs e)
         {
             serviceType.ClearServiceTypes();
+            serviceType.HideButton(true, true, false, false);
         }
 
 
@@ -111,6 +117,8 @@ namespace TriforceSalon.UserControls
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
             salonServices.ClearServices();
+            salonServices.HideButton(true, true, false, false);
+
         }
     }
 }

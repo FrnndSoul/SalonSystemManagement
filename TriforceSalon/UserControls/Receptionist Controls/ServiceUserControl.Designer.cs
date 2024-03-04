@@ -44,6 +44,8 @@
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ServiceAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +68,8 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.label6);
+            this.guna2Panel1.Controls.Add(this.ServiceAmountTxtB);
             this.guna2Panel1.Controls.Add(this.CServiceTxtB);
             this.guna2Panel1.Controls.Add(this.ServiceTxtB);
             this.guna2Panel1.Controls.Add(this.label5);
@@ -86,14 +90,19 @@
             // CServiceTxtB
             // 
             this.CServiceTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CServiceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CServiceTxtB.Location = new System.Drawing.Point(44, 381);
             this.CServiceTxtB.Name = "CServiceTxtB";
             this.CServiceTxtB.Size = new System.Drawing.Size(305, 38);
             this.CServiceTxtB.TabIndex = 18;
             this.CServiceTxtB.Text = "Service";
+            this.CServiceTxtB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ServiceTxtB
             // 
+            this.ServiceTxtB.AutoRoundedCorners = true;
+            this.ServiceTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceTxtB.BorderRadius = 17;
             this.ServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.ServiceTxtB.DefaultText = "";
             this.ServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -114,42 +123,52 @@
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(41, 488);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(41, 581);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(305, 38);
             this.label5.TabIndex = 16;
             this.label5.Text = "Preferred Employee";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(44, 268);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(305, 38);
             this.label4.TabIndex = 15;
             this.label4.Text = "Number";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(44, 170);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(305, 38);
             this.label3.TabIndex = 14;
             this.label3.Text = "Age";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(47, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(305, 38);
             this.label2.TabIndex = 13;
             this.label2.Text = "Name";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PEmployeeComB
             // 
+            this.PEmployeeComB.AutoRoundedCorners = true;
             this.PEmployeeComB.BackColor = System.Drawing.Color.Transparent;
+            this.PEmployeeComB.BorderRadius = 17;
             this.PEmployeeComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.PEmployeeComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PEmployeeComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -157,13 +176,16 @@
             this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.PEmployeeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.PEmployeeComB.ItemHeight = 30;
-            this.PEmployeeComB.Location = new System.Drawing.Point(44, 529);
+            this.PEmployeeComB.Location = new System.Drawing.Point(44, 622);
             this.PEmployeeComB.Name = "PEmployeeComB";
             this.PEmployeeComB.Size = new System.Drawing.Size(302, 36);
             this.PEmployeeComB.TabIndex = 9;
             // 
             // CustomerPhoneNTxtB
             // 
+            this.CustomerPhoneNTxtB.AutoRoundedCorners = true;
+            this.CustomerPhoneNTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerPhoneNTxtB.BorderRadius = 17;
             this.CustomerPhoneNTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CustomerPhoneNTxtB.DefaultText = "";
             this.CustomerPhoneNTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -183,6 +205,9 @@
             // 
             // CustomerAgeTxtB
             // 
+            this.CustomerAgeTxtB.AutoRoundedCorners = true;
+            this.CustomerAgeTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerAgeTxtB.BorderRadius = 17;
             this.CustomerAgeTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CustomerAgeTxtB.DefaultText = "";
             this.CustomerAgeTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -202,6 +227,9 @@
             // 
             // CustomerNameTxtB
             // 
+            this.CustomerNameTxtB.AutoRoundedCorners = true;
+            this.CustomerNameTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerNameTxtB.BorderRadius = 17;
             this.CustomerNameTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CustomerNameTxtB.DefaultText = "";
             this.CustomerNameTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -230,13 +258,13 @@
             this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.ProcessCustomerBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.ProcessCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ProcessCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
             this.ProcessCustomerBtn.Location = new System.Drawing.Point(26, 718);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
             this.ProcessCustomerBtn.Size = new System.Drawing.Size(331, 73);
             this.ProcessCustomerBtn.TabIndex = 0;
-            this.ProcessCustomerBtn.Text = "Process";
+            this.ProcessCustomerBtn.Text = "Process Customer";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
@@ -271,6 +299,39 @@
             this.label1.Size = new System.Drawing.Size(256, 38);
             this.label1.TabIndex = 4;
             this.label1.Text = "Search Services:";
+            // 
+            // ServiceAmountTxtB
+            // 
+            this.ServiceAmountTxtB.AutoRoundedCorners = true;
+            this.ServiceAmountTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceAmountTxtB.BorderRadius = 17;
+            this.ServiceAmountTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ServiceAmountTxtB.DefaultText = "";
+            this.ServiceAmountTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ServiceAmountTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ServiceAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceAmountTxtB.Location = new System.Drawing.Point(41, 520);
+            this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
+            this.ServiceAmountTxtB.PasswordChar = '\0';
+            this.ServiceAmountTxtB.PlaceholderText = "";
+            this.ServiceAmountTxtB.SelectedText = "";
+            this.ServiceAmountTxtB.Size = new System.Drawing.Size(305, 36);
+            this.ServiceAmountTxtB.TabIndex = 19;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(41, 479);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(305, 38);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Amount";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ServicesUserControl
             // 
@@ -307,5 +368,7 @@
         public Guna.UI2.WinForms.Guna2TextBox CustomerAgeTxtB;
         public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
         public Guna.UI2.WinForms.Guna2TextBox ServiceTxtB;
+        private System.Windows.Forms.Label label6;
+        private Guna.UI2.WinForms.Guna2TextBox ServiceAmountTxtB;
     }
 }
