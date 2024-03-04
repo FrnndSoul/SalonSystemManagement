@@ -153,7 +153,6 @@
             this.NPaymentBtn.TabIndex = 14;
             this.NPaymentBtn.Text = "Payment";
             this.NPaymentBtn.UseTransparentBackground = true;
-            this.NPaymentBtn.Click += new System.EventHandler(this.NPaymentBtn_Click);
             // 
             // RecepLogOutBtn
             // 

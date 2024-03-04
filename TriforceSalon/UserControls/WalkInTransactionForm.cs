@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
+using TriforceSalon.UserControls.Receptionist_Controls;
 
 namespace TriforceSalon.UserControls
 {
@@ -139,9 +140,5 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void NPaymentBtn_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
