@@ -181,6 +181,7 @@ namespace TriforceSalon.Class_Components
 
                         command.ExecuteNonQuery();
 
+                        MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         GetSalonServices();
                         ClearServices();
                     }

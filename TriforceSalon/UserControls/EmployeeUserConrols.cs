@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
@@ -14,15 +15,17 @@ namespace TriforceSalon.UserControls
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
         public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
+        public TransactionMethods transactionMethods = new TransactionMethods();
         private RealTimeClock userClock;
+        string serviceTypeName;
+
         public EmployeeUserConrols()
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
-            string serviceTypeName = ServiceTypeNameLbl.Text;
-            LoadCustomers(serviceTypeName);
+            serviceTypeName = ServiceTypeNameLbl.Text;
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
-
+            transaction.HideAllPanels();
         }
 
         public void LoadCustomers(string serviceTypeName)
@@ -103,6 +106,7 @@ namespace TriforceSalon.UserControls
         {
             int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
             transaction.ShowCustomerList();
+            LoadCustomers(ServiceTypeNameLbl.Text);
             transaction.EmployeeProcessComplete(CustID);
         }
 
@@ -117,6 +121,20 @@ namespace TriforceSalon.UserControls
                     break;
                 }
             }
+        }
+
+        private void ReloadBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("click");
+            LoadCustomers(transactionMethods.GetServiceTypeName(Method.ServiceID));
+
+        }
+
+        private void ShowQueueBtn_Click(object sender, EventArgs e)
+        {
+            EmpStartingPanel.Visible = false;
+            transaction.ShowCustomerList();
+            LoadCustomers(serviceTypeName);
         }
     }
 }

@@ -215,12 +215,11 @@ namespace TriforceSalon
                     {
                         ResetAttempt(inputID);
                         MessageBox.Show($"Welcome Staff, {Username}!");
+                        GetEmployeeInfo();
                         foreach (Form openForm in Application.OpenForms)
                         {
                             if (openForm is MainForm mainForm)
                             {
-                                //tanggalin ito as much as possible
-                                GetEmployeeInfo();
                                 mainForm.ShowEmployee();
                                 break;
                             }

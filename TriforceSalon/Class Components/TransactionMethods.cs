@@ -23,29 +23,41 @@ namespace TriforceSalon.Class_Components
 
         public void ProcessCustomer(string serviceName, int serviceID)
         {
-            using (var conn = new MySqlConnection(mysqlcon))
+            try
             {
-                conn.Open();
-                string query = "insert into transaction (CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID)" +
-                    "values(@customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID)";
-                using (MySqlCommand command = new MySqlCommand(query, conn))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
-                    command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
-                    command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
+                    conn.Open();
+                    string query = "insert into transaction (CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
+                        "values(@customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
+                        command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
+                        command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
+                        command.Parameters.AddWithValue("@amount", Convert.ToDecimal(ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text));
+                        command.Parameters.AddWithValue("@time_taken", DateTime.Now);
 
-                    //palitan ito
-                    command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
-                    command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
-                    command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
-                    command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
+                        //palitan ito
+                        command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
+                        command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
+                        command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
+                        command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
 
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Customer Added to the Queue", "Customer Process", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Customer Added to the Queue", "Customer Process", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearProcess();
 
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in ProcessCustomer");
+
+            }
         }
+
         public int GetEmployeeID(string name)
         {
             EmpID = -1;
@@ -55,20 +67,18 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "Select AccountID from salon_employee where Name = @name";
+                    string query = "Select AccountID from salon_employees where Name = @name";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@name", name);
-
-                        using(MySqlDataReader reader =  command.ExecuteReader())
+                       
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out EmpID))
                         {
-                            object result = command.ExecuteScalar();
-                            if (result != null && int.TryParse(result.ToString(), out EmpID))
-                            {
-                                return EmpID;
-                            }
+                            return EmpID;
                         }
+                        
                     }
                 }
             }
@@ -166,6 +176,17 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in GetServiceType");
             }
             return VariationID;
+        }
+
+        public void ClearProcess()
+        {
+            ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem = null;
+
         }
     }
 }

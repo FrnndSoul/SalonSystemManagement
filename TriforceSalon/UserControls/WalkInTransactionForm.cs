@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
+using TriforceSalon.UserControls.Receptionist_Controls;
 
 namespace TriforceSalon.UserControls
 {

@@ -32,6 +32,7 @@
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.servicesUserControl1 = new TriforceSalon.UserControls.Receptionist_Controls.ServicesUserControl();
+            this.paymentsUserControls1 = new TriforceSalon.UserControls.Receptionist_Controls.PaymentsUserControls();
             this.NServicesBtn = new Guna.UI2.WinForms.Guna2Button();
             this.NSellProdBtn = new Guna.UI2.WinForms.Guna2Button();
             this.NAppointmentsBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -83,6 +84,14 @@
             this.servicesUserControl1.Name = "servicesUserControl1";
             this.servicesUserControl1.Size = new System.Drawing.Size(1920, 843);
             this.servicesUserControl1.TabIndex = 0;
+            // 
+            // paymentsUserControls1
+            // 
+            this.paymentsUserControls1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.paymentsUserControls1.Location = new System.Drawing.Point(4, 4);
+            this.paymentsUserControls1.Name = "paymentsUserControls1";
+            this.paymentsUserControls1.Size = new System.Drawing.Size(1920, 843);
+            this.paymentsUserControls1.TabIndex = 1;
             // 
             // NServicesBtn
             // 

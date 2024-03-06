@@ -31,6 +31,8 @@
             this.ServiceTypeFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ServiceAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CServiceTxtB = new System.Windows.Forms.Label();
             this.ServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,8 +46,6 @@
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ServiceAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +87,39 @@
             this.guna2Panel1.Size = new System.Drawing.Size(378, 820);
             this.guna2Panel1.TabIndex = 2;
             // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(41, 479);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(305, 38);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Amount";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ServiceAmountTxtB
+            // 
+            this.ServiceAmountTxtB.AutoRoundedCorners = true;
+            this.ServiceAmountTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceAmountTxtB.BorderRadius = 17;
+            this.ServiceAmountTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ServiceAmountTxtB.DefaultText = "";
+            this.ServiceAmountTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ServiceAmountTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ServiceAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceAmountTxtB.Location = new System.Drawing.Point(41, 520);
+            this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
+            this.ServiceAmountTxtB.PasswordChar = '\0';
+            this.ServiceAmountTxtB.PlaceholderText = "";
+            this.ServiceAmountTxtB.SelectedText = "";
+            this.ServiceAmountTxtB.Size = new System.Drawing.Size(305, 36);
+            this.ServiceAmountTxtB.TabIndex = 19;
+            // 
             // CServiceTxtB
             // 
             this.CServiceTxtB.BackColor = System.Drawing.Color.Transparent;
@@ -110,7 +143,7 @@
             this.ServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Location = new System.Drawing.Point(44, 422);
             this.ServiceTxtB.Name = "ServiceTxtB";
@@ -173,7 +206,7 @@
             this.PEmployeeComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PEmployeeComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PEmployeeComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PEmployeeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.PEmployeeComB.ItemHeight = 30;
             this.PEmployeeComB.Location = new System.Drawing.Point(44, 622);
@@ -193,7 +226,7 @@
             this.CustomerPhoneNTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerPhoneNTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerPhoneNTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(44, 309);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
@@ -215,7 +248,7 @@
             this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Location = new System.Drawing.Point(47, 211);
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
@@ -237,7 +270,7 @@
             this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(47, 118);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
@@ -300,39 +333,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Search Services:";
             // 
-            // ServiceAmountTxtB
-            // 
-            this.ServiceAmountTxtB.AutoRoundedCorners = true;
-            this.ServiceAmountTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceAmountTxtB.BorderRadius = 17;
-            this.ServiceAmountTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.ServiceAmountTxtB.DefaultText = "";
-            this.ServiceAmountTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.ServiceAmountTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.ServiceAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.ServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtB.Location = new System.Drawing.Point(41, 520);
-            this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
-            this.ServiceAmountTxtB.PasswordChar = '\0';
-            this.ServiceAmountTxtB.PlaceholderText = "";
-            this.ServiceAmountTxtB.SelectedText = "";
-            this.ServiceAmountTxtB.Size = new System.Drawing.Size(305, 36);
-            this.ServiceAmountTxtB.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(41, 479);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(305, 38);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Amount";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // ServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,6 +369,6 @@
         public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
         public Guna.UI2.WinForms.Guna2TextBox ServiceTxtB;
         private System.Windows.Forms.Label label6;
-        private Guna.UI2.WinForms.Guna2TextBox ServiceAmountTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox ServiceAmountTxtB;
     }
 }

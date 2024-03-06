@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -35,15 +36,15 @@ namespace TriforceSalon.Class_Components
 
                                 Panel panel = new Panel
                                 {
-                                    Width = 100,
-                                    Height = 100,
+                                    Width = 140,
+                                    Height = 140,
                                     Margin = new Padding(10),
                                     Tag = reader["ServiceID"].ToString()
                                 };
 
                                 PictureBox picBox = new PictureBox
                                 {
-                                    Width = 100,
+                                    Width = 120,
                                     Height = 75,
                                     Location = new Point(10, 10),
                                     BackgroundImage = servicetypeImage,
@@ -54,10 +55,10 @@ namespace TriforceSalon.Class_Components
                                 Label labelTitle = new Label
                                 {
                                     Text = reader["ServiceTypeName"].ToString(),
-                                    Location = new Point(10, 160),
+                                    Location = new Point(10, 95),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
-                                    Font = new Font("Stanberry", 14, FontStyle.Regular),
+                                    Font = new Font("Stanberry", 8, FontStyle.Regular),
                                     Tag = reader["ServiceID"].ToString()
                                 };
 
@@ -80,42 +81,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void AddEmployeesComB(int serviceID, string mysqlcon) 
-        {
-            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    conn.Open();
-                    string query = "select Name from salon_employees where ServiceID = @service_ID";
-
-                    using(MySqlCommand command = new MySqlCommand(query, conn)) 
-                    {
-                        command.Parameters.AddWithValue("@service_ID", serviceID);
-
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    string EmpName = reader["Name"].ToString();
-                                    ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add(EmpName);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in addEmployeesComB()");
-            }
-
-        }
-
-        public void GetServiceData(FlowLayoutPanel serviceFL, string mysqlcon)
+        public void GetServiceData(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {
@@ -158,7 +124,7 @@ namespace TriforceSalon.Class_Components
                                     Location = new Point(10, 160),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
-                                    Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
 
@@ -168,11 +134,19 @@ namespace TriforceSalon.Class_Components
                                     Location = new Point(100, 160),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
-                                    Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
 
-                                
+                                EventHandler clickHandler = (sender, e) =>
+                                {
+                                    string serviceID = ((Control)sender).Tag.ToString();
+                                    serviceTB.Text = labelTitle.Text;
+                                    amountTB.Text = labelTitle1.Text;
+                                };
+
+                                panel.Click += clickHandler;
+                                picBox.Click += clickHandler;
 
                                 panel.Controls.Add(picBox);
                                 panel.Controls.Add(labelTitle);
@@ -185,7 +159,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void UpdateServiceFL(FlowLayoutPanel serviceFL, string serviceTypeID, string mysqlcon)
+        public void UpdateServiceFL(FlowLayoutPanel serviceFL, string serviceTypeID, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
             // Clear existing panels in ServiceFL
             serviceFL.Controls.Clear();
@@ -232,7 +206,7 @@ namespace TriforceSalon.Class_Components
                                     Location = new Point(10, 160),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
-                                    Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
 
@@ -242,9 +216,19 @@ namespace TriforceSalon.Class_Components
                                     Location = new Point(100, 160),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
-                                    Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
+
+                                EventHandler clickHandler = (sender, e) =>
+                                {
+                                    string serviceID = ((Control)sender).Tag.ToString();
+                                    serviceTB.Text = labelTitle.Text;
+                                    amountTB.Text = labelTitle1.Text;
+                                };
+
+                                panel.Click += clickHandler;
+                                picBox.Click += clickHandler;
 
                                 panel.Controls.Add(picBox);
                                 panel.Controls.Add(labelTitle);
@@ -255,6 +239,41 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
+        }
+
+        public void AddEmployeesComB(int serviceID, string mysqlcon)
+        {
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "select Name from salon_employees where ServiceID = @service_ID";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@service_ID", serviceID);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    string EmpName = reader["Name"].ToString();
+                                    ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add(EmpName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in addEmployeesComB()");
+            }
+
         }
     }
 }
