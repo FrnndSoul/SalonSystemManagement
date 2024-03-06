@@ -175,8 +175,14 @@ namespace TriforceSalon
                 $"Name: {Name}\n" +
                 $"Username: {Username}\n" +
                 $"Email: {Email}\n" +
-                $"Birthdate: {Birthdate}",
+                $"Birthdate: {Birthdate}" +
+                $"\n\nAre these information accurate?",
                 "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
 
             string hashedPassword = Method.HashString(Password);
 
