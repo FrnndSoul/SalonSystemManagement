@@ -41,7 +41,6 @@ namespace TriforceSalon.UserControls
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.EmpStartingPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.ShowQueueBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.ReloadBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -237,7 +236,6 @@ namespace TriforceSalon.UserControls
             // 
             this.guna2Panel2.BorderRadius = 50;
             this.guna2Panel2.Controls.Add(this.EmpStartingPanel);
-            this.guna2Panel2.Controls.Add(this.ReloadBtn);
             this.guna2Panel2.Controls.Add(this.label9);
             this.guna2Panel2.Controls.Add(this.label7);
             this.guna2Panel2.Controls.Add(this.label6);
@@ -276,33 +274,13 @@ namespace TriforceSalon.UserControls
             this.ShowQueueBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.ShowQueueBtn.Font = new System.Drawing.Font("Segoe UI", 36F);
             this.ShowQueueBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.ShowQueueBtn.Location = new System.Drawing.Point(283, 318);
+            this.ShowQueueBtn.Location = new System.Drawing.Point(287, 336);
             this.ShowQueueBtn.Name = "ShowQueueBtn";
             this.ShowQueueBtn.Size = new System.Drawing.Size(771, 87);
             this.ShowQueueBtn.TabIndex = 0;
             this.ShowQueueBtn.Text = "Show Customer Queue";
             this.ShowQueueBtn.UseTransparentBackground = true;
             this.ShowQueueBtn.Click += new System.EventHandler(this.ShowQueueBtn_Click);
-            // 
-            // ReloadBtn
-            // 
-            this.ReloadBtn.Animated = true;
-            this.ReloadBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ReloadBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.ReloadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.ReloadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.ReloadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.ReloadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.ReloadBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.ReloadBtn.ForeColor = System.Drawing.Color.White;
-            this.ReloadBtn.Location = new System.Drawing.Point(1362, 200);
-            this.ReloadBtn.Name = "ReloadBtn";
-            this.ReloadBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.ReloadBtn.Size = new System.Drawing.Size(50, 50);
-            this.ReloadBtn.TabIndex = 11;
-            this.ReloadBtn.Text = "R";
-            this.ReloadBtn.UseTransparentBackground = true;
-            this.ReloadBtn.Click += new System.EventHandler(this.ReloadBtn_Click);
             // 
             // label9
             // 
@@ -721,7 +699,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2TextBox CustomerIDTxtB;
         public System.Windows.Forms.Label label12;
         public Guna.UI2.WinForms.Guna2PictureBox ServicePicPicB;
-        private Guna.UI2.WinForms.Guna2CircleButton ReloadBtn;
         public Guna.UI2.WinForms.Guna2Panel EmpStartingPanel;
         private Guna.UI2.WinForms.Guna2Button ShowQueueBtn;
     }
