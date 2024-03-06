@@ -126,6 +126,19 @@ namespace TriforceSalon
             LoadUserData();
         }
 
+        private void CreateBtn_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowSignUp();
+                    break;
+                }
+            }
+        }
+
         private void UserDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (UserDGV.Rows.Count <= 0)
