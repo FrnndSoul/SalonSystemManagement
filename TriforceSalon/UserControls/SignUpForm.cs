@@ -76,11 +76,13 @@ namespace TriforceSalon
             TogglePassword.Checked = false;
             BirthdayPicker.Value = BirthdayPicker.MaxDate;
 
+            this.Visible = false;
+
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    mainForm.ShowAdmin();
                     break;
                 }
             }
