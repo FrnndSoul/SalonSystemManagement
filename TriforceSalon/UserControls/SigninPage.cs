@@ -30,20 +30,6 @@ namespace TriforceSalon
             TogglePassword.Checked = false;
         }
 
-       
-        private void CreateAccountLnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    mainForm.ShowSignUp();
-                    break;
-                }
-            }
-            Clear();
-        }
-
         private void TogglePassword_CheckedChanged(object sender, EventArgs e)
         {
             PasswordTxtbox.PasswordChar = TogglePassword.Checked ? '\0' : '*';

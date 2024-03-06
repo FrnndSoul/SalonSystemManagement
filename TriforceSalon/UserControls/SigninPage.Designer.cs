@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.TogglePassword = new System.Windows.Forms.CheckBox();
-            this.CreateAccountLnk = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SigninBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -59,27 +57,12 @@
             this.TogglePassword.UseVisualStyleBackColor = true;
             this.TogglePassword.CheckedChanged += new System.EventHandler(this.TogglePassword_CheckedChanged);
             // 
-            // CreateAccountLnk
-            // 
-            this.CreateAccountLnk.AutoSize = true;
-            this.CreateAccountLnk.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateAccountLnk.LinkColor = System.Drawing.Color.White;
-            this.CreateAccountLnk.Location = new System.Drawing.Point(276, 864);
-            this.CreateAccountLnk.Name = "CreateAccountLnk";
-            this.CreateAccountLnk.Size = new System.Drawing.Size(183, 37);
-            this.CreateAccountLnk.TabIndex = 4;
-            this.CreateAccountLnk.TabStop = true;
-            this.CreateAccountLnk.Text = "Sign Up Here";
-            this.CreateAccountLnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateAccountLnk_LinkClicked);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.panel1.Controls.Add(this.guna2PictureBox1);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.CreateAccountLnk);
             this.panel1.Controls.Add(this.SigninBtn);
             this.panel1.Controls.Add(this.PasswordTxtbox);
             this.panel1.Controls.Add(this.UsernameTxtbox);
@@ -103,18 +86,6 @@
             this.guna2PictureBox1.TabIndex = 8;
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(102, 864);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(178, 37);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "No Account?";
             // 
             // label2
             // 
@@ -261,12 +232,10 @@
 
         #endregion
         private System.Windows.Forms.CheckBox TogglePassword;
-        private System.Windows.Forms.LinkLabel CreateAccountLnk;
         private System.Windows.Forms.Panel panel1;
         private Guna.UI2.WinForms.Guna2TextBox UsernameTxtbox;
         private Guna.UI2.WinForms.Guna2TextBox PasswordTxtbox;
         private Guna.UI2.WinForms.Guna2Button SigninBtn;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;

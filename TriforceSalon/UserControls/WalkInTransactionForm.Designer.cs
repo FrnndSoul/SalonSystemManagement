@@ -38,6 +38,7 @@
             this.NAppointmentsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.NPaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RecepLogOutBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.paymentsUserControls1 = new TriforceSalon.UserControls.Receptionist_Controls.PaymentsUserControls();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
@@ -194,6 +195,14 @@
             this.RecepLogOutBtn.Text = "Log-Out";
             this.RecepLogOutBtn.UseTransparentBackground = true;
             this.RecepLogOutBtn.Click += new System.EventHandler(this.RecepLogOutBtn_Click);
+            // 
+            // paymentsUserControls1
+            // 
+            this.paymentsUserControls1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.paymentsUserControls1.Location = new System.Drawing.Point(4, 4);
+            this.paymentsUserControls1.Name = "paymentsUserControls1";
+            this.paymentsUserControls1.Size = new System.Drawing.Size(1920, 843);
+            this.paymentsUserControls1.TabIndex = 1;
             // 
             // WalkInTransactionForm
             // 
