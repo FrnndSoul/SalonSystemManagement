@@ -151,5 +151,18 @@ namespace TriforceSalon.Class_Components
             EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = true;
 
         }
+
+        public void HideAllPanels()
+        {
+            EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
+
+            EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = false;
+        }
     }
 }

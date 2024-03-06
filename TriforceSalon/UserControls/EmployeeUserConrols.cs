@@ -25,8 +25,7 @@ namespace TriforceSalon.UserControls
             employeeUserConrolsInstance = this;
             serviceTypeName = ServiceTypeNameLbl.Text;
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
-            LoadCustomers(serviceTypeName);
-
+            transaction.HideAllPanels();
         }
 
         public void LoadCustomers(string serviceTypeName)
@@ -129,6 +128,13 @@ namespace TriforceSalon.UserControls
             MessageBox.Show("click");
             LoadCustomers(transactionMethods.GetServiceTypeName(Method.ServiceID));
 
+        }
+
+        private void ShowQueueBtn_Click(object sender, EventArgs e)
+        {
+            EmpStartingPanel.Visible = false;
+            transaction.ShowCustomerList();
+            LoadCustomers(serviceTypeName);
         }
     }
 }
