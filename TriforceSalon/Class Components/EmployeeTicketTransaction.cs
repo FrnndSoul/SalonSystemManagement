@@ -10,7 +10,6 @@ namespace TriforceSalon.Class_Components
 {
     public class EmployeeTicketTransaction
     {
-        //private EmployeeUserConrols empUserControls = new EmployeeUserConrols();
         private string mysqlcon;
         public byte[] servicePhoto;
         public EmployeeTicketTransaction()
@@ -21,7 +20,6 @@ namespace TriforceSalon.Class_Components
         public void ProcessTicket(int ticketID)
         {
             DateTime startTIme = DateTime.Now;
-            //int accountID = 13018;
             int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text);
 
 
@@ -62,6 +60,7 @@ namespace TriforceSalon.Class_Components
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
+                    conn.Open();
                    string query = "select ServiceImage from salon_services where ServiceName = @service_name";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -99,15 +98,15 @@ namespace TriforceSalon.Class_Components
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "Update transaction set PaymentStatus = @payment_status";
+                    string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@payment_status", CustomerID);
+                        command.Parameters.AddWithValue("@custumer_ID", CustomerID);
 
                         command.ExecuteNonQuery();
                         MessageBox.Show("Custoemr Service Complete, Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ShowEmpLock();
+                        ShowCustomerList();
                     }
                 }
             }
@@ -136,7 +135,6 @@ namespace TriforceSalon.Class_Components
             EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = false;
 
         }
@@ -144,14 +142,12 @@ namespace TriforceSalon.Class_Components
         {
             EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
-            //empUserControls.LoadCustomers(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text);
 
             EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = true;
 
         }

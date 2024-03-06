@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls;
 
 namespace TriforceSalon
 {
     public partial class MainForm : Form
     {
+        EmployeeUserConrols emp = new EmployeeUserConrols();
+        TransactionMethods transactionMethods = new TransactionMethods();
         public MainForm()
         {
             InitializeComponent();
@@ -81,6 +84,7 @@ namespace TriforceSalon
         }
         public void ShowEmployee()
         {
+            emp.LoadCustomers(transactionMethods.GetServiceTypeName(Method.ServiceID));
             walkInTransactionForm1.Visible = false;
             adminForm1.Visible = false;
             managerPage1.Visible = false;

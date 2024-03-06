@@ -39,14 +39,15 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl = new System.Windows.Forms.Label();
             this.EmployeeLogOutBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ReloadBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.ServicePicPicB = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -63,7 +64,6 @@ namespace TriforceSalon.UserControls
             this.label14 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.EmployeeDoneBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.CustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeePicturePicB)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -233,8 +233,8 @@ namespace TriforceSalon.UserControls
             // guna2Panel2
             // 
             this.guna2Panel2.BorderRadius = 50;
+            this.guna2Panel2.Controls.Add(this.ReloadBtn);
             this.guna2Panel2.Controls.Add(this.label9);
-            this.guna2Panel2.Controls.Add(this.label8);
             this.guna2Panel2.Controls.Add(this.label7);
             this.guna2Panel2.Controls.Add(this.label6);
             this.guna2Panel2.Controls.Add(this.label5);
@@ -249,6 +249,26 @@ namespace TriforceSalon.UserControls
             this.guna2Panel2.Size = new System.Drawing.Size(1462, 1080);
             this.guna2Panel2.TabIndex = 1;
             // 
+            // ReloadBtn
+            // 
+            this.ReloadBtn.Animated = true;
+            this.ReloadBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ReloadBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ReloadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ReloadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ReloadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ReloadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.ReloadBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ReloadBtn.ForeColor = System.Drawing.Color.White;
+            this.ReloadBtn.Location = new System.Drawing.Point(1362, 200);
+            this.ReloadBtn.Name = "ReloadBtn";
+            this.ReloadBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.ReloadBtn.Size = new System.Drawing.Size(50, 50);
+            this.ReloadBtn.TabIndex = 11;
+            this.ReloadBtn.Text = "R";
+            this.ReloadBtn.UseTransparentBackground = true;
+            this.ReloadBtn.Click += new System.EventHandler(this.ReloadBtn_Click);
+            // 
             // label9
             // 
             this.label9.BackColor = System.Drawing.Color.Transparent;
@@ -261,24 +281,12 @@ namespace TriforceSalon.UserControls
             this.label9.Text = "ID";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(886, 187);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 63);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Employee Request";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(1065, 200);
+            this.label7.Location = new System.Drawing.Point(1028, 200);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 50);
             this.label7.TabIndex = 7;
@@ -290,7 +298,7 @@ namespace TriforceSalon.UserControls
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(688, 200);
+            this.label6.Location = new System.Drawing.Point(782, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 50);
             this.label6.TabIndex = 6;
@@ -302,7 +310,7 @@ namespace TriforceSalon.UserControls
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(501, 181);
+            this.label5.Location = new System.Drawing.Point(545, 181);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 69);
             this.label5.TabIndex = 5;
@@ -314,7 +322,7 @@ namespace TriforceSalon.UserControls
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(339, 200);
+            this.label4.Location = new System.Drawing.Point(370, 200);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 50);
             this.label4.TabIndex = 4;
@@ -343,6 +351,17 @@ namespace TriforceSalon.UserControls
             this.label1.Size = new System.Drawing.Size(535, 62);
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer Queue";
+            // 
+            // CustomerListFLowLayout
+            // 
+            this.CustomerListFLowLayout.AutoScroll = true;
+            this.CustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.CustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.CustomerListFLowLayout.Location = new System.Drawing.Point(78, 253);
+            this.CustomerListFLowLayout.Name = "CustomerListFLowLayout";
+            this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
+            this.CustomerListFLowLayout.TabIndex = 0;
             // 
             // EmployeeLockPanel
             // 
@@ -609,17 +628,6 @@ namespace TriforceSalon.UserControls
             this.EmployeeDoneBtn.UseTransparentBackground = true;
             this.EmployeeDoneBtn.Click += new System.EventHandler(this.EmployeeDoneBtn_Click);
             // 
-            // CustomerListFLowLayout
-            // 
-            this.CustomerListFLowLayout.AutoScroll = true;
-            this.CustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.CustomerListFLowLayout.Location = new System.Drawing.Point(78, 253);
-            this.CustomerListFLowLayout.Name = "CustomerListFLowLayout";
-            this.CustomerListFLowLayout.Size = new System.Drawing.Size(1337, 790);
-            this.CustomerListFLowLayout.TabIndex = 0;
-            // 
             // EmployeeUserConrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,7 +669,6 @@ namespace TriforceSalon.UserControls
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Label label8;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
@@ -678,5 +685,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2TextBox CustomerIDTxtB;
         public System.Windows.Forms.Label label12;
         public Guna.UI2.WinForms.Guna2PictureBox ServicePicPicB;
+        private Guna.UI2.WinForms.Guna2CircleButton ReloadBtn;
     }
 }
