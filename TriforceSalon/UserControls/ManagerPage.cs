@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
         public ManagerPage()
         {
             InitializeComponent();
+            generalView_Inventory1.Visible = true;
         }
 
         private void LogoutBtn_Click(object sender, EventArgs e)
@@ -33,7 +34,13 @@ namespace TriforceSalon.UserControls
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
             generalView_Inventory1.Visible = true;
-            //set visible niyo dito yung iba
+            serviceType_ServicePage1.Visible = false;
+        }
+
+        private void ServicesBtn_Click(object sender, EventArgs e)
+        {
+            serviceType_ServicePage1.Visible = true;
+            generalView_Inventory1.Visible = false;
         }
     }
 }

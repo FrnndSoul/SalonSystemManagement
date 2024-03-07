@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
+using TriforceSalon.UserControls.Receptionist_Controls;
 
 namespace TriforceSalon.UserControls
 {
@@ -124,6 +125,31 @@ namespace TriforceSalon.UserControls
         private void guna2ShadowPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void RecepLogOutBtn_Click(object sender, EventArgs e)
+        {
+            Method.LogOutUser();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
+            }
+        }
+
+        private void NPaymentBtn_Click(object sender, EventArgs e)
+        {
+            paymentsUserControls1.Visible = true;
+            servicesUserControl1.Visible = false;
+        }
+
+        private void NServicesBtn_Click(object sender, EventArgs e)
+        {
+            paymentsUserControls1.Visible = false;
+            servicesUserControl1.Visible = true;
         }
     }
 }

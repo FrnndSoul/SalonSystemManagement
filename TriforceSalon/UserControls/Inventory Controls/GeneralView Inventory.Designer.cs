@@ -57,7 +57,6 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-
             this.InventoryDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.InventoryDGV.ColumnHeadersHeight = 80;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -67,7 +66,6 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-          
             this.InventoryDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.InventoryDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.InventoryDGV.Location = new System.Drawing.Point(25, 33);
@@ -78,6 +76,7 @@
             this.InventoryDGV.RowHeadersWidth = 51;
             this.InventoryDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.InventoryDGV.RowTemplate.Height = 40;
+            this.InventoryDGV.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.InventoryDGV.Size = new System.Drawing.Size(1450, 800);
             this.InventoryDGV.TabIndex = 0;
             this.InventoryDGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -101,7 +100,6 @@
             this.InventoryDGV.ThemeStyle.RowsStyle.Height = 40;
             this.InventoryDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.InventoryDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-
             // 
             // EditBtn
             // 

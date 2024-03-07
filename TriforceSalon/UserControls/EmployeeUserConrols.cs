@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
@@ -13,16 +14,18 @@ namespace TriforceSalon.UserControls
     {
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
+        public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
+        public TransactionMethods transactionMethods = new TransactionMethods();
         private RealTimeClock userClock;
+        string serviceTypeName;
+
         public EmployeeUserConrols()
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
-            string serviceTypeName = ServiceTypeNameLbl.Text;
-            LoadCustomers(serviceTypeName);
-            //userClock = new RealTimeClock(TimerLbl, "dddd, MMMM d yyyy (HH:mm:ss)");
-            userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (HH:mm:ss)");
-
+            serviceTypeName = ServiceTypeNameLbl.Text;
+            userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
+            transaction.HideAllPanels();
         }
 
         public void LoadCustomers(string serviceTypeName)
@@ -34,18 +37,8 @@ namespace TriforceSalon.UserControls
                 {
                     conn.Open();
 
-                    /* string query = "SELECT t.CustomerName," +
-                                     " t.CustomerAge, " +
-                                     " t.CustomerPhoneNumber, " +
-                                     " t.ServiceVariation, " +
-                                     " t.PreferredEmployee," +
-                                     " t.PriorityStatus, " +
-                                     " t.TransactionID" +
-                                     " FROM transaction t" +
-                                     " WHERE ServiceType = @service_type " +
-                                     "AND PaymentStatus = 'UNPAID";*/
-
-                    string query = "SELECT t.CustomerName," +
+                    //nandito pa yung preferred Employee for backup purposes
+                   /* string query = "SELECT t.CustomerName," +
                                       " t.CustomerAge, " +
                                       " t.CustomerPhoneNumber, " +
                                       " t.ServiceVariation, " +
@@ -55,7 +48,19 @@ namespace TriforceSalon.UserControls
                                       " FROM transaction t" +
                                       " WHERE ServiceType = @service_type" +
                                       " AND PaymentStatus = 'UNPAID'" +  
-                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    //removed na dito yung pref employee
+                    string query = "SELECT t.CustomerName," +
+                                     " t.CustomerAge, " +
+                                     " t.CustomerPhoneNumber, " +
+                                     " t.ServiceVariation, " +
+                                     " t.PriorityStatus, " +
+                                     " t.TransactionID" +
+                                     " FROM transaction t" +
+                                     " WHERE ServiceType = @service_type" +
+                                     " AND PaymentStatus = 'UNPAID'" +
+                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -73,7 +78,7 @@ namespace TriforceSalon.UserControls
                                 var Age = row["CustomerAge"].ToString();
                                 var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
-                                var PrefEmp = row["PreferredEmployee"].ToString();
+                                //var PrefEmp = row["PreferredEmployee"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
@@ -81,7 +86,7 @@ namespace TriforceSalon.UserControls
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrefEmp, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
                                 CustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -95,6 +100,41 @@ namespace TriforceSalon.UserControls
             {
                 MessageBox.Show(ex.Message, "Error in LoadCustomer()");
             }
+        }
+
+        private void EmployeeDoneBtn_Click(object sender, EventArgs e)
+        {
+            int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
+            transaction.ShowCustomerList();
+            LoadCustomers(ServiceTypeNameLbl.Text);
+            transaction.EmployeeProcessComplete(CustID);
+        }
+
+        private void EmployeeLogOutBtn_Click(object sender, EventArgs e)
+        {
+            Method.LogOutUser();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowLogin();
+                    break;
+                }
+            }
+        }
+
+        private void ReloadBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("click");
+            LoadCustomers(transactionMethods.GetServiceTypeName(Method.ServiceID));
+
+        }
+
+        private void ShowQueueBtn_Click(object sender, EventArgs e)
+        {
+            EmpStartingPanel.Visible = false;
+            transaction.ShowCustomerList();
+            LoadCustomers(serviceTypeName);
         }
     }
 }

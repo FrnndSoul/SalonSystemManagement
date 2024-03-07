@@ -52,6 +52,7 @@ namespace TriforceSalon.UserControls
 
         private void addProduct_Inventory1_VisibleChanged(object sender, EventArgs e)
         {
+            LoadInventory();
             if (!addProduct_Inventory1.Visible)
             {
                 ShowButtons();
@@ -64,6 +65,7 @@ namespace TriforceSalon.UserControls
 
         private void requestShipment_Inventory1_VisibleChanged(object sender, EventArgs e)
         {
+            LoadInventory();
             if (!requestShipment_Inventory1.Visible)
             {
                 ShowButtons();
@@ -76,6 +78,7 @@ namespace TriforceSalon.UserControls
 
         private void editProduct_Inventory1_VisibleChanged(object sender, EventArgs e)
         {
+            LoadInventory();
             if (!editProduct_Inventory1.Visible)
             {
                 ShowButtons();

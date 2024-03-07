@@ -32,19 +32,18 @@ namespace TriforceSalon
         {
             InitializeComponent();
             Method.EclipsePhotoBox(Photo);
-            this.RoleBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
-            this.RoleBox.Items.Clear();
-            SetRoles(RoleBox);
+            this.ServiceTypeBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
+            this.ServiceTypeBox.Items.Clear();
+            SetRoles(ServiceTypeBox);
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
             LoadUserData();
-            
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1,3);
-            UserDGV_CellContentClick_1(select, args); 
 
+            object select = UserDGV;
+            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
+            UserDGV_CellContentClick(select, args);
         }
 
         public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
@@ -74,6 +73,10 @@ namespace TriforceSalon
 
         public void LoadUserData()
         {
+            foreach (DataGridViewRow row in UserDGV.SelectedRows)
+            {
+                UserDGV.Rows.Remove(row);
+            }
             try
             {
                 connection.Open();
@@ -100,12 +103,6 @@ namespace TriforceSalon
             }
         }
 
-
-        private void UserTab_Click(object sender, EventArgs e)
-        {
-            LoadUserData();
-        }
-
         private void SignoutBtn_Click(object sender, EventArgs e)
         {
             DiscardFunc();
@@ -126,14 +123,48 @@ namespace TriforceSalon
             {
                 DiscardFunc();
             }
+            LoadUserData();
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e)
+        private void CreateBtn_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    mainForm.ShowSignUp();
+                    break;
+                }
+            }
+        }
+
+        private void UserDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (UserDGV.Rows.Count <= 0)
+            {
+                return;
+            }
+
+            if (UserDGV.SelectedCells.Count > 0)
+            {
+                int userRow = UserDGV.SelectedCells[0].RowIndex;
+                if (userRow >= 0 && userRow < UserDGV.Rows.Count)
+                {
+                    int selectedAccountID = Convert.ToInt32(UserDGV.Rows[userRow].Cells["AccountID"].Value);
+                    ReadUserData(selectedAccountID);
+                    DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader, AccountAccessReader, ServiceIDReader);
+                }
+            }
+        }
+
+        private void SaveBtn_Click_1(object sender, EventArgs e)
         {
             string tempName = NameBox.Text;
             string tempUsername = UsernameBox.Text;
             string tempEmail = EmailBox.Text;
-            string tempAccess = AccessBox.Text;
+            string tempServiceType = ServiceTypeBox.Text;
+            string tempAccountAccess = AccessBox.Text;
 
             if (!Method.ValidEmail(tempEmail))
             {
@@ -148,32 +179,32 @@ namespace TriforceSalon
                 return;
             }
 
-            Method.ChangeUserData(tempName, tempUsername, newUpload, tempAccess, IDReader);
+            Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
             LoadUserData();
+        }
 
-            UserDGV_CellContentClick_1(null, null);
+        private void DiscardBtn_Click_1(object sender, EventArgs e)
+        {
             DiscardFunc();
         }
 
-
-        private void BirthdayPicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EditBtn_Click(object sender, EventArgs e)
+        private void EditBtn_Click_1(object sender, EventArgs e)
         {
             NameBox.Enabled = true;
             UsernameBox.Enabled = true;
             EmailBox.Enabled = true;
             UploadBtn.Enabled = true;
+            AccessBox.Enabled = true;
+            ServiceTypeBox.Enabled = true;
+
+            UserDGV.Enabled = false;
+
             SaveBtn.Visible = true;
             DiscardBtn.Visible = true;
             EditBtn.Visible = false;
-            UserDGV.Enabled = false;
         }
 
-        private void UploadBtn_Click(object sender, EventArgs e)
+        private void UploadBtn_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -211,31 +242,29 @@ namespace TriforceSalon
             UsernameBox.Text = UsernameInput;
             EmailBox.Text = EmailInput;
             BirthdayPicker.Value = BirthdateInput;
-            StatusBox.Text = Status.ToString();
+
+            if (Status == 0)
+            {
+                StatusBox.Text = "Great";
+            } else if (Status == 1)
+            {
+                StatusBox.Text = "Good";
+            } else if (Status == 2)
+            {
+                StatusBox.Text = "Critical";
+            } else if (Status == 3)
+            {
+                StatusBox.Text = "Inactive";
+            } else
+            {
+                StatusBox.Text = "Deactivated";
+            }
+
             IDBox.Text = IDInput.ToString();
             AccessBox.Text = Access;
 
             string roleName = GetServiceTypeName(ServiceID);
-            RoleBox.Text = roleName;
-        }
-
-        private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (UserDGV.Rows.Count <= 0)
-            {
-                return;
-            }
-
-            if (UserDGV.SelectedCells.Count > 0)
-            {
-                int userRow = UserDGV.SelectedCells[0].RowIndex;
-                if (userRow >= 0 && userRow < UserDGV.Rows.Count)
-                {
-                    int selectedAccountID = Convert.ToInt32(UserDGV.Rows[userRow].Cells["AccountID"].Value);
-                    ReadUserData(selectedAccountID);
-                    DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader, AccountAccessReader, ServiceIDReader);
-                }
-            }
+            ServiceTypeBox.Text = roleName;
         }
 
         public void DiscardFunc()
@@ -248,12 +277,10 @@ namespace TriforceSalon
             SaveBtn.Visible = false;
             DiscardBtn.Visible = false;
             UserDGV.Enabled = true;
+            AccessBox.Enabled = false;
+            ServiceTypeBox.Enabled = false;
 
             LoadUserData();
-
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
-            UserDGV_CellContentClick_1(select, args);
         }
 
         public static void ReadUserData(int accountID)

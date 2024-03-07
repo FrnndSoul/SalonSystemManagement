@@ -34,6 +34,8 @@
             this.adminForm1 = new TriforceSalon.AdminForm();
             this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
             this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
+            this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
+            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
             this.SuspendLayout();
             // 
             // signinPage1
@@ -68,6 +70,18 @@
             resources.ApplyResources(this.managerPage1, "managerPage1");
             this.managerPage1.Name = "managerPage1";
             // 
+            // employeeUserConrols1
+            // 
+            this.employeeUserConrols1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
+            this.employeeUserConrols1.Name = "employeeUserConrols1";
+            // 
+            // cardProcess1
+            // 
+            this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            resources.ApplyResources(this.cardProcess1, "cardProcess1");
+            this.cardProcess1.Name = "cardProcess1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -77,6 +91,7 @@
             this.Controls.Add(this.adminForm1);
             this.Controls.Add(this.walkInTransactionForm1);
             this.Controls.Add(this.managerPage1);
+            this.Controls.Add(this.employeeUserConrols1);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -91,6 +106,8 @@
         private SignUpForm signUpForm1;
         private UserControls.WalkInTransactionForm walkInTransactionForm1;
         private UserControls.ManagerPage managerPage1;
+        private UserControls.EmployeeUserConrols employeeUserConrols1;
+        private UserControls.Receptionist_Controls.CardProcess cardProcess1;
     }
 }
 
