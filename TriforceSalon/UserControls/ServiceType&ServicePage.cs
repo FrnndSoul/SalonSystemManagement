@@ -23,10 +23,11 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
             servicePageInstance = this;
+            ServiceTypePanel.BringToFront();
+
             serviceType.ServiceTypeInfoDGV();
             salonServices.PopulateServiceType();
             salonServices.GetSalonServices();
-            ServiceTypePanel.BringToFront();
 
             //For the services
             ServiceNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;

@@ -188,7 +188,7 @@ namespace TriforceSalon
                     if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
-                        LogUser(Convert.ToInt32(inputID));
+                        await LogUser(Convert.ToInt32(inputID));
 
                         MessageBox.Show($"Welcome Manager, {Username}!");
 
@@ -225,7 +225,7 @@ namespace TriforceSalon
                             }
                         }
 
-                        LogUser(AccountID);
+                        await LogUser(AccountID);
                         return true;
                     }
                     else
@@ -245,11 +245,11 @@ namespace TriforceSalon
                                     break;
                                 }
                             }
-                        LogUser(AccountID);
+                        await LogUser(AccountID);
                         return true;
                     }
 
-                    LogUser(AccountID);
+                    await LogUser(AccountID);
                     return true; // Indicate successful login
                 }
                 else
@@ -509,13 +509,14 @@ namespace TriforceSalon
             return regex.IsMatch(password);
         }
 
-        public static void LogUser(int IDlog)
+        public static async Task LogUser(int IDlog)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
+
                     string query = "INSERT INTO `logs`(`SessionID`, `ID`, `TimeIn`)" +
                         "VALUES (@sessionID,@id,@timeIn)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
@@ -525,7 +526,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@id", IDlog);
                         querycmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
 
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
             }
@@ -568,7 +569,7 @@ namespace TriforceSalon
             }
         }
 
-        public static void GetEmployeeInfo()
+        public  void GetEmployeeInfo()
         {
             byte[] photoBytes = Photo;
 

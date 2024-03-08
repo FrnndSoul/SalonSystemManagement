@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls
 {
@@ -26,6 +27,8 @@ namespace TriforceSalon.UserControls
                 if (openForm is MainForm mainForm)
                 {
                     //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }

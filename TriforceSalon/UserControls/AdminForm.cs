@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -26,9 +28,9 @@ namespace TriforceSalon
             SetRoles(ServiceTypeBox);
         }
 
-        private void AdminForm_Load(object sender, EventArgs e)
+        private async void AdminForm_Load(object sender, EventArgs e)
         {
-            LoadUserData();
+            await LoadUserData();
 
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
@@ -60,7 +62,7 @@ namespace TriforceSalon
             }
         }
 
-        public void LoadUserData()
+        /*public void LoadUserData()
         {
             foreach (DataGridViewRow row in UserDGV.SelectedRows)
             {
@@ -85,6 +87,44 @@ namespace TriforceSalon
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n\nat LoadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }*/
+
+        public async Task LoadUserData()
+        {
+            foreach (DataGridViewRow row in UserDGV.SelectedRows)
+            {
+                UserDGV.Rows.Remove(row);
+            }
+
+            try
+            {
+                await connection.OpenAsync();
+
+                string sql = "SELECT accounts.Username, accounts.AccountID, " +
+                             "salon_employees.AccountAccess, salon_employees.Name, salon_employees.Email, " +
+                             "salon_employees.Birthdate, salon_employees.AccountStatus, " +
+                             "salon_employees.ServiceID, salon_employees.Availability FROM accounts " +
+                             "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID";
+
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                {
+                    await adapter.FillAsync(dataTable);
+                }
+
+                UserDGV.DataSource = dataTable;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat LoadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

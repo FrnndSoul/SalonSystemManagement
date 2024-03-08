@@ -426,8 +426,6 @@
   <ItemGroup>
     <None Include="Resources\photo_2024-03-04_03-03-561.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\Main UserControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,7 +38,7 @@
             this.NAppointmentsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.NPaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RecepLogOutBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.paymentsUserControls1 = new TriforceSalon.UserControls.Receptionist_Controls.PaymentsUserControls();
+            this.TimerLbl = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
@@ -55,11 +55,11 @@
             this.label1.Size = new System.Drawing.Size(642, 77);
             this.label1.TabIndex = 1;
             this.label1.Text = "Walk-In Transaction";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.TimerLbl);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.guna2Panel1.Location = new System.Drawing.Point(3, 3);
@@ -196,13 +196,17 @@
             this.RecepLogOutBtn.UseTransparentBackground = true;
             this.RecepLogOutBtn.Click += new System.EventHandler(this.RecepLogOutBtn_Click);
             // 
-            // paymentsUserControls1
+            // TimerLbl
             // 
-            this.paymentsUserControls1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.paymentsUserControls1.Location = new System.Drawing.Point(4, 4);
-            this.paymentsUserControls1.Name = "paymentsUserControls1";
-            this.paymentsUserControls1.Size = new System.Drawing.Size(1920, 843);
-            this.paymentsUserControls1.TabIndex = 1;
+            this.TimerLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.TimerLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerLbl.ForeColor = System.Drawing.Color.White;
+            this.TimerLbl.Location = new System.Drawing.Point(1331, 11);
+            this.TimerLbl.Name = "TimerLbl";
+            this.TimerLbl.Size = new System.Drawing.Size(526, 80);
+            this.TimerLbl.TabIndex = 2;
+            this.TimerLbl.Text = "Timer";
+            this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // WalkInTransactionForm
             // 
@@ -238,5 +242,6 @@
         private Guna.UI2.WinForms.Guna2Button RecepLogOutBtn;
         private Receptionist_Controls.ServicesUserControl servicesUserControl1;
         private Receptionist_Controls.PaymentsUserControls paymentsUserControls1;
+        private System.Windows.Forms.Label TimerLbl;
     }
 }
