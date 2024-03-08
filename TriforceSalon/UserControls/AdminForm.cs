@@ -1,20 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon
 {
@@ -110,7 +99,9 @@ namespace TriforceSalon
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
@@ -133,7 +124,9 @@ namespace TriforceSalon
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowSignUp();
+                    //mainForm.ShowSignUp();
+                    SignUpForm signUp = new SignUpForm();
+                    UserControlNavigator.ShowControl(signUp, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }

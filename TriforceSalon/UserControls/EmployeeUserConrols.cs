@@ -117,7 +117,7 @@ namespace TriforceSalon.UserControls
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    //mainForm.ShowLogin();
                     break;
                 }
             }
