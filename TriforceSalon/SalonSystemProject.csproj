@@ -181,12 +181,6 @@
     <Compile Include="UserControls\ManagerPage.Designer.cs">
       <DependentUpon>ManagerPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ManagerServices.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ManagerServices.Designer.cs">
-      <DependentUpon>ManagerServices.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -282,9 +276,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerPage.resx">
       <DependentUpon>ManagerPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ManagerServices.resx">
-      <DependentUpon>ManagerServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>

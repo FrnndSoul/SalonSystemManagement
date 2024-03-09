@@ -182,7 +182,7 @@
             // ReceptionistContent
             // 
             this.ReceptionistContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.ReceptionistContent.Location = new System.Drawing.Point(0, 229);
+            this.ReceptionistContent.Location = new System.Drawing.Point(0, 237);
             this.ReceptionistContent.Name = "ReceptionistContent";
             this.ReceptionistContent.Size = new System.Drawing.Size(1920, 843);
             this.ReceptionistContent.TabIndex = 16;
@@ -201,7 +201,7 @@
             this.Controls.Add(this.guna2Panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WalkInTransactionForm";
-            this.Size = new System.Drawing.Size(1920, 1072);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.WalkInTransactionForm_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
