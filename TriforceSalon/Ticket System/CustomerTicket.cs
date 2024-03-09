@@ -59,9 +59,11 @@ namespace TriforceSalon.Test
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                ProcessCustomerBtn.Enabled = true;
 
-                
-
+            }
         }
     }
 

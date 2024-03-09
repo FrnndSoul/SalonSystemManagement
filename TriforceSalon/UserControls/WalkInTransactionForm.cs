@@ -27,6 +27,9 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
             walkInTransactionFormInstance = this;
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
+
+            ServicesUserControl serviecUC = new ServicesUserControl();
+            UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
         }
 
         private void WalkInTransactionForm_Load(object sender, EventArgs e)
@@ -51,14 +54,20 @@ namespace TriforceSalon.UserControls
 
         private void NPaymentBtn_Click(object sender, EventArgs e)
         {
-            paymentsUserControls1.Visible = true;
-            servicesUserControl1.Visible = false;
+            /* paymentsUserControls1.Visible = true;
+             servicesUserControl1.Visible = false;*/
+
+            PaymentsUserControls paymentUC = new PaymentsUserControls();
+            UserControlNavigator.ShowControl(paymentUC, ReceptionistContent);
         }
 
         private void NServicesBtn_Click(object sender, EventArgs e)
         {
-            paymentsUserControls1.Visible = false;
-            servicesUserControl1.Visible = true;
+            /* paymentsUserControls1.Visible = false;
+             servicesUserControl1.Visible = true;*/
+
+            ServicesUserControl serviecUC = new ServicesUserControl();
+            UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
         }
     }
 }

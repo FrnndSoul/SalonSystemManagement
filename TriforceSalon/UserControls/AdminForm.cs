@@ -147,14 +147,14 @@ namespace TriforceSalon
             }
         }
 
-        private void DiscardBtn_Click(object sender, EventArgs e)
+        private async void DiscardBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Discard changes for the user?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 DiscardFunc();
             }
-            LoadUserData();
+            await LoadUserData();
         }
 
         private void CreateBtn_Click(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace TriforceSalon
             }
         }
 
-        private void SaveBtn_Click_1(object sender, EventArgs e)
+        private async void SaveBtn_Click_1(object sender, EventArgs e)
         {
             string tempName = NameBox.Text;
             string tempUsername = UsernameBox.Text;
@@ -213,7 +213,7 @@ namespace TriforceSalon
             }
 
             Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
-            LoadUserData();
+            await LoadUserData();
         }
 
         private void DiscardBtn_Click_1(object sender, EventArgs e)
@@ -300,7 +300,7 @@ namespace TriforceSalon
             ServiceTypeBox.Text = roleName;
         }
 
-        public void DiscardFunc()
+        public async void DiscardFunc()
         {
             EditBtn.Visible = true;
             NameBox.Enabled = false;
@@ -313,7 +313,7 @@ namespace TriforceSalon
             AccessBox.Enabled = false;
             ServiceTypeBox.Enabled = false;
 
-            LoadUserData();
+            await LoadUserData();
         }
 
         public static void ReadUserData(int accountID)

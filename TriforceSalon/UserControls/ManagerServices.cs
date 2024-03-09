@@ -13,9 +13,9 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
             managerServicesInstance = this;
-            serviceType.ServiceTypeInfoDGV();
+            /*serviceType.ServiceTypeInfoDGV();
             salonServices.PopulateServiceType();
-            salonServices.GetSalonServices();
+            salonServices.GetSalonServices();*/
         }
 
         private void AddImageServiceTypeBtn_Click(object sender, EventArgs e)
@@ -23,10 +23,10 @@ namespace TriforceSalon.UserControls
             serviceType.AddServiceTypeImage();
         }
 
-        private void AddServiceTypeBtn_Click(object sender, EventArgs e)
+        private async void AddServiceTypeBtn_Click(object sender, EventArgs e)
         {
             string serviceTypeName = ServiceTypeTxtB.Text;
-            serviceType.AddServiceType(serviceTypeName);
+            await serviceType.AddServiceType(serviceTypeName);
         }
 
         public void Clear()
@@ -49,16 +49,16 @@ namespace TriforceSalon.UserControls
             salonServices.EditSalonServices();
         }
 
-        private void UpdateServBtn_Click(object sender, EventArgs e)
+        private async void UpdateServBtn_Click(object sender, EventArgs e)
         {
             int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
-            salonServices.UpdateSalonServices(servarID);
+            await salonServices.UpdateSalonServices(servarID);
         }
 
-        private void UpdateServiceTBtn_Click(object sender, EventArgs e)
+        private async void UpdateServiceTBtn_Click(object sender, EventArgs e)
         {
             int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
-            serviceType.UpdateServiceType(sID);
+            await serviceType.UpdateServiceType(sID);
         }
 
         private void CancelEditBtn_Click(object sender, EventArgs e)
@@ -76,11 +76,11 @@ namespace TriforceSalon.UserControls
             salonServices.AddServiceImage();
         }
 
-        private void AddServiceBtn_Click(object sender, EventArgs e)
+        private async void AddServiceBtn_Click(object sender, EventArgs e)
         {
             string serviceTypeName = AddSalonServices.SelectedItem.ToString();
             salonServices.GetServiceTypeID(serviceTypeName);
-            salonServices.AddSalonServices();
+            await salonServices.AddSalonServices();
         }
     }
 }
