@@ -29,85 +29,30 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.signinPage1 = new TriforceSalon.SigninPage();
-            this.signUpForm1 = new TriforceSalon.SignUpForm();
-            this.adminForm1 = new TriforceSalon.AdminForm();
-            this.walkInTransactionForm1 = new TriforceSalon.UserControls.WalkInTransactionForm();
-            this.managerPage1 = new TriforceSalon.UserControls.ManagerPage();
-            this.employeeUserConrols1 = new TriforceSalon.UserControls.EmployeeUserConrols();
-            this.cardProcess1 = new TriforceSalon.UserControls.Receptionist_Controls.CardProcess();
+            this.MainFormContent = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // signinPage1
+            // MainFormContent
             // 
-            this.signinPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.signinPage1, "signinPage1");
-            this.signinPage1.Name = "signinPage1";
-            this.signinPage1.Load += new System.EventHandler(this.SigninPage1_Load);
-            // 
-            // signUpForm1
-            // 
-            this.signUpForm1.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.signUpForm1, "signUpForm1");
-            this.signUpForm1.Name = "signUpForm1";
-            // 
-            // adminForm1
-            // 
-            this.adminForm1.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
-            this.adminForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
-            resources.ApplyResources(this.adminForm1, "adminForm1");
-            this.adminForm1.Name = "adminForm1";
-            // 
-            // walkInTransactionForm1
-            // 
-            this.walkInTransactionForm1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.walkInTransactionForm1, "walkInTransactionForm1");
-            this.walkInTransactionForm1.Name = "walkInTransactionForm1";
-            // 
-            // managerPage1
-            // 
-            this.managerPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.managerPage1, "managerPage1");
-            this.managerPage1.Name = "managerPage1";
-            // 
-            // employeeUserConrols1
-            // 
-            this.employeeUserConrols1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.employeeUserConrols1, "employeeUserConrols1");
-            this.employeeUserConrols1.Name = "employeeUserConrols1";
-            // 
-            // cardProcess1
-            // 
-            this.cardProcess1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            resources.ApplyResources(this.cardProcess1, "cardProcess1");
-            this.cardProcess1.Name = "cardProcess1";
+            this.MainFormContent.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            resources.ApplyResources(this.MainFormContent, "MainFormContent");
+            this.MainFormContent.Name = "MainFormContent";
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.signinPage1);
-            this.Controls.Add(this.signUpForm1);
-            this.Controls.Add(this.adminForm1);
-            this.Controls.Add(this.walkInTransactionForm1);
-            this.Controls.Add(this.managerPage1);
-            this.Controls.Add(this.employeeUserConrols1);
+            this.Controls.Add(this.MainFormContent);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private SigninPage signinPage1;
-        private AdminForm adminForm1;
-        private SignUpForm signUpForm1;
-        private UserControls.WalkInTransactionForm walkInTransactionForm1;
-        private UserControls.ManagerPage managerPage1;
-        private UserControls.EmployeeUserConrols employeeUserConrols1;
         private UserControls.Receptionist_Controls.CardProcess cardProcess1;
+        public System.Windows.Forms.Panel MainFormContent;
     }
 }
 

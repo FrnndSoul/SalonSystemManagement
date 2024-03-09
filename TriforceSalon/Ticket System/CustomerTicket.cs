@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -42,14 +43,27 @@ namespace TriforceSalon.Test
 
         }
 
-        private void ProcessCustomerBtn_Click(object sender, EventArgs e)
+        private async void ProcessCustomerBtn_Click(object sender, EventArgs e)
         {
+            ProcessCustomerBtn.Enabled = false;
             int ticketID = Convert.ToInt32(TicketLbl.Text);
             string serviceName = ServiceVarLbl.Text;
-            empTransaction.ProcessTicket(ticketID);
-            empTransaction.FetchServiceImage(serviceName);
-            empTransaction.PassValueToLock();
 
+            try
+            {
+                await empTransaction.ProcessTicketAsync(ticketID);
+                await empTransaction.FetchServiceImageAsync(serviceName);
+                empTransaction.PassValueToLock();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ProcessCustomerBtn.Enabled = true;
+
+            }
         }
     }
 

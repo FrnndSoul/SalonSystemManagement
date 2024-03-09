@@ -113,6 +113,7 @@
             this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceAmountTxtB.Location = new System.Drawing.Point(41, 520);
+            this.ServiceAmountTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
             this.ServiceAmountTxtB.PasswordChar = '\0';
             this.ServiceAmountTxtB.PlaceholderText = "";
@@ -146,6 +147,7 @@
             this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Location = new System.Drawing.Point(44, 422);
+            this.ServiceTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceTxtB.Name = "ServiceTxtB";
             this.ServiceTxtB.PasswordChar = '\0';
             this.ServiceTxtB.PlaceholderText = "";
@@ -229,6 +231,7 @@
             this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(44, 309);
+            this.CustomerPhoneNTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
             this.CustomerPhoneNTxtB.PlaceholderText = "";
@@ -251,6 +254,7 @@
             this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Location = new System.Drawing.Point(47, 211);
+            this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
@@ -273,6 +277,7 @@
             this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(47, 118);
+            this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
             this.CustomerNameTxtB.PlaceholderText = "";
@@ -345,6 +350,7 @@
             this.Controls.Add(this.ServiceTypeFL);
             this.Name = "ServicesUserControl";
             this.Size = new System.Drawing.Size(1920, 843);
+            this.Load += new System.EventHandler(this.ServicesUserControl_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

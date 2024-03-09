@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Linq;
+using System.Management;
 using System.Threading.Tasks;
 using System.Web.WebSockets;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class EmployeeUserConrols : UserControl
     {
+        public static Method method = new Method();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         public static EmployeeUserConrols employeeUserConrolsInstance;
         public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
@@ -23,19 +25,24 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
+            method.GetEmployeeInfo();
             serviceTypeName = ServiceTypeNameLbl.Text;
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
-            transaction.HideAllPanels();
+            transaction.ShowCustomerList();
+
+        }
+        private async void EmployeeUserConrols_Load(object sender, EventArgs e)
+        {
+            await LoadCustomersAsync(serviceTypeName);
         }
 
-        public void LoadCustomers(string serviceTypeName)
+        public async Task LoadCustomersAsync(string serviceTypeName)
         {
-
             try
             {
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
 
                     //nandito pa yung preferred Employee for backup purposes
                    /* string query = "SELECT t.CustomerName," +
@@ -68,7 +75,7 @@ namespace TriforceSalon.UserControls
                         using (var adapter = new MySqlDataAdapter(command))
                         {
                             var dataTable = new DataTable();
-                            adapter.Fill(dataTable);
+                            await adapter.FillAsync(dataTable);
 
                             CustomerListFLowLayout.Controls.Clear();
 
@@ -78,7 +85,6 @@ namespace TriforceSalon.UserControls
                                 var Age = row["CustomerAge"].ToString();
                                 var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
-                                //var PrefEmp = row["PreferredEmployee"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
@@ -102,12 +108,24 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void EmployeeDoneBtn_Click(object sender, EventArgs e)
+        private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
             int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
             transaction.ShowCustomerList();
-            LoadCustomers(ServiceTypeNameLbl.Text);
-            transaction.EmployeeProcessComplete(CustID);
+            EmployeeDoneBtn.Enabled = false;
+            try
+            {
+                await LoadCustomersAsync(ServiceTypeNameLbl.Text);
+                await transaction.EmployeeProcessCompleteAsync(CustID);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                EmployeeDoneBtn.Enabled = true;
+            }
         }
 
         private void EmployeeLogOutBtn_Click(object sender, EventArgs e)
@@ -117,24 +135,12 @@ namespace TriforceSalon.UserControls
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
-        }
-
-        private void ReloadBtn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("click");
-            LoadCustomers(transactionMethods.GetServiceTypeName(Method.ServiceID));
-
-        }
-
-        private void ShowQueueBtn_Click(object sender, EventArgs e)
-        {
-            EmpStartingPanel.Visible = false;
-            transaction.ShowCustomerList();
-            LoadCustomers(serviceTypeName);
         }
     }
 }
