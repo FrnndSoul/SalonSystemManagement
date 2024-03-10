@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data.Common;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Test;
 using TriforceSalon.UserControls;
@@ -10,7 +12,6 @@ namespace TriforceSalon.Class_Components
 {
     public class EmployeeTicketTransaction
     {
-        //private EmployeeUserConrols empUserControls = new EmployeeUserConrols();
         private string mysqlcon;
         public byte[] servicePhoto;
         public EmployeeTicketTransaction()
@@ -18,10 +19,9 @@ namespace TriforceSalon.Class_Components
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
 
-        public void ProcessTicket(int ticketID)
+        public async Task ProcessTicketAsync(int ticketID)
         {
-            DateTime startTIme = DateTime.Now;
-            //int accountID = 13018;
+            DateTime startTime = DateTime.Now;
             int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text);
 
 
@@ -33,17 +33,18 @@ namespace TriforceSalon.Class_Components
                 {
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
-                        conn.Open();
+                        await conn.OpenAsync();
+
                         string query = "Insert into employee_records (AccountID, TimeStart, CustomerID)" +
                             "Value(@accountID, @timeStart, @customerID)";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
-                            command.Parameters.AddWithValue("accountID", accountID);
-                            command.Parameters.AddWithValue("timeStart", startTIme);
-                            command.Parameters.AddWithValue("customerID", ticketID);
+                            command.Parameters.AddWithValue("@accountID", accountID);
+                            command.Parameters.AddWithValue("@timeStart", startTime);
+                            command.Parameters.AddWithValue("@customerID", ticketID);
 
-                            command.ExecuteNonQuery();
+                            await command.ExecuteNonQueryAsync();
                             MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ShowEmpLock();
                         }
@@ -56,28 +57,33 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void FetchServiceImage(string serviceName)
+        public async Task FetchServiceImageAsync(string serviceName)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                   string query = "select ServiceImage from salon_services where ServiceName = @service_name";
+                    await conn.OpenAsync();
+
+                    string query = "select ServiceImage from salon_services where ServiceName = @service_name";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_name", serviceName);
 
-                        using(MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
-                                while (reader.Read())
+                                while (await reader.ReadAsync())
                                 {
                                     servicePhoto = (byte[])reader["ServiceImage"];
 
                                     using (MemoryStream ms = new MemoryStream(servicePhoto))
                                     {
-                                        EmployeeUserConrols.employeeUserConrolsInstance.ServicePicPicB.Image = Image.FromStream(ms);
+                                        await Task.Run(() =>
+                                        {
+                                            EmployeeUserConrols.employeeUserConrolsInstance.ServicePicPicB.Image = Image.FromStream(ms);
+                                        });
                                     }
                                 }
                             }
@@ -85,29 +91,30 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in FetchServiceImage()");
-
             }
         }
 
-        public void EmployeeProcessComplete(int CustomerID)
+        public async Task EmployeeProcessCompleteAsync(int CustomerID)
         {
             try
             {
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
-                    string query = "Update transaction set PaymentStatus = @payment_status";
+                    await conn.OpenAsync();
+                    string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID;" +
+                        "Update employee_records set TimeEnd = @endTime where CustomerID = @custumer_ID";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@payment_status", CustomerID);
+                        command.Parameters.AddWithValue("@custumer_ID", CustomerID);
+                        command.Parameters.AddWithValue("@endTime", DateTime.Now);
 
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync();
                         MessageBox.Show("Custoemr Service Complete, Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ShowEmpLock();
+                        ShowCustomerList();
                     }
                 }
             }
@@ -136,7 +143,6 @@ namespace TriforceSalon.Class_Components
             EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = false;
             EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = false;
 
         }
@@ -144,14 +150,12 @@ namespace TriforceSalon.Class_Components
         {
             EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
-            //empUserControls.LoadCustomers(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text);
 
             EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label8.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = true;
 
         }

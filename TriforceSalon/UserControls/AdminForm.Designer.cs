@@ -548,7 +548,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.SignoutBtn);
             this.Name = "AdminForm";
-            this.Size = new System.Drawing.Size(1900, 1060);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();

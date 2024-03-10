@@ -34,7 +34,6 @@
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.PrioStatusLbl = new System.Windows.Forms.Label();
-            this.PreferredEmpLbl = new System.Windows.Forms.Label();
             this.PhoneNumberLbl = new System.Windows.Forms.Label();
             this.AgeLbl = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
@@ -57,7 +56,7 @@
             // 
             this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TicketLbl.ForeColor = System.Drawing.Color.White;
-            this.TicketLbl.Location = new System.Drawing.Point(1056, 28);
+            this.TicketLbl.Location = new System.Drawing.Point(975, 27);
             this.TicketLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TicketLbl.Name = "TicketLbl";
             this.TicketLbl.Size = new System.Drawing.Size(76, 35);
@@ -69,7 +68,7 @@
             // 
             this.ServiceVarLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceVarLbl.ForeColor = System.Drawing.Color.White;
-            this.ServiceVarLbl.Location = new System.Drawing.Point(615, 28);
+            this.ServiceVarLbl.Location = new System.Drawing.Point(663, 30);
             this.ServiceVarLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ServiceVarLbl.Name = "ServiceVarLbl";
             this.ServiceVarLbl.Size = new System.Drawing.Size(119, 35);
@@ -106,7 +105,6 @@
             this.guna2Panel1.BorderRadius = 30;
             this.guna2Panel1.Controls.Add(this.ProcessCustomerBtn);
             this.guna2Panel1.Controls.Add(this.PrioStatusLbl);
-            this.guna2Panel1.Controls.Add(this.PreferredEmpLbl);
             this.guna2Panel1.Controls.Add(this.PhoneNumberLbl);
             this.guna2Panel1.Controls.Add(this.AgeLbl);
             this.guna2Panel1.Controls.Add(this.ServiceVarLbl);
@@ -121,29 +119,18 @@
             // 
             this.PrioStatusLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrioStatusLbl.ForeColor = System.Drawing.Color.White;
-            this.PrioStatusLbl.Location = new System.Drawing.Point(930, 27);
+            this.PrioStatusLbl.Location = new System.Drawing.Point(828, 22);
             this.PrioStatusLbl.Name = "PrioStatusLbl";
-            this.PrioStatusLbl.Size = new System.Drawing.Size(110, 37);
+            this.PrioStatusLbl.Size = new System.Drawing.Size(110, 50);
             this.PrioStatusLbl.TabIndex = 5;
             this.PrioStatusLbl.Text = "Priority Status";
             this.PrioStatusLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // PreferredEmpLbl
-            // 
-            this.PreferredEmpLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PreferredEmpLbl.ForeColor = System.Drawing.Color.White;
-            this.PreferredEmpLbl.Location = new System.Drawing.Point(749, 27);
-            this.PreferredEmpLbl.Name = "PreferredEmpLbl";
-            this.PreferredEmpLbl.Size = new System.Drawing.Size(168, 37);
-            this.PreferredEmpLbl.TabIndex = 4;
-            this.PreferredEmpLbl.Text = "Preferred Employee";
-            this.PreferredEmpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PhoneNumberLbl
             // 
             this.PhoneNumberLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PhoneNumberLbl.ForeColor = System.Drawing.Color.White;
-            this.PhoneNumberLbl.Location = new System.Drawing.Point(382, 27);
+            this.PhoneNumberLbl.Location = new System.Drawing.Point(403, 30);
             this.PhoneNumberLbl.Name = "PhoneNumberLbl";
             this.PhoneNumberLbl.Size = new System.Drawing.Size(217, 37);
             this.PhoneNumberLbl.TabIndex = 3;
@@ -185,6 +172,5 @@
         public System.Windows.Forms.Label PhoneNumberLbl;
         public System.Windows.Forms.Label AgeLbl;
         public System.Windows.Forms.Label PrioStatusLbl;
-        public System.Windows.Forms.Label PreferredEmpLbl;
     }
 }

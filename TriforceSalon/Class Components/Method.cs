@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
-using System.Windows;
-using System.Data.SqlClient;
 using System.Windows.Forms;
-using static Mysqlx.Datatypes.Scalar.Types;
-using System.Data;
 using System.Drawing;
 using System.Text.RegularExpressions;
-using Org.BouncyCastle.Ocsp;
-using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 using TriforceSalon.UserControls;
 using TriforceSalon.Class_Components;
 using System.IO;
+using System.Data.Common;
 
 namespace TriforceSalon
 {
@@ -40,21 +34,26 @@ namespace TriforceSalon
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public static void ReadUserData(string user)
+       
+        public static async Task ReadUserDataAsync(string user)
         {
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
+                    await conn.OpenAsync();
+
                     string query = "SELECT * FROM `accounts` JOIN `salon_employees` ON accounts.AccountID = salon_employees.AccountID WHERE accounts.AccountID = @accountID";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+
+                    using (MySqlCommand querycmd = new MySqlCommand(query, conn))
                     {
                         querycmd.Parameters.AddWithValue("@accountID", user);
-                        using (MySqlDataReader reader = querycmd.ExecuteReader())
+
+                        using (DbDataReader reader = await querycmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
+                                // Your existing code remains unchanged
                                 Username = reader["Username"].ToString();
                                 Password = reader["Password"].ToString();
                                 Name = reader["Name"].ToString();
@@ -94,9 +93,10 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         public static void ChangeUserData(string newName, string newUsername, string newEmail, string newServiceType, string newAccess, byte[] newPhoto, int accountID)
         {
@@ -168,33 +168,41 @@ namespace TriforceSalon
                         throw new Exception("Service type not found in the database.");
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error GetServiceIDByName: {ex.Message}", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new Exception("Service type not found in the database.");
             }
         }
 
-
-        public static bool Login(string inputID, string inputPassword)
+        public static async Task<bool> LoginAsync(string inputID, string inputPassword)
         {
-            ReadUserData(inputID);
+            await Task.Run(() => ReadUserDataAsync(inputID));
 
             if (AccountStatus < 3)
             {
-                string HashedPass = HashString(inputPassword);
-                if (HashedPass == Password)
+                string hashedPass = HashString(inputPassword);
+                if (hashedPass == Password)
                 {
                     if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
-                        Method.LogUser(Convert.ToInt32(inputID));
+                        await LogUser(Convert.ToInt32(inputID));
+
                         MessageBox.Show($"Welcome Manager, {Username}!");
+
                         foreach (Form openForm in Application.OpenForms)
                         {
                             if (openForm is MainForm mainForm)
                             {
-                                mainForm.ShowManager();
+                                ManagerPage managerPage = new ManagerPage();
+
+                                mainForm.Invoke((MethodInvoker)delegate
+                                {
+                                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+                                });
+
                                 break;
                             }
                         }
@@ -203,30 +211,46 @@ namespace TriforceSalon
                     {
                         ResetAttempt(inputID);
                         MessageBox.Show($"Welcome Receptionist, {Username}!");
+
                         foreach (Form openForm in Application.OpenForms)
                         {
                             if (openForm is MainForm mainForm)
                             {
-                                mainForm.ShowWalkIn();
+                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+                                mainForm.Invoke((MethodInvoker)delegate
+                                {
+                                    UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+                                });
                                 break;
                             }
                         }
-                    } else
+
+                        await LogUser(AccountID);
+                        return true;
+                    }
+                    else
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome Staff, {Username}!");
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForm mainForm)
+                        MessageBox.Show($"Welcome OtherRole, {Username}!");
+                        
+                            foreach (Form openForm in Application.OpenForms)
                             {
-                                //tanggalin ito as much as possible
-                                GetEmployeeInfo();
-                                mainForm.ShowEmployee();
-                                break;
+                                if (openForm is MainForm mainForm)
+                                {
+                                    EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
+                                    mainForm.Invoke((MethodInvoker)delegate
+                                    {
+                                        UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
+                                    });
+                                    break;
+                                }
                             }
-                        }
+                        await LogUser(AccountID);
+                        return true;
                     }
-                    LogUser(AccountID);
+
+                    await LogUser(AccountID);
+                    return true; // Indicate successful login
                 }
                 else
                 {
@@ -243,13 +267,14 @@ namespace TriforceSalon
             else if (AccountStatus == 4)
             {
                 MessageBox.Show($"Your account has already been archived", "Account Archived",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } else 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
             {
                 MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            return false;
+            return false; // Indicate unsuccessful login
         }
 
         public static void WrongPassword(string wrongID)
@@ -484,13 +509,14 @@ namespace TriforceSalon
             return regex.IsMatch(password);
         }
 
-        public static void LogUser(int IDlog)
+        public static async Task LogUser(int IDlog)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
+
                     string query = "INSERT INTO `logs`(`SessionID`, `ID`, `TimeIn`)" +
                         "VALUES (@sessionID,@id,@timeIn)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
@@ -500,7 +526,7 @@ namespace TriforceSalon
                         querycmd.Parameters.AddWithValue("@id", IDlog);
                         querycmd.Parameters.AddWithValue("@timeIn", DateTime.Now);
 
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
             }
@@ -543,7 +569,7 @@ namespace TriforceSalon
             }
         }
 
-        public static void GetEmployeeInfo()
+        public  void GetEmployeeInfo()
         {
             byte[] photoBytes = Photo;
 
@@ -557,5 +583,147 @@ namespace TriforceSalon
             }
 
         }
+
+        /*public static void ReadUserData(string user)
+     {
+         try
+         {
+             using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+             {
+                 connection.Open();
+                 string query = "SELECT * FROM `accounts` JOIN `salon_employees` ON accounts.AccountID = salon_employees.AccountID WHERE accounts.AccountID = @accountID";
+                 using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+                 {
+                     querycmd.Parameters.AddWithValue("@accountID", user);
+                     using (MySqlDataReader reader = querycmd.ExecuteReader())
+                     {
+                         if (reader.Read())
+                         {
+                             Username = reader["Username"].ToString();
+                             Password = reader["Password"].ToString();
+                             Name = reader["Name"].ToString();
+                             Email = reader["Email"].ToString();
+                             Availability = reader["Availability"].ToString();
+                             AccountAccess = reader["AccountAccess"].ToString();
+
+                             Birthdate = (DateTime)reader["Birthdate"];
+
+                             AccountID = Convert.ToInt32(reader["AccountID"]);
+                             Status = Convert.ToInt32(reader["Status"]);
+                             AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
+                             ServiceID = Convert.ToInt32(reader["ServiceID"]);
+
+                             if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
+                             {
+                                 long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
+                                 byte[] photoBytes = new byte[byteSize];
+                                 reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
+                                 Photo = photoBytes;
+                             }
+                             else
+                             {
+                                 Photo = null;
+                             }
+                         }
+                         else
+                         {
+                             if (string.Equals(user, "Admin", StringComparison.OrdinalIgnoreCase))
+                             {
+                                 MessageBox.Show("UserID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                             }
+                         }
+                     }
+                 }
+             }
+         }
+         catch (Exception e)
+         {
+             MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+     }*/
+
+        /*public static bool Login(string inputID, string inputPassword)
+        {
+            ReadUserData(inputID);
+
+            if (AccountStatus < 3)
+            {
+                string HashedPass = HashString(inputPassword);
+                if (HashedPass == Password)
+                {
+                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ResetAttempt(inputID);
+                        Method.LogUser(Convert.ToInt32(inputID));
+                        MessageBox.Show($"Welcome Manager, {Username}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                //mainForm.ShowManager();
+
+                                ManagerPage managerPage = new ManagerPage();
+                                UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+                                break;
+                            }
+                        }
+                    }
+                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ResetAttempt(inputID);
+                        MessageBox.Show($"Welcome Receptionist, {Username}!");
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                //mainForm.ShowWalkIn();
+                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+                                UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+
+                                break;
+                            }
+                        }
+                    } else
+                    {
+                        ResetAttempt(inputID);
+                        MessageBox.Show($"Welcome Staff, {Username}!");
+                        GetEmployeeInfo();
+                        foreach (Form openForm in Application.OpenForms)
+                        {
+                            if (openForm is MainForm mainForm)
+                            {
+                                //mainForm.ShowEmployee();
+                                EmployeeUserConrols empControl = new EmployeeUserConrols();
+                                UserControlNavigator.ShowControl(empControl, MainForm.mainFormInstance.MainFormContent);
+
+                                break;
+                            }
+                        }
+                    }
+                    LogUser(AccountID);
+                }
+                else
+                {
+                    if (DuplicateChecker(inputID, "AccountID", "salon_employees"))
+                    {
+                        WrongPassword(inputID);
+                    }
+                    else
+                    {
+                        MessageBox.Show("ID incorrect, please try again");
+                    }
+                }
+            }
+            else if (AccountStatus == 4)
+            {
+                MessageBox.Show($"Your account has already been archived", "Account Archived",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            } else 
+            {
+                MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            return false;
+        }*/
     }
 }

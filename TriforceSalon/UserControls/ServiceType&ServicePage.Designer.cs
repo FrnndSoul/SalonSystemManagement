@@ -650,10 +650,11 @@
             this.Controls.Add(this.ServiceTypeBtn);
             this.Controls.Add(this.ServicePanel);
             this.Controls.Add(this.backgroundShape);
-            this.Controls.Add(this.ServiceBtn);
             this.Controls.Add(this.ServiceTypePanel);
+            this.Controls.Add(this.ServiceBtn);
             this.Name = "ServiceType_ServicePage";
             this.Size = new System.Drawing.Size(1500, 950);
+            this.Load += new System.EventHandler(this.ServiceType_ServicePage_Load);
             this.ServiceTypePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).EndInit();
