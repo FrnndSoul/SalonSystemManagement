@@ -214,9 +214,9 @@ namespace TriforceSalon
             {
                 return;
             }
-
             Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
             await LoadUserData();
+            DiscardFunc();                                                                  
         }
 
         private void DiscardBtn_Click_1(object sender, EventArgs e)
@@ -235,6 +235,7 @@ namespace TriforceSalon
 
             UserDGV.Enabled = false;
 
+            CreateBtn.Visible = false;
             SaveBtn.Visible = true;
             DiscardBtn.Visible = true;
             EditBtn.Visible = false;
@@ -315,6 +316,7 @@ namespace TriforceSalon
             UserDGV.Enabled = true;
             AccessBox.Enabled = false;
             ServiceTypeBox.Enabled = false;
+            CreateBtn.Visible = true;
 
             await LoadUserData();
         }
