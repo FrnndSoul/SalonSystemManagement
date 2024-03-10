@@ -112,6 +112,7 @@
             this.ReportsBtn.TabIndex = 2;
             this.ReportsBtn.Text = "Reports";
             this.ReportsBtn.UseTransparentBackground = true;
+            this.ReportsBtn.Click += new System.EventHandler(this.ReportsBtn_Click);
             // 
             // ServicesBtn
             // 
