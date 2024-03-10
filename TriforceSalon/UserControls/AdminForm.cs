@@ -313,6 +313,7 @@ namespace TriforceSalon
             UserDGV.Enabled = true;
             AccessBox.Enabled = false;
             ServiceTypeBox.Enabled = false;
+            CreateBtn.Visible = true;
 
             await LoadUserData();
         }
