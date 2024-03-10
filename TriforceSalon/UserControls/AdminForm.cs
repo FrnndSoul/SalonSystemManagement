@@ -178,9 +178,13 @@ namespace TriforceSalon
             {
                 return;
             }
-
             Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
             LoadUserData();
+
+            CreateBtn.Visible = true;
+            SaveBtn.Visible = false;
+            DiscardBtn.Visible = false;
+            EditBtn.Visible = true;
         }
 
         private void DiscardBtn_Click_1(object sender, EventArgs e)
@@ -199,6 +203,7 @@ namespace TriforceSalon
 
             UserDGV.Enabled = false;
 
+            CreateBtn.Visible = false;
             SaveBtn.Visible = true;
             DiscardBtn.Visible = true;
             EditBtn.Visible = false;
