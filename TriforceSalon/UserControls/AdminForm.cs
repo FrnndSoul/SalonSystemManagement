@@ -213,11 +213,7 @@ namespace TriforceSalon
             }
             Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
             await LoadUserData();
-
-            CreateBtn.Visible = true;
-            SaveBtn.Visible = false;
-            DiscardBtn.Visible = false;
-            EditBtn.Visible = true;
+            DiscardFunc();                                                                  
         }
 
         private void DiscardBtn_Click_1(object sender, EventArgs e)
