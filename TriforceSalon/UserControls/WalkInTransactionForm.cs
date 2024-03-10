@@ -8,6 +8,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class WalkInTransactionForm : UserControl
     {
+        TransactionMethods transactionM = new TransactionMethods();
         public static WalkInTransactionForm walkInTransactionFormInstance;
         public PopulateDataGridView populateMethods = new PopulateDataGridView();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
@@ -21,6 +22,7 @@ namespace TriforceSalon.UserControls
 
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
+
         }
 
         private void WalkInTransactionForm_Load(object sender, EventArgs e)
@@ -48,6 +50,7 @@ namespace TriforceSalon.UserControls
             /* paymentsUserControls1.Visible = true;
              servicesUserControl1.Visible = false;*/
 
+            transactionM.LockTransactionNavigation(NPaymentBtn);
             PaymentsUserControls paymentUC = new PaymentsUserControls();
             UserControlNavigator.ShowControl(paymentUC, ReceptionistContent);
         }
@@ -57,6 +60,7 @@ namespace TriforceSalon.UserControls
             /* paymentsUserControls1.Visible = false;
              servicesUserControl1.Visible = true;*/
 
+            transactionM.LockTransactionNavigation(NServicesBtn);
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
         }

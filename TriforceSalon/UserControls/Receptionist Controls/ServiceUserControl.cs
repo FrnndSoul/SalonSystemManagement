@@ -1,10 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
+﻿using System;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using ZstdSharp.Unsafe;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -38,6 +34,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
             await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
         }
 

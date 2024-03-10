@@ -43,11 +43,13 @@ namespace TriforceSalon
         {
             string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;
+            SigninBtn.Enabled = false;
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
                 MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SigninBtn.Enabled = true;
                 return;
             }
 
@@ -63,6 +65,7 @@ namespace TriforceSalon
                         AdminForm adminForm = new AdminForm();
                         UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
                         //mainForm.ShowAdmin();
+                        SigninBtn.Enabled = true;
                         break;
                     }
                 }
@@ -70,8 +73,22 @@ namespace TriforceSalon
                 return;
             }
 
-            await Method.LoginAsync(Username, Password);
-            Clear();
+            try
+            {
+                await Method.LoginAsync(Username, Password);
+                Clear();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                SigninBtn.Enabled = true;
+            }
+            finally
+            {
+                SigninBtn.Enabled = true;
+                MessageBox.Show("ID correct, Wrong password");
+                //Saul, Wala kang guard clause kapag tama yung ID at mali ang password
+            }
 
             /*string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;

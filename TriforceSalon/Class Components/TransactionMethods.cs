@@ -1,6 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -28,10 +30,11 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "insert into transaction (CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
-                        "values(@customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
+                    string query = "insert into transaction (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
+                        "values(@transactionID, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
+                        command.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
                         command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                         command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
@@ -87,6 +90,14 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in GetEmployeeID");
             }
             return EmpID;
+        }
+
+        public int GenerateTransactionID()
+        {
+            Random rnd = new Random();
+            int ID = rnd.Next(0, 100000001);
+
+            return ID;
         }
 
         public int GetServiceTypeID(string serviceName)
@@ -176,6 +187,20 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in GetServiceType");
             }
             return VariationID;
+        }
+
+        public void LockTransactionNavigation(Guna2Button chosenButton)
+        {
+            chosenButton.Enabled = false;
+            chosenButton.BackColor = Color.FromArgb(255, 228, 242);
+            chosenButton.BorderColor = Color.FromArgb(52, 42, 83);
+        }
+
+        public void EnableTransactionNavigation(Guna2Button chosenButton)
+        {
+            chosenButton.Enabled = true;
+            chosenButton.BackColor = Color.FromArgb(52, 42, 83);
+            chosenButton.BorderColor = Color.Black;
         }
 
         public void ClearProcess()
