@@ -79,14 +79,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 {
                                     MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
-                                CustomerName = reader["Password"].ToString();
+                                CustomerName = reader["CustomerName"].ToString();
                                 ServiceType = reader["ServiceType"].ToString();
                                 ServiceVariation = reader["ServiceVariation"].ToString();
                                 PriorityStatus = reader["PriorityStatus"].ToString();
-                                Age = Convert.ToInt32(reader["Age"]);
-                                Phone = Convert.ToInt32(reader["Phone"]);
+                                Age = Convert.ToInt32(reader["CustomerAge"]);
+                                Phone = Convert.ToInt32(reader["CustomerPhoneNumber"]);
                                 EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
-                                VariationID = Convert.ToInt32(reader["VariationID"]);
+                                VariationID = Convert.ToInt32(reader["ServiceVariationID"]);
                                 Amount = Convert.ToInt32(reader["Amount"]);
                                 DisplayTransaction();
                             } else
@@ -111,7 +111,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PhoneNumberBox.Text = Phone.ToString();
             ServiceTypeBox.Text = ServiceType;
             ServiceVariationBox.Text = ServiceVariation;
-            ServiceVariationIDBox.Text = ServiceVariationIDBox.ToString();
+            ServiceVariationIDBox.Text = VariationID.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
 
             if (Age >= 60)

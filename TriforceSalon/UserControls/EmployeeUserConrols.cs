@@ -112,6 +112,7 @@ namespace TriforceSalon.UserControls
         {
             int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
             transaction.ShowCustomerList();
+
             EmployeeDoneBtn.Enabled = false;
             try
             {

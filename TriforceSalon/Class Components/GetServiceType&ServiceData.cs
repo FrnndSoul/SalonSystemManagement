@@ -509,7 +509,7 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "select Name from salon_employees where ServiceID = @service_ID";
+                    string query = "select Name from salon_employees where ServiceID = @service_ID AND AccountAccess NOT IN ('Receptionist','Manager')";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {

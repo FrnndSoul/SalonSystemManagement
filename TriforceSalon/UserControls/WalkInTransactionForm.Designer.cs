@@ -69,9 +69,9 @@
             this.TimerLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.TimerLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimerLbl.ForeColor = System.Drawing.Color.White;
-            this.TimerLbl.Location = new System.Drawing.Point(1331, 11);
+            this.TimerLbl.Location = new System.Drawing.Point(825, 11);
             this.TimerLbl.Name = "TimerLbl";
-            this.TimerLbl.Size = new System.Drawing.Size(526, 80);
+            this.TimerLbl.Size = new System.Drawing.Size(1032, 80);
             this.TimerLbl.TabIndex = 2;
             this.TimerLbl.Text = "Timer";
             this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -87,7 +87,7 @@
             this.NServicesBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NServicesBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NServicesBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NServicesBtn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NServicesBtn.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.NServicesBtn.ForeColor = System.Drawing.Color.White;
             this.NServicesBtn.Location = new System.Drawing.Point(12, 138);
             this.NServicesBtn.Name = "NServicesBtn";
