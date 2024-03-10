@@ -1,17 +1,13 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
+﻿using System;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using ZstdSharp.Unsafe;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class ServicesUserControl : UserControl
     {
         public static ServicesUserControl servicesUserControlInstance;
-        private readonly GetServiceType_ServiceData serviceTypeService;
+        private readonly GetServiceType_ServiceData serviceTypeService = new GetServiceType_ServiceData();
         public readonly string mysqlcon;
         private PictureBox pic;
         private Label serviceTypeLbl;
@@ -25,16 +21,26 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             servicesUserControlInstance = this;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
-            serviceTypeService = new GetServiceType_ServiceData();
+            //serviceTypeService = new GetServiceType_ServiceData();
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
             CustomerAgeTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
 
-            GetServiceTypeData();
-            GetServiceData();
+           /* GetServiceTypeData();
+            GetServiceData();*/
         }
 
-        public void GetServiceTypeData()
+        private async void ServicesUserControl_Load(object sender, System.EventArgs e)
+        {
+            await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
+            await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+
+            await serviceTypeService.GetAllEmployee(mysqlcon);
+            transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+
+        }
+
+        /*public void GetServiceTypeData()
         {
             serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
         }
@@ -42,15 +48,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public void GetServiceData()
         {
             serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-        }
+        }*/
 
-        private void UpdateServiceFL(string serviceTypeID)
+        private async void UpdateServiceFL(string serviceTypeID)
         {
-            serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            await serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
 
         private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
+            MessageBox.Show(Convert.ToString(PEmployeeComB.SelectedItem));
+
             if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
@@ -67,5 +75,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
             }
         }
+
+        
     }
 }

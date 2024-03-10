@@ -56,10 +56,10 @@
             // 
             this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TicketLbl.ForeColor = System.Drawing.Color.White;
-            this.TicketLbl.Location = new System.Drawing.Point(975, 27);
+            this.TicketLbl.Location = new System.Drawing.Point(970, 28);
             this.TicketLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TicketLbl.Name = "TicketLbl";
-            this.TicketLbl.Size = new System.Drawing.Size(76, 35);
+            this.TicketLbl.Size = new System.Drawing.Size(173, 35);
             this.TicketLbl.TabIndex = 1;
             this.TicketLbl.Text = "TicketID";
             this.TicketLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

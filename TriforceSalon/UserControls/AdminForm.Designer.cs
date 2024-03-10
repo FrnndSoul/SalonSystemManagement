@@ -409,6 +409,7 @@
             this.UploadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.UploadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.UploadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadBtn.Enabled = false;
             this.UploadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.UploadBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.UploadBtn.ForeColor = System.Drawing.Color.White;
@@ -451,6 +452,7 @@
             this.DiscardBtn.TabIndex = 73;
             this.DiscardBtn.Text = "Discard";
             this.DiscardBtn.UseTransparentBackground = true;
+            this.DiscardBtn.Visible = false;
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click_1);
             // 
             // SaveBtn
@@ -473,6 +475,7 @@
             this.SaveBtn.TabIndex = 72;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseTransparentBackground = true;
+            this.SaveBtn.Visible = false;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click_1);
             // 
             // UserDGV
@@ -548,7 +551,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.SignoutBtn);
             this.Name = "AdminForm";
-            this.Size = new System.Drawing.Size(1900, 1060);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();

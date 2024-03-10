@@ -1,14 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 using TriforceSalon.UserControls;
 using System.Data;
-using Org.BouncyCastle.Asn1.X509;
+using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace TriforceSalon.Class_Components
 {
@@ -26,11 +25,11 @@ namespace TriforceSalon.Class_Components
         int serviceVariationID;
         int serviceTypeID;
 
-
         public SalonServices()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
+
         public void AddServiceImage()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -61,22 +60,23 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void PopulateServiceType()
+        public async Task PopulateServiceType()
         {
+            ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Clear();
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "select ServiceTypeName from service_type";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
-                                while (reader.Read())
+                                while (await reader.ReadAsync())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
                                     ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Add(serviceTypes);
@@ -124,23 +124,23 @@ namespace TriforceSalon.Class_Components
 
 
 
-        public void GetSalonServices()
+        public async Task GetSalonServicesAsync()
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemID` FROM `salon_services`";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(reader);
+                                dt.Load(reader); // Use Load instead of LoadAsync
                                 ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.DataSource = dt;
                             }
                         }
@@ -153,13 +153,14 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void AddSalonServices()
+        //gawing async ito
+        public async Task AddSalonServices()
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
 
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -179,10 +180,9 @@ namespace TriforceSalon.Class_Components
                         command.Parameters.AddWithValue("@itemId", GetItemId(Convert.ToString(ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem)));
 
 
-                        command.ExecuteNonQuery();
-
+                        await command.ExecuteNonQueryAsync();
                         MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        GetSalonServices();
+                        await GetSalonServicesAsync();
                         ClearServices();
                     }
                 }
@@ -264,7 +264,7 @@ namespace TriforceSalon.Class_Components
             }
         }
        
-        public void UpdateSalonServices(int variationID)
+        public async Task UpdateSalonServices(int variationID)
         {
             string serviceType = ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
@@ -272,7 +272,7 @@ namespace TriforceSalon.Class_Components
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "Update salon_services set ServiceName = @service_name, ServiceAmount = @service_amount, ServiceTypeID = @servicetype_ID";
 
                     byte[] imageData = null;
@@ -300,10 +300,10 @@ namespace TriforceSalon.Class_Components
 
                         if (isNewServiceImageSelected)
                         {
-                            command.Parameters.AddWithValue(" @service_image", imageData);
+                            command.Parameters.AddWithValue("@service_image", imageData);
                         }
-                        command.ExecuteNonQuery();
-                        GetSalonServices();
+                        await command.ExecuteNonQueryAsync();
+                        await GetSalonServicesAsync();
                         ClearServices();
                         HideButton(true, true, false, false);
                     }
