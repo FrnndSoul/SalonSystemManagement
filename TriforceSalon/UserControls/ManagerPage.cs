@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sales_roject;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,18 +39,22 @@ namespace TriforceSalon.UserControls
 
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
-            /*generalView_Inventory1.Visible = true;
-            serviceType_ServicePage1.Visible = false;*/
+            
             GeneralView_Inventory viewInventory = new GeneralView_Inventory();
             UserControlNavigator.ShowControl(viewInventory, ManagerContent);
         }
 
         private void ServicesBtn_Click(object sender, EventArgs e)
         {
-            /*serviceType_ServicePage1.Visible = true;
-            generalView_Inventory1.Visible = false;*/
+          
             ServiceType_ServicePage serviceView = new ServiceType_ServicePage();
             UserControlNavigator.ShowControl(serviceView, ManagerContent);
+        }
+
+        private void ReportsBtn_Click(object sender, EventArgs e)
+        {
+            SalesUI sales = new SalesUI();
+            UserControlNavigator.ShowControl(sales, ManagerContent);
         }
     }
 }
