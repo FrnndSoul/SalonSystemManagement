@@ -30,8 +30,8 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "insert into transaction (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
-                        "values(@transactionID, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
+                    string query = "insert into transaction (TransactionID, EmployeeID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
+                        "values(@transactionID, @pref_emp, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
@@ -40,16 +40,29 @@ namespace TriforceSalon.Class_Components
                         command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                         command.Parameters.AddWithValue("@amount", Convert.ToDecimal(ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text));
                         command.Parameters.AddWithValue("@time_taken", DateTime.Now);
-
-                        //palitan ito
-                        command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
                         command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
                         command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
                         command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
 
+                        //palitan ito
+                        //command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
+
+                        if (Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem) == null ||
+                            Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem) == "None")
+                        {
+                            command.Parameters.AddWithValue("@pref_emp", 0);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
+                        }
                         command.ExecuteNonQuery();
+
+
                         MessageBox.Show("Customer Added to the Queue", "Customer Process", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearProcess();
+                        ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text = Convert.ToString(GenerateTransactionID());
+
 
                     }
                 }
@@ -91,6 +104,8 @@ namespace TriforceSalon.Class_Components
             }
             return EmpID;
         }
+
+
 
         public int GenerateTransactionID()
         {
@@ -189,7 +204,7 @@ namespace TriforceSalon.Class_Components
             return VariationID;
         }
 
-        public void LockTransactionNavigation(Guna2Button chosenButton)
+        /*public void LockTransactionNavigation(Guna2Button chosenButton)
         {
             chosenButton.Enabled = false;
             chosenButton.BackColor = Color.FromArgb(255, 228, 242);
@@ -201,6 +216,32 @@ namespace TriforceSalon.Class_Components
             chosenButton.Enabled = true;
             chosenButton.BackColor = Color.FromArgb(52, 42, 83);
             chosenButton.BorderColor = Color.Black;
+        }*/
+
+        public void LockTransactionNavigation(List<Guna2Button> buttons, Guna2Button clickedButton)
+        {
+            foreach (var button in buttons)
+            {
+                if (button == clickedButton)
+                {
+                    button.Enabled = false;
+                    button.BackColor = Color.FromArgb(255, 228, 242);
+                    button.BorderColor = Color.FromArgb(52, 42, 83);
+                }
+            }
+        }
+
+        public void EnableTransactionNavigation(List<Guna2Button> buttons, Guna2Button clickedButton)
+        {
+            foreach (var button in buttons)
+            {
+                if (button != clickedButton)
+                {
+                    button.Enabled = true;
+                    button.BackColor = Color.FromArgb(52, 42, 83);
+                    button.BorderColor = Color.Black;
+                }
+            }
         }
 
         public void ClearProcess()

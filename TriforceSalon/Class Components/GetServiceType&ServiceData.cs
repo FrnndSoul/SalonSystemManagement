@@ -504,6 +504,7 @@ namespace TriforceSalon.Class_Components
         public async Task AddEmployeesComB(int serviceID, string mysqlcon)
         {
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -538,12 +539,13 @@ namespace TriforceSalon.Class_Components
         public async Task GetAllEmployee(string mysqlcon)
         {
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
+
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    //string query = "select Name from salon_employees AccountAccess NOT IN ('Receptionist','Manager')";
                     string query = "SELECT Name FROM salon_employees WHERE AccountAccess NOT IN ('Receptionist', 'Manager')";
 
 

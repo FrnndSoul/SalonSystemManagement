@@ -31,6 +31,8 @@
             this.ServiceTypeFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ServiceAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CServiceTxtB = new System.Windows.Forms.Label();
@@ -46,17 +48,15 @@
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ServiceTypeFL
             // 
             this.ServiceTypeFL.BackColor = System.Drawing.Color.White;
-            this.ServiceTypeFL.Location = new System.Drawing.Point(14, 16);
+            this.ServiceTypeFL.Location = new System.Drawing.Point(218, 16);
             this.ServiceTypeFL.Name = "ServiceTypeFL";
-            this.ServiceTypeFL.Size = new System.Drawing.Size(1493, 140);
+            this.ServiceTypeFL.Size = new System.Drawing.Size(1289, 140);
             this.ServiceTypeFL.TabIndex = 0;
             // 
             // ServiceFL
@@ -90,6 +90,41 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(378, 820);
             this.guna2Panel1.TabIndex = 2;
+            // 
+            // transactionIDTxtB
+            // 
+            this.transactionIDTxtB.AutoRoundedCorners = true;
+            this.transactionIDTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.transactionIDTxtB.BorderRadius = 17;
+            this.transactionIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.transactionIDTxtB.DefaultText = "";
+            this.transactionIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.transactionIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.transactionIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.transactionIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.transactionIDTxtB.Enabled = false;
+            this.transactionIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.transactionIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transactionIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.transactionIDTxtB.Location = new System.Drawing.Point(18, 637);
+            this.transactionIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.transactionIDTxtB.Name = "transactionIDTxtB";
+            this.transactionIDTxtB.PasswordChar = '\0';
+            this.transactionIDTxtB.PlaceholderText = "";
+            this.transactionIDTxtB.SelectedText = "";
+            this.transactionIDTxtB.Size = new System.Drawing.Size(331, 36);
+            this.transactionIDTxtB.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(21, 594);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(305, 38);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Transaction ID";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
@@ -341,41 +376,6 @@
             this.label1.Size = new System.Drawing.Size(256, 38);
             this.label1.TabIndex = 4;
             this.label1.Text = "Search Services:";
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 594);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(305, 38);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Transaction ID";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // transactionIDTxtB
-            // 
-            this.transactionIDTxtB.AutoRoundedCorners = true;
-            this.transactionIDTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.transactionIDTxtB.BorderRadius = 17;
-            this.transactionIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.transactionIDTxtB.DefaultText = "";
-            this.transactionIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.transactionIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.transactionIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.transactionIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.transactionIDTxtB.Enabled = false;
-            this.transactionIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.transactionIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transactionIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.transactionIDTxtB.Location = new System.Drawing.Point(18, 637);
-            this.transactionIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.transactionIDTxtB.Name = "transactionIDTxtB";
-            this.transactionIDTxtB.PasswordChar = '\0';
-            this.transactionIDTxtB.PlaceholderText = "";
-            this.transactionIDTxtB.SelectedText = "";
-            this.transactionIDTxtB.Size = new System.Drawing.Size(331, 36);
-            this.transactionIDTxtB.TabIndex = 22;
             // 
             // ServicesUserControl
             // 
