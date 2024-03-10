@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
@@ -13,7 +16,6 @@ namespace TriforceSalon.UserControls
         public PopulateDataGridView populateMethods = new PopulateDataGridView();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         private RealTimeClock userClock;
-
         public WalkInTransactionForm()
         {
             InitializeComponent();
@@ -47,20 +49,22 @@ namespace TriforceSalon.UserControls
 
         private void NPaymentBtn_Click(object sender, EventArgs e)
         {
-            /* paymentsUserControls1.Visible = true;
-             servicesUserControl1.Visible = false;*/
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn };
 
-            transactionM.LockTransactionNavigation(NPaymentBtn);
+            transactionM.LockTransactionNavigation(NavigationButtons, NPaymentBtn);
+            transactionM.EnableTransactionNavigation(NavigationButtons, NPaymentBtn);
+
             PaymentsUserControls paymentUC = new PaymentsUserControls();
             UserControlNavigator.ShowControl(paymentUC, ReceptionistContent);
         }
 
         private void NServicesBtn_Click(object sender, EventArgs e)
         {
-            /* paymentsUserControls1.Visible = false;
-             servicesUserControl1.Visible = true;*/
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn };
 
-            transactionM.LockTransactionNavigation(NServicesBtn);
+            transactionM.LockTransactionNavigation(NavigationButtons, NServicesBtn);
+            transactionM.EnableTransactionNavigation(NavigationButtons, NServicesBtn);
+
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
         }

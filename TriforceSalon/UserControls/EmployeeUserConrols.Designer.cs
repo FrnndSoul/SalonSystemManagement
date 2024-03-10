@@ -201,7 +201,7 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTypeNameLbl.ForeColor = System.Drawing.Color.Transparent;
-            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(129, 770);
+            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(132, 789);
             this.ServiceTypeNameLbl.Name = "ServiceTypeNameLbl";
             this.ServiceTypeNameLbl.Size = new System.Drawing.Size(155, 50);
             this.ServiceTypeNameLbl.TabIndex = 2;
@@ -252,7 +252,7 @@ namespace TriforceSalon.UserControls
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Transparent;
-            this.label9.Location = new System.Drawing.Point(1180, 200);
+            this.label9.Location = new System.Drawing.Point(1096, 200);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 50);
             this.label9.TabIndex = 9;
@@ -264,7 +264,7 @@ namespace TriforceSalon.UserControls
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(1028, 200);
+            this.label7.Location = new System.Drawing.Point(950, 200);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 50);
             this.label7.TabIndex = 7;

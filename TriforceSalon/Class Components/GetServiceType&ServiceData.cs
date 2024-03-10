@@ -504,6 +504,7 @@ namespace TriforceSalon.Class_Components
         public async Task AddEmployeesComB(int serviceID, string mysqlcon)
         {
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -515,6 +516,41 @@ namespace TriforceSalon.Class_Components
                     {
                         command.Parameters.AddWithValue("@service_ID", serviceID);
 
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string EmpName = reader["Name"].ToString();
+                                    ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add(EmpName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
+            }
+        }
+
+        public async Task GetAllEmployee(string mysqlcon)
+        {
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT Name FROM salon_employees WHERE AccountAccess NOT IN ('Receptionist', 'Manager')";
+
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
                         using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)

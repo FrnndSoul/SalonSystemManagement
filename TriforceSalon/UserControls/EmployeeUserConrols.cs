@@ -33,10 +33,10 @@ namespace TriforceSalon.UserControls
         }
         private async void EmployeeUserConrols_Load(object sender, EventArgs e)
         {
-            await LoadCustomersAsync(serviceTypeName);
+            await LoadCustomersAsync(serviceTypeName, Convert.ToInt32(Method.AccountID));
         }
 
-        public async Task LoadCustomersAsync(string serviceTypeName)
+        public async Task LoadCustomersAsync(string serviceTypeName, int ID)
         {
             try
             {
@@ -44,21 +44,8 @@ namespace TriforceSalon.UserControls
                 {
                     await conn.OpenAsync();
 
-                    //nandito pa yung preferred Employee for backup purposes
-                   /* string query = "SELECT t.CustomerName," +
-                                      " t.CustomerAge, " +
-                                      " t.CustomerPhoneNumber, " +
-                                      " t.ServiceVariation, " +
-                                      " t.PreferredEmployee," +
-                                      " t.PriorityStatus, " +
-                                      " t.TransactionID" +
-                                      " FROM transaction t" +
-                                      " WHERE ServiceType = @service_type" +
-                                      " AND PaymentStatus = 'UNPAID'" +  
-                                      " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
-
                     //removed na dito yung pref employee
-                    string query = "SELECT t.CustomerName," +
+                    /*string query = "SELECT t.CustomerName," +
                                      " t.CustomerAge, " +
                                      " t.CustomerPhoneNumber, " +
                                      " t.ServiceVariation, " +
@@ -67,11 +54,26 @@ namespace TriforceSalon.UserControls
                                      " FROM transaction t" +
                                      " WHERE ServiceType = @service_type" +
                                      " AND PaymentStatus = 'UNPAID'" +
-                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    //test query
+                    string query = "SELECT t.CustomerName," +
+                                    " t.CustomerAge, " +
+                                    " t.CustomerPhoneNumber, " +
+                                    " t.ServiceVariation, " +
+                                    " t.PriorityStatus, " +
+                                    " t.TransactionID" +
+                                    " FROM transaction t" +
+                                    " WHERE ServiceType = @service_type" +
+                                    " AND PaymentStatus = 'UNPAID'" +
+                                    " AND (EmployeeID = @employee_id OR EmployeeID = 0)" +
+                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_type", serviceTypeName);
+                        command.Parameters.AddWithValue("@employee_id", ID);
                         using (var adapter = new MySqlDataAdapter(command))
                         {
                             var dataTable = new DataTable();
@@ -114,10 +116,11 @@ namespace TriforceSalon.UserControls
             transaction.ShowCustomerList();
 
             EmployeeDoneBtn.Enabled = false;
+            await transaction.EmployeeProcessCompleteAsync(CustID);
+
             try
             {
-                await LoadCustomersAsync(ServiceTypeNameLbl.Text);
-                await transaction.EmployeeProcessCompleteAsync(CustID);
+                await LoadCustomersAsync(ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
             }
             catch(Exception ex)
             {

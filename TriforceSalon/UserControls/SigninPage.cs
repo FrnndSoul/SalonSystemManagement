@@ -86,7 +86,6 @@ namespace TriforceSalon
             finally
             {
                 SigninBtn.Enabled = true;
-                MessageBox.Show("ID correct, Wrong password");
                 //Saul, Wala kang guard clause kapag tama yung ID at mali ang password
             }
 

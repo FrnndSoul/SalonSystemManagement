@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls;
 
 namespace TriforceSalon.Test
 {
@@ -47,13 +48,34 @@ namespace TriforceSalon.Test
         {
             ProcessCustomerBtn.Enabled = false;
             int ticketID = Convert.ToInt32(TicketLbl.Text);
+            string CName = NameLbl.Text;
+            string CAge = AgeLbl.Text;
+            string PNumber = PhoneNumberLbl.Text;
+            string Cserviec = ServiceVarLbl.Text;
+            string prio = PrioStatusLbl.Text;
+
+            /*MessageBox.Show(Convert.ToString(ticketID));
+            MessageBox.Show(CName);
+            MessageBox.Show(CAge);
+            MessageBox.Show(PNumber);
+            MessageBox.Show(Cserviec);
+            MessageBox.Show(prio);
+*/
+
             string serviceName = ServiceVarLbl.Text;
+
 
             try
             {
                 await empTransaction.ProcessTicketAsync(ticketID);
                 await empTransaction.FetchServiceImageAsync(serviceName);
-                empTransaction.PassValueToLock();
+
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerNameTxtB.Text = CName;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerAgeTxtB.Text = CAge;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerPNumTxtB.Text = PNumber;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerServiceTxtB.Text = Cserviec;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
+                //empTransaction.PassValueToLock(); //may prob
             }
             catch(Exception ex)
             {
