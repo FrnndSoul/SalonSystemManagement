@@ -535,5 +535,39 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public async Task GetAllEmployee(string mysqlcon)
+        {
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    //string query = "select Name from salon_employees AccountAccess NOT IN ('Receptionist','Manager')";
+                    string query = "SELECT Name FROM salon_employees WHERE AccountAccess NOT IN ('Receptionist', 'Manager')";
+
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string EmpName = reader["Name"].ToString();
+                                    ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add(EmpName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
+            }
+        }
+
     }
 }

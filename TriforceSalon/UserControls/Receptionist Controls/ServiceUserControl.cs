@@ -34,6 +34,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
             await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            await serviceTypeService.GetAllEmployee(mysqlcon);
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
         }

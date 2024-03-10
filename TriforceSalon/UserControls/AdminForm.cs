@@ -30,11 +30,14 @@ namespace TriforceSalon
 
         private async void AdminForm_Load(object sender, EventArgs e)
         {
-            await LoadUserData();
+            //            await LoadUserData();
 
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
             UserDGV_CellContentClick(select, args);
+
+            await LoadUserData();
+
         }
 
         public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
