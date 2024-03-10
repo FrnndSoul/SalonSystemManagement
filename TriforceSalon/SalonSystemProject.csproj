@@ -223,6 +223,13 @@
     <Compile Include="UserControls\Inventory Controls\RequestShipment Inventory.Designer.cs">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Sales\SalesClass.cs" />
+    <Compile Include="UserControls\Sales\SalesUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Sales\SalesUI.Designer.cs">
+      <DependentUpon>SalesUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ServiceType&amp;ServicePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -297,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Sales\SalesUI.resx">
+      <DependentUpon>SalesUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ServiceType&amp;ServicePage.resx">
       <DependentUpon>ServiceType&amp;ServicePage.cs</DependentUpon>
