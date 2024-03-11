@@ -164,7 +164,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `card_transactions` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
