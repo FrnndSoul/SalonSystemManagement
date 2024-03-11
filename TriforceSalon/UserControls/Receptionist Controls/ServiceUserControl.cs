@@ -34,6 +34,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
             await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+
+            await serviceTypeService.GetAllEmployee(mysqlcon);
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
         }
@@ -55,6 +57,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
+            MessageBox.Show(Convert.ToString(PEmployeeComB.SelectedItem));
+
             if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {

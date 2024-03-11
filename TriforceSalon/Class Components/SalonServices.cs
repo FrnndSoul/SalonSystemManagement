@@ -62,6 +62,7 @@ namespace TriforceSalon.Class_Components
 
         public async Task PopulateServiceType()
         {
+            ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Clear();
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))

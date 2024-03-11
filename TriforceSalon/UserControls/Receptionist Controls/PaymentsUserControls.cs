@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             InitializeComponent();
             AdjustCheckBoxSize(PWDCheckbox);
+        }
+
+        private void PaymentsUserControls_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
@@ -75,10 +81,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 if (string.Equals(paymentstatus, "PAID",StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                } else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
+                                } 
+                                
+                                else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
+
                                 CustomerName = reader["CustomerName"].ToString();
                                 ServiceType = reader["ServiceType"].ToString();
                                 ServiceVariation = reader["ServiceVariation"].ToString();
@@ -113,6 +122,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceVariationBox.Text = ServiceVariation;
             ServiceVariationIDBox.Text = VariationID.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
+            AmountBox.Text = Amount.ToString();
+
+
+            guna2Panel1.Enabled = true;
+            TransactionIDBox.Enabled = false;
+            LoadBtn.Enabled = false;
+            CardPayment.Enabled = true;
+            CashPayment.Enabled = true;
+            GcashPayment.Enabled = true;
+            VoidBtn.Enabled = true;
 
             if (Age >= 60)
             {
@@ -122,20 +141,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 int discount = (int)(amountValue * 0.2);
                 DiscountBox.Text = discount.ToString();
             }
-            
-            AmountBox.Text = Amount.ToString();
-            TransactionIDBox.Enabled = false;
-            LoadBtn.Enabled = false;
-            CardPayment.Enabled = true;
-            CashPayment.Enabled = true;
-            GcashPayment.Enabled = true;
-            VoidBtn.Enabled = true;
         }
 
-        private void PaymentsUserControls_Load(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void VoidBtn_Click(object sender, EventArgs e)
         {
@@ -219,9 +227,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     if (cash > Convert.ToInt32(AmountBox.Text))
                     {
-                        MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
-                    MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                     ChangePaymentStatus("PAID");
                     DefaultLoad();
                 }
