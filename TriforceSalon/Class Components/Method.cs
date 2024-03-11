@@ -34,7 +34,7 @@ namespace TriforceSalon
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-       
+
         public static async Task ReadUserDataAsync(string user)
         {
             try
@@ -43,42 +43,21 @@ namespace TriforceSalon
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT * FROM `accounts` JOIN `salon_employees` ON accounts.AccountID = salon_employees.AccountID WHERE accounts.AccountID = @accountID";
+                    string accountQuery = "SELECT * FROM `accounts` WHERE AccountID = @accountID";
 
-                    using (MySqlCommand querycmd = new MySqlCommand(query, conn))
+                    using (MySqlCommand accountCmd = new MySqlCommand(accountQuery, conn))
                     {
-                        querycmd.Parameters.AddWithValue("@accountID", user);
+                        accountCmd.Parameters.AddWithValue("@accountID", user);
 
-                        using (DbDataReader reader = await querycmd.ExecuteReaderAsync())
+                        using (DbDataReader accountReader = await accountCmd.ExecuteReaderAsync())
                         {
-                            if (await reader.ReadAsync())
+                            if (await accountReader.ReadAsync())
                             {
-                                // Your existing code remains unchanged
-                                Username = reader["Username"].ToString();
-                                Password = reader["Password"].ToString();
-                                Name = reader["Name"].ToString();
-                                Email = reader["Email"].ToString();
-                                Availability = reader["Availability"].ToString();
-                                AccountAccess = reader["AccountAccess"].ToString();
+                                Username = accountReader["Username"].ToString();
+                                Password = accountReader["Password"].ToString();
 
-                                Birthdate = (DateTime)reader["Birthdate"];
-
-                                AccountID = Convert.ToInt32(reader["AccountID"]);
-                                Status = Convert.ToInt32(reader["Status"]);
-                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
-                                ServiceID = Convert.ToInt32(reader["ServiceID"]);
-
-                                if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
-                                {
-                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
-                                    byte[] photoBytes = new byte[byteSize];
-                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
-                                    Photo = photoBytes;
-                                }
-                                else
-                                {
-                                    Photo = null;
-                                }
+                                AccountID = Convert.ToInt32(accountReader["AccountID"]);
+                                Status = Convert.ToInt32(accountReader["Status"]);
                             }
                             else
                             {
@@ -96,7 +75,57 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    
+        public static async Task ReadEmployeeData(string accountID)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
 
+                    string query = "SELECT * FROM `salon_employees` WHERE AccountID = @accountID";
+
+                    using (MySqlCommand querycmd = new MySqlCommand(query, conn))
+                    {
+                        querycmd.Parameters.AddWithValue("@accountID", accountID);
+                        using (DbDataReader reader = await querycmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Name = reader["Name"].ToString(); 
+                                Email = reader["Email"].ToString(); 
+                                Availability = reader["Availability"].ToString(); 
+                                AccountAccess = reader["AccountAccess"].ToString(); 
+
+                                Birthdate = (DateTime)reader["Birthdate"]; 
+
+                                AccountID = Convert.ToInt32(reader["AccountID"]); 
+                                Status = Convert.ToInt32(reader["Status"]); 
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]); 
+                                ServiceID = Convert.ToInt32(reader["ServiceID"]); 
+
+                                if (!reader.IsDBNull(reader.GetOrdinal("Photo"))) 
+                                {
+                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
+                                    byte[] photoBytes = new byte[byteSize];
+                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
+                                    Photo = photoBytes;
+                                }
+                                else
+                                {
+                                    Photo = null;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ReadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static void ChangeUserData(string newName, string newUsername, string newEmail, string newServiceType, string newAccess, byte[] newPhoto, int accountID)
         {
@@ -185,11 +214,11 @@ namespace TriforceSalon
                 string hashedPass = HashString(inputPassword);
                 if (hashedPass == Password)
                 {
+                    await ReadEmployeeData(inputID);
                     if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
                         await LogUser(Convert.ToInt32(inputID));
-
                         MessageBox.Show($"Welcome Manager, {Username}!");
 
                         foreach (Form openForm in Application.OpenForms)
