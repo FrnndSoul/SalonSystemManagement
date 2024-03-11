@@ -231,7 +231,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
-                    MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                     ChangePaymentStatus("PAID");
                     DefaultLoad();
                 }
