@@ -495,7 +495,7 @@
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.UserDGV.Size = new System.Drawing.Size(937, 823);
             this.UserDGV.TabIndex = 71;
-            this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick);
+            this.UserDGV.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentDoubleClick);
             // 
             // CreateBtn
             // 
