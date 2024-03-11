@@ -401,15 +401,27 @@ namespace TriforceSalon.Class_Components
                                     Tag = reader["ServiceTypeID"].ToString()
                                 };
 
-                                EventHandler clickHandler = (sender, e) =>
+                                Func<object, EventArgs, Task> clickHandler = async (sender, e) =>
                                 {
                                     string serviceID = ((Control)sender).Tag.ToString();
+
+                                    await AddEmployeesComB(Convert.ToInt32(serviceID), mysqlcon);
                                     serviceTB.Text = labelTitle.Text;
                                     amountTB.Text = labelTitle1.Text;
                                 };
 
-                                panel.Click += clickHandler;
-                                picBox.Click += clickHandler;
+                                panel.Click += new EventHandler((sender, e) => clickHandler(sender, e));
+                                picBox.Click += new EventHandler((sender, e) => clickHandler(sender, e));
+
+                                /*EventHandler clickHandler = (sender, e) =>
+                                {
+                                    string serviceID = ((Control)sender).Tag.ToString();
+                                    serviceTB.Text = labelTitle.Text;
+                                    amountTB.Text = labelTitle1.Text;
+                                };*/
+
+                                /*panel.Click += clickHandler;
+                                picBox.Click += clickHandler;*/
 
                                 panel.Controls.Add(picBox);
                                 panel.Controls.Add(labelTitle);

@@ -24,7 +24,7 @@ namespace sales_roject.Sales
                 await connection.OpenAsync();
 
                 string query = "SELECT `TransactionID`, `CustomerName`, `CustomerAge`, `CustomerPhoneNumber`, `ServiceVariation`, `EmployeeID`," +
-                    "`PriorityStatus`, `ServiceVariationID`, `Amount`, `TimeTaken` FROM `transaction` WHERE `PaymentStatus` = PAID";
+                    "`PriorityStatus`, `ServiceVariationID`, `Amount`, `TimeTaken` FROM `transaction` WHERE PaymentStatus = 'PAID'";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {

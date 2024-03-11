@@ -26,7 +26,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             try
             {
-                await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon);
+                await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon, ProductsControlDGV);
             }
             catch (Exception ex)
             {

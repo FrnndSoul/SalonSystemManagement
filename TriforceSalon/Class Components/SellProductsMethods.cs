@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -88,7 +89,7 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task LoadItemsInSales(FlowLayoutPanel sellFlowlayout, string mysqlcon)
+        public async Task LoadItemsInSales(FlowLayoutPanel sellFlowlayout, string mysqlcon, Guna2DataGridView datagrid)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {
@@ -160,7 +161,54 @@ namespace TriforceSalon.Class_Components
 
                         await Task.WhenAll(tasks);
                         sellFlowlayout.Controls.AddRange(panels.ToArray());
+                        SubscribeToServiceClickEvents(sellFlowlayout, datagrid);
                     }
+                }
+            }
+        }
+
+        public void SubscribeToServiceClickEvents(FlowLayoutPanel serviceFL, Guna2DataGridView dataGridView)
+        {
+            foreach (Control control in serviceFL.Controls)
+            {
+                if (control is Panel panel)
+                {
+                    panel.Click += (sender, e) => DisplayServiceData(panel, dataGridView);
+                    foreach (Control innerControl in panel.Controls)
+                    {
+                        if (innerControl is PictureBox pictureBox)
+                        {
+                            pictureBox.Click += (sender, e) => DisplayServiceData(panel, dataGridView);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DisplayServiceData(Panel panel, Guna2DataGridView dataGridView)
+        {
+            string serviceName = panel.Controls.OfType<Label>().FirstOrDefault()?.Text;
+            string serviceAmount = panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text;
+
+            if (serviceName != null && serviceAmount != null)
+            {
+                bool found = false;
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    if (row.IsNewRow) continue; // Skip the new row added by DataGridView
+
+                    if (row.Cells[0].Value.ToString() == serviceName)
+                    {
+                        int currentQty = int.Parse(row.Cells[2].Value.ToString());
+                        row.Cells[2].Value = (currentQty + 1).ToString();
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    dataGridView.Rows.Add(serviceName, "-", "1", "+", serviceAmount, "Bin");
                 }
             }
         }
