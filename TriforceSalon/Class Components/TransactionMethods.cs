@@ -204,20 +204,6 @@ namespace TriforceSalon.Class_Components
             return VariationID;
         }
 
-        /*public void LockTransactionNavigation(Guna2Button chosenButton)
-        {
-            chosenButton.Enabled = false;
-            chosenButton.BackColor = Color.FromArgb(255, 228, 242);
-            chosenButton.BorderColor = Color.FromArgb(52, 42, 83);
-        }
-
-        public void EnableTransactionNavigation(Guna2Button chosenButton)
-        {
-            chosenButton.Enabled = true;
-            chosenButton.BackColor = Color.FromArgb(52, 42, 83);
-            chosenButton.BorderColor = Color.Black;
-        }*/
-
         public void LockTransactionNavigation(List<Guna2Button> buttons, Guna2Button clickedButton)
         {
             foreach (var button in buttons)

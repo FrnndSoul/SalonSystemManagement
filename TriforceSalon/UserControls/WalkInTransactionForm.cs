@@ -49,7 +49,7 @@ namespace TriforceSalon.UserControls
 
         private void NPaymentBtn_Click(object sender, EventArgs e)
         {
-            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn };
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn, NSellProdBtn, NAppointmentsBtn };
 
             transactionM.LockTransactionNavigation(NavigationButtons, NPaymentBtn);
             transactionM.EnableTransactionNavigation(NavigationButtons, NPaymentBtn);
@@ -60,13 +60,35 @@ namespace TriforceSalon.UserControls
 
         private void NServicesBtn_Click(object sender, EventArgs e)
         {
-            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn };
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn, NSellProdBtn, NAppointmentsBtn };
 
             transactionM.LockTransactionNavigation(NavigationButtons, NServicesBtn);
             transactionM.EnableTransactionNavigation(NavigationButtons, NServicesBtn);
 
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
+        }
+
+        private void NSellProdBtn_Click(object sender, EventArgs e)
+        {
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn, NSellProdBtn, NAppointmentsBtn };
+
+            transactionM.LockTransactionNavigation(NavigationButtons, NSellProdBtn);
+            transactionM.EnableTransactionNavigation(NavigationButtons, NSellProdBtn);
+
+            SellProductsUserControls sellProducts = new SellProductsUserControls();
+            UserControlNavigator.ShowControl(sellProducts, ReceptionistContent);
+        }
+
+        private void NAppointmentsBtn_Click(object sender, EventArgs e)
+        {
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { NServicesBtn, NPaymentBtn, NSellProdBtn, NAppointmentsBtn };
+
+            transactionM.LockTransactionNavigation(NavigationButtons, NAppointmentsBtn);
+            transactionM.EnableTransactionNavigation(NavigationButtons, NAppointmentsBtn);
+
+            AppointmentsUserControls appointment = new AppointmentsUserControls();
+            UserControlNavigator.ShowControl(appointment, ReceptionistContent);
         }
     }
 }
