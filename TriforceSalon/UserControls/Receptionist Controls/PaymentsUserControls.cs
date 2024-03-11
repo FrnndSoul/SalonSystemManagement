@@ -229,6 +229,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     MessageBox.Show("Not enough cash entered!","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 } else
                 {
+                    ChangePaymentStatus("PAID");
                     if (cash > Convert.ToInt32(AmountBox.Text))
                     {
                         //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -242,7 +243,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         ChangePaymentStatus("PAID");
 
                     }
-
                     DefaultLoad();
                 }
             }

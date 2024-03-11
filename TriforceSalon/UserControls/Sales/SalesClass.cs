@@ -23,7 +23,8 @@ namespace sales_roject.Sales
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT `TransactionID`, `CustomerName`, `CustomerAge`, `CustomerPhoneNumber`, `ServiceVariation`, `EmployeeID`, `PriorityStatus`, `ServiceVariationID`, `PaymentStatus`, `Amount`, `TimeTaken` FROM `transaction`";
+                string query = "SELECT `TransactionID`, `CustomerName`, `CustomerAge`, `CustomerPhoneNumber`, `ServiceVariation`, `EmployeeID`," +
+                    "`PriorityStatus`, `ServiceVariationID`, `Amount`, `TimeTaken` FROM `transaction` WHERE `PaymentStatus` = PAID";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -45,7 +46,7 @@ namespace sales_roject.Sales
                 await connection.OpenAsync();
 
                 string query = "SELECT EmployeeID, DATE(TimeTaken) AS TimeTaken, SUM(Amount) AS TotalSale " +
-                               "FROM transaction " +
+                               "FROM transaction  WHERE `PaymentStatus` = PAID " +
                                "GROUP BY EmployeeID, DATE(TimeTaken)";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -98,7 +99,7 @@ namespace sales_roject.Sales
                                "       ServiceVariationID, " +
                                "       DATE(TimeTaken) AS TimeTaken, " +
                                "       SUM(Amount) AS TotalAmount " +
-                               "FROM transaction " +
+                               "FROM transaction  WHERE `PaymentStatus` = PAID " +
                                "GROUP BY ServiceType, ServiceVariation, DATE(TimeTaken)";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
