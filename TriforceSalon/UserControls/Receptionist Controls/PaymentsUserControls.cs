@@ -164,11 +164,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `card_transactions` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    //string query = "UPDATE `card_transactions` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
-                        command.Parameters.AddWithValue("@TransactionID", TransactionID);
+                        command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
                         int rowsAffected = command.ExecuteNonQuery();
                     }
                 }
@@ -191,6 +193,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
+
+            guna2Panel1.Enabled = false;
 
             PWDCheckbox.Checked = false;
 
@@ -229,14 +233,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ChangePaymentStatus("PAID");
 
                     }
                     else
                     {
                         MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ChangePaymentStatus("PAID");
+
                     }
 
-                    ChangePaymentStatus("PAID");
                     DefaultLoad();
                 }
             }

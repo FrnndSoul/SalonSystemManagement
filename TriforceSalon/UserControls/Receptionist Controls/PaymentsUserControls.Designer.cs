@@ -150,6 +150,7 @@
             this.guna2Panel1.Controls.Add(this.PhoneNumberBox);
             this.guna2Panel1.Controls.Add(this.AgeBox);
             this.guna2Panel1.Controls.Add(this.NameBox);
+            this.guna2Panel1.Enabled = false;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2Panel1.Location = new System.Drawing.Point(24, 128);
             this.guna2Panel1.Name = "guna2Panel1";
