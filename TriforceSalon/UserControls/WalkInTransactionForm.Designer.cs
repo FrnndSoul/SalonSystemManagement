@@ -116,6 +116,7 @@
             this.NSellProdBtn.TabIndex = 12;
             this.NSellProdBtn.Text = "Sell Products";
             this.NSellProdBtn.UseTransparentBackground = true;
+            this.NSellProdBtn.Click += new System.EventHandler(this.NSellProdBtn_Click);
             // 
             // NAppointmentsBtn
             // 
@@ -136,6 +137,7 @@
             this.NAppointmentsBtn.TabIndex = 13;
             this.NAppointmentsBtn.Text = "Appointments";
             this.NAppointmentsBtn.UseTransparentBackground = true;
+            this.NAppointmentsBtn.Click += new System.EventHandler(this.NAppointmentsBtn_Click);
             // 
             // NPaymentBtn
             // 
