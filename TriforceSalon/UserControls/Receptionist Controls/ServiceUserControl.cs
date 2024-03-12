@@ -76,6 +76,40 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        
+        private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string currentText = CustomerAgeTxtB.Text;
+
+            int totalLength = currentText.Length + 1;
+            if (totalLength >= 2)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string currentText = CustomerAgeTxtB.Text;
+
+            int totalLength = currentText.Length + 1;
+            if (totalLength >= 11)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
     }
 }

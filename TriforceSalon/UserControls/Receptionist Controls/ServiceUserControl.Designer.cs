@@ -277,6 +277,7 @@
             this.CustomerPhoneNTxtB.SelectedText = "";
             this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(331, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
+            this.CustomerPhoneNTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerPhoneNTxtB_KeyPress);
             // 
             // CustomerAgeTxtB
             // 
@@ -300,6 +301,7 @@
             this.CustomerAgeTxtB.SelectedText = "";
             this.CustomerAgeTxtB.Size = new System.Drawing.Size(331, 36);
             this.CustomerAgeTxtB.TabIndex = 2;
+            this.CustomerAgeTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerAgeTxtB_KeyPress);
             // 
             // CustomerNameTxtB
             // 

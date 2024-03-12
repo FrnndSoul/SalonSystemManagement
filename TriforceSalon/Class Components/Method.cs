@@ -100,8 +100,7 @@ namespace TriforceSalon
 
                                 Birthdate = (DateTime)reader["Birthdate"]; 
 
-                                AccountID = Convert.ToInt32(reader["AccountID"]); 
-                                Status = Convert.ToInt32(reader["Status"]); 
+                                AccountID = Convert.ToInt32(reader["AccountID"]);
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]); 
                                 ServiceID = Convert.ToInt32(reader["ServiceID"]); 
 
@@ -207,10 +206,124 @@ namespace TriforceSalon
 
         public static async Task<bool> LoginAsync(string inputID, string inputPassword)
         {
-            await Task.Run(() => ReadUserDataAsync(inputID));
-
-            if (AccountStatus < 3)
+            try
             {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    await connection.OpenAsync();
+
+                    string query = "SELECT Password, Username FROM accounts WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@accountID", inputID);
+                        using (DbDataReader accountReader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await accountReader.ReadAsync())
+                            {
+                                string username = accountReader["Username"].ToString();
+                                string password = accountReader["Password"].ToString();
+
+                                if (password == HashString(inputPassword))
+                                {
+                                    await ReadEmployeeData(inputID);
+
+                                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        ResetAttempt(inputID);
+                                        await LogUser(Convert.ToInt32(inputID));
+                                        MessageBox.Show($"Welcome Manager, {username}!");
+
+                                        foreach (Form openForm in Application.OpenForms)
+                                        {
+                                            if (openForm is MainForm mainForm)
+                                            {
+                                                ManagerPage managerPage = new ManagerPage();
+
+                                                mainForm.Invoke((MethodInvoker)delegate
+                                                {
+                                                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+                                                });
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        ResetAttempt(inputID);
+                                        MessageBox.Show($"Welcome Receptionist, {username}!");
+
+                                        foreach (Form openForm in Application.OpenForms)
+                                        {
+                                            if (openForm is MainForm mainForm)
+                                            {
+                                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+                                                mainForm.Invoke((MethodInvoker)delegate
+                                                {
+                                                    UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+                                                });
+                                                break;
+                                            }
+                                        }
+
+                                        await LogUser(AccountID);
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        ResetAttempt(inputID);
+                                        MessageBox.Show($"Welcome OtherRole, {username}!");
+
+                                        foreach (Form openForm in Application.OpenForms)
+                                        {
+                                            if (openForm is MainForm mainForm)
+                                            {
+                                                EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
+                                                mainForm.Invoke((MethodInvoker)delegate
+                                                {
+                                                    UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
+                                                });
+                                                break;
+                                            }
+                                        }
+                                        await LogUser(AccountID);
+                                        return true;
+                                    }
+
+                                    await LogUser(AccountID);
+                                    return true;
+                                }
+                            } else
+                            {
+                                MessageBox.Show("User not found.","Warning");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+            }
+
+            return false;
+
+
+
+
+
+
+
+            await ReadUserDataAsync(inputID);
+
+            if (Status < 3)
+            {
+                await ReadEmployeeData(inputID);
+                if (AccountStatus >= 3)
+                {
+                    return false;
+                }
+
                 string hashedPass = HashString(inputPassword);
                 if (hashedPass == Password)
                 {
@@ -231,7 +344,6 @@ namespace TriforceSalon
                                 {
                                     UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
                                 });
-
                                 break;
                             }
                         }
