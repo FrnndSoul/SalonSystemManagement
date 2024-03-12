@@ -413,15 +413,88 @@ namespace TriforceSalon.Class_Components
                                 panel.Click += new EventHandler((sender, e) => clickHandler(sender, e));
                                 picBox.Click += new EventHandler((sender, e) => clickHandler(sender, e));
 
-                                /*EventHandler clickHandler = (sender, e) =>
+                                panel.Controls.Add(picBox);
+                                panel.Controls.Add(labelTitle);
+                                panel.Controls.Add(labelTitle1);
+                                serviceFL.Controls.Add(panel);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task GetServiceDataForSearch(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB, string search)
+        {
+            serviceFL.Controls.Clear();
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                await conn.OpenAsync();
+                string query = "SELECT ServiceName, ServiceImage, ServiceAmount, ServiceTypeID FROM salon_services Where ServiceName LIKE @service";
+
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@service", "%" + search + "%");
+
+                    using (DbDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            byte[] imageBytes = (byte[])reader["ServiceImage"];
+
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                Image servicetypeImage = Image.FromStream(ms);
+
+                                Panel panel = new Panel
+                                {
+                                    Width = 200,
+                                    Height = 200,
+                                    Margin = new Padding(10),
+                                    Tag = reader["ServiceTypeID"].ToString()
+                                };
+
+                                PictureBox picBox = new PictureBox
+                                {
+                                    Width = 200,
+                                    Height = 150,
+                                    Location = new Point(10, 10),
+                                    BackgroundImage = servicetypeImage,
+                                    BackgroundImageLayout = ImageLayout.Stretch,
+                                    Tag = reader["ServiceTypeID"].ToString()
+                                };
+
+                                Label labelTitle = new Label
+                                {
+                                    Text = reader["ServiceName"].ToString(),
+                                    Location = new Point(10, 160),
+                                    ForeColor = Color.Black,
+                                    AutoSize = true,
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
+                                    Tag = reader["ServiceTypeID"].ToString()
+                                };
+
+                                Label labelTitle1 = new Label
+                                {
+                                    Text = reader["ServiceAmount"].ToString(),
+                                    Location = new Point(100, 160),
+                                    ForeColor = Color.Black,
+                                    AutoSize = true,
+                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
+                                    Tag = reader["ServiceTypeID"].ToString()
+                                };
+
+                                Func<object, EventArgs, Task> clickHandler = async (sender, e) =>
                                 {
                                     string serviceID = ((Control)sender).Tag.ToString();
+
+                                    await AddEmployeesComB(Convert.ToInt32(serviceID), mysqlcon);
                                     serviceTB.Text = labelTitle.Text;
                                     amountTB.Text = labelTitle1.Text;
-                                };*/
+                                };
 
-                                /*panel.Click += clickHandler;
-                                picBox.Click += clickHandler;*/
+                                panel.Click += new EventHandler((sender, e) => clickHandler(sender, e));
+                                picBox.Click += new EventHandler((sender, e) => clickHandler(sender, e));
 
                                 panel.Controls.Add(picBox);
                                 panel.Controls.Add(labelTitle);

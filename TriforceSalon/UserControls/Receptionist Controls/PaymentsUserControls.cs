@@ -16,8 +16,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus;
-        public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
+        public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
+        public static int TransactionID, Age, EmployeeID, VariationID, Amount;
+
 
         public PaymentsUserControls()
         {
@@ -72,7 +73,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     string query = "SELECT * FROM `transaction` WHERE TransactionID = @transacID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@transacID", TransactionIDBox.Text);
+                        querycmd.Parameters.AddWithValue("@transacID", Convert.ToInt64(TransactionIDBox.Text));
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
                             if (reader.Read())
@@ -93,7 +94,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 ServiceVariation = reader["ServiceVariation"].ToString();
                                 PriorityStatus = reader["PriorityStatus"].ToString();
                                 Age = Convert.ToInt32(reader["CustomerAge"]);
-                                Phone = Convert.ToInt32(reader["CustomerPhoneNumber"]);
+                                Phone = Convert.ToString(reader["CustomerPhoneNumber"]);
                                 EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
                                 VariationID = Convert.ToInt32(reader["ServiceVariationID"]);
                                 Amount = Convert.ToInt32(reader["Amount"]);
