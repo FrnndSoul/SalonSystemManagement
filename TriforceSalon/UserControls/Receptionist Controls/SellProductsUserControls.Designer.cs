@@ -32,8 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.cLbl = new System.Windows.Forms.Label();
             this.cashLbl = new System.Windows.Forms.Label();
             this.ttlLbl = new System.Windows.Forms.Label();
@@ -51,6 +50,8 @@
             this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.AllProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,37 +63,27 @@
             this.ProductsFL.Size = new System.Drawing.Size(1329, 737);
             this.ProductsFL.TabIndex = 1;
             // 
-            // label1
+            // ProductSearchTxtB
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(624, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(256, 38);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Search Services:";
-            // 
-            // guna2TextBox1
-            // 
-            this.guna2TextBox1.Animated = true;
-            this.guna2TextBox1.AutoRoundedCorners = true;
-            this.guna2TextBox1.BorderRadius = 18;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(879, 24);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PasswordChar = '\0';
-            this.guna2TextBox1.PlaceholderText = "";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(474, 38);
-            this.guna2TextBox1.TabIndex = 5;
+            this.ProductSearchTxtB.Animated = true;
+            this.ProductSearchTxtB.AutoRoundedCorners = true;
+            this.ProductSearchTxtB.BorderRadius = 18;
+            this.ProductSearchTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ProductSearchTxtB.DefaultText = "";
+            this.ProductSearchTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ProductSearchTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ProductSearchTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ProductSearchTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ProductSearchTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ProductSearchTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ProductSearchTxtB.Location = new System.Drawing.Point(879, 24);
+            this.ProductSearchTxtB.Name = "ProductSearchTxtB";
+            this.ProductSearchTxtB.PasswordChar = '\0';
+            this.ProductSearchTxtB.PlaceholderText = "";
+            this.ProductSearchTxtB.SelectedText = "";
+            this.ProductSearchTxtB.Size = new System.Drawing.Size(474, 38);
+            this.ProductSearchTxtB.TabIndex = 5;
             // 
             // cLbl
             // 
@@ -228,7 +219,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.ProductsControlDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductsControlDGV.ColumnHeadersHeight = 15;
+            this.ProductsControlDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductCol,
             this.DecrementCol,
@@ -262,7 +254,7 @@
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.ProductsControlDGV.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductsControlDGV.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.Height = 15;
             this.ProductsControlDGV.ThemeStyle.ReadOnly = true;
             this.ProductsControlDGV.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -315,11 +307,49 @@
             this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // SearchProductsBtn
+            // 
+            this.SearchProductsBtn.AutoRoundedCorners = true;
+            this.SearchProductsBtn.BorderRadius = 18;
+            this.SearchProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SearchProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SearchProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SearchProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SearchProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SearchProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchProductsBtn.ForeColor = System.Drawing.Color.Black;
+            this.SearchProductsBtn.Location = new System.Drawing.Point(693, 24);
+            this.SearchProductsBtn.Name = "SearchProductsBtn";
+            this.SearchProductsBtn.Size = new System.Drawing.Size(180, 38);
+            this.SearchProductsBtn.TabIndex = 23;
+            this.SearchProductsBtn.Text = "Search";
+            this.SearchProductsBtn.Click += new System.EventHandler(this.SearchProductsBtn_Click);
+            // 
+            // AllProductsBtn
+            // 
+            this.AllProductsBtn.AutoRoundedCorners = true;
+            this.AllProductsBtn.BorderRadius = 18;
+            this.AllProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AllProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AllProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AllProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AllProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.AllProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllProductsBtn.ForeColor = System.Drawing.Color.Black;
+            this.AllProductsBtn.Location = new System.Drawing.Point(24, 24);
+            this.AllProductsBtn.Name = "AllProductsBtn";
+            this.AllProductsBtn.Size = new System.Drawing.Size(180, 38);
+            this.AllProductsBtn.TabIndex = 24;
+            this.AllProductsBtn.Text = "All Products";
+            this.AllProductsBtn.Click += new System.EventHandler(this.AllProductsBtn_Click);
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.AllProductsBtn);
+            this.Controls.Add(this.SearchProductsBtn);
             this.Controls.Add(this.ProductsControlDGV);
             this.Controls.Add(this.PaymentBtn);
             this.Controls.Add(this.VoidBtn);
@@ -331,8 +361,7 @@
             this.Controls.Add(this.discLbl);
             this.Controls.Add(this.sbLbl);
             this.Controls.Add(this.subLbl);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.guna2TextBox1);
+            this.Controls.Add(this.ProductSearchTxtB);
             this.Controls.Add(this.ProductsFL);
             this.Name = "SellProductsUserControls";
             this.Size = new System.Drawing.Size(1920, 843);
@@ -345,8 +374,7 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel ProductsFL;
-        private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox ProductSearchTxtB;
         private System.Windows.Forms.Label cLbl;
         private System.Windows.Forms.Label cashLbl;
         private System.Windows.Forms.Label ttlLbl;
@@ -364,5 +392,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CostCol;
         private System.Windows.Forms.DataGridViewButtonColumn DisposeCol;
         public Guna.UI2.WinForms.Guna2DataGridView ProductsControlDGV;
+        private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
+        private Guna.UI2.WinForms.Guna2Button AllProductsBtn;
     }
 }
