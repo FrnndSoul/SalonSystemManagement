@@ -260,7 +260,7 @@ namespace TriforceSalon
                     else
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome OtherRole, {Username}!");
+                        MessageBox.Show($"Welcome Staff, {Username}!");
                         
                             foreach (Form openForm in Application.OpenForms)
                             {
