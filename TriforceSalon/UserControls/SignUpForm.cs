@@ -83,6 +83,9 @@ namespace TriforceSalon
                 if (openForm is MainForm mainForm)
                 {
                     //mainForm.ShowAdmin();
+
+
+
                     break;
                 }
             }

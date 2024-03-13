@@ -101,7 +101,7 @@ namespace TriforceSalon
                                 Birthdate = (DateTime)reader["Birthdate"]; 
 
                                 AccountID = Convert.ToInt32(reader["AccountID"]); 
-                                Status = Convert.ToInt32(reader["Status"]); 
+                                //Status = Convert.ToInt32(reader["Status"]); 
                                 AccountStatus = Convert.ToInt32(reader["AccountStatus"]); 
                                 ServiceID = Convert.ToInt32(reader["ServiceID"]); 
 
@@ -260,7 +260,7 @@ namespace TriforceSalon
                     else
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome OtherRole, {Username}!");
+                        MessageBox.Show($"Welcome Staff, {Username}!");
                         
                             foreach (Form openForm in Application.OpenForms)
                             {

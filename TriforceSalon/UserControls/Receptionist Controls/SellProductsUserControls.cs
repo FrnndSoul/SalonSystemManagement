@@ -26,11 +26,39 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             try
             {
-                await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon);
+                await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon, ProductsControlDGV);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void SearchProductsBtn_Click(object sender, EventArgs e)
+        {
+            string product = ProductSearchTxtB.Text;
+            try
+            {
+                await sellMethods.LoadItemsInSalesForSearch(ProductsFL, mysqlcon, ProductsControlDGV, product);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private async void AllProductsBtn_Click(object sender, EventArgs e)
+        {
+            ProductsFL.Controls.Clear();
+            try
+            {
+                await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon, ProductsControlDGV);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
             }
         }
     }

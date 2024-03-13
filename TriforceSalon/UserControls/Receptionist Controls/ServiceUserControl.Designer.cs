@@ -46,17 +46,18 @@
             this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.SearchServiceBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.GetAllServiceBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ServiceTypeFL
             // 
             this.ServiceTypeFL.BackColor = System.Drawing.Color.White;
-            this.ServiceTypeFL.Location = new System.Drawing.Point(218, 16);
+            this.ServiceTypeFL.Location = new System.Drawing.Point(160, 16);
             this.ServiceTypeFL.Name = "ServiceTypeFL";
-            this.ServiceTypeFL.Size = new System.Drawing.Size(1289, 140);
+            this.ServiceTypeFL.Size = new System.Drawing.Size(1347, 140);
             this.ServiceTypeFL.TabIndex = 0;
             // 
             // ServiceFL
@@ -345,45 +346,71 @@
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
-            // guna2TextBox1
+            // SearchServiceTxtB
             // 
-            this.guna2TextBox1.Animated = true;
-            this.guna2TextBox1.AutoRoundedCorners = true;
-            this.guna2TextBox1.BorderRadius = 18;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(1033, 209);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PasswordChar = '\0';
-            this.guna2TextBox1.PlaceholderText = "";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(474, 38);
-            this.guna2TextBox1.TabIndex = 3;
+            this.SearchServiceTxtB.Animated = true;
+            this.SearchServiceTxtB.AutoRoundedCorners = true;
+            this.SearchServiceTxtB.BorderRadius = 18;
+            this.SearchServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SearchServiceTxtB.DefaultText = "";
+            this.SearchServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SearchServiceTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SearchServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchServiceTxtB.Location = new System.Drawing.Point(1033, 209);
+            this.SearchServiceTxtB.Name = "SearchServiceTxtB";
+            this.SearchServiceTxtB.PasswordChar = '\0';
+            this.SearchServiceTxtB.PlaceholderText = "";
+            this.SearchServiceTxtB.SelectedText = "";
+            this.SearchServiceTxtB.Size = new System.Drawing.Size(474, 38);
+            this.SearchServiceTxtB.TabIndex = 3;
             // 
-            // label1
+            // SearchServiceBtn
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(778, 209);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(256, 38);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Search Services:";
+            this.SearchServiceBtn.AutoRoundedCorners = true;
+            this.SearchServiceBtn.BorderRadius = 18;
+            this.SearchServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SearchServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SearchServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SearchServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SearchServiceBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
+            this.SearchServiceBtn.Location = new System.Drawing.Point(837, 209);
+            this.SearchServiceBtn.Name = "SearchServiceBtn";
+            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 38);
+            this.SearchServiceBtn.TabIndex = 4;
+            this.SearchServiceBtn.Text = "Search";
+            this.SearchServiceBtn.Click += new System.EventHandler(this.SearchServiceBtn_Click);
+            // 
+            // GetAllServiceBtn
+            // 
+            this.GetAllServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.GetAllServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.GetAllServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.GetAllServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.GetAllServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.GetAllServiceBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GetAllServiceBtn.ForeColor = System.Drawing.Color.Black;
+            this.GetAllServiceBtn.Location = new System.Drawing.Point(14, 16);
+            this.GetAllServiceBtn.Name = "GetAllServiceBtn";
+            this.GetAllServiceBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.GetAllServiceBtn.Size = new System.Drawing.Size(140, 140);
+            this.GetAllServiceBtn.TabIndex = 5;
+            this.GetAllServiceBtn.Text = "All Service";
+            this.GetAllServiceBtn.Click += new System.EventHandler(this.GetAllServiceBtn_Click);
             // 
             // ServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.guna2TextBox1);
+            this.Controls.Add(this.GetAllServiceBtn);
+            this.Controls.Add(this.SearchServiceBtn);
+            this.Controls.Add(this.SearchServiceTxtB);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.ServiceFL);
             this.Controls.Add(this.ServiceTypeFL);
@@ -401,8 +428,7 @@
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2TextBox SearchServiceTxtB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -417,5 +443,7 @@
         public Guna.UI2.WinForms.Guna2TextBox ServiceAmountTxtB;
         public Guna.UI2.WinForms.Guna2TextBox transactionIDTxtB;
         private System.Windows.Forms.Label label7;
+        private Guna.UI2.WinForms.Guna2Button SearchServiceBtn;
+        private Guna.UI2.WinForms.Guna2CircleButton GetAllServiceBtn;
     }
 }
