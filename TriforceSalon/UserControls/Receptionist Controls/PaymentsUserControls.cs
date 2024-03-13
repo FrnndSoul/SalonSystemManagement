@@ -165,9 +165,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    //string query = "UPDATE `card_transactions` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
                     string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
-
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
@@ -230,7 +228,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     MessageBox.Show("Not enough cash entered!","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 } else
                 {
-                    ChangePaymentStatus("PAID");
                     if (cash > Convert.ToInt32(AmountBox.Text))
                     {
                         //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -244,6 +241,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         ChangePaymentStatus("PAID");
 
                     }
+                    ChangePaymentStatus("PAID");
                     DefaultLoad();
                 }
             }
