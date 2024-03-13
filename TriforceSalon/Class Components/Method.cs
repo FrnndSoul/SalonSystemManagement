@@ -11,6 +11,7 @@ using TriforceSalon.UserControls;
 using TriforceSalon.Class_Components;
 using System.IO;
 using System.Data.Common;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TriforceSalon
 {
@@ -225,71 +226,7 @@ namespace TriforceSalon
 
                                 if (password == HashString(inputPassword))
                                 {
-                                    await ReadEmployeeData(inputID);
-
-                                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        ResetAttempt(inputID);
-                                        await LogUser(Convert.ToInt32(inputID));
-                                        MessageBox.Show($"Welcome Manager, {username}!");
-
-                                        foreach (Form openForm in Application.OpenForms)
-                                        {
-                                            if (openForm is MainForm mainForm)
-                                            {
-                                                ManagerPage managerPage = new ManagerPage();
-
-                                                mainForm.Invoke((MethodInvoker)delegate
-                                                {
-                                                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
-                                                });
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        ResetAttempt(inputID);
-                                        MessageBox.Show($"Welcome Receptionist, {username}!");
-
-                                        foreach (Form openForm in Application.OpenForms)
-                                        {
-                                            if (openForm is MainForm mainForm)
-                                            {
-                                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
-                                                mainForm.Invoke((MethodInvoker)delegate
-                                                {
-                                                    UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
-                                                });
-                                                break;
-                                            }
-                                        }
-
-                                        await LogUser(AccountID);
-                                        return true;
-                                    }
-                                    else
-                                    {
-                                        ResetAttempt(inputID);
-                                        MessageBox.Show($"Welcome OtherRole, {username}!");
-
-                                        foreach (Form openForm in Application.OpenForms)
-                                        {
-                                            if (openForm is MainForm mainForm)
-                                            {
-                                                EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
-                                                mainForm.Invoke((MethodInvoker)delegate
-                                                {
-                                                    UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
-                                                });
-                                                break;
-                                            }
-                                        }
-                                        await LogUser(AccountID);
-                                        return true;
-                                    }
-
-                                    await LogUser(AccountID);
+                                    LogInCompleteAsync(inputID);
                                     return true;
                                 }
                             } else
@@ -306,13 +243,7 @@ namespace TriforceSalon
 
             }
 
-            return false;
-
-
-
-
-
-
+            return false; //up is new, down is old
 
             await ReadUserDataAsync(inputID);
 
@@ -415,8 +346,79 @@ namespace TriforceSalon
                 MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            return false; // Indicate unsuccessful login
+            return false;
         }
+
+        public static async Task LogInCompleteAsync(string inputID)
+        {
+            try
+            {
+                await ReadEmployeeData(inputID);
+
+                if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show($"Welcome Manager!");
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            ManagerPage managerPage = new ManagerPage();
+
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+                else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show($"Welcome Receptionist!");
+
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    ResetAttempt(inputID);
+                    MessageBox.Show($"Welcome Staff!");
+
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+
+                ResetAttempt(inputID);
+                await LogUser(AccountID);
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
         public static void WrongPassword(string wrongID)
         {
