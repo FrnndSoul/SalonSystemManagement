@@ -57,6 +57,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        //lagyan ito ng itemID para mabilis
         public async Task FetchServiceImageAsync(string serviceName)
         {
             try

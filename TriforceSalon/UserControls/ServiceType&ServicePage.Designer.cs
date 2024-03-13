@@ -58,6 +58,8 @@
             this.ServiceNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.SalonServicesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.ServiceTypePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).BeginInit();
@@ -359,6 +361,8 @@
             // ServicePanel
             // 
             this.ServicePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServicePanel.Controls.Add(this.label2);
+            this.ServicePanel.Controls.Add(this.label1);
             this.ServicePanel.Controls.Add(this.EditServBtn);
             this.ServicePanel.Controls.Add(this.InventoryItemsComB);
             this.ServicePanel.Controls.Add(this.CancelEditServiceBtn);
@@ -642,6 +646,26 @@
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(945, 494);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 32);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Category";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(1176, 494);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 32);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "Inventory Item";
+            // 
             // ServiceType_ServicePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,5 +715,7 @@
         public Guna.UI2.WinForms.Guna2PictureBox ServiceImagePicB;
         public Guna.UI2.WinForms.Guna2DataGridView SalonServicesDGV;
         public Guna.UI2.WinForms.Guna2ComboBox InventoryItemsComB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

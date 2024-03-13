@@ -42,7 +42,7 @@
             // NameLbl
             // 
             this.NameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.NameLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLbl.ForeColor = System.Drawing.Color.White;
             this.NameLbl.Location = new System.Drawing.Point(36, 34);
             this.NameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -54,7 +54,7 @@
             // 
             // TicketLbl
             // 
-            this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TicketLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TicketLbl.ForeColor = System.Drawing.Color.White;
             this.TicketLbl.Location = new System.Drawing.Point(970, 28);
             this.TicketLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -66,7 +66,7 @@
             // 
             // ServiceVarLbl
             // 
-            this.ServiceVarLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceVarLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceVarLbl.ForeColor = System.Drawing.Color.White;
             this.ServiceVarLbl.Location = new System.Drawing.Point(663, 30);
             this.ServiceVarLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -117,7 +117,7 @@
             // 
             // PrioStatusLbl
             // 
-            this.PrioStatusLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrioStatusLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrioStatusLbl.ForeColor = System.Drawing.Color.White;
             this.PrioStatusLbl.Location = new System.Drawing.Point(828, 22);
             this.PrioStatusLbl.Name = "PrioStatusLbl";
@@ -128,7 +128,7 @@
             // 
             // PhoneNumberLbl
             // 
-            this.PhoneNumberLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PhoneNumberLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PhoneNumberLbl.ForeColor = System.Drawing.Color.White;
             this.PhoneNumberLbl.Location = new System.Drawing.Point(403, 30);
             this.PhoneNumberLbl.Name = "PhoneNumberLbl";
@@ -139,7 +139,7 @@
             // 
             // AgeLbl
             // 
-            this.AgeLbl.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AgeLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AgeLbl.ForeColor = System.Drawing.Color.White;
             this.AgeLbl.Location = new System.Drawing.Point(298, 28);
             this.AgeLbl.Name = "AgeLbl";
