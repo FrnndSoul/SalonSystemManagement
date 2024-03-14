@@ -34,7 +34,7 @@ namespace TriforceSalon
 
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
-            UserDGV_CellContentClick(select, args);
+            UserDGV_CellContentDoubleClick(select, args);
 
             await LoadUserData();
 
@@ -175,7 +175,7 @@ namespace TriforceSalon
             }
         }
 
-        private void UserDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (UserDGV.Rows.Count <= 0)
             {
