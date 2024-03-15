@@ -11,6 +11,7 @@ using TriforceSalon.UserControls;
 using TriforceSalon.Class_Components;
 using System.IO;
 using System.Data.Common;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TriforceSalon
 {
@@ -34,7 +35,7 @@ namespace TriforceSalon
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-       
+
         public static async Task ReadUserDataAsync(string user)
         {
             try
@@ -43,42 +44,21 @@ namespace TriforceSalon
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT * FROM `accounts` JOIN `salon_employees` ON accounts.AccountID = salon_employees.AccountID WHERE accounts.AccountID = @accountID";
+                    string accountQuery = "SELECT * FROM `accounts` WHERE AccountID = @accountID";
 
-                    using (MySqlCommand querycmd = new MySqlCommand(query, conn))
+                    using (MySqlCommand accountCmd = new MySqlCommand(accountQuery, conn))
                     {
-                        querycmd.Parameters.AddWithValue("@accountID", user);
+                        accountCmd.Parameters.AddWithValue("@accountID", user);
 
-                        using (DbDataReader reader = await querycmd.ExecuteReaderAsync())
+                        using (DbDataReader accountReader = await accountCmd.ExecuteReaderAsync())
                         {
-                            if (await reader.ReadAsync())
+                            if (await accountReader.ReadAsync())
                             {
-                                // Your existing code remains unchanged
-                                Username = reader["Username"].ToString();
-                                Password = reader["Password"].ToString();
-                                Name = reader["Name"].ToString();
-                                Email = reader["Email"].ToString();
-                                Availability = reader["Availability"].ToString();
-                                AccountAccess = reader["AccountAccess"].ToString();
+                                Username = accountReader["Username"].ToString();
+                                Password = accountReader["Password"].ToString();
 
-                                Birthdate = (DateTime)reader["Birthdate"];
-
-                                AccountID = Convert.ToInt32(reader["AccountID"]);
-                                Status = Convert.ToInt32(reader["Status"]);
-                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]);
-                                ServiceID = Convert.ToInt32(reader["ServiceID"]);
-
-                                if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
-                                {
-                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
-                                    byte[] photoBytes = new byte[byteSize];
-                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
-                                    Photo = photoBytes;
-                                }
-                                else
-                                {
-                                    Photo = null;
-                                }
+                                AccountID = Convert.ToInt32(accountReader["AccountID"]);
+                                Status = Convert.ToInt32(accountReader["Status"]);
                             }
                             else
                             {
@@ -96,7 +76,56 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    
+        public static async Task ReadEmployeeData(string accountID)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
 
+                    string query = "SELECT * FROM `salon_employees` WHERE AccountID = @accountID";
+
+                    using (MySqlCommand querycmd = new MySqlCommand(query, conn))
+                    {
+                        querycmd.Parameters.AddWithValue("@accountID", accountID);
+                        using (DbDataReader reader = await querycmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Name = reader["Name"].ToString(); 
+                                Email = reader["Email"].ToString(); 
+                                Availability = reader["Availability"].ToString(); 
+                                AccountAccess = reader["AccountAccess"].ToString(); 
+
+                                Birthdate = (DateTime)reader["Birthdate"]; 
+
+                                AccountID = Convert.ToInt32(reader["AccountID"]); 
+                                AccountStatus = Convert.ToInt32(reader["AccountStatus"]); 
+                                ServiceID = Convert.ToInt32(reader["ServiceID"]); 
+
+                                if (!reader.IsDBNull(reader.GetOrdinal("Photo"))) 
+                                {
+                                    long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
+                                    byte[] photoBytes = new byte[byteSize];
+                                    reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
+                                    Photo = photoBytes;
+                                }
+                                else
+                                {
+                                    Photo = null;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat ReadEmployeeData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static void ChangeUserData(string newName, string newUsername, string newEmail, string newServiceType, string newAccess, byte[] newPhoto, int accountID)
         {
@@ -178,18 +207,62 @@ namespace TriforceSalon
 
         public static async Task<bool> LoginAsync(string inputID, string inputPassword)
         {
-            await Task.Run(() => ReadUserDataAsync(inputID));
-
-            if (AccountStatus < 3)
+            try
             {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    await connection.OpenAsync();
+
+                    string query = "SELECT Password, Username FROM accounts WHERE AccountID = @accountID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@accountID", inputID);
+                        using (DbDataReader accountReader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await accountReader.ReadAsync())
+                            {
+                                string username = accountReader["Username"].ToString();
+                                string password = accountReader["Password"].ToString();
+
+                                if (password == HashString(inputPassword))
+                                {
+                                    LogInCompleteAsync(inputID);
+                                    return true;
+                                }
+                            } else
+                            {
+                                MessageBox.Show("User not found.","Warning");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+
+            }
+
+            return false; //up is new, down is old
+
+            await ReadUserDataAsync(inputID);
+
+            if (Status < 3)
+            {
+                await ReadEmployeeData(inputID);
+                if (AccountStatus >= 3)
+                {
+                    return false;
+                }
+
                 string hashedPass = HashString(inputPassword);
                 if (hashedPass == Password)
                 {
+                    await ReadEmployeeData(inputID);
                     if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                     {
                         ResetAttempt(inputID);
                         await LogUser(Convert.ToInt32(inputID));
-
                         MessageBox.Show($"Welcome Manager, {Username}!");
 
                         foreach (Form openForm in Application.OpenForms)
@@ -202,7 +275,6 @@ namespace TriforceSalon
                                 {
                                     UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
                                 });
-
                                 break;
                             }
                         }
@@ -231,7 +303,7 @@ namespace TriforceSalon
                     else
                     {
                         ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome OtherRole, {Username}!");
+                        MessageBox.Show($"Welcome Staff, {Username}!");
                         
                             foreach (Form openForm in Application.OpenForms)
                             {
@@ -274,8 +346,79 @@ namespace TriforceSalon
                 MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            return false; // Indicate unsuccessful login
+            return false;
         }
+
+        public static async Task LogInCompleteAsync(string inputID)
+        {
+            try
+            {
+                await ReadEmployeeData(inputID);
+
+                if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show($"Welcome Manager!");
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            ManagerPage managerPage = new ManagerPage();
+
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+                else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show($"Welcome Receptionist!");
+
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    ResetAttempt(inputID);
+                    MessageBox.Show($"Welcome Staff!");
+
+                    foreach (Form openForm in Application.OpenForms)
+                    {
+                        if (openForm is MainForm mainForm)
+                        {
+                            EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
+                            mainForm.Invoke((MethodInvoker)delegate
+                            {
+                                UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
+                            });
+                            break;
+                        }
+                    }
+                }
+
+                ResetAttempt(inputID);
+                await LogUser(AccountID);
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
         public static void WrongPassword(string wrongID)
         {

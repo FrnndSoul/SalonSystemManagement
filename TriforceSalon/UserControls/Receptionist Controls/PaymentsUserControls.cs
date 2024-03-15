@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus;
-        public static int TransactionID, Age, Phone, EmployeeID, VariationID, Amount;
+        public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
+        public static int TransactionID, Age, EmployeeID, VariationID, Amount;
+
 
         public PaymentsUserControls()
         {
             InitializeComponent();
             AdjustCheckBoxSize(PWDCheckbox);
+        }
+
+        private void PaymentsUserControls_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
@@ -66,7 +73,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     string query = "SELECT * FROM `transaction` WHERE TransactionID = @transacID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@transacID", TransactionIDBox.Text);
+                        querycmd.Parameters.AddWithValue("@transacID", Convert.ToInt64(TransactionIDBox.Text));
                         using (MySqlDataReader reader = querycmd.ExecuteReader())
                         {
                             if (reader.Read())
@@ -75,16 +82,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 if (string.Equals(paymentstatus, "PAID",StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                } else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
+                                } 
+                                
+                                else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
+
                                 CustomerName = reader["CustomerName"].ToString();
                                 ServiceType = reader["ServiceType"].ToString();
                                 ServiceVariation = reader["ServiceVariation"].ToString();
                                 PriorityStatus = reader["PriorityStatus"].ToString();
                                 Age = Convert.ToInt32(reader["CustomerAge"]);
-                                Phone = Convert.ToInt32(reader["CustomerPhoneNumber"]);
+                                Phone = Convert.ToString(reader["CustomerPhoneNumber"]);
                                 EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
                                 VariationID = Convert.ToInt32(reader["ServiceVariationID"]);
                                 Amount = Convert.ToInt32(reader["Amount"]);
@@ -113,6 +123,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceVariationBox.Text = ServiceVariation;
             ServiceVariationIDBox.Text = VariationID.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
+            AmountBox.Text = Amount.ToString();
+
+
+            guna2Panel1.Enabled = true;
+            TransactionIDBox.Enabled = false;
+            LoadBtn.Enabled = false;
+            CardPayment.Enabled = true;
+            CashPayment.Enabled = true;
+            GcashPayment.Enabled = true;
+            VoidBtn.Enabled = true;
 
             if (Age >= 60)
             {
@@ -122,20 +142,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 int discount = (int)(amountValue * 0.2);
                 DiscountBox.Text = discount.ToString();
             }
-            
-            AmountBox.Text = Amount.ToString();
-            TransactionIDBox.Enabled = false;
-            LoadBtn.Enabled = false;
-            CardPayment.Enabled = true;
-            CashPayment.Enabled = true;
-            GcashPayment.Enabled = true;
-            VoidBtn.Enabled = true;
         }
 
-        private void PaymentsUserControls_Load(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void VoidBtn_Click(object sender, EventArgs e)
         {
@@ -156,11 +165,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `card_transactions` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
-                        command.Parameters.AddWithValue("@TransactionID", TransactionID);
+                        command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
                         int rowsAffected = command.ExecuteNonQuery();
                     }
                 }
@@ -183,6 +192,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
+
+            guna2Panel1.Enabled = false;
 
             PWDCheckbox.Checked = false;
 
@@ -219,9 +230,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     if (cash > Convert.ToInt32(AmountBox.Text))
                     {
-                        MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ChangePaymentStatus("PAID");
+
                     }
-                    MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ChangePaymentStatus("PAID");
+
+                    }
                     ChangePaymentStatus("PAID");
                     DefaultLoad();
                 }

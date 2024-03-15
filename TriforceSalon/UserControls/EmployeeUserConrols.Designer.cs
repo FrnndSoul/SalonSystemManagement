@@ -207,6 +207,7 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl.TabIndex = 2;
             this.ServiceTypeNameLbl.Text = "Placeholder";
             this.ServiceTypeNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ServiceTypeNameLbl.Visible = false;
             // 
             // EmployeeLogOutBtn
             // 

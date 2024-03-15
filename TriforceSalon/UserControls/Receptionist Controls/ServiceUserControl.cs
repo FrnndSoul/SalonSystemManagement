@@ -57,8 +57,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(Convert.ToString(PEmployeeComB.SelectedItem));
-
             if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
@@ -76,6 +74,67 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        
+        private async void SearchServiceBtn_Click(object sender, EventArgs e)
+        {
+            string search = SearchServiceTxtB.Text;
+
+            try {
+                await serviceTypeService.GetServiceDataForSearch(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, search);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void GetAllServiceBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiceFL.Controls.Clear();
+                await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+                await serviceTypeService.GetAllEmployee(mysqlcon);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+                
+        private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string currentText = CustomerAgeTxtB.Text;
+
+            int totalLength = currentText.Length + 1;
+            if (totalLength >= 2)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            string currentText = CustomerAgeTxtB.Text;
+
+            int totalLength = currentText.Length + 1;
+            if (totalLength >= 11)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
     }
 }
