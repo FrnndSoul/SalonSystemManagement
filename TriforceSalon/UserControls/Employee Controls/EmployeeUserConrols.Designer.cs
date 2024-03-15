@@ -39,13 +39,6 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl = new System.Windows.Forms.Label();
             this.EmployeeLogOutBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.ServicePicPicB = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -233,13 +226,6 @@ namespace TriforceSalon.UserControls
             // guna2Panel2
             // 
             this.guna2Panel2.BorderRadius = 50;
-            this.guna2Panel2.Controls.Add(this.label9);
-            this.guna2Panel2.Controls.Add(this.label7);
-            this.guna2Panel2.Controls.Add(this.label6);
-            this.guna2Panel2.Controls.Add(this.label5);
-            this.guna2Panel2.Controls.Add(this.label4);
-            this.guna2Panel2.Controls.Add(this.label3);
-            this.guna2Panel2.Controls.Add(this.label1);
             this.guna2Panel2.Controls.Add(this.EmployeeLockPanel);
             this.guna2Panel2.Controls.Add(this.CustomerListFLowLayout);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
@@ -247,89 +233,6 @@ namespace TriforceSalon.UserControls
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1462, 1080);
             this.guna2Panel2.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Transparent;
-            this.label9.Location = new System.Drawing.Point(1096, 200);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 50);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "ID";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(950, 200);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 50);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Status";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(782, 200);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 50);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Service";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(545, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 69);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Phone Number";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(370, 200);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 50);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Age";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(164, 181);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 69);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Customer Name";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(44, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(535, 62);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Customer Queue";
             // 
             // EmployeeLockPanel
             // 
@@ -633,7 +536,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         public Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         public Guna.UI2.WinForms.Guna2Button EmployeeLogOutBtn;
-        public System.Windows.Forms.Label label1;
         public System.Windows.Forms.FlowLayoutPanel CustomerListFLowLayout;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label EmpNameLbl;
@@ -645,12 +547,6 @@ namespace TriforceSalon.UserControls
         public System.Windows.Forms.Label ServiceTypeNameLbl;
         private Guna.UI2.WinForms.Guna2Button EmployeeDoneBtn;
         public Guna.UI2.WinForms.Guna2Panel EmployeeLockPanel;
-        public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label label3;
-        public System.Windows.Forms.Label label5;
-        public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Label label7;
-        public System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         public System.Windows.Forms.Label label11;

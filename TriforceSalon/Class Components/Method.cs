@@ -226,7 +226,7 @@ namespace TriforceSalon
 
                                 if (password == HashString(inputPassword))
                                 {
-                                    LogInCompleteAsync(inputID);
+                                    await LogInCompleteAsync(inputID);
                                     return true;
                                 }
                             } else
