@@ -136,6 +136,12 @@
     <Compile Include="Ticket System\CustomerTicket.Designer.cs">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Employee Controls\EmployeeLock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Employee Controls\EmployeeLock.Designer.cs">
+      <DependentUpon>EmployeeLock.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,10 +161,10 @@
     <Compile Include="UserControls\Inventory Controls\EditProduct Inventory.Designer.cs">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\EmployeeUserConrols.cs">
+    <Compile Include="UserControls\Employee Controls\EmployeeUserConrols.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\EmployeeUserConrols.Designer.cs">
+    <Compile Include="UserControls\Employee Controls\EmployeeUserConrols.Designer.cs">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Inventory Controls\GeneralView Inventory.cs">
@@ -258,6 +264,9 @@
     <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Employee Controls\EmployeeLock.resx">
+      <DependentUpon>EmployeeLock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -267,7 +276,7 @@
     <EmbeddedResource Include="UserControls\Inventory Controls\EditProduct Inventory.resx">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\EmployeeUserConrols.resx">
+    <EmbeddedResource Include="UserControls\Employee Controls\EmployeeUserConrols.resx">
       <DependentUpon>EmployeeUserConrols.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\GeneralView Inventory.resx">

@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls;
+using TriforceSalon.UserControls.Employee_Controls;
 
 namespace TriforceSalon.Test
 {
@@ -70,12 +71,11 @@ namespace TriforceSalon.Test
                 await empTransaction.ProcessTicketAsync(ticketID);
                 await empTransaction.FetchServiceImageAsync(serviceName);
 
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerNameTxtB.Text = CName;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerAgeTxtB.Text = CAge;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerPNumTxtB.Text = PNumber;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerServiceTxtB.Text = Cserviec;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
-                //empTransaction.PassValueToLock(); //may prob
+                EmployeeLock.employeeLockInstance.CustomerNameTxtB.Text = CName;
+                EmployeeLock.employeeLockInstance.CustomerAgeTxtB.Text = CAge;
+                EmployeeLock.employeeLockInstance.CustomerPNumTxtB.Text = PNumber;
+                EmployeeLock.employeeLockInstance.CustomerServiceTxtB.Text = Cserviec;
+                EmployeeLock.employeeLockInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
             }
             catch(Exception ex)
             {
