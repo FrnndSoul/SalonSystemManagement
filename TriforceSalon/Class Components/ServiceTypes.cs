@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.UserControls;
 
@@ -32,23 +34,24 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
-        public void ServiceTypeInfoDGV()
+
+        public async Task ServiceTypeInfoDGV()
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "Select ServiceTypeImage, ServiceTypeName, ServiceID from service_type";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
                                 DataTable dt = new DataTable();
                                 dt.Load(reader);
-                                ManagerServices.managerServicesInstance.ServiceTypeDGV.DataSource = dt;
+                                ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.DataSource = dt;
                             }
                         }
                     }
@@ -57,7 +60,6 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show("Error in ServiceTypeInfoDGV(): " + ex.Message);
-
             }
         }
 
@@ -80,7 +82,7 @@ namespace TriforceSalon.Class_Components
 
                         Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
 
-                        ManagerServices.managerServicesInstance.ServiceTypePicB.Image = resizedImage;
+                        ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = resizedImage;
                         isNewServiceImageSelected = true; //flag ito para sa image
                     }
                     catch (Exception ex)
@@ -91,15 +93,15 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void AddServiceType(string serviceType)
+        public async Task AddServiceType(string serviceType)
         {
-            if (ManagerServices.managerServicesInstance.ServiceTypePicB == null)
+            if (ServiceType_ServicePage.servicePageInstance.ServiceTypePicB == null)
             {
                 MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text) || ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text == "Service Type Name")
+            if (string.IsNullOrWhiteSpace(ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text) || ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text == "Service Type Name")
             {
                 MessageBox.Show("Please fill out all the required data", "Missing Informations", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -113,11 +115,11 @@ namespace TriforceSalon.Class_Components
                 {
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
-                        conn.Open();
+                        await conn.OpenAsync();
 
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            ManagerServices.managerServicesInstance.ServiceTypePicB.Image.Save(ms, ImageFormat.Jpeg);
+                            ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image.Save(ms, ImageFormat.Jpeg);
                             imageData = ms.ToArray();
                         }
 
@@ -128,9 +130,9 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@service_name", serviceType);
                             command.Parameters.AddWithValue("@service_image", imageData);
 
-                            command.ExecuteNonQuery();
-                            salonServices.PopulateServiceType();
-                            ServiceTypeInfoDGV();
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
                             ClearServiceTypes();
                         }
                     }
@@ -150,14 +152,14 @@ namespace TriforceSalon.Class_Components
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error in AddServiceType()(): " + ex.Message);
+                    MessageBox.Show("Error in AddServiceTypeAsync(): " + ex.Message);
                 }
             }
         }
 
         public void EditServiceTypes()
         {
-            if (ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows.Count == 0)
+            if (ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -165,15 +167,17 @@ namespace TriforceSalon.Class_Components
             DialogResult result = MessageBox.Show("Are you sure you want to edit this service type?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if (ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows.Count == 1)
+                if (ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows.Count == 1)
                 {
-                    DataGridViewRow selectedRow = ManagerServices.managerServicesInstance.ServiceTypeDGV.SelectedRows[0];
+                    DataGridViewRow selectedRow = ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows[0];
 
                     string ServiceTypeName = selectedRow.Cells["ServiceTypeName"].Value.ToString();
                     serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceID"].Value);
 
-                    ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text = ServiceTypeName;
+                    ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text = ServiceTypeName;
                     loadImages.ServiceTypeImage(serviceTypeID);
+
+                    HideButton(false, false, true, true);
 
                     try
                     {
@@ -200,10 +204,10 @@ namespace TriforceSalon.Class_Components
             serviceTypeID = 0;
         }
 
-        public void UpdateServiceType(int serviceID)
+        public async Task UpdateServiceType(int serviceID)
         {
 
-            if (string.IsNullOrWhiteSpace(ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text) || ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text == "Service Type Name")
+            if (string.IsNullOrWhiteSpace(ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text) || ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text == "Service Type Name")
             {
                 MessageBox.Show("Please fill out all the required data", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -217,12 +221,12 @@ namespace TriforceSalon.Class_Components
                 {
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
-                        conn.Open();
+                        await conn.OpenAsync();
                         string query = "UPDATE service_type SET ServiceTypeName = @service_name";
                         byte[] imageData = null;
                         if (isNewServiceImageSelected)
                         {
-                            using (Bitmap bmp = new Bitmap(ManagerServices.managerServicesInstance.ServiceTypePicB.Image))
+                            using (Bitmap bmp = new Bitmap(ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image))
                             {
                                 using (MemoryStream ms = new MemoryStream())
                                 {
@@ -237,8 +241,7 @@ namespace TriforceSalon.Class_Components
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
-                            // Loop seems unnecessary unless you plan to execute the command multiple times with different serviceTypes
-                            command.Parameters.AddWithValue("@service_name", ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text);
+                            command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text);
                             command.Parameters.AddWithValue("@service_ID", serviceID);
 
                             if (isNewServiceImageSelected)
@@ -246,10 +249,11 @@ namespace TriforceSalon.Class_Components
                                 command.Parameters.AddWithValue("@service_image", imageData);
                             }
 
-                            command.ExecuteNonQuery();
-                            salonServices.PopulateServiceType();
-                            ServiceTypeInfoDGV();
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
                             ClearServiceTypes();
+                            HideButton(true, true, false, false);
                         }
                     }
                 }
@@ -266,15 +270,25 @@ namespace TriforceSalon.Class_Components
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error in UpdateServiceType(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error in UpdateServiceTypeAsync(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
         public void ClearServiceTypes()
         {
-            ManagerServices.managerServicesInstance.ServiceTypeTxtB.Text = null;
-            ManagerServices.managerServicesInstance.ServiceTypePicB.Image = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = null;
+
+        }
+
+
+        public void HideButton(bool add, bool edit, bool cancel, bool update)
+        {
+            ServiceType_ServicePage.servicePageInstance.UpdateServiceTBtn.Visible = update;
+            ServiceType_ServicePage.servicePageInstance.EditServiceTBtn.Visible = edit;
+            ServiceType_ServicePage.servicePageInstance.CancelEditBtn.Visible = cancel;
+            ServiceType_ServicePage.servicePageInstance.AddServiceTypeBtn.Enabled = add;
 
         }
 

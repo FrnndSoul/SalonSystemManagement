@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls;
 
 namespace TriforceSalon.Test
 {
     public partial class CustomerTicket : UserControl
     {
         EmployeeTicketTransaction empTransaction = new EmployeeTicketTransaction();
-
+        public static CustomerTicket customerTicketInstance;
 
 
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
@@ -15,19 +17,20 @@ namespace TriforceSalon.Test
         public string CustomerAge => AgeLbl.Text;
         public string CustomerNumber => PhoneNumberLbl.Text;
         public string Service => ServiceVarLbl.Text;
-        public string PredEmp => PreferredEmpLbl.Text;
+        //public string PredEmp => PreferredEmpLbl.Text;
         public string Status => PrioStatusLbl.Text;
         public string Ticket => TicketLbl.Text;
 
-        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string PredEmp, string Status, string Ticket)
+        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket)
         {
             InitializeComponent();
+            customerTicketInstance = this;
 
             NameLbl.Text = CustomerName;
             AgeLbl.Text = CustomerAge;
             PhoneNumberLbl.Text = CustomerNumber;
             ServiceVarLbl.Text = Service;
-            PreferredEmpLbl.Text = PredEmp;
+            //PreferredEmpLbl.Text = PredEmp;
             PrioStatusLbl.Text = Status;
             TicketLbl.Text = Ticket;
 
@@ -41,10 +44,48 @@ namespace TriforceSalon.Test
 
         }
 
-        private void ProcessCustomerBtn_Click(object sender, EventArgs e)
+        private async void ProcessCustomerBtn_Click(object sender, EventArgs e)
         {
+            ProcessCustomerBtn.Enabled = false;
             int ticketID = Convert.ToInt32(TicketLbl.Text);
-            empTransaction.ProcessTicket(ticketID);
+            string CName = NameLbl.Text;
+            string CAge = AgeLbl.Text;
+            string PNumber = PhoneNumberLbl.Text;
+            string Cserviec = ServiceVarLbl.Text;
+            string prio = PrioStatusLbl.Text;
+
+            /*MessageBox.Show(Convert.ToString(ticketID));
+            MessageBox.Show(CName);
+            MessageBox.Show(CAge);
+            MessageBox.Show(PNumber);
+            MessageBox.Show(Cserviec);
+            MessageBox.Show(prio);
+*/
+
+            string serviceName = ServiceVarLbl.Text;
+
+
+            try
+            {
+                await empTransaction.ProcessTicketAsync(ticketID);
+                await empTransaction.FetchServiceImageAsync(serviceName);
+
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerNameTxtB.Text = CName;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerAgeTxtB.Text = CAge;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerPNumTxtB.Text = PNumber;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerServiceTxtB.Text = Cserviec;
+                EmployeeUserConrols.employeeUserConrolsInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
+                //empTransaction.PassValueToLock(); //may prob
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ProcessCustomerBtn.Enabled = true;
+
+            }
         }
     }
 
@@ -54,17 +95,17 @@ namespace TriforceSalon.Test
         public string CustomerAge { get; }
         public string CustomerNumber { get; }
         public string Service { get; }
-        public string PredEmp { get; }
+        //public string PredEmp { get; }
         public string Status { get; }
         public string Ticket { get; }
 
-        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string predEmp, string status, string ticket)
+        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket)
         {
             CustomerName = customerName;
             CustomerAge = customerAge;
             CustomerNumber = customerNumber;
             Service = service;
-            PredEmp = predEmp;
+            //PredEmp = predEmp;
             Status = status;
             Ticket = ticket;
 

@@ -52,6 +52,7 @@
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UserDGV = new System.Windows.Forms.DataGridView();
+            this.CreateBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
@@ -379,7 +380,7 @@
             // EditBtn
             // 
             this.EditBtn.Animated = true;
-            this.EditBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.EditBtn.BackColor = System.Drawing.Color.Transparent;
             this.EditBtn.BorderRadius = 20;
             this.EditBtn.BorderThickness = 1;
             this.EditBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -395,6 +396,7 @@
             this.EditBtn.Size = new System.Drawing.Size(225, 45);
             this.EditBtn.TabIndex = 76;
             this.EditBtn.Text = "Edit User";
+            this.EditBtn.UseTransparentBackground = true;
             this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click_1);
             // 
             // UploadBtn
@@ -407,6 +409,7 @@
             this.UploadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.UploadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.UploadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.UploadBtn.Enabled = false;
             this.UploadBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.UploadBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.UploadBtn.ForeColor = System.Drawing.Color.White;
@@ -432,7 +435,7 @@
             // DiscardBtn
             // 
             this.DiscardBtn.Animated = true;
-            this.DiscardBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.DiscardBtn.BackColor = System.Drawing.Color.Transparent;
             this.DiscardBtn.BorderRadius = 20;
             this.DiscardBtn.BorderThickness = 1;
             this.DiscardBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -442,18 +445,20 @@
             this.DiscardBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.DiscardBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.DiscardBtn.ForeColor = System.Drawing.Color.White;
-            this.DiscardBtn.Location = new System.Drawing.Point(547, 938);
+            this.DiscardBtn.Location = new System.Drawing.Point(300, 938);
             this.DiscardBtn.Margin = new System.Windows.Forms.Padding(2);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(225, 45);
             this.DiscardBtn.TabIndex = 73;
             this.DiscardBtn.Text = "Discard";
+            this.DiscardBtn.UseTransparentBackground = true;
+            this.DiscardBtn.Visible = false;
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click_1);
             // 
             // SaveBtn
             // 
             this.SaveBtn.Animated = true;
-            this.SaveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.SaveBtn.BorderRadius = 20;
             this.SaveBtn.BorderThickness = 1;
             this.SaveBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -469,6 +474,8 @@
             this.SaveBtn.Size = new System.Drawing.Size(225, 45);
             this.SaveBtn.TabIndex = 72;
             this.SaveBtn.Text = "Save";
+            this.SaveBtn.UseTransparentBackground = true;
+            this.SaveBtn.Visible = false;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click_1);
             // 
             // UserDGV
@@ -488,7 +495,29 @@
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.UserDGV.Size = new System.Drawing.Size(937, 823);
             this.UserDGV.TabIndex = 71;
-            this.UserDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentClick);
+            this.UserDGV.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentDoubleClick);
+            // 
+            // CreateBtn
+            // 
+            this.CreateBtn.Animated = true;
+            this.CreateBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CreateBtn.BorderRadius = 20;
+            this.CreateBtn.BorderThickness = 1;
+            this.CreateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CreateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CreateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CreateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CreateBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.CreateBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
+            this.CreateBtn.ForeColor = System.Drawing.Color.White;
+            this.CreateBtn.Location = new System.Drawing.Point(554, 938);
+            this.CreateBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.CreateBtn.Name = "CreateBtn";
+            this.CreateBtn.Size = new System.Drawing.Size(225, 45);
+            this.CreateBtn.TabIndex = 93;
+            this.CreateBtn.Text = "Create User";
+            this.CreateBtn.UseTransparentBackground = true;
+            this.CreateBtn.Click += new System.EventHandler(this.CreateBtn_Click);
             // 
             // AdminForm
             // 
@@ -496,6 +525,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
+            this.Controls.Add(this.CreateBtn);
             this.Controls.Add(this.AccessBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ServiceTypeBox);
@@ -521,7 +551,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.SignoutBtn);
             this.Name = "AdminForm";
-            this.Size = new System.Drawing.Size(1900, 1060);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.AdminForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
@@ -556,5 +586,6 @@
         private Guna.UI2.WinForms.Guna2Button DiscardBtn;
         private Guna.UI2.WinForms.Guna2Button SaveBtn;
         private System.Windows.Forms.DataGridView UserDGV;
+        private Guna.UI2.WinForms.Guna2Button CreateBtn;
     }
 }

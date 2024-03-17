@@ -76,11 +76,16 @@ namespace TriforceSalon
             TogglePassword.Checked = false;
             BirthdayPicker.Value = BirthdayPicker.MaxDate;
 
+            this.Visible = false;
+
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    //mainForm.ShowAdmin();
+
+
+
                     break;
                 }
             }
@@ -173,8 +178,14 @@ namespace TriforceSalon
                 $"Name: {Name}\n" +
                 $"Username: {Username}\n" +
                 $"Email: {Email}\n" +
-                $"Birthdate: {Birthdate}",
+                $"Birthdate: {Birthdate}" +
+                $"\n\nAre these information accurate?",
                 "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
 
             string hashedPassword = Method.HashString(Password);
 

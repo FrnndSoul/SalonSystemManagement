@@ -112,17 +112,19 @@
     <Compile Include="Class Components\ChangeImageSize.cs" />
     <Compile Include="Class Components\EmployeeTicketTransaction.cs" />
     <Compile Include="Class Components\GetServiceType&amp;ServiceData.cs" />
+    <Compile Include="Class Components\InputRestriction.cs" />
     <Compile Include="Class Components\LoadImages.cs" />
     <Compile Include="Class Components\PopulateDataGridView.cs" />
     <Compile Include="Class Components\SalonServices.cs" />
+    <Compile Include="Class Components\SellProductsMethods.cs" />
     <Compile Include="Class Components\ServiceTypes.cs" />
     <Compile Include="Class Components\TransactionMethods.cs" />
     <Compile Include="Class Components\RealTimeClock.cs" />
+    <Compile Include="Class Components\UserControlNavigator.cs" />
     <Compile Include="Custom Components\ButtonColorChangeOnHover.cs" />
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Microsoft\VisualBasic\Interaction.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,12 +182,6 @@
     <Compile Include="UserControls\ManagerPage.Designer.cs">
       <DependentUpon>ManagerPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ManagerServices.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ManagerServices.Designer.cs">
-      <DependentUpon>ManagerServices.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -227,6 +223,13 @@
     </Compile>
     <Compile Include="UserControls\Inventory Controls\RequestShipment Inventory.Designer.cs">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Sales\SalesClass.cs" />
+    <Compile Include="UserControls\Sales\SalesUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Sales\SalesUI.Designer.cs">
+      <DependentUpon>SalesUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ServiceType&amp;ServicePage.cs">
       <SubType>UserControl</SubType>
@@ -282,9 +285,6 @@
     <EmbeddedResource Include="UserControls\ManagerPage.resx">
       <DependentUpon>ManagerPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ManagerServices.resx">
-      <DependentUpon>ManagerServices.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Sales\SalesUI.resx">
+      <DependentUpon>SalesUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ServiceType&amp;ServicePage.resx">
       <DependentUpon>ServiceType&amp;ServicePage.cs</DependentUpon>
@@ -425,5 +428,6 @@
   <ItemGroup>
     <None Include="Resources\photo_2024-03-04_03-03-561.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,13 +24,13 @@ namespace TriforceSalon.Class_Components
             {
                 // Set the cell value to null to display an empty cell
                 e.ThrowException = false;
-                ManagerServices.managerServicesInstance.ServiceTypeDGV[e.ColumnIndex, e.RowIndex].Value = null;
+                ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV[e.ColumnIndex, e.RowIndex].Value = null;
             }
         }
 
         public void ServicesType_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            ManagerServices.managerServicesInstance.ServiceTypeDGV.AutoResizeRow(e.RowIndex, DataGridViewAutoSizeRowMode.AllCells);
+            ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.AutoResizeRow(e.RowIndex, DataGridViewAutoSizeRowMode.AllCells);
         }
 
         public void ServiceTypeImage(int ServiceID)
@@ -46,13 +46,13 @@ namespace TriforceSalon.Class_Components
                         Image image = Image.FromStream(ms);
 
                         // Set the PictureBox image only if the conversion succeeds
-                        ManagerServices.managerServicesInstance.ServiceTypePicB.Image = image;
+                        ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = image;
                     }
                 }
                 else
                 {
                     // Set PictureBox image to a default image or null if there's no image data
-                    ManagerServices.managerServicesInstance.ServiceTypePicB.Image = null;
+                    ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = null;
                 }
             }
             catch (ArgumentException ex)
@@ -62,7 +62,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Exception Details: " + ex.Message);
 
                 // Set PictureBox image to a default image or show an error image
-                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Error loading image: " + ex.Message);
 
                 // Set PictureBox image to a default image or show an error image
-                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
             }
         }
         public byte[] GetServiceTypeID(int ServiceTypeID)
@@ -118,13 +118,13 @@ namespace TriforceSalon.Class_Components
                         Image image = Image.FromStream(ms);
 
                         // Set the PictureBox image only if the conversion succeeds
-                        ManagerServices.managerServicesInstance.ServiceImagePicB.Image = image;
+                        ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = image;
                     }
                 }
                 else
                 {
                     // Set PictureBox image to a default image or null if there's no image data
-                    ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null;
+                    ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
                 }
             }
             catch (ArgumentException ex)
@@ -134,7 +134,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Exception Details: " + ex.Message);
 
                 // Set PictureBox image to a default image or show an error image
-                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Error loading image: " + ex.Message);
 
                 // Set PictureBox image to a default image or show an error image
-                ManagerServices.managerServicesInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
             }
         }
 
