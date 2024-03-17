@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +25,10 @@ namespace TriforceSalon.UserControls.Employee_Controls
             InitializeComponent();
             employeeLockInstance = this;
         }
-
+        private async void EmployeeLock_Load(object sender, EventArgs e)
+        {
+            await transaction.GetServicesAsync(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text);
+        }
         private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
             int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
@@ -46,6 +50,26 @@ namespace TriforceSalon.UserControls.Employee_Controls
             {
                 EmployeeDoneBtn.Enabled = true;
             }
+        }
+
+        private void AddServiceChckB_CheckedChanged(object sender, EventArgs e)
+        {
+            Guna2CheckBox checkbox = sender as Guna2CheckBox;
+
+            if (checkbox.Checked)
+            {
+                AddServicePanel.Enabled = false;
+            }
+            else
+            {
+                AddServicePanel.Enabled = true;
+            }
+        }
+
+        private async void ServiceListComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string serviceName = Convert.ToString(ServiceListComB.SelectedItem);
+            await transaction.GetServiceAmountAsync(serviceName);
         }
     }
 }

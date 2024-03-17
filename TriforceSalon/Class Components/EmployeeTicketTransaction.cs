@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Test;
 using TriforceSalon.UserControls;
+using TriforceSalon.UserControls.Employee_Controls;
 
 namespace TriforceSalon.Class_Components
 {
@@ -14,6 +15,7 @@ namespace TriforceSalon.Class_Components
     {
         private string mysqlcon;
         public byte[] servicePhoto;
+        public TransactionMethods transation = new TransactionMethods();
         public EmployeeTicketTransaction()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -22,7 +24,7 @@ namespace TriforceSalon.Class_Components
         public async Task ProcessTicketAsync(int ticketID)
         {
             DateTime startTime = DateTime.Now;
-            int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text);
+            int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberLbl.Text);
 
 
             DialogResult choices = MessageBox.Show("Are you sure you want to serve this customer?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -58,7 +60,7 @@ namespace TriforceSalon.Class_Components
         }
 
         //lagyan ito ng itemID para mabilis
-        public async Task FetchServiceImageAsync(string serviceName)
+        /*public async Task FetchServiceImageAsync(string serviceName)
         {
             try
             {
@@ -96,7 +98,7 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.Message, "Error in FetchServiceImage()");
             }
-        }
+        }*/
 
         public async Task EmployeeProcessCompleteAsync(int CustomerID)
         {
@@ -125,39 +127,87 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void PassValueToLock()
+        public async Task GetServicesAsync(string type)
         {
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerNameTxtB.Text = CustomerTicket.customerTicketInstance.NameLbl.Text;
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerAgeTxtB.Text = CustomerTicket.customerTicketInstance.AgeLbl.Text;
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerPNumTxtB.Text = CustomerTicket.customerTicketInstance.PhoneNumberLbl.Text;
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerServiceTxtB.Text = CustomerTicket.customerTicketInstance.ServiceVarLbl.Text;
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerIDTxtB.Text = CustomerTicket.customerTicketInstance.TicketLbl.Text;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "select ServiceName from salon_services where ServiceTypeID = @typeID";
+
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@typeID",transation.GetServiceTypeID(type));
+                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if(reader.HasRows)
+                            {
+                                while(await reader.ReadAsync())
+                                {
+                                    string servieName = reader["ServiceName"].ToString();
+                                    EmployeeLock.employeeLockInstance.ServiceListComB.Items.Add(servieName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetServicesAsync()");
+
+            }
         }
+
+        public async Task GetServiceAmountAsync(string name)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "select ServiceAmount from salon_services where ServiceName = @sName";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@sName", name);
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string servieAmount = reader["ServiceAmount"].ToString();
+                                    EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text = servieAmount;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetServiceAmountAsync()");
+
+            }
+        }
+
 
         public void ShowEmpLock()
         {
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = false;
+            //EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = true;
 
-            EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = false;
-            EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = false;
+           
 
         }
         public void ShowCustomerList()
         {
-            EmployeeUserConrols.employeeUserConrolsInstance.CustomerListFLowLayout.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = true;
+            //EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
 
-            EmployeeUserConrols.employeeUserConrolsInstance.label3.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label4.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label5.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label6.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label7.Visible = true;
-            EmployeeUserConrols.employeeUserConrolsInstance.label9.Visible = true;
+           
 
         }
     }
