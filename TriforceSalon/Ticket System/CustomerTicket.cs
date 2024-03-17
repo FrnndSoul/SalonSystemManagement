@@ -69,7 +69,7 @@ namespace TriforceSalon.Test
             try
             {
                 await empTransaction.ProcessTicketAsync(ticketID);
-                await empTransaction.FetchServiceImageAsync(serviceName);
+                //await empTransaction.FetchServiceImageAsync(serviceName);
 
                 EmployeeLock.employeeLockInstance.CustomerNameTxtB.Text = CName;
                 EmployeeLock.employeeLockInstance.CustomerAgeTxtB.Text = CAge;

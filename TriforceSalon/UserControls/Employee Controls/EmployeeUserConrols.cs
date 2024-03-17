@@ -25,6 +25,7 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
             employeeUserConrolsInstance = this;
+            WelcomeLbl.Text = "Welcome " + Method.Name;
             method.GetEmployeeInfo();
             serviceTypeName = ServiceTypeNameLbl.Text;
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
@@ -34,6 +35,7 @@ namespace TriforceSalon.UserControls
         private async void EmployeeUserConrols_Load(object sender, EventArgs e)
         {
             await LoadSpecialCustomersAsync(serviceTypeName, Convert.ToInt32(Method.AccountID));
+            await LoadGeneralCustomersAsync(serviceTypeName, Convert.ToInt32(Method.AccountID));
         }
 
         public async Task LoadSpecialCustomersAsync(string serviceTypeName, int ID)
@@ -52,7 +54,7 @@ namespace TriforceSalon.UserControls
                                     " FROM transaction t" +
                                     " WHERE ServiceType = @service_type" +
                                     " AND PaymentStatus = 'UNPAID'" +
-                                    " AND (EmployeeID = @employee_id OR EmployeeID = 0)" +
+                                    " AND EmployeeID = @employee_id" +
                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
 
 
@@ -65,7 +67,7 @@ namespace TriforceSalon.UserControls
                             var dataTable = new DataTable();
                             await adapter.FillAsync(dataTable);
 
-                            CustomerListFLowLayout.Controls.Clear();
+                            SpecialCustomerListFLowLayout.Controls.Clear();
 
                             foreach (DataRow row in dataTable.Rows)
                             {
@@ -76,12 +78,12 @@ namespace TriforceSalon.UserControls
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
-                                if (CustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
+                                if (SpecialCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
                                 var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
-                                CustomerListFLowLayout.Controls.Add(cutomer);
+                                SpecialCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
                             }
@@ -112,6 +114,7 @@ namespace TriforceSalon.UserControls
                                     " FROM transaction t" +
                                     " WHERE ServiceType = @service_type" +
                                     " AND PaymentStatus = 'UNPAID'" +
+                                    " AND EmployeeID = 0" +
                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
 
 
@@ -124,7 +127,7 @@ namespace TriforceSalon.UserControls
                             var dataTable = new DataTable();
                             await adapter.FillAsync(dataTable);
 
-                            CustomerListFLowLayout.Controls.Clear();
+                            GeneralCustomerListFLowLayout.Controls.Clear();
 
                             foreach (DataRow row in dataTable.Rows)
                             {
@@ -135,12 +138,12 @@ namespace TriforceSalon.UserControls
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
 
-                                if (CustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
+                                if (GeneralCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
                                 var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
-                                CustomerListFLowLayout.Controls.Add(cutomer);
+                                GeneralCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
                             }
@@ -152,28 +155,6 @@ namespace TriforceSalon.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in LoadCustomer()");
-            }
-        }
-
-        private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
-        {
-            int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
-            transaction.ShowCustomerList();
-
-            EmployeeDoneBtn.Enabled = false;
-            await transaction.EmployeeProcessCompleteAsync(CustID);
-
-            try
-            {
-                await LoadSpecialCustomersAsync(ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                EmployeeDoneBtn.Enabled = true;
             }
         }
 
