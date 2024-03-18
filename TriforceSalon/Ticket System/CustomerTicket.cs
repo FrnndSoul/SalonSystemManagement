@@ -53,7 +53,7 @@ namespace TriforceSalon.Test
             string CAge = AgeLbl.Text;
             string PNumber = PhoneNumberLbl.Text;
             string Cserviec = ServiceVarLbl.Text;
-            string prio = PrioStatusLbl.Text;
+            //string prio = PrioStatusLbl.Text;
 
             /*MessageBox.Show(Convert.ToString(ticketID));
             MessageBox.Show(CName);

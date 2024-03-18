@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using TriforceSalon.Test;
 using TriforceSalon.UserControls;
 using TriforceSalon.UserControls.Employee_Controls;
+using TriforceSalon.UserControls.Receptionist_Controls;
 
 namespace TriforceSalon.Class_Components
 {
@@ -107,12 +108,47 @@ namespace TriforceSalon.Class_Components
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID;" +
-                        "Update employee_records set TimeEnd = @endTime where CustomerID = @custumer_ID";
+                    //original query
+                    /*string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID;" +
+                        "Update employee_records set TimeEnd = @endTime where CustomerID = @custumer_ID";*/
+
+                    //test query
+                    /*string query = "Update customer_info set PaymentStatus = 'PROCESSED where TransactionID = @customer_ID";
+
+                    if(EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
+                    {
+                        query += " Insert into service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount)" +
+                            "values (@service_groupID, @service_variation, @service_varID, @amount);" +
+                            "Update employee_records set TimeEnd = @endTime where CustomerID = @customer_ID";
+                    }
+                    else
+                    {
+                        query += "Update employee_records set TimeEnd = @endTime where CustomerID = @customer_ID";
+                    }*/
+
+                    string query = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
+
+                    if (EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
+                    {
+                        query += "; INSERT INTO service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount) " +
+                                 "VALUES (@service_groupID, @service_variation, @service_varID, @amount);" +
+
+                                 " UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+                    }
+                    else
+                    {
+                        query += "; UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+                    }
+
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@custumer_ID", CustomerID);
+                        command.Parameters.AddWithValue("@service_groupID", CustomerID);
+                        command.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
+                        command.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
+                        command.Parameters.AddWithValue("@amount", Convert.ToDecimal(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text));
+
+                        command.Parameters.AddWithValue("@customer_ID", CustomerID);
                         command.Parameters.AddWithValue("@endTime", DateTime.Now);
 
                         await command.ExecuteNonQueryAsync();
@@ -127,7 +163,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task GetServicesAsync(string type)
+        public async Task GetServicesAsync(int type)
         {
             try
             {
@@ -138,7 +174,7 @@ namespace TriforceSalon.Class_Components
 
                     using(MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@typeID",transation.GetServiceTypeID(type));
+                        command.Parameters.AddWithValue("@typeID", type);
                         using(DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if(reader.HasRows)
@@ -196,18 +232,29 @@ namespace TriforceSalon.Class_Components
 
         public void ShowEmpLock()
         {
-            EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = false;
+            //EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = false;
             //EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = true;
 
-           
+            EmployeeLock employeeLock = new EmployeeLock();
+            UserControlNavigator.ShowControl(employeeLock, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
 
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.SpecialQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLogOutBtn.Visible = false;
         }
         public void ShowCustomerList()
         {
-            EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = true;
+            //EmployeeUserConrols.employeeUserConrolsInstance.GeneralCustomerListFLowLayout.Visible = true;
             //EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockPanel.Visible = false;
 
-           
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.SpecialQPanel.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLogOutBtn.Visible = true;
+
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = false;
+
+
 
         }
     }

@@ -15,10 +15,17 @@ namespace TriforceSalon.Class_Components
 {
     public class SellProductsMethods
     {
-        public SellProductsMethods()
-        {
+        public delegate void UpdateTotalPriceDelegate();
+        public delegate void AddTotalPriceDelegate(int rowIndex);
+        private readonly UpdateTotalPriceDelegate updateTotalPrice;
+        private readonly AddTotalPriceDelegate addTotalPrice;
 
+        public SellProductsMethods(UpdateTotalPriceDelegate updateTotalPrice, AddTotalPriceDelegate addTotalPrice)
+        {
+            this.updateTotalPrice = updateTotalPrice;
+            this.addTotalPrice = addTotalPrice;
         }
+        
 
         /*public async Task LoadItemsInSales(FlowLayoutPanel sellFlowlayout, string mysqlcon)
         {
@@ -284,6 +291,7 @@ namespace TriforceSalon.Class_Components
                         int currentQty = int.Parse(row.Cells[2].Value.ToString());
                         row.Cells[2].Value = (currentQty + 1).ToString();
                         found = true;
+                        addTotalPrice?.Invoke(row.Index);
                         break;
                     }
                 }
@@ -291,6 +299,7 @@ namespace TriforceSalon.Class_Components
                 if (!found)
                 {
                     dataGridView.Rows.Add(serviceName, "-", "1", "+", serviceAmount, "Bin");
+                    updateTotalPrice?.Invoke();
                 }
             }
         }

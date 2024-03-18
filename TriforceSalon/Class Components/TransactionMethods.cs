@@ -30,20 +30,33 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "insert into transaction (TransactionID, EmployeeID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
-                        "values(@transactionID, @pref_emp, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    /*string query = "insert into transaction (TransactionID, EmployeeID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
+                        "values(@transactionID, @pref_emp, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";*/
+
+                    string testQuery = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, EmployeeID, ServiceType, ServiceGroupID)" +
+                            " Values (@transactionID, @customer_name, @customer_age, @customer_number, @pref_emp, @service_type, @service_groupID);" +
+
+                            "insert into service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount)" +
+                            " values(@service_groupID, @service_var, @service_varID, @amount);";
+
+
+                    using (MySqlCommand command = new MySqlCommand(testQuery, conn))
                     {
+                        //for custoemr_info
                         command.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
                         command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                         command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
-                        command.Parameters.AddWithValue("@amount", Convert.ToDecimal(ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text));
-                        command.Parameters.AddWithValue("@time_taken", DateTime.Now);
-                        command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
                         command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
+
+                        //for service_group
+                        command.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+                        command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
                         command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
 
+                        command.Parameters.AddWithValue("@amount", Convert.ToDecimal(ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text));
+
+                        //command.Parameters.AddWithValue("@time_taken", DateTime.Now);
                         //palitan ito
                         //command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
 
@@ -62,8 +75,6 @@ namespace TriforceSalon.Class_Components
                         MessageBox.Show("Customer Added to the Queue", "Customer Process", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearProcess();
                         ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text = Convert.ToString(GenerateTransactionID());
-
-
                     }
                 }
             }
