@@ -193,6 +193,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ticket System\AppointmentTicket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticket System\AppointmentTicket.Designer.cs">
+      <DependentUpon>AppointmentTicket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ticket System\CustomerTicket.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ticket System\AppointmentTicket.resx">
+      <DependentUpon>AppointmentTicket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ticket System\CustomerTicket.resx">
       <DependentUpon>CustomerTicket.cs</DependentUpon>
     </EmbeddedResource>
