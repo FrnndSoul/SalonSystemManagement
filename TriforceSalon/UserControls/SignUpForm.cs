@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -66,7 +67,7 @@ namespace TriforceSalon
 
         public void BackBtn_Click(object sender, EventArgs e)
         {
-            NameBox.Text = "";
+            /*NameBox.Text = "";
             UsernameBox.Text = "";
             EmailBox.Text = "";
             PasswordBox.Text = "";
@@ -76,16 +77,14 @@ namespace TriforceSalon
             TogglePassword.Checked = false;
             BirthdayPicker.Value = BirthdayPicker.MaxDate;
 
-            this.Visible = false;
+            this.Visible = false;*/
 
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
-                    //mainForm.ShowAdmin();
-
-
-
+                    AdminForm adminForm = new AdminForm();
+                    UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
