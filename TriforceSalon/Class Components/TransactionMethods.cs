@@ -1,18 +1,42 @@
-﻿using Guna.UI2.WinForms;
+﻿/*using Guna.UI2.WinForms;
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout.Borders;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
-using System.Transactions;
-using System.Web.Util;
+using System.Windows.Forms;
+using TriforceSalon.UserControls.Receptionist_Controls;*/
+
+using Guna.UI2.WinForms;
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout.Borders;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.UserControls.Receptionist_Controls;
+using ZstdSharp.Unsafe;
+using Color = System.Drawing.Color;
+using Image = System.Drawing.Image;
+using Table = iText.Layout.Element.Table;
+using TextAlignment = iText.Layout.Properties.TextAlignment;
+
 
 namespace TriforceSalon.Class_Components
 {
@@ -281,10 +305,18 @@ namespace TriforceSalon.Class_Components
                     }
 
                     await InsertToSales(salesID, orderID);
-
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearContents();
                     //GeneratePurchaseOnlyReceipt();
+                    GeneratePDFReceipt(SellProductsUserControls.sellProductsUserControlsInstance.ProductsControlDGV,
+                        SellProductsUserControls.sellProductsUserControlsInstance.SubLbl,
+                        SellProductsUserControls.sellProductsUserControlsInstance.DiscLbl,
+                        SellProductsUserControls.sellProductsUserControlsInstance.TotLbl,
+                        SellProductsUserControls.sellProductsUserControlsInstance.CashTxtBx,
+                        SellProductsUserControls.sellProductsUserControlsInstance.discChckBx,
+                        SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB,
+                        ID);
+
+                    ClearContents();
 
                 }
             }
@@ -294,6 +326,158 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public void GeneratePDFReceipt(Guna2DataGridView guna2DataGridView1, Label sbLbl, Label dscLbl, Label ttlLbl, Guna2TextBox cashtxtBx, Guna2CheckBox discChckBx, Guna2TextBox custName, int ID)
+        {
+            decimal subtotal = decimal.Parse(sbLbl.Text.Replace("Php. ", ""));
+            decimal discount = decimal.Parse(dscLbl.Text.Replace("Php. ", ""));
+            decimal totalAmount = decimal.Parse(ttlLbl.Text.Replace("Php. ", ""));
+            string serviceText = custName.Text;
+            decimal cashEntered;
+
+            int totalQuantity = 0;
+
+            if (!decimal.TryParse(cashtxtBx.Text, out cashEntered))
+            {
+                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (cashEntered < totalAmount)
+            {
+                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            {
+                saveFileDialog1.Filter = "PDF Files|*.pdf";
+                saveFileDialog1.Title = "Save PDF File";
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string pdfFilePath = saveFileDialog1.FileName;
+
+                    using (PdfWriter writer = new PdfWriter(new FileStream(pdfFilePath, FileMode.Create)))
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    using (iText.Layout.Document doc = new iText.Layout.Document(pdf))
+                    {
+                        doc.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.JUSTIFIED_ALL);
+                        ImageData logoImageData = ImageDataFactory.Create(GetBytesFromImage(Properties.Resources.SignInDesignLogo));
+                        iText.Layout.Element.Image logo = new iText.Layout.Element.Image(logoImageData);
+                        logo.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+                        logo.SetWidth(200);
+                        logo.SetHeight(200);
+
+                        doc.Add(logo);
+                        doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph("Tel NO : (02) 4568-2996").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("Mobile NO : (0993) 369-4904").SetTextAlignment(TextAlignment.LEFT));
+                        //doc.Add(new Paragraph($"Served by: {positionDB} {usernameDB}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Served by: " + Method.Name).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Served to: {serviceText}").SetTextAlignment(TextAlignment.LEFT));
+                        //doc.Add(new Paragraph($"Order #{orderid} ").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Order #" + ID).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
+
+                        Table table = new Table(4);
+                        table.SetWidth(UnitValue.CreatePercentValue(100));
+                        table.SetTextAlignment(TextAlignment.CENTER);
+                        table.AddCell(new Cell().Add(new Paragraph("QUANTITY")).SetBorder(Border.NO_BORDER));
+                        table.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
+                        table.AddCell(new Cell().Add(new Paragraph("PRODUCT")).SetBorder(Border.NO_BORDER));
+                        table.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
+
+                        foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                        {
+                            string product = row.Cells[0].Value.ToString();
+                            string quantity = row.Cells[2].Value.ToString();
+                            string totalprice = row.Cells[4].Value.ToString();
+                            string variationCost = GetVariationCost(product);
+                            if (int.TryParse(quantity, out int quantityValue))
+                            {
+                                totalQuantity += quantityValue;
+                            }
+
+                            table.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
+                            table.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER));
+                            table.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
+                            table.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER));
+                        }
+
+                        doc.Add(table);
+
+                        Table table1 = new Table(2);
+                        table1.SetWidth(UnitValue.CreatePercentValue(100));
+                        table1.SetTextAlignment(TextAlignment.LEFT);
+                        decimal change = cashEntered - totalAmount;
+
+                        AddReceiptDetailRow(table1, "SUBTOTAL:", $"Php. {subtotal.ToString("0.00")}");
+                        AddReceiptDetailRow(table1, "DISCOUNT:", $"Php. {discount.ToString("0.00")}");
+                        AddReceiptDetailRow(table1, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}");
+                        AddReceiptDetailRow(table1, "CASH:", $"Php. {cashEntered.ToString("0.00")}");
+                        AddReceiptDetailRow(table1, "CHANGE:", $"Php. {change.ToString("0.00")}");
+
+                        doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
+                        doc.Add(table1);
+                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
+                        doc.Add(new Paragraph("THIS RECEIPT SERVES AS YOUR PROOF OF PURCHASE").SetTextAlignment(TextAlignment.CENTER));
+                    }
+
+                    MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "🎉 Congrats on your purchase at TriCharm Salon! 🎉", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    guna2DataGridView1.Rows.Clear();
+                    sbLbl.Text = "Php. 0.00";
+                    ttlLbl.Text = "Php. 0.00";
+                    dscLbl.Text = "Php. 0.00";
+                    cashtxtBx.Text = "";
+                    discChckBx.Checked = false;
+                    cashtxtBx.ForeColor = Color.LightGray;
+                    System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
+
+                }
+            }
+        }
+        private string GetVariationCost(string variationName)
+        {
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                conn.Open();
+                string query = "SELECT Cost FROM inventory WHERE ItemName = @ItemName";
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@ItemName", variationName);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        string variationCost = "0.00";
+                        while (reader.Read())
+                        {
+                            variationCost = reader["Cost"].ToString();
+                        }
+                        return variationCost;
+                    }
+                }
+            }
+        }
+
+
+        void AddReceiptDetailRow(Table table, string description, string value)
+        {
+            table.AddCell(new Cell().Add(new Paragraph(description)).SetBorder(Border.NO_BORDER));
+            table.AddCell(new Cell().Add(new Paragraph(value)).SetTextAlignment(TextAlignment.RIGHT).SetBorder(Border.NO_BORDER));
+        }
+
+        private byte[] GetBytesFromImage(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
         public async Task InsertToSales(int saleID, int ID)
         {
            

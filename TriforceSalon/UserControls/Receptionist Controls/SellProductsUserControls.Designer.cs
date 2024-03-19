@@ -517,9 +517,7 @@
         private System.Windows.Forms.Label cLbl;
         private System.Windows.Forms.Label cashLbl;
         private System.Windows.Forms.Label totalLbl;
-        private System.Windows.Forms.Label DiscLbl;
         private System.Windows.Forms.Label discL;
-        private System.Windows.Forms.Label SubLbl;
         private System.Windows.Forms.Label sbLbl;
         private Guna.UI2.WinForms.Guna2Button VoidBtn;
         private Guna.UI2.WinForms.Guna2Button PaymentBtn;
@@ -533,11 +531,13 @@
         private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
         private Guna.UI2.WinForms.Guna2Button AllProductsBtn;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2CheckBox discChckBx;
         private System.Windows.Forms.Label label2;
         public Guna.UI2.WinForms.Guna2ComboBox CustomerIDComB;
         public Guna.UI2.WinForms.Guna2TextBox CashTxtBx;
         public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
         public System.Windows.Forms.Label TotLbl;
+        public System.Windows.Forms.Label DiscLbl;
+        public System.Windows.Forms.Label SubLbl;
+        public Guna.UI2.WinForms.Guna2CheckBox discChckBx;
     }
 }

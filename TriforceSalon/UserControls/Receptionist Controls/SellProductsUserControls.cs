@@ -313,13 +313,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 else
                 {
-                   /* string tID = Convert.ToString(transaction.GenerateTransactionID());
-                    string sID = Convert.ToString(transaction.SalesID());*/
-
-                  /*  MessageBox.Show(tID, "Transaction ID");
-                    MessageBox.Show(sID, "Sales ID");*/
-
-
                     await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
                 }
 
