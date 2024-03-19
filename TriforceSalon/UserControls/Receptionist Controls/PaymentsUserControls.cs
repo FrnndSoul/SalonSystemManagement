@@ -5,6 +5,7 @@ using System;
 using System.Data.Common;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -14,6 +15,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
+        public TransactionMethods transaction = new TransactionMethods();
 
         public decimal totalPrice = 0;
 
@@ -229,7 +231,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
@@ -417,6 +419,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AmountBox.Text = "";
             DiscountBox.Text = "";
 
+            ProductsBoughtDGV.Rows.Clear();
+            ServiceAcquiredDGV.Rows.Clear();
+
             PaymentPanel.Enabled = false;
 
             PWDCheckbox.Checked = false;
@@ -440,33 +445,36 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void CashPayment_Click(object sender, EventArgs e)
+        private async void CashPayment_Click(object sender, EventArgs e)
         {
+            long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
+
             string userInput = ShowInputDialog("Enter the amount of customer's money:", "Cash Payment");
 
             if (!string.IsNullOrEmpty(userInput))
             {
-                int cash = Convert.ToInt32(userInput);
-                if (cash < Convert.ToInt32(AmountBox.Text))
+                decimal cash = Convert.ToDecimal(userInput);
+                if (cash < Convert.ToDecimal(AmountBox.Text))
                 {
                     MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    if (cash > Convert.ToInt32(AmountBox.Text))
+                    if (cash > Convert.ToDecimal(AmountBox.Text))
                     {
                         //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ChangePaymentStatus("PAID");
-
+                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     }
                     else
                     {
                         MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ChangePaymentStatus("PAID");
-
+                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     }
-                    ChangePaymentStatus("PAID");
+                   /* ChangePaymentStatus("PAID");
+                    await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
                     DefaultLoad();
                 }
             }

@@ -334,7 +334,7 @@ namespace TriforceSalon.Class_Components
 
         public void ClearContents()
         {
-            SellProductsUserControls.sellProductsUserControlsInstance.ProductsControlDGV.ClearSelection();
+            SellProductsUserControls.sellProductsUserControlsInstance.ProductsControlDGV.Rows.Clear();
             SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = null;
             SellProductsUserControls.sellProductsUserControlsInstance.CustomerIDComB.SelectedItem = null;
             SellProductsUserControls.sellProductsUserControlsInstance.CashTxtBx.Text = null;
