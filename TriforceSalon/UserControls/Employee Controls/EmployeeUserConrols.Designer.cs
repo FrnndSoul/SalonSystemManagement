@@ -38,13 +38,14 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl = new System.Windows.Forms.Label();
             this.EmployeeNameLbl = new System.Windows.Forms.Label();
             this.SpecialCustomerListFLowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.GeneralQPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.SpecialQPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
+            this.EmployeeLockContent = new System.Windows.Forms.Panel();
+            this.GeneralQPanel.SuspendLayout();
+            this.SpecialQPanel.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@ namespace TriforceSalon.UserControls
             this.TimerLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.TimerLbl.Location = new System.Drawing.Point(1177, 35);
             this.TimerLbl.Name = "TimerLbl";
-            this.TimerLbl.Size = new System.Drawing.Size(718, 156);
+            this.TimerLbl.Size = new System.Drawing.Size(718, 120);
             this.TimerLbl.TabIndex = 11;
             this.TimerLbl.Text = "Time";
             this.TimerLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -65,7 +66,7 @@ namespace TriforceSalon.UserControls
             this.EmpNumberLbl.BackColor = System.Drawing.Color.Transparent;
             this.EmpNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpNumberLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EmpNumberLbl.Location = new System.Drawing.Point(11, 158);
+            this.EmpNumberLbl.Location = new System.Drawing.Point(11, 130);
             this.EmpNumberLbl.Name = "EmpNumberLbl";
             this.EmpNumberLbl.Size = new System.Drawing.Size(245, 39);
             this.EmpNumberLbl.TabIndex = 8;
@@ -108,7 +109,7 @@ namespace TriforceSalon.UserControls
             this.WelcomeLbl.BackColor = System.Drawing.Color.Transparent;
             this.WelcomeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WelcomeLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.WelcomeLbl.Location = new System.Drawing.Point(3, 33);
+            this.WelcomeLbl.Location = new System.Drawing.Point(3, 5);
             this.WelcomeLbl.Name = "WelcomeLbl";
             this.WelcomeLbl.Size = new System.Drawing.Size(372, 117);
             this.WelcomeLbl.TabIndex = 2;
@@ -120,7 +121,7 @@ namespace TriforceSalon.UserControls
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label1.Location = new System.Drawing.Point(596, 158);
+            this.label1.Location = new System.Drawing.Point(596, 130);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 39);
             this.label1.TabIndex = 12;
@@ -132,7 +133,7 @@ namespace TriforceSalon.UserControls
             this.EmpAccNumberLbl.BackColor = System.Drawing.Color.Transparent;
             this.EmpAccNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpAccNumberLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EmpAccNumberLbl.Location = new System.Drawing.Point(262, 158);
+            this.EmpAccNumberLbl.Location = new System.Drawing.Point(262, 130);
             this.EmpAccNumberLbl.Name = "EmpAccNumberLbl";
             this.EmpAccNumberLbl.Size = new System.Drawing.Size(110, 39);
             this.EmpAccNumberLbl.TabIndex = 13;
@@ -144,7 +145,7 @@ namespace TriforceSalon.UserControls
             this.ServiceTypeNameLbl.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTypeNameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(745, 158);
+            this.ServiceTypeNameLbl.Location = new System.Drawing.Point(745, 130);
             this.ServiceTypeNameLbl.Name = "ServiceTypeNameLbl";
             this.ServiceTypeNameLbl.Size = new System.Drawing.Size(110, 39);
             this.ServiceTypeNameLbl.TabIndex = 14;
@@ -156,7 +157,7 @@ namespace TriforceSalon.UserControls
             this.EmployeeNameLbl.BackColor = System.Drawing.Color.Transparent;
             this.EmployeeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmployeeNameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EmployeeNameLbl.Location = new System.Drawing.Point(367, 33);
+            this.EmployeeNameLbl.Location = new System.Drawing.Point(367, 5);
             this.EmployeeNameLbl.Name = "EmployeeNameLbl";
             this.EmployeeNameLbl.Size = new System.Drawing.Size(372, 117);
             this.EmployeeNameLbl.TabIndex = 15;
@@ -173,16 +174,16 @@ namespace TriforceSalon.UserControls
             this.SpecialCustomerListFLowLayout.Size = new System.Drawing.Size(913, 462);
             this.SpecialCustomerListFLowLayout.TabIndex = 1;
             // 
-            // guna2Panel1
+            // GeneralQPanel
             // 
-            this.guna2Panel1.BorderRadius = 50;
-            this.guna2Panel1.Controls.Add(this.label2);
-            this.guna2Panel1.Controls.Add(this.GeneralCustomerListFLowLayout);
-            this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(-53, 288);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(999, 705);
-            this.guna2Panel1.TabIndex = 16;
+            this.GeneralQPanel.BorderRadius = 50;
+            this.GeneralQPanel.Controls.Add(this.label2);
+            this.GeneralQPanel.Controls.Add(this.GeneralCustomerListFLowLayout);
+            this.GeneralQPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.GeneralQPanel.Location = new System.Drawing.Point(-53, 288);
+            this.GeneralQPanel.Name = "GeneralQPanel";
+            this.GeneralQPanel.Size = new System.Drawing.Size(999, 705);
+            this.GeneralQPanel.TabIndex = 16;
             // 
             // label2
             // 
@@ -195,16 +196,16 @@ namespace TriforceSalon.UserControls
             this.label2.TabIndex = 1;
             this.label2.Text = "General Queue";
             // 
-            // guna2Panel2
+            // SpecialQPanel
             // 
-            this.guna2Panel2.BorderRadius = 50;
-            this.guna2Panel2.Controls.Add(this.label3);
-            this.guna2Panel2.Controls.Add(this.SpecialCustomerListFLowLayout);
-            this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
-            this.guna2Panel2.Location = new System.Drawing.Point(965, 288);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(999, 705);
-            this.guna2Panel2.TabIndex = 17;
+            this.SpecialQPanel.BorderRadius = 50;
+            this.SpecialQPanel.Controls.Add(this.label3);
+            this.SpecialQPanel.Controls.Add(this.SpecialCustomerListFLowLayout);
+            this.SpecialQPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.SpecialQPanel.Location = new System.Drawing.Point(965, 288);
+            this.SpecialQPanel.Name = "SpecialQPanel";
+            this.SpecialQPanel.Size = new System.Drawing.Size(999, 705);
+            this.SpecialQPanel.TabIndex = 17;
             // 
             // label3
             // 
@@ -229,23 +230,33 @@ namespace TriforceSalon.UserControls
             this.guna2Panel3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.guna2Panel3.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(1928, 224);
+            this.guna2Panel3.Size = new System.Drawing.Size(1928, 183);
             this.guna2Panel3.TabIndex = 18;
+            // 
+            // EmployeeLockContent
+            // 
+            this.EmployeeLockContent.BackColor = System.Drawing.Color.Transparent;
+            this.EmployeeLockContent.Location = new System.Drawing.Point(320, 212);
+            this.EmployeeLockContent.Name = "EmployeeLockContent";
+            this.EmployeeLockContent.Size = new System.Drawing.Size(1281, 840);
+            this.EmployeeLockContent.TabIndex = 19;
             // 
             // EmployeeUserConrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.SpecialQPanel);
+            this.Controls.Add(this.GeneralQPanel);
             this.Controls.Add(this.EmployeeLogOutBtn);
-            this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.guna2Panel3);
+            this.Controls.Add(this.EmployeeLockContent);
+            this.DoubleBuffered = true;
             this.Name = "EmployeeUserConrols";
             this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.EmployeeUserConrols_Load);
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel2.ResumeLayout(false);
+            this.GeneralQPanel.ResumeLayout(false);
+            this.SpecialQPanel.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -262,10 +273,11 @@ namespace TriforceSalon.UserControls
         public System.Windows.Forms.Label ServiceTypeNameLbl;
         public System.Windows.Forms.Label EmployeeNameLbl;
         public System.Windows.Forms.FlowLayoutPanel SpecialCustomerListFLowLayout;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        public Guna.UI2.WinForms.Guna2Panel GeneralQPanel;
+        public Guna.UI2.WinForms.Guna2Panel SpecialQPanel;
+        public System.Windows.Forms.Panel EmployeeLockContent;
     }
 }

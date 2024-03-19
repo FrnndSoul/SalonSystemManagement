@@ -8,6 +8,7 @@ using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
+using TriforceSalon.UserControls.Employee_Controls;
 
 namespace TriforceSalon.UserControls
 {
@@ -31,6 +32,8 @@ namespace TriforceSalon.UserControls
             userClock = new RealTimeClock(TimerLbl, "dddd, dd MMMM yyyy (hh:mm:ss tt)");
             transaction.ShowCustomerList();
 
+            EmployeeLock employeeLock = new EmployeeLock();
+            UserControlNavigator.ShowControl(employeeLock, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
         }
         private async void EmployeeUserConrols_Load(object sender, EventArgs e)
         {
@@ -45,7 +48,7 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT t.CustomerName," +
+                   /* string query = "SELECT t.CustomerName," +
                                     " t.CustomerAge, " +
                                     " t.CustomerPhoneNumber, " +
                                     " t.ServiceVariation, " +
@@ -55,10 +58,24 @@ namespace TriforceSalon.UserControls
                                     " WHERE ServiceType = @service_type" +
                                     " AND PaymentStatus = 'UNPAID'" +
                                     " AND EmployeeID = @employee_id" +
-                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    string testQuery = "SELECT ci.CustomerName, " +
+                                    "ci.CustomerAge, " +
+                                    "ci.CustomerPhoneNumber, " +
+                                    "ci.PriorityStatus, " +
+                                    "sg.ServiceVariation, " +
+                                    "ci.TransactionID " + 
+                                    "FROM customer_info ci " + 
+                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " + 
+                                    "WHERE ci.ServiceType = @service_type " + 
+                                    "AND ci.PaymentStatus = 'UNPAID' " + 
+                                    "AND ci.EmployeeID = @employee_id " + 
+                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken"; 
 
 
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
+
+                    using (MySqlCommand command = new MySqlCommand(testQuery, conn))
                     {
                         command.Parameters.AddWithValue("@service_type", serviceTypeName);
                         command.Parameters.AddWithValue("@employee_id", ID);
@@ -105,7 +122,7 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT t.CustomerName," +
+                    /*string query = "SELECT t.CustomerName," +
                                     " t.CustomerAge, " +
                                     " t.CustomerPhoneNumber, " +
                                     " t.ServiceVariation, " +
@@ -115,13 +132,26 @@ namespace TriforceSalon.UserControls
                                     " WHERE ServiceType = @service_type" +
                                     " AND PaymentStatus = 'UNPAID'" +
                                     " AND EmployeeID = 0" +
-                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";
+                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    string testQuery = "SELECT ci.CustomerName, " +
+                                    "ci.CustomerAge, " +
+                                    "ci.CustomerPhoneNumber, " +
+                                    "ci.PriorityStatus, " +
+                                    "sg.ServiceVariation, " +
+                                    "ci.TransactionID " +
+                                    "FROM customer_info ci " +
+                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                    "WHERE ci.ServiceType = @service_type " +
+                                    "AND ci.PaymentStatus = 'UNPAID' " +
+                                    "AND ci.EmployeeID = 0 " +
+                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
 
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    using (MySqlCommand command = new MySqlCommand(testQuery, conn))
                     {
                         command.Parameters.AddWithValue("@service_type", serviceTypeName);
-                        command.Parameters.AddWithValue("@employee_id", ID);
+                        //command.Parameters.AddWithValue("@employee_id", ID);
                         using (var adapter = new MySqlDataAdapter(command))
                         {
                             var dataTable = new DataTable();
