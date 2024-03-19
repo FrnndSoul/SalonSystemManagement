@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Drawing;
+using System.Transactions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using static TriforceSalon.Class_Components.SellProductsMethods;
@@ -10,12 +11,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class SellProductsUserControls : UserControl
     {
+        public static SellProductsUserControls sellProductsUserControlsInstance;
+        TransactionMethods transaction = new TransactionMethods();
         SellProductsMethods sellMethods;
         private readonly string mysqlcon;
         private decimal totalPrice = 0.00m;
         public SellProductsUserControls()
         {
             InitializeComponent();
+            sellProductsUserControlsInstance = this;
             UpdateTotalPriceDelegate updateTotalPriceDelegate = UpdateTotalPrice;
             AddTotalPriceDelegate addTotalPriceDelegate = AddTotalPrice;
             sellMethods = new SellProductsMethods(updateTotalPriceDelegate, addTotalPriceDelegate);
@@ -29,6 +33,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             try
             {
                 await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon, ProductsControlDGV);
+                await transaction.GetAllUnfinishedTickets();
             }
             catch (Exception ex)
             {
@@ -292,6 +297,43 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             RefreshPlaceButtonState();
             CheckVoidButtonState();
 
+        }
+
+        private async void PaymentBtn_Click(object sender, EventArgs e)
+        {
+            int salesID = transaction.GenerateTransactionID();
+            int orderID = transaction.GenerateTransactionID();
+
+            if (CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
+            {
+                if (CustomerNameTxtB.Text == null)
+                {
+                    MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                else
+                {
+                   /* string tID = Convert.ToString(transaction.GenerateTransactionID());
+                    string sID = Convert.ToString(transaction.SalesID());*/
+
+                  /*  MessageBox.Show(tID, "Transaction ID");
+                    MessageBox.Show(sID, "Sales ID");*/
+
+
+                    await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                }
+
+                //dito ilalagay yung method to process na rekta resibo na
+            }
+            else
+            {
+                //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
+                int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
+                MessageBox.Show(Convert.ToString(ID));
+                await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+
+
+            }
         }
     }
 }
