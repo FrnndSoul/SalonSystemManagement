@@ -368,6 +368,40 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AmountBox.Text = Convert.ToString(totalCombinedPrice);
         }
 
+        public async Task SendToSales(long transactionID, int salesID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "Insert into sales (SaleID, OrderID, SaleDate, Amount) values (@saleID, @orderID, @saleDate, @totAmount)";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        /*string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
+                        string numericValue = totalText.Replace("Php.", "").Trim();
+                        decimal.TryParse(numericValue, out decimal totalAmount);*/
+
+                        decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
+
+                        command.Parameters.AddWithValue("@saleID", salesID);
+                        command.Parameters.AddWithValue("@orderID", transactionID);
+                        command.Parameters.AddWithValue("@saleDate", DateTime.Now);
+                        command.Parameters.AddWithValue("@totAmount", totalAmount);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in SendToSales");
+            }
+        }
+
 
 
         public void DefaultLoad()
@@ -377,8 +411,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AgeBox.Text = "";
             PhoneNumberBox.Text = "";
             ServiceTypeBox.Text = "";
-            ServiceVariationBox.Text = "";
-            ServiceVariationIDBox.Text = "";
+            /*ServiceVariationBox.Text = "";
+            ServiceVariationIDBox.Text = "";*/
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
