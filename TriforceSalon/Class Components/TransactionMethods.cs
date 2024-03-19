@@ -65,7 +65,8 @@ namespace TriforceSalon.Class_Components
                         //command.Parameters.AddWithValue("@pref_emp", GetEmployeeID(Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem)));
 
                         if (Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem) == null ||
-                            Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem) == "None")
+                            Convert.ToString(ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem) == "None" ||
+                            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedIndex == -1)
                         {
                             command.Parameters.AddWithValue("@pref_emp", 0);
                         }
@@ -472,6 +473,7 @@ namespace TriforceSalon.Class_Components
             ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text = null;
             ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text = null;
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedItem = null;
+            ServicesUserControl.servicesUserControlInstance.PEmployeeComB.SelectedIndex = -1;
 
         }
     }

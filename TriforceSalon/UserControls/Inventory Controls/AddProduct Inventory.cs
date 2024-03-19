@@ -53,8 +53,9 @@ namespace TriforceSalon.UserControls
             string ID = IDBox.Text;
             string Cost = CostBox.Text;
             string Aggregate = AggregateBox.Text;
+            string SRP = SRPTxtB.Text;
 
-            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate))
+            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(SRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -70,14 +71,15 @@ namespace TriforceSalon.UserControls
                 {
                     connection.Open();
                     string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`,`Photo`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status, @photo)";
+                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, 'SRP', `Aggregate`, `Status`,`Photo`) VALUES" +
+                        "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
                         querycmd.Parameters.AddWithValue("@itemName", Name);
                         querycmd.Parameters.AddWithValue("@stock", 0);
                         querycmd.Parameters.AddWithValue("@cost", Cost);
+                        querycmd.Parameters.AddWithValue("@srp", SRP);
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);

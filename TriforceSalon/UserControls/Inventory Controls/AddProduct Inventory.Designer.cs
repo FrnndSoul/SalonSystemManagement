@@ -41,6 +41,8 @@
             this.AddProduct = new Guna.UI2.WinForms.Guna2Button();
             this.PhotoBox = new Guna.UI2.WinForms.Guna2PictureBox();
             this.UploadPhoto = new Guna.UI2.WinForms.Guna2Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.SRPTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label5.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(537, 511);
+            this.label5.Location = new System.Drawing.Point(550, 511);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(151, 37);
             this.label5.TabIndex = 88;
@@ -126,7 +128,7 @@
             this.AggregateBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.AggregateBox.ForeColor = System.Drawing.Color.Black;
             this.AggregateBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AggregateBox.Location = new System.Drawing.Point(544, 561);
+            this.AggregateBox.Location = new System.Drawing.Point(557, 561);
             this.AggregateBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.AggregateBox.Name = "AggregateBox";
             this.AggregateBox.PasswordChar = '\0';
@@ -295,11 +297,51 @@
             this.UploadPhoto.UseTransparentBackground = true;
             this.UploadPhoto.Click += new System.EventHandler(this.UploadPhoto_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label2.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(976, 511);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(308, 37);
+            this.label2.TabIndex = 94;
+            this.label2.Text = "Suggested Retail Price";
+            // 
+            // SRPTxtB
+            // 
+            this.SRPTxtB.Animated = true;
+            this.SRPTxtB.AutoRoundedCorners = true;
+            this.SRPTxtB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SRPTxtB.BorderColor = System.Drawing.Color.Black;
+            this.SRPTxtB.BorderRadius = 24;
+            this.SRPTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SRPTxtB.DefaultText = "";
+            this.SRPTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SRPTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SRPTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SRPTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SRPTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SRPTxtB.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.SRPTxtB.ForeColor = System.Drawing.Color.Black;
+            this.SRPTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SRPTxtB.Location = new System.Drawing.Point(983, 561);
+            this.SRPTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.SRPTxtB.Name = "SRPTxtB";
+            this.SRPTxtB.PasswordChar = '\0';
+            this.SRPTxtB.PlaceholderText = "";
+            this.SRPTxtB.SelectedText = "";
+            this.SRPTxtB.Size = new System.Drawing.Size(400, 50);
+            this.SRPTxtB.TabIndex = 93;
+            // 
             // AddProduct_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SRPTxtB);
             this.Controls.Add(this.UploadPhoto);
             this.Controls.Add(this.PhotoBox);
             this.Controls.Add(this.BackBtn);
@@ -336,5 +378,7 @@
         private Guna.UI2.WinForms.Guna2Button AddProduct;
         private Guna.UI2.WinForms.Guna2PictureBox PhotoBox;
         private Guna.UI2.WinForms.Guna2Button UploadPhoto;
+        private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2TextBox SRPTxtB;
     }
 }
