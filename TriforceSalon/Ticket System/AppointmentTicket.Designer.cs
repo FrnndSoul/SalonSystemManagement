@@ -44,7 +44,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.CancelAppointBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
@@ -69,7 +68,6 @@
             this.guna2Panel1.Controls.Add(this.label3);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.label1);
-            this.guna2Panel1.Controls.Add(this.guna2Button3);
             this.guna2Panel1.Controls.Add(this.CancelAppointBtn);
             this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
@@ -81,7 +79,7 @@
             // SAmount
             // 
             this.SAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SAmount.Location = new System.Drawing.Point(1494, 51);
+            this.SAmount.Location = new System.Drawing.Point(1502, 51);
             this.SAmount.Name = "SAmount";
             this.SAmount.Size = new System.Drawing.Size(91, 26);
             this.SAmount.TabIndex = 17;
@@ -216,23 +214,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Transaction ID:";
             // 
-            // guna2Button3
-            // 
-            this.guna2Button3.AutoRoundedCorners = true;
-            this.guna2Button3.BorderRadius = 17;
-            this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(1615, 46);
-            this.guna2Button3.Name = "guna2Button3";
-            this.guna2Button3.Size = new System.Drawing.Size(180, 37);
-            this.guna2Button3.TabIndex = 2;
-            this.guna2Button3.Text = "Edit";
-            // 
             // CancelAppointBtn
             // 
             this.CancelAppointBtn.AutoRoundedCorners = true;
@@ -244,7 +225,7 @@
             this.CancelAppointBtn.FillColor = System.Drawing.Color.Red;
             this.CancelAppointBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CancelAppointBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelAppointBtn.Location = new System.Drawing.Point(1615, 88);
+            this.CancelAppointBtn.Location = new System.Drawing.Point(1615, 70);
             this.CancelAppointBtn.Name = "CancelAppointBtn";
             this.CancelAppointBtn.Size = new System.Drawing.Size(180, 37);
             this.CancelAppointBtn.TabIndex = 1;
@@ -262,7 +243,7 @@
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(1615, 5);
+            this.guna2Button1.Location = new System.Drawing.Point(1615, 23);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(180, 37);
             this.guna2Button1.TabIndex = 0;
@@ -287,7 +268,6 @@
         private Guna.UI2.WinForms.Guna2Button CancelAppointBtn;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

@@ -188,6 +188,7 @@
     <Compile Include="Custom Components\RoundedTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Microsoft\VisualBasic\Interaction.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

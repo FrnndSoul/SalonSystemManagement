@@ -1,6 +1,8 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using System;
+using System.Data.Common;
 using System.Drawing;
 using System.Transactions;
 using System.Windows.Forms;
@@ -325,6 +327,48 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(Convert.ToString(ID));
                 await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
 
+
+            }
+        }
+
+        private async void VoidBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to void these items?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
+
+                using (MySqlConnection conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN account a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
+
+                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if(await reader.ReadAsync())
+                            {
+                                string position = reader["AccountAccess"].ToString();
+
+                                if(position != "Manager")
+                                {
+                                    MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else
+                            {
+                                //insert the method here
+                            }
+                        }
+                    }
+
+
+                }
 
             }
         }

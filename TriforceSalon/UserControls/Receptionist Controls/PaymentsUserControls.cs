@@ -192,12 +192,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             //AmountBox.Text = Amount.ToString();
 
 
-            PaymentPanel.Enabled = true;
+            //PaymentPanel.Enabled = true;
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
             CardPayment.Enabled = true;
             CashPayment.Enabled = true;
             GcashPayment.Enabled = true;
+            ClearFieldsBtn.Enabled = true;
+            PaymentBtn.Enabled = true;
             VoidBtn.Enabled = true;
 
             if (Age >= 60)
@@ -246,6 +248,37 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        private async void PaymentBtn_Click(object sender, EventArgs e)
+        {
+            long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
+            decimal cash = Convert.ToDecimal(CustomerMoneyInput.Text);
+
+            if (cash < Convert.ToDecimal(AmountBox.Text))
+            {
+                MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (cash > Convert.ToDecimal(AmountBox.Text))
+                {
+                    //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ChangePaymentStatus("PAID");
+                    await SendToSales(CustomerID, transaction.GenerateTransactionID());
+                }
+                else
+                {
+                    MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ChangePaymentStatus("PAID");
+                    await SendToSales(CustomerID, transaction.GenerateTransactionID());
+                }
+                /* ChangePaymentStatus("PAID");
+                 await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
+                DefaultLoad();
+            }
+
+        }
+
         public async Task FillProductsBoughtAsync(long transactionID, Guna2DataGridView productsBoughtDGV)
         {
             try
@@ -254,7 +287,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "Select ProductName, Quantity, Amount from product_group where ProductGroupID = @transactionID";
+                    string query = "Select ProductName, Quantity, Amount from product_group where ProductGroupID = @transactionID AND IsVoided = 'NO'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -398,7 +431,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in SendToSales");
             }
@@ -432,6 +465,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CashPayment.Enabled = false;
             GcashPayment.Enabled = false;
             VoidBtn.Enabled = false;
+            PaymentBtn.Enabled = false;
+            ClearFieldsBtn.Enabled = false;
 
             cardProcess1.Visible = false;
             gcashProcess1.Visible = false;
@@ -473,8 +508,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         ChangePaymentStatus("PAID");
                         await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     }
-                   /* ChangePaymentStatus("PAID");
-                    await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
+                    /* ChangePaymentStatus("PAID");
+                     await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
                     DefaultLoad();
                 }
             }

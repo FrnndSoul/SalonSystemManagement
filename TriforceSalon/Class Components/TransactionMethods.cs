@@ -23,6 +23,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Drawing;
@@ -228,10 +229,8 @@ namespace TriforceSalon.Class_Components
                         //update customer_info set (ProductsBoughtID) values(@customerID)
                         //Insert into customer_info (ProductsBoughtID) values (@customerID)
 
-                        string query = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID;" +
-
-                        "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate) " +
-                        "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate)";
+                        string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate) " +
+                                        "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate)";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
@@ -244,10 +243,18 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
 
                             await command.ExecuteNonQueryAsync();
+                            MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ClearContents();
+                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+                    string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@customerID", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                    ClearContents();
                 }
             }
             catch(Exception ex)
@@ -512,9 +519,62 @@ namespace TriforceSalon.Class_Components
         }
 
 
-        public void VoidOrderButton()
-        {
 
+        public async Task  VoidOrderButton(int ID, Guna2DataGridView productControl)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    foreach (DataGridViewRow row in productControl.Rows)
+                    {
+                        string itemName;
+                        if (row.Cells["ProductCol"].Value != null)
+                        {
+                            itemName = row.Cells["ProductCol"].Value.ToString();
+                            //itemNameFound = true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
+                        int itemid = await GetItemIdAsync(itemName);
+
+                        string voidQuery = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate, IsVoided) " +
+                        "values (@productGroupID, @productName, @productID, @quantity, @productGAmount, @employeeID, @orderDate, @void)";
+
+                        using (MySqlCommand command = new MySqlCommand(voidQuery, conn))
+                        {
+                            string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
+                            string numericValue = totalText.Replace("Php.", "").Trim();
+                            decimal.TryParse(numericValue, out decimal totalAmount);
+
+
+                            command.Parameters.AddWithValue("@productGroupID", ID);
+                            command.Parameters.AddWithValue("@productName", itemName);
+                            command.Parameters.AddWithValue("@productID", itemid);
+                            command.Parameters.AddWithValue("@quantity", qty);
+                            command.Parameters.AddWithValue("@productGAmount", amount);
+                            command.Parameters.AddWithValue("@employeeID", Method.AccountID);
+                            command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                            await command.ExecuteNonQueryAsync();
+                        }
+                        MessageBox.Show("Order is voided.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearContents();
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in VoidOrderButton");
+
+            }
         }
 
         public void ClearContents()
