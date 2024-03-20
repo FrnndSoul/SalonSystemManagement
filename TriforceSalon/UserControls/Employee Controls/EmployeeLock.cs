@@ -35,6 +35,8 @@ namespace TriforceSalon.UserControls.Employee_Controls
             {
                 //test
                 await EmployeeUserConrols.employeeUserConrolsInstance.LoadSpecialCustomersAsync(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+                await EmployeeUserConrols.employeeUserConrolsInstance.LoadGeneralCustomersAsync(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+
                 transaction.ShowCustomerList();
             }
             catch (Exception ex)

@@ -1,11 +1,18 @@
 ﻿using Guna.UI2.WinForms;
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout.Borders;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Data.Common;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -64,7 +71,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void PWDCheckbox_CheckedChanged(object sender, EventArgs e)
         {
+            /*int amountValue = Convert.ToInt32(Amount);
+            Amount = (int)(amountValue * 0.8);
+            int discount = (int)(amountValue * 0.2);
+            DiscountBox.Text = discount.ToString();*/
 
+            /*
+                        decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
+                        Amount = (decimal)(totalAmount * 0.8);
+                        int discount = (decimal)(amountValue * 0.2);
+                        DiscountBox.Text = discount.ToString();*/
+
+            decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
+            decimal discountedAmount = totalAmount * 0.8m; // Apply 20% discount
+            decimal discount = totalAmount - discountedAmount; // Calculate the discount
+            AmountBox.Text = discountedAmount.ToString(); // Update the amount with the discounted value
+            DiscountBox.Text = discount.ToString(); // Display the discount
         }
 
         private void CardPayment_Click(object sender, EventArgs e)
@@ -202,14 +224,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = true;
             VoidBtn.Enabled = true;
 
-            if (Age >= 60)
+           /* if (Age >= 60)
             {
                 PWDCheckbox.Checked = true;
                 int amountValue = Convert.ToInt32(Amount);
                 Amount = (int)(amountValue * 0.8);
                 int discount = (int)(amountValue * 0.2);
                 DiscountBox.Text = discount.ToString();
-            }
+            }*/
         }
 
 
@@ -264,12 +286,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ChangePaymentStatus("PAID");
+                    GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                 }
                 else
                 {
                     MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ChangePaymentStatus("PAID");
+                    GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                 }
                 /* ChangePaymentStatus("PAID");
@@ -277,6 +301,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 DefaultLoad();
             }
 
+        }
+
+        private void ClearFieldsBtn_Click(object sender, EventArgs e)
+        {
+            DefaultLoad();
+            
         }
 
         public async Task FillProductsBoughtAsync(long transactionID, Guna2DataGridView productsBoughtDGV)
@@ -468,8 +498,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = false;
             ClearFieldsBtn.Enabled = false;
 
-            cardProcess1.Visible = false;
-            gcashProcess1.Visible = false;
+            /*cardProcess1.Visible = false;
+            gcashProcess1.Visible = false;*/
         }
 
         private void cardProcess1_VisibleChanged(object sender, EventArgs e)
@@ -551,6 +581,136 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             promptForm.AcceptButton = confirmation;
 
             return promptForm.ShowDialog() == DialogResult.OK ? inputBox.Text : "0";
+        }
+
+        public void GeneratePDFBothReceipt()
+        {
+            decimal subtotalAmount = decimal.Parse(AmountBox.Text);
+            decimal discount = decimal.Parse(DiscountBox.Text);
+            decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
+            int totalProductQuantity = 0;
+            int totalServiceQuantity = ServiceAcquiredDGV.Rows.Count;
+            string nameText = NameBox.Text;
+
+            if (!decimal.TryParse(CustomerMoneyInput.Text, out cashEntered))
+            {
+                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (cashEntered < subtotalAmount)
+            {
+                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            {
+                saveFileDialog1.Filter = "PDF Files|*.pdf";
+                saveFileDialog1.Title = "Save PDF File";
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string pdfFilePath = saveFileDialog1.FileName;
+
+                    using (PdfWriter writer = new PdfWriter(new FileStream(pdfFilePath, FileMode.Create)))
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    using (iText.Layout.Document doc = new iText.Layout.Document(pdf))
+                    {
+                        doc.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.JUSTIFIED_ALL);
+                        ImageData logoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.SalonLogo));
+                        iText.Layout.Element.Image logo = new iText.Layout.Element.Image(logoImageData);
+                        logo.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+                        logo.SetWidth(200);
+                        logo.SetHeight(200);
+
+                        doc.Add(logo);
+                        doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph(" "));
+                        doc.Add(new Paragraph("Tel NO : (02) 4568-2996").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("Mobile NO : (0993) 369-4904").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Served by: " + Method.Name).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Served to: {nameText}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Order #" + TransactionIDBox.Text).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")).SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
+
+                        // Table for products bought
+                        if (ProductsBoughtDGV.Rows.Count > 0)
+                        {
+                            Table productTable = new Table(4);
+                            productTable.SetWidth(UnitValue.CreatePercentValue(100));
+                            productTable.SetTextAlignment(TextAlignment.CENTER);
+                            productTable.AddCell(new Cell().Add(new Paragraph("QUANTITY")).SetBorder(Border.NO_BORDER));
+                            productTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
+                            productTable.AddCell(new Cell().Add(new Paragraph("PRODUCT")).SetBorder(Border.NO_BORDER));
+                            productTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
+
+                            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
+                            {
+                                string product = row.Cells[0].Value.ToString();
+                                string quantity = row.Cells[1].Value.ToString();
+                                string totalprice = row.Cells[2].Value.ToString();
+                                string variationCost = transaction.GetVariationCost(product);
+                                if (int.TryParse(quantity, out int quantityValue))
+                                {
+                                    totalProductQuantity += quantityValue;
+                                }
+
+                                productTable.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER));
+                            }
+                            doc.Add(productTable);
+                            doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
+                        }
+
+                        // Table for services acquired
+                        Table serviceTable = new Table(3);
+                        serviceTable.SetWidth(UnitValue.CreatePercentValue(100));
+                        serviceTable.SetTextAlignment(TextAlignment.CENTER);
+                        serviceTable.AddCell(new Cell().Add(new Paragraph("SERVICE")).SetBorder(Border.NO_BORDER));
+                        serviceTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
+                        serviceTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
+
+                        foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
+                        {
+                            string service = row.Cells["ServiceCol"].Value.ToString();
+                            string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
+                            serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
+                        }
+
+                        doc.Add(serviceTable);
+
+                        Table summaryTable = new Table(2);
+                        summaryTable.SetWidth(UnitValue.CreatePercentValue(100));
+                        summaryTable.SetTextAlignment(TextAlignment.LEFT);
+                        decimal totalAmount = subtotalAmount - discount;
+                        decimal change = cashEntered - totalAmount;
+
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}");
+
+                        int totalQuantity = totalProductQuantity + totalServiceQuantity;
+                        doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
+                        doc.Add(summaryTable);
+                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
+                        doc.Add(new Paragraph("THIS RECEIPT SERVES AS YOUR PROOF OF PURCHASE").SetTextAlignment(TextAlignment.CENTER));
+                    }
+
+                    MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "🎉 Congrats on your purchase at TriCharm Salon! 🎉", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //guna2DataGridView1.Rows.Clear();
+                    System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
+                }
+            }
         }
     }
 }

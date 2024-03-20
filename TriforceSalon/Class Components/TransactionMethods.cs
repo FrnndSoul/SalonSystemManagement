@@ -448,7 +448,7 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-        private string GetVariationCost(string variationName)
+        public string GetVariationCost(string variationName)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {
@@ -471,13 +471,13 @@ namespace TriforceSalon.Class_Components
         }
 
 
-        void AddReceiptDetailRow(Table table, string description, string value)
+        public void AddReceiptDetailRow(Table table, string description, string value)
         {
             table.AddCell(new Cell().Add(new Paragraph(description)).SetBorder(Border.NO_BORDER));
             table.AddCell(new Cell().Add(new Paragraph(value)).SetTextAlignment(TextAlignment.RIGHT).SetBorder(Border.NO_BORDER));
         }
 
-        private byte[] GetBytesFromImage(Image image)
+        public byte[] GetBytesFromImage(Image image)
         {
             using (MemoryStream ms = new MemoryStream())
             {
