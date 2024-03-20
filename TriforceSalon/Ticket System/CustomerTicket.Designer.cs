@@ -93,7 +93,7 @@
             this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.ProcessCustomerBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.ProcessCustomerBtn.Font = new System.Drawing.Font("Chinacat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessCustomerBtn.Font = new System.Drawing.Font("Chinacat", 12F);
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
             this.ProcessCustomerBtn.Location = new System.Drawing.Point(713, 77);
             this.ProcessCustomerBtn.Margin = new System.Windows.Forms.Padding(2);

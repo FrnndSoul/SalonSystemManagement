@@ -27,7 +27,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
         //Need ayusin ang tamang refresh hindi narereset ang list
         private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
-            int CustID = Convert.ToInt32(CustomerIDTxtB.Text);
+            long CustID = Convert.ToInt64(CustomerIDTxtB.Text);
 
             EmployeeDoneBtn.Enabled = false;
             await transaction.EmployeeProcessCompleteAsync(CustID);

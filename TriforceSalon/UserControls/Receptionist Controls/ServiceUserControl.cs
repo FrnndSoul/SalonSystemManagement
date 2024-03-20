@@ -103,7 +103,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 
         private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 return;
@@ -116,12 +116,28 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 e.Handled = true;
                 return;
+            }*/
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Get the current text in the TextBox
+            string currentText = CustomerAgeTxtB.Text;
+
+            // Check if the input length will exceed 3 characters after adding the new input
+            if (currentText.Length >= 3 && e.KeyChar != '\b') // '\b' represents the Backspace key
+            {
+                e.Handled = true; // Ignore the input
+                return;
             }
         }
 
         private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 return;
@@ -133,6 +149,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (totalLength >= 11)
             {
                 e.Handled = true;
+                return;
+            }*/
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Get the current text in the TextBox
+            string currentText = CustomerPhoneNTxtB.Text;
+
+            // Check if the input length will exceed 11 characters after adding the new input
+            if (currentText.Length >= 11 && e.KeyChar != '\b') // '\b' represents the Backspace key
+            {
+                e.Handled = true; // Ignore the input
                 return;
             }
         }

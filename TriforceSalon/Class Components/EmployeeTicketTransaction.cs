@@ -101,19 +101,19 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task EmployeeProcessCompleteAsync(int CustomerID)
+        /*public async Task EmployeeProcessCompleteAsync(long CustomerID)
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
                     //original query
-                    /*string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID;" +
-                        "Update employee_records set TimeEnd = @endTime where CustomerID = @custumer_ID";*/
+                    *//*string query = "Update transaction set PaymentStatus = 'PROCESSED' where TransactionID = @custumer_ID;" +
+                        "Update employee_records set TimeEnd = @endTime where CustomerID = @custumer_ID";*//*
 
                     //test query
-                    /*string query = "Update customer_info set PaymentStatus = 'PROCESSED where TransactionID = @customer_ID";
+                    *//*string query = "Update customer_info set PaymentStatus = 'PROCESSED where TransactionID = @customer_ID";
 
                     if(EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
                     {
@@ -124,7 +124,7 @@ namespace TriforceSalon.Class_Components
                     else
                     {
                         query += "Update employee_records set TimeEnd = @endTime where CustomerID = @customer_ID";
-                    }*/
+                    }*//*
 
                     string query = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
 
@@ -137,18 +137,19 @@ namespace TriforceSalon.Class_Components
                     }
                     else
                     {
+
                         query += "; UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
                     }
 
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@service_groupID", CustomerID);
+                        command.Parameters.AddWithValue("@service_groupID", Convert.ToInt64(CustomerID));
                         command.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
                         command.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
                         command.Parameters.AddWithValue("@amount", Convert.ToDecimal(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text));
 
-                        command.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        command.Parameters.AddWithValue("@customer_ID", Convert.ToInt64(CustomerID));
                         command.Parameters.AddWithValue("@endTime", DateTime.Now);
 
                         await command.ExecuteNonQueryAsync();
@@ -157,11 +158,11 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
             }
-        }
+        }*/
 
         public async Task GetServicesAsync(int type)
         {
@@ -172,14 +173,14 @@ namespace TriforceSalon.Class_Components
                     await conn.OpenAsync();
                     string query = "select ServiceName from salon_services where ServiceTypeID = @typeID";
 
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@typeID", type);
-                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            if(reader.HasRows)
+                            if (reader.HasRows)
                             {
-                                while(await reader.ReadAsync())
+                                while (await reader.ReadAsync())
                                 {
                                     string servieName = reader["ServiceName"].ToString();
                                     EmployeeLock.employeeLockInstance.ServiceListComB.Items.Add(servieName);
@@ -189,10 +190,71 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in GetServicesAsync()");
+            }
+        }
 
+        public async Task EmployeeProcessCompleteAsync(long CustomerID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
+
+                    if (EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
+                    {
+                        // Add parameters for INSERT INTO service_group statement
+                        query += "; INSERT INTO service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount) " +
+                                 "VALUES (@service_groupID, @service_variation, @service_varID, @amount)";
+
+                        // Set parameters for INSERT INTO service_group statement
+                        using (MySqlCommand insertCommand = new MySqlCommand(query, conn))
+                        {
+                            insertCommand.Parameters.AddWithValue("@service_groupID", CustomerID);
+                            insertCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
+                            insertCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
+
+                            decimal amount;
+                            if (decimal.TryParse(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text, out amount))
+                            {
+                                insertCommand.Parameters.AddWithValue("@amount", amount);
+                            }
+                            else
+                            {
+                                // Handle invalid amount input
+                                MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
+                            await insertCommand.ExecuteNonQueryAsync();
+                        }
+                    }
+
+                    // Update employee_records regardless of the checkbox state
+                    query += "; UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+
+                    // Execute the command
+                    using (MySqlCommand updateCommand = new MySqlCommand(query, conn))
+                    {
+                        // Set parameters for UPDATE employee_records statement
+                        updateCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        updateCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
+
+                        await updateCommand.ExecuteNonQueryAsync();
+                    }
+
+                    MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ShowCustomerList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
             }
         }
 
