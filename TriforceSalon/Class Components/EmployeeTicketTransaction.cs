@@ -198,7 +198,7 @@ namespace TriforceSalon.Class_Components
 
         public async Task EmployeeProcessCompleteAsync(long CustomerID)
         {
-            try
+            /*try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
@@ -246,6 +246,63 @@ namespace TriforceSalon.Class_Components
                         updateCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
 
                         await updateCommand.ExecuteNonQueryAsync();
+                    }
+
+                    MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ShowCustomerList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
+            }*/
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
+                    using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                    {
+                        updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        await updateCustomerCommand.ExecuteNonQueryAsync();
+                    }
+
+                    if (EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
+                    {
+                        string insertServiceGroupQuery = "INSERT INTO service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount) " +
+                                                         "VALUES (@service_groupID, @service_variation, @service_varID, @amount)";
+                        using (MySqlCommand insertServiceGroupCommand = new MySqlCommand(insertServiceGroupQuery, conn))
+                        {
+                            insertServiceGroupCommand.Parameters.AddWithValue("@service_groupID", CustomerID);
+                            insertServiceGroupCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
+                            insertServiceGroupCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
+
+                            decimal amount;
+                            if (decimal.TryParse(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text, out amount))
+                            {
+                                insertServiceGroupCommand.Parameters.AddWithValue("@amount", amount);
+                            }
+                            else
+                            {
+                                // Handle invalid amount input
+                                MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
+                            await insertServiceGroupCommand.ExecuteNonQueryAsync();
+                        }
+                    }
+
+                    string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+                    using (MySqlCommand updateEmployeeRecordsCommand = new MySqlCommand(updateEmployeeRecordsQuery, conn))
+                    {
+                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
+
+                        await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
                     }
 
                     MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
