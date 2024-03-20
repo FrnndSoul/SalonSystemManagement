@@ -1,14 +1,11 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.X509;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.Common;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -18,6 +15,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
+        public TransactionMethods transaction = new TransactionMethods();
+
+        public decimal totalPrice = 0;
 
 
         public PaymentsUserControls()
@@ -52,6 +52,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             checkBox.Invalidate();
         }
 
+        private void guna2HtmlLabel18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void PWDCheckbox_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -63,9 +73,65 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             cardProcess1.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount, Convert.ToInt32(TransactionIDBox.Text));
         }
 
-        private void LoadBtn_Click(object sender, EventArgs e)
+        private async void LoadBtn_Click(object sender, EventArgs e)
         {
+            long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
             try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "select CustomerName, CustomerAge, CustomerPhoneNumber, PriorityStatus, PaymentStatus, TimeTaken, EmployeeID, ServiceType " +
+                        "from customer_info " +
+                        "where TransactionID = @transactionID";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@transactionID", CustomerID);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.Read())
+                            {
+                                string paymentstatus = reader["PaymentStatus"].ToString();
+                                if (string.Equals(paymentstatus, "PAID", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+
+                                else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+
+                                CustomerName = reader["CustomerName"].ToString();
+                                ServiceType = reader["ServiceType"].ToString();
+                                Age = Convert.ToInt32(reader["CustomerAge"]);
+                                Phone = Convert.ToString(reader["CustomerPhoneNumber"]);
+                                EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
+
+                                DisplayTransaction();
+                                await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
+                                await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
+                                CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Transaction ID not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nat TransactionIDBox Key Press", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
+
+            /*try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
@@ -111,7 +177,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message + "\nat TransactionIDBox Key Press", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
+            }*/
         }
 
         private void DisplayTransaction()
@@ -120,13 +186,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AgeBox.Text = Age.ToString();
             PhoneNumberBox.Text = Phone.ToString();
             ServiceTypeBox.Text = ServiceType;
-            ServiceVariationBox.Text = ServiceVariation;
-            ServiceVariationIDBox.Text = VariationID.ToString();
+            //ServiceVariationBox.Text = ServiceVariation;
+            //ServiceVariationIDBox.Text = VariationID.ToString();
             EmployeeIDBox.Text = EmployeeID.ToString();
-            AmountBox.Text = Amount.ToString();
+            //AmountBox.Text = Amount.ToString();
 
 
-            guna2Panel1.Enabled = true;
+            PaymentPanel.Enabled = true;
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
             CardPayment.Enabled = true;
@@ -144,7 +210,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-       
+
 
         private void VoidBtn_Click(object sender, EventArgs e)
         {
@@ -165,7 +231,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `transaction` SET `PaymentStatus` = @NewStatus WHERE `TransactionID` = @TransactionID";
+                    string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@NewStatus", newStatus);
@@ -180,6 +246,166 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        public async Task FillProductsBoughtAsync(long transactionID, Guna2DataGridView productsBoughtDGV)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "Select ProductName, Quantity, Amount from product_group where ProductGroupID = @transactionID";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string productName = reader["ProductName"].ToString();
+                                int quantity = Convert.ToInt32(reader["Quantity"]);
+                                decimal amount = Convert.ToDecimal(reader["Amount"]);
+
+                                int rowIndex = productsBoughtDGV.Rows.Add();
+
+                                productsBoughtDGV.Rows[rowIndex].Cells["ProdNameCol"].Value = productName;
+                                productsBoughtDGV.Rows[rowIndex].Cells["QuantityCol"].Value = quantity;
+                                productsBoughtDGV.Rows[rowIndex].Cells["TotAmountCol"].Value = amount;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in FillProductsBoughtAsync");
+
+            }
+        }
+        public async Task FillServiceAcquiredAsync(long transactionID, Guna2DataGridView serviceAcquiredDGV)
+        {
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "Select ServiceVariation, Amount from service_group where ServiceGroupID = @transactionID";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@transactionID", transactionID);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string productName = reader["ServiceVariation"].ToString();
+                                decimal amount = Convert.ToDecimal(reader["Amount"]);
+
+                                int rowIndex = serviceAcquiredDGV.Rows.Add();
+
+                                serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceCol"].Value = productName;
+                                serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceAmountCol"].Value = amount;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in FillServiceAcquiredAsync");
+
+            }
+        }
+
+        public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)
+        {
+            decimal totalPrice = 0;
+
+            // Iterate over the rows of the DataGridView
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // Assuming the price is in a column named "PriceCol"
+                if (row.Cells["TotAmountCol"].Value != null && decimal.TryParse(row.Cells["TotAmountCol"].Value.ToString(), out decimal price))
+                {
+                    // Extract the price from the current row and add it to the total price
+                    totalPrice += price;
+                }
+            }
+
+            return totalPrice;
+        }
+
+        public decimal CalculateTotalPriceOfService(DataGridView dataGridView)
+        {
+            decimal totalPrice = 0;
+
+            // Iterate over the rows of the DataGridView
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // Assuming the price is in a column named "PriceCol"
+                if (row.Cells["ServiceAmountCol"].Value != null && decimal.TryParse(row.Cells["ServiceAmountCol"].Value.ToString(), out decimal price))
+                {
+                    // Extract the price from the current row and add it to the total price
+                    totalPrice += price;
+                }
+            }
+
+            return totalPrice;
+        }
+
+        public void CalculateTotalCombinedPrice(DataGridView dataGridView1, DataGridView dataGridView2)
+        {
+            // Calculate the total price for each DataGridView
+            decimal totalPrice1 = CalculateTotalPriceOfProd(dataGridView1);
+            decimal totalPrice2 = CalculateTotalPriceOfService(dataGridView2);
+
+            // Compute the sum of the total prices
+            decimal totalCombinedPrice = totalPrice1 + totalPrice2;
+
+            AmountBox.Text = Convert.ToString(totalCombinedPrice);
+        }
+
+        public async Task SendToSales(long transactionID, int salesID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "Insert into sales (SaleID, OrderID, SaleDate, Amount) values (@saleID, @orderID, @saleDate, @totAmount)";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        /*string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
+                        string numericValue = totalText.Replace("Php.", "").Trim();
+                        decimal.TryParse(numericValue, out decimal totalAmount);*/
+
+                        decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
+
+                        command.Parameters.AddWithValue("@saleID", salesID);
+                        command.Parameters.AddWithValue("@orderID", transactionID);
+                        command.Parameters.AddWithValue("@saleDate", DateTime.Now);
+                        command.Parameters.AddWithValue("@totAmount", totalAmount);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in SendToSales");
+            }
+        }
+
+
+
         public void DefaultLoad()
         {
             TransactionIDBox.Text = "";
@@ -187,13 +413,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AgeBox.Text = "";
             PhoneNumberBox.Text = "";
             ServiceTypeBox.Text = "";
-            ServiceVariationBox.Text = "";
-            ServiceVariationIDBox.Text = "";
+            /*ServiceVariationBox.Text = "";
+            ServiceVariationIDBox.Text = "";*/
             EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
 
-            guna2Panel1.Enabled = false;
+            ProductsBoughtDGV.Rows.Clear();
+            ServiceAcquiredDGV.Rows.Clear();
+
+            PaymentPanel.Enabled = false;
 
             PWDCheckbox.Checked = false;
 
@@ -216,32 +445,36 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void CashPayment_Click(object sender, EventArgs e)
+        private async void CashPayment_Click(object sender, EventArgs e)
         {
+            long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
+
             string userInput = ShowInputDialog("Enter the amount of customer's money:", "Cash Payment");
 
             if (!string.IsNullOrEmpty(userInput))
             {
-                int cash = Convert.ToInt32(userInput);
-                if (cash < Convert.ToInt32(AmountBox.Text))
+                decimal cash = Convert.ToDecimal(userInput);
+                if (cash < Convert.ToDecimal(AmountBox.Text))
                 {
-                    MessageBox.Show("Not enough cash entered!","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                } else
+                    MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
                 {
-                    if (cash > Convert.ToInt32(AmountBox.Text))
+                    if (cash > Convert.ToDecimal(AmountBox.Text))
                     {
                         //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show($"Customer's change: {cash - Convert.ToInt32(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ChangePaymentStatus("PAID");
-
+                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     }
                     else
                     {
                         MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ChangePaymentStatus("PAID");
-
+                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     }
-                    ChangePaymentStatus("PAID");
+                   /* ChangePaymentStatus("PAID");
+                    await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
                     DefaultLoad();
                 }
             }
