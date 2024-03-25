@@ -112,6 +112,7 @@
             this.transactionIDTxtB.Name = "transactionIDTxtB";
             this.transactionIDTxtB.PasswordChar = '\0';
             this.transactionIDTxtB.PlaceholderText = "";
+            this.transactionIDTxtB.ReadOnly = true;
             this.transactionIDTxtB.SelectedText = "";
             this.transactionIDTxtB.Size = new System.Drawing.Size(331, 36);
             this.transactionIDTxtB.TabIndex = 22;
@@ -131,7 +132,7 @@
             // 
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 413);
+            this.label6.Location = new System.Drawing.Point(21, 510);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(305, 38);
             this.label6.TabIndex = 20;
@@ -152,11 +153,12 @@
             this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtB.Location = new System.Drawing.Point(21, 456);
+            this.ServiceAmountTxtB.Location = new System.Drawing.Point(21, 553);
             this.ServiceAmountTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
             this.ServiceAmountTxtB.PasswordChar = '\0';
             this.ServiceAmountTxtB.PlaceholderText = "";
+            this.ServiceAmountTxtB.ReadOnly = true;
             this.ServiceAmountTxtB.SelectedText = "";
             this.ServiceAmountTxtB.Size = new System.Drawing.Size(331, 36);
             this.ServiceAmountTxtB.TabIndex = 19;
@@ -165,7 +167,7 @@
             // 
             this.CServiceTxtB.BackColor = System.Drawing.Color.Transparent;
             this.CServiceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CServiceTxtB.Location = new System.Drawing.Point(21, 322);
+            this.CServiceTxtB.Location = new System.Drawing.Point(21, 419);
             this.CServiceTxtB.Name = "CServiceTxtB";
             this.CServiceTxtB.Size = new System.Drawing.Size(305, 38);
             this.CServiceTxtB.TabIndex = 18;
@@ -186,11 +188,12 @@
             this.ServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTxtB.Location = new System.Drawing.Point(21, 365);
+            this.ServiceTxtB.Location = new System.Drawing.Point(21, 462);
             this.ServiceTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceTxtB.Name = "ServiceTxtB";
             this.ServiceTxtB.PasswordChar = '\0';
             this.ServiceTxtB.PlaceholderText = "";
+            this.ServiceTxtB.ReadOnly = true;
             this.ServiceTxtB.SelectedText = "";
             this.ServiceTxtB.Size = new System.Drawing.Size(331, 36);
             this.ServiceTxtB.TabIndex = 17;
@@ -199,7 +202,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(21, 504);
+            this.label5.Location = new System.Drawing.Point(26, 322);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(305, 38);
             this.label5.TabIndex = 16;
@@ -251,7 +254,7 @@
             this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PEmployeeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.PEmployeeComB.ItemHeight = 30;
-            this.PEmployeeComB.Location = new System.Drawing.Point(21, 545);
+            this.PEmployeeComB.Location = new System.Drawing.Point(26, 363);
             this.PEmployeeComB.Name = "PEmployeeComB";
             this.PEmployeeComB.Size = new System.Drawing.Size(328, 36);
             this.PEmployeeComB.TabIndex = 9;

@@ -74,7 +74,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(317, 469);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(650, 75);
@@ -107,7 +107,7 @@
             this.ServiceListComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ServiceListComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceListComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceListComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServiceListComB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceListComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ServiceListComB.ItemHeight = 30;
             this.ServiceListComB.Location = new System.Drawing.Point(239, 55);
@@ -127,14 +127,14 @@
             this.AServiceAmountTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.AServiceAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.AServiceAmountTxtB.Enabled = false;
             this.AServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.AServiceAmountTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AServiceAmountTxtB.Location = new System.Drawing.Point(831, 49);
             this.AServiceAmountTxtB.Name = "AServiceAmountTxtB";
             this.AServiceAmountTxtB.PasswordChar = '\0';
             this.AServiceAmountTxtB.PlaceholderText = "";
+            this.AServiceAmountTxtB.ReadOnly = true;
             this.AServiceAmountTxtB.SelectedText = "";
             this.AServiceAmountTxtB.Size = new System.Drawing.Size(350, 42);
             this.AServiceAmountTxtB.TabIndex = 23;
@@ -142,7 +142,7 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label4.Location = new System.Drawing.Point(620, 36);
             this.label4.Name = "label4";
@@ -154,7 +154,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label3.Location = new System.Drawing.Point(28, 36);
             this.label3.Name = "label3";
@@ -189,7 +189,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label2.Location = new System.Drawing.Point(626, 183);
             this.label2.Name = "label2";
@@ -227,14 +227,14 @@
             this.CustomerServiceTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.CustomerServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerServiceTxtB.Enabled = false;
             this.CustomerServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerServiceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerServiceTxtB.Location = new System.Drawing.Point(831, 47);
             this.CustomerServiceTxtB.Name = "CustomerServiceTxtB";
             this.CustomerServiceTxtB.PasswordChar = '\0';
             this.CustomerServiceTxtB.PlaceholderText = "";
+            this.CustomerServiceTxtB.ReadOnly = true;
             this.CustomerServiceTxtB.SelectedText = "";
             this.CustomerServiceTxtB.Size = new System.Drawing.Size(350, 42);
             this.CustomerServiceTxtB.TabIndex = 22;
@@ -250,14 +250,14 @@
             this.CustomerPNumTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.CustomerPNumTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerPNumTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerPNumTxtB.Enabled = false;
             this.CustomerPNumTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPNumTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerPNumTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPNumTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPNumTxtB.Location = new System.Drawing.Point(831, 125);
             this.CustomerPNumTxtB.Name = "CustomerPNumTxtB";
             this.CustomerPNumTxtB.PasswordChar = '\0';
             this.CustomerPNumTxtB.PlaceholderText = "";
+            this.CustomerPNumTxtB.ReadOnly = true;
             this.CustomerPNumTxtB.SelectedText = "";
             this.CustomerPNumTxtB.Size = new System.Drawing.Size(350, 42);
             this.CustomerPNumTxtB.TabIndex = 21;
@@ -273,14 +273,14 @@
             this.CustomerAgeTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerAgeTxtB.Enabled = false;
             this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Location = new System.Drawing.Point(260, 125);
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
+            this.CustomerAgeTxtB.ReadOnly = true;
             this.CustomerAgeTxtB.SelectedText = "";
             this.CustomerAgeTxtB.Size = new System.Drawing.Size(350, 42);
             this.CustomerAgeTxtB.TabIndex = 20;
@@ -296,14 +296,14 @@
             this.CustomerNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerNameTxtB.Enabled = false;
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(260, 47);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
             this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.ReadOnly = true;
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(350, 42);
             this.CustomerNameTxtB.TabIndex = 19;
@@ -319,14 +319,14 @@
             this.CustomerIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.CustomerIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerIDTxtB.Enabled = false;
             this.CustomerIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerIDTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerIDTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDTxtB.Location = new System.Drawing.Point(260, 205);
             this.CustomerIDTxtB.Name = "CustomerIDTxtB";
             this.CustomerIDTxtB.PasswordChar = '\0';
             this.CustomerIDTxtB.PlaceholderText = "";
+            this.CustomerIDTxtB.ReadOnly = true;
             this.CustomerIDTxtB.SelectedText = "";
             this.CustomerIDTxtB.Size = new System.Drawing.Size(350, 42);
             this.CustomerIDTxtB.TabIndex = 18;
@@ -334,7 +334,7 @@
             // label11
             // 
             this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label11.Location = new System.Drawing.Point(54, 202);
             this.label11.Name = "label11";
@@ -346,7 +346,7 @@
             // label16
             // 
             this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label16.Location = new System.Drawing.Point(49, 34);
             this.label16.Name = "label16";
@@ -358,7 +358,7 @@
             // label15
             // 
             this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label15.Location = new System.Drawing.Point(55, 117);
             this.label15.Name = "label15";
@@ -370,7 +370,7 @@
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label13.Location = new System.Drawing.Point(630, 44);
             this.label13.Name = "label13";
@@ -382,7 +382,7 @@
             // label14
             // 
             this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.label14.Location = new System.Drawing.Point(626, 110);
             this.label14.Name = "label14";
@@ -394,7 +394,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(317, 43);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(650, 75);
