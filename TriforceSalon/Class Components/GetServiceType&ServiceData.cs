@@ -944,7 +944,7 @@ namespace TriforceSalon.Class_Components
             {
                 await conn.OpenAsync();
                 //string query = "SELECT MAX (QueueNumber) FROM service_group WHERE AppointmentDate = @appointment AND ServiceType = @serviceType";
-                string query = "SELECT MAX(QueueNumber) AS MaxQueueNumber FROM service_group WHERE AppointmentDate = @appointment AND ServiceType = @serviceType";
+                string query = "SELECT MAX(CAST(QueueNumber AS UNSIGNED)) FROM service_group WHERE AppointmentDate = @appointment AND ServiceType = @serviceType";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {

@@ -54,6 +54,7 @@
             this.ServiceFilterComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -463,6 +464,7 @@
             this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ServicesGDGVVControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ServicesGDGVVControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ServiceTypeCol,
             this.SNameCol,
             this.PrefEmpCol,
             this.AmountCol,
@@ -494,7 +496,7 @@
             this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.Height = 15;
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.Height = 28;
             this.ServicesGDGVVControl.ThemeStyle.ReadOnly = true;
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -503,6 +505,12 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.Height = 22;
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // ServiceTypeCol
+            // 
+            this.ServiceTypeCol.HeaderText = "ServiceType";
+            this.ServiceTypeCol.Name = "ServiceTypeCol";
+            this.ServiceTypeCol.ReadOnly = true;
             // 
             // SNameCol
             // 
@@ -572,6 +580,7 @@
         public Guna.UI2.WinForms.Guna2ComboBox ServiceFilterComB;
         private Guna.UI2.WinForms.Guna2Button AddLServiceListBtn;
         private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;

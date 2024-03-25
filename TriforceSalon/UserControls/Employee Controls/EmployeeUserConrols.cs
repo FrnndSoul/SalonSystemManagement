@@ -94,12 +94,13 @@ namespace TriforceSalon.UserControls
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
+                                var Queue = row["QueueNumber"].ToString();
 
                                 if (SpecialCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket, Queue);
                                 SpecialCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -167,12 +168,13 @@ namespace TriforceSalon.UserControls
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
+                                var Queue = row["QueueNumber"].ToString();
 
                                 if (GeneralCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket, Queue);
                                 GeneralCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 

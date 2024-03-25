@@ -43,6 +43,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
 
             await serviceTypeService.GetAllEmployee(mysqlcon);
+            PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
         }
@@ -62,7 +63,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
 
-        private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
+        private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
             if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
@@ -77,7 +78,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
-                transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
+                //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl);
             }
         }
 
@@ -213,16 +215,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void AddLServiceListBtn_Click(object sender, EventArgs e)
         {
-            string dateNow = Convert.ToString(DateTime.Now);
+            string dateNow = DateTime.Now.ToString("MM-dd-yyyy dddd");
             string serviceName = ServiceTxtB.Text;
             string prefEmp = PEmployeeComB.SelectedItem.ToString();
             decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
-            int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceName, mysqlcon);
+            string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
+            int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
 
-            ServicesGDGVVControl.Rows.Add(serviceName, prefEmp, amountService, queueNumber);
-            /* DataTable dt = new DataTable();
-             ServicesGDGVVControl.DataSource = dt;
-             dt.Rows.Add(serviceName, prefEmp, amountService, queueNumber);*/
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
         }
     }
 }

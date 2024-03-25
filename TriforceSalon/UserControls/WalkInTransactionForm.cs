@@ -29,7 +29,7 @@ namespace TriforceSalon.UserControls
 
         private void WalkInTransactionForm_Load(object sender, EventArgs e)
         {
-
+            NServicesBtn.Enabled = false;
         }
 
         private void RecepLogOutBtn_Click(object sender, EventArgs e)
