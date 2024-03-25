@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ServiceTypeFL = new System.Windows.Forms.FlowLayoutPanel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -48,29 +50,31 @@
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.SearchServiceBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.GetAllServiceBtn = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.FilterServiceComboBox = new System.Windows.Forms.Label();
+            this.ServiceFilterComB = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ServiceTypeFL
-            // 
-            this.ServiceTypeFL.BackColor = System.Drawing.Color.White;
-            this.ServiceTypeFL.Location = new System.Drawing.Point(160, 16);
-            this.ServiceTypeFL.Name = "ServiceTypeFL";
-            this.ServiceTypeFL.Size = new System.Drawing.Size(1347, 140);
-            this.ServiceTypeFL.TabIndex = 0;
             // 
             // ServiceFL
             // 
             this.ServiceFL.BackColor = System.Drawing.Color.White;
-            this.ServiceFL.Location = new System.Drawing.Point(14, 259);
+            this.ServiceFL.Location = new System.Drawing.Point(14, 86);
             this.ServiceFL.Name = "ServiceFL";
-            this.ServiceFL.Size = new System.Drawing.Size(1493, 577);
+            this.ServiceFL.Size = new System.Drawing.Size(1266, 750);
             this.ServiceFL.TabIndex = 1;
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.ServicesGDGVVControl);
+            this.guna2Panel1.Controls.Add(this.AddLServiceListBtn);
             this.guna2Panel1.Controls.Add(this.transactionIDTxtB);
             this.guna2Panel1.Controls.Add(this.label7);
             this.guna2Panel1.Controls.Add(this.label6);
@@ -87,9 +91,9 @@
             this.guna2Panel1.Controls.Add(this.CustomerNameTxtB);
             this.guna2Panel1.Controls.Add(this.ProcessCustomerBtn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(1532, 16);
+            this.guna2Panel1.Location = new System.Drawing.Point(1304, 16);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(378, 820);
+            this.guna2Panel1.Size = new System.Drawing.Size(606, 820);
             this.guna2Panel1.TabIndex = 2;
             // 
             // transactionIDTxtB
@@ -107,23 +111,23 @@
             this.transactionIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.transactionIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.transactionIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.transactionIDTxtB.Location = new System.Drawing.Point(18, 637);
+            this.transactionIDTxtB.Location = new System.Drawing.Point(354, 176);
             this.transactionIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.transactionIDTxtB.Name = "transactionIDTxtB";
             this.transactionIDTxtB.PasswordChar = '\0';
             this.transactionIDTxtB.PlaceholderText = "";
             this.transactionIDTxtB.ReadOnly = true;
             this.transactionIDTxtB.SelectedText = "";
-            this.transactionIDTxtB.Size = new System.Drawing.Size(331, 36);
+            this.transactionIDTxtB.Size = new System.Drawing.Size(215, 36);
             this.transactionIDTxtB.TabIndex = 22;
             // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 594);
+            this.label7.Location = new System.Drawing.Point(349, 133);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(305, 38);
+            this.label7.Size = new System.Drawing.Size(196, 38);
             this.label7.TabIndex = 21;
             this.label7.Text = "Transaction ID";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -132,11 +136,11 @@
             // 
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 510);
+            this.label6.Location = new System.Drawing.Point(414, 555);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(305, 38);
+            this.label6.Size = new System.Drawing.Size(131, 38);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Amount";
+            this.label6.Text = "Amount (₱)";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ServiceAmountTxtB
@@ -153,23 +157,23 @@
             this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtB.Location = new System.Drawing.Point(21, 553);
+            this.ServiceAmountTxtB.Location = new System.Drawing.Point(419, 598);
             this.ServiceAmountTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceAmountTxtB.Name = "ServiceAmountTxtB";
             this.ServiceAmountTxtB.PasswordChar = '\0';
             this.ServiceAmountTxtB.PlaceholderText = "";
             this.ServiceAmountTxtB.ReadOnly = true;
             this.ServiceAmountTxtB.SelectedText = "";
-            this.ServiceAmountTxtB.Size = new System.Drawing.Size(331, 36);
+            this.ServiceAmountTxtB.Size = new System.Drawing.Size(150, 36);
             this.ServiceAmountTxtB.TabIndex = 19;
             // 
             // CServiceTxtB
             // 
             this.CServiceTxtB.BackColor = System.Drawing.Color.Transparent;
             this.CServiceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CServiceTxtB.Location = new System.Drawing.Point(21, 419);
+            this.CServiceTxtB.Location = new System.Drawing.Point(29, 555);
             this.CServiceTxtB.Name = "CServiceTxtB";
-            this.CServiceTxtB.Size = new System.Drawing.Size(305, 38);
+            this.CServiceTxtB.Size = new System.Drawing.Size(104, 38);
             this.CServiceTxtB.TabIndex = 18;
             this.CServiceTxtB.Text = "Service";
             this.CServiceTxtB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -188,7 +192,7 @@
             this.ServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTxtB.Location = new System.Drawing.Point(21, 462);
+            this.ServiceTxtB.Location = new System.Drawing.Point(34, 598);
             this.ServiceTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.ServiceTxtB.Name = "ServiceTxtB";
             this.ServiceTxtB.PasswordChar = '\0';
@@ -202,7 +206,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(26, 322);
+            this.label5.Location = new System.Drawing.Point(29, 644);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(305, 38);
             this.label5.TabIndex = 16;
@@ -213,9 +217,9 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(21, 230);
+            this.label4.Location = new System.Drawing.Point(34, 133);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(305, 38);
+            this.label4.Size = new System.Drawing.Size(141, 38);
             this.label4.TabIndex = 15;
             this.label4.Text = "Number";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -224,9 +228,9 @@
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 140);
+            this.label3.Location = new System.Drawing.Point(457, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(305, 38);
+            this.label3.Size = new System.Drawing.Size(55, 38);
             this.label3.TabIndex = 14;
             this.label3.Text = "Age";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -235,9 +239,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(21, 52);
+            this.label2.Location = new System.Drawing.Point(29, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(305, 38);
+            this.label2.Size = new System.Drawing.Size(75, 38);
             this.label2.TabIndex = 13;
             this.label2.Text = "Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,7 +258,7 @@
             this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PEmployeeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.PEmployeeComB.ItemHeight = 30;
-            this.PEmployeeComB.Location = new System.Drawing.Point(26, 363);
+            this.PEmployeeComB.Location = new System.Drawing.Point(34, 685);
             this.PEmployeeComB.Name = "PEmployeeComB";
             this.PEmployeeComB.Size = new System.Drawing.Size(328, 36);
             this.PEmployeeComB.TabIndex = 9;
@@ -273,13 +277,13 @@
             this.CustomerPhoneNTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(21, 273);
+            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(34, 176);
             this.CustomerPhoneNTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
             this.CustomerPhoneNTxtB.PlaceholderText = "";
             this.CustomerPhoneNTxtB.SelectedText = "";
-            this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(331, 36);
+            this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(181, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
             this.CustomerPhoneNTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerPhoneNTxtB_KeyPress);
             // 
@@ -297,13 +301,13 @@
             this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Location = new System.Drawing.Point(21, 183);
+            this.CustomerAgeTxtB.Location = new System.Drawing.Point(462, 92);
             this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
             this.CustomerAgeTxtB.SelectedText = "";
-            this.CustomerAgeTxtB.Size = new System.Drawing.Size(331, 36);
+            this.CustomerAgeTxtB.Size = new System.Drawing.Size(83, 36);
             this.CustomerAgeTxtB.TabIndex = 2;
             this.CustomerAgeTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerAgeTxtB_KeyPress);
             // 
@@ -321,7 +325,7 @@
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Location = new System.Drawing.Point(21, 95);
+            this.CustomerNameTxtB.Location = new System.Drawing.Point(34, 92);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
@@ -343,9 +347,9 @@
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ProcessCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
-            this.ProcessCustomerBtn.Location = new System.Drawing.Point(26, 732);
+            this.ProcessCustomerBtn.Location = new System.Drawing.Point(330, 744);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
-            this.ProcessCustomerBtn.Size = new System.Drawing.Size(331, 59);
+            this.ProcessCustomerBtn.Size = new System.Drawing.Size(256, 59);
             this.ProcessCustomerBtn.TabIndex = 0;
             this.ProcessCustomerBtn.Text = "Process Customer";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
@@ -355,7 +359,7 @@
             // 
             this.SearchServiceTxtB.Animated = true;
             this.SearchServiceTxtB.AutoRoundedCorners = true;
-            this.SearchServiceTxtB.BorderRadius = 18;
+            this.SearchServiceTxtB.BorderRadius = 17;
             this.SearchServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.SearchServiceTxtB.DefaultText = "";
             this.SearchServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -365,71 +369,186 @@
             this.SearchServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Location = new System.Drawing.Point(1033, 209);
+            this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 25);
+            this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SearchServiceTxtB.Name = "SearchServiceTxtB";
             this.SearchServiceTxtB.PasswordChar = '\0';
             this.SearchServiceTxtB.PlaceholderText = "";
             this.SearchServiceTxtB.SelectedText = "";
-            this.SearchServiceTxtB.Size = new System.Drawing.Size(474, 38);
+            this.SearchServiceTxtB.Size = new System.Drawing.Size(474, 36);
             this.SearchServiceTxtB.TabIndex = 3;
             // 
             // SearchServiceBtn
             // 
             this.SearchServiceBtn.AutoRoundedCorners = true;
-            this.SearchServiceBtn.BorderRadius = 18;
+            this.SearchServiceBtn.BorderRadius = 17;
             this.SearchServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.SearchServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.SearchServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.SearchServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SearchServiceBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchServiceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceBtn.Location = new System.Drawing.Point(837, 209);
+            this.SearchServiceBtn.Location = new System.Drawing.Point(610, 25);
             this.SearchServiceBtn.Name = "SearchServiceBtn";
-            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 38);
+            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 36);
             this.SearchServiceBtn.TabIndex = 4;
             this.SearchServiceBtn.Text = "Search";
             this.SearchServiceBtn.Click += new System.EventHandler(this.SearchServiceBtn_Click);
             // 
-            // GetAllServiceBtn
+            // FilterServiceComboBox
             // 
-            this.GetAllServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.GetAllServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.GetAllServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.GetAllServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.GetAllServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.GetAllServiceBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GetAllServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.GetAllServiceBtn.Location = new System.Drawing.Point(14, 16);
-            this.GetAllServiceBtn.Name = "GetAllServiceBtn";
-            this.GetAllServiceBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.GetAllServiceBtn.Size = new System.Drawing.Size(140, 140);
-            this.GetAllServiceBtn.TabIndex = 5;
-            this.GetAllServiceBtn.Text = "All Service";
-            this.GetAllServiceBtn.Click += new System.EventHandler(this.GetAllServiceBtn_Click);
+            this.FilterServiceComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FilterServiceComboBox.ForeColor = System.Drawing.Color.White;
+            this.FilterServiceComboBox.Location = new System.Drawing.Point(10, 25);
+            this.FilterServiceComboBox.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.FilterServiceComboBox.Name = "FilterServiceComboBox";
+            this.FilterServiceComboBox.Size = new System.Drawing.Size(180, 29);
+            this.FilterServiceComboBox.TabIndex = 5;
+            this.FilterServiceComboBox.Text = "Filter Services: ";
+            // 
+            // ServiceFilterComB
+            // 
+            this.ServiceFilterComB.AutoRoundedCorners = true;
+            this.ServiceFilterComB.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceFilterComB.BorderRadius = 17;
+            this.ServiceFilterComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ServiceFilterComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ServiceFilterComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceFilterComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceFilterComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServiceFilterComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ServiceFilterComB.ItemHeight = 30;
+            this.ServiceFilterComB.Location = new System.Drawing.Point(172, 25);
+            this.ServiceFilterComB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ServiceFilterComB.Name = "ServiceFilterComB";
+            this.ServiceFilterComB.Size = new System.Drawing.Size(347, 36);
+            this.ServiceFilterComB.TabIndex = 6;
+            this.ServiceFilterComB.SelectedIndexChanged += new System.EventHandler(this.ServiceFilterComB_SelectedIndexChanged);
+            // 
+            // AddLServiceListBtn
+            // 
+            this.AddLServiceListBtn.Animated = true;
+            this.AddLServiceListBtn.AutoRoundedCorners = true;
+            this.AddLServiceListBtn.BackColor = System.Drawing.Color.Transparent;
+            this.AddLServiceListBtn.BorderRadius = 28;
+            this.AddLServiceListBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AddLServiceListBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AddLServiceListBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AddLServiceListBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AddLServiceListBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.AddLServiceListBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddLServiceListBtn.ForeColor = System.Drawing.Color.White;
+            this.AddLServiceListBtn.Location = new System.Drawing.Point(36, 744);
+            this.AddLServiceListBtn.Name = "AddLServiceListBtn";
+            this.AddLServiceListBtn.Size = new System.Drawing.Size(256, 59);
+            this.AddLServiceListBtn.TabIndex = 23;
+            this.AddLServiceListBtn.Text = "Add To List";
+            this.AddLServiceListBtn.UseTransparentBackground = true;
+            this.AddLServiceListBtn.Click += new System.EventHandler(this.AddLServiceListBtn_Click);
+            // 
+            // ServicesGDGVVControl
+            // 
+            this.ServicesGDGVVControl.AllowUserToAddRows = false;
+            this.ServicesGDGVVControl.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.ServicesGDGVVControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ServicesGDGVVControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SNameCol,
+            this.PrefEmpCol,
+            this.AmountCol,
+            this.QueNumCol});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ServicesGDGVVControl.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.ServicesGDGVVControl.Location = new System.Drawing.Point(34, 229);
+            this.ServicesGDGVVControl.Name = "ServicesGDGVVControl";
+            this.ServicesGDGVVControl.ReadOnly = true;
+            this.ServicesGDGVVControl.RowHeadersVisible = false;
+            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 311);
+            this.ServicesGDGVVControl.TabIndex = 24;
+            this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.ServicesGDGVVControl.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ServicesGDGVVControl.ThemeStyle.HeaderStyle.Height = 15;
+            this.ServicesGDGVVControl.ThemeStyle.ReadOnly = true;
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.Height = 22;
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // SNameCol
+            // 
+            this.SNameCol.HeaderText = "Service Name";
+            this.SNameCol.Name = "SNameCol";
+            this.SNameCol.ReadOnly = true;
+            // 
+            // PrefEmpCol
+            // 
+            this.PrefEmpCol.HeaderText = "Preferred Employee";
+            this.PrefEmpCol.Name = "PrefEmpCol";
+            this.PrefEmpCol.ReadOnly = true;
+            // 
+            // AmountCol
+            // 
+            this.AmountCol.HeaderText = "Amount";
+            this.AmountCol.Name = "AmountCol";
+            this.AmountCol.ReadOnly = true;
+            // 
+            // QueNumCol
+            // 
+            this.QueNumCol.HeaderText = "Queue Number";
+            this.QueNumCol.Name = "QueNumCol";
+            this.QueNumCol.ReadOnly = true;
             // 
             // ServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.Controls.Add(this.GetAllServiceBtn);
+            this.Controls.Add(this.ServiceFilterComB);
+            this.Controls.Add(this.FilterServiceComboBox);
             this.Controls.Add(this.SearchServiceBtn);
             this.Controls.Add(this.SearchServiceTxtB);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.ServiceFL);
-            this.Controls.Add(this.ServiceTypeFL);
             this.Name = "ServicesUserControl";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.ServicesUserControl_Load);
             this.guna2Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel ServiceTypeFL;
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
@@ -449,6 +568,13 @@
         public Guna.UI2.WinForms.Guna2TextBox transactionIDTxtB;
         private System.Windows.Forms.Label label7;
         private Guna.UI2.WinForms.Guna2Button SearchServiceBtn;
-        private Guna.UI2.WinForms.Guna2CircleButton GetAllServiceBtn;
+        private System.Windows.Forms.Label FilterServiceComboBox;
+        public Guna.UI2.WinForms.Guna2ComboBox ServiceFilterComB;
+        private Guna.UI2.WinForms.Guna2Button AddLServiceListBtn;
+        private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
     }
 }

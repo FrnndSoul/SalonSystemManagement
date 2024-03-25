@@ -47,10 +47,12 @@
             this.ServiceAcquiredDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ServiceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServicesDiscountChckBoxCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductsBoughtDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductsDiscountChckBoxCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -80,8 +82,6 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LoadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.ProductsDiscountChckBoxCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServicesDiscountChckBoxCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
@@ -122,7 +122,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Chinacat", 47.99999F);
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(333, 107);
-            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(1234, 98);
             this.guna2HtmlLabel1.TabIndex = 1;
@@ -134,7 +134,7 @@
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.White;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(333, 38);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(496, 38);
             this.guna2HtmlLabel2.TabIndex = 2;
@@ -180,7 +180,7 @@
             this.PaymentPanel.Controls.Add(this.NameBox);
             this.PaymentPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.PaymentPanel.Location = new System.Drawing.Point(32, 226);
-            this.PaymentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PaymentPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PaymentPanel.Name = "PaymentPanel";
             this.PaymentPanel.Size = new System.Drawing.Size(1944, 788);
             this.PaymentPanel.TabIndex = 3;
@@ -201,9 +201,9 @@
             this.ClearFieldsBtn.ForeColor = System.Drawing.Color.White;
             this.ClearFieldsBtn.IndicateFocus = true;
             this.ClearFieldsBtn.Location = new System.Drawing.Point(67, 1452);
-            this.ClearFieldsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearFieldsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ClearFieldsBtn.Name = "ClearFieldsBtn";
-            this.ClearFieldsBtn.Size = new System.Drawing.Size(275, 46);
+            this.ClearFieldsBtn.Size = new System.Drawing.Size(307, 46);
             this.ClearFieldsBtn.TabIndex = 46;
             this.ClearFieldsBtn.Text = "Clear Fields";
             this.ClearFieldsBtn.UseTransparentBackground = true;
@@ -222,7 +222,7 @@
             this.PaymentBtn.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PaymentBtn.ForeColor = System.Drawing.Color.White;
             this.PaymentBtn.Location = new System.Drawing.Point(1043, 1262);
-            this.PaymentBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PaymentBtn.Margin = new System.Windows.Forms.Padding(4);
             this.PaymentBtn.Name = "PaymentBtn";
             this.PaymentBtn.Size = new System.Drawing.Size(749, 55);
             this.PaymentBtn.TabIndex = 45;
@@ -278,7 +278,7 @@
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(924, 1550);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(209, 71);
             this.panel1.TabIndex = 41;
@@ -313,7 +313,7 @@
             this.ServiceAcquiredDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ServiceAcquiredDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceAcquiredDGV.Location = new System.Drawing.Point(1103, 586);
-            this.ServiceAcquiredDGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ServiceAcquiredDGV.Margin = new System.Windows.Forms.Padding(4);
             this.ServiceAcquiredDGV.Name = "ServiceAcquiredDGV";
             this.ServiceAcquiredDGV.ReadOnly = true;
             this.ServiceAcquiredDGV.RowHeadersVisible = false;
@@ -356,6 +356,13 @@
             this.ServiceAmountCol.Name = "ServiceAmountCol";
             this.ServiceAmountCol.ReadOnly = true;
             // 
+            // ServicesDiscountChckBoxCol
+            // 
+            this.ServicesDiscountChckBoxCol.HeaderText = "DIscount";
+            this.ServicesDiscountChckBoxCol.MinimumWidth = 6;
+            this.ServicesDiscountChckBoxCol.Name = "ServicesDiscountChckBoxCol";
+            this.ServicesDiscountChckBoxCol.ReadOnly = true;
+            // 
             // ProductsBoughtDGV
             // 
             this.ProductsBoughtDGV.AllowUserToAddRows = false;
@@ -387,7 +394,7 @@
             this.ProductsBoughtDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.ProductsBoughtDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsBoughtDGV.Location = new System.Drawing.Point(77, 586);
-            this.ProductsBoughtDGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProductsBoughtDGV.Margin = new System.Windows.Forms.Padding(4);
             this.ProductsBoughtDGV.Name = "ProductsBoughtDGV";
             this.ProductsBoughtDGV.ReadOnly = true;
             this.ProductsBoughtDGV.RowHeadersVisible = false;
@@ -437,6 +444,13 @@
             this.TotAmountCol.Name = "TotAmountCol";
             this.TotAmountCol.ReadOnly = true;
             // 
+            // ProductsDiscountChckBoxCol
+            // 
+            this.ProductsDiscountChckBoxCol.HeaderText = "Discount";
+            this.ProductsDiscountChckBoxCol.MinimumWidth = 6;
+            this.ProductsDiscountChckBoxCol.Name = "ProductsDiscountChckBoxCol";
+            this.ProductsDiscountChckBoxCol.ReadOnly = true;
+            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
@@ -467,7 +481,7 @@
             this.guna2HtmlLabel16.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel16.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel16.Location = new System.Drawing.Point(125, 1270);
-            this.guna2HtmlLabel16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel16.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             this.guna2HtmlLabel16.Size = new System.Drawing.Size(249, 38);
             this.guna2HtmlLabel16.TabIndex = 31;
@@ -511,7 +525,7 @@
             this.PWDCheckbox.Enabled = false;
             this.PWDCheckbox.Font = new System.Drawing.Font("Chinacat", 18F);
             this.PWDCheckbox.Location = new System.Drawing.Point(647, 288);
-            this.PWDCheckbox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PWDCheckbox.Margin = new System.Windows.Forms.Padding(4);
             this.PWDCheckbox.Name = "PWDCheckbox";
             this.PWDCheckbox.Size = new System.Drawing.Size(179, 40);
             this.PWDCheckbox.TabIndex = 29;
@@ -538,11 +552,11 @@
             this.VoidBtn.ForeColor = System.Drawing.Color.White;
             this.VoidBtn.IndicateFocus = true;
             this.VoidBtn.Location = new System.Drawing.Point(67, 1526);
-            this.VoidBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.VoidBtn.Margin = new System.Windows.Forms.Padding(4);
             this.VoidBtn.Name = "VoidBtn";
-            this.VoidBtn.Size = new System.Drawing.Size(275, 46);
+            this.VoidBtn.Size = new System.Drawing.Size(307, 46);
             this.VoidBtn.TabIndex = 28;
-            this.VoidBtn.Text = "Void Service";
+            this.VoidBtn.Text = "Void Transaction";
             this.VoidBtn.UseTransparentBackground = true;
             this.VoidBtn.Click += new System.EventHandler(this.VoidBtn_Click);
             // 
@@ -552,7 +566,7 @@
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel14.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel14.Location = new System.Drawing.Point(1036, 1398);
-            this.guna2HtmlLabel14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel14.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             this.guna2HtmlLabel14.Size = new System.Drawing.Size(364, 38);
             this.guna2HtmlLabel14.TabIndex = 27;
@@ -565,7 +579,7 @@
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
             this.GcashPayment.Location = new System.Drawing.Point(1685, 1365);
-            this.GcashPayment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GcashPayment.Margin = new System.Windows.Forms.Padding(4);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(107, 98);
@@ -582,7 +596,7 @@
             this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
             this.CardPayment.ImageRotate = 0F;
             this.CardPayment.Location = new System.Drawing.Point(1456, 1365);
-            this.CardPayment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CardPayment.Margin = new System.Windows.Forms.Padding(4);
             this.CardPayment.Name = "CardPayment";
             this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.CardPayment.Size = new System.Drawing.Size(107, 98);
@@ -598,7 +612,7 @@
             this.guna2HtmlLabel15.Font = new System.Drawing.Font("Chinacat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel15.ForeColor = System.Drawing.Color.White;
             this.guna2HtmlLabel15.Location = new System.Drawing.Point(67, 1119);
-            this.guna2HtmlLabel15.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel15.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(605, 50);
             this.guna2HtmlLabel15.TabIndex = 23;
@@ -611,7 +625,7 @@
             this.CashPayment.Image = global::TriforceSalon.Properties.Resources.Cash;
             this.CashPayment.ImageRotate = 0F;
             this.CashPayment.Location = new System.Drawing.Point(1571, 1365);
-            this.CashPayment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CashPayment.Margin = new System.Windows.Forms.Padding(4);
             this.CashPayment.Name = "CashPayment";
             this.CashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.CashPayment.Size = new System.Drawing.Size(107, 98);
@@ -627,7 +641,7 @@
             this.guna2HtmlLabel11.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel11.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel11.Location = new System.Drawing.Point(1116, 290);
-            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
             this.guna2HtmlLabel11.Size = new System.Drawing.Size(156, 38);
             this.guna2HtmlLabel11.TabIndex = 19;
@@ -649,7 +663,7 @@
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.IndicateFocus = true;
             this.guna2Button1.Location = new System.Drawing.Point(1443, 1356);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(364, 117);
             this.guna2Button1.TabIndex = 23;
@@ -661,7 +675,7 @@
             this.guna2HtmlLabel10.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel10.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel10.Location = new System.Drawing.Point(1071, 206);
-            this.guna2HtmlLabel10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel10.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             this.guna2HtmlLabel10.Size = new System.Drawing.Size(197, 38);
             this.guna2HtmlLabel10.TabIndex = 16;
@@ -673,7 +687,7 @@
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Chinacat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel7.ForeColor = System.Drawing.Color.White;
             this.guna2HtmlLabel7.Location = new System.Drawing.Point(1116, 87);
-            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             this.guna2HtmlLabel7.Size = new System.Drawing.Size(592, 50);
             this.guna2HtmlLabel7.TabIndex = 15;
@@ -685,7 +699,7 @@
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel13.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel13.Location = new System.Drawing.Point(125, 1196);
-            this.guna2HtmlLabel13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel13.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
             this.guna2HtmlLabel13.Size = new System.Drawing.Size(126, 38);
             this.guna2HtmlLabel13.TabIndex = 20;
@@ -725,7 +739,7 @@
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Chinacat", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel6.ForeColor = System.Drawing.Color.White;
             this.guna2HtmlLabel6.Location = new System.Drawing.Point(81, 87);
-            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(640, 50);
             this.guna2HtmlLabel6.TabIndex = 4;
@@ -737,7 +751,7 @@
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(36, 388);
-            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(220, 38);
             this.guna2HtmlLabel5.TabIndex = 14;
@@ -749,7 +763,7 @@
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(205, 297);
-            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(65, 38);
             this.guna2HtmlLabel4.TabIndex = 13;
@@ -761,7 +775,7 @@
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(176, 206);
-            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(93, 38);
             this.guna2HtmlLabel3.TabIndex = 4;
@@ -913,7 +927,7 @@
             this.guna2HtmlLabel12.Font = new System.Drawing.Font("Chinacat", 47.99999F);
             this.guna2HtmlLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2HtmlLabel12.Location = new System.Drawing.Point(2024, 31);
-            this.guna2HtmlLabel12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel12.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
             this.guna2HtmlLabel12.Size = new System.Drawing.Size(439, 98);
             this.guna2HtmlLabel12.TabIndex = 5;
@@ -934,7 +948,7 @@
             this.LoadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.LoadBtn.IndicateFocus = true;
             this.LoadBtn.Location = new System.Drawing.Point(1472, 31);
-            this.LoadBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LoadBtn.Margin = new System.Windows.Forms.Padding(4);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(203, 54);
             this.LoadBtn.TabIndex = 28;
@@ -946,24 +960,10 @@
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2Panel2.Location = new System.Drawing.Point(1984, 70);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(556, 944);
             this.guna2Panel2.TabIndex = 29;
-            // 
-            // ProductsDiscountChckBoxCol
-            // 
-            this.ProductsDiscountChckBoxCol.HeaderText = "Discount";
-            this.ProductsDiscountChckBoxCol.MinimumWidth = 6;
-            this.ProductsDiscountChckBoxCol.Name = "ProductsDiscountChckBoxCol";
-            this.ProductsDiscountChckBoxCol.ReadOnly = true;
-            // 
-            // ServicesDiscountChckBoxCol
-            // 
-            this.ServicesDiscountChckBoxCol.HeaderText = "DIscount";
-            this.ServicesDiscountChckBoxCol.MinimumWidth = 6;
-            this.ServicesDiscountChckBoxCol.Name = "ServicesDiscountChckBoxCol";
-            this.ServicesDiscountChckBoxCol.ReadOnly = true;
             // 
             // PaymentsUserControls
             // 
@@ -977,7 +977,7 @@
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.TransactionIDBox);
             this.Controls.Add(this.guna2Panel2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PaymentsUserControls";
             this.Size = new System.Drawing.Size(2560, 1038);
             this.Load += new System.EventHandler(this.PaymentsUserControls_Load);

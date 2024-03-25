@@ -238,18 +238,89 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
 
 
-        private void VoidBtn_Click(object sender, EventArgs e)
+        private async void VoidBtn_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Confirming before voiding this transaction.", "Confirm Void Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Do you want to void these items?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result != DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
-                return;
+                string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
+
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                string position = reader["AccountAccess"].ToString();
+
+                                if (position != "Manager")
+                                {
+                                    MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                                ChangePaymentStatus("VOIDED");
+                                MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                DefaultLoad(); 
+                            }
+                            else
+                            {
+                                MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                        }
+                    }
+                }
+
             }
-            ChangePaymentStatus("VOIDED");
-            DefaultLoad();
+
+
+            /* DialogResult result = MessageBox.Show("Confirming before voiding this transaction.", "Confirm Void Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+             if (result != DialogResult.Yes)
+             {
+                 return;
+             }
+             ChangePaymentStatus("VOIDED");
+             DefaultLoad();*/
         }
 
+        public async Task GetEmployeeName(long EmpID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "SELECT se.Name FROM salon_employees se WHERE AccountID = @ID";
+
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@ID", EmpID);
+                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                EmployeeIDBox.Text = reader["Name"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetEmployeeName()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public void ChangePaymentStatus(string newStatus)
         {
             try

@@ -326,8 +326,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
                 MessageBox.Show(Convert.ToString(ID));
                 await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
-
-
             }
         }
 
@@ -339,11 +337,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
 
-                using (MySqlConnection conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN account a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -358,11 +356,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 if(position != "Manager")
                                 {
                                     MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
                                 }
+                                //insert void method here
+
                             }
                             else
                             {
-                                //insert the method here
+                                MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
                             }
                         }
                     }
