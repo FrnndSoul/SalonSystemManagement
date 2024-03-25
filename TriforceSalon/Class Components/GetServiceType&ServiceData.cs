@@ -966,10 +966,5 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-
-        public async Task AddToList()
-        {
-
-        }
     }
 }
