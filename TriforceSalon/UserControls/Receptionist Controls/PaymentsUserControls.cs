@@ -120,11 +120,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 if (string.Equals(paymentstatus, "PAID", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
                                 }
 
                                 else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
                                 }
 
                                 CustomerName = reader["CustomerName"].ToString();
@@ -347,6 +349,20 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
         }
+
+        private void CustomerMoneyInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (CustomerMoneyInput.Text.Length == 0 && e.KeyChar == '0')
+            {
+                e.Handled = true;
+            }
+        }
+
         public async Task FillServiceAcquiredAsync(long transactionID, Guna2DataGridView serviceAcquiredDGV)
         {
 
