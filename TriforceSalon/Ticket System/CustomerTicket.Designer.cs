@@ -42,6 +42,8 @@
             this.PrioStatusLbl = new System.Windows.Forms.Label();
             this.PhoneNumberLbl = new System.Windows.Forms.Label();
             this.AgeLbl = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.QNumberLbl = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,10 +52,10 @@
             this.NameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.NameLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLbl.ForeColor = System.Drawing.Color.White;
-            this.NameLbl.Location = new System.Drawing.Point(269, 16);
+            this.NameLbl.Location = new System.Drawing.Point(66, 16);
             this.NameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(400, 35);
+            this.NameLbl.Size = new System.Drawing.Size(304, 35);
             this.NameLbl.TabIndex = 0;
             this.NameLbl.Text = "NameP";
             this.NameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -109,6 +111,8 @@
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderColor = System.Drawing.Color.Black;
             this.guna2Panel1.BorderRadius = 30;
+            this.guna2Panel1.Controls.Add(this.QNumberLbl);
+            this.guna2Panel1.Controls.Add(this.label7);
             this.guna2Panel1.Controls.Add(this.label6);
             this.guna2Panel1.Controls.Add(this.label5);
             this.guna2Panel1.Controls.Add(this.label4);
@@ -187,7 +191,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(216, 22);
+            this.label1.Location = new System.Drawing.Point(13, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 23);
             this.label1.TabIndex = 6;
@@ -227,6 +231,29 @@
             this.AgeLbl.Text = "AgeP";
             this.AgeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(389, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(116, 23);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Queue Number";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // QNumberLbl
+            // 
+            this.QNumberLbl.Font = new System.Drawing.Font("Chinacat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QNumberLbl.ForeColor = System.Drawing.Color.White;
+            this.QNumberLbl.Location = new System.Drawing.Point(510, 16);
+            this.QNumberLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.QNumberLbl.Name = "QNumberLbl";
+            this.QNumberLbl.Size = new System.Drawing.Size(172, 35);
+            this.QNumberLbl.TabIndex = 13;
+            this.QNumberLbl.Text = "QueueNumber";
+            this.QNumberLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // CustomerTicket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,5 +283,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label QNumberLbl;
+        private System.Windows.Forms.Label label7;
     }
 }

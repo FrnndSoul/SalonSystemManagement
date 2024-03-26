@@ -43,6 +43,7 @@ namespace TriforceSalon.Class_Components
 {
     public class TransactionMethods
     {
+        Inventory inventoryMethods = new Inventory();
         private string mysqlcon;
         private int TypeID;
         private int VariationID;
@@ -62,23 +63,23 @@ namespace TriforceSalon.Class_Components
                     /*string query = "insert into transaction (TransactionID, EmployeeID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceVariation, ServiceType, ServiceVariationID, Amount, TimeTaken)" +
                         "values(@transactionID, @pref_emp, @customer_name, @customer_age, @customer_number, @service_var, @service_type, @service_varID, @amount, @time_taken)";*/
 
-                    string testQuery = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, EmployeeID, ServiceType, ServiceGroupID)" +
-                            " Values (@transactionID, @customer_name, @customer_age, @customer_number, @pref_emp, @service_type, @service_groupID);" +
+                    string testQuery = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, EmployeeID, ServiceGroupID)" +
+                            " Values (@transactionID, @customer_name, @customer_age, @customer_number, @pref_emp, @service_groupID)";
 
-                            "insert into service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount)" +
-                            " values(@service_groupID, @service_var, @service_varID, @amount);";
+                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount)" +
+                            " values(@service_groupID, @service_var, @service_varID, @amount)";
 
 
                     using (MySqlCommand command = new MySqlCommand(testQuery, conn))
                     {
-                        //for custoemr_info
+                        //for customer_info
                         command.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
                         command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                         command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
-                        command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
 
                         //for service_group
+                        command.Parameters.AddWithValue("@service_type", GetServiceTypeName(serviceID));
                         command.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command.Parameters.AddWithValue("@service_var", ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text);
                         command.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceName));
@@ -113,6 +114,102 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in ProcessCustomer");
 
             }
+        }
+
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid)
+        {
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID)" +
+                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID)";
+
+                    using(MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn))
+                    {
+                        command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+                        command1.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
+                        command1.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
+                        command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
+                        command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+
+                        await command1.ExecuteNonQueryAsync();
+                    }
+
+                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber, AppointmentDate)"
+                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @queueNumber, @date)";
+
+                    foreach (DataGridViewRow row in serviceDataGrid.Rows)
+                    {
+                        string serviceType = Convert.ToString(row.Cells["ServiceTypeCol"].Value);
+                        string serviceVariation = Convert.ToString(row.Cells["SNameCol"].Value);
+                        string preferredEmployee = Convert.ToString(row.Cells["PrefEmpCol"].Value);
+                        decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
+                        int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
+
+                        //edit mo ito para mamatch mo yung hinahanap sa database
+                        using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn))
+                        {
+                            command2.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+                            command2.Parameters.AddWithValue("@service_type", await GetServiceType(serviceVariation));
+                            command2.Parameters.AddWithValue("@service_var", serviceVariation);
+                            command2.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceVariation));
+                            command2.Parameters.AddWithValue("@amount", serviceAMount);
+                            command2.Parameters.AddWithValue("@queueNumber", queueNumber);
+                            command2.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM-dd-yyyy dddd"));
+
+                            if (preferredEmployee == null || string.IsNullOrWhiteSpace(preferredEmployee) || preferredEmployee == "None")
+                            {
+                                MessageBox.Show("Preferred employee not specified.");
+                                command2.Parameters.AddWithValue("@pref_emp", 0);
+                            }
+                            else
+                            {
+                                int employeeID = GetEmployeeID(preferredEmployee);
+                                MessageBox.Show($"Employee ID found: {employeeID}");
+                                command2.Parameters.AddWithValue("@pref_emp", GetEmployeeID(preferredEmployee));
+                            }
+
+
+                            await command2.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in TestProcessCustomer");
+
+            }
+        }
+
+        public async Task<string> GetServiceType(string serviceName)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "Select st.ServiceTypeName from service_type st Join salon_services ss ON st.ServiceID = ss.ServiceTypeID where ss.ServiceName = @serviceName ";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@serviceName", serviceName);
+
+                        object result = await command.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            return result.ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetServiceType");
+            }
+            return null;
         }
 
         public int GetEmployeeID(string name)
@@ -311,6 +408,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
 
+                    await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
                     await InsertToSales(salesID, orderID);
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //GeneratePurchaseOnlyReceipt();
@@ -322,9 +420,6 @@ namespace TriforceSalon.Class_Components
                         SellProductsUserControls.sellProductsUserControlsInstance.discChckBx,
                         SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB,
                         ID);
-
-                    ClearContents();
-
                 }
             }
             catch(Exception ex)

@@ -5,6 +5,7 @@ using System;
 using System.Data.Common;
 using System.Drawing;
 using System.Transactions;
+using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using static TriforceSalon.Class_Components.SellProductsMethods;
@@ -15,6 +16,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static SellProductsUserControls sellProductsUserControlsInstance;
         TransactionMethods transaction = new TransactionMethods();
+        Inventory inventoryMethods = new Inventory();
         SellProductsMethods sellMethods;
         private readonly string mysqlcon;
         private decimal totalPrice = 0.00m;
@@ -107,7 +109,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 conn.Open();
-                string query = "SELECT Cost FROM inventory WHERE ItemName = @itemName";
+                string query = "SELECT SRP FROM inventory WHERE ItemName = @itemName";
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@itemName", serviceName);
@@ -116,7 +118,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         while (reader.Read())
                         {
-                            unitPrice = decimal.Parse(reader["Cost"].ToString());
+                            unitPrice = decimal.Parse(reader["SRP"].ToString());
                         }
                     }
                 }
@@ -316,6 +318,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 else
                 {
                     await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                    transaction.ClearContents();
                 }
 
                 //dito ilalagay yung method to process na rekta resibo na
@@ -326,8 +329,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
                 MessageBox.Show(Convert.ToString(ID));
                 await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
-
-
             }
         }
 
@@ -339,11 +340,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
 
-                using (MySqlConnection conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN account a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -358,18 +359,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 if(position != "Manager")
                                 {
                                     MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
                                 }
+                                //insert void method here
+
                             }
                             else
                             {
-                                //insert the method here
+                                MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
                             }
                         }
                     }
-
-
                 }
-
             }
         }
     }
