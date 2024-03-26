@@ -15,6 +15,7 @@ namespace TriforceSalon.Class_Components
 {
     public class SellProductsMethods
     {
+        GetServiceType_ServiceData serviceData = new GetServiceType_ServiceData();
         public delegate void UpdateTotalPriceDelegate();
         public delegate void AddTotalPriceDelegate(int rowIndex);
         private readonly UpdateTotalPriceDelegate updateTotalPrice;
@@ -245,7 +246,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 byte[] imageBytes = (byte[])reader["Photo"];
 
-                                using (MemoryStream ms = new MemoryStream(imageBytes))
+                                /*using (MemoryStream ms = new MemoryStream(imageBytes))
                                 {
                                     Image servicetypeImage = Image.FromStream(ms);
 
@@ -290,6 +291,52 @@ namespace TriforceSalon.Class_Components
                                     panel.Controls.Add(picBox);
                                     panel.Controls.Add(labelTitle);
                                     panel.Controls.Add(labelTitle1);
+                                    panels.Add(panel);*/
+                                using (MemoryStream ms = new MemoryStream(imageBytes))
+                                {
+                                    Image serviceTypeImage = Image.FromStream(ms);
+
+                                    Panel panel = new Panel
+                                    {
+                                        Width = 200,
+                                        Height = 250, // Adjusted height to accommodate the layout
+                                        Margin = new Padding(10),
+                                        Tag = reader["ItemID"].ToString()
+                                    };
+
+                                    PictureBox picBox = new PictureBox
+                                    {
+                                        Width = 200,
+                                        Height = 150,
+                                        BackgroundImage = serviceTypeImage,
+                                        BackgroundImageLayout = ImageLayout.Stretch,
+                                        Tag = reader["ItemID"].ToString()
+                                    };
+
+                                    Label labelTitle = new Label
+                                    {
+                                        Text = reader["ItemName"].ToString(),
+                                        Location = new Point(10, 160), // Adjusted location to accommodate the layout
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 12, FontStyle.Regular),
+                                        Tag = reader["ItemID"].ToString()
+                                    };
+
+                                    Label labelTitle1 = new Label
+                                    {
+                                        //papalitan ito at gagawing srp
+                                        Text = "Amount: ₱" + reader["SRP"].ToString(),
+                                        Location = new Point(10, 210), // Adjusted location to accommodate the layout
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 12, FontStyle.Regular),
+                                        Tag = reader["ItemID"].ToString()
+                                    };
+
+                                    panel.Controls.Add(picBox);
+                                    panel.Controls.Add(labelTitle);
+                                    panel.Controls.Add(labelTitle1);
                                     panels.Add(panel);
                                 }
                             }));
@@ -324,7 +371,8 @@ namespace TriforceSalon.Class_Components
         private void DisplayServiceData(Panel panel, Guna2DataGridView dataGridView)
         {
             string serviceName = panel.Controls.OfType<Label>().FirstOrDefault()?.Text;
-            string serviceAmount = panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text;
+            //string serviceAmount = panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text;
+            decimal serviceAmount = serviceData.ExtractAmount(panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text);
 
             if (serviceName != null && serviceAmount != null)
             {

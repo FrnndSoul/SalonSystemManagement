@@ -43,6 +43,7 @@ namespace TriforceSalon.Class_Components
 {
     public class TransactionMethods
     {
+        Inventory inventoryMethods = new Inventory();
         private string mysqlcon;
         private int TypeID;
         private int VariationID;
@@ -407,6 +408,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
 
+                    await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
                     await InsertToSales(salesID, orderID);
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //GeneratePurchaseOnlyReceipt();
@@ -418,9 +420,6 @@ namespace TriforceSalon.Class_Components
                         SellProductsUserControls.sellProductsUserControlsInstance.discChckBx,
                         SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB,
                         ID);
-
-                    ClearContents();
-
                 }
             }
             catch(Exception ex)

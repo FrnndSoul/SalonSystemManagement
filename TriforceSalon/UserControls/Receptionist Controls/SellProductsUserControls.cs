@@ -5,6 +5,7 @@ using System;
 using System.Data.Common;
 using System.Drawing;
 using System.Transactions;
+using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using static TriforceSalon.Class_Components.SellProductsMethods;
@@ -15,6 +16,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static SellProductsUserControls sellProductsUserControlsInstance;
         TransactionMethods transaction = new TransactionMethods();
+        Inventory inventoryMethods = new Inventory();
         SellProductsMethods sellMethods;
         private readonly string mysqlcon;
         private decimal totalPrice = 0.00m;
@@ -107,7 +109,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 conn.Open();
-                string query = "SELECT Cost FROM inventory WHERE ItemName = @itemName";
+                string query = "SELECT SRP FROM inventory WHERE ItemName = @itemName";
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@itemName", serviceName);
@@ -116,7 +118,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         while (reader.Read())
                         {
-                            unitPrice = decimal.Parse(reader["Cost"].ToString());
+                            unitPrice = decimal.Parse(reader["SRP"].ToString());
                         }
                     }
                 }
@@ -316,6 +318,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 else
                 {
                     await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                    transaction.ClearContents();
                 }
 
                 //dito ilalagay yung method to process na rekta resibo na
@@ -368,10 +371,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             }
                         }
                     }
-
-
                 }
-
             }
         }
     }
