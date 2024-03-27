@@ -183,7 +183,7 @@ namespace TriforceSalon.Class_Components
                                 while (await reader.ReadAsync())
                                 {
                                     string servieName = reader["ServiceName"].ToString();
-                                    EmployeeLock.employeeLockInstance.ServiceListComB.Items.Add(servieName);
+                                    //EmployeeLock.employeeLockInstance.ServiceListComB.Items.Add(servieName);
                                 }
                             }
                         }
@@ -277,10 +277,10 @@ namespace TriforceSalon.Class_Components
                         using (MySqlCommand insertServiceGroupCommand = new MySqlCommand(insertServiceGroupQuery, conn))
                         {
                             insertServiceGroupCommand.Parameters.AddWithValue("@service_groupID", CustomerID);
-                            insertServiceGroupCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
-                            insertServiceGroupCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
+                            //insertServiceGroupCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
+                            //insertServiceGroupCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
 
-                            decimal amount;
+                            /*decimal amount;
                             if (decimal.TryParse(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text, out amount))
                             {
                                 insertServiceGroupCommand.Parameters.AddWithValue("@amount", amount);
@@ -290,7 +290,7 @@ namespace TriforceSalon.Class_Components
                                 // Handle invalid amount input
                                 MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
-                            }
+                            }*/
 
                             await insertServiceGroupCommand.ExecuteNonQueryAsync();
                         }
@@ -334,7 +334,7 @@ namespace TriforceSalon.Class_Components
                                 while (await reader.ReadAsync())
                                 {
                                     string servieAmount = reader["ServiceAmount"].ToString();
-                                    EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text = servieAmount;
+                                    //EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text = servieAmount;
                                 }
                             }
                         }

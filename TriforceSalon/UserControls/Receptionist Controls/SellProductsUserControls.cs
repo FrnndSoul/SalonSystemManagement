@@ -20,6 +20,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         SellProductsMethods sellMethods;
         private readonly string mysqlcon;
         private decimal totalPrice = 0.00m;
+        private decimal discount = 0.00m;
         public SellProductsUserControls()
         {
             InitializeComponent();
@@ -27,9 +28,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             UpdateTotalPriceDelegate updateTotalPriceDelegate = UpdateTotalPrice;
             AddTotalPriceDelegate addTotalPriceDelegate = AddTotalPrice;
             sellMethods = new SellProductsMethods(updateTotalPriceDelegate, addTotalPriceDelegate);
-
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-
+            ProductsControlDGV.EditingControlShowing += ProductsControlDGV_EditingControlShowing;
         }
 
         private async void SellProductsUserControls_Load(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
         private async void SearchProductsBtn_Click(object sender, EventArgs e)
         {
             string product = ProductSearchTxtB.Text;
@@ -72,6 +72,45 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
         }
+        private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountChckB"].Index && e.Control is ComboBox)
+            {
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.SelectedIndexChanged -= new EventHandler(ComboBox_SelectedIndexChanged);
+                comboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
+            }
+        }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            totalPrice = 0.00m;
+            ComboBox comboBox = sender as ComboBox;
+            string selectedValue = comboBox.SelectedItem.ToString();
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+
+                if (selectedValue == "Discounted")
+                {
+                    if (row.Cells[4].Value != null)
+                    {
+                        decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                        //totalPrice += rowTotal;
+                        decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
+                        discount += DiscountFromProducts(rowTotal);
+                        decimal discountedTotal = totalPrice - discount;
+                        DiscLbl.Text = "Php. " + discount.ToString("0.00");
+                        TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
+                    }
+                }
+                else
+                {
+
+                }
+                // Your logic here
+            }
+        }
+
 
         private void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -98,7 +137,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     int currentQty = int.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
                     SubtractTotalPrice(e.RowIndex);
                 }
+                
             }
+        }
+
+        private decimal DiscountFromProducts(decimal amount)
+        {
+            decimal VAT = amount * 0.12m;
+            decimal PriceWithoutVAT = amount - VAT;
+            decimal discount = PriceWithoutVAT * 0.20m;
+            return discount + VAT;
 
         }
 
@@ -127,6 +175,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
         private void UpdateTotalPrice() //NEW CODE
         {
+
             totalPrice = 0.00m;
 
             foreach (DataGridViewRow row in ProductsControlDGV.Rows)
@@ -135,7 +184,26 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
                     totalPrice += rowTotal;
+
+                    /*DataGridViewComboBoxCell comboBoxCell = (DataGridViewComboBoxCell)row.Cells["DiscountChckB"];
+                    string comboBoxValue = comboBoxCell.Value.ToString();
+                    //MessageBox.Show(comboBoxValue);
+                    
+                   if (comboBoxValue == "Discounted")
+                    {
+                        //it wont go here even if it is checked
+                        decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
+                        decimal discount = DiscountFromProducts(rowTotal);
+                        decimal discountedTotal = totalPrice - discount;
+                        DiscLbl.Text = "Php. " + discount.ToString("0.00");
+                        TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
+                    }
+                    else if (comboBoxValue == "Normal")
+                    {
+                    }*/
+
                 }
+
             }
             SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
             TotLbl.Text = SubLbl.Text;
@@ -147,6 +215,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 DiscLbl.Text = "Php. " + discount.ToString("0.00");
                 TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
             }
+
         }
 
         private void AddTotalPrice(int rowIndex)
@@ -300,7 +369,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             RefreshPlaceButtonState();
             CheckVoidButtonState();
-
         }
 
         private async void PaymentBtn_Click(object sender, EventArgs e)
@@ -350,13 +418,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
 
-                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            if(await reader.ReadAsync())
+                            if (await reader.ReadAsync())
                             {
                                 string position = reader["AccountAccess"].ToString();
 
-                                if(position != "Manager")
+                                if (position != "Manager")
                                 {
                                     MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     return;

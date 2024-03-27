@@ -333,7 +333,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.EmployeeLockPanel);
             this.Name = "EmployeeLock";
-            this.Size = new System.Drawing.Size(1283, 840);
+            this.Size = new System.Drawing.Size(1283, 566);
             this.Load += new System.EventHandler(this.EmployeeLock_Load);
             this.EmployeeLockPanel.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);
