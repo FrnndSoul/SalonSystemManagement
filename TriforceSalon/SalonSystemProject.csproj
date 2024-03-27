@@ -213,6 +213,12 @@
     <Compile Include="UserControls\Employee Controls\EmployeeLock.Designer.cs">
       <DependentUpon>EmployeeLock.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Employee Controls\RatingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Employee Controls\RatingsUserControl.Designer.cs">
+      <DependentUpon>RatingsUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -340,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Employee Controls\EmployeeLock.resx">
       <DependentUpon>EmployeeLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Employee Controls\RatingsUserControl.resx">
+      <DependentUpon>RatingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
@@ -516,6 +525,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SalonLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Very Satisfied.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Satisfied.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Neutral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unsatisfied.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

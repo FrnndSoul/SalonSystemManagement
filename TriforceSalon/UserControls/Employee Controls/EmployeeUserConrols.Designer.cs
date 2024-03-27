@@ -236,9 +236,9 @@ namespace TriforceSalon.UserControls
             // EmployeeLockContent
             // 
             this.EmployeeLockContent.BackColor = System.Drawing.Color.Transparent;
-            this.EmployeeLockContent.Location = new System.Drawing.Point(320, 212);
+            this.EmployeeLockContent.Location = new System.Drawing.Point(320, 335);
             this.EmployeeLockContent.Name = "EmployeeLockContent";
-            this.EmployeeLockContent.Size = new System.Drawing.Size(1281, 840);
+            this.EmployeeLockContent.Size = new System.Drawing.Size(1278, 564);
             this.EmployeeLockContent.TabIndex = 19;
             // 
             // EmployeeUserConrols
