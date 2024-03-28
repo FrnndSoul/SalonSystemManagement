@@ -1,9 +1,11 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
+using Mysqlx.Session;
 using MySqlX.XDevAPI.Common;
 using System;
 using System.Data.Common;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Transactions;
 using System.Web.WebSockets;
 using System.Windows.Forms;
@@ -29,7 +31,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AddTotalPriceDelegate addTotalPriceDelegate = AddTotalPrice;
             sellMethods = new SellProductsMethods(updateTotalPriceDelegate, addTotalPriceDelegate);
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            ProductsControlDGV.EditingControlShowing += ProductsControlDGV_EditingControlShowing;
+            //ProductsControlDGV.EditingControlShowing += ProductsControlDGV_EditingControlShowing;
+            //ProductsControlDGV.CellValueChanged += ProductsControlDGV_CellValueChanged;
+            DirectTransactionRBtn.Checked = true;
+            CustomerIDComB.Enabled = false;
+
         }
 
         private async void SellProductsUserControls_Load(object sender, EventArgs e)
@@ -44,7 +50,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private async void SearchProductsBtn_Click(object sender, EventArgs e)
         {
             string product = ProductSearchTxtB.Text;
@@ -72,47 +78,199 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
         }
-        private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        /*private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountChckB"].Index && e.Control is ComboBox)
+            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountComB"].Index && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged -= new EventHandler(ComboBox_SelectedIndexChanged);
                 comboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
             }
-        }
+        }*/
 
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+
+
+
+
+        /*private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountComB"].Index && e.Control is ComboBox)
+            {
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.SelectionChangeCommitted -= new EventHandler(ComboBox_SelectedIndexChanged);
+                comboBox.SelectionChangeCommitted += new EventHandler(ComboBox_SelectedIndexChanged);
+
+                ComboBox_SelectedIndexChanged(comboBox, EventArgs.Empty);
+            }
+        }*/
+
+
+
+
+
+
+
+
+
+
+
+
+        /*private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             totalPrice = 0.00m;
+            discount = 0.00m;
             ComboBox comboBox = sender as ComboBox;
             string selectedValue = comboBox.SelectedItem.ToString();
             foreach (DataGridViewRow row in ProductsControlDGV.Rows)
             {
-
                 if (selectedValue == "Discounted")
+                {
+                    discount = 0.00m; // Reset discount to recalculate
+
+                    if (row.Cells[4].Value != null)
+                    {
+                        decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                        discount += DiscountFromProducts(rowTotal);
+                    }
+
+                }
+                else
+                {
+                    discount = 0.00m; // No discount
+                }
+            }
+            
+
+            UpdateTotalPrice();
+        }*/
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            totalPrice = 0.00m;
+            discount = 0.00m;
+
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+                if (row.Cells[4].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    decimal discountedPrice = rowTotal; // Default to original price
+
+                    DataGridViewComboBoxCell comboBoxCell = row.Cells["DiscountComB"] as DataGridViewComboBoxCell;
+                    if (comboBoxCell != null)
+                    {
+                        string selectedValue = comboBoxCell.Value.ToString();
+                        if (selectedValue == "Discounted")
+                        {
+                            // Apply discount only if the product is marked as "Discounted"
+                            discountedPrice = rowTotal - DiscountFromProducts(rowTotal);
+                            discount += DiscountFromProducts(rowTotal);
+                        }
+                    }
+
+                    totalPrice += discountedPrice;
+                }
+            }
+
+            UpdateTotalPrice();
+        }
+
+        private void UpdateTotalPrice()
+        {
+            totalPrice = 0.00m;
+
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+                if (row.Cells[4].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    totalPrice += rowTotal;
+                }
+            }
+
+            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
+
+
+            /*if (discount > 0.00m)
+            {
+                decimal discountedTotal = totalPrice - discount;
+                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
+                DiscLbl.Text = "Php. " + discount.ToString("0.00");
+            }
+            else
+            {
+                DiscLbl.Text = "Php. 0.00"; // No discount applied
+                TotLbl.Text = SubLbl.Text;
+            }*/
+        }
+
+        /*private void UpdateTotalPrice()
+        {
+            totalPrice = 0.00m;
+
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+                if (row.Cells[4].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    totalPrice += rowTotal;
+                }
+            }
+
+            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
+
+            if (discount > 0.00m)
+            {
+                decimal discountedTotal = totalPrice - discount;
+                DiscLbl.Text = "Php. " + discount.ToString("0.00");
+                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
+            }
+            else
+            {
+                DiscLbl.Text = "Php. 0.00"; // No discount applied
+                TotLbl.Text = SubLbl.Text;
+            }
+        }*/
+
+
+        /*private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            totalPrice = 0.00m;
+            discount = 0.00m;
+            ComboBox comboBox = sender as ComboBox;
+            string selectedValue = comboBox.SelectedItem.ToString();
+            MessageBox.Show(selectedValue);
+
+            if (selectedValue == "Discounted")
+            {
+                foreach (DataGridViewRow row in ProductsControlDGV.Rows)
                 {
                     if (row.Cells[4].Value != null)
                     {
                         decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
-                        //totalPrice += rowTotal;
-                        decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
-                        discount += DiscountFromProducts(rowTotal);
-                        decimal discountedTotal = totalPrice - discount;
-                        DiscLbl.Text = "Php. " + discount.ToString("0.00");
-                        TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
+                        decimal discountedPrice = rowTotal - DiscountFromProducts(rowTotal);
+                        totalPrice += discountedPrice;
+                        MessageBox.Show(discountedPrice.ToString());
                     }
                 }
-                else
-                {
-
-                }
-                // Your logic here
             }
-        }
+            else
+            {
+                foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+                {
+                    if (row.Cells[4].Value != null)
+                    {
+                        totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
+                    }
+                }
+            }
+
+            UpdateTotalPrice();
+        }*/
 
 
-        private void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private async void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ProductsControlDGV.Rows.Count) // 
             {
@@ -120,10 +278,51 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "DisposeCol")
                 {
-                    decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
-                    ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
-                    totalPrice -= removedItemPrice;
-                    UpdateTotalPrice();
+                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
+
+                        using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                        {
+                            await conn.OpenAsync();
+
+                            string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+
+                            using (MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
+
+                                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                                {
+                                    if (await reader.ReadAsync())
+                                    {
+                                        string position = reader["AccountAccess"].ToString();
+
+                                        if (position != "Manager")
+                                        {
+                                            MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
+                                            ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
+                                            totalPrice -= removedItemPrice;
+                                            UpdateTotalPrice();
+                                            PaymentBtn.Enabled = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 else if (e.ColumnIndex == ProductsControlDGV.Columns["IncrementCol"].Index)
                 {
@@ -131,13 +330,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     currentQty++;
                     ProductsControlDGV.Rows[e.RowIndex].Cells[2].Value = currentQty;
                     AddTotalPrice(e.RowIndex);
+                    PaymentBtn.Enabled = false;
                 }
                 else if (e.ColumnIndex == ProductsControlDGV.Columns["DecrementCol"].Index)
                 {
                     int currentQty = int.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
                     SubtractTotalPrice(e.RowIndex);
+                    PaymentBtn.Enabled = false;
                 }
-                
             }
         }
 
@@ -145,10 +345,25 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             decimal VAT = amount * 0.12m;
             decimal PriceWithoutVAT = amount - VAT;
-            decimal discount = PriceWithoutVAT * 0.20m;
-            return discount + VAT;
-
+            decimal discountPrice = PriceWithoutVAT * 0.20m;
+            return discountPrice + VAT;
         }
+        /*private decimal DiscountFromProducts(decimal rowTotal)
+        {
+            decimal discountRate = 0.20m; // 20% discount for senior citizens
+            decimal vatRate = 0.12m; // 12% VAT in the Philippines
+
+            // Compute the discount
+            decimal discount = rowTotal * discountRate;
+
+            // Compute the VAT
+            decimal vat = rowTotal * vatRate;
+
+            // Subtract the discount and VAT from the row total
+            decimal discountedTotal = rowTotal - discount - vat;
+
+            return discountedTotal;
+        }*/
 
         private decimal GetUnitPriceForFood(string serviceName)
         {
@@ -173,7 +388,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             return unitPrice;
         }
-        private void UpdateTotalPrice() //NEW CODE
+        /*private void UpdateTotalPrice() //NEW CODE
         {
 
             totalPrice = 0.00m;
@@ -184,24 +399,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
                     totalPrice += rowTotal;
-
-                    /*DataGridViewComboBoxCell comboBoxCell = (DataGridViewComboBoxCell)row.Cells["DiscountChckB"];
-                    string comboBoxValue = comboBoxCell.Value.ToString();
-                    //MessageBox.Show(comboBoxValue);
-                    
-                   if (comboBoxValue == "Discounted")
-                    {
-                        //it wont go here even if it is checked
-                        decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
-                        decimal discount = DiscountFromProducts(rowTotal);
-                        decimal discountedTotal = totalPrice - discount;
-                        DiscLbl.Text = "Php. " + discount.ToString("0.00");
-                        TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
-                    }
-                    else if (comboBoxValue == "Normal")
-                    {
-                    }*/
-
                 }
 
             }
@@ -216,7 +413,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
             }
 
-        }
+        }*/
 
         private void AddTotalPrice(int rowIndex)
         {
@@ -369,6 +566,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             RefreshPlaceButtonState();
             CheckVoidButtonState();
+
         }
 
         private async void PaymentBtn_Click(object sender, EventArgs e)
@@ -376,27 +574,35 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             int salesID = transaction.GenerateTransactionID();
             int orderID = transaction.GenerateTransactionID();
 
-            if (CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
+            if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
             {
-                if (CustomerNameTxtB.Text == null)
+                if (ExtractAmount(TotLbl.Text) > Convert.ToDecimal(CashTxtBx.Text))
                 {
-                    MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
+                    if (CustomerNameTxtB.Text == null)
+                    {
+                        MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    else
+                    {
+                        await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                        transaction.ClearContents();
+                    }
                 }
                 else
                 {
-                    await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
-                    transaction.ClearContents();
-                }
+                    MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
 
-                //dito ilalagay yung method to process na rekta resibo na
+                }
             }
-            else
+            else if (DatabaseTransactionRBtn.Checked == true)
             {
                 //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
                 int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
                 MessageBox.Show(Convert.ToString(ID));
                 await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+                transaction.ClearContents();
             }
         }
 
@@ -441,6 +647,93 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
                 }
             }
+        }
+        public decimal ExtractAmount(string input)
+        {
+            string pattern = @"Php\. (\d+(\.\d+)?)";
+
+            // Match the pattern in the input string
+            Match match = Regex.Match(input, pattern);
+
+            // Check if a match is found
+            if (match.Success)
+            {
+                // Extract the amount from the match
+                string amountString = match.Groups[1].Value;
+
+                // Convert the amount to a decimal
+                if (decimal.TryParse(amountString, out decimal extractedAmount))
+                {
+                    return extractedAmount;
+                }
+                else
+                {
+                    throw new ArgumentException("Failed to parse amount.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Pattern not found in input string.");
+            }
+        }
+
+        private void CalculateCostBtn_Click(object sender, EventArgs e)
+        {
+            CalculateTotalPrice();
+            PaymentBtn.Enabled = true;
+        }
+        private void CalculateTotalPrice()
+        {
+            totalPrice = 0.00m;
+            decimal discountedTotal = 0.00m;
+            decimal normalTotal = 0.00m;
+
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+                if (row.Cells[4].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    string selectedValue = row.Cells["DiscountComB"].Value.ToString();
+
+                    if (selectedValue == "Discounted")
+                    {
+                        // Apply discount for discounted products
+                        discountedTotal += rowTotal - DiscountFromProducts(rowTotal);
+                    }
+                    else
+                    {
+                        // Add original price for normal products
+                        normalTotal += rowTotal;
+                    }
+
+                    totalPrice += rowTotal; // Add to total regardless
+                }
+            }
+
+            // Update UI with totals
+            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
+            TotLbl.Text = "Php. " + (discountedTotal + normalTotal).ToString("0.00");
+            DiscLbl.Text = "Php. " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+        }
+
+        private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            CustomerIDComB.Enabled = false;
+
+            ProductsControlDGV.Columns["DiscountComB"].Visible = true;
+            CashTxtBx.Enabled = true;
+            CalculateCostBtn.Enabled = true;
+            CustomerNameTxtB.Enabled = true;
+        }
+
+        private void DatabaseTransactionRBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            CustomerIDComB.Enabled = true;
+
+            ProductsControlDGV.Columns["DiscountComB"].Visible = false;
+            CashTxtBx.Enabled = false;
+            CalculateCostBtn.Enabled = false;
+            CustomerNameTxtB.Enabled = false;
         }
     }
 }

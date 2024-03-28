@@ -57,8 +57,11 @@
             this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountChckB = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DiscountComB = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CalculateCostBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.DatabaseTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.DirectTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +70,7 @@
             this.ProductsFL.BackColor = System.Drawing.Color.White;
             this.ProductsFL.Location = new System.Drawing.Point(24, 88);
             this.ProductsFL.Name = "ProductsFL";
-            this.ProductsFL.Size = new System.Drawing.Size(1298, 737);
+            this.ProductsFL.Size = new System.Drawing.Size(1252, 737);
             this.ProductsFL.TabIndex = 1;
             // 
             // ProductSearchTxtB
@@ -84,7 +87,7 @@
             this.ProductSearchTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ProductSearchTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ProductSearchTxtB.Location = new System.Drawing.Point(848, 24);
+            this.ProductSearchTxtB.Location = new System.Drawing.Point(802, 24);
             this.ProductSearchTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ProductSearchTxtB.Name = "ProductSearchTxtB";
             this.ProductSearchTxtB.PasswordChar = '\0';
@@ -98,7 +101,7 @@
             this.cLbl.BackColor = System.Drawing.Color.Transparent;
             this.cLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cLbl.ForeColor = System.Drawing.Color.White;
-            this.cLbl.Location = new System.Drawing.Point(1596, 670);
+            this.cLbl.Location = new System.Drawing.Point(1411, 762);
             this.cLbl.Name = "cLbl";
             this.cLbl.Size = new System.Drawing.Size(76, 33);
             this.cLbl.TabIndex = 19;
@@ -110,9 +113,9 @@
             this.cashLbl.BackColor = System.Drawing.Color.Transparent;
             this.cashLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cashLbl.ForeColor = System.Drawing.Color.White;
-            this.cashLbl.Location = new System.Drawing.Point(1387, 670);
+            this.cashLbl.Location = new System.Drawing.Point(1288, 762);
             this.cashLbl.Name = "cashLbl";
-            this.cashLbl.Size = new System.Drawing.Size(154, 33);
+            this.cashLbl.Size = new System.Drawing.Size(117, 33);
             this.cashLbl.TabIndex = 18;
             this.cashLbl.Text = "Cash";
             this.cashLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -122,9 +125,9 @@
             this.TotLbl.BackColor = System.Drawing.Color.Transparent;
             this.TotLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotLbl.ForeColor = System.Drawing.Color.White;
-            this.TotLbl.Location = new System.Drawing.Point(1596, 623);
+            this.TotLbl.Location = new System.Drawing.Point(1411, 711);
             this.TotLbl.Name = "TotLbl";
-            this.TotLbl.Size = new System.Drawing.Size(268, 33);
+            this.TotLbl.Size = new System.Drawing.Size(168, 33);
             this.TotLbl.TabIndex = 17;
             this.TotLbl.Text = "Php. 0.00";
             this.TotLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,9 +137,9 @@
             this.totalLbl.BackColor = System.Drawing.Color.Transparent;
             this.totalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLbl.ForeColor = System.Drawing.Color.White;
-            this.totalLbl.Location = new System.Drawing.Point(1388, 623);
+            this.totalLbl.Location = new System.Drawing.Point(1282, 711);
             this.totalLbl.Name = "totalLbl";
-            this.totalLbl.Size = new System.Drawing.Size(153, 33);
+            this.totalLbl.Size = new System.Drawing.Size(123, 33);
             this.totalLbl.TabIndex = 16;
             this.totalLbl.Text = "Total";
             this.totalLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -146,9 +149,9 @@
             this.DiscLbl.BackColor = System.Drawing.Color.Transparent;
             this.DiscLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscLbl.ForeColor = System.Drawing.Color.White;
-            this.DiscLbl.Location = new System.Drawing.Point(1596, 581);
+            this.DiscLbl.Location = new System.Drawing.Point(1411, 661);
             this.DiscLbl.Name = "DiscLbl";
-            this.DiscLbl.Size = new System.Drawing.Size(268, 33);
+            this.DiscLbl.Size = new System.Drawing.Size(201, 33);
             this.DiscLbl.TabIndex = 15;
             this.DiscLbl.Text = "Php. 0.00";
             this.DiscLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -158,9 +161,9 @@
             this.discL.BackColor = System.Drawing.Color.Transparent;
             this.discL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discL.ForeColor = System.Drawing.Color.White;
-            this.discL.Location = new System.Drawing.Point(1362, 581);
+            this.discL.Location = new System.Drawing.Point(1282, 661);
             this.discL.Name = "discL";
-            this.discL.Size = new System.Drawing.Size(184, 33);
+            this.discL.Size = new System.Drawing.Size(123, 33);
             this.discL.TabIndex = 14;
             this.discL.Text = "Discount";
             this.discL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -170,9 +173,9 @@
             this.SubLbl.BackColor = System.Drawing.Color.Transparent;
             this.SubLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubLbl.ForeColor = System.Drawing.Color.White;
-            this.SubLbl.Location = new System.Drawing.Point(1596, 538);
+            this.SubLbl.Location = new System.Drawing.Point(1411, 612);
             this.SubLbl.Name = "SubLbl";
-            this.SubLbl.Size = new System.Drawing.Size(268, 33);
+            this.SubLbl.Size = new System.Drawing.Size(194, 33);
             this.SubLbl.TabIndex = 13;
             this.SubLbl.Text = "Php. 0.00";
             this.SubLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -182,9 +185,9 @@
             this.sbLbl.BackColor = System.Drawing.Color.Transparent;
             this.sbLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sbLbl.ForeColor = System.Drawing.Color.White;
-            this.sbLbl.Location = new System.Drawing.Point(1362, 538);
+            this.sbLbl.Location = new System.Drawing.Point(1282, 612);
             this.sbLbl.Name = "sbLbl";
-            this.sbLbl.Size = new System.Drawing.Size(179, 33);
+            this.sbLbl.Size = new System.Drawing.Size(123, 33);
             this.sbLbl.TabIndex = 12;
             this.sbLbl.Text = "Subtotal";
             this.sbLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -197,10 +200,10 @@
             this.VoidBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.VoidBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.VoidBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.VoidBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.VoidBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.VoidBtn.ForeColor = System.Drawing.Color.Black;
-            this.VoidBtn.Location = new System.Drawing.Point(1357, 776);
+            this.VoidBtn.FillColor = System.Drawing.Color.Red;
+            this.VoidBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VoidBtn.ForeColor = System.Drawing.Color.White;
+            this.VoidBtn.Location = new System.Drawing.Point(1647, 746);
             this.VoidBtn.Name = "VoidBtn";
             this.VoidBtn.Size = new System.Drawing.Size(254, 49);
             this.VoidBtn.TabIndex = 20;
@@ -216,9 +219,9 @@
             this.PaymentBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.PaymentBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.PaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.PaymentBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.PaymentBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PaymentBtn.ForeColor = System.Drawing.Color.Black;
-            this.PaymentBtn.Location = new System.Drawing.Point(1638, 776);
+            this.PaymentBtn.Location = new System.Drawing.Point(1647, 679);
             this.PaymentBtn.Name = "PaymentBtn";
             this.PaymentBtn.Size = new System.Drawing.Size(254, 49);
             this.PaymentBtn.TabIndex = 21;
@@ -247,7 +250,7 @@
             this.QuantityCol,
             this.IncrementCol,
             this.CostCol,
-            this.DiscountChckB,
+            this.DiscountComB,
             this.DisposeCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -258,11 +261,11 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ProductsControlDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.ProductsControlDGV.Location = new System.Drawing.Point(1357, 24);
+            this.ProductsControlDGV.Location = new System.Drawing.Point(1294, 24);
             this.ProductsControlDGV.Name = "ProductsControlDGV";
             this.ProductsControlDGV.RowHeadersVisible = false;
             this.ProductsControlDGV.RowHeadersWidth = 51;
-            this.ProductsControlDGV.Size = new System.Drawing.Size(535, 291);
+            this.ProductsControlDGV.Size = new System.Drawing.Size(598, 291);
             this.ProductsControlDGV.TabIndex = 22;
             this.ProductsControlDGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.ProductsControlDGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -301,7 +304,7 @@
             this.SearchProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.SearchProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchProductsBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchProductsBtn.Location = new System.Drawing.Point(662, 24);
+            this.SearchProductsBtn.Location = new System.Drawing.Point(616, 24);
             this.SearchProductsBtn.Name = "SearchProductsBtn";
             this.SearchProductsBtn.Size = new System.Drawing.Size(180, 38);
             this.SearchProductsBtn.TabIndex = 23;
@@ -337,13 +340,13 @@
             this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Location = new System.Drawing.Point(1669, 670);
+            this.CashTxtBx.Location = new System.Drawing.Point(1475, 762);
             this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CashTxtBx.Name = "CashTxtBx";
             this.CashTxtBx.PasswordChar = '\0';
             this.CashTxtBx.PlaceholderText = "";
             this.CashTxtBx.SelectedText = "";
-            this.CashTxtBx.Size = new System.Drawing.Size(222, 33);
+            this.CashTxtBx.Size = new System.Drawing.Size(137, 33);
             this.CashTxtBx.TabIndex = 25;
             this.CashTxtBx.TextChanged += new System.EventHandler(this.CashTxtBx_TextChanged);
             this.CashTxtBx.Enter += new System.EventHandler(this.CashTxtBx_Enter);
@@ -391,7 +394,7 @@
             this.discChckBx.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.discChckBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.discChckBx.ForeColor = System.Drawing.Color.White;
-            this.discChckBx.Location = new System.Drawing.Point(1357, 464);
+            this.discChckBx.Location = new System.Drawing.Point(1475, 463);
             this.discChckBx.Name = "discChckBx";
             this.discChckBx.Size = new System.Drawing.Size(315, 45);
             this.discChckBx.TabIndex = 28;
@@ -400,6 +403,7 @@
             this.discChckBx.UncheckedState.BorderRadius = 0;
             this.discChckBx.UncheckedState.BorderThickness = 0;
             this.discChckBx.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.discChckBx.Visible = false;
             this.discChckBx.CheckedChanged += new System.EventHandler(this.discChckBx_CheckedChanged);
             // 
             // label2
@@ -465,15 +469,15 @@
             this.CostCol.Name = "CostCol";
             this.CostCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // DiscountChckB
+            // DiscountComB
             // 
-            this.DiscountChckB.HeaderText = "Discount";
-            this.DiscountChckB.Items.AddRange(new object[] {
+            this.DiscountComB.HeaderText = "Discount";
+            this.DiscountComB.Items.AddRange(new object[] {
             "Normal",
             "Discounted"});
-            this.DiscountChckB.Name = "DiscountChckB";
-            this.DiscountChckB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DiscountChckB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DiscountComB.Name = "DiscountComB";
+            this.DiscountComB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DiscountComB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // DisposeCol
             // 
@@ -483,11 +487,66 @@
             this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // CalculateCostBtn
+            // 
+            this.CalculateCostBtn.AutoRoundedCorners = true;
+            this.CalculateCostBtn.BorderRadius = 22;
+            this.CalculateCostBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CalculateCostBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CalculateCostBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CalculateCostBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CalculateCostBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.CalculateCostBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalculateCostBtn.ForeColor = System.Drawing.Color.Black;
+            this.CalculateCostBtn.Location = new System.Drawing.Point(1647, 612);
+            this.CalculateCostBtn.Name = "CalculateCostBtn";
+            this.CalculateCostBtn.Size = new System.Drawing.Size(254, 47);
+            this.CalculateCostBtn.TabIndex = 32;
+            this.CalculateCostBtn.Text = "Compute";
+            this.CalculateCostBtn.Click += new System.EventHandler(this.CalculateCostBtn_Click);
+            // 
+            // DatabaseTransactionRBtn
+            // 
+            this.DatabaseTransactionRBtn.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DatabaseTransactionRBtn.CheckedState.BorderThickness = 0;
+            this.DatabaseTransactionRBtn.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DatabaseTransactionRBtn.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.DatabaseTransactionRBtn.Location = new System.Drawing.Point(1318, 413);
+            this.DatabaseTransactionRBtn.Name = "DatabaseTransactionRBtn";
+            this.DatabaseTransactionRBtn.Size = new System.Drawing.Size(23, 23);
+            this.DatabaseTransactionRBtn.TabIndex = 34;
+            this.DatabaseTransactionRBtn.Text = "guna2CustomRadioButton1";
+            this.DatabaseTransactionRBtn.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.DatabaseTransactionRBtn.UncheckedState.BorderThickness = 2;
+            this.DatabaseTransactionRBtn.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.DatabaseTransactionRBtn.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.DatabaseTransactionRBtn.CheckedChanged += new System.EventHandler(this.DatabaseTransactionRBtn_CheckedChanged);
+            // 
+            // DirectTransactionRBtn
+            // 
+            this.DirectTransactionRBtn.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DirectTransactionRBtn.CheckedState.BorderThickness = 0;
+            this.DirectTransactionRBtn.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.DirectTransactionRBtn.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.DirectTransactionRBtn.Location = new System.Drawing.Point(1318, 355);
+            this.DirectTransactionRBtn.Name = "DirectTransactionRBtn";
+            this.DirectTransactionRBtn.Size = new System.Drawing.Size(23, 23);
+            this.DirectTransactionRBtn.TabIndex = 35;
+            this.DirectTransactionRBtn.Text = "guna2CustomRadioButton2";
+            this.DirectTransactionRBtn.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.DirectTransactionRBtn.UncheckedState.BorderThickness = 2;
+            this.DirectTransactionRBtn.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.DirectTransactionRBtn.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            this.DirectTransactionRBtn.CheckedChanged += new System.EventHandler(this.DirectTransactionRBtn_CheckedChanged);
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.DatabaseTransactionRBtn);
+            this.Controls.Add(this.DirectTransactionRBtn);
+            this.Controls.Add(this.CalculateCostBtn);
             this.Controls.Add(this.CustomerIDComB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.discChckBx);
@@ -545,7 +604,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
         private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn DiscountChckB;
+        private System.Windows.Forms.DataGridViewComboBoxColumn DiscountComB;
         private System.Windows.Forms.DataGridViewButtonColumn DisposeCol;
+        private Guna.UI2.WinForms.Guna2Button CalculateCostBtn;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton DatabaseTransactionRBtn;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton DirectTransactionRBtn;
     }
 }
