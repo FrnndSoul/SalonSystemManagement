@@ -1,4 +1,4 @@
-﻿using sales_roject;
+﻿using TriforceSalon;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using salesreport;
 
 namespace TriforceSalon.UserControls
 {
@@ -51,10 +52,21 @@ namespace TriforceSalon.UserControls
             UserControlNavigator.ShowControl(serviceView, ManagerContent);
         }
 
-        private void ReportsBtn_Click(object sender, EventArgs e)
+        private async void ReportsBtn_Click(object sender, EventArgs e)
         {
-            SalesUI sales = new SalesUI();
-            UserControlNavigator.ShowControl(sales, ManagerContent);
+            await Task.Delay(500);
+            this.Visible = false;
+
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    //mainForm.ShowLogin();
+                    SalesForm sales = new SalesForm();
+                    UserControlNavigator.ShowControl(sales, MainForm.mainFormInstance.MainFormContent);
+                    break;
+                }
+            }
         }
     }
 }
