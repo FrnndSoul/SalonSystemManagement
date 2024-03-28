@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls;
+using TriforceSalon.UserControls.Employee_Controls;
 
 namespace TriforceSalon.Test
 {
@@ -21,7 +22,9 @@ namespace TriforceSalon.Test
         public string Status => PrioStatusLbl.Text;
         public string Ticket => TicketLbl.Text;
 
-        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket)
+        public string Queue => QNumberLbl.Text;
+
+        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket, string queue)
         {
             InitializeComponent();
             customerTicketInstance = this;
@@ -33,6 +36,7 @@ namespace TriforceSalon.Test
             //PreferredEmpLbl.Text = PredEmp;
             PrioStatusLbl.Text = Status;
             TicketLbl.Text = Ticket;
+            QNumberLbl.Text = queue;
 
         }
 
@@ -52,7 +56,7 @@ namespace TriforceSalon.Test
             string CAge = AgeLbl.Text;
             string PNumber = PhoneNumberLbl.Text;
             string Cserviec = ServiceVarLbl.Text;
-            string prio = PrioStatusLbl.Text;
+            //string prio = PrioStatusLbl.Text;
 
             /*MessageBox.Show(Convert.ToString(ticketID));
             MessageBox.Show(CName);
@@ -68,14 +72,13 @@ namespace TriforceSalon.Test
             try
             {
                 await empTransaction.ProcessTicketAsync(ticketID);
-                await empTransaction.FetchServiceImageAsync(serviceName);
+                //await empTransaction.FetchServiceImageAsync(serviceName);
 
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerNameTxtB.Text = CName;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerAgeTxtB.Text = CAge;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerPNumTxtB.Text = PNumber;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerServiceTxtB.Text = Cserviec;
-                EmployeeUserConrols.employeeUserConrolsInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
-                //empTransaction.PassValueToLock(); //may prob
+                EmployeeLock.employeeLockInstance.CustomerNameTxtB.Text = CName;
+                EmployeeLock.employeeLockInstance.CustomerAgeTxtB.Text = CAge;
+                EmployeeLock.employeeLockInstance.CustomerPNumTxtB.Text = PNumber;
+                EmployeeLock.employeeLockInstance.CustomerServiceTxtB.Text = Cserviec;
+                EmployeeLock.employeeLockInstance.CustomerIDTxtB.Text = Convert.ToString(ticketID);
             }
             catch(Exception ex)
             {
@@ -98,8 +101,9 @@ namespace TriforceSalon.Test
         //public string PredEmp { get; }
         public string Status { get; }
         public string Ticket { get; }
+        public string Queue {  get; }
 
-        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket)
+        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket, string queue)
         {
             CustomerName = customerName;
             CustomerAge = customerAge;
@@ -108,7 +112,7 @@ namespace TriforceSalon.Test
             //PredEmp = predEmp;
             Status = status;
             Ticket = ticket;
-
+            Queue = queue;
         }
     }
 

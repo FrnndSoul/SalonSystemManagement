@@ -226,7 +226,7 @@ namespace TriforceSalon
 
                                 if (password == HashString(inputPassword))
                                 {
-                                    LogInCompleteAsync(inputID);
+                                    await LogInCompleteAsync(inputID);
                                     return true;
                                 }
                             } else
@@ -714,17 +714,9 @@ namespace TriforceSalon
 
         public  void GetEmployeeInfo()
         {
-            byte[] photoBytes = Photo;
-
-            EmployeeUserConrols.employeeUserConrolsInstance.EmpNameTxtB.Text = Name;
-            EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberTxtB.Text = Convert.ToString(AccountID);
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeNameLbl.Text = Name;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberLbl.Text = Convert.ToString(AccountID);
             EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text = transaction.GetServiceTypeName(ServiceID);
-
-            using (MemoryStream ms = new MemoryStream(photoBytes))
-            {
-                EmployeeUserConrols.employeeUserConrolsInstance.EmployeePicturePicB.Image = Image.FromStream(ms);
-            }
-
         }
 
         /*public static void ReadUserData(string user)
