@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,6 +50,8 @@
             this.ServiceTypeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceTypeDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ServicePanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.EditServBtn = new Guna.UI2.WinForms.Guna2Button();
             this.InventoryItemsComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.CancelEditServiceBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -58,14 +63,24 @@
             this.ServiceNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.SalonServicesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.BindedServiceItemDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.AddItemBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ItemIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProdQuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ItemIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceTypePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).BeginInit();
             this.ServicePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceImagePicB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalonServicesDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindedServiceItemDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // backgroundShape
@@ -361,6 +376,11 @@
             // ServicePanel
             // 
             this.ServicePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServicePanel.Controls.Add(this.ItemIDTxtB);
+            this.ServicePanel.Controls.Add(this.label4);
+            this.ServicePanel.Controls.Add(this.label3);
+            this.ServicePanel.Controls.Add(this.AddItemBtn);
+            this.ServicePanel.Controls.Add(this.BindedServiceItemDGV);
             this.ServicePanel.Controls.Add(this.label2);
             this.ServicePanel.Controls.Add(this.label1);
             this.ServicePanel.Controls.Add(this.EditServBtn);
@@ -378,6 +398,26 @@
             this.ServicePanel.Name = "ServicePanel";
             this.ServicePanel.Size = new System.Drawing.Size(1400, 800);
             this.ServicePanel.TabIndex = 33;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(935, 586);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 32);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "Inventory Item";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(1176, 207);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 32);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "Category";
             // 
             // EditServBtn
             // 
@@ -415,11 +455,12 @@
             this.InventoryItemsComB.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.InventoryItemsComB.ForeColor = System.Drawing.Color.Black;
             this.InventoryItemsComB.ItemHeight = 30;
-            this.InventoryItemsComB.Location = new System.Drawing.Point(1181, 528);
+            this.InventoryItemsComB.Location = new System.Drawing.Point(937, 620);
             this.InventoryItemsComB.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryItemsComB.Name = "InventoryItemsComB";
             this.InventoryItemsComB.Size = new System.Drawing.Size(210, 36);
             this.InventoryItemsComB.TabIndex = 43;
+            this.InventoryItemsComB.SelectedIndexChanged += new System.EventHandler(this.InventoryItemsComB_SelectedIndexChanged);
             // 
             // CancelEditServiceBtn
             // 
@@ -478,10 +519,10 @@
             this.AddServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceBtn.Location = new System.Drawing.Point(1075, 613);
+            this.AddServiceBtn.Location = new System.Drawing.Point(940, 733);
             this.AddServiceBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceBtn.Name = "AddServiceBtn";
-            this.AddServiceBtn.Size = new System.Drawing.Size(210, 50);
+            this.AddServiceBtn.Size = new System.Drawing.Size(451, 50);
             this.AddServiceBtn.TabIndex = 39;
             this.AddServiceBtn.Text = "Add Service ";
             this.AddServiceBtn.UseTransparentBackground = true;
@@ -501,7 +542,7 @@
             this.AddServiceImageBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceImageBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceImageBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceImageBtn.Location = new System.Drawing.Point(1075, 312);
+            this.AddServiceImageBtn.Location = new System.Drawing.Point(937, 293);
             this.AddServiceImageBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceImageBtn.Name = "AddServiceImageBtn";
             this.AddServiceImageBtn.Size = new System.Drawing.Size(210, 50);
@@ -523,7 +564,7 @@
             this.AddSalonServices.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.AddSalonServices.ForeColor = System.Drawing.Color.Black;
             this.AddSalonServices.ItemHeight = 30;
-            this.AddSalonServices.Location = new System.Drawing.Point(950, 528);
+            this.AddSalonServices.Location = new System.Drawing.Point(1181, 241);
             this.AddSalonServices.Margin = new System.Windows.Forms.Padding(2);
             this.AddSalonServices.Name = "AddSalonServices";
             this.AddSalonServices.Size = new System.Drawing.Size(210, 36);
@@ -545,7 +586,7 @@
             this.ServiceAmountTxtb.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceAmountTxtb.ForeColor = System.Drawing.Color.Black;
             this.ServiceAmountTxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceAmountTxtb.Location = new System.Drawing.Point(1181, 420);
+            this.ServiceAmountTxtb.Location = new System.Drawing.Point(1181, 138);
             this.ServiceAmountTxtb.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.ServiceAmountTxtb.Name = "ServiceAmountTxtb";
             this.ServiceAmountTxtb.PasswordChar = '\0';
@@ -570,7 +611,7 @@
             this.ServiceNameTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceNameTxtB.Location = new System.Drawing.Point(950, 420);
+            this.ServiceNameTxtB.Location = new System.Drawing.Point(1181, 67);
             this.ServiceNameTxtB.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.ServiceNameTxtB.Name = "ServiceNameTxtB";
             this.ServiceNameTxtB.PasswordChar = '\0';
@@ -582,7 +623,7 @@
             // ServiceImagePicB
             // 
             this.ServiceImagePicB.ImageRotate = 0F;
-            this.ServiceImagePicB.Location = new System.Drawing.Point(1075, 94);
+            this.ServiceImagePicB.Location = new System.Drawing.Point(937, 67);
             this.ServiceImagePicB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceImagePicB.Name = "ServiceImagePicB";
             this.ServiceImagePicB.Size = new System.Drawing.Size(210, 210);
@@ -593,27 +634,27 @@
             // 
             this.SalonServicesDGV.AllowUserToAddRows = false;
             this.SalonServicesDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.SalonServicesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.SalonServicesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.SalonServicesDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SalonServicesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SalonServicesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.SalonServicesDGV.ColumnHeadersHeight = 4;
             this.SalonServicesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.SalonServicesDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SalonServicesDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.SalonServicesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.Location = new System.Drawing.Point(17, 15);
             this.SalonServicesDGV.Margin = new System.Windows.Forms.Padding(2);
@@ -646,25 +687,180 @@
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // label1
+            // BindedServiceItemDGV
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(945, 494);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 32);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Category";
+            this.BindedServiceItemDGV.AllowUserToAddRows = false;
+            this.BindedServiceItemDGV.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.BindedServiceItemDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BindedServiceItemDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.BindedServiceItemDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BindedServiceItemDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProdNameCol,
+            this.ItemIDCol,
+            this.DecrementCol,
+            this.ProdQuantityCol,
+            this.IncrementCol,
+            this.RemoveCol});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BindedServiceItemDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            this.BindedServiceItemDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.BindedServiceItemDGV.Location = new System.Drawing.Point(937, 421);
+            this.BindedServiceItemDGV.Name = "BindedServiceItemDGV";
+            this.BindedServiceItemDGV.ReadOnly = true;
+            this.BindedServiceItemDGV.RowHeadersVisible = false;
+            this.BindedServiceItemDGV.Size = new System.Drawing.Size(454, 150);
+            this.BindedServiceItemDGV.TabIndex = 46;
+            this.BindedServiceItemDGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.BindedServiceItemDGV.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.BindedServiceItemDGV.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.BindedServiceItemDGV.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.BindedServiceItemDGV.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.BindedServiceItemDGV.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.BindedServiceItemDGV.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BindedServiceItemDGV.ThemeStyle.HeaderStyle.Height = 15;
+            this.BindedServiceItemDGV.ThemeStyle.ReadOnly = true;
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.Height = 22;
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.BindedServiceItemDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.BindedServiceItemDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BindedServiceItemDGV_CellClick);
             // 
-            // label2
+            // AddItemBtn
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1176, 494);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(183, 32);
-            this.label2.TabIndex = 45;
-            this.label2.Text = "Inventory Item";
+            this.AddItemBtn.Animated = true;
+            this.AddItemBtn.AutoRoundedCorners = true;
+            this.AddItemBtn.BackColor = System.Drawing.Color.Transparent;
+            this.AddItemBtn.BorderRadius = 24;
+            this.AddItemBtn.BorderThickness = 1;
+            this.AddItemBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AddItemBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AddItemBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AddItemBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AddItemBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.AddItemBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
+            this.AddItemBtn.ForeColor = System.Drawing.Color.Black;
+            this.AddItemBtn.Location = new System.Drawing.Point(1178, 635);
+            this.AddItemBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.AddItemBtn.Name = "AddItemBtn";
+            this.AddItemBtn.Size = new System.Drawing.Size(210, 50);
+            this.AddItemBtn.TabIndex = 47;
+            this.AddItemBtn.Text = "Add To List";
+            this.AddItemBtn.UseTransparentBackground = true;
+            this.AddItemBtn.Click += new System.EventHandler(this.AddItemBtn_Click);
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(934, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(457, 43);
+            this.label3.TabIndex = 48;
+            this.label3.Text = "Service Details";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(931, 373);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(457, 43);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Binded Items";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ItemIDTxtB
+            // 
+            this.ItemIDTxtB.Animated = true;
+            this.ItemIDTxtB.AutoRoundedCorners = true;
+            this.ItemIDTxtB.BorderColor = System.Drawing.Color.Black;
+            this.ItemIDTxtB.BorderRadius = 17;
+            this.ItemIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ItemIDTxtB.DefaultText = "";
+            this.ItemIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ItemIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ItemIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ItemIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ItemIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ItemIDTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
+            this.ItemIDTxtB.ForeColor = System.Drawing.Color.Black;
+            this.ItemIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ItemIDTxtB.Location = new System.Drawing.Point(937, 663);
+            this.ItemIDTxtB.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.ItemIDTxtB.Name = "ItemIDTxtB";
+            this.ItemIDTxtB.PasswordChar = '\0';
+            this.ItemIDTxtB.PlaceholderText = "Item ID";
+            this.ItemIDTxtB.SelectedText = "";
+            this.ItemIDTxtB.Size = new System.Drawing.Size(210, 36);
+            this.ItemIDTxtB.TabIndex = 50;
+            // 
+            // RemoveCol
+            // 
+            this.RemoveCol.FillWeight = 54.94059F;
+            this.RemoveCol.HeaderText = "X";
+            this.RemoveCol.Name = "RemoveCol";
+            this.RemoveCol.ReadOnly = true;
+            this.RemoveCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IncrementCol
+            // 
+            this.IncrementCol.FillWeight = 54.94059F;
+            this.IncrementCol.HeaderText = "+";
+            this.IncrementCol.Name = "IncrementCol";
+            this.IncrementCol.ReadOnly = true;
+            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ProdQuantityCol
+            // 
+            this.ProdQuantityCol.FillWeight = 54.94059F;
+            this.ProdQuantityCol.HeaderText = "Quantity";
+            this.ProdQuantityCol.Name = "ProdQuantityCol";
+            this.ProdQuantityCol.ReadOnly = true;
+            // 
+            // DecrementCol
+            // 
+            this.DecrementCol.FillWeight = 55.99042F;
+            this.DecrementCol.HeaderText = "-";
+            this.DecrementCol.Name = "DecrementCol";
+            this.DecrementCol.ReadOnly = true;
+            // 
+            // ItemIDCol
+            // 
+            this.ItemIDCol.HeaderText = "Item ID";
+            this.ItemIDCol.Name = "ItemIDCol";
+            this.ItemIDCol.ReadOnly = true;
+            // 
+            // ProdNameCol
+            // 
+            this.ProdNameCol.FillWeight = 279.1878F;
+            this.ProdNameCol.HeaderText = "Product";
+            this.ProdNameCol.Name = "ProdNameCol";
+            this.ProdNameCol.ReadOnly = true;
             // 
             // ServiceType_ServicePage
             // 
@@ -685,6 +881,7 @@
             this.ServicePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceImagePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalonServicesDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindedServiceItemDGV)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -717,5 +914,16 @@
         public Guna.UI2.WinForms.Guna2ComboBox InventoryItemsComB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        public Guna.UI2.WinForms.Guna2Button AddItemBtn;
+        public Guna.UI2.WinForms.Guna2TextBox ItemIDTxtB;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemIDCol;
+        private System.Windows.Forms.DataGridViewButtonColumn DecrementCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdQuantityCol;
+        private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
+        private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
+        public Guna.UI2.WinForms.Guna2DataGridView BindedServiceItemDGV;
     }
 }

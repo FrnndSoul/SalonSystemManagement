@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.cLbl = new System.Windows.Forms.Label();
@@ -44,6 +44,13 @@
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.PaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductsControlDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountComB = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AllProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CashTxtBx = new Guna.UI2.WinForms.Guna2TextBox();
@@ -52,17 +59,15 @@
             this.discChckBx = new Guna.UI2.WinForms.Guna2CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CustomerIDComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountComB = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CalculateCostBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DatabaseTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.DirectTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductsFL
@@ -232,16 +237,16 @@
             // 
             this.ProductsControlDGV.AllowUserToAddRows = false;
             this.ProductsControlDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.ProductsControlDGV.ColumnHeadersHeight = 15;
             this.ProductsControlDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -252,14 +257,14 @@
             this.CostCol,
             this.DiscountComB,
             this.DisposeCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.ProductsControlDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsControlDGV.Location = new System.Drawing.Point(1294, 24);
             this.ProductsControlDGV.Name = "ProductsControlDGV";
@@ -292,6 +297,59 @@
             this.ProductsControlDGV.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsControlDGV_CellValueChanged);
             this.ProductsControlDGV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ProductsControlDGV_RowsAdded);
             this.ProductsControlDGV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ProductsControlDGV_RowsRemoved);
+            // 
+            // ProductCol
+            // 
+            this.ProductCol.HeaderText = "Products";
+            this.ProductCol.MinimumWidth = 6;
+            this.ProductCol.Name = "ProductCol";
+            // 
+            // DecrementCol
+            // 
+            this.DecrementCol.HeaderText = "-";
+            this.DecrementCol.MinimumWidth = 6;
+            this.DecrementCol.Name = "DecrementCol";
+            this.DecrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DecrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.MinimumWidth = 6;
+            this.QuantityCol.Name = "QuantityCol";
+            // 
+            // IncrementCol
+            // 
+            this.IncrementCol.HeaderText = "+";
+            this.IncrementCol.MinimumWidth = 6;
+            this.IncrementCol.Name = "IncrementCol";
+            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // CostCol
+            // 
+            this.CostCol.HeaderText = "Amount";
+            this.CostCol.MinimumWidth = 6;
+            this.CostCol.Name = "CostCol";
+            this.CostCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // DiscountComB
+            // 
+            this.DiscountComB.HeaderText = "Discount";
+            this.DiscountComB.Items.AddRange(new object[] {
+            "Normal",
+            "Discounted"});
+            this.DiscountComB.Name = "DiscountComB";
+            this.DiscountComB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DiscountComB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // DisposeCol
+            // 
+            this.DisposeCol.HeaderText = "Bin";
+            this.DisposeCol.MinimumWidth = 6;
+            this.DisposeCol.Name = "DisposeCol";
+            this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // SearchProductsBtn
             // 
@@ -434,59 +492,6 @@
             this.CustomerIDComB.Size = new System.Drawing.Size(314, 36);
             this.CustomerIDComB.TabIndex = 31;
             // 
-            // ProductCol
-            // 
-            this.ProductCol.HeaderText = "Products";
-            this.ProductCol.MinimumWidth = 6;
-            this.ProductCol.Name = "ProductCol";
-            // 
-            // DecrementCol
-            // 
-            this.DecrementCol.HeaderText = "-";
-            this.DecrementCol.MinimumWidth = 6;
-            this.DecrementCol.Name = "DecrementCol";
-            this.DecrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DecrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // QuantityCol
-            // 
-            this.QuantityCol.HeaderText = "Quantity";
-            this.QuantityCol.MinimumWidth = 6;
-            this.QuantityCol.Name = "QuantityCol";
-            // 
-            // IncrementCol
-            // 
-            this.IncrementCol.HeaderText = "+";
-            this.IncrementCol.MinimumWidth = 6;
-            this.IncrementCol.Name = "IncrementCol";
-            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // CostCol
-            // 
-            this.CostCol.HeaderText = "Amount";
-            this.CostCol.MinimumWidth = 6;
-            this.CostCol.Name = "CostCol";
-            this.CostCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // DiscountComB
-            // 
-            this.DiscountComB.HeaderText = "Discount";
-            this.DiscountComB.Items.AddRange(new object[] {
-            "Normal",
-            "Discounted"});
-            this.DiscountComB.Name = "DiscountComB";
-            this.DiscountComB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DiscountComB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // DisposeCol
-            // 
-            this.DisposeCol.HeaderText = "Bin";
-            this.DisposeCol.MinimumWidth = 6;
-            this.DisposeCol.Name = "DisposeCol";
-            this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // CalculateCostBtn
             // 
             this.CalculateCostBtn.AutoRoundedCorners = true;
@@ -539,11 +544,65 @@
             this.DirectTransactionRBtn.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             this.DirectTransactionRBtn.CheckedChanged += new System.EventHandler(this.DirectTransactionRBtn_CheckedChanged);
             // 
+            // GcashPayment
+            // 
+            this.GcashPayment.BackColor = System.Drawing.Color.Transparent;
+            this.GcashPayment.Enabled = false;
+            this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
+            this.GcashPayment.ImageRotate = 0F;
+            this.GcashPayment.Location = new System.Drawing.Point(1770, 533);
+            this.GcashPayment.Name = "GcashPayment";
+            this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.GcashPayment.Size = new System.Drawing.Size(50, 50);
+            this.GcashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GcashPayment.TabIndex = 38;
+            this.GcashPayment.TabStop = false;
+            this.GcashPayment.UseTransparentBackground = true;
+            // 
+            // CardPayment
+            // 
+            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
+            this.CardPayment.Enabled = false;
+            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
+            this.CardPayment.ImageRotate = 0F;
+            this.CardPayment.Location = new System.Drawing.Point(1709, 533);
+            this.CardPayment.Name = "CardPayment";
+            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.CardPayment.Size = new System.Drawing.Size(50, 50);
+            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CardPayment.TabIndex = 37;
+            this.CardPayment.TabStop = false;
+            this.CardPayment.UseTransparentBackground = true;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.Animated = true;
+            this.guna2Button1.AutoRoundedCorners = true;
+            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button1.BorderRadius = 32;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Enabled = false;
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.IndicateFocus = true;
+            this.guna2Button1.Location = new System.Drawing.Point(1697, 526);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(132, 66);
+            this.guna2Button1.TabIndex = 36;
+            this.guna2Button1.UseTransparentBackground = true;
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.GcashPayment);
+            this.Controls.Add(this.CardPayment);
+            this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.DatabaseTransactionRBtn);
             this.Controls.Add(this.DirectTransactionRBtn);
             this.Controls.Add(this.CalculateCostBtn);
@@ -572,6 +631,8 @@
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.SellProductsUserControls_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -609,5 +670,8 @@
         private Guna.UI2.WinForms.Guna2Button CalculateCostBtn;
         private Guna.UI2.WinForms.Guna2CustomRadioButton DatabaseTransactionRBtn;
         private Guna.UI2.WinForms.Guna2CustomRadioButton DirectTransactionRBtn;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox CardPayment;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
