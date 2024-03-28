@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.EmployeeLockPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.AddServicePanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.ServiceListComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.AServiceAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.AddServiceChckB = new Guna.UI2.WinForms.Guna2CustomCheckBox();
@@ -51,7 +45,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.EmployeeDoneBtn = new Guna.UI2.WinForms.Guna2Button();
             this.EmployeeLockPanel.SuspendLayout();
-            this.AddServicePanel.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,108 +53,14 @@
             this.EmployeeLockPanel.AutoScroll = true;
             this.EmployeeLockPanel.BackColor = System.Drawing.Color.Transparent;
             this.EmployeeLockPanel.BorderRadius = 50;
-            this.EmployeeLockPanel.Controls.Add(this.label1);
-            this.EmployeeLockPanel.Controls.Add(this.AddServicePanel);
             this.EmployeeLockPanel.Controls.Add(this.guna2Panel3);
             this.EmployeeLockPanel.Controls.Add(this.label10);
             this.EmployeeLockPanel.Controls.Add(this.EmployeeDoneBtn);
             this.EmployeeLockPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.EmployeeLockPanel.Location = new System.Drawing.Point(2, 0);
             this.EmployeeLockPanel.Name = "EmployeeLockPanel";
-            this.EmployeeLockPanel.Size = new System.Drawing.Size(1278, 837);
+            this.EmployeeLockPanel.Size = new System.Drawing.Size(1278, 564);
             this.EmployeeLockPanel.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(317, 469);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(650, 75);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Additional Service";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // AddServicePanel
-            // 
-            this.AddServicePanel.BackColor = System.Drawing.Color.Transparent;
-            this.AddServicePanel.BorderRadius = 50;
-            this.AddServicePanel.Controls.Add(this.ServiceListComB);
-            this.AddServicePanel.Controls.Add(this.AServiceAmountTxtB);
-            this.AddServicePanel.Controls.Add(this.label4);
-            this.AddServicePanel.Controls.Add(this.label3);
-            this.AddServicePanel.Enabled = false;
-            this.AddServicePanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AddServicePanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AddServicePanel.Location = new System.Drawing.Point(27, 547);
-            this.AddServicePanel.Name = "AddServicePanel";
-            this.AddServicePanel.Size = new System.Drawing.Size(1223, 131);
-            this.AddServicePanel.TabIndex = 23;
-            // 
-            // ServiceListComB
-            // 
-            this.ServiceListComB.AutoRoundedCorners = true;
-            this.ServiceListComB.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceListComB.BorderRadius = 17;
-            this.ServiceListComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ServiceListComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ServiceListComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceListComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceListComB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ServiceListComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.ServiceListComB.ItemHeight = 30;
-            this.ServiceListComB.Location = new System.Drawing.Point(239, 55);
-            this.ServiceListComB.Name = "ServiceListComB";
-            this.ServiceListComB.Size = new System.Drawing.Size(350, 36);
-            this.ServiceListComB.TabIndex = 25;
-            this.ServiceListComB.SelectedIndexChanged += new System.EventHandler(this.ServiceListComB_SelectedIndexChanged);
-            // 
-            // AServiceAmountTxtB
-            // 
-            this.AServiceAmountTxtB.AutoRoundedCorners = true;
-            this.AServiceAmountTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.AServiceAmountTxtB.BorderRadius = 20;
-            this.AServiceAmountTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.AServiceAmountTxtB.DefaultText = "";
-            this.AServiceAmountTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.AServiceAmountTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.AServiceAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.AServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.AServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AServiceAmountTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AServiceAmountTxtB.Location = new System.Drawing.Point(831, 49);
-            this.AServiceAmountTxtB.Name = "AServiceAmountTxtB";
-            this.AServiceAmountTxtB.PasswordChar = '\0';
-            this.AServiceAmountTxtB.PlaceholderText = "";
-            this.AServiceAmountTxtB.ReadOnly = true;
-            this.AServiceAmountTxtB.SelectedText = "";
-            this.AServiceAmountTxtB.Size = new System.Drawing.Size(350, 42);
-            this.AServiceAmountTxtB.TabIndex = 23;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.label4.Location = new System.Drawing.Point(620, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(205, 69);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Service Amount";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.label3.Location = new System.Drawing.Point(28, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 69);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Service Name:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // guna2Panel3
             // 
@@ -231,6 +130,7 @@
             this.CustomerServiceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerServiceTxtB.Location = new System.Drawing.Point(831, 47);
+            this.CustomerServiceTxtB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CustomerServiceTxtB.Name = "CustomerServiceTxtB";
             this.CustomerServiceTxtB.PasswordChar = '\0';
             this.CustomerServiceTxtB.PlaceholderText = "";
@@ -254,6 +154,7 @@
             this.CustomerPNumTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPNumTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPNumTxtB.Location = new System.Drawing.Point(831, 125);
+            this.CustomerPNumTxtB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CustomerPNumTxtB.Name = "CustomerPNumTxtB";
             this.CustomerPNumTxtB.PasswordChar = '\0';
             this.CustomerPNumTxtB.PlaceholderText = "";
@@ -277,6 +178,7 @@
             this.CustomerAgeTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Location = new System.Drawing.Point(260, 125);
+            this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
@@ -300,6 +202,7 @@
             this.CustomerNameTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(260, 47);
+            this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
             this.CustomerNameTxtB.PlaceholderText = "";
@@ -323,6 +226,7 @@
             this.CustomerIDTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDTxtB.Location = new System.Drawing.Point(260, 205);
+            this.CustomerIDTxtB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CustomerIDTxtB.Name = "CustomerIDTxtB";
             this.CustomerIDTxtB.PasswordChar = '\0';
             this.CustomerIDTxtB.PlaceholderText = "";
@@ -414,7 +318,7 @@
             this.EmployeeDoneBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.EmployeeDoneBtn.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmployeeDoneBtn.ForeColor = System.Drawing.Color.White;
-            this.EmployeeDoneBtn.Location = new System.Drawing.Point(276, 732);
+            this.EmployeeDoneBtn.Location = new System.Drawing.Point(270, 441);
             this.EmployeeDoneBtn.Name = "EmployeeDoneBtn";
             this.EmployeeDoneBtn.Size = new System.Drawing.Size(725, 71);
             this.EmployeeDoneBtn.TabIndex = 0;
@@ -429,10 +333,9 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.EmployeeLockPanel);
             this.Name = "EmployeeLock";
-            this.Size = new System.Drawing.Size(1283, 840);
+            this.Size = new System.Drawing.Size(1283, 566);
             this.Load += new System.EventHandler(this.EmployeeLock_Load);
             this.EmployeeLockPanel.ResumeLayout(false);
-            this.AddServicePanel.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -454,13 +357,7 @@
         public System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label10;
         private Guna.UI2.WinForms.Guna2Button EmployeeDoneBtn;
-        private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2Panel AddServicePanel;
         public System.Windows.Forms.Label label2;
-        public Guna.UI2.WinForms.Guna2TextBox AServiceAmountTxtB;
-        public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label label3;
-        public Guna.UI2.WinForms.Guna2ComboBox ServiceListComB;
         public Guna.UI2.WinForms.Guna2CustomCheckBox AddServiceChckB;
     }
 }

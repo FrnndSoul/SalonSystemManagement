@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TriforceSalon.Class_Components
 {
@@ -393,7 +394,7 @@ namespace TriforceSalon.Class_Components
 
                 if (!found)
                 {
-                    dataGridView.Rows.Add(serviceName, "-", "1", "+", serviceAmount, "Bin");
+                    dataGridView.Rows.Add(serviceName, "-", "1", "+", serviceAmount, "Normal", "Bin");
                     updateTotalPrice?.Invoke();
                 }
             }
