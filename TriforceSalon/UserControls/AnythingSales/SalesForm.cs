@@ -122,14 +122,8 @@ namespace salesreport
             {
                 if (openForm is MainForm mainForm)
                 {
-                    foreach (Control control in mainForm.Controls)
-                    {
-                        if (control is ManagerPage managerPage)
-                        {
-                            managerPage.Visible = true;
-                            break;
-                        }
-                    }
+                    ManagerPage managerPage = new ManagerPage();
+                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
