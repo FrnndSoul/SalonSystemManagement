@@ -55,13 +55,12 @@ namespace TriforceSalon.UserControls
         private async void ReportsBtn_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            this.Visible = false;
+            this.Parent.Controls.Remove(this);
 
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
-                    //mainForm.ShowLogin();
                     SalesForm sales = new SalesForm();
                     UserControlNavigator.ShowControl(sales, MainForm.mainFormInstance.MainFormContent);
                     break;
