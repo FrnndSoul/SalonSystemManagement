@@ -9,6 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using Guna.UI2.WinForms;
 
 namespace TriforceSalon
 {
@@ -105,6 +106,65 @@ namespace TriforceSalon
             }
         }
 
+        public async Task <int> GetItemIDByName(string productName)
+        {
+            int itemID = -1;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "Select ItemID from inventory WHERE ItemName = @itemName";
+
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@itemName", productName);
+
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out itemID))
+                        {
+                            return itemID;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\nat GetItemIDByName()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return itemID;
+        }
+
+        public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
+
+                    foreach (DataGridViewRow row in productsDataGrid.Rows)
+                    {
+                        int quantity = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        string itemName = Convert.ToString(row.Cells["ProductCol"].Value);
+                        int productID = await GetItemIDByName(itemName);
+                        using (MySqlCommand command = new MySqlCommand(subtractQuery, conn))
+                        {
+                            command.Parameters.AddWithValue("@quantity", quantity);
+                            command.Parameters.AddWithValue("@itemID", productID);
+
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + "\n\nat SubtractItemsInInventoryForPurchase()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+        }
 
     }
 }

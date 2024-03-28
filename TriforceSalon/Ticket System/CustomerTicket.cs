@@ -22,7 +22,9 @@ namespace TriforceSalon.Test
         public string Status => PrioStatusLbl.Text;
         public string Ticket => TicketLbl.Text;
 
-        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket)
+        public string Queue => QNumberLbl.Text;
+
+        public CustomerTicket(string CustomerName, string CustomerAge, string CustomerNumber, string Service, string Status, string Ticket, string queue)
         {
             InitializeComponent();
             customerTicketInstance = this;
@@ -34,6 +36,7 @@ namespace TriforceSalon.Test
             //PreferredEmpLbl.Text = PredEmp;
             PrioStatusLbl.Text = Status;
             TicketLbl.Text = Ticket;
+            QNumberLbl.Text = queue;
 
         }
 
@@ -98,8 +101,9 @@ namespace TriforceSalon.Test
         //public string PredEmp { get; }
         public string Status { get; }
         public string Ticket { get; }
+        public string Queue {  get; }
 
-        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket)
+        public ScheduleSelectedEventArgs(string customerName, string customerAge, string customerNumber, string service, string status, string ticket, string queue)
         {
             CustomerName = customerName;
             CustomerAge = customerAge;
@@ -108,7 +112,7 @@ namespace TriforceSalon.Test
             //PredEmp = predEmp;
             Status = status;
             Ticket = ticket;
-
+            Queue = queue;
         }
     }
 
