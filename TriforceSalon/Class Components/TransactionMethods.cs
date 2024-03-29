@@ -116,15 +116,15 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
         {
             try
             {
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID)" +
-                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID)";
+                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
+                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID, @priorityStatus)";
 
                     using(MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn))
                     {
@@ -133,6 +133,7 @@ namespace TriforceSalon.Class_Components
                         command1.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                         command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                         command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+                        command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
 
                         await command1.ExecuteNonQueryAsync();
                     }

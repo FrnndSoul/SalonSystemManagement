@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Caching;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -117,7 +118,6 @@ namespace TriforceSalon.UserControls
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
             serviceType.EditServiceTypes();
-
         }
 
         private void CancelEditBtn_Click(object sender, EventArgs e)
@@ -151,6 +151,8 @@ namespace TriforceSalon.UserControls
                 string serviceTypeName = AddSalonServices.SelectedItem.ToString();
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
+                salonServices.ClearServices();
+
             }
         }
 
@@ -187,6 +189,51 @@ namespace TriforceSalon.UserControls
 
         }
 
-        
+        private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+            if (chosenItem == null)
+            {
+                ItemIDTxtB.Text = string.Empty;
+            }
+            else
+            {
+                ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+            }
+        }
+
+        private void AddItemBtn_Click(object sender, EventArgs e)
+        {
+            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+            int itemID = Convert.ToInt32(ItemIDTxtB.Text);
+
+            BindedServiceItemDGV.Rows.Add(chosenItem, itemID, "-", 1, "+", "X");
+        }
+
+        private void BindedServiceItemDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < BindedServiceItemDGV.Rows.Count)
+            {
+                if(e.ColumnIndex == BindedServiceItemDGV.Columns["DecrementCol"].Index)
+                {
+                    int currentQty = int.Parse(BindedServiceItemDGV.Rows[e.RowIndex].Cells["ProdQuantityCol"].Value.ToString());
+                    if(currentQty > 1)
+                    {
+                        currentQty--;
+                        BindedServiceItemDGV.Rows[e.RowIndex].Cells[3].Value = currentQty;
+                    }
+                }
+                else if (e.ColumnIndex == BindedServiceItemDGV.Columns["IncrementCol"].Index)
+                {
+                    int currentQty = int.Parse(BindedServiceItemDGV.Rows[e.RowIndex].Cells["ProdQuantityCol"].Value.ToString());
+                    currentQty++;
+                    BindedServiceItemDGV.Rows[e.RowIndex].Cells[3].Value = currentQty;
+                }
+                else if(e.ColumnIndex == BindedServiceItemDGV.Columns["RemoveCol"].Index)
+                {
+                    BindedServiceItemDGV.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
     }
 }

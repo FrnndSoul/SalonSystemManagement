@@ -9,9 +9,11 @@ using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Data.Common;
 using System.IO;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods;
 using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
@@ -23,6 +25,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
         public TransactionMethods transaction = new TransactionMethods();
+        CardProcess cardProcess = new CardProcess();
 
         public decimal totalPrice = 0;
 
@@ -35,12 +38,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void PaymentsUserControls_Load(object sender, EventArgs e)
         {
-
+            DefaultLoad();
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
         {
-            gcashProcess1.Visible = true;
+            //gcashProcess1.Visible = true;
+            GcashProcess gcash = new GcashProcess();
+            UserControlNavigator.ShowControl(gcash, OtherTransactionContainer);
         }
 
         private void gcashProcess1_VisibleChanged(object sender, EventArgs e)
@@ -91,8 +96,74 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CardPayment_Click(object sender, EventArgs e)
         {
-            cardProcess1.Visible = true;
-            cardProcess1.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount, Convert.ToInt32(TransactionIDBox.Text));
+            //cardProcess1.Visible = true;
+            CardProcess cardProcess = new CardProcess();
+            UserControlNavigator.ShowControl(cardProcess, OtherTransactionContainer);
+
+            cardProcess.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount, Convert.ToInt32(TransactionIDBox.Text));
+        }
+        private decimal DiscountFromProducts(decimal amount)
+        {
+            decimal VAT = amount * 0.12m;
+            decimal PriceWithoutVAT = amount - VAT;
+            decimal discountPrice = PriceWithoutVAT * 0.20m;
+            return discountPrice + VAT;
+        }
+        private void OverallPrice()
+        {
+            totalPrice = 0.00m;
+            decimal discountedTotal = 0.00m;
+            decimal normalTotal = 0.00m;
+
+            // Assuming ProductsControlDGV contains products data
+            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
+            {
+                if (row.Cells[2].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
+                    string selectedValue = row.Cells["ProductsDiscountChckBoxCol"].Value.ToString();
+
+                    if (selectedValue == "Discounted")
+                    {
+                        // Apply discount for discounted products
+                        discountedTotal += rowTotal - DiscountFromProducts(rowTotal);
+                    }
+                    else
+                    {
+                        // Add original price for normal products
+                        normalTotal += rowTotal;
+                    }
+
+                    totalPrice += rowTotal; // Add to total regardless
+                }
+            }
+
+            // Assuming another DataGridView called SecondProductsControlDGV contains products data from another table
+            foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
+            {
+                if (row.Cells[1].Value != null)
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[1].Value.ToString());
+                    string selectedValue = row.Cells["ServicesDiscountChckBoxCol"].Value.ToString();
+
+                    if (selectedValue == "Discounted")
+                    {
+                        // Apply discount for discounted products
+                        discountedTotal += rowTotal - DiscountFromProducts(rowTotal);
+                    }
+                    else
+                    {
+                        // Add original price for normal products
+                        normalTotal += rowTotal;
+                    }
+                    totalPrice += rowTotal;
+                }
+            }
+
+            // Update UI with totals
+            AmountBox.Text = "Php. " + totalPrice.ToString("0.00");
+            TotalAmountTxtB.Text = "Php. " + (discountedTotal + normalTotal).ToString("0.00");
+            DiscountBox.Text = "Php. " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
         private async void LoadBtn_Click(object sender, EventArgs e)
@@ -104,9 +175,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "select CustomerName, CustomerAge, CustomerPhoneNumber, PriorityStatus, PaymentStatus, TimeTaken, EmployeeID, ServiceType " +
-                        "from customer_info " +
-                        "where TransactionID = @transactionID";
+                    /*string query = "select ci.CustomerName, ci.CustomerAge, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken, sg.EmployeeID, sg.ServiceType " +
+                        "from customer_info ci" +
+                        "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                        "where TransactionID = @transactionID";*/
+
+                    string query = "SELECT ci.CustomerName, ci.CustomerAge, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
+                                   "FROM customer_info ci " +
+                                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                   "WHERE TransactionID = @transactionID";
+
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -130,15 +208,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 }
 
                                 CustomerName = reader["CustomerName"].ToString();
-                                ServiceType = reader["ServiceType"].ToString();
+                                //ServiceType = reader["ServiceType"].ToString();
                                 Age = Convert.ToInt32(reader["CustomerAge"]);
                                 Phone = Convert.ToString(reader["CustomerPhoneNumber"]);
-                                EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
+                                //EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
 
                                 DisplayTransaction();
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
-                                CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
+                                //CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
                             }
                             else
                             {
@@ -209,10 +287,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             NameBox.Text = CustomerName;
             AgeBox.Text = Age.ToString();
             PhoneNumberBox.Text = Phone.ToString();
-            ServiceTypeBox.Text = ServiceType;
+            //ServiceTypeBox.Text = ServiceType;
             //ServiceVariationBox.Text = ServiceVariation;
             //ServiceVariationIDBox.Text = VariationID.ToString();
-            EmployeeIDBox.Text = EmployeeID.ToString();
+            //EmployeeIDBox.Text = EmployeeID.ToString();
             //AmountBox.Text = Amount.ToString();
 
 
@@ -220,11 +298,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
             CardPayment.Enabled = true;
-            CashPayment.Enabled = true;
+            //CashPayment.Enabled = true;
             GcashPayment.Enabled = true;
             ClearFieldsBtn.Enabled = true;
             PaymentBtn.Enabled = true;
             VoidBtn.Enabled = true;
+            CalculateTotalBtn.Enabled = true;
 
            /* if (Age >= 60)
             {
@@ -240,7 +319,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you want to void these items?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Do you want to void the transaction?", "Void Items and Services", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -281,8 +360,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
 
             }
-
-
             /* DialogResult result = MessageBox.Show("Confirming before voiding this transaction.", "Confirm Void Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
              if (result != DialogResult.Yes)
@@ -293,34 +370,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
              DefaultLoad();*/
         }
 
-        public async Task GetEmployeeName(long EmpID)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string query = "SELECT se.Name FROM salon_employees se WHERE AccountID = @ID";
-
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        command.Parameters.AddWithValue("@ID", EmpID);
-                        using(DbDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                EmployeeIDBox.Text = reader["Name"].ToString();
-                            }
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in GetEmployeeName()", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         public void ChangePaymentStatus(string newStatus)
         {
             try
@@ -348,13 +397,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
             decimal cash = Convert.ToDecimal(CustomerMoneyInput.Text);
 
-            if (cash < Convert.ToDecimal(AmountBox.Text))
+            if (cash < Convert.ToDecimal(TotalAmountTxtB.Text))
             {
                 MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if (cash > Convert.ToDecimal(AmountBox.Text))
+                if (cash > Convert.ToDecimal(TotalAmountTxtB.Text))
                 {
                     //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -372,6 +421,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 /* ChangePaymentStatus("PAID");
                  await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
                 DefaultLoad();
+
+                OtherTransactionContainer.Controls.Clear();
             }
 
         }
@@ -409,6 +460,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 productsBoughtDGV.Rows[rowIndex].Cells["ProdNameCol"].Value = productName;
                                 productsBoughtDGV.Rows[rowIndex].Cells["QuantityCol"].Value = quantity;
                                 productsBoughtDGV.Rows[rowIndex].Cells["TotAmountCol"].Value = amount;
+                                productsBoughtDGV.Rows[rowIndex].Cells["ProductsDiscountChckBoxCol"].Value = "Normal";
+
                             }
                         }
                     }
@@ -432,6 +485,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 e.Handled = true;
             }
+        }
+
+        private void CalculateTotalBtn_Click(object sender, EventArgs e)
+        {
+            OverallPrice();
+            PaymentBtn.Enabled = true;
         }
 
         public async Task FillServiceAcquiredAsync(long transactionID, Guna2DataGridView serviceAcquiredDGV)
@@ -460,6 +519,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                                 serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceCol"].Value = productName;
                                 serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceAmountCol"].Value = amount;
+                                serviceAcquiredDGV.Rows[rowIndex].Cells["ServicesDiscountChckBoxCol"].Value = "Normal";
+
                             }
                         }
                     }
@@ -562,28 +623,30 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             NameBox.Text = "";
             AgeBox.Text = "";
             PhoneNumberBox.Text = "";
-            ServiceTypeBox.Text = "";
+            //ServiceTypeBox.Text = "";
             /*ServiceVariationBox.Text = "";
             ServiceVariationIDBox.Text = "";*/
-            EmployeeIDBox.Text = "";
+            //EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
 
             ProductsBoughtDGV.Rows.Clear();
             ServiceAcquiredDGV.Rows.Clear();
 
-            PaymentPanel.Enabled = false;
+            //PaymentPanel.Enabled = false;
 
             PWDCheckbox.Checked = false;
 
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
             CardPayment.Enabled = false;
-            CashPayment.Enabled = false;
+            //CashPayment.Enabled = false;
             GcashPayment.Enabled = false;
             VoidBtn.Enabled = false;
             PaymentBtn.Enabled = false;
             ClearFieldsBtn.Enabled = false;
+            CalculateTotalBtn.Enabled = false;
+
 
             /*cardProcess1.Visible = false;
             gcashProcess1.Visible = false;*/

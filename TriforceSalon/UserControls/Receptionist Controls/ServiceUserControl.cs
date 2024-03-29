@@ -35,9 +35,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
-            //await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
-            //await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-
             await serviceTypeService.GetServiceTypeAsync(mysqlcon);
             ServiceFilterComB.SelectedIndex = 0;
             await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
@@ -45,7 +42,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.GetAllEmployee(mysqlcon);
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
-
         }
 
         /*public void GetServiceTypeData()
@@ -79,7 +75,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
             }
         }
 

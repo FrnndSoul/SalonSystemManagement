@@ -25,7 +25,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
 
         }
-
+        private async void AppointmentsUserControls_Load(object sender, EventArgs e)
+        {
+            await LoadPresentCustomer();
+        }
         public async Task LoadPresentCustomer()
         {
             try
@@ -34,8 +37,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount FROM Appointments " +
-                        "WHERE AppointDate = CURDATE() AND IsCancelled = 'NO' ";
+                    /*string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount FROM Appointments " +
+                        "WHERE AppointDate = CURDATE() AND IsCancelled != 'NO' ";*/
+
+                    string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                        "FROM Appointments " +
+                        "WHERE DATE(AppointDate) = CURDATE() AND IsCancelled = 'NO'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -60,7 +67,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 {
                                     continue;
                                 }
-                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CNumber, CAge, SName, SAmount);
+                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CAge, CNumber, SName, SAmount);
                                 AppointmentLIstFL.Controls.Add(cutomer);
                                 cutomer.AppointmentCustomerSelected += AppointmentCustomerDetails;
                             }
@@ -72,6 +79,21 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message, "Error in LoadPresentCustomer()");
             }
+        }
+
+        private async void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            await LoadPresentCustomer();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2TextBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
