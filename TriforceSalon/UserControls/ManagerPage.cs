@@ -10,17 +10,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using salesreport;
+using Guna.UI2.WinForms;
 
 namespace TriforceSalon.UserControls
 {
     public partial class ManagerPage : UserControl
     {
+        TransactionMethods transactionMethods = new TransactionMethods();
         public ManagerPage()
         {
             InitializeComponent();
             //generalView_Inventory1.Visible = true;
             GeneralView_Inventory viewInventory = new GeneralView_Inventory();
             UserControlNavigator.ShowControl(viewInventory, ManagerContent);
+            InventoryBtn.Enabled = false;
         }
 
         private void LogoutBtn_Click(object sender, EventArgs e)
@@ -38,16 +41,32 @@ namespace TriforceSalon.UserControls
             }
         }
 
+        public void DisableButtons(bool choice)
+        {
+            InventoryBtn.Enabled = choice;
+            ServicesBtn.Enabled = choice;
+            ReportsBtn.Enabled = choice;
+            LogoutBtn.Enabled = choice;
+        }
+
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
-            
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, ReportsBtn };
+
+            transactionMethods.LockTransactionNavigation(NavigationButtons, InventoryBtn);
+            transactionMethods.EnableTransactionNavigation(NavigationButtons, InventoryBtn);
+
             GeneralView_Inventory viewInventory = new GeneralView_Inventory();
             UserControlNavigator.ShowControl(viewInventory, ManagerContent);
         }
 
         private void ServicesBtn_Click(object sender, EventArgs e)
         {
-          
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, ReportsBtn };
+
+            transactionMethods.LockTransactionNavigation(NavigationButtons, ServicesBtn);
+            transactionMethods.EnableTransactionNavigation(NavigationButtons, ServicesBtn);
+
             ServiceType_ServicePage serviceView = new ServiceType_ServicePage();
             UserControlNavigator.ShowControl(serviceView, ManagerContent);
         }
