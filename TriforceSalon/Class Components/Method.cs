@@ -17,10 +17,6 @@ namespace TriforceSalon
 {
     public class Method
     {
-        /*
-         * accounts - Username, Password, AccountlD, Status
-         * salon_employees - AccountlD, Name, Email, Birthdate, Photo, AccountStatus, ServicelD, Availability
-         */
 
         public static TransactionMethods transaction = new TransactionMethods();
 
@@ -35,6 +31,35 @@ namespace TriforceSalon
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
+        public static async Task RecordShipment(int ShipmentID, int ItemID, string ItemName, int Qty, int Cost, string Supplier)
+        {
+            string query = @"INSERT INTO shipments (`ManagerID`, `Date Shipped`, `ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`, `Supplier`) 
+                VALUES (@ManagerID, @DateShipped, @ShipmentID, @ItemID, @ItemName, @Quantity, @Cost, @Supplier)";
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ManagerID", AccountID);
+                        cmd.Parameters.AddWithValue("@DateShipped", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@ShipmentID", ShipmentID);
+                        cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                        cmd.Parameters.AddWithValue("@ItemName", ItemName);
+                        cmd.Parameters.AddWithValue("@Quantity", Qty);
+                        cmd.Parameters.AddWithValue("@Cost", Cost);
+                        cmd.Parameters.AddWithValue("@Supplier", Supplier);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
 
         public static async Task ReadUserDataAsync(string user)
         {
