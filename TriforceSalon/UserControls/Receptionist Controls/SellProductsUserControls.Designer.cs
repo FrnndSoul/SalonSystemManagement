@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.cLbl = new System.Windows.Forms.Label();
@@ -63,11 +63,9 @@
             this.DatabaseTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.DirectTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductsFL
@@ -104,9 +102,9 @@
             // cLbl
             // 
             this.cLbl.BackColor = System.Drawing.Color.Transparent;
-            this.cLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cLbl.ForeColor = System.Drawing.Color.White;
-            this.cLbl.Location = new System.Drawing.Point(1411, 762);
+            this.cLbl.Location = new System.Drawing.Point(1407, 705);
             this.cLbl.Name = "cLbl";
             this.cLbl.Size = new System.Drawing.Size(76, 33);
             this.cLbl.TabIndex = 19;
@@ -116,9 +114,9 @@
             // cashLbl
             // 
             this.cashLbl.BackColor = System.Drawing.Color.Transparent;
-            this.cashLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cashLbl.ForeColor = System.Drawing.Color.White;
-            this.cashLbl.Location = new System.Drawing.Point(1288, 762);
+            this.cashLbl.Location = new System.Drawing.Point(1284, 705);
             this.cashLbl.Name = "cashLbl";
             this.cashLbl.Size = new System.Drawing.Size(117, 33);
             this.cashLbl.TabIndex = 18;
@@ -128,9 +126,9 @@
             // TotLbl
             // 
             this.TotLbl.BackColor = System.Drawing.Color.Transparent;
-            this.TotLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotLbl.ForeColor = System.Drawing.Color.White;
-            this.TotLbl.Location = new System.Drawing.Point(1411, 711);
+            this.TotLbl.Location = new System.Drawing.Point(1407, 654);
             this.TotLbl.Name = "TotLbl";
             this.TotLbl.Size = new System.Drawing.Size(168, 33);
             this.TotLbl.TabIndex = 17;
@@ -140,9 +138,9 @@
             // totalLbl
             // 
             this.totalLbl.BackColor = System.Drawing.Color.Transparent;
-            this.totalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLbl.ForeColor = System.Drawing.Color.White;
-            this.totalLbl.Location = new System.Drawing.Point(1282, 711);
+            this.totalLbl.Location = new System.Drawing.Point(1278, 654);
             this.totalLbl.Name = "totalLbl";
             this.totalLbl.Size = new System.Drawing.Size(123, 33);
             this.totalLbl.TabIndex = 16;
@@ -152,9 +150,9 @@
             // DiscLbl
             // 
             this.DiscLbl.BackColor = System.Drawing.Color.Transparent;
-            this.DiscLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiscLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscLbl.ForeColor = System.Drawing.Color.White;
-            this.DiscLbl.Location = new System.Drawing.Point(1411, 661);
+            this.DiscLbl.Location = new System.Drawing.Point(1407, 604);
             this.DiscLbl.Name = "DiscLbl";
             this.DiscLbl.Size = new System.Drawing.Size(201, 33);
             this.DiscLbl.TabIndex = 15;
@@ -164,9 +162,9 @@
             // discL
             // 
             this.discL.BackColor = System.Drawing.Color.Transparent;
-            this.discL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.discL.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discL.ForeColor = System.Drawing.Color.White;
-            this.discL.Location = new System.Drawing.Point(1282, 661);
+            this.discL.Location = new System.Drawing.Point(1278, 604);
             this.discL.Name = "discL";
             this.discL.Size = new System.Drawing.Size(123, 33);
             this.discL.TabIndex = 14;
@@ -176,9 +174,9 @@
             // SubLbl
             // 
             this.SubLbl.BackColor = System.Drawing.Color.Transparent;
-            this.SubLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubLbl.ForeColor = System.Drawing.Color.White;
-            this.SubLbl.Location = new System.Drawing.Point(1411, 612);
+            this.SubLbl.Location = new System.Drawing.Point(1407, 555);
             this.SubLbl.Name = "SubLbl";
             this.SubLbl.Size = new System.Drawing.Size(194, 33);
             this.SubLbl.TabIndex = 13;
@@ -188,9 +186,9 @@
             // sbLbl
             // 
             this.sbLbl.BackColor = System.Drawing.Color.Transparent;
-            this.sbLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sbLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sbLbl.ForeColor = System.Drawing.Color.White;
-            this.sbLbl.Location = new System.Drawing.Point(1282, 612);
+            this.sbLbl.Location = new System.Drawing.Point(1278, 555);
             this.sbLbl.Name = "sbLbl";
             this.sbLbl.Size = new System.Drawing.Size(123, 33);
             this.sbLbl.TabIndex = 12;
@@ -206,9 +204,9 @@
             this.VoidBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.VoidBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.VoidBtn.FillColor = System.Drawing.Color.Red;
-            this.VoidBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VoidBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VoidBtn.ForeColor = System.Drawing.Color.White;
-            this.VoidBtn.Location = new System.Drawing.Point(1647, 746);
+            this.VoidBtn.Location = new System.Drawing.Point(1638, 689);
             this.VoidBtn.Name = "VoidBtn";
             this.VoidBtn.Size = new System.Drawing.Size(254, 49);
             this.VoidBtn.TabIndex = 20;
@@ -224,11 +222,11 @@
             this.PaymentBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.PaymentBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.PaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.PaymentBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PaymentBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PaymentBtn.ForeColor = System.Drawing.Color.Black;
-            this.PaymentBtn.Location = new System.Drawing.Point(1647, 679);
+            this.PaymentBtn.Location = new System.Drawing.Point(1638, 623);
             this.PaymentBtn.Name = "PaymentBtn";
-            this.PaymentBtn.Size = new System.Drawing.Size(254, 49);
+            this.PaymentBtn.Size = new System.Drawing.Size(190, 49);
             this.PaymentBtn.TabIndex = 21;
             this.PaymentBtn.Text = "Place";
             this.PaymentBtn.Click += new System.EventHandler(this.PaymentBtn_Click);
@@ -237,16 +235,16 @@
             // 
             this.ProductsControlDGV.AllowUserToAddRows = false;
             this.ProductsControlDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ProductsControlDGV.ColumnHeadersHeight = 15;
             this.ProductsControlDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -257,14 +255,14 @@
             this.CostCol,
             this.DiscountComB,
             this.DisposeCol});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ProductsControlDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsControlDGV.Location = new System.Drawing.Point(1294, 24);
             this.ProductsControlDGV.Name = "ProductsControlDGV";
@@ -360,7 +358,7 @@
             this.SearchProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.SearchProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.SearchProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SearchProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchProductsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchProductsBtn.ForeColor = System.Drawing.Color.Black;
             this.SearchProductsBtn.Location = new System.Drawing.Point(616, 24);
             this.SearchProductsBtn.Name = "SearchProductsBtn";
@@ -378,7 +376,7 @@
             this.AllProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.AllProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.AllProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AllProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllProductsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AllProductsBtn.ForeColor = System.Drawing.Color.Black;
             this.AllProductsBtn.Location = new System.Drawing.Point(24, 24);
             this.AllProductsBtn.Name = "AllProductsBtn";
@@ -398,7 +396,7 @@
             this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Location = new System.Drawing.Point(1475, 762);
+            this.CashTxtBx.Location = new System.Drawing.Point(1471, 705);
             this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CashTxtBx.Name = "CashTxtBx";
             this.CashTxtBx.PasswordChar = '\0';
@@ -413,9 +411,9 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1358, 344);
+            this.label1.Location = new System.Drawing.Point(1349, 344);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(223, 39);
             this.label1.TabIndex = 26;
@@ -435,7 +433,7 @@
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Location = new System.Drawing.Point(1587, 344);
+            this.CustomerNameTxtB.Location = new System.Drawing.Point(1578, 344);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
@@ -452,7 +450,7 @@
             this.discChckBx.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.discChckBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.discChckBx.ForeColor = System.Drawing.Color.White;
-            this.discChckBx.Location = new System.Drawing.Point(1475, 463);
+            this.discChckBx.Location = new System.Drawing.Point(1293, 446);
             this.discChckBx.Name = "discChckBx";
             this.discChckBx.Size = new System.Drawing.Size(315, 45);
             this.discChckBx.TabIndex = 28;
@@ -466,9 +464,9 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1362, 401);
+            this.label2.Location = new System.Drawing.Point(1353, 401);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 39);
             this.label2.TabIndex = 29;
@@ -487,7 +485,7 @@
             this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.CustomerIDComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.CustomerIDComB.ItemHeight = 30;
-            this.CustomerIDComB.Location = new System.Drawing.Point(1587, 404);
+            this.CustomerIDComB.Location = new System.Drawing.Point(1578, 404);
             this.CustomerIDComB.Name = "CustomerIDComB";
             this.CustomerIDComB.Size = new System.Drawing.Size(314, 36);
             this.CustomerIDComB.TabIndex = 31;
@@ -501,9 +499,9 @@
             this.CalculateCostBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.CalculateCostBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.CalculateCostBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CalculateCostBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalculateCostBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CalculateCostBtn.ForeColor = System.Drawing.Color.Black;
-            this.CalculateCostBtn.Location = new System.Drawing.Point(1647, 612);
+            this.CalculateCostBtn.Location = new System.Drawing.Point(1638, 555);
             this.CalculateCostBtn.Name = "CalculateCostBtn";
             this.CalculateCostBtn.Size = new System.Drawing.Size(254, 47);
             this.CalculateCostBtn.TabIndex = 32;
@@ -550,7 +548,7 @@
             this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(1770, 533);
+            this.GcashPayment.Location = new System.Drawing.Point(1842, 620);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(50, 50);
@@ -558,21 +556,6 @@
             this.GcashPayment.TabIndex = 38;
             this.GcashPayment.TabStop = false;
             this.GcashPayment.UseTransparentBackground = true;
-            // 
-            // CardPayment
-            // 
-            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
-            this.CardPayment.Enabled = false;
-            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
-            this.CardPayment.ImageRotate = 0F;
-            this.CardPayment.Location = new System.Drawing.Point(1709, 533);
-            this.CardPayment.Name = "CardPayment";
-            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.CardPayment.Size = new System.Drawing.Size(50, 50);
-            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CardPayment.TabIndex = 37;
-            this.CardPayment.TabStop = false;
-            this.CardPayment.UseTransparentBackground = true;
             // 
             // guna2Button1
             // 
@@ -589,9 +572,9 @@
             this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.IndicateFocus = true;
-            this.guna2Button1.Location = new System.Drawing.Point(1697, 526);
+            this.guna2Button1.Location = new System.Drawing.Point(1833, 613);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(132, 66);
+            this.guna2Button1.Size = new System.Drawing.Size(66, 66);
             this.guna2Button1.TabIndex = 36;
             this.guna2Button1.UseTransparentBackground = true;
             // 
@@ -601,7 +584,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.Controls.Add(this.GcashPayment);
-            this.Controls.Add(this.CardPayment);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.DatabaseTransactionRBtn);
             this.Controls.Add(this.DirectTransactionRBtn);
@@ -632,7 +614,6 @@
             this.Load += new System.EventHandler(this.SellProductsUserControls_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -671,7 +652,6 @@
         private Guna.UI2.WinForms.Guna2CustomRadioButton DatabaseTransactionRBtn;
         private Guna.UI2.WinForms.Guna2CustomRadioButton DirectTransactionRBtn;
         private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox CardPayment;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }

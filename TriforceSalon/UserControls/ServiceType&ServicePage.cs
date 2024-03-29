@@ -118,7 +118,6 @@ namespace TriforceSalon.UserControls
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
             serviceType.EditServiceTypes();
-
         }
 
         private void CancelEditBtn_Click(object sender, EventArgs e)

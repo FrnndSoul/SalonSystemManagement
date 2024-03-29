@@ -86,6 +86,7 @@ namespace TriforceSalon.UserControls
                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                                    "WHERE sg.ServiceType = @service_type " +
                                    "AND ci.PaymentStatus = 'UNPAID' " +
+                                   "AND ci.PaymentStatus = 'ONGOING' " +
                                    "AND sg.EmployeeID = @employee_id " +
                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
@@ -175,6 +176,7 @@ namespace TriforceSalon.UserControls
                                       "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                                       "WHERE sg.ServiceType = @service_type " +
                                       "AND ci.PaymentStatus = 'UNPAID' " +
+                                      "AND ci.PaymentStatus = 'ONGOING' " +
                                       "AND sg.EmployeeID = 0 " +
                                       "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 

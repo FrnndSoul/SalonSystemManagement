@@ -317,7 +317,6 @@ namespace TriforceSalon.Class_Components
             catch(Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
        
@@ -437,6 +436,42 @@ namespace TriforceSalon.Class_Components
             return item_id;
         }
 
+        public async Task<string> GetServiceTypeByName(string serviceVariation)
+        {
+            string serviceTypeName = null;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT st.ServiceTypeName FROM service_type st " +
+                        "JOIN salon_services ss ON st.ServiceTypeID = ss.ServiceTypeID " +
+                        "WHERE ss.ServiceName = @serviceVariation";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+
+                        var result = await command.ExecuteScalarAsync();
+
+                        if (result != null)
+                        {
+                            serviceTypeName = result.ToString();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error in GetServiceTypeByName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            return serviceTypeName;
+        }
+
+
+
         private async Task AddItemBindedToDatabase(int ServiceID, Guna2DataGridView bindedItems)
         {
             try
@@ -471,7 +506,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        private async Task<int> GetServiceVariationID(string ServiceName)
+        public async Task<int> GetServiceVariationID(string ServiceName)
         {
             int ID = -1;
             try
