@@ -330,7 +330,7 @@
             this.label4.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.label4.Location = new System.Drawing.Point(34, 133);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(141, 38);
+            this.label4.Size = new System.Drawing.Size(148, 38);
             this.label4.TabIndex = 15;
             this.label4.Text = "Number";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

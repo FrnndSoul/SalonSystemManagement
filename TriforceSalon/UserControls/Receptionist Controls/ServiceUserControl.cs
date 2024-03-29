@@ -61,7 +61,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
-            if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
+            string ID = transactionIDTxtB.Text;
+            string name = CustomerNameTxtB.Text;
+            string age = CustomerAgeTxtB.Text;
+            if (CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -76,6 +79,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 transactionMethods.GetServiceTypeID(serviceName);
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
                 await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                transactionMethods.GeneratePDFTicket(ID, name, age);
+
             }
         }
 

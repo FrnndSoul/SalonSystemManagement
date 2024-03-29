@@ -61,6 +61,7 @@
             this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -147,6 +148,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.CancelBtn);
             this.guna2Panel1.Controls.Add(this.AppointmentDateTxtB);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.ServicesGDGVVControl);
@@ -302,7 +304,7 @@
             this.AddLServiceListBtn.Animated = true;
             this.AddLServiceListBtn.AutoRoundedCorners = true;
             this.AddLServiceListBtn.BackColor = System.Drawing.Color.Transparent;
-            this.AddLServiceListBtn.BorderRadius = 23;
+            this.AddLServiceListBtn.BorderRadius = 30;
             this.AddLServiceListBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.AddLServiceListBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.AddLServiceListBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -310,9 +312,9 @@
             this.AddLServiceListBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.AddLServiceListBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddLServiceListBtn.ForeColor = System.Drawing.Color.White;
-            this.AddLServiceListBtn.Location = new System.Drawing.Point(36, 755);
+            this.AddLServiceListBtn.Location = new System.Drawing.Point(13, 745);
             this.AddLServiceListBtn.Name = "AddLServiceListBtn";
-            this.AddLServiceListBtn.Size = new System.Drawing.Size(256, 48);
+            this.AddLServiceListBtn.Size = new System.Drawing.Size(190, 62);
             this.AddLServiceListBtn.TabIndex = 23;
             this.AddLServiceListBtn.Text = "Add To List";
             this.AddLServiceListBtn.UseTransparentBackground = true;
@@ -560,7 +562,7 @@
             this.ProcessCustomerBtn.Animated = true;
             this.ProcessCustomerBtn.AutoRoundedCorners = true;
             this.ProcessCustomerBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ProcessCustomerBtn.BorderRadius = 23;
+            this.ProcessCustomerBtn.BorderRadius = 30;
             this.ProcessCustomerBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -568,13 +570,34 @@
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ProcessCustomerBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
-            this.ProcessCustomerBtn.Location = new System.Drawing.Point(330, 755);
+            this.ProcessCustomerBtn.Location = new System.Drawing.Point(207, 745);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
-            this.ProcessCustomerBtn.Size = new System.Drawing.Size(256, 48);
+            this.ProcessCustomerBtn.Size = new System.Drawing.Size(190, 62);
             this.ProcessCustomerBtn.TabIndex = 0;
             this.ProcessCustomerBtn.Text = "Activate Appointment";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
+            // 
+            // CancelBtn
+            // 
+            this.CancelBtn.Animated = true;
+            this.CancelBtn.AutoRoundedCorners = true;
+            this.CancelBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CancelBtn.BorderRadius = 30;
+            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CancelBtn.FillColor = System.Drawing.Color.Red;
+            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelBtn.ForeColor = System.Drawing.Color.White;
+            this.CancelBtn.Location = new System.Drawing.Point(400, 745);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(190, 62);
+            this.CancelBtn.TabIndex = 27;
+            this.CancelBtn.Text = "Cancel Edit";
+            this.CancelBtn.UseTransparentBackground = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // EditAppointmentUserControl
             // 
@@ -628,5 +651,6 @@
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         public Guna.UI2.WinForms.Guna2TextBox AppointmentDateTxtB;
         private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2Button CancelBtn;
     }
 }

@@ -22,6 +22,7 @@ namespace TriforceSalon.Ticket_System
     {
         EditAppointmentUserControl editAppointment = new EditAppointmentUserControl();
         AppointmentsUserControls appointment = new AppointmentsUserControls();
+        TransactionMethods transactionMethods = new TransactionMethods();
         SalonServices salonService = new SalonServices();
 
         public event EventHandler<ScheduleSelectedEventArgs> AppointmentTicketChanged;
@@ -172,6 +173,7 @@ namespace TriforceSalon.Ticket_System
                     }
                 }
                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                transactionMethods.GeneratePDFTicket(ID, name, age);
                 await appointment.LoadPresentCustomer();
             }
             catch(Exception ex)

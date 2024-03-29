@@ -114,6 +114,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProcessCustomerBtn_Click(object sender, EventArgs e)
         {
+            string ID = transactionIDTxtB.Text;
+            string name = CustomerNameTxtB.Text;
+            string age = CustomerAgeTxtB.Text;
+
             if (CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
@@ -135,8 +139,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 else
                 {
                     await TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
-
                 }
+                transactionMethods.GeneratePDFTicket(ID, name, age);
             }
         }
 
@@ -213,6 +217,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             string selectedType = ServiceFilterComB.SelectedItem.ToString();
             await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, selectedType, ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            AppointmentsUserControls appointment = new AppointmentsUserControls();
+            UserControlNavigator.ShowControl(appointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
         }
     }
 }

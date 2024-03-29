@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class EditProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
@@ -108,10 +109,19 @@ namespace TriforceSalon.UserControls
                         querycmd.ExecuteNonQuery();
                     }
                 }
-            } catch (Exception ex)
+                MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\nat SaveBtn_Click() InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void editSRPTxtB_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         public byte[] LoadPhoto(int itemID)
@@ -169,6 +179,8 @@ namespace TriforceSalon.UserControls
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
+
         }
     }
 }
