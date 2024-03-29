@@ -13,6 +13,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class RequestShipment_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
@@ -93,11 +94,15 @@ namespace TriforceSalon.UserControls
                 return;
             }
             Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
+            MessageBox.Show("Item has been added", "Restock Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            manager.DisableButtons(true);
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
+
         }
     }
 }

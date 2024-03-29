@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class AddProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static byte[] PhotoBytes;
         public static int ItemID;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -47,7 +48,7 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void AddProduct_Click(object sender, EventArgs e)
+        private async void AddProduct_Click(object sender, EventArgs e)
         {
             string Name = NameBox.Text;
             string ID = IDBox.Text;
@@ -69,10 +70,11 @@ namespace TriforceSalon.UserControls
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
-                    string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, 'SRP', `Aggregate`, `Status`,`Photo`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+                    await connection.OpenAsync();
+                    string query = "INSERT INTO `inventory` " +
+                                   "(`ItemID`, `ItemName`, `Stock`, `Cost`, `SRP`, `Aggregate`, `Status`, `Photo`) VALUES " +
+                                   "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
@@ -83,9 +85,11 @@ namespace TriforceSalon.UserControls
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
+                MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
             }
             catch (Exception ex)
             {
@@ -112,6 +116,7 @@ namespace TriforceSalon.UserControls
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
         }
     }
 }

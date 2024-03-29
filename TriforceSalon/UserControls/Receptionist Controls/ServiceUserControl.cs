@@ -35,9 +35,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
-            //await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
-            //await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-
             await serviceTypeService.GetServiceTypeAsync(mysqlcon);
             ServiceFilterComB.SelectedIndex = 0;
             await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
@@ -45,7 +42,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.GetAllEmployee(mysqlcon);
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
-
         }
 
         /*public void GetServiceTypeData()
@@ -65,7 +61,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
-            if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
+            string ID = transactionIDTxtB.Text;
+            string name = CustomerNameTxtB.Text;
+            string age = CustomerAgeTxtB.Text;
+            if (CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -79,7 +78,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                transactionMethods.GeneratePDFTicket(ID, name, age);
+
             }
         }
 

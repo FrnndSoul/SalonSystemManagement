@@ -17,7 +17,9 @@ using TriforceSalon.UserControls.Receptionist_Controls;*/
 
 using Guna.UI2.WinForms;
 using iText.IO.Image;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Layout;
 using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
@@ -32,7 +34,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.UserControls.Receptionist_Controls;
-using ZstdSharp.Unsafe;
 using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 using Table = iText.Layout.Element.Table;
@@ -116,15 +117,15 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
         {
             try
             {
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID)" +
-                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID)";
+                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
+                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID, @priorityStatus)";
 
                     using(MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn))
                     {
@@ -133,6 +134,7 @@ namespace TriforceSalon.Class_Components
                         command1.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
                         command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                         command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
+                        command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
 
                         await command1.ExecuteNonQueryAsync();
                     }
@@ -167,7 +169,7 @@ namespace TriforceSalon.Class_Components
                             else
                             {
                                 int employeeID = GetEmployeeID(preferredEmployee);
-                                MessageBox.Show($"Employee ID found: {employeeID}");
+                                //MessageBox.Show($"Employee ID found: {employeeID}");
                                 command2.Parameters.AddWithValue("@pref_emp", GetEmployeeID(preferredEmployee));
                             }
 
@@ -176,6 +178,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
                 }
+                MessageBox.Show("Customer has been processed", "Process Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception ex)
             {
@@ -540,6 +543,51 @@ namespace TriforceSalon.Class_Components
                     cashtxtBx.ForeColor = Color.LightGray;
                     System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
 
+                }
+            }
+        }
+
+        public void GeneratePDFTicket(string ID, string name, string age)
+        {
+            string transactionTB = ID;
+            string nameTB = name;
+            string ageTB = age;
+
+            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            {
+                saveFileDialog1.Filter = "PDF Files|*.pdf";
+                saveFileDialog1.Title = "Save PDF File";
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string pdfFilePath = saveFileDialog1.FileName;
+
+                    using (PdfWriter writer = new PdfWriter(new FileStream(pdfFilePath, FileMode.Create)))
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    using (Document doc = new Document(pdf))
+                    {
+                        PageSize customPageSize = new PageSize(252f, 612f); // 3.5 * 72, 8.5 * 72
+                        pdf.SetDefaultPageSize(customPageSize);
+
+                        ImageData logoImageData = ImageDataFactory.Create(GetBytesFromImage(Properties.Resources.SalonLogo));
+                        iText.Layout.Element.Image logo = new iText.Layout.Element.Image(logoImageData);
+                        logo.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+                        logo.SetWidth(150);
+                        logo.SetHeight(150);
+                        doc.Add(logo);
+
+                        doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph("TICKET").SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph($"Transaction ID: {transactionTB}                                 Date: {DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Customer Name: {nameTB}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Age: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph("THANK YOU FOR VISITING OUR SALON! WE HOPE TO SEE YOU AGAIN SOON.").SetTextAlignment(TextAlignment.JUSTIFIED_ALL));
+                    }
+
+                    MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "Receipt Generated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
                 }
             }
         }
