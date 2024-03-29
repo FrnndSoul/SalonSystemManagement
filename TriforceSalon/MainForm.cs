@@ -16,7 +16,6 @@ namespace TriforceSalon
 
             SigninPage signinPage = new SigninPage();
             UserControlNavigator.ShowControl(signinPage, MainFormContent);
-            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -48,32 +48,46 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-                   /* string query = "SELECT t.CustomerName," +
-                                    " t.CustomerAge, " +
-                                    " t.CustomerPhoneNumber, " +
-                                    " t.ServiceVariation, " +
-                                    " t.PriorityStatus, " +
-                                    " t.TransactionID" +
-                                    " FROM transaction t" +
-                                    " WHERE ServiceType = @service_type" +
-                                    " AND PaymentStatus = 'UNPAID'" +
-                                    " AND EmployeeID = @employee_id" +
-                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+                    /* string query = "SELECT t.CustomerName," +
+                                     " t.CustomerAge, " +
+                                     " t.CustomerPhoneNumber, " +
+                                     " t.ServiceVariation, " +
+                                     " t.PriorityStatus, " +
+                                     " t.TransactionID" +
+                                     " FROM transaction t" +
+                                     " WHERE ServiceType = @service_type" +
+                                     " AND PaymentStatus = 'UNPAID'" +
+                                     " AND EmployeeID = @employee_id" +
+                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
+
+                    //sleep na muna
+                    /* string testQuery = "SELECT ci.CustomerName, " +
+                                     "ci.CustomerAge, " +
+                                     "ci.CustomerPhoneNumber, " +
+                                     "ci.PriorityStatus, " +
+                                     "sg.ServiceVariation, " +
+                                     "ci.TransactionID " + 
+                                     "sg.QueueNumber, " +
+                                     "FROM customer_info ci " + 
+                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " + 
+                                     "WHERE ci.ServiceType = @service_type " + 
+                                     "AND ci.PaymentStatus = 'UNPAID' " + 
+                                     "AND ci.EmployeeID = @employee_id " + 
+                                     "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken"; */
 
                     string testQuery = "SELECT ci.CustomerName, " +
-                                    "ci.CustomerAge, " +
-                                    "ci.CustomerPhoneNumber, " +
-                                    "ci.PriorityStatus, " +
-                                    "sg.ServiceVariation, " +
-                                    "ci.TransactionID " + 
-                                    "FROM customer_info ci " + 
-                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " + 
-                                    "WHERE ci.ServiceType = @service_type " + 
-                                    "AND ci.PaymentStatus = 'UNPAID' " + 
-                                    "AND ci.EmployeeID = @employee_id " + 
-                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken"; 
-
-
+                                   "ci.CustomerAge, " +
+                                   "ci.CustomerPhoneNumber, " +
+                                   "ci.PriorityStatus, " +
+                                   "sg.ServiceVariation, " +
+                                   "ci.TransactionID, " +
+                                   "sg.QueueNumber " +  // Removed the comma here
+                                   "FROM customer_info ci " +
+                                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                   "WHERE sg.ServiceType = @service_type " +
+                                   "AND ci.PaymentStatus = 'UNPAID' " +
+                                   "AND sg.EmployeeID = @employee_id " +
+                                   "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
                     using (MySqlCommand command = new MySqlCommand(testQuery, conn))
                     {
@@ -94,12 +108,13 @@ namespace TriforceSalon.UserControls
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
+                                var Queue = row["QueueNumber"].ToString();
 
                                 if (SpecialCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket, Queue);
                                 SpecialCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -111,7 +126,7 @@ namespace TriforceSalon.UserControls
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error in LoadCustomer()");
+                MessageBox.Show(ex.Message, "Error in LoadSpecialCustomersAsync()");
             }
         }
 
@@ -134,18 +149,34 @@ namespace TriforceSalon.UserControls
                                     " AND EmployeeID = 0" +
                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
 
-                    string testQuery = "SELECT ci.CustomerName, " +
-                                    "ci.CustomerAge, " +
-                                    "ci.CustomerPhoneNumber, " +
-                                    "ci.PriorityStatus, " +
-                                    "sg.ServiceVariation, " +
-                                    "ci.TransactionID " +
-                                    "FROM customer_info ci " +
-                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                    "WHERE ci.ServiceType = @service_type " +
-                                    "AND ci.PaymentStatus = 'UNPAID' " +
-                                    "AND ci.EmployeeID = 0 " +
-                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
+                    //sleep muna
+                    /* string testQuery = "SELECT ci.CustomerName, " +
+                                     "ci.CustomerAge, " +
+                                     "ci.CustomerPhoneNumber, " +
+                                     "ci.PriorityStatus, " +
+                                     "sg.ServiceVariation, " +
+                                     "ci.TransactionID " +
+                                     "sg.QueueNumber, " +
+                                     "FROM customer_info ci " +
+                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                     "WHERE ci.ServiceType = @service_type " +
+                                     "AND ci.PaymentStatus = 'UNPAID' " +
+                                     "AND ci.EmployeeID = 0 " +
+                                     "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";*/
+
+                      string testQuery = "SELECT ci.CustomerName, " +
+                                      "ci.CustomerAge, " +
+                                      "ci.CustomerPhoneNumber, " +
+                                      "ci.PriorityStatus, " +
+                                      "sg.ServiceVariation, " +
+                                      "ci.TransactionID, " + // Added comma here
+                                      "sg.QueueNumber " + // Removed extra comma here
+                                      "FROM customer_info ci " +
+                                      "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                      "WHERE sg.ServiceType = @service_type " +
+                                      "AND ci.PaymentStatus = 'UNPAID' " +
+                                      "AND sg.EmployeeID = 0 " +
+                                      "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
 
                     using (MySqlCommand command = new MySqlCommand(testQuery, conn))
@@ -167,12 +198,13 @@ namespace TriforceSalon.UserControls
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
+                                var Queue = row["QueueNumber"].ToString();
 
                                 if (GeneralCustomerListFLowLayout.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
                                 {
                                     continue;
                                 }
-                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket);
+                                var cutomer = new CustomerTicket(Name, Age, PhoneNumber, Service, PrioStatus, Ticket, Queue);
                                 GeneralCustomerListFLowLayout.Controls.Add(cutomer);
                                 cutomer.CustomerSelected += CustomerDetails;
 
@@ -184,7 +216,7 @@ namespace TriforceSalon.UserControls
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error in LoadCustomer()");
+                MessageBox.Show(ex.Message, "Error in LoadGeneralCustomersAsync()");
             }
         }
 

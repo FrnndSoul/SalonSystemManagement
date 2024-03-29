@@ -96,9 +96,9 @@ namespace TriforceSalon.UserControls
             // 
             // GeneralCustomerListFLowLayout
             // 
+            this.GeneralCustomerListFLowLayout.AutoScroll = true;
             this.GeneralCustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.GeneralCustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GeneralCustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.GeneralCustomerListFLowLayout.Location = new System.Drawing.Point(69, 194);
             this.GeneralCustomerListFLowLayout.Name = "GeneralCustomerListFLowLayout";
             this.GeneralCustomerListFLowLayout.Size = new System.Drawing.Size(913, 462);
@@ -166,9 +166,9 @@ namespace TriforceSalon.UserControls
             // 
             // SpecialCustomerListFLowLayout
             // 
+            this.SpecialCustomerListFLowLayout.AutoScroll = true;
             this.SpecialCustomerListFLowLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.SpecialCustomerListFLowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SpecialCustomerListFLowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.SpecialCustomerListFLowLayout.Location = new System.Drawing.Point(17, 194);
             this.SpecialCustomerListFLowLayout.Name = "SpecialCustomerListFLowLayout";
             this.SpecialCustomerListFLowLayout.Size = new System.Drawing.Size(913, 462);
@@ -236,9 +236,9 @@ namespace TriforceSalon.UserControls
             // EmployeeLockContent
             // 
             this.EmployeeLockContent.BackColor = System.Drawing.Color.Transparent;
-            this.EmployeeLockContent.Location = new System.Drawing.Point(320, 212);
+            this.EmployeeLockContent.Location = new System.Drawing.Point(320, 335);
             this.EmployeeLockContent.Name = "EmployeeLockContent";
-            this.EmployeeLockContent.Size = new System.Drawing.Size(1281, 840);
+            this.EmployeeLockContent.Size = new System.Drawing.Size(1278, 564);
             this.EmployeeLockContent.TabIndex = 19;
             // 
             // EmployeeUserConrols

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
+using System.Data;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -32,10 +35,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
-            await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
-            await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            //await serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
+            //await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+
+            await serviceTypeService.GetServiceTypeAsync(mysqlcon);
+            ServiceFilterComB.SelectedIndex = 0;
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
 
             await serviceTypeService.GetAllEmployee(mysqlcon);
+            PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
         }
@@ -55,7 +63,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
 
-        private void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
+        private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
             if(CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
@@ -70,7 +78,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
-                transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
+                //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl);
             }
         }
 
@@ -87,7 +96,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private async void GetAllServiceBtn_Click(object sender, EventArgs e)
+        /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -99,7 +108,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+        }*/
                 
         private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -167,6 +176,53 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 e.Handled = true; // Ignore the input
                 return;
             }
+        }
+
+        private async void ServiceFilterComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedType = ServiceFilterComB.SelectedItem.ToString();
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, selectedType, ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+        }
+
+        public decimal ExtractAmount(string input)
+        {
+            string pattern = @"Amount:\s*₱\s*(\d+)";
+
+            // Match the pattern in the input string
+            Match match = Regex.Match(input, pattern);
+
+            // Check if a match is found
+            if (match.Success)
+            {
+                // Extract the amount from the match
+                string amountString = match.Groups[1].Value;
+
+                // Convert the amount to a decimal
+                if (decimal.TryParse(amountString, out decimal extractedAmount))
+                {
+                    return extractedAmount;
+                }
+                else
+                {
+                    throw new ArgumentException("Failed to parse amount.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Pattern not found in input string.");
+            }
+        }
+
+        private async void AddLServiceListBtn_Click(object sender, EventArgs e)
+        {
+            string dateNow = DateTime.Now.ToString("MM-dd-yyyy dddd");
+            string serviceName = ServiceTxtB.Text;
+            string prefEmp = PEmployeeComB.SelectedItem.ToString();
+            decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
+            string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
+            int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
+
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
         }
         private async void EmployeeLock_Load(object sender, EventArgs e)
         {
-            await transaction.GetServicesAsync(salonServices.GetServiceTypeID(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text));
+            //await transaction.GetServicesAsync(salonServices.GetServiceTypeID(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text));
         }
 
         //Need ayusin ang tamang refresh hindi narereset ang list
@@ -35,6 +35,8 @@ namespace TriforceSalon.UserControls.Employee_Controls
             {
                 //test
                 await EmployeeUserConrols.employeeUserConrolsInstance.LoadSpecialCustomersAsync(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+                await EmployeeUserConrols.employeeUserConrolsInstance.LoadGeneralCustomersAsync(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+
                 transaction.ShowCustomerList();
             }
             catch (Exception ex)
@@ -50,7 +52,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
         private void AddServiceChckB_CheckedChanged(object sender, EventArgs e)
         {
             Guna2CustomCheckBox checkbox = sender as Guna2CustomCheckBox;
-            AddServicePanel.Enabled = checkbox?.Checked ?? false;
+            //AddServicePanel.Enabled = checkbox?.Checked ?? false;
 
             /* Guna2CheckBox checkbox = sender as Guna2CheckBox;
 
@@ -69,8 +71,8 @@ namespace TriforceSalon.UserControls.Employee_Controls
 
         private async void ServiceListComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string serviceName = Convert.ToString(ServiceListComB.SelectedItem);
-            await transaction.GetServiceAmountAsync(serviceName);
+            //string serviceName = Convert.ToString(ServiceListComB.SelectedItem);
+            //await transaction.GetServiceAmountAsync(serviceName);
         }
 
         private void AddServiceChckB_Click(object sender, EventArgs e)

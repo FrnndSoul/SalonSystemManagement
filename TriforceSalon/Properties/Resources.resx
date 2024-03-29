@@ -121,6 +121,9 @@
   <data name="save icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SalonLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalonLogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="access icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\access icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -159,6 +162,9 @@
   </data>
   <data name="service type black icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\service type black icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="photo_2024-03-04_03-03-561" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\photo_2024-03-04_03-03-561.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,7 +211,19 @@
   <data name="request3 icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\request3 icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="photo_2024-03-04_03-03-561" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\photo_2024-03-04_03-03-561.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Very Satisfied" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Very Satisfied.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Satisfied" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Satisfied.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Neutral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Neutral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Unsatisfied" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Unsatisfied.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
