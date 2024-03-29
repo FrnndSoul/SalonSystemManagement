@@ -294,7 +294,7 @@
             this.AddQtyBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.AddQtyBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddQtyBtn.ForeColor = System.Drawing.Color.White;
-            this.AddQtyBtn.Location = new System.Drawing.Point(123, 630);
+            this.AddQtyBtn.Location = new System.Drawing.Point(669, 630);
             this.AddQtyBtn.Name = "AddQtyBtn";
             this.AddQtyBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.AddQtyBtn.Size = new System.Drawing.Size(50, 50);
@@ -313,7 +313,7 @@
             this.SubQtyBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.SubQtyBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubQtyBtn.ForeColor = System.Drawing.Color.White;
-            this.SubQtyBtn.Location = new System.Drawing.Point(660, 630);
+            this.SubQtyBtn.Location = new System.Drawing.Point(119, 630);
             this.SubQtyBtn.Name = "SubQtyBtn";
             this.SubQtyBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.SubQtyBtn.Size = new System.Drawing.Size(50, 50);

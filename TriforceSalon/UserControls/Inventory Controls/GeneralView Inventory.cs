@@ -42,11 +42,11 @@ namespace TriforceSalon.UserControls
                 return;
             }
             ReadRow(ItemRow);
-            if (Status <= 2)
+            /*if (Status <= 2)
             {
                 MessageBox.Show($"There is still ample supply of\n{ItemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
+            }*/
             requestShipment_Inventory1.Visible = true;
             requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock);
             manager.DisableButtons(false);
