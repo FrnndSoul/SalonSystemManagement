@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class GeneralView_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
@@ -48,6 +49,7 @@ namespace TriforceSalon.UserControls
             }
             requestShipment_Inventory1.Visible = true;
             requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock);
+            manager.DisableButtons(false);
         }
 
         private void addProduct_Inventory1_VisibleChanged(object sender, EventArgs e)
@@ -107,11 +109,14 @@ namespace TriforceSalon.UserControls
             ReadRow(itemRow);
             editProduct_Inventory1.Visible = true;
             editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
+            manager.DisableButtons(false);
+
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
             addProduct_Inventory1.Visible = true;
+            manager.DisableButtons(false);
         }
 
         public void LoadInventory()

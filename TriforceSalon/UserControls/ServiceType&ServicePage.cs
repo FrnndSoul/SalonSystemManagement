@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static ServiceType_ServicePage servicePageInstance;
         private ServiceTypes serviceType = new ServiceTypes();
         private SalonServices salonServices = new SalonServices();
@@ -112,11 +113,16 @@ namespace TriforceSalon.UserControls
             {
                 int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
                 await serviceType.UpdateServiceType(sID);
+                //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
             }
         }
 
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
+            manager.DisableButtons(false);
+
             serviceType.EditServiceTypes();
         }
 
@@ -124,6 +130,9 @@ namespace TriforceSalon.UserControls
         {
             serviceType.ClearServiceTypes();
             serviceType.HideButton(true, true, false, false);
+            //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            manager.DisableButtons(true);
+
         }
 
 
@@ -173,12 +182,16 @@ namespace TriforceSalon.UserControls
             {
                 int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
                 await salonServices.UpdateSalonServices(servarID);
+                //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
 
             }
         }
 
         private void EditServBtn_Click(object sender, EventArgs e)
         {
+            manager.DisableButtons(false);
             salonServices.EditSalonServices();
         }
 
@@ -186,6 +199,8 @@ namespace TriforceSalon.UserControls
         {
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
+            manager.DisableButtons(true);
+
 
         }
 
