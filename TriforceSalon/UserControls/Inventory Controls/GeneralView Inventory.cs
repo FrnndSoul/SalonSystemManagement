@@ -120,7 +120,7 @@ namespace TriforceSalon.UserControls
             try
             {
                 connection.Open();
-                string sql = "SELECT `ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status` FROM `inventory`";
+                string sql = "SELECT `ItemID`, `ItemName`, SRP, `Stock`, `Cost`, `Aggregate`, `Status` FROM `inventory`";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))

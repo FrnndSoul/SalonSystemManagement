@@ -272,7 +272,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ProductsControlDGV.Rows.Count) // 
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ProductsControlDGV.Rows.Count)
             {
                 DataGridViewCell clickedCell = ProductsControlDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
 

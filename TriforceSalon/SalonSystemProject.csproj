@@ -310,6 +310,12 @@
     <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.Designer.cs">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\EditAppointmentUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\EditAppointmentUserControl.Designer.cs">
+      <DependentUpon>EditAppointmentUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -429,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\EditAppointmentUserControl.resx">
+      <DependentUpon>EditAppointmentUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.resx">
       <DependentUpon>CardProcess.cs</DependentUpon>

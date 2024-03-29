@@ -28,9 +28,10 @@ namespace TriforceSalon.UserControls.Employee_Controls
         private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
             long CustID = Convert.ToInt64(CustomerIDTxtB.Text);
+            string serviceVariation = CustomerServiceTxtB.Text;
 
             EmployeeDoneBtn.Enabled = false;
-            await transaction.EmployeeProcessCompleteAsync(CustID);
+            await transaction.EmployeeProcessCompleteAsync(CustID, serviceVariation);
             try
             {
                 //test

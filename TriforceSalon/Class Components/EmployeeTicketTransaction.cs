@@ -51,6 +51,14 @@ namespace TriforceSalon.Class_Components
                             MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ShowEmpLock();
                         }
+
+                        string query2 = "UPDATE customer_info SET PaymentStatus = 'INSESSION' WHERE TransactionID = @customerID";
+
+                        using(MySqlCommand command = new MySqlCommand(query2, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ticketID);
+                            await command.ExecuteNonQueryAsync();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -196,56 +204,30 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task EmployeeProcessCompleteAsync(long CustomerID)
+        public async Task EmployeeProcessCompleteAsync(long CustomerID, string serviceVariation)
         {
+            //initial code
             /*try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
-                    string query = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
-
-                    if (EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
+                    string updateCustomerQuery = "UPDATE service_group SET IsDone = 'PROCESSED' WHERE ServiceGroupID = @customer_ID AND WHERE ServiceVariation = @serviceVariation";
+                    using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
                     {
-                        // Add parameters for INSERT INTO service_group statement
-                        query += "; INSERT INTO service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount) " +
-                                 "VALUES (@service_groupID, @service_variation, @service_varID, @amount)";
-
-                        // Set parameters for INSERT INTO service_group statement
-                        using (MySqlCommand insertCommand = new MySqlCommand(query, conn))
-                        {
-                            insertCommand.Parameters.AddWithValue("@service_groupID", CustomerID);
-                            insertCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
-                            insertCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
-
-                            decimal amount;
-                            if (decimal.TryParse(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text, out amount))
-                            {
-                                insertCommand.Parameters.AddWithValue("@amount", amount);
-                            }
-                            else
-                            {
-                                // Handle invalid amount input
-                                MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-
-                            await insertCommand.ExecuteNonQueryAsync();
-                        }
+                        updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        updateCustomerCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+                        await updateCustomerCommand.ExecuteNonQueryAsync();
                     }
 
-                    // Update employee_records regardless of the checkbox state
-                    query += "; UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
-
-                    // Execute the command
-                    using (MySqlCommand updateCommand = new MySqlCommand(query, conn))
+                    string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+                    using (MySqlCommand updateEmployeeRecordsCommand = new MySqlCommand(updateEmployeeRecordsQuery, conn))
                     {
-                        // Set parameters for UPDATE employee_records statement
-                        updateCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        updateCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
+                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
 
-                        await updateCommand.ExecuteNonQueryAsync();
+                        await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
                     }
 
                     MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -262,40 +244,16 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-
-                    string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
-                    using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                    // Update the IsDone status for the service group
+                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE CustomerID = @customer_ID AND ServiceVariation = @serviceVariation";
+                    using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
                     {
-                        updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        await updateCustomerCommand.ExecuteNonQueryAsync();
+                        updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+                        await updateServiceGroupCommand.ExecuteNonQueryAsync();
                     }
 
-                    if (EmployeeLock.employeeLockInstance.AddServiceChckB.Checked == true)
-                    {
-                        string insertServiceGroupQuery = "INSERT INTO service_group (ServiceGroupID, ServiceVariation, ServiceVariationID, Amount) " +
-                                                         "VALUES (@service_groupID, @service_variation, @service_varID, @amount)";
-                        using (MySqlCommand insertServiceGroupCommand = new MySqlCommand(insertServiceGroupQuery, conn))
-                        {
-                            insertServiceGroupCommand.Parameters.AddWithValue("@service_groupID", CustomerID);
-                            //insertServiceGroupCommand.Parameters.AddWithValue("@service_variation", Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem));
-                            //insertServiceGroupCommand.Parameters.AddWithValue("@service_varID", transation.GetServiceVariationID(Convert.ToString(EmployeeLock.employeeLockInstance.ServiceListComB.SelectedItem)));
-
-                            /*decimal amount;
-                            if (decimal.TryParse(EmployeeLock.employeeLockInstance.AServiceAmountTxtB.Text, out amount))
-                            {
-                                insertServiceGroupCommand.Parameters.AddWithValue("@amount", amount);
-                            }
-                            else
-                            {
-                                // Handle invalid amount input
-                                MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }*/
-
-                            await insertServiceGroupCommand.ExecuteNonQueryAsync();
-                        }
-                    }
-
+                    // Update the end time for the employee records
                     string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
                     using (MySqlCommand updateEmployeeRecordsCommand = new MySqlCommand(updateEmployeeRecordsQuery, conn))
                     {
@@ -304,10 +262,37 @@ namespace TriforceSalon.Class_Components
 
                         await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
                     }
+                    // Check if all services for the given CustomerID and serviceVariation are marked as "done"
+                    string checkServicesQuery = "SELECT COUNT(*) FROM service_group WHERE ServiceGroupID = @customer_ID AND IsDone != 'DONE'";
+                    using (MySqlCommand checkServicesCommand = new MySqlCommand(checkServicesQuery, conn))
+                    {
+                        checkServicesCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                        //checkServicesCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+                        int pendingServicesCount = Convert.ToInt32(await checkServicesCommand.ExecuteScalarAsync());
 
-                    MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ShowCustomerList();
+                        if (pendingServicesCount == 0)
+                        {
+                            // All services are done, update the customer status to PROCESSED
+                            string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
+                            using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                            {
+                                updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                await updateCustomerCommand.ExecuteNonQueryAsync();
+                            }
+                        }
+                        else
+                        {
+                            string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'ONGOING' WHERE TransactionID = @customer_ID";
+                            using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                            {
+                                updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                await updateCustomerCommand.ExecuteNonQueryAsync();
+                            }
+                        }
+                    }
                 }
+                MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowCustomerList();
             }
             catch (Exception ex)
             {

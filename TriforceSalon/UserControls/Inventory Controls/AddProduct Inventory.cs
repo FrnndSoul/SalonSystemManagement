@@ -47,7 +47,7 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void AddProduct_Click(object sender, EventArgs e)
+        private async void AddProduct_Click(object sender, EventArgs e)
         {
             string Name = NameBox.Text;
             string ID = IDBox.Text;
@@ -69,10 +69,11 @@ namespace TriforceSalon.UserControls
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
-                    string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, 'SRP', `Aggregate`, `Status`,`Photo`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+                    await connection.OpenAsync();
+                    string query = "INSERT INTO `inventory` " +
+                                   "(`ItemID`, `ItemName`, `Stock`, `Cost`, `SRP`, `Aggregate`, `Status`, `Photo`) VALUES " +
+                                   "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
@@ -83,7 +84,7 @@ namespace TriforceSalon.UserControls
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
             }
