@@ -20,6 +20,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class PaymentsUserControls : UserControl
     {
+        Inventory inventory = new Inventory();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string CustomerName, ServiceType, ServiceVariation, PriorityStatus, EmployeeName, PaymentStatus, Phone;
@@ -207,13 +208,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     return;
                                 }
 
-                                CustomerName = reader["CustomerName"].ToString();
+                                string Customer_name = reader["CustomerName"].ToString();
                                 //ServiceType = reader["ServiceType"].ToString();
-                                Age = Convert.ToInt32(reader["CustomerAge"]);
-                                Phone = Convert.ToString(reader["CustomerPhoneNumber"]);
+                                int Customer_age = Convert.ToInt32(reader["CustomerAge"]);
+                                string Customer_phone = Convert.ToString(reader["CustomerPhoneNumber"]);
                                 //EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
 
-                                DisplayTransaction();
+                                DisplayTransaction(Customer_name, Customer_age, Customer_phone);
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
                                 //CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
@@ -282,11 +283,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }*/
         }
 
-        private void DisplayTransaction()
+        private void DisplayTransaction(string name, int age, string phoneNumber)
         {
-            NameBox.Text = CustomerName;
-            AgeBox.Text = Age.ToString();
-            PhoneNumberBox.Text = Phone.ToString();
+            NameBox.Text = name;
+            AgeBox.Text = age.ToString();
+            PhoneNumberBox.Text = phoneNumber.ToString();
             //ServiceTypeBox.Text = ServiceType;
             //ServiceVariationBox.Text = ServiceVariation;
             //ServiceVariationIDBox.Text = VariationID.ToString();
@@ -316,9 +317,51 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
 
 
+        public async Task VoidedItems(long ID, Guna2DataGridView products)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
 
+                    foreach (DataGridViewRow row in products.Rows)
+                    {
+                        string itemName;
+                        if (row.Cells["ProdNameCol"].Value != null)
+                        {
+                            itemName = row.Cells["ProdNameCol"].Value.ToString();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        decimal amount = Convert.ToDecimal(row.Cells["TotAmountCol"].Value);
+                        int itemid = await transaction.GetItemIdAsync(itemName);
+
+                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @ID";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ID);
+                            await command.ExecuteNonQueryAsync();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in void transaction");
+            }
+        }
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
+            VoidBtn.Enabled = false;
+
+            long ID = Convert.ToInt64(TransactionIDBox.Text);
             DialogResult result = MessageBox.Show("Do you want to void the transaction?", "Void Items and Services", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -347,6 +390,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     return;
                                 }
                                 ChangePaymentStatus("VOIDED");
+                                await VoidedItems(ID, ProductsBoughtDGV);
                                 MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 DefaultLoad(); 
                             }
@@ -368,6 +412,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
              }
              ChangePaymentStatus("VOIDED");
              DefaultLoad();*/
+            VoidBtn.Enabled = true;
         }
 
         public void ChangePaymentStatus(string newStatus)
@@ -394,6 +439,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void PaymentBtn_Click(object sender, EventArgs e)
         {
+            PaymentBtn.Enabled = false;
+
             long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
             decimal cash = Convert.ToDecimal(CustomerMoneyInput.Text);
 
@@ -410,6 +457,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     ChangePaymentStatus("PAID");
                     GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
+                    await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
                 }
                 else
                 {
@@ -417,6 +465,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     ChangePaymentStatus("PAID");
                     GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
+                    await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
                 }
                 /* ChangePaymentStatus("PAID");
                  await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
@@ -424,9 +473,37 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 OtherTransactionContainer.Controls.Clear();
             }
-
+            PaymentBtn.Enabled = true;
         }
+        public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
 
+                    foreach (DataGridViewRow row in productsDataGrid.Rows)
+                    {
+                        int quantity = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
+                        int productID = await inventory.GetItemIDByName(itemName);
+                        using (MySqlCommand command = new MySqlCommand(subtractQuery, conn))
+                        {
+                            command.Parameters.AddWithValue("@quantity", quantity);
+                            command.Parameters.AddWithValue("@itemID", productID);
+
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + "\n\nat SubtractItemsInInventoryForPurchase()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void ClearFieldsBtn_Click(object sender, EventArgs e)
         {
             DefaultLoad();

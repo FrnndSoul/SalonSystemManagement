@@ -198,14 +198,14 @@
             this.TotalAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TotalAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TotalAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TotalAmountTxtB.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.TotalAmountTxtB.ForeColor = System.Drawing.Color.White;
+            this.TotalAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.TotalAmountTxtB.ForeColor = System.Drawing.Color.Black;
             this.TotalAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TotalAmountTxtB.Location = new System.Drawing.Point(254, 1023);
             this.TotalAmountTxtB.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TotalAmountTxtB.Name = "TotalAmountTxtB";
             this.TotalAmountTxtB.PasswordChar = '\0';
-            this.TotalAmountTxtB.PlaceholderText = "Balance";
+            this.TotalAmountTxtB.PlaceholderText = "Total";
             this.TotalAmountTxtB.ReadOnly = true;
             this.TotalAmountTxtB.SelectedText = "";
             this.TotalAmountTxtB.Size = new System.Drawing.Size(349, 44);
@@ -293,7 +293,8 @@
             this.CustomerMoneyInput.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerMoneyInput.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerMoneyInput.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerMoneyInput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerMoneyInput.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.CustomerMoneyInput.ForeColor = System.Drawing.Color.Black;
             this.CustomerMoneyInput.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerMoneyInput.Location = new System.Drawing.Point(990, 909);
             this.CustomerMoneyInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -553,17 +554,17 @@
             this.DiscountBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.DiscountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.DiscountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.DiscountBox.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.DiscountBox.ForeColor = System.Drawing.Color.White;
+            this.DiscountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.DiscountBox.ForeColor = System.Drawing.Color.Black;
             this.DiscountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.DiscountBox.Location = new System.Drawing.Point(297, 967);
+            this.DiscountBox.Location = new System.Drawing.Point(307, 967);
             this.DiscountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.DiscountBox.Name = "DiscountBox";
             this.DiscountBox.PasswordChar = '\0';
             this.DiscountBox.PlaceholderText = "0.00";
             this.DiscountBox.ReadOnly = true;
             this.DiscountBox.SelectedText = "";
-            this.DiscountBox.Size = new System.Drawing.Size(306, 44);
+            this.DiscountBox.Size = new System.Drawing.Size(296, 44);
             this.DiscountBox.TabIndex = 30;
             // 
             // PWDCheckbox
@@ -693,8 +694,8 @@
             this.AmountBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AmountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AmountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AmountBox.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.AmountBox.ForeColor = System.Drawing.Color.White;
+            this.AmountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.AmountBox.ForeColor = System.Drawing.Color.Black;
             this.AmountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AmountBox.Location = new System.Drawing.Point(214, 909);
             this.AmountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -765,7 +766,7 @@
             this.PhoneNumberBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PhoneNumberBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumberBox.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PhoneNumberBox.ForeColor = System.Drawing.Color.White;
+            this.PhoneNumberBox.ForeColor = System.Drawing.Color.Black;
             this.PhoneNumberBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumberBox.Location = new System.Drawing.Point(227, 165);
             this.PhoneNumberBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -791,8 +792,8 @@
             this.AgeBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AgeBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AgeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AgeBox.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AgeBox.ForeColor = System.Drawing.Color.White;
+            this.AgeBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.AgeBox.ForeColor = System.Drawing.Color.Black;
             this.AgeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AgeBox.Location = new System.Drawing.Point(880, 108);
             this.AgeBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -819,7 +820,7 @@
             this.NameBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.NameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
-            this.NameBox.ForeColor = System.Drawing.Color.White;
+            this.NameBox.ForeColor = System.Drawing.Color.Black;
             this.NameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Location = new System.Drawing.Point(227, 108);
             this.NameBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);

@@ -84,6 +84,8 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceTypeBtn_Click(object sender, EventArgs e)
         {
+            AddServiceTypeBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -97,10 +99,13 @@ namespace TriforceSalon.UserControls
                 string serviceTypeName = ServiceTypeTxtB.Text;
                 await serviceType.AddServiceType(serviceTypeName);
             }
+            AddServiceTypeBtn.Enabled = true;
         }
 
         private async void UpdateServiceTBtn_Click(object sender, EventArgs e)
         {
+            UpdateServiceTBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -117,6 +122,8 @@ namespace TriforceSalon.UserControls
                 manager.DisableButtons(true);
 
             }
+            UpdateServiceTBtn.Enabled = false;
+
         }
 
         private void EditServiceTBtn_Click(object sender, EventArgs e)
@@ -144,6 +151,8 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceBtn_Click(object sender, EventArgs e)
         {
+            AddServiceBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
                 AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
                 || ServiceImagePicB.Image is null)
@@ -161,12 +170,16 @@ namespace TriforceSalon.UserControls
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
                 salonServices.ClearServices();
-
+                BindedServiceItemDGV.Rows.Clear();
             }
+            AddServiceBtn.Enabled = true;
+
         }
 
         private async void UpdateServBtn_Click(object sender, EventArgs e)
         {
+            UpdateServBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
                AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
                || ServiceImagePicB.Image is null)
@@ -184,9 +197,9 @@ namespace TriforceSalon.UserControls
                 await salonServices.UpdateSalonServices(servarID);
                 //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 manager.DisableButtons(true);
-
-
             }
+
+            UpdateServBtn.Enabled = true;
         }
 
         private void EditServBtn_Click(object sender, EventArgs e)
@@ -206,7 +219,7 @@ namespace TriforceSalon.UserControls
 
         private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+            /*string chosenItem = InventoryItemsComB.SelectedItem.ToString();
             if (chosenItem == null)
             {
                 ItemIDTxtB.Text = string.Empty;
@@ -214,6 +227,24 @@ namespace TriforceSalon.UserControls
             else
             {
                 ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+            }*/
+
+            if (InventoryItemsComB.SelectedItem != null)
+            {
+                string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+                if (chosenItem == null)
+                {
+                    ItemIDTxtB.Text = string.Empty;
+                }
+                else
+                {
+                    ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+                }
+            }
+            else
+            {
+                // Handle the case where SelectedItem is null
+                ItemIDTxtB.Text = string.Empty;
             }
         }
 

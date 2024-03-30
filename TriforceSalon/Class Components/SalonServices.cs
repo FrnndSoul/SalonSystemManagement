@@ -11,6 +11,8 @@ using System.Data.Common;
 using Guna.UI2.WinForms;
 using iText.Signatures;
 using System.Web.WebSockets;
+using System.Deployment.Internal;
+using System.Configuration;
 
 namespace TriforceSalon.Class_Components
 {
@@ -360,6 +362,7 @@ namespace TriforceSalon.Class_Components
                         }
                         await command.ExecuteNonQueryAsync();
                         await GetSalonServicesAsync();
+                        await UpdateBindedService(ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV, serviceVariationID);
                         ClearServices();
                         HideButton(true, true, false, false);
                     }
@@ -368,6 +371,48 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async Task UpdateBindedService(Guna2DataGridView newBindedItems, int ID)
+        {
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string deleteQuery = "DELETE FROM `binded_items` WHERE ItemGroupID = @itemGroupID";
+                    using (MySqlCommand command = new MySqlCommand(deleteQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@itemGroupID", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+                    string insertQuery = "INSERT INTO binded_items (ItemGroupID, ItemName, ItemID, Quantity)" +
+                        "VALUES (@itemGroupID, @itemName, @itemID, @quantity)";
+
+                    foreach (DataGridViewRow row in newBindedItems.Rows)
+                    {
+                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
+                        int itemID = Convert.ToInt32(row.Cells["ItemIDCol"].Value);
+                        int quantity = Convert.ToInt32(row.Cells["ProdQuantityCol"].Value);
+
+                        using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
+                        {
+                            command.Parameters.AddWithValue("@itemGroupID", ID);
+                            command.Parameters.AddWithValue("@itemName", itemName);
+                            command.Parameters.AddWithValue("@itemID", itemID);
+                            command.Parameters.AddWithValue("@quantity", quantity);
+
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -551,10 +596,7 @@ namespace TriforceSalon.Class_Components
             ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = null;
             ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = null;
             ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem = null;
-
             ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
-
         }
-
     }
 }

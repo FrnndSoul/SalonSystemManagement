@@ -74,6 +74,7 @@
             this.ServiceNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.SalonServicesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.VariationIDLbl = new System.Windows.Forms.Label();
             this.ServiceTypePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).BeginInit();
@@ -376,6 +377,7 @@
             // ServicePanel
             // 
             this.ServicePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServicePanel.Controls.Add(this.VariationIDLbl);
             this.ServicePanel.Controls.Add(this.ItemIDTxtB);
             this.ServicePanel.Controls.Add(this.label4);
             this.ServicePanel.Controls.Add(this.label3);
@@ -863,6 +865,17 @@
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalonServicesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // VariationIDLbl
+            // 
+            this.VariationIDLbl.AutoSize = true;
+            this.VariationIDLbl.ForeColor = System.Drawing.Color.White;
+            this.VariationIDLbl.Location = new System.Drawing.Point(949, 29);
+            this.VariationIDLbl.Name = "VariationIDLbl";
+            this.VariationIDLbl.Size = new System.Drawing.Size(35, 13);
+            this.VariationIDLbl.TabIndex = 51;
+            this.VariationIDLbl.Text = "label5";
+            this.VariationIDLbl.Visible = false;
+            // 
             // ServiceType_ServicePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -880,6 +893,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).EndInit();
             this.ServicePanel.ResumeLayout(false);
+            this.ServicePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BindedServiceItemDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceImagePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalonServicesDGV)).EndInit();
@@ -926,5 +940,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
         public Guna.UI2.WinForms.Guna2DataGridView BindedServiceItemDGV;
+        private System.Windows.Forms.Label VariationIDLbl;
     }
 }

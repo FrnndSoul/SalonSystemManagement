@@ -114,6 +114,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProcessCustomerBtn_Click(object sender, EventArgs e)
         {
+            ProcessCustomerBtn.Enabled = false;
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
             string age = CustomerAgeTxtB.Text;
@@ -142,6 +143,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 transactionMethods.GeneratePDFTicket(ID, name, age);
             }
+            ProcessCustomerBtn.Enabled = true;
         }
 
         public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
