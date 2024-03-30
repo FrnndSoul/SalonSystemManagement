@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.UserControls;
 
@@ -32,17 +34,18 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
-        public void ServiceTypeInfoDGV()
+
+        public async Task ServiceTypeInfoDGV()
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "Select ServiceTypeImage, ServiceTypeName, ServiceID from service_type";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
@@ -57,7 +60,6 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show("Error in ServiceTypeInfoDGV(): " + ex.Message);
-
             }
         }
 
@@ -91,7 +93,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void AddServiceType(string serviceType)
+        public async Task AddServiceType(string serviceType)
         {
             if (ServiceType_ServicePage.servicePageInstance.ServiceTypePicB == null)
             {
@@ -113,7 +115,7 @@ namespace TriforceSalon.Class_Components
                 {
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
-                        conn.Open();
+                        await conn.OpenAsync();
 
                         using (MemoryStream ms = new MemoryStream())
                         {
@@ -128,9 +130,9 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@service_name", serviceType);
                             command.Parameters.AddWithValue("@service_image", imageData);
 
-                            command.ExecuteNonQuery();
-                            salonServices.PopulateServiceType();
-                            ServiceTypeInfoDGV();
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
                             ClearServiceTypes();
                         }
                     }
@@ -150,7 +152,7 @@ namespace TriforceSalon.Class_Components
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error in AddServiceType()(): " + ex.Message);
+                    MessageBox.Show("Error in AddServiceTypeAsync(): " + ex.Message);
                 }
             }
         }
@@ -202,7 +204,7 @@ namespace TriforceSalon.Class_Components
             serviceTypeID = 0;
         }
 
-        public void UpdateServiceType(int serviceID)
+        public async Task UpdateServiceType(int serviceID)
         {
 
             if (string.IsNullOrWhiteSpace(ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text) || ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text == "Service Type Name")
@@ -219,7 +221,7 @@ namespace TriforceSalon.Class_Components
                 {
                     using (var conn = new MySqlConnection(mysqlcon))
                     {
-                        conn.Open();
+                        await conn.OpenAsync();
                         string query = "UPDATE service_type SET ServiceTypeName = @service_name";
                         byte[] imageData = null;
                         if (isNewServiceImageSelected)
@@ -239,7 +241,6 @@ namespace TriforceSalon.Class_Components
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
-                            // Loop seems unnecessary unless you plan to execute the command multiple times with different serviceTypes
                             command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text);
                             command.Parameters.AddWithValue("@service_ID", serviceID);
 
@@ -248,12 +249,11 @@ namespace TriforceSalon.Class_Components
                                 command.Parameters.AddWithValue("@service_image", imageData);
                             }
 
-                            command.ExecuteNonQuery();
-                            salonServices.PopulateServiceType();
-                            ServiceTypeInfoDGV();
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
                             ClearServiceTypes();
                             HideButton(true, true, false, false);
-
                         }
                     }
                 }
@@ -270,7 +270,7 @@ namespace TriforceSalon.Class_Components
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error in UpdateServiceType(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error in UpdateServiceTypeAsync(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

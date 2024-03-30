@@ -1,14 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 using TriforceSalon.UserControls;
 using System.Data;
-using Org.BouncyCastle.Asn1.X509;
+using System.Threading.Tasks;
+using System.Data.Common;
+using Guna.UI2.WinForms;
+using iText.Signatures;
+using System.Web.WebSockets;
 
 namespace TriforceSalon.Class_Components
 {
@@ -26,11 +28,11 @@ namespace TriforceSalon.Class_Components
         int serviceVariationID;
         int serviceTypeID;
 
-
         public SalonServices()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
+
         public void AddServiceImage()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -61,22 +63,23 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void PopulateServiceType()
+        public async Task PopulateServiceType()
         {
+            ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Clear();
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "select ServiceTypeName from service_type";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
-                                while (reader.Read())
+                                while (await reader.ReadAsync())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
                                     ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Add(serviceTypes);
@@ -124,23 +127,23 @@ namespace TriforceSalon.Class_Components
 
 
 
-        public void GetSalonServices()
+        public async Task GetSalonServicesAsync()
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
-                    string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemID` FROM `salon_services`";
+                    await conn.OpenAsync();
+                    string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemGroupID` FROM `salon_services`";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (reader.HasRows)
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(reader);
+                                dt.Load(reader); // Use Load instead of LoadAsync
                                 ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.DataSource = dt;
                             }
                         }
@@ -153,13 +156,22 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void AddSalonServices()
+        //gawing async ito
+
+        public int GenerateServiceVariationID()
         {
+            Random _random = new Random();
+
+            return _random.Next(1000, 10000);
+        }
+        public async Task AddSalonServices()
+        {
+            int serviceID = Convert.ToInt32(GenerateServiceVariationID());
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
 
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -167,23 +179,24 @@ namespace TriforceSalon.Class_Components
                         imageData = ms.ToArray();
                     }
 
-                    string query = "Insert into salon_services (ServiceTypeID, ServiceImage, ServiceName, ServiceAmount, ItemID)" +
-                        "Values(@service_type_ID, @service_image, @service_name, @service_ammount, @itemId)";
+                    string query = "Insert into salon_services (ServiceTypeID, ServiceVariationID, ServiceImage, ServiceName, ServiceAmount, ItemGroupID)" +
+                        "Values(@service_type_ID, @serviceVarID ,@service_image, @service_name, @service_amount, @itemGroupID)";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
+                        command.Parameters.AddWithValue("@serviceVarID", serviceID);
                         command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
-                        command.Parameters.AddWithValue("@service_ammount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
+                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
                         command.Parameters.AddWithValue("@service_image", imageData);
-                        command.Parameters.AddWithValue("@itemId", GetItemId(Convert.ToString(ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem)));
+                        command.Parameters.AddWithValue("@itemGroupID", serviceID);
+                        //command.Parameters.AddWithValue("@itemId", GetItemId(Convert.ToString(ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem)));
 
 
-                        command.ExecuteNonQuery();
-
+                        await command.ExecuteNonQueryAsync();
+                        await AddItemBindedToDatabase(serviceID, ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV);
                         MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        GetSalonServices();
-                        ClearServices();
+                        await GetSalonServicesAsync();
                     }
                 }
             }
@@ -206,7 +219,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public void EditSalonServices()
+        public async void EditSalonServices()
         {
             if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 0)
             {
@@ -260,11 +273,54 @@ namespace TriforceSalon.Class_Components
                     {
                         MessageBox.Show("EditSalonServices() Error: " + ex.Message);
                     }
+
+                    await FetchBindedItems(serviceVariationID, ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV);
                 }
             }
         }
+
+        public async Task FetchBindedItems(int ID, Guna2DataGridView bindedTable)
+        {
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT ItemName, ItemID, Quantity FROM binded_items WHERE ItemGroupID = @id";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", ID);
+
+                        using(DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+
+                            bindedTable.Rows.Clear();
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                string itemName = row["ItemName"].ToString();
+                                int itemID = Convert.ToInt32(row["ItemID"]);
+                                int quantity = Convert.ToInt32(row["Quantity"]);
+
+                                // Add a new row with the fetched data and buttons
+                                bindedTable.Rows.Add(itemName, itemID, "-", quantity, "+", "X");
+                            }
+
+                            //bindedTable.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
        
-        public void UpdateSalonServices(int variationID)
+        public async Task UpdateSalonServices(int variationID)
         {
             string serviceType = ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
@@ -272,7 +328,7 @@ namespace TriforceSalon.Class_Components
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "Update salon_services set ServiceName = @service_name, ServiceAmount = @service_amount, ServiceTypeID = @servicetype_ID";
 
                     byte[] imageData = null;
@@ -300,10 +356,10 @@ namespace TriforceSalon.Class_Components
 
                         if (isNewServiceImageSelected)
                         {
-                            command.Parameters.AddWithValue(" @service_image", imageData);
+                            command.Parameters.AddWithValue("@service_image", imageData);
                         }
-                        command.ExecuteNonQuery();
-                        GetSalonServices();
+                        await command.ExecuteNonQueryAsync();
+                        await GetSalonServicesAsync();
                         ClearServices();
                         HideButton(true, true, false, false);
                     }
@@ -348,21 +404,21 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public int GetItemId(string itemName)
+        public async Task <int> GetItemId(string itemName)
         {
             item_id = -1;
             try
             {
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string query = "select ItemID from inventory where ItemName = @item_name";
 
                     using(MySqlCommand command = new MySqlCommand( query, conn))
                     {
                         command.Parameters.AddWithValue("@item_name", itemName);
 
-                        object result = command.ExecuteScalar();
+                        object result = await command.ExecuteScalarAsync();
                         if (result != null && int.TryParse(result.ToString(), out item_id))
                         {
 
@@ -378,6 +434,106 @@ namespace TriforceSalon.Class_Components
 
             }
             return item_id;
+        }
+
+        public async Task<string> GetServiceTypeByName(string serviceVariation)
+        {
+            string serviceTypeName = null;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT st.ServiceTypeName FROM service_type st " +
+                        "JOIN salon_services ss ON st.ServiceTypeID = ss.ServiceTypeID " +
+                        "WHERE ss.ServiceName = @serviceVariation";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+
+                        var result = await command.ExecuteScalarAsync();
+
+                        if (result != null)
+                        {
+                            serviceTypeName = result.ToString();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error in GetServiceTypeByName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            return serviceTypeName;
+        }
+
+
+
+        private async Task AddItemBindedToDatabase(int ServiceID, Guna2DataGridView bindedItems)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "INSERT INTO binded_items (ItemGroupID, ItemName, ItemID, Quantity)" +
+                        "VALUES (@itemGroupID, @itemName, @itemID, @quantity)";
+
+                    foreach (DataGridViewRow row in bindedItems.Rows)
+                    {
+                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
+                        int itemID = Convert.ToInt32(row.Cells["ItemIDCol"].Value);
+                        int quantity = Convert.ToInt32(row.Cells["ProdQuantityCol"].Value);
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@itemGroupID", ServiceID);
+                            command.Parameters.AddWithValue("@itemName", itemName);
+                            command.Parameters.AddWithValue("@itemID", itemID);
+                            command.Parameters.AddWithValue("@quantity", quantity);
+
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error in AddItemBindedToDatabase", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async Task<int> GetServiceVariationID(string ServiceName)
+        {
+            int ID = -1;
+            try
+            {
+                using(var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "SELECT ServiceVariationID FROM salon_services WHERE ServiceName = @serviceName";
+
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@serviceName", ServiceName);
+
+                        object result = command.ExecuteScalarAsync();
+                        if (result != null && int.TryParse(result.ToString(), out ID))
+                        {
+                            return ID;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+               MessageBox.Show("Error: " + ex.Message, "Error in GetServiceVariationID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return ID;
         }
 
         public void HideButton(bool add, bool edit, bool cancel, bool update)

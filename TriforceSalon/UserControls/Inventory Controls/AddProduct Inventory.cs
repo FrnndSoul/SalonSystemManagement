@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class AddProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static byte[] PhotoBytes;
         public static int ItemID;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -47,14 +48,15 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void AddProduct_Click(object sender, EventArgs e)
+        private async void AddProduct_Click(object sender, EventArgs e)
         {
             string Name = NameBox.Text;
             string ID = IDBox.Text;
             string Cost = CostBox.Text;
             string Aggregate = AggregateBox.Text;
+            string SRP = SRPTxtB.Text;
 
-            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate))
+            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(SRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -68,22 +70,26 @@ namespace TriforceSalon.UserControls
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
-                    string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, `Aggregate`, `Status`,`Photo`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @aggregate, @status, @photo)";
+                    await connection.OpenAsync();
+                    string query = "INSERT INTO `inventory` " +
+                                   "(`ItemID`, `ItemName`, `Stock`, `Cost`, `SRP`, `Aggregate`, `Status`, `Photo`) VALUES " +
+                                   "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
                         querycmd.Parameters.AddWithValue("@itemName", Name);
                         querycmd.Parameters.AddWithValue("@stock", 0);
                         querycmd.Parameters.AddWithValue("@cost", Cost);
+                        querycmd.Parameters.AddWithValue("@srp", SRP);
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
+                MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
             }
             catch (Exception ex)
             {
@@ -110,6 +116,7 @@ namespace TriforceSalon.UserControls
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
         }
     }
 }

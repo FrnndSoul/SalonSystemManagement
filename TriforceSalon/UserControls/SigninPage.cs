@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon
 {
     public partial class SigninPage : UserControl
     {
+
+        public static SigninPage signinInstatnce;
         public SigninPage()
         {
             InitializeComponent();
+            signinInstatnce = this;
             PasswordTxtbox.PasswordChar = '*';
         }
 
@@ -35,9 +39,58 @@ namespace TriforceSalon
             PasswordTxtbox.PasswordChar = TogglePassword.Checked ? '\0' : '*';
         }
 
-        private void SigninBtn_Click_1(object sender, EventArgs e)
+        private async void SigninBtn_Click_1(object sender, EventArgs e)
         {
             string Username = UsernameTxtbox.Text;
+            string Password = PasswordTxtbox.Text;
+            SigninBtn.Enabled = false;
+
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+            {
+                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SigninBtn.Enabled = true;
+                return;
+            }
+
+            if (string.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
+                && string.Equals(Password, "Admin123", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Admin log in success", "Welcome",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (Form openForm in Application.OpenForms)
+                {
+                    if (openForm is MainForm mainForm)
+                    {
+                        AdminForm adminForm = new AdminForm();
+                        UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
+                        //mainForm.ShowAdmin();
+                        SigninBtn.Enabled = true;
+                        break;
+                    }
+                }
+                Clear();
+                return;
+            }
+
+            try
+            {
+                await Method.LoginAsync(Username, Password);
+               
+                Clear();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                SigninBtn.Enabled = true;
+            }
+            finally
+            {
+                SigninBtn.Enabled = true;
+                //Saul, Wala kang guard clause kapag tama yung ID at mali ang password
+            }
+
+            /*string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
@@ -56,7 +109,9 @@ namespace TriforceSalon
                 {
                     if (openForm is MainForm mainForm)
                     {
-                        mainForm.ShowAdmin();
+                        AdminForm adminForm = new AdminForm();
+                        UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
+                        //mainForm.ShowAdmin();
                         break;
                     }
                 }
@@ -65,7 +120,7 @@ namespace TriforceSalon
             }
 
             Method.Login(Username, Password);
-            Clear();
+            Clear();*/
         }
     }
 }

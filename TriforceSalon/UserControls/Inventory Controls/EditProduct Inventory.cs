@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class EditProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static string ItemName;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
@@ -74,8 +75,9 @@ namespace TriforceSalon.UserControls
             string newAggregate = AggregateBox.Text;
             string newID = IDBox.Text;
             string newStock = StockBox.Text;
+            string newSRP = editSRPTxtB.Text;
 
-            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock))
+            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -93,12 +95,13 @@ namespace TriforceSalon.UserControls
                 {
                     connection.Open();
                     string query =
-                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Aggregate = @aggregate, Photo = @photo, Stock = @stock " +
+                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Aggregate = @aggregate, Photo = @photo, Stock = @stock, SRP = @srp " +
                         "WHERE ItemID = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemName", newName);
                         querycmd.Parameters.AddWithValue("@cost", newCost);
+                        querycmd.Parameters.AddWithValue("@srp", newSRP);
                         querycmd.Parameters.AddWithValue("@aggregate", newAggregate);
                         querycmd.Parameters.AddWithValue("@itemID", newID);
                         querycmd.Parameters.AddWithValue("@stock", newStock);
@@ -106,10 +109,19 @@ namespace TriforceSalon.UserControls
                         querycmd.ExecuteNonQuery();
                     }
                 }
-            } catch (Exception ex)
+                MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\nat SaveBtn_Click() InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void editSRPTxtB_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         public byte[] LoadPhoto(int itemID)
@@ -167,6 +179,8 @@ namespace TriforceSalon.UserControls
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
+
         }
     }
 }

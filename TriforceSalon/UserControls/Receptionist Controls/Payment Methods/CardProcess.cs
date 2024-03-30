@@ -18,15 +18,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ExpirationDatePicker.MaxDate = DateTime.Today.AddYears(5);
         }
 
-        public static string CustomerName, EmployeeName, ServiceVariation, PaymentStatus,
+        public static string CustomerName, PhoneNumber, EmployeeName, ServiceVariation, PaymentStatus,
             CardHolder, CardNumber;
-        public static int Age, PhoneNumber, Balance, TransactionID, 
+        public static int Age, Balance, TransactionID, 
             CVC;
         public static DateTime CardExpiration;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
-        public void ThrowData(string customerName, string employeeName, string serviceVariation, string paymentStatus, int age, int phoneNumber, int balance, int transactionID)
+        public void ThrowData(string customerName, string employeeName, string serviceVariation, string paymentStatus, int age, string phoneNumber, int balance, int transactionID)
         {
             CustomerName = customerName;
             EmployeeName = employeeName;
