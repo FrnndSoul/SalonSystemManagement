@@ -253,6 +253,9 @@ namespace TriforceSalon
                                 {
                                     await LogInCompleteAsync(inputID);
                                     return true;
+                                } else
+                                {
+                                    return false;
                                 }
                             } else
                             {
@@ -265,111 +268,8 @@ namespace TriforceSalon
             }
             catch (Exception exc)
             {
-
-            }
-
-            return false; //up is new, down is old
-
-            await ReadUserDataAsync(inputID);
-
-            if (Status < 3)
-            {
-                await ReadEmployeeData(inputID);
-                if (AccountStatus >= 3)
-                {
-                    return false;
-                }
-
-                string hashedPass = HashString(inputPassword);
-                if (hashedPass == Password)
-                {
-                    await ReadEmployeeData(inputID);
-                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
-                    {
-                        ResetAttempt(inputID);
-                        await LogUser(Convert.ToInt32(inputID));
-                        MessageBox.Show($"Welcome Manager, {Username}!");
-
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForm mainForm)
-                            {
-                                ManagerPage managerPage = new ManagerPage();
-
-                                mainForm.Invoke((MethodInvoker)delegate
-                                {
-                                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
-                                });
-                                break;
-                            }
-                        }
-                    }
-                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
-                    {
-                        ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome Receptionist, {Username}!");
-
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForm mainForm)
-                            {
-                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
-                                mainForm.Invoke((MethodInvoker)delegate
-                                {
-                                    UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
-                                });
-                                break;
-                            }
-                        }
-
-                        await LogUser(AccountID);
-                        return true;
-                    }
-                    else
-                    {
-                        ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome Staff, {Username}!");
-                        
-                            foreach (Form openForm in Application.OpenForms)
-                            {
-                                if (openForm is MainForm mainForm)
-                                {
-                                    EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
-                                    mainForm.Invoke((MethodInvoker)delegate
-                                    {
-                                        UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
-                                    });
-                                    break;
-                                }
-                            }
-                        await LogUser(AccountID);
-                        return true;
-                    }
-
-                    await LogUser(AccountID);
-                    return true; // Indicate successful login
-                }
-                else
-                {
-                    if (DuplicateChecker(inputID, "AccountID", "salon_employees"))
-                    {
-                        WrongPassword(inputID);
-                    }
-                    else
-                    {
-                        MessageBox.Show("ID incorrect, please try again");
-                    }
-                }
-            }
-            else if (AccountStatus == 4)
-            {
-                MessageBox.Show($"Your account has already been archived", "Account Archived",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(exc.Message);
+                return false;
             }
             return false;
         }
