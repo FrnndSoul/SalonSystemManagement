@@ -170,7 +170,7 @@ namespace TriforceSalon.UserControls
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
                 salonServices.ClearServices();
-
+                BindedServiceItemDGV.Rows.Clear();
             }
             AddServiceBtn.Enabled = true;
 
@@ -198,6 +198,7 @@ namespace TriforceSalon.UserControls
                 //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 manager.DisableButtons(true);
             }
+
             UpdateServBtn.Enabled = true;
         }
 
@@ -218,7 +219,7 @@ namespace TriforceSalon.UserControls
 
         private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+            /*string chosenItem = InventoryItemsComB.SelectedItem.ToString();
             if (chosenItem == null)
             {
                 ItemIDTxtB.Text = string.Empty;
@@ -226,6 +227,24 @@ namespace TriforceSalon.UserControls
             else
             {
                 ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+            }*/
+
+            if (InventoryItemsComB.SelectedItem != null)
+            {
+                string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+                if (chosenItem == null)
+                {
+                    ItemIDTxtB.Text = string.Empty;
+                }
+                else
+                {
+                    ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+                }
+            }
+            else
+            {
+                // Handle the case where SelectedItem is null
+                ItemIDTxtB.Text = string.Empty;
             }
         }
 

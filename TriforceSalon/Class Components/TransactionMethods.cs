@@ -163,7 +163,7 @@ namespace TriforceSalon.Class_Components
 
                             if (preferredEmployee == null || string.IsNullOrWhiteSpace(preferredEmployee) || preferredEmployee == "None")
                             {
-                                MessageBox.Show("Preferred employee not specified.");
+                                //MessageBox.Show("Preferred employee not specified.");
                                 command2.Parameters.AddWithValue("@pref_emp", 0);
                             }
                             else
