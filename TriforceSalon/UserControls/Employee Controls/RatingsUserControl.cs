@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls.Employee_Controls
 {
     public partial class RatingsUserControl : UserControl
     {
+        EmployeeTicketTransaction ticket = new EmployeeTicketTransaction();
         private int ratingsNumber = 0;
         private int customerNumber = 0;
         private string mysqlcon;
@@ -108,11 +110,13 @@ namespace TriforceSalon.UserControls.Employee_Controls
 
                         await command.ExecuteNonQueryAsync();
                     }
+                    MessageBox.Show("Rating have been submitted", "Employee Rating", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ticket.ShowCustomerList();
                 }
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
     }
