@@ -181,8 +181,7 @@ namespace TriforceSalon.UserControls
             UpdateServBtn.Enabled = false;
 
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-               AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-               || ServiceImagePicB.Image is null)
+               AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

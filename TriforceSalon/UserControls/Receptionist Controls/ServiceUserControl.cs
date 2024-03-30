@@ -227,7 +227,20 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
 
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
+        }
+
+        private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
+                {
+                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                }
+            }
         }
     }
 }

@@ -65,7 +65,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
 
-            if(isOnTime == true)
+            if (isOnTime == true)
             {
                 queueNumber = 0;
             }
@@ -75,7 +75,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
 
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
         }
 
 
@@ -133,7 +133,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
 
-                if(isOnTime == true)
+                if (isOnTime == true)
                 {
                     await TestProcessCustomer(ServicesGDGVVControl, "PRIORITY");
                 }
@@ -225,6 +225,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             AppointmentsUserControls appointment = new AppointmentsUserControls();
             UserControlNavigator.ShowControl(appointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
+        }
+
+        private void ServicesGDGVVControl_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
+                {
+                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                }
+            }
         }
     }
 }

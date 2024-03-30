@@ -281,6 +281,8 @@ namespace TriforceSalon.Class_Components
                                 updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                                 await updateCustomerCommand.ExecuteNonQueryAsync();
                             }
+                            //GetBindedItems(serviceVariation);
+
                         }
                         else
                         {
@@ -290,6 +292,7 @@ namespace TriforceSalon.Class_Components
                                 updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                                 await updateCustomerCommand.ExecuteNonQueryAsync();
                             }
+                            //GetBindedItems(serviceVariation);
                         }
                     }
                 }
