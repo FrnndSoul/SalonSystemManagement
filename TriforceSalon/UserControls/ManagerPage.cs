@@ -20,13 +20,7 @@ namespace TriforceSalon.UserControls
         public ManagerPage()
         {
             InitializeComponent();
-            //generalView_Inventory1.Visible = true;
-            
-        }
-        private void ManagerPage_Load(object sender, EventArgs e)
-        {
-            GeneralView_Inventory viewInventory = new GeneralView_Inventory();
-            UserControlNavigator.ShowControl(viewInventory, ManagerContent);
+
             InventoryBtn.Enabled = false;
         }
         private void LogoutBtn_Click(object sender, EventArgs e)
