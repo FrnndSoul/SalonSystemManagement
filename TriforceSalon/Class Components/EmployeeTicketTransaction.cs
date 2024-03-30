@@ -245,7 +245,7 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
                     // Update the IsDone status for the service group
-                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE CustomerID = @customer_ID AND ServiceVariation = @serviceVariation";
+                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariation = @serviceVariation";
                     using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
                     {
                         updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
@@ -292,7 +292,8 @@ namespace TriforceSalon.Class_Components
                     }
                 }
                 MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowCustomerList();
+                ShowCustomerRatings();
+                //ShowCustomerList();
             }
             catch (Exception ex)
             {
@@ -341,6 +342,19 @@ namespace TriforceSalon.Class_Components
 
             EmployeeLock employeeLock = new EmployeeLock();
             UserControlNavigator.ShowControl(employeeLock, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
+
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.SpecialQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLogOutBtn.Visible = false;
+        }
+
+        public void ShowCustomerRatings()
+        {
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Controls.Clear();
+
+            RatingsUserControl ratings = new RatingsUserControl();
+            UserControlNavigator.ShowControl(ratings, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
 
             EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = false;

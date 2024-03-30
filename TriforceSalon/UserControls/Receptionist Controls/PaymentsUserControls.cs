@@ -297,7 +297,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             //PaymentPanel.Enabled = true;
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
-            CardPayment.Enabled = true;
+            //CardPayment.Enabled = true;
             //CashPayment.Enabled = true;
             GcashPayment.Enabled = true;
             ClearFieldsBtn.Enabled = true;
@@ -639,7 +639,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
-            CardPayment.Enabled = false;
+            //CardPayment.Enabled = false;
             //CashPayment.Enabled = false;
             GcashPayment.Enabled = false;
             VoidBtn.Enabled = false;

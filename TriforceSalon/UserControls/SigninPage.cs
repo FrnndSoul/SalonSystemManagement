@@ -76,6 +76,7 @@ namespace TriforceSalon
             try
             {
                 await Method.LoginAsync(Username, Password);
+               
                 Clear();
             }
             catch(Exception ex)
