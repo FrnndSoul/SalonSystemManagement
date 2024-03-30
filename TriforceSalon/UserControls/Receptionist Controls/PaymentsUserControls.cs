@@ -316,9 +316,49 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
 
 
+        public async Task VoidedItems(long ID, Guna2DataGridView products)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
 
+                    foreach (DataGridViewRow row in products.Rows)
+                    {
+                        string itemName;
+                        if (row.Cells["ProdNameCol"].Value != null)
+                        {
+                            itemName = row.Cells["ProdNameCol"].Value.ToString();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        decimal amount = Convert.ToDecimal(row.Cells["TotAmountCol"].Value);
+                        int itemid = await transaction.GetItemIdAsync(itemName);
+
+                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @ID";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ID);
+                            await command.ExecuteNonQueryAsync();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in void transaction");
+            }
+        }
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
+            long ID = Convert.ToInt64(TransactionIDBox.Text);
             DialogResult result = MessageBox.Show("Do you want to void the transaction?", "Void Items and Services", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -347,6 +387,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     return;
                                 }
                                 ChangePaymentStatus("VOIDED");
+                                await VoidedItems(ID, ProductsBoughtDGV);
                                 MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 DefaultLoad(); 
                             }
