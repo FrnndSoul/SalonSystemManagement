@@ -145,5 +145,28 @@ namespace TriforceSalon
             }
         }
 
+        public async static Task DeductItems(string id, string qty)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
+                   
+                    using (MySqlCommand command = new MySqlCommand(subtractQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@quantity", qty);
+                        command.Parameters.AddWithValue("@itemID", id);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + "\n\nat DeductItems()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

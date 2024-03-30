@@ -251,6 +251,8 @@ namespace TriforceSalon.Class_Components
                         updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                         updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
                         await updateServiceGroupCommand.ExecuteNonQueryAsync();
+
+                        GetBindedItems(serviceVariation);
                     }
 
                     // Update the end time for the employee records
@@ -298,6 +300,46 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
+            }
+        }
+
+        public async void GetBindedItems(string serviceName)
+        {
+            string query = @"SELECT 
+                    bi.ItemID, 
+                    bi.Quantity 
+                FROM 
+                    binded_items bi 
+                INNER JOIN 
+                    salon_services ss ON ss.ItemGroupID = bi.ItemGroupID 
+                WHERE 
+                    ss.ServiceName = @serviceName";
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(mysqlcon))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@serviceName", serviceName);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string itemID = reader["ItemID"].ToString();
+                                string quantity = reader["Quantity"].ToString();
+
+                                //deduct in the database
+                                await Inventory.DeductItems(itemID, quantity);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error.");
             }
         }
 
