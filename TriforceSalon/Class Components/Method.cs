@@ -255,6 +255,8 @@ namespace TriforceSalon
                                     return true;
                                 } else
                                 {
+                                    MessageBox.Show("Wrong password", "Warning");
+                                    WrongPassword(inputID);
                                     return false;
                                 }
                             } else
@@ -340,11 +342,10 @@ namespace TriforceSalon
                 ResetAttempt(inputID);
                 await LogUser(AccountID);
 
-
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error.");
             }
         }
 

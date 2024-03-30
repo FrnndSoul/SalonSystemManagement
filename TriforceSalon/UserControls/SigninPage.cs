@@ -75,11 +75,7 @@ namespace TriforceSalon
 
             try
             {
-                if (!await Method.LoginAsync(Username, Password))
-                {
-                    MessageBox.Show("Login Failed!", "Error",
-                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                await Method.LoginAsync(Username, Password);
                 Clear();
             }
             catch(Exception ex)
