@@ -255,13 +255,13 @@ namespace TriforceSalon
                                     return true;
                                 } else
                                 {
-                                    MessageBox.Show("Wrong password", "Warning");
+                                    MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK ,MessageBoxIcon.Warning);
                                     WrongPassword(inputID);
                                     return false;
                                 }
                             } else
                             {
-                                MessageBox.Show("User not found.","Warning");
+                                MessageBox.Show("User not found.","Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return false;
                             }
                         }
