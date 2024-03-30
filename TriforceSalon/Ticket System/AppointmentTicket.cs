@@ -54,6 +54,8 @@ namespace TriforceSalon.Ticket_System
 
         private async void CancelAppointBtn_Click(object sender, EventArgs e)
         {
+            CancelAppointBtn.Enabled = false;
+
             string custID = CustID.Text;
             try
             {
@@ -74,6 +76,7 @@ namespace TriforceSalon.Ticket_System
             {
                 MessageBox.Show(ex.Message, "Error in CancelAppointBtn()");
             }
+            CancelAppointBtn.Enabled = true;
         }
 
         private void EditInfoBtn_Click(object sender, EventArgs e)
@@ -109,6 +112,8 @@ namespace TriforceSalon.Ticket_System
 
         private async void ActivateCustomerBtn_Click(object sender, EventArgs e)
         {
+            ActivateCustomerBtn.Enabled = false;
+
             TimeSpan allowedWindow = TimeSpan.FromMinutes(5);
             string appointmentDate = CustDate.Text;
             DateTime appointmentTime = Convert.ToDateTime(appointmentDate);
@@ -180,6 +185,7 @@ namespace TriforceSalon.Ticket_System
             {
                 MessageBox.Show("Error: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        ActivateCustomerBtn.Enabled = true;
         }
     }
 

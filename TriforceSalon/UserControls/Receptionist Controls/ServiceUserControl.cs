@@ -61,6 +61,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
+            ProcessCustomerBtn.Enabled = false;
+
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
             string age = CustomerAgeTxtB.Text;
@@ -82,6 +84,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 transactionMethods.GeneratePDFTicket(ID, name, age);
 
             }
+            ProcessCustomerBtn.Enabled = true ;
+
         }
 
         private async void SearchServiceBtn_Click(object sender, EventArgs e)

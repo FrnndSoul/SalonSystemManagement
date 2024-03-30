@@ -83,7 +83,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void RefreshBtn_Click(object sender, EventArgs e)
         {
+            RefreshBtn.Enabled = false;
+
             await LoadPresentCustomer();
+
+            RefreshBtn.Enabled = true;
+
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)

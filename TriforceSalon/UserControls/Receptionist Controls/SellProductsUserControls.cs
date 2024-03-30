@@ -572,43 +572,56 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void PaymentBtn_Click(object sender, EventArgs e)
         {
-            int salesID = transaction.GenerateTransactionID();
             int orderID = transaction.GenerateTransactionID();
+            PaymentBtn.Enabled = false;
 
-            if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
+            try
             {
-                if (ExtractAmount(TotLbl.Text) > Convert.ToDecimal(CashTxtBx.Text))
+                if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
-                    if (CustomerNameTxtB.Text == null)
+                    if (ExtractAmount(TotLbl.Text) > Convert.ToDecimal(CashTxtBx.Text))
                     {
-                        MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        if (CustomerNameTxtB.Text == null)
+                        {
+                            MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else
+                        {
+                            await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                            transaction.ClearContents();
+                        }
                     }
                     else
                     {
-                        await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
-                        transaction.ClearContents();
+                        MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+
                     }
                 }
-                else
+                else if (DatabaseTransactionRBtn.Checked == true)
                 {
-                    MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-
+                    //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
+                    int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
+                    MessageBox.Show(Convert.ToString(ID));
+                    await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+                    transaction.ClearContents();
                 }
             }
-            else if (DatabaseTransactionRBtn.Checked == true)
+            catch(Exception ex)
             {
-                //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
-                int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                MessageBox.Show(Convert.ToString(ID));
-                await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
-                transaction.ClearContents();
+                MessageBox.Show(ex.Message, "Operation Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                PaymentBtn.Enabled = true;
             }
         }
 
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
+            VoidBtn.Enabled = false;
+
             int orderID = transaction.GenerateTransactionID();
             DialogResult result = MessageBox.Show("Do you want to void these items?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -649,6 +662,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
                 }
             }
+            VoidBtn.Enabled = true;
         }
 
         public async Task VoidedPurchase(int ID, Guna2DataGridView products)
@@ -743,6 +757,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             CalculateTotalPrice();
             PaymentBtn.Enabled = true;
+            guna2Button1.Enabled = true;
+
         }
         private void CalculateTotalPrice()
         {
@@ -796,6 +812,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CashTxtBx.Enabled = false;
             CalculateCostBtn.Enabled = false;
             CustomerNameTxtB.Enabled = false;
+        }
+
+        private void GcashPayment_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
