@@ -188,6 +188,7 @@
             this.MinimumSize = new System.Drawing.Size(1920, 1090);
             this.Name = "ManagerPage";
             this.Size = new System.Drawing.Size(1920, 1090);
+            this.Load += new System.EventHandler(this.ManagerPage_Load);
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
