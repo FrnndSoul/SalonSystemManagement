@@ -383,6 +383,9 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
+                    /*ManagerPage managerPage = new ManagerPage();
+                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+*/
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)
@@ -397,6 +400,7 @@ namespace TriforceSalon
                         }
                     }
                 }
+
                 else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Receptionist!");

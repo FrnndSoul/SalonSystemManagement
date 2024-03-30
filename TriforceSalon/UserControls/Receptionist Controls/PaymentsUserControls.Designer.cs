@@ -62,10 +62,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.DiscountBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -80,12 +80,10 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LoadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.OtherTransactionContainer = new Guna.UI2.WinForms.Guna2Panel();
-            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // TransactionIDBox
@@ -158,7 +156,6 @@
             this.PaymentPanel.Controls.Add(this.VoidBtn);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel14);
             this.PaymentPanel.Controls.Add(this.GcashPayment);
-            this.PaymentPanel.Controls.Add(this.CardPayment);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel15);
             this.PaymentPanel.Controls.Add(this.guna2Button1);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel13);
@@ -569,6 +566,26 @@
             this.DiscountBox.Size = new System.Drawing.Size(306, 44);
             this.DiscountBox.TabIndex = 30;
             // 
+            // PWDCheckbox
+            // 
+            this.PWDCheckbox.AutoSize = true;
+            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.CheckedState.BorderRadius = 0;
+            this.PWDCheckbox.CheckedState.BorderThickness = 0;
+            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.Enabled = false;
+            this.PWDCheckbox.Font = new System.Drawing.Font("Stanberry", 20F);
+            this.PWDCheckbox.Location = new System.Drawing.Point(1138, 114);
+            this.PWDCheckbox.Name = "PWDCheckbox";
+            this.PWDCheckbox.Size = new System.Drawing.Size(156, 38);
+            this.PWDCheckbox.TabIndex = 29;
+            this.PWDCheckbox.Text = "is Senior?";
+            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
+            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
+            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
+            // 
             // VoidBtn
             // 
             this.VoidBtn.Animated = true;
@@ -609,7 +626,7 @@
             this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(1206, 1051);
+            this.GcashPayment.Location = new System.Drawing.Point(1121, 1051);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(80, 80);
@@ -618,22 +635,6 @@
             this.GcashPayment.TabStop = false;
             this.GcashPayment.UseTransparentBackground = true;
             this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
-            // 
-            // CardPayment
-            // 
-            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
-            this.CardPayment.Enabled = false;
-            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
-            this.CardPayment.ImageRotate = 0F;
-            this.CardPayment.Location = new System.Drawing.Point(1120, 1051);
-            this.CardPayment.Name = "CardPayment";
-            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.CardPayment.Size = new System.Drawing.Size(80, 80);
-            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CardPayment.TabIndex = 24;
-            this.CardPayment.TabStop = false;
-            this.CardPayment.UseTransparentBackground = true;
-            this.CardPayment.Click += new System.EventHandler(this.CardPayment_Click);
             // 
             // guna2HtmlLabel15
             // 
@@ -663,7 +664,7 @@
             this.guna2Button1.IndicateFocus = true;
             this.guna2Button1.Location = new System.Drawing.Point(1110, 1044);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(191, 95);
+            this.guna2Button1.Size = new System.Drawing.Size(103, 95);
             this.guna2Button1.TabIndex = 23;
             this.guna2Button1.UseTransparentBackground = true;
             // 
@@ -871,26 +872,6 @@
             this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
             this.OtherTransactionContainer.TabIndex = 29;
             // 
-            // PWDCheckbox
-            // 
-            this.PWDCheckbox.AutoSize = true;
-            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.CheckedState.BorderRadius = 0;
-            this.PWDCheckbox.CheckedState.BorderThickness = 0;
-            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.Enabled = false;
-            this.PWDCheckbox.Font = new System.Drawing.Font("Stanberry", 20F);
-            this.PWDCheckbox.Location = new System.Drawing.Point(1138, 114);
-            this.PWDCheckbox.Name = "PWDCheckbox";
-            this.PWDCheckbox.Size = new System.Drawing.Size(156, 38);
-            this.PWDCheckbox.TabIndex = 29;
-            this.PWDCheckbox.Text = "is Senior?";
-            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
-            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
-            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
-            // 
             // PaymentsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -911,7 +892,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -933,7 +913,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox CardPayment;
         private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel15;
