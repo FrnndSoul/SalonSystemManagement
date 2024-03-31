@@ -46,6 +46,12 @@ namespace TriforceSalon.UserControls
             using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
             {
                 PhotoBox.Image = Image.FromStream(ms);
+
+                using (MemoryStream imageStream = new MemoryStream())
+                {
+                    PhotoBox.Image.Save(imageStream, PhotoBox.Image.RawFormat);
+                    PhotoByteHolder = imageStream.ToArray();
+                }
             }
         }
 
@@ -78,7 +84,6 @@ namespace TriforceSalon.UserControls
             string newID = IDBox.Text;
             string newStock = StockBox.Text;
             string newSRP = editSRPTxtB.Text;
-
 
 
             if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
