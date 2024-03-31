@@ -162,9 +162,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             // Update UI with totals
-            AmountBox.Text = "Php. " + totalPrice.ToString("0.00");
-            TotalAmountTxtB.Text = "Php. " + (discountedTotal + normalTotal).ToString("0.00");
-            DiscountBox.Text = "Php. " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+            AmountBox.Text = totalPrice.ToString("0.00");
+            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
+            DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
         private async void LoadBtn_Click(object sender, EventArgs e)
@@ -359,7 +359,62 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
+
             VoidBtn.Enabled = false;
+
+            try
+            {
+                long ID = Convert.ToInt64(TransactionIDBox.Text);
+                DialogResult result = MessageBox.Show("Do you want to void the transaction?", "Void Items and Services", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
+
+                    using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                    {
+                        await conn.OpenAsync();
+
+                        string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
+
+                            using (DbDataReader reader = await command.ExecuteReaderAsync())
+                            {
+                                if (await reader.ReadAsync())
+                                {
+                                    string position = reader["AccountAccess"].ToString();
+
+                                    if (position != "Manager")
+                                    {
+                                        MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+                                    ChangePaymentStatus("VOIDED");
+                                    await VoidedItems(ID, ProductsBoughtDGV);
+                                    MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    DefaultLoad();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    DefaultLoad();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            VoidBtn.Enabled = true;
+            /*VoidBtn.Enabled = false;
 
             long ID = Convert.ToInt64(TransactionIDBox.Text);
             DialogResult result = MessageBox.Show("Do you want to void the transaction?", "Void Items and Services", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -402,17 +457,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         }
                     }
                 }
-
+                DefaultLoad();
             }
-            /* DialogResult result = MessageBox.Show("Confirming before voiding this transaction.", "Confirm Void Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            *//* DialogResult result = MessageBox.Show("Confirming before voiding this transaction.", "Confirm Void Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
              if (result != DialogResult.Yes)
              {
                  return;
              }
              ChangePaymentStatus("VOIDED");
-             DefaultLoad();*/
-            VoidBtn.Enabled = true;
+             DefaultLoad();*//*
+            VoidBtn.Enabled = true;*/
         }
 
         public void ChangePaymentStatus(string newStatus)
@@ -570,6 +625,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = true;
         }
 
+        private void TransactionIDBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow digits and control characters (including backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Get the current text in the textbox
+            string currentText = TransactionIDBox.Text;
+
+            // Calculate the total length if the new character is added
+            int totalLength = currentText.Length + (e.KeyChar == '\b' ? -1 : 1);
+
+            // Check if the total length exceeds the maximum allowed length
+            if (totalLength > 8)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
         public async Task FillServiceAcquiredAsync(long transactionID, Guna2DataGridView serviceAcquiredDGV)
         {
 
@@ -706,6 +784,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             //EmployeeIDBox.Text = "";
             AmountBox.Text = "";
             DiscountBox.Text = "";
+            TotalAmountTxtB.Text = "";
+            CustomerMoneyInput.Text = "";
 
             ProductsBoughtDGV.Rows.Clear();
             ServiceAcquiredDGV.Rows.Clear();

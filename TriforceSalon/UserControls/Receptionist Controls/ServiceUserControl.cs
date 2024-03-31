@@ -36,12 +36,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
             await serviceTypeService.GetServiceTypeAsync(mysqlcon);
-            ServiceFilterComB.SelectedIndex = 0;
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-
             await serviceTypeService.GetAllEmployee(mysqlcon);
+            ServiceFilterComB.SelectedIndex = 0;
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
         }
 
         /*public void GetServiceTypeData()
@@ -82,6 +83,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
                 await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
                 transactionMethods.GeneratePDFTicket(ID, name, age);
+                ClearAll();
 
             }
             ProcessCustomerBtn.Enabled = true ;
@@ -101,6 +103,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        private void ClearAll()
+        {
+            ServicesGDGVVControl.Rows.Clear();
+            CustomerNameTxtB.Clear();
+            CustomerAgeTxtB.Clear();
+            CustomerPhoneNTxtB.Clear();
+            ServiceTxtB.Clear();
+            ServiceAmountTxtB.Clear();
+            PEmployeeComB.SelectedIndex = 0;
+            transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+        }
         /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
         {
             try
@@ -114,7 +127,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message);
             }
         }*/
-                
+
         private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -227,7 +240,42 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
 
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
+        }
+
+        private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
+                {
+                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
+
+        private void PEmployeeComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow letters, space, and backspace
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the length exceeds the maximum allowed length (30 characters)
+            if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

@@ -29,20 +29,23 @@
         private void InitializeComponent()
         {
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.SubmitResponseBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Cnum = new System.Windows.Forms.Label();
+            this.ServiceVarID = new System.Windows.Forms.Label();
+            this.EmpID = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.SubmitResponseBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.RatingsLbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.SatisfactionImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.RBtn2 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.RBtn3 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.RBtn4 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.RBtn5 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RBtn1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RatingsLbl = new System.Windows.Forms.Label();
-            this.SatisfactionImagePicB = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SatisfactionImagePicB)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +53,9 @@
             // guna2Panel2
             // 
             this.guna2Panel2.BorderRadius = 50;
+            this.guna2Panel2.Controls.Add(this.Cnum);
+            this.guna2Panel2.Controls.Add(this.ServiceVarID);
+            this.guna2Panel2.Controls.Add(this.EmpID);
             this.guna2Panel2.Controls.Add(this.label6);
             this.guna2Panel2.Controls.Add(this.SubmitResponseBtn);
             this.guna2Panel2.Controls.Add(this.label5);
@@ -70,6 +76,47 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1218, 485);
             this.guna2Panel2.TabIndex = 1;
             // 
+            // Cnum
+            // 
+            this.Cnum.AutoSize = true;
+            this.Cnum.Location = new System.Drawing.Point(1067, 145);
+            this.Cnum.Name = "Cnum";
+            this.Cnum.Size = new System.Drawing.Size(35, 13);
+            this.Cnum.TabIndex = 18;
+            this.Cnum.Text = "label9";
+            this.Cnum.Visible = false;
+            // 
+            // ServiceVarID
+            // 
+            this.ServiceVarID.AutoSize = true;
+            this.ServiceVarID.Location = new System.Drawing.Point(1067, 115);
+            this.ServiceVarID.Name = "ServiceVarID";
+            this.ServiceVarID.Size = new System.Drawing.Size(35, 13);
+            this.ServiceVarID.TabIndex = 17;
+            this.ServiceVarID.Text = "label8";
+            this.ServiceVarID.Visible = false;
+            // 
+            // EmpID
+            // 
+            this.EmpID.AutoSize = true;
+            this.EmpID.Location = new System.Drawing.Point(1067, 71);
+            this.EmpID.Name = "EmpID";
+            this.EmpID.Size = new System.Drawing.Size(35, 13);
+            this.EmpID.TabIndex = 16;
+            this.EmpID.Text = "label7";
+            this.EmpID.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(909, 367);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 23);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "5";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SubmitResponseBtn
             // 
             this.SubmitResponseBtn.AutoRoundedCorners = true;
@@ -89,17 +136,6 @@
             this.SubmitResponseBtn.Text = "Submit";
             this.SubmitResponseBtn.UseTransparentBackground = true;
             this.SubmitResponseBtn.Click += new System.EventHandler(this.SubmitResponseBtn_Click);
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(909, 367);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 23);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "5";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -123,6 +159,17 @@
             this.label4.Text = "3";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // RatingsLbl
+            // 
+            this.RatingsLbl.BackColor = System.Drawing.Color.Transparent;
+            this.RatingsLbl.Font = new System.Drawing.Font("Stanberry", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RatingsLbl.Location = new System.Drawing.Point(566, 156);
+            this.RatingsLbl.Name = "RatingsLbl";
+            this.RatingsLbl.Size = new System.Drawing.Size(335, 51);
+            this.RatingsLbl.TabIndex = 7;
+            this.RatingsLbl.Text = "Your Rating";
+            this.RatingsLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
@@ -134,6 +181,19 @@
             this.label3.Text = "2";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // SatisfactionImagePicB
+            // 
+            this.SatisfactionImagePicB.BackColor = System.Drawing.Color.Transparent;
+            this.SatisfactionImagePicB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SatisfactionImagePicB.Image = global::TriforceSalon.Properties.Resources.Neutral;
+            this.SatisfactionImagePicB.ImageRotate = 0F;
+            this.SatisfactionImagePicB.Location = new System.Drawing.Point(413, 115);
+            this.SatisfactionImagePicB.Name = "SatisfactionImagePicB";
+            this.SatisfactionImagePicB.Size = new System.Drawing.Size(150, 139);
+            this.SatisfactionImagePicB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.SatisfactionImagePicB.TabIndex = 6;
+            this.SatisfactionImagePicB.TabStop = false;
+            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
@@ -144,6 +204,17 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "1";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Stanberry", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(385, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(523, 85);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Service Rating";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RBtn2
             // 
@@ -177,6 +248,22 @@
             this.RBtn3.UncheckedState.BorderThickness = 2;
             this.RBtn3.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.RBtn3.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // RBtn1
+            // 
+            this.RBtn1.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.BorderThickness = 0;
+            this.RBtn1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn1.Location = new System.Drawing.Point(234, 307);
+            this.RBtn1.Name = "RBtn1";
+            this.RBtn1.Size = new System.Drawing.Size(57, 57);
+            this.RBtn1.TabIndex = 6;
+            this.RBtn1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn1.UncheckedState.BorderThickness = 2;
+            this.RBtn1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
             // RBtn4
             // 
@@ -212,57 +299,6 @@
             this.RBtn5.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.RBtn5.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // RBtn1
-            // 
-            this.RBtn1.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn1.CheckedState.BorderThickness = 0;
-            this.RBtn1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn1.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn1.Location = new System.Drawing.Point(234, 307);
-            this.RBtn1.Name = "RBtn1";
-            this.RBtn1.Size = new System.Drawing.Size(57, 57);
-            this.RBtn1.TabIndex = 6;
-            this.RBtn1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn1.UncheckedState.BorderThickness = 2;
-            this.RBtn1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // RatingsLbl
-            // 
-            this.RatingsLbl.BackColor = System.Drawing.Color.Transparent;
-            this.RatingsLbl.Font = new System.Drawing.Font("Stanberry", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RatingsLbl.Location = new System.Drawing.Point(566, 156);
-            this.RatingsLbl.Name = "RatingsLbl";
-            this.RatingsLbl.Size = new System.Drawing.Size(335, 51);
-            this.RatingsLbl.TabIndex = 7;
-            this.RatingsLbl.Text = "Your Rating";
-            this.RatingsLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // SatisfactionImagePicB
-            // 
-            this.SatisfactionImagePicB.BackColor = System.Drawing.Color.Transparent;
-            this.SatisfactionImagePicB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SatisfactionImagePicB.Image = global::TriforceSalon.Properties.Resources.Neutral;
-            this.SatisfactionImagePicB.ImageRotate = 0F;
-            this.SatisfactionImagePicB.Location = new System.Drawing.Point(413, 115);
-            this.SatisfactionImagePicB.Name = "SatisfactionImagePicB";
-            this.SatisfactionImagePicB.Size = new System.Drawing.Size(150, 139);
-            this.SatisfactionImagePicB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.SatisfactionImagePicB.TabIndex = 6;
-            this.SatisfactionImagePicB.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Stanberry", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(385, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(523, 85);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Service Rating";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // RatingsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +308,7 @@
             this.Name = "RatingsUserControl";
             this.Size = new System.Drawing.Size(1278, 564);
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SatisfactionImagePicB)).EndInit();
             this.ResumeLayout(false);
 
@@ -294,5 +331,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label Cnum;
+        private System.Windows.Forms.Label ServiceVarID;
+        private System.Windows.Forms.Label EmpID;
     }
 }

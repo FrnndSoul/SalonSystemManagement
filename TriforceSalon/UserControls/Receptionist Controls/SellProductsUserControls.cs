@@ -189,7 +189,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
             }
 
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
+            //SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
 
 
             /*if (discount > 0.00m)
@@ -534,7 +534,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -544,6 +544,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 ValidateCashTextbox();
             }
 
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }*/
+
+            // Allow digits, control characters, and a single period
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Allow the backspace key
+            if (e.KeyChar == '\b')
+            {
+                return;
+            }
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ValidateCashTextbox();
+            }
+
+            // Prevent multiple periods
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -574,14 +597,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-
+            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+            decimal extractedAmount = ExtractAmount(TotLbl.Text);
             try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
-                    if (ExtractAmount(TotLbl.Text) > Convert.ToDecimal(CashTxtBx.Text))
+                    if (extractedAmount < cash)
                     {
-                        if (CustomerNameTxtB.Text == null)
+                        if (CustomerNameTxtB.Text == null || CustomerNameTxtB.Text == "")
                         {
                             MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
@@ -596,7 +620,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
-
                     }
                 }
                 else if (DatabaseTransactionRBtn.Checked == true)
@@ -718,6 +741,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     transaction.ClearContents();*/
                 }
                 MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                products.Rows.Clear();
+                SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
             }
             catch (Exception ex)
             {
@@ -726,7 +751,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
         public decimal ExtractAmount(string input)
         {
-            string pattern = @"Php\. (\d+(\.\d+)?)";
+            string pattern = @"₱\ (\d+(\.\d+)?)";
 
             // Match the pattern in the input string
             Match match = Regex.Match(input, pattern);
@@ -789,9 +814,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             // Update UI with totals
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
-            TotLbl.Text = "Php. " + (discountedTotal + normalTotal).ToString("0.00");
-            DiscLbl.Text = "Php. " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+            SubLbl.Text = "₱ " + totalPrice.ToString("0.00");
+            TotLbl.Text = "₱ " + (discountedTotal + normalTotal).ToString("0.00");
+            DiscLbl.Text = "₱ " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
@@ -817,6 +842,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void GcashPayment_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow letters, space, and backspace
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the length exceeds the maximum allowed length (30 characters)
+            if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

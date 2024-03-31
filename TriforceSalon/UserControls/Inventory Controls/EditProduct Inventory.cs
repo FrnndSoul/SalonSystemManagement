@@ -26,7 +26,7 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
         }
 
-        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID)
+        public void InitialLoading(string name, int id, decimal srp, int cost, int aggregate, int status, int userID)
         {
             Name = name;
             ItemID = id;
@@ -39,7 +39,9 @@ namespace TriforceSalon.UserControls
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
             AggregateBox.Text = aggregate.ToString();
-            StockBox.Text = Stock.ToString();
+            //StockBox.Text = Stock.ToString();
+            StockBox.Text = status.ToString();
+            editSRPTxtB.Text = srp.ToString("0.000");
 
             using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
             {
@@ -77,6 +79,8 @@ namespace TriforceSalon.UserControls
             string newStock = StockBox.Text;
             string newSRP = editSRPTxtB.Text;
 
+
+
             if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -110,6 +114,7 @@ namespace TriforceSalon.UserControls
                     }
                 }
                 MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearFields();
                 manager.DisableButtons(true);
 
             }
@@ -181,6 +186,20 @@ namespace TriforceSalon.UserControls
             this.Visible = false;
             manager.DisableButtons(true);
 
+        }
+
+        private void ClearFields()
+        {
+            PhotoBox.Image = null;
+            IDBox.Text = null;
+            NameBox.Text = null;
+            StockBox.Text = null;
+            CostBox.Text = null;
+            AggregateBox.Text = null;
+            editSRPTxtB.Text = null;
+
+            this.Visible = false;
+            manager.DisableButtons(true);
         }
     }
 }

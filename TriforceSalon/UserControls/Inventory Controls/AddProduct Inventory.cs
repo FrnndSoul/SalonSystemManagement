@@ -89,12 +89,24 @@ namespace TriforceSalon.UserControls
                     }
                 }
                 MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ItemID = Inventory.GenerateID();
+                IDBox.Text = ItemID.ToString();
                 manager.DisableButtons(true);
+                Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\nat AddProduct_Click", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        private void Clear()
+        {
+            NameBox.Text = null;
+            CostBox.Text = null;
+            AggregateBox.Text = null;
+            SRPTxtB.Text = null;
+            PhotoBox.Image = null;
         }
 
         private void CostBox_KeyPress(object sender, KeyPressEventArgs e)

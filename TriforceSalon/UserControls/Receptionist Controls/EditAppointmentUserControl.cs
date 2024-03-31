@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -65,7 +66,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
 
-            if(isOnTime == true)
+            if (isOnTime == true)
             {
                 queueNumber = 0;
             }
@@ -75,7 +76,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
 
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, queueNumber);
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
         }
 
 
@@ -123,6 +124,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ProcessCustomerBtn.Enabled = true;
                 return;
             }
 
@@ -133,26 +135,37 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 string serviceName = ServiceTxtB.Text;
                 transactionMethods.GetServiceTypeID(serviceName);
 
-                if(isOnTime == true)
+                if (isOnTime == true)
                 {
-                    await TestProcessCustomer(ServicesGDGVVControl, "PRIORITY");
+                    await TestProcessCustomer(ServicesGDGVVControl, "PRIORITY", Convert.ToInt64(ID));
                 }
                 else
                 {
-                    await TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                    await TestProcessCustomer(ServicesGDGVVControl, "NORMAL", Convert.ToInt64(ID));
                 }
                 transactionMethods.GeneratePDFTicket(ID, name, age);
             }
+            AppointmentsUserControls appointment = new AppointmentsUserControls();
+            UserControlNavigator.ShowControl(appointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
+
             ProcessCustomerBtn.Enabled = true;
         }
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, long ID)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
+
+                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE = ReferenceNumber = @refNum";
+                    using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@refNum", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+
                     string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
                         " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID, @priorityStatus)";
 
@@ -225,6 +238,19 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             AppointmentsUserControls appointment = new AppointmentsUserControls();
             UserControlNavigator.ShowControl(appointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
+        }
+
+        private void ServicesGDGVVControl_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
+                {
+                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                }
+            }
         }
     }
 }

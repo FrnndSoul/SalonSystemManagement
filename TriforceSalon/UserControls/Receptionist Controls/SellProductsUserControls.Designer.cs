@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.cLbl = new System.Windows.Forms.Label();
@@ -108,7 +108,7 @@
             this.cLbl.Name = "cLbl";
             this.cLbl.Size = new System.Drawing.Size(76, 33);
             this.cLbl.TabIndex = 19;
-            this.cLbl.Text = "Php.";
+            this.cLbl.Text = "₱";
             this.cLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cashLbl
@@ -132,7 +132,7 @@
             this.TotLbl.Name = "TotLbl";
             this.TotLbl.Size = new System.Drawing.Size(168, 33);
             this.TotLbl.TabIndex = 17;
-            this.TotLbl.Text = "Php. 0.00";
+            this.TotLbl.Text = "₱ 0.00";
             this.TotLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // totalLbl
@@ -156,7 +156,7 @@
             this.DiscLbl.Name = "DiscLbl";
             this.DiscLbl.Size = new System.Drawing.Size(201, 33);
             this.DiscLbl.TabIndex = 15;
-            this.DiscLbl.Text = "Php. 0.00";
+            this.DiscLbl.Text = "₱ 0.00";
             this.DiscLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // discL
@@ -180,7 +180,7 @@
             this.SubLbl.Name = "SubLbl";
             this.SubLbl.Size = new System.Drawing.Size(194, 33);
             this.SubLbl.TabIndex = 13;
-            this.SubLbl.Text = "Php. 0.00";
+            this.SubLbl.Text = "₱ 0.00";
             this.SubLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // sbLbl
@@ -235,16 +235,16 @@
             // 
             this.ProductsControlDGV.AllowUserToAddRows = false;
             this.ProductsControlDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsControlDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ProductsControlDGV.ColumnHeadersHeight = 15;
             this.ProductsControlDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -255,14 +255,14 @@
             this.CostCol,
             this.DiscountComB,
             this.DisposeCol});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsControlDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ProductsControlDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsControlDGV.Location = new System.Drawing.Point(1294, 24);
             this.ProductsControlDGV.Name = "ProductsControlDGV";
@@ -394,15 +394,15 @@
             this.CashTxtBx.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CashTxtBx.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Location = new System.Drawing.Point(1471, 705);
+            this.CashTxtBx.Location = new System.Drawing.Point(1435, 705);
             this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CashTxtBx.Name = "CashTxtBx";
             this.CashTxtBx.PasswordChar = '\0';
             this.CashTxtBx.PlaceholderText = "";
             this.CashTxtBx.SelectedText = "";
-            this.CashTxtBx.Size = new System.Drawing.Size(137, 33);
+            this.CashTxtBx.Size = new System.Drawing.Size(173, 33);
             this.CashTxtBx.TabIndex = 25;
             this.CashTxtBx.TextChanged += new System.EventHandler(this.CashTxtBx_TextChanged);
             this.CashTxtBx.Enter += new System.EventHandler(this.CashTxtBx_Enter);
@@ -431,7 +431,7 @@
             this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(1578, 344);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -441,6 +441,7 @@
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(314, 39);
             this.CustomerNameTxtB.TabIndex = 27;
+            this.CustomerNameTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerNameTxtB_KeyPress);
             // 
             // discChckBx
             // 
@@ -482,7 +483,7 @@
             this.CustomerIDComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CustomerIDComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerIDComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.CustomerIDComB.ItemHeight = 30;
             this.CustomerIDComB.Location = new System.Drawing.Point(1578, 404);

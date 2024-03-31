@@ -89,6 +89,7 @@ namespace TriforceSalon.UserControls
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceTypeBtn.Enabled = true;
                 return;
             }
 
@@ -158,8 +159,8 @@ namespace TriforceSalon.UserControls
                 || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceBtn.Enabled = true;
                 return;
-
             }
 
             DialogResult result = MessageBox.Show("Are you sure with the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -173,7 +174,6 @@ namespace TriforceSalon.UserControls
                 BindedServiceItemDGV.Rows.Clear();
             }
             AddServiceBtn.Enabled = true;
-
         }
 
         private async void UpdateServBtn_Click(object sender, EventArgs e)
@@ -181,8 +181,7 @@ namespace TriforceSalon.UserControls
             UpdateServBtn.Enabled = false;
 
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-               AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-               || ServiceImagePicB.Image is null)
+               AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -196,6 +195,8 @@ namespace TriforceSalon.UserControls
                 int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
                 await salonServices.UpdateSalonServices(servarID);
                 //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                salonServices.ClearServices();
+                BindedServiceItemDGV.Rows.Clear();
                 manager.DisableButtons(true);
             }
 
@@ -210,11 +211,10 @@ namespace TriforceSalon.UserControls
 
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
+            BindedServiceItemDGV.Rows.Clear();
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
             manager.DisableButtons(true);
-
-
         }
 
         private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)

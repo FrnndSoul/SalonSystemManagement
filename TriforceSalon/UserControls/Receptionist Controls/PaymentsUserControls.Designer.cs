@@ -110,6 +110,7 @@
             this.TransactionIDBox.SelectedText = "";
             this.TransactionIDBox.Size = new System.Drawing.Size(408, 44);
             this.TransactionIDBox.TabIndex = 0;
+            this.TransactionIDBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransactionIDBox_KeyPress);
             // 
             // guna2HtmlLabel1
             // 

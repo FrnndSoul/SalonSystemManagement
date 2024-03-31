@@ -252,9 +252,10 @@ namespace TriforceSalon.Class_Components
             {
                 await conn.OpenAsync();
 
-                string query = "SELECT TransactionID FROM customer_info WHERE PaymentStatus = 'PROCESSED' or PaymentStatus = 'UNPAID' ";
+                //string query = "SELECT TransactionID FROM customer_info WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus = 'PROCESSED' or PaymentStatus = 'UNPAID' ";
+                string query = "SELECT TransactionID FROM customer_info WHERE DATE(TimeTaken) = CURDATE() AND (PaymentStatus = 'PROCESSED' OR PaymentStatus = 'UNPAID')";
 
-                using(MySqlCommand command = new MySqlCommand(query, conn))
+                using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
                     using(DbDataReader reader = await  command.ExecuteReaderAsync())
                     {
