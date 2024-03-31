@@ -46,12 +46,7 @@ namespace TriforceSalon.UserControls
             using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
             {
                 PhotoBox.Image = Image.FromStream(ms);
-
-                using (MemoryStream imageStream = new MemoryStream())
-                {
-                    PhotoBox.Image.Save(imageStream, PhotoBox.Image.RawFormat);
-                    PhotoByteHolder = imageStream.ToArray();
-                }
+                PhotoByteHolder = ms.ToArray();
             }
         }
 
