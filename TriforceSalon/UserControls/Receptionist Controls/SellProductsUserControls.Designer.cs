@@ -108,7 +108,7 @@
             this.cLbl.Name = "cLbl";
             this.cLbl.Size = new System.Drawing.Size(76, 33);
             this.cLbl.TabIndex = 19;
-            this.cLbl.Text = "Php.";
+            this.cLbl.Text = "₱";
             this.cLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cashLbl
@@ -132,7 +132,7 @@
             this.TotLbl.Name = "TotLbl";
             this.TotLbl.Size = new System.Drawing.Size(168, 33);
             this.TotLbl.TabIndex = 17;
-            this.TotLbl.Text = "Php. 0.00";
+            this.TotLbl.Text = "₱ 0.00";
             this.TotLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // totalLbl
@@ -156,7 +156,7 @@
             this.DiscLbl.Name = "DiscLbl";
             this.DiscLbl.Size = new System.Drawing.Size(201, 33);
             this.DiscLbl.TabIndex = 15;
-            this.DiscLbl.Text = "Php. 0.00";
+            this.DiscLbl.Text = "₱ 0.00";
             this.DiscLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // discL
@@ -180,7 +180,7 @@
             this.SubLbl.Name = "SubLbl";
             this.SubLbl.Size = new System.Drawing.Size(194, 33);
             this.SubLbl.TabIndex = 13;
-            this.SubLbl.Text = "Php. 0.00";
+            this.SubLbl.Text = "₱ 0.00";
             this.SubLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // sbLbl
@@ -394,15 +394,15 @@
             this.CashTxtBx.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CashTxtBx.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Location = new System.Drawing.Point(1471, 705);
+            this.CashTxtBx.Location = new System.Drawing.Point(1435, 705);
             this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CashTxtBx.Name = "CashTxtBx";
             this.CashTxtBx.PasswordChar = '\0';
             this.CashTxtBx.PlaceholderText = "";
             this.CashTxtBx.SelectedText = "";
-            this.CashTxtBx.Size = new System.Drawing.Size(137, 33);
+            this.CashTxtBx.Size = new System.Drawing.Size(173, 33);
             this.CashTxtBx.TabIndex = 25;
             this.CashTxtBx.TextChanged += new System.EventHandler(this.CashTxtBx_TextChanged);
             this.CashTxtBx.Enter += new System.EventHandler(this.CashTxtBx_Enter);
@@ -431,7 +431,7 @@
             this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(1578, 344);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -441,6 +441,7 @@
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(314, 39);
             this.CustomerNameTxtB.TabIndex = 27;
+            this.CustomerNameTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerNameTxtB_KeyPress);
             // 
             // discChckBx
             // 
@@ -482,7 +483,7 @@
             this.CustomerIDComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CustomerIDComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerIDComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.CustomerIDComB.ItemHeight = 30;
             this.CustomerIDComB.Location = new System.Drawing.Point(1578, 404);
@@ -548,7 +549,7 @@
             this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(1842, 620);
+            this.GcashPayment.Location = new System.Drawing.Point(1841, 621);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(50, 50);
@@ -556,6 +557,7 @@
             this.GcashPayment.TabIndex = 38;
             this.GcashPayment.TabStop = false;
             this.GcashPayment.UseTransparentBackground = true;
+            this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
             // 
             // guna2Button1
             // 

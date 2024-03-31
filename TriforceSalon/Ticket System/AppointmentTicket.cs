@@ -54,6 +54,8 @@ namespace TriforceSalon.Ticket_System
 
         private async void CancelAppointBtn_Click(object sender, EventArgs e)
         {
+            CancelAppointBtn.Enabled = false;
+
             string custID = CustID.Text;
             try
             {
@@ -74,6 +76,7 @@ namespace TriforceSalon.Ticket_System
             {
                 MessageBox.Show(ex.Message, "Error in CancelAppointBtn()");
             }
+            CancelAppointBtn.Enabled = true;
         }
 
         private void EditInfoBtn_Click(object sender, EventArgs e)
@@ -109,6 +112,8 @@ namespace TriforceSalon.Ticket_System
 
         private async void ActivateCustomerBtn_Click(object sender, EventArgs e)
         {
+            ActivateCustomerBtn.Enabled = false;
+
             TimeSpan allowedWindow = TimeSpan.FromMinutes(5);
             string appointmentDate = CustDate.Text;
             DateTime appointmentTime = Convert.ToDateTime(appointmentDate);
@@ -142,6 +147,15 @@ namespace TriforceSalon.Ticket_System
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
+
+                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE  ReferenceNumber = @refNum";
+                    using(MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@refNum", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+
                     string query = "Insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, PriorityStatus, ServiceGroupID) " +
                         "VALUES (@transactionID, @customerName, @customerAge, @customerNumber, @prioStatus, @serviceGroupID)";
 
@@ -173,13 +187,15 @@ namespace TriforceSalon.Ticket_System
                     }
                 }
                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                transactionMethods.GeneratePDFTicket(ID, name, age);
                 await appointment.LoadPresentCustomer();
+                transactionMethods.GeneratePDFTicket(ID, name, age);
+
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        ActivateCustomerBtn.Enabled = true;
         }
     }
 

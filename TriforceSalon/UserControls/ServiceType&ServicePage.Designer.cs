@@ -50,6 +50,7 @@
             this.ServiceTypeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceTypeDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ServicePanel = new System.Windows.Forms.Panel();
+            this.VariationIDLbl = new System.Windows.Forms.Label();
             this.ItemIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -248,7 +249,7 @@
             this.AddImageServiceTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddImageServiceTypeBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddImageServiceTypeBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(1075, 339);
+            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(1062, 388);
             this.AddImageServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddImageServiceTypeBtn.Name = "AddImageServiceTypeBtn";
             this.AddImageServiceTypeBtn.Size = new System.Drawing.Size(210, 50);
@@ -261,7 +262,7 @@
             // 
             this.ServiceTypePicB.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypePicB.ImageRotate = 0F;
-            this.ServiceTypePicB.Location = new System.Drawing.Point(1075, 125);
+            this.ServiceTypePicB.Location = new System.Drawing.Point(1062, 174);
             this.ServiceTypePicB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceTypePicB.Name = "ServiceTypePicB";
             this.ServiceTypePicB.Size = new System.Drawing.Size(210, 210);
@@ -282,10 +283,10 @@
             this.AddServiceTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddServiceTypeBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddServiceTypeBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddServiceTypeBtn.Location = new System.Drawing.Point(1075, 479);
+            this.AddServiceTypeBtn.Location = new System.Drawing.Point(941, 736);
             this.AddServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddServiceTypeBtn.Name = "AddServiceTypeBtn";
-            this.AddServiceTypeBtn.Size = new System.Drawing.Size(210, 50);
+            this.AddServiceTypeBtn.Size = new System.Drawing.Size(447, 50);
             this.AddServiceTypeBtn.TabIndex = 17;
             this.AddServiceTypeBtn.Text = "Add Service Type";
             this.AddServiceTypeBtn.UseTransparentBackground = true;
@@ -307,7 +308,7 @@
             this.ServiceTypeTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceTypeTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceTypeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1075, 424);
+            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1062, 476);
             this.ServiceTypeTxtB.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ServiceTypeTxtB.Name = "ServiceTypeTxtB";
             this.ServiceTypeTxtB.PasswordChar = '\0';
@@ -376,6 +377,7 @@
             // ServicePanel
             // 
             this.ServicePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ServicePanel.Controls.Add(this.VariationIDLbl);
             this.ServicePanel.Controls.Add(this.ItemIDTxtB);
             this.ServicePanel.Controls.Add(this.label4);
             this.ServicePanel.Controls.Add(this.label3);
@@ -398,6 +400,17 @@
             this.ServicePanel.Name = "ServicePanel";
             this.ServicePanel.Size = new System.Drawing.Size(1400, 800);
             this.ServicePanel.TabIndex = 33;
+            // 
+            // VariationIDLbl
+            // 
+            this.VariationIDLbl.AutoSize = true;
+            this.VariationIDLbl.ForeColor = System.Drawing.Color.White;
+            this.VariationIDLbl.Location = new System.Drawing.Point(949, 29);
+            this.VariationIDLbl.Name = "VariationIDLbl";
+            this.VariationIDLbl.Size = new System.Drawing.Size(35, 13);
+            this.VariationIDLbl.TabIndex = 51;
+            this.VariationIDLbl.Text = "label5";
+            this.VariationIDLbl.Visible = false;
             // 
             // ItemIDTxtB
             // 
@@ -609,7 +622,7 @@
             this.EditServBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditServBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.EditServBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditServBtn.Location = new System.Drawing.Point(17, 733);
+            this.EditServBtn.Location = new System.Drawing.Point(18, 733);
             this.EditServBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditServBtn.Name = "EditServBtn";
             this.EditServBtn.Size = new System.Drawing.Size(900, 50);
@@ -868,11 +881,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.ServicePanel);
             this.Controls.Add(this.ServiceTypePanel);
             this.Controls.Add(this.backgroundShape);
             this.Controls.Add(this.ServiceTypeBtn);
             this.Controls.Add(this.ServiceBtn);
+            this.Controls.Add(this.ServicePanel);
             this.Name = "ServiceType_ServicePage";
             this.Size = new System.Drawing.Size(1500, 950);
             this.Load += new System.EventHandler(this.ServiceType_ServicePage_Load);
@@ -880,6 +893,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceTypeDGV)).EndInit();
             this.ServicePanel.ResumeLayout(false);
+            this.ServicePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BindedServiceItemDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceImagePicB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalonServicesDGV)).EndInit();
@@ -926,5 +940,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
         public Guna.UI2.WinForms.Guna2DataGridView BindedServiceItemDGV;
+        private System.Windows.Forms.Label VariationIDLbl;
     }
 }

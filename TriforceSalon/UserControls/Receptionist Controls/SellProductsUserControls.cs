@@ -6,6 +6,7 @@ using System;
 using System.Data.Common;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.WebSockets;
 using System.Windows.Forms;
@@ -188,7 +189,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
             }
 
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
+            //SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
 
 
             /*if (discount > 0.00m)
@@ -533,7 +534,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -543,6 +544,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 ValidateCashTextbox();
             }
 
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }*/
+
+            // Allow digits, control characters, and a single period
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Allow the backspace key
+            if (e.KeyChar == '\b')
+            {
+                return;
+            }
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ValidateCashTextbox();
+            }
+
+            // Prevent multiple periods
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -571,43 +595,57 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void PaymentBtn_Click(object sender, EventArgs e)
         {
-            int salesID = transaction.GenerateTransactionID();
             int orderID = transaction.GenerateTransactionID();
-
-            if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
+            PaymentBtn.Enabled = false;
+            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+            decimal extractedAmount = ExtractAmount(TotLbl.Text);
+            try
             {
-                if (ExtractAmount(TotLbl.Text) > Convert.ToDecimal(CashTxtBx.Text))
+                if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
-                    if (CustomerNameTxtB.Text == null)
+                    if (extractedAmount < cash)
                     {
-                        MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        if (CustomerNameTxtB.Text == null || CustomerNameTxtB.Text == "")
+                        {
+                            MessageBox.Show("Customer's name is required to proceed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else
+                        {
+                            await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                            transaction.ClearContents();
+                        }
                     }
                     else
                     {
-                        await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
-                        transaction.ClearContents();
+                        MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
                     }
                 }
-                else
+                else if (DatabaseTransactionRBtn.Checked == true)
                 {
-                    MessageBox.Show("Invalid Amount Entered", " Invalid Payment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-
+                    //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
+                    int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
+                    MessageBox.Show(Convert.ToString(ID));
+                    await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+                    transaction.ClearContents();
                 }
             }
-            else if (DatabaseTransactionRBtn.Checked == true)
+            catch(Exception ex)
             {
-                //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
-                int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                MessageBox.Show(Convert.ToString(ID));
-                await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
-                transaction.ClearContents();
+                MessageBox.Show(ex.Message, "Operation Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                PaymentBtn.Enabled = true;
             }
         }
 
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
+            VoidBtn.Enabled = false;
+
+            int orderID = transaction.GenerateTransactionID();
             DialogResult result = MessageBox.Show("Do you want to void these items?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -635,8 +673,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     return;
                                 }
+                                await VoidedPurchase(orderID, ProductsControlDGV);
                                 //insert void method here
-
                             }
                             else
                             {
@@ -647,10 +685,73 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
                 }
             }
+            VoidBtn.Enabled = true;
+        }
+
+        public async Task VoidedPurchase(int ID, Guna2DataGridView products)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    foreach (DataGridViewRow row in products.Rows)
+                    {
+                        string itemName;
+                        if (row.Cells["ProductCol"].Value != null)
+                        {
+                            itemName = row.Cells["ProductCol"].Value.ToString();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
+                        int itemid = await transaction.GetItemIdAsync(itemName);
+                       
+                        string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate, IsVoided) " +
+                                        "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate, @void)";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ID);
+                            command.Parameters.AddWithValue("@productName", itemName);
+                            command.Parameters.AddWithValue("@productID", itemid);
+                            command.Parameters.AddWithValue("@quantity", qty);
+                            command.Parameters.AddWithValue("@amount", amount);
+                            command.Parameters.AddWithValue("@employeeID", Method.AccountID);
+                            command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                            command.Parameters.AddWithValue("@void", "YES");
+
+                            await command.ExecuteNonQueryAsync();
+                            
+                        }
+                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                   /* string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@customerID", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                    transaction.ClearContents();*/
+                }
+                MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                products.Rows.Clear();
+                SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
+            }
         }
         public decimal ExtractAmount(string input)
         {
-            string pattern = @"Php\. (\d+(\.\d+)?)";
+            string pattern = @"₱\ (\d+(\.\d+)?)";
 
             // Match the pattern in the input string
             Match match = Regex.Match(input, pattern);
@@ -681,6 +782,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             CalculateTotalPrice();
             PaymentBtn.Enabled = true;
+            guna2Button1.Enabled = true;
+
         }
         private void CalculateTotalPrice()
         {
@@ -711,9 +814,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             // Update UI with totals
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
-            TotLbl.Text = "Php. " + (discountedTotal + normalTotal).ToString("0.00");
-            DiscLbl.Text = "Php. " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+            SubLbl.Text = "₱ " + totalPrice.ToString("0.00");
+            TotLbl.Text = "₱ " + (discountedTotal + normalTotal).ToString("0.00");
+            DiscLbl.Text = "₱ " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
@@ -734,6 +837,28 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CashTxtBx.Enabled = false;
             CalculateCostBtn.Enabled = false;
             CustomerNameTxtB.Enabled = false;
+        }
+
+        private void GcashPayment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow letters, space, and backspace
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the length exceeds the maximum allowed length (30 characters)
+            if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }
