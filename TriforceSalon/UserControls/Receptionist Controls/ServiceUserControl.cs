@@ -36,12 +36,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
             await serviceTypeService.GetServiceTypeAsync(mysqlcon);
-            ServiceFilterComB.SelectedIndex = 0;
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-
             await serviceTypeService.GetAllEmployee(mysqlcon);
+            ServiceFilterComB.SelectedIndex = 0;
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+
         }
 
         /*public void GetServiceTypeData()
@@ -82,6 +83,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
                 await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
                 transactionMethods.GeneratePDFTicket(ID, name, age);
+                ClearAll();
 
             }
             ProcessCustomerBtn.Enabled = true ;
@@ -101,6 +103,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        private void ClearAll()
+        {
+            ServicesGDGVVControl.Rows.Clear();
+            CustomerNameTxtB.Clear();
+            CustomerAgeTxtB.Clear();
+            CustomerPhoneNTxtB.Clear();
+            ServiceTxtB.Clear();
+            ServiceAmountTxtB.Clear();
+            PEmployeeComB.SelectedIndex = 0;
+            transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+        }
         /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
         {
             try
@@ -114,7 +127,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message);
             }
         }*/
-                
+
         private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -241,6 +254,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
                 }
             }
+        }
+
+        private void PEmployeeComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

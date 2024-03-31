@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
+using System.Security.Policy;
 
 namespace TriforceSalon.UserControls
 {
@@ -21,6 +22,7 @@ namespace TriforceSalon.UserControls
         public static string ItemName;
         public static int ItemRow, ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
+        public decimal SRP;
 
         public GeneralView_Inventory()
         {
@@ -107,9 +109,11 @@ namespace TriforceSalon.UserControls
             }
 
             ReadRow(itemRow);
-            editProduct_Inventory1.Visible = true;
-            editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
             manager.DisableButtons(false);
+            editProduct_Inventory1.Visible = true;
+            //editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
+            editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Aggregate, Stock, EmployeeID);
+
 
         }
 
@@ -148,6 +152,7 @@ namespace TriforceSalon.UserControls
         {
             ItemName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
             ItemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
+            SRP = Convert.ToDecimal(InventoryDGV.Rows[itemRow].Cells["SRP"].Value);
             Stock = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Stock"].Value);
             Cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
             Aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);

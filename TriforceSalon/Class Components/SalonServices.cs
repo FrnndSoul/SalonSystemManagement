@@ -566,7 +566,7 @@ namespace TriforceSalon.Class_Components
                     {
                         command.Parameters.AddWithValue("@serviceName", ServiceName);
 
-                        object result = command.ExecuteScalarAsync();
+                        object result = await command.ExecuteScalarAsync();
                         if (result != null && int.TryParse(result.ToString(), out ID))
                         {
                             return ID;

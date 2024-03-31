@@ -622,7 +622,7 @@
             this.EditServBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditServBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.EditServBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditServBtn.Location = new System.Drawing.Point(17, 733);
+            this.EditServBtn.Location = new System.Drawing.Point(18, 733);
             this.EditServBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditServBtn.Name = "EditServBtn";
             this.EditServBtn.Size = new System.Drawing.Size(900, 50);

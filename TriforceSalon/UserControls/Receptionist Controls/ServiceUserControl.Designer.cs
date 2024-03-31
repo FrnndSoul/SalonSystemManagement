@@ -34,6 +34,12 @@
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -54,12 +60,6 @@
             this.SearchServiceBtn = new Guna.UI2.WinForms.Guna2Button();
             this.FilterServiceComboBox = new System.Windows.Forms.Label();
             this.ServiceFilterComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -158,6 +158,45 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ServicesGDGVVControl.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ServicesGDGVVControl_CellClick);
+            // 
+            // ServiceTypeCol
+            // 
+            this.ServiceTypeCol.HeaderText = "ServiceType";
+            this.ServiceTypeCol.Name = "ServiceTypeCol";
+            this.ServiceTypeCol.ReadOnly = true;
+            // 
+            // SNameCol
+            // 
+            this.SNameCol.HeaderText = "Service Name";
+            this.SNameCol.Name = "SNameCol";
+            this.SNameCol.ReadOnly = true;
+            // 
+            // PrefEmpCol
+            // 
+            this.PrefEmpCol.HeaderText = "Preferred Employee";
+            this.PrefEmpCol.Name = "PrefEmpCol";
+            this.PrefEmpCol.ReadOnly = true;
+            // 
+            // AmountCol
+            // 
+            this.AmountCol.HeaderText = "Amount";
+            this.AmountCol.Name = "AmountCol";
+            this.AmountCol.ReadOnly = true;
+            // 
+            // RemoveServiceCol
+            // 
+            this.RemoveServiceCol.HeaderText = "X";
+            this.RemoveServiceCol.Name = "RemoveServiceCol";
+            this.RemoveServiceCol.ReadOnly = true;
+            this.RemoveServiceCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveServiceCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // QueNumCol
+            // 
+            this.QueNumCol.HeaderText = "Queue Number";
+            this.QueNumCol.Name = "QueNumCol";
+            this.QueNumCol.ReadOnly = true;
+            this.QueNumCol.Visible = false;
             // 
             // AddLServiceListBtn
             // 
@@ -346,6 +385,7 @@
             this.PEmployeeComB.Name = "PEmployeeComB";
             this.PEmployeeComB.Size = new System.Drawing.Size(328, 36);
             this.PEmployeeComB.TabIndex = 9;
+            this.PEmployeeComB.SelectedIndexChanged += new System.EventHandler(this.PEmployeeComB_SelectedIndexChanged);
             // 
             // CustomerPhoneNTxtB
             // 
@@ -509,45 +549,6 @@
             this.ServiceFilterComB.Size = new System.Drawing.Size(347, 36);
             this.ServiceFilterComB.TabIndex = 6;
             this.ServiceFilterComB.SelectedIndexChanged += new System.EventHandler(this.ServiceFilterComB_SelectedIndexChanged);
-            // 
-            // ServiceTypeCol
-            // 
-            this.ServiceTypeCol.HeaderText = "ServiceType";
-            this.ServiceTypeCol.Name = "ServiceTypeCol";
-            this.ServiceTypeCol.ReadOnly = true;
-            // 
-            // SNameCol
-            // 
-            this.SNameCol.HeaderText = "Service Name";
-            this.SNameCol.Name = "SNameCol";
-            this.SNameCol.ReadOnly = true;
-            // 
-            // PrefEmpCol
-            // 
-            this.PrefEmpCol.HeaderText = "Preferred Employee";
-            this.PrefEmpCol.Name = "PrefEmpCol";
-            this.PrefEmpCol.ReadOnly = true;
-            // 
-            // AmountCol
-            // 
-            this.AmountCol.HeaderText = "Amount";
-            this.AmountCol.Name = "AmountCol";
-            this.AmountCol.ReadOnly = true;
-            // 
-            // RemoveServiceCol
-            // 
-            this.RemoveServiceCol.HeaderText = "X";
-            this.RemoveServiceCol.Name = "RemoveServiceCol";
-            this.RemoveServiceCol.ReadOnly = true;
-            this.RemoveServiceCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.RemoveServiceCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // QueNumCol
-            // 
-            this.QueNumCol.HeaderText = "Queue Number";
-            this.QueNumCol.Name = "QueNumCol";
-            this.QueNumCol.ReadOnly = true;
-            this.QueNumCol.Visible = false;
             // 
             // ServicesUserControl
             // 

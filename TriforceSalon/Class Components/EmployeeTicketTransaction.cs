@@ -17,12 +17,13 @@ namespace TriforceSalon.Class_Components
         private string mysqlcon;
         public byte[] servicePhoto;
         public TransactionMethods transation = new TransactionMethods();
+        public SalonServices services = new SalonServices();
         public EmployeeTicketTransaction()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
 
-        public async Task ProcessTicketAsync(int ticketID)
+        public async Task ProcessTicketAsync(int ticketID, int serviceID)
         {
             DateTime startTime = DateTime.Now;
             int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberLbl.Text);
@@ -38,14 +39,15 @@ namespace TriforceSalon.Class_Components
                     {
                         await conn.OpenAsync();
 
-                        string query = "Insert into employee_records (AccountID, TimeStart, CustomerID)" +
-                            "Value(@accountID, @timeStart, @customerID)";
+                        string query = "Insert into employee_records (AccountID, TimeStart, CustomerID, ServiceID)" +
+                            "Value(@accountID, @timeStart, @customerID, @serviceID)";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
                             command.Parameters.AddWithValue("@accountID", accountID);
                             command.Parameters.AddWithValue("@timeStart", startTime);
                             command.Parameters.AddWithValue("@customerID", ticketID);
+                            command.Parameters.AddWithValue("@serviceID", serviceID);
 
                             await command.ExecuteNonQueryAsync();
                             MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

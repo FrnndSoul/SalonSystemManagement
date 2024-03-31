@@ -1,6 +1,7 @@
 ﻿using Guna.UI2.WinForms;
 using System;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using TriforceSalon.Class_Components;
 
 namespace TriforceSalon.UserControls.Employee_Controls
@@ -10,8 +11,11 @@ namespace TriforceSalon.UserControls.Employee_Controls
         public static EmployeeLock employeeLockInstance;
         public EmployeeTicketTransaction transaction = new EmployeeTicketTransaction();
         public TransactionMethods transactionMethods = new TransactionMethods();
+        RatingsUserControl ratings = new RatingsUserControl();  
         SalonServices salonServices = new SalonServices();
         private RealTimeClock userClock;
+        public static int serviceID;
+        public static long customerID;
 
         public EmployeeLock()
         {
@@ -29,9 +33,12 @@ namespace TriforceSalon.UserControls.Employee_Controls
         {
             long CustID = Convert.ToInt64(CustomerIDTxtB.Text);
             string serviceVariation = CustomerServiceTxtB.Text;
-
+            serviceID = await salonServices.GetServiceVariationID(serviceVariation);
+            customerID = CustID;
             EmployeeDoneBtn.Enabled = false;
             await transaction.EmployeeProcessCompleteAsync(CustID, serviceVariation);
+
+            //ratings.GetCustomerService(CustID, serviceID);
             try
             {
                 //test
@@ -49,7 +56,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
                 EmployeeDoneBtn.Enabled = true;
             }
         }
-
+        
         private void AddServiceChckB_CheckedChanged(object sender, EventArgs e)
         {
             Guna2CustomCheckBox checkbox = sender as Guna2CustomCheckBox;

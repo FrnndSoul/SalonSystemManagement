@@ -147,6 +147,15 @@ namespace TriforceSalon.Ticket_System
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
+
+                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE = ReferenceNumber = @refNum";
+                    using(MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@refNum", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+
+
                     string query = "Insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, PriorityStatus, ServiceGroupID) " +
                         "VALUES (@transactionID, @customerName, @customerAge, @customerNumber, @prioStatus, @serviceGroupID)";
 

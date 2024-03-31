@@ -41,6 +41,12 @@
             this.AppointmentDateTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -57,12 +63,6 @@
             this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -293,6 +293,43 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ServicesGDGVVControl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ServicesGDGVVControl_CellContentClick);
             // 
+            // ServiceTypeCol
+            // 
+            this.ServiceTypeCol.HeaderText = "ServiceType";
+            this.ServiceTypeCol.Name = "ServiceTypeCol";
+            this.ServiceTypeCol.ReadOnly = true;
+            // 
+            // SNameCol
+            // 
+            this.SNameCol.HeaderText = "Service Name";
+            this.SNameCol.Name = "SNameCol";
+            this.SNameCol.ReadOnly = true;
+            // 
+            // PrefEmpCol
+            // 
+            this.PrefEmpCol.HeaderText = "Preferred Employee";
+            this.PrefEmpCol.Name = "PrefEmpCol";
+            this.PrefEmpCol.ReadOnly = true;
+            // 
+            // AmountCol
+            // 
+            this.AmountCol.HeaderText = "Amount";
+            this.AmountCol.Name = "AmountCol";
+            this.AmountCol.ReadOnly = true;
+            // 
+            // RemoveServiceCol
+            // 
+            this.RemoveServiceCol.HeaderText = "X";
+            this.RemoveServiceCol.Name = "RemoveServiceCol";
+            this.RemoveServiceCol.ReadOnly = true;
+            // 
+            // QueNumCol
+            // 
+            this.QueNumCol.HeaderText = "Queue Number";
+            this.QueNumCol.Name = "QueNumCol";
+            this.QueNumCol.ReadOnly = true;
+            this.QueNumCol.Visible = false;
+            // 
             // AddLServiceListBtn
             // 
             this.AddLServiceListBtn.Animated = true;
@@ -501,6 +538,7 @@
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
             this.CustomerPhoneNTxtB.PlaceholderText = "";
+            this.CustomerPhoneNTxtB.ReadOnly = true;
             this.CustomerPhoneNTxtB.SelectedText = "";
             this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(181, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
@@ -524,6 +562,7 @@
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
+            this.CustomerAgeTxtB.ReadOnly = true;
             this.CustomerAgeTxtB.SelectedText = "";
             this.CustomerAgeTxtB.Size = new System.Drawing.Size(83, 36);
             this.CustomerAgeTxtB.TabIndex = 2;
@@ -547,6 +586,7 @@
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
             this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.ReadOnly = true;
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(272, 36);
             this.CustomerNameTxtB.TabIndex = 1;
@@ -571,43 +611,6 @@
             this.ProcessCustomerBtn.Text = "Activate Appointment";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
-            // 
-            // ServiceTypeCol
-            // 
-            this.ServiceTypeCol.HeaderText = "ServiceType";
-            this.ServiceTypeCol.Name = "ServiceTypeCol";
-            this.ServiceTypeCol.ReadOnly = true;
-            // 
-            // SNameCol
-            // 
-            this.SNameCol.HeaderText = "Service Name";
-            this.SNameCol.Name = "SNameCol";
-            this.SNameCol.ReadOnly = true;
-            // 
-            // PrefEmpCol
-            // 
-            this.PrefEmpCol.HeaderText = "Preferred Employee";
-            this.PrefEmpCol.Name = "PrefEmpCol";
-            this.PrefEmpCol.ReadOnly = true;
-            // 
-            // AmountCol
-            // 
-            this.AmountCol.HeaderText = "Amount";
-            this.AmountCol.Name = "AmountCol";
-            this.AmountCol.ReadOnly = true;
-            // 
-            // RemoveServiceCol
-            // 
-            this.RemoveServiceCol.HeaderText = "X";
-            this.RemoveServiceCol.Name = "RemoveServiceCol";
-            this.RemoveServiceCol.ReadOnly = true;
-            // 
-            // QueNumCol
-            // 
-            this.QueNumCol.HeaderText = "Queue Number";
-            this.QueNumCol.Name = "QueNumCol";
-            this.QueNumCol.ReadOnly = true;
-            this.QueNumCol.Visible = false;
             // 
             // EditAppointmentUserControl
             // 

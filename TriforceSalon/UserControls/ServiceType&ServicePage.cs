@@ -195,6 +195,8 @@ namespace TriforceSalon.UserControls
                 int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
                 await salonServices.UpdateSalonServices(servarID);
                 //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                salonServices.ClearServices();
+                BindedServiceItemDGV.Rows.Clear();
                 manager.DisableButtons(true);
             }
 
@@ -209,11 +211,10 @@ namespace TriforceSalon.UserControls
 
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
+            BindedServiceItemDGV.Rows.Clear();
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
             manager.DisableButtons(true);
-
-
         }
 
         private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)

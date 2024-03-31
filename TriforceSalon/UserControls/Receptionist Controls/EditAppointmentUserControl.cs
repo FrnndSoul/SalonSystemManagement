@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -135,24 +136,32 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (isOnTime == true)
                 {
-                    await TestProcessCustomer(ServicesGDGVVControl, "PRIORITY");
+                    await TestProcessCustomer(ServicesGDGVVControl, "PRIORITY", Convert.ToInt64(ID));
                 }
                 else
                 {
-                    await TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                    await TestProcessCustomer(ServicesGDGVVControl, "NORMAL", Convert.ToInt64(ID));
                 }
                 transactionMethods.GeneratePDFTicket(ID, name, age);
             }
             ProcessCustomerBtn.Enabled = true;
         }
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, long ID)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
+
+                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE = ReferenceNumber = @refNum";
+                    using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@refNum", ID);
+                        await command.ExecuteNonQueryAsync();
+                    }
+
                     string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
                         " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID, @priorityStatus)";
 
