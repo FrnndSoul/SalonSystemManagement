@@ -490,7 +490,7 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
                     string query = "SELECT st.ServiceTypeName FROM service_type st " +
-                        "JOIN salon_services ss ON st.ServiceTypeID = ss.ServiceTypeID " +
+                        "JOIN salon_services ss ON st.ServiceID = ss.ServiceTypeID " +
                         "WHERE ss.ServiceName = @serviceVariation";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))

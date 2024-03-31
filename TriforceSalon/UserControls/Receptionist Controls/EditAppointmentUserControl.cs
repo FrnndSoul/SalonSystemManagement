@@ -124,6 +124,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ProcessCustomerBtn.Enabled = true;
                 return;
             }
 
@@ -144,6 +145,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 transactionMethods.GeneratePDFTicket(ID, name, age);
             }
+            AppointmentsUserControls appointment = new AppointmentsUserControls();
+            UserControlNavigator.ShowControl(appointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
+
             ProcessCustomerBtn.Enabled = true;
         }
 

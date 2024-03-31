@@ -534,7 +534,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -544,6 +544,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 ValidateCashTextbox();
             }
 
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }*/
+
+            // Allow digits, control characters, and a single period
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Allow the backspace key
+            if (e.KeyChar == '\b')
+            {
+                return;
+            }
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ValidateCashTextbox();
+            }
+
+            // Prevent multiple periods
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -819,6 +842,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void GcashPayment_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow letters, space, and backspace
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the length exceeds the maximum allowed length (30 characters)
+            if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

@@ -89,6 +89,7 @@ namespace TriforceSalon.UserControls
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceTypeBtn.Enabled = true;
                 return;
             }
 
@@ -158,8 +159,8 @@ namespace TriforceSalon.UserControls
                 || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceBtn.Enabled = true;
                 return;
-
             }
 
             DialogResult result = MessageBox.Show("Are you sure with the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -173,7 +174,6 @@ namespace TriforceSalon.UserControls
                 BindedServiceItemDGV.Rows.Clear();
             }
             AddServiceBtn.Enabled = true;
-
         }
 
         private async void UpdateServBtn_Click(object sender, EventArgs e)

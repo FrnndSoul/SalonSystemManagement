@@ -44,6 +44,7 @@ namespace TriforceSalon.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.EmployeeLockContent = new System.Windows.Forms.Panel();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             this.GeneralQPanel.SuspendLayout();
             this.SpecialQPanel.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -83,7 +84,7 @@ namespace TriforceSalon.UserControls
             this.EmployeeLogOutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.EmployeeLogOutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.EmployeeLogOutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.EmployeeLogOutBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.EmployeeLogOutBtn.FillColor = System.Drawing.Color.Red;
             this.EmployeeLogOutBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmployeeLogOutBtn.ForeColor = System.Drawing.Color.White;
             this.EmployeeLogOutBtn.Location = new System.Drawing.Point(1568, 1012);
@@ -241,11 +242,30 @@ namespace TriforceSalon.UserControls
             this.EmployeeLockContent.Size = new System.Drawing.Size(1278, 564);
             this.EmployeeLockContent.TabIndex = 19;
             // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 26;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshBtn.ForeColor = System.Drawing.Color.White;
+            this.RefreshBtn.Location = new System.Drawing.Point(1568, 228);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(327, 54);
+            this.RefreshBtn.TabIndex = 20;
+            this.RefreshBtn.Text = "Refresh List";
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
+            // 
             // EmployeeUserConrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.RefreshBtn);
             this.Controls.Add(this.SpecialQPanel);
             this.Controls.Add(this.GeneralQPanel);
             this.Controls.Add(this.EmployeeLogOutBtn);
@@ -279,5 +299,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2Panel GeneralQPanel;
         public Guna.UI2.WinForms.Guna2Panel SpecialQPanel;
         public System.Windows.Forms.Panel EmployeeLockContent;
+        private Guna.UI2.WinForms.Guna2Button RefreshBtn;
     }
 }

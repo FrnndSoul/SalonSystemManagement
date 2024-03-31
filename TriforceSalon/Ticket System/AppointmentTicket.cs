@@ -148,7 +148,7 @@ namespace TriforceSalon.Ticket_System
                 {
                     await conn.OpenAsync();
 
-                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE = ReferenceNumber = @refNum";
+                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE  ReferenceNumber = @refNum";
                     using(MySqlCommand command = new MySqlCommand(updateQuery, conn))
                     {
                         command.Parameters.AddWithValue("@refNum", ID);
@@ -187,8 +187,9 @@ namespace TriforceSalon.Ticket_System
                     }
                 }
                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                transactionMethods.GeneratePDFTicket(ID, name, age);
                 await appointment.LoadPresentCustomer();
+                transactionMethods.GeneratePDFTicket(ID, name, age);
+
             }
             catch(Exception ex)
             {

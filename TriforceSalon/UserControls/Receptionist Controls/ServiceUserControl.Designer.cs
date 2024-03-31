@@ -457,6 +457,7 @@
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(331, 36);
             this.CustomerNameTxtB.TabIndex = 1;
+            this.CustomerNameTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerNameTxtB_KeyPress);
             // 
             // ProcessCustomerBtn
             // 

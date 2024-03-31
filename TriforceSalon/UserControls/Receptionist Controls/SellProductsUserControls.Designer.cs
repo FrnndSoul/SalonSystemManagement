@@ -441,6 +441,7 @@
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(314, 39);
             this.CustomerNameTxtB.TabIndex = 27;
+            this.CustomerNameTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerNameTxtB_KeyPress);
             // 
             // discChckBx
             // 

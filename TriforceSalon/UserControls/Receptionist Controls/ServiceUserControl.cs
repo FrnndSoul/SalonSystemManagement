@@ -42,7 +42,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
 
             await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
         }
 
         /*public void GetServiceTypeData()
@@ -259,6 +259,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void PEmployeeComB_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow letters, space, and backspace
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the length exceeds the maximum allowed length (30 characters)
+            if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

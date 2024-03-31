@@ -625,6 +625,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = true;
         }
 
+        private void TransactionIDBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow digits and control characters (including backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Get the current text in the textbox
+            string currentText = TransactionIDBox.Text;
+
+            // Calculate the total length if the new character is added
+            int totalLength = currentText.Length + (e.KeyChar == '\b' ? -1 : 1);
+
+            // Check if the total length exceeds the maximum allowed length
+            if (totalLength > 8)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
         public async Task FillServiceAcquiredAsync(long transactionID, Guna2DataGridView serviceAcquiredDGV)
         {
 
@@ -762,6 +785,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AmountBox.Text = "";
             DiscountBox.Text = "";
             TotalAmountTxtB.Text = "";
+            CustomerMoneyInput.Text = "";
 
             ProductsBoughtDGV.Rows.Clear();
             ServiceAcquiredDGV.Rows.Clear();

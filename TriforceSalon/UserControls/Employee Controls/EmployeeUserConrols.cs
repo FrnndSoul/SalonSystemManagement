@@ -298,5 +298,12 @@ namespace TriforceSalon.UserControls
                 }
             }
         }
+
+        private async void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            await EmployeeUserConrols.employeeUserConrolsInstance.LoadSpecialCustomersAsync(ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+            await EmployeeUserConrols.employeeUserConrolsInstance.LoadGeneralCustomersAsync(ServiceTypeNameLbl.Text, Convert.ToInt32(Method.AccountID));
+
+        }
     }
 }

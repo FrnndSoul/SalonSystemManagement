@@ -84,6 +84,7 @@
             this.Cnum.Size = new System.Drawing.Size(35, 13);
             this.Cnum.TabIndex = 18;
             this.Cnum.Text = "label9";
+            this.Cnum.Visible = false;
             // 
             // ServiceVarID
             // 
@@ -93,6 +94,7 @@
             this.ServiceVarID.Size = new System.Drawing.Size(35, 13);
             this.ServiceVarID.TabIndex = 17;
             this.ServiceVarID.Text = "label8";
+            this.ServiceVarID.Visible = false;
             // 
             // EmpID
             // 
@@ -102,6 +104,7 @@
             this.EmpID.Size = new System.Drawing.Size(35, 13);
             this.EmpID.TabIndex = 16;
             this.EmpID.Text = "label7";
+            this.EmpID.Visible = false;
             // 
             // label6
             // 
