@@ -20,6 +20,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 {
     public partial class PaymentsUserControls : UserControl
     {
+        public static PaymentsUserControls paymentInstance;
         Inventory inventory = new Inventory();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
@@ -35,6 +36,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             InitializeComponent();
             AdjustCheckBoxSize(PWDCheckbox);
+            paymentInstance = this;
         }
 
         private void PaymentsUserControls_Load(object sender, EventArgs e)
@@ -45,7 +47,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void GcashPayment_Click(object sender, EventArgs e)
         {
             //gcashProcess1.Visible = true;
-            GcashProcess gcash = new GcashProcess();
+            GcashProcessB gcash = new GcashProcessB();
             UserControlNavigator.ShowControl(gcash, OtherTransactionContainer);
         }
 
