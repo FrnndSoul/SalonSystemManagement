@@ -900,8 +900,6 @@
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Panel PaymentPanel;
@@ -923,7 +921,7 @@
         private Guna.UI2.WinForms.Guna2Button VoidBtn;
         private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Payment_Methods.GcashProcess gcashProcess1;
+        private Payment_Methods.GcashProcessB gcashProcess1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
         private Guna.UI2.WinForms.Guna2TextBox DiscountBox;
         private System.Windows.Forms.Label label1;
@@ -947,5 +945,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox TotalAmountTxtB;
         private Guna.UI2.WinForms.Guna2CheckBox PWDCheckbox;
+        public Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
     }
 }
