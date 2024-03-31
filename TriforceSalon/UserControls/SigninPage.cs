@@ -41,15 +41,25 @@ namespace TriforceSalon
 
         private async void SigninBtn_Click_1(object sender, EventArgs e)
         {
+            if (UsernameTxtbox.ReadOnly == true || PasswordTxtbox.ReadOnly == true)
+            {
+                return;
+            }
+
+            UsernameTxtbox.ReadOnly = true;
+            PasswordTxtbox.ReadOnly = true;
+
+            await Task.Delay(1000);
+
             string Username = UsernameTxtbox.Text;
             string Password = PasswordTxtbox.Text;
-            SigninBtn.Enabled = false;
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
                 MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SigninBtn.Enabled = true;
+                UsernameTxtbox.ReadOnly = false;
+                PasswordTxtbox.ReadOnly = false;
                 return;
             }
 
@@ -64,8 +74,6 @@ namespace TriforceSalon
                     {
                         AdminForm adminForm = new AdminForm();
                         UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
-                        //mainForm.ShowAdmin();
-                        SigninBtn.Enabled = true;
                         break;
                     }
                 }
@@ -75,55 +83,16 @@ namespace TriforceSalon
 
             try
             {
-                if (!await Method.LoginAsync(Username, Password))
-                {
-                    MessageBox.Show("Login Failed!", "Error",
-                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                await Method.LoginAsync(Username, Password);
                 Clear();
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                SigninBtn.Enabled = true;
-            }
-            finally
-            {
-                SigninBtn.Enabled = true;
-                //Saul, Wala kang guard clause kapag tama yung ID at mali ang password
             }
 
-            /*string Username = UsernameTxtbox.Text;
-            string Password = PasswordTxtbox.Text;
-
-            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
-            {
-                MessageBox.Show("Kindly fill up all the information \nneeded, thank you.", "Warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.Equals(Username, "Admin", StringComparison.OrdinalIgnoreCase)
-                && string.Equals(Password, "Admin123", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show("Admin log in success", "Welcome",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Form openForm in Application.OpenForms)
-                {
-                    if (openForm is MainForm mainForm)
-                    {
-                        AdminForm adminForm = new AdminForm();
-                        UserControlNavigator.ShowControl(adminForm, MainForm.mainFormInstance.MainFormContent);
-                        //mainForm.ShowAdmin();
-                        break;
-                    }
-                }
-                Clear();
-                return;
-            }
-
-            Method.Login(Username, Password);
-            Clear();*/
+            UsernameTxtbox.ReadOnly = false;
+            PasswordTxtbox.ReadOnly = false;
         }
     }
 }
