@@ -306,6 +306,7 @@ namespace TriforceSalon
 
         public async void DiscardFunc()
         {
+            await LoadUserData();
             EditBtn.Visible = true;
             NameBox.Enabled = false;
             UsernameBox.Enabled = false;
@@ -317,8 +318,6 @@ namespace TriforceSalon
             AccessBox.Enabled = false;
             ServiceTypeBox.Enabled = false;
             CreateBtn.Visible = true;
-
-            await LoadUserData();
         }
 
         public static void ReadUserData(int accountID)
