@@ -308,14 +308,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
-           /* if (Age >= 60)
+            if (Age >= 60)
             {
                 PWDCheckbox.Checked = true;
-                int amountValue = Convert.ToInt32(Amount);
+                /*int amountValue = Convert.ToInt32(Amount);
                 Amount = (int)(amountValue * 0.8);
                 int discount = (int)(amountValue * 0.2);
-                DiscountBox.Text = discount.ToString();
-            }*/
+                DiscountBox.Text = discount.ToString();*/
+            }
         }
 
 
