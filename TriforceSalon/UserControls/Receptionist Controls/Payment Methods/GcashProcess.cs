@@ -46,7 +46,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
         private void PaymentBtn_Click(object sender, EventArgs e)
         {
             long TransactionID = Convert.ToInt64(PaymentsUserControls.paymentInstance.TransactionIDBox.Text);
-            foreach (Form openForm in Application.OpenForms)
+            /*foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
@@ -63,7 +63,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
                         }
                     }
                 }
-            }
+            }*/
 
             try
             {
