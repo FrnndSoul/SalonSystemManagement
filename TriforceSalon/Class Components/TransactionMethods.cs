@@ -344,9 +344,9 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
 
                             await command.ExecuteNonQueryAsync();
-                            MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
