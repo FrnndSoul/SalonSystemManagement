@@ -196,9 +196,8 @@ namespace TriforceSalon.Ticket_System
                     }
                 }
                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await appointment.LoadPresentCustomer();
                 transactionMethods.GeneratePDFTicket(ID, name, age);
-
+                await appointment.LoadPresentCustomer();
             }
             catch(Exception ex)
             {
