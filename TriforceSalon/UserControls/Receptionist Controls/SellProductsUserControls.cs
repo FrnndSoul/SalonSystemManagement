@@ -598,12 +598,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+/*            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
             decimal extractedAmount = ExtractAmount(TotLbl.Text);
-            try
+*/            try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
+                    decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+                    decimal extractedAmount = ExtractAmount(TotLbl.Text);
+
                     if (extractedAmount <= cash)
                     {
                         if (CustomerNameTxtB.Text == null || CustomerNameTxtB.Text == "")
@@ -628,7 +631,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
                     int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                    MessageBox.Show(Convert.ToString(ID));
+                    //MessageBox.Show(Convert.ToString(ID));
                     await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
                     transaction.ClearContents();
                 }

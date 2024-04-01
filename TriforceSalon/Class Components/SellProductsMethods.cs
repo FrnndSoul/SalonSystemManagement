@@ -231,7 +231,9 @@ namespace TriforceSalon.Class_Components
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
-                string query = "select ItemID, ItemName, Photo, Cost from inventory where ItemName Like @search LIMIT 100";
+                //string query = "select ItemID, ItemName, Photo, Cost from inventory where ItemName Like @search LIMIT 100";
+                //string query = "SELECT ItemID, ItemName, Photo, SRP FROM inventory WHERE ItemName Like @search AND STOCK != 0 LIMIT 100";
+                string query = "SELECT ItemID, ItemName, Photo, SRP FROM inventory WHERE ItemName LIKE @search AND STOCK <> 0 LIMIT 100";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
