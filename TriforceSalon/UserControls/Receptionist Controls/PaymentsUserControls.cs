@@ -504,13 +504,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (cash < Convert.ToDecimal(TotalAmountTxtB.Text))
             {
                 MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {
                 if (cash > Convert.ToDecimal(TotalAmountTxtB.Text))
                 {
                     //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(TotalAmountTxtB.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ChangePaymentStatus("PAID");
                     GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
@@ -564,7 +565,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void ClearFieldsBtn_Click(object sender, EventArgs e)
         {
             DefaultLoad();
-            
+            ProductsBoughtDGV.Rows.Clear();
+            ServiceAcquiredDGV.Rows.Clear();
+
         }
 
         public async Task FillProductsBoughtAsync(long transactionID, Guna2DataGridView productsBoughtDGV)
@@ -625,6 +628,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             OverallPrice();
             PaymentBtn.Enabled = true;
+            guna2Button1.Enabled = true;
         }
 
         private void TransactionIDBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -805,6 +809,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = false;
             ClearFieldsBtn.Enabled = false;
             CalculateTotalBtn.Enabled = false;
+            guna2Button1.Enabled = false;
+
 
 
             /*cardProcess1.Visible = false;
@@ -895,6 +901,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public void GeneratePDFBothReceipt()
         {
             decimal subtotalAmount = decimal.Parse(AmountBox.Text);
+            decimal totAmount = decimal.Parse(TotalAmountTxtB.Text);
             decimal discount = decimal.Parse(DiscountBox.Text);
             decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
             int totalProductQuantity = 0;
@@ -907,7 +914,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 return;
             }
 
-            if (cashEntered < subtotalAmount)
+            if (cashEntered < totAmount)
             {
                 MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
