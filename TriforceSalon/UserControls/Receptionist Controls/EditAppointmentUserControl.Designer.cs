@@ -140,6 +140,7 @@
             // 
             // ServiceFL
             // 
+            this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
             this.ServiceFL.Location = new System.Drawing.Point(14, 80);
             this.ServiceFL.Name = "ServiceFL";
