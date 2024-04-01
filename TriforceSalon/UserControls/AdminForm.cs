@@ -1,54 +1,84 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Asn1.X509;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using TriforceSalon.Class_Components;
 
 namespace TriforceSalon
 {
     public partial class AdminForm : UserControl
     {
-        public static byte[] PhotoLocal, PhotoDB;
-        public static int AccountStatusReader, IDReader, UserRow;
+        public static byte[] PhotoDB, newUpload;
+        public static int AccountStatusReader, IDReader, UserRow, ServiceIDReader;
         public static string NameReader, UsernameReader, EmailReader,
-            SelectedUsername;
+            SelectedUsername, AccountAccessReader, AvailabilityReader;
         public static DateTime BirthdateReader;
-        public static string mysqlcon = "server=localhost;user=root;database=salondb;password=";
+        public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
         public AdminForm()
         {
             InitializeComponent();
             Method.EclipsePhotoBox(Photo);
+            this.ServiceTypeBox.Style = (Guna.UI2.WinForms.Enums.TextBoxStyle)ComboBoxStyle.DropDownList;
+            this.ServiceTypeBox.Items.Clear();
+            SetRoles(ServiceTypeBox);
         }
 
-        private void AdminForm_Load(object sender, EventArgs e)
+        private async void AdminForm_Load(object sender, EventArgs e)
         {
-            LoadUserData();
-            
+            //            await LoadUserData();
+
             object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1,3);
-            UserDGV_CellContentClick_1(select, args);  
+            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
+            UserDGV_CellContentDoubleClick(select, args);
+
+            await LoadUserData();
+
         }
 
-        public void LoadUserData()
+        public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
         {
+            using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT DISTINCT ServiceTypeName FROM service_type";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string serviceTypeName = reader["ServiceTypeName"].ToString();
+                            _ = roleBox.Items.Add(serviceTypeName);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /*public void LoadUserData()
+        {
+            foreach (DataGridViewRow row in UserDGV.SelectedRows)
+            {
+                UserDGV.Rows.Remove(row);
+            }
             try
             {
                 connection.Open();
-                string sql = "SELECT `ID`, `Name`, `Username`, `Email`, `Birthdate`, `AccountStatus` FROM `users`";
+                string sql = "SELECT accounts.Username, accounts.AccountID, " +
+                             "salon_employees.AccountAccess, salon_employees.Name, salon_employees.Email, " +
+                             "salon_employees.Birthdate, salon_employees.AccountStatus, " +
+                             "salon_employees.ServiceID, salon_employees.Availability FROM accounts " +
+                             "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -65,11 +95,44 @@ namespace TriforceSalon
             {
                 connection.Close();
             }
-        }
+        }*/
 
-        private void UserTab_Click(object sender, EventArgs e)
+        public async Task LoadUserData()
         {
-            LoadUserData();
+            foreach (DataGridViewRow row in UserDGV.SelectedRows)
+            {
+                UserDGV.Rows.Remove(row);
+            }
+
+            try
+            {
+                await connection.OpenAsync();
+
+                string sql = "SELECT accounts.Username, accounts.AccountID, " +
+                             "salon_employees.AccountAccess, salon_employees.Name, salon_employees.Email, " +
+                             "salon_employees.Birthdate, salon_employees.AccountStatus, " +
+                             "salon_employees.ServiceID, salon_employees.Availability FROM accounts " +
+                             "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID";
+
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                {
+                    await adapter.FillAsync(dataTable);
+                }
+
+                UserDGV.DataSource = dataTable;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n\nat LoadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         private void SignoutBtn_Click(object sender, EventArgs e)
@@ -79,81 +142,65 @@ namespace TriforceSalon
             {
                 if (openForm is MainForm mainForm)
                 {
-                    mainForm.ShowLogin();
+                    //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
         }
 
-        private void ChangeRoleBtn_Click(object sender, EventArgs e)
-        {
-            DialogResult result;
-            if (1000000 < IDReader && IDReader < 9999)
-            {
-                result = MessageBox.Show
-                    ($"Promoting the user {UsernameReader}.\n" +
-                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);                                
-            } else
-            {
-                result = MessageBox.Show
-                    ($"Demoting the user {UsernameReader}.\n" +
-                    $"Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            }
-
-            if (result == DialogResult.Yes)
-            {
-                int newID = Method.GenerateID(IDReader);
-                ChangeUserID(UsernameReader, newID);
-                LoadUserData();
-
-                object select = UserDGV;
-                DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
-                UserDGV_CellContentClick_1(select, args);
-                DiscardFunc();   
-            }
-        }
-
-        public static void ChangeUserID(string User, int ID)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
-                {
-                    connection.Open();
-                    string query =
-                        "UPDATE users SET ID = @ID " +
-                        "WHERE Username = @Username";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
-                    {
-                        querycmd.Parameters.AddWithValue("@ID", ID);
-                        querycmd.Parameters.AddWithValue("@Username", User);
-                        querycmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message + "\n\nat ChangeUserID()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void DiscardBtn_Click(object sender, EventArgs e)
+        private async void DiscardBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Discard changes for the user?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.No)
+            if (result == DialogResult.Yes)
             {
-                checkBox1.CheckState = CheckState.Checked;
-                return;
+                DiscardFunc();
             }
-            DiscardFunc();
+            await LoadUserData();
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e)
+        private void CreateBtn_Click(object sender, EventArgs e)
         {
-            ReadUserData(UsernameReader);
+            this.Visible = false;
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    //mainForm.ShowSignUp();
+                    SignUpForm signUp = new SignUpForm();
+                    UserControlNavigator.ShowControl(signUp, MainForm.mainFormInstance.MainFormContent);
+                    break;
+                }
+            }
+        }
+
+        private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (UserDGV.Rows.Count <= 0)
+            {
+                return;
+            }
+
+            if (UserDGV.SelectedCells.Count > 0)
+            {
+                int userRow = UserDGV.SelectedCells[0].RowIndex;
+                if (userRow >= 0 && userRow < UserDGV.Rows.Count)
+                {
+                    int selectedAccountID = Convert.ToInt32(UserDGV.Rows[userRow].Cells["AccountID"].Value);
+                    ReadUserData(selectedAccountID);
+                    DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader, AccountAccessReader, ServiceIDReader);
+                }
+            }
+        }
+
+        private async void SaveBtn_Click_1(object sender, EventArgs e)
+        {
             string tempName = NameBox.Text;
             string tempUsername = UsernameBox.Text;
             string tempEmail = EmailBox.Text;
+            string tempServiceType = ServiceTypeBox.Text;
+            string tempAccountAccess = AccessBox.Text;
 
             if (!Method.ValidEmail(tempEmail))
             {
@@ -163,21 +210,38 @@ namespace TriforceSalon
             }
 
             DialogResult result = MessageBox.Show($"Save the current changes for user {UsernameReader}?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.No)
+            if (result != DialogResult.Yes)
             {
                 return;
             }
+            Method.ChangeUserData(tempName, tempUsername, tempEmail, tempServiceType, tempAccountAccess, newUpload, Convert.ToInt32(IDBox.Text));
+            await LoadUserData();
+            DiscardFunc();                                                                  
+        }
 
-            Method.ChangeUserData(tempName, tempUsername, PhotoLocal, IDReader);
-            LoadUserData();
-
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
-            UserDGV_CellContentClick_1(select, args);
+        private void DiscardBtn_Click_1(object sender, EventArgs e)
+        {
             DiscardFunc();
         }
 
-        private void UploadBtn_Click(object sender, EventArgs e)
+        private void EditBtn_Click_1(object sender, EventArgs e)
+        {
+            NameBox.Enabled = true;
+            UsernameBox.Enabled = true;
+            EmailBox.Enabled = true;
+            UploadBtn.Enabled = true;
+            AccessBox.Enabled = true;
+            ServiceTypeBox.Enabled = true;
+
+            UserDGV.Enabled = false;
+
+            CreateBtn.Visible = false;
+            SaveBtn.Visible = true;
+            DiscardBtn.Visible = true;
+            EditBtn.Visible = false;
+        }
+
+        private void UploadBtn_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -193,12 +257,16 @@ namespace TriforceSalon
                 using (MemoryStream ms = new MemoryStream())
                 {
                     image.Save(ms, image.RawFormat);
-                    PhotoLocal = ms.ToArray();
+                    newUpload = ms.ToArray();
                 }
+            }
+            else
+            {
+                newUpload = PhotoDB;
             }
         }
 
-        public void DisplayUserData(byte[] PhotoInput, string NameInput, string UsernameInput, string EmailInput, DateTime BirthdateInput, int Status, int IDInput)
+        public void DisplayUserData(byte[] PhotoInput, string NameInput, string UsernameInput, string EmailInput, DateTime BirthdateInput, int Status, int IDInput, string Access, int ServiceID)
         {
             if (PhotoInput != null && PhotoInput.Length > 0)
             {
@@ -211,85 +279,88 @@ namespace TriforceSalon
             UsernameBox.Text = UsernameInput;
             EmailBox.Text = EmailInput;
             BirthdayPicker.Value = BirthdateInput;
-            StatusBox.Text = Status.ToString();
+
+            if (Status == 0)
+            {
+                StatusBox.Text = "Great";
+            } else if (Status == 1)
+            {
+                StatusBox.Text = "Good";
+            } else if (Status == 2)
+            {
+                StatusBox.Text = "Critical";
+            } else if (Status == 3)
+            {
+                StatusBox.Text = "Inactive";
+            } else
+            {
+                StatusBox.Text = "Deactivated";
+            }
+
             IDBox.Text = IDInput.ToString();
+            AccessBox.Text = Access;
+
+            string roleName = GetServiceTypeName(ServiceID);
+            ServiceTypeBox.Text = roleName;
         }
 
-        private void UserDGV_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        public async void DiscardFunc()
         {
-            UserRow = UserDGV.SelectedCells[0].RowIndex;
-
-            if (UserRow < 0 || UserRow >= UserDGV.Rows.Count)
-            {
-                return;
-            }
-            string SelectedUsername = UserDGV.Rows[UserRow].Cells["Username"].Value.ToString();    
-            ReadUserData(SelectedUsername);
-            DisplayUserData(PhotoDB, NameReader, UsernameReader, EmailReader, BirthdateReader, AccountStatusReader, IDReader);
-        }
-
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                NameBox.Enabled = true;
-                UsernameBox.Enabled = true;
-                EmailBox.Enabled = true;
-                UploadBtn.Enabled = true;
-                SaveBtn.Visible = true;
-                ChangeRoleBtn.Visible = true;
-                DiscardBtn.Visible = true;
-                checkBox1.Enabled = false;
-            }
-        }
-
-        public void DiscardFunc()
-        {
-            checkBox1.CheckState = CheckState.Unchecked;
-
-            checkBox1.Enabled = true;
+            await LoadUserData();
+            EditBtn.Visible = true;
             NameBox.Enabled = false;
             UsernameBox.Enabled = false;
             EmailBox.Enabled = false;
             UploadBtn.Enabled = false;
             SaveBtn.Visible = false;
-            ChangeRoleBtn.Visible = false;
             DiscardBtn.Visible = false;
-
-            LoadUserData();
-
-            object select = UserDGV;
-            DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(3, UserRow);
-            UserDGV_CellContentClick_1(select, args);
+            UserDGV.Enabled = true;
+            AccessBox.Enabled = false;
+            ServiceTypeBox.Enabled = false;
+            CreateBtn.Visible = true;
         }
 
-        public static void ReadUserData(string user)
+        public static void ReadUserData(int accountID)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "SELECT * from users WHERE Username = @username";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
+
+                    string query = "SELECT accounts.Username, accounts.AccountID, " +
+                                   "salon_employees.AccountAccess, salon_employees.Name, salon_employees.Email, " +
+                                   "salon_employees.Birthdate, salon_employees.Photo, salon_employees.AccountStatus, " +
+                                   "salon_employees.ServiceID, salon_employees.Availability " +
+                                   "FROM accounts " +
+                                   "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID " +
+                                   "WHERE accounts.AccountID = @accountID";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        querycmd.Parameters.AddWithValue("@username", user);
-                        using (MySqlDataReader reader = querycmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@accountID", accountID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                IDReader = Convert.ToInt32(reader["ID"]);
-                                NameReader = reader["Name"].ToString();
                                 UsernameReader = reader["Username"].ToString();
+                                IDReader = Convert.ToInt32(reader["AccountID"]);
+                                AccountAccessReader = reader["AccountAccess"].ToString();
+                                NameReader = reader["Name"].ToString();
                                 EmailReader = reader["Email"].ToString();
-                                AccountStatusReader = Convert.ToInt32(reader["AccountStatus"]);
                                 BirthdateReader = (DateTime)reader["Birthdate"];
+                                AccountStatusReader = Convert.ToInt32(reader["AccountStatus"]);
+                                ServiceIDReader = Convert.ToInt32(reader["ServiceID"]);
+                                AvailabilityReader = reader["Availability"].ToString();
+
                                 if (!reader.IsDBNull(reader.GetOrdinal("Photo")))
                                 {
                                     long byteSize = reader.GetBytes(reader.GetOrdinal("Photo"), 0, null, 0, 0);
                                     byte[] photoBytes = new byte[byteSize];
                                     reader.GetBytes(reader.GetOrdinal("Photo"), 0, photoBytes, 0, (int)byteSize);
                                     PhotoDB = photoBytes;
+                                    newUpload = photoBytes;
                                 }
                                 else
                                 {
@@ -298,10 +369,7 @@ namespace TriforceSalon
                             }
                             else
                             {
-                                if (user != "admin")
-                                {
-                                    MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
+                                MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -309,9 +377,35 @@ namespace TriforceSalon
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n\nat ReadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n\nat ReadUserData() admin form", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private string GetServiceTypeName(int serviceID)
+        {
+            string serviceTypeName = "";
 
+            using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT ServiceTypeName FROM service_type WHERE ServiceID = @serviceID";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@serviceID", serviceID);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            serviceTypeName = result.ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return serviceTypeName;
+        }
     }
 }

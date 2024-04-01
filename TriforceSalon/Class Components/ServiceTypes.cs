@@ -1,0 +1,296 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TriforceSalon.UserControls;
+
+namespace TriforceSalon.Class_Components
+{
+    public class ServiceTypesInfo
+    {
+        public string ServiceTypeName { get; set; }
+        public int ServiceID { get; set; }
+        public byte[] ServiceTypeImage { get; set; }
+    }
+    public class ServiceTypes
+    {
+        LoadImages loadImages = new LoadImages();
+        ChangeImageSize newImageSIze = new ChangeImageSize();
+        private readonly string mysqlcon;
+        public byte[] imageData;
+        private bool isNewServiceImageSelected = false;
+        public int serviceTypeID;
+        SalonServices salonServices = new SalonServices();
+        //public List<ServiceTypesInfo> serviceTypes;
+
+        public ServiceTypes()
+        {
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+        }
+
+        public async Task ServiceTypeInfoDGV()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "Select ServiceTypeImage, ServiceTypeName, ServiceID from service_type";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                DataTable dt = new DataTable();
+                                dt.Load(reader);
+                                ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.DataSource = dt;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in ServiceTypeInfoDGV(): " + ex.Message);
+            }
+        }
+
+        public void AddServiceTypeImage()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+                openFileDialog.Title = "Select an Image File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Image selectedImage = Image.FromFile(openFileDialog.FileName);
+
+                        // Resize the selected image
+                        int newWidth = 163;
+                        int newHeight = 128;
+
+                        Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
+
+                        ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = resizedImage;
+                        isNewServiceImageSelected = true; //flag ito para sa image
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error loading the image: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        public async Task AddServiceType(string serviceType)
+        {
+            if (ServiceType_ServicePage.servicePageInstance.ServiceTypePicB == null)
+            {
+                MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text) || ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text == "Service Type Name")
+            {
+                MessageBox.Show("Please fill out all the required data", "Missing Informations", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult choices = MessageBox.Show("Are you sure the information you have entered is correct?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (choices == DialogResult.Yes)
+            {
+                try
+                {
+                    using (var conn = new MySqlConnection(mysqlcon))
+                    {
+                        await conn.OpenAsync();
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image.Save(ms, ImageFormat.Jpeg);
+                            imageData = ms.ToArray();
+                        }
+
+                        string query = "Insert into service_type (ServiceTypeName, ServiceTypeImage) values (@service_name, @service_image)";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@service_name", serviceType);
+                            command.Parameters.AddWithValue("@service_image", imageData);
+
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
+                            ClearServiceTypes();
+                        }
+                    }
+                }
+
+                catch (MySqlException a)
+                {
+                    if (a.Number == 1062)
+                    {
+                        MessageBox.Show("Service type already exists", "Add Service Type", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Database Error: " + a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error in AddServiceTypeAsync(): " + ex.Message);
+                }
+            }
+        }
+
+        public void EditServiceTypes()
+        {
+            if (ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DialogResult result = MessageBox.Show("Are you sure you want to edit this service type?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows.Count == 1)
+                {
+                    DataGridViewRow selectedRow = ServiceType_ServicePage.servicePageInstance.ServiceTypeDGV.SelectedRows[0];
+
+                    string ServiceTypeName = selectedRow.Cells["ServiceTypeName"].Value.ToString();
+                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceID"].Value);
+
+                    ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text = ServiceTypeName;
+                    loadImages.ServiceTypeImage(serviceTypeID);
+
+                    HideButton(false, false, true, true);
+
+                    try
+                    {
+                        using (var conn = new MySqlConnection(mysqlcon))
+                        {
+                            conn.Open();
+                            string query = "select ServiceTypeName from service_type where ServiceID = @service_ID";
+
+                            using (MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@service_ID", serviceTypeID);
+
+                                MySqlDataReader reader = command.ExecuteReader();
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error in EditServiceTypes(): " + ex.Message);
+                    }
+                }
+            }
+            serviceTypeID = 0;
+        }
+
+        public async Task UpdateServiceType(int serviceID)
+        {
+
+            if (string.IsNullOrWhiteSpace(ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text) || ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text == "Service Type Name")
+            {
+                MessageBox.Show("Please fill out all the required data", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult choices = MessageBox.Show("Are you sure the information you have entered is correct?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (choices == DialogResult.Yes)
+            {
+                try
+                {
+                    using (var conn = new MySqlConnection(mysqlcon))
+                    {
+                        await conn.OpenAsync();
+                        string query = "UPDATE service_type SET ServiceTypeName = @service_name";
+                        byte[] imageData = null;
+                        if (isNewServiceImageSelected)
+                        {
+                            using (Bitmap bmp = new Bitmap(ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image))
+                            {
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    bmp.Save(ms, ImageFormat.Jpeg); // You can choose the format you want
+                                    imageData = ms.ToArray();
+                                    query += ", ServiceTypeImage = @service_image";
+                                }
+                            }
+                        }
+
+                        query += " WHERE ServiceID = @service_ID";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text);
+                            command.Parameters.AddWithValue("@service_ID", serviceID);
+
+                            if (isNewServiceImageSelected)
+                            {
+                                command.Parameters.AddWithValue("@service_image", imageData);
+                            }
+
+                            await command.ExecuteNonQueryAsync();
+                            await salonServices.PopulateServiceType();
+                            await ServiceTypeInfoDGV();
+                            ClearServiceTypes();
+                            HideButton(true, true, false, false);
+                        }
+                    }
+                }
+                catch (MySqlException a)
+                {
+                    if (a.Number == 1062)
+                    {
+                        MessageBox.Show("Menu name already exists.", "Add variation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show(a.Message, "Add Menu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error in UpdateServiceTypeAsync(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public void ClearServiceTypes()
+        {
+            ServiceType_ServicePage.servicePageInstance.ServiceTypeTxtB.Text = null;
+            ServiceType_ServicePage.servicePageInstance.ServiceTypePicB.Image = null;
+
+        }
+
+
+        public void HideButton(bool add, bool edit, bool cancel, bool update)
+        {
+            ServiceType_ServicePage.servicePageInstance.UpdateServiceTBtn.Visible = update;
+            ServiceType_ServicePage.servicePageInstance.EditServiceTBtn.Visible = edit;
+            ServiceType_ServicePage.servicePageInstance.CancelEditBtn.Visible = cancel;
+            ServiceType_ServicePage.servicePageInstance.AddServiceTypeBtn.Enabled = add;
+
+        }
+
+    }
+}
