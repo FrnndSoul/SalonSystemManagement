@@ -29,8 +29,8 @@ namespace TriforceSalon
                     string query = "UPDATE `inventory` SET `Status` = " +
                         "CASE " +
                             "WHEN `Stock` = 0 THEN 3 " +
-                            "WHEN `Stock` = 0.25 * `Aggregate` THEN 2 " +
-                            "WHEN `Stock` = 0.5 * `Aggregate` THEN 1 " +
+                            "WHEN `Stock` = 0.25 * `StockPerDay` THEN 2 " +
+                            "WHEN `Stock` = 0.5 * `StockPerDay` THEN 1 " +
                             "ELSE 0 " +
                             "END; ";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
@@ -45,23 +45,51 @@ namespace TriforceSalon
             }
         }
 
-        public static int ShipmentID()
-        {
-            Random random = new Random();
-            do
-            {
-                ShipmentReference = random.Next(100000, 1000000);
-
-            } while (Method.DuplicateChecker(ShipmentReference.ToString(), "ShipmentID", "shipments") == true);
-            return ShipmentReference;
-        }
-
         public static int GenerateID()
         {
             Random random = new Random();
             int id = random.Next(10000, 100000);
             return id;
         }
+
+        public static void PullStocks()
+        {
+            try
+            {
+
+            } catch (Exception e) 
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
+        }
+
+        public static bool IsFirstManager()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT COUNT(*) 
+                        FROM salon_employees se
+                        INNER JOIN logs lo ON lo.AccountID = se.AccountID
+                        WHERE se.AccountAccess = 'Manager' AND DATE(lo.TimeIn) = CURDATE()";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+        }
+
 
         public static void AddShippedItems(int ID, int Stock)
         {

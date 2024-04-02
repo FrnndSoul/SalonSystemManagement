@@ -21,6 +21,7 @@ namespace TriforceSalon.UserControls
         public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+
         public EditProduct_Inventory()
         {
             InitializeComponent();
