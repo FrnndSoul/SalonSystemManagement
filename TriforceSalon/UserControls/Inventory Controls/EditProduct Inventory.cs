@@ -16,7 +16,7 @@ namespace TriforceSalon.UserControls
     public partial class EditProduct_Inventory : UserControl
     {
         ManagerPage manager = new ManagerPage();
-        public static string ItemName;
+        public static string ItemName, PerDay;
         public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -27,7 +27,7 @@ namespace TriforceSalon.UserControls
             InitializeComponent();
         }
 
-        public void InitialLoading(string name, int id, decimal srp, int cost, int aggregate, int status, int userID)
+        public void InitialLoading(string name, int id, decimal srp, int cost, int aggregate, int status, int userID, string perDay)
         {
             Name = name;
             ItemID = id;
@@ -35,8 +35,10 @@ namespace TriforceSalon.UserControls
             Aggregate = aggregate;
             Status = status;
             EmployeeID = userID;
+            PerDay = perDay;
 
             NameBox.Text = name;
+            perDayBox.Text = perDay;
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
             AggregateBox.Text = aggregate.ToString();

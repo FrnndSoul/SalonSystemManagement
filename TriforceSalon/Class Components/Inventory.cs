@@ -70,7 +70,7 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `inventory` SET `Stock` = `Stock` + @newStock WHERE `ItemID` = @itemID";
+                    string query = "UPDATE `inventory` SET `Aggregate` = `Aggregate` + @newStock WHERE `ItemID` = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@newStock", Stock);

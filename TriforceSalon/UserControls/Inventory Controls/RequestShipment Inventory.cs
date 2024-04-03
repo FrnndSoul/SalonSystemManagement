@@ -16,15 +16,24 @@ namespace TriforceSalon.UserControls
         ManagerPage manager = new ManagerPage();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public static string ItemName;
+        public static string ItemName, PerDay;
         public static int ItemRow, ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+
+        private void QuantityBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         public static byte[] PhotoByteHolder;
         public RequestShipment_Inventory()
         {
             InitializeComponent();
         }
 
-        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID, int stock)
+        public void InitialLoading(string name, int id, int cost, int aggregate, int status, int userID, int stock, string perDay)
         {
             Name = name;
             ItemID = id;
@@ -32,14 +41,16 @@ namespace TriforceSalon.UserControls
             Aggregate = aggregate;
             Status = status;
             EmployeeID = userID;
+            PerDay = perDay; 
 
             NameBox.Text = name;
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
             AggregateBox.Text = aggregate.ToString();
             StockBox.Text = stock.ToString();
+            perDayBox.Text = perDay;
 
-            if(status == 0)
+            if (status == 0)
             {
                 StatusBox.Text = "Great";
             } else if (status == 1)
@@ -81,6 +92,14 @@ namespace TriforceSalon.UserControls
             if (Convert.ToInt32(QuantityBox.Text) == 0)
             {
                 MessageBox.Show("Cannot ship zero quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int supply = Convert.ToInt32(QuantityBox.Text) + Convert.ToInt32(AggregateBox.Text);
+
+            if (supply < Convert.ToInt32(perDayBox.Text))
+            {
+                MessageBox.Show("The requested supply with the current aggregate is not sufficient", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

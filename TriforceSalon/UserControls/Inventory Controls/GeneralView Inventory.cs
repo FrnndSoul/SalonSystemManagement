@@ -19,7 +19,7 @@ namespace TriforceSalon.UserControls
         ManagerPage manager = new ManagerPage();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public static string ItemName;
+        public static string ItemName, PerDay;
         public static int ItemRow, ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
         public decimal SRP;
@@ -43,14 +43,11 @@ namespace TriforceSalon.UserControls
                 MessageBox.Show("Select a product first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             ReadRow(ItemRow);
-            /*if (Status <= 2)
-            {
-                MessageBox.Show($"There is still ample supply of\n{ItemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }*/
+
             requestShipment_Inventory1.Visible = true;
-            requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock);
+            requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock, PerDay);
             manager.DisableButtons(false);
         }
 
@@ -111,10 +108,7 @@ namespace TriforceSalon.UserControls
             ReadRow(itemRow);
             manager.DisableButtons(false);
             editProduct_Inventory1.Visible = true;
-            //editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
             editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Aggregate, Stock, EmployeeID);
-
-
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
@@ -129,7 +123,7 @@ namespace TriforceSalon.UserControls
             try
             {
                 connection.Open();
-                string sql = "SELECT `ItemID`, `ItemName`, SRP, `Stock`, `Cost`, `Aggregate`, `Status` FROM `inventory`";
+                string sql = "SELECT `ItemID`, `ItemName`, SRP, `Stock`, `StockPerDay`, `Cost`, `Aggregate`, `Status` FROM `inventory`";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -153,6 +147,7 @@ namespace TriforceSalon.UserControls
             ItemName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
             ItemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
             SRP = Convert.ToDecimal(InventoryDGV.Rows[itemRow].Cells["SRP"].Value);
+            PerDay = InventoryDGV.Rows[itemRow].Cells["StockPerDay"].Value.ToString();
             Stock = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Stock"].Value);
             Cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
             Aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);
