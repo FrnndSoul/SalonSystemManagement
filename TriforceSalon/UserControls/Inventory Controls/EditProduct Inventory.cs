@@ -79,12 +79,19 @@ namespace TriforceSalon.UserControls
             string newAggregate = AggregateBox.Text;
             string newID = IDBox.Text;
             string newStock = StockBox.Text;
+            string newPerDay = perDayBox.Text;
             string newSRP = editSRPTxtB.Text;
 
 
-            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
+            if (string.IsNullOrEmpty(newPerDay) || string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Convert.ToInt32(newPerDay) > Convert.ToInt32(newAggregate))
+            {
+                MessageBox.Show("Stock per day cannot be more than the aggregate", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -100,11 +107,12 @@ namespace TriforceSalon.UserControls
                 {
                     connection.Open();
                     string query =
-                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Aggregate = @aggregate, Photo = @photo, Stock = @stock, SRP = @srp " +
+                        "UPDATE inventory SET ItemName = @itemName, StockPerDay = @perDay, Cost = @cost, Aggregate = @aggregate, Photo = @photo, Stock = @stock, SRP = @srp " +
                         "WHERE ItemID = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemName", newName);
+                        querycmd.Parameters.AddWithValue("@perDay", newPerDay);
                         querycmd.Parameters.AddWithValue("@cost", newCost);
                         querycmd.Parameters.AddWithValue("@srp", newSRP);
                         querycmd.Parameters.AddWithValue("@aggregate", newAggregate);
@@ -158,6 +166,14 @@ namespace TriforceSalon.UserControls
             {
                 MessageBox.Show(ex.Message + "\nat LoadPhoto InventoryPage", "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        private void perDayBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
 

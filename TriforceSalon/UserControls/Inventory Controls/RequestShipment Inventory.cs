@@ -54,8 +54,9 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void AddQtyBtn_Click(object sender, EventArgs e)
+        private async void AddQtyBtn_Click(object sender, EventArgs e)
         {
+            await Task.Delay(500);
             int x = Convert.ToInt32(QuantityBox.Text);
             if (x != Convert.ToInt32(AggregateBox.Text))
             {
@@ -64,8 +65,9 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void SubQtyBtn_Click(object sender, EventArgs e)
+        private async void SubQtyBtn_Click(object sender, EventArgs e)
         {
+            await Task.Delay(500);
             int x = Convert.ToInt32(QuantityBox.Text);
             if (x > 0)
             {

@@ -412,7 +412,7 @@
             this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label8.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(236, 588);
+            this.label8.Location = new System.Drawing.Point(279, 588);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(281, 37);
             this.label8.TabIndex = 73;

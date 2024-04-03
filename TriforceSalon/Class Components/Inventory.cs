@@ -63,34 +63,6 @@ namespace TriforceSalon
             }
         }
 
-        public static bool IsFirstManager()
-        {
-            try
-            {
-                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
-                {
-                    conn.Open();
-
-                    string query = @"
-                        SELECT COUNT(*) 
-                        FROM salon_employees se
-                        INNER JOIN logs lo ON lo.AccountID = se.AccountID
-                        WHERE se.AccountAccess = 'Manager' AND DATE(lo.TimeIn) = CURDATE()";
-
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    return count > 0;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                return false;
-            }
-        }
-
-
         public static void AddShippedItems(int ID, int Stock)
         {
             try
@@ -110,6 +82,29 @@ namespace TriforceSalon
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n\nat AddShippedItems()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async static void PullItems()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = @"
+                        UPDATE inventory
+                        SET Stock = StockPerDay,
+                            Aggregate = Aggregate - StockPerDay;";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
             }
         }
 
