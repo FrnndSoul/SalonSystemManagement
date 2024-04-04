@@ -11,6 +11,7 @@ using System.Transactions;
 using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods;
 using static TriforceSalon.Class_Components.SellProductsMethods;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
@@ -597,13 +598,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+/*            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
             decimal extractedAmount = ExtractAmount(TotLbl.Text);
-            try
+*/            try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
-                    if (extractedAmount < cash)
+                    decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+                    decimal extractedAmount = ExtractAmount(TotLbl.Text);
+
+                    if (extractedAmount <= cash)
                     {
                         if (CustomerNameTxtB.Text == null || CustomerNameTxtB.Text == "")
                         {
@@ -612,6 +616,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         }
                         else
                         {
+                            MessageBox.Show($"Customer's change: {cash - extractedAmount}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
                             transaction.ClearContents();
                         }
@@ -626,7 +631,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
                     int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                    MessageBox.Show(Convert.ToString(ID));
+                    //MessageBox.Show(Convert.ToString(ID));
                     await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
                     transaction.ClearContents();
                 }
@@ -783,6 +788,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CalculateTotalPrice();
             PaymentBtn.Enabled = true;
             guna2Button1.Enabled = true;
+            GcashPayment.Enabled = true;
 
         }
         private void CalculateTotalPrice()
@@ -822,7 +828,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
         {
             CustomerIDComB.Enabled = false;
-
+            
             ProductsControlDGV.Columns["DiscountComB"].Visible = true;
             CashTxtBx.Enabled = true;
             CalculateCostBtn.Enabled = true;
@@ -837,11 +843,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CashTxtBx.Enabled = false;
             CalculateCostBtn.Enabled = false;
             CustomerNameTxtB.Enabled = false;
+            PaymentBtn.Enabled = true;
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
         {
+            Gcash2 gcash = new Gcash2();
+            UserControlNavigator.ShowControl(gcash, OtherTransactionContainer);
 
+            AllProductsBtn.Visible = false;
+            ProductsFL.Visible = false;
+            SearchProductsBtn.Visible = false;
+            ProductSearchTxtB.Visible = false;
+
+            OtherTransactionContainer.Visible = true;
+            guna2HtmlLabel12.Visible = true;
+            BackBtn.Visible = true;
         }
 
         private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
@@ -859,6 +876,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            AllProductsBtn.Visible = true;
+            ProductsFL.Visible = true;
+            SearchProductsBtn.Visible = true;
+            ProductSearchTxtB.Visible = true;
+
+            OtherTransactionContainer.Visible = false;
+            guna2HtmlLabel12.Visible = false;
+            BackBtn.Visible = false;
         }
     }
 }

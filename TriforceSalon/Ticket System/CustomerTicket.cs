@@ -61,6 +61,7 @@ namespace TriforceSalon.Test
             string Cserviec = ServiceVarLbl.Text;
             string serviceName = ServiceVarLbl.Text;
             int serviceID = await services.GetServiceVariationID(serviceName);
+            EmployeeUserConrols.employeeUserConrolsInstance.RefreshBtn.Visible = false;
             //string prio = PrioStatusLbl.Text;
 
             /*MessageBox.Show(Convert.ToString(ticketID));

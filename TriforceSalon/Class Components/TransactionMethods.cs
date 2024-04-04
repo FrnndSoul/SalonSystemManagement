@@ -344,9 +344,9 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
 
                             await command.ExecuteNonQueryAsync();
-                            MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
@@ -397,7 +397,7 @@ namespace TriforceSalon.Class_Components
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
                             string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
-                            string numericValue = totalText.Replace("Php.", "").Trim();
+                            string numericValue = totalText.Replace("₱ ", "").Trim();
                             decimal.TryParse(numericValue, out decimal totalAmount);
 
 
@@ -428,15 +428,15 @@ namespace TriforceSalon.Class_Components
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error in PurchaseToReceipt");
+                MessageBox.Show(ex.ToString(), "Error in PurchaseToReceipt");
             }
         }
 
         public void GeneratePDFReceipt(Guna2DataGridView guna2DataGridView1, Label sbLbl, Label dscLbl, Label ttlLbl, Guna2TextBox cashtxtBx, Guna2CheckBox discChckBx, Guna2TextBox custName, int ID)
         {
-            decimal subtotal = decimal.Parse(sbLbl.Text.Replace("Php. ", ""));
-            decimal discount = decimal.Parse(dscLbl.Text.Replace("Php. ", ""));
-            decimal totalAmount = decimal.Parse(ttlLbl.Text.Replace("Php. ", ""));
+            decimal subtotal = decimal.Parse(sbLbl.Text.Replace("₱ ", ""));
+            decimal discount = decimal.Parse(dscLbl.Text.Replace("₱ ", ""));
+            decimal totalAmount = decimal.Parse(ttlLbl.Text.Replace("₱ ", ""));
             string serviceText = custName.Text;
             decimal cashEntered;
 

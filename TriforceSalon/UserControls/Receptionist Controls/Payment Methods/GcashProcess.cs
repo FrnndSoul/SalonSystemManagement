@@ -12,12 +12,12 @@ using System.Windows.Forms;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
 {
-    public partial class GcashProcess : UserControl
+    public partial class GcashProcessB : UserControl
     {
         public static int ReferenceNumber, TransactionID;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public GcashProcess()
+        public GcashProcessB()
         {
             InitializeComponent();
         }
@@ -45,7 +45,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
 
         private void PaymentBtn_Click(object sender, EventArgs e)
         {
-            foreach (Form openForm in Application.OpenForms)
+            long TransactionID = Convert.ToInt64(PaymentsUserControls.paymentInstance.TransactionIDBox.Text);
+            /*foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
                 {
@@ -53,7 +54,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
                     {
                         if (control is PaymentsUserControls paymentUserControl)
                         {
-                            paymentUserControl.ChangePaymentStatus("PAID");
+                            //paymentUserControl.ChangePaymentStatus("PAID");
                             break;
                         }
                         else
@@ -62,14 +63,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
                         }
                     }
                 }
-            }
+            }*/
 
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "INSERT INTO `card_transactions` (`TransactionID`, `ReferenceNumber`) VALUES (@TransactionID, @ReferenceNumber)";
+                    string query = "INSERT INTO `gcash_transactions` (`TransactionID`, `ReferenceNumber`) VALUES (@TransactionID, @ReferenceNumber)";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@TransactionID", TransactionID);

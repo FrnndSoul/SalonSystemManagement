@@ -100,13 +100,14 @@
             this.TransactionIDBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TransactionIDBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TransactionIDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TransactionIDBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TransactionIDBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.TransactionIDBox.ForeColor = System.Drawing.Color.Black;
             this.TransactionIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TransactionIDBox.Location = new System.Drawing.Point(677, 25);
             this.TransactionIDBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TransactionIDBox.Name = "TransactionIDBox";
             this.TransactionIDBox.PasswordChar = '\0';
-            this.TransactionIDBox.PlaceholderText = "";
+            this.TransactionIDBox.PlaceholderText = "Enter Transaction ID";
             this.TransactionIDBox.SelectedText = "";
             this.TransactionIDBox.Size = new System.Drawing.Size(408, 44);
             this.TransactionIDBox.TabIndex = 0;
@@ -301,7 +302,7 @@
             this.CustomerMoneyInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CustomerMoneyInput.Name = "CustomerMoneyInput";
             this.CustomerMoneyInput.PasswordChar = '\0';
-            this.CustomerMoneyInput.PlaceholderText = "";
+            this.CustomerMoneyInput.PlaceholderText = "Enter Cash";
             this.CustomerMoneyInput.SelectedText = "";
             this.CustomerMoneyInput.Size = new System.Drawing.Size(382, 44);
             this.CustomerMoneyInput.TabIndex = 43;
@@ -900,8 +901,6 @@
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Panel PaymentPanel;
@@ -923,7 +922,7 @@
         private Guna.UI2.WinForms.Guna2Button VoidBtn;
         private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Payment_Methods.GcashProcess gcashProcess1;
+        private Payment_Methods.GcashProcessB gcashProcess1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
         private Guna.UI2.WinForms.Guna2TextBox DiscountBox;
         private System.Windows.Forms.Label label1;
@@ -947,5 +946,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox TotalAmountTxtB;
         private Guna.UI2.WinForms.Guna2CheckBox PWDCheckbox;
+        public Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
     }
 }

@@ -121,6 +121,8 @@ namespace TriforceSalon.UserControls
             
             Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
             MessageBox.Show("Item has been added", "Restock Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SupplierBox.Text = string.Empty;
+            QuantityBox.Text = "0";
             BackBtn_Click(null, null);
             manager.DisableButtons(true);
         }
@@ -128,6 +130,8 @@ namespace TriforceSalon.UserControls
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            SupplierBox.Text = string.Empty;
+            QuantityBox.Text = "0";
             manager.DisableButtons(true);
         }
     }

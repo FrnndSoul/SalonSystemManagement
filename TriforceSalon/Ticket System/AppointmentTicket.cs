@@ -24,6 +24,8 @@ namespace TriforceSalon.Ticket_System
         AppointmentsUserControls appointment = new AppointmentsUserControls();
         TransactionMethods transactionMethods = new TransactionMethods();
         SalonServices salonService = new SalonServices();
+        private readonly GetServiceType_ServiceData serviceTypeService = new GetServiceType_ServiceData();
+
 
         public event EventHandler<ScheduleSelectedEventArgs> AppointmentTicketChanged;
         public string transactionID => CustID.Text;
@@ -119,7 +121,9 @@ namespace TriforceSalon.Ticket_System
             DateTime appointmentTime = Convert.ToDateTime(appointmentDate);
             DateTime earliestArrivalTime = appointmentTime.Subtract(allowedWindow);
             string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            string dateNow = DateTime.Now.ToString("MM-dd-yyyy dddd");
 
+            string serviceType = await transactionMethods.GetServiceType(ServiceChosen.Text);
             string ID = CustID.Text;
             string name = Convert.ToString(CustName.Text);
             string age = CustAge.Text;
@@ -128,6 +132,8 @@ namespace TriforceSalon.Ticket_System
             string sChosen = ServiceChosen.Text;
             string amount = SAmount.Text;
             string priority = null;
+            int queue = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
+
 
             bool isCustomerOnTime = false;
 
@@ -136,11 +142,13 @@ namespace TriforceSalon.Ticket_System
             {
                 isCustomerOnTime = true;
                 priority = "PRIORITY";
+                queue = 0;
             }
             else
             {
                 isCustomerOnTime = false;
                 priority = "NORMAL";
+                queue = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
             }
             try
             {
@@ -171,8 +179,8 @@ namespace TriforceSalon.Ticket_System
                         await command.ExecuteNonQueryAsync();
                     }
 
-                    string query2 = "Insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount) " +
-                        "VALUES (@serviceGroupID, @serviceType, @employeeID, @serviceVariation, @serviceVariationID, @amount)";
+                    string query2 = "Insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber) " +
+                        "VALUES (@serviceGroupID, @serviceType, @employeeID, @serviceVariation, @serviceVariationID, @amount, @queue)";
 
                     using(MySqlCommand command = new MySqlCommand(query2, conn))
                     {
@@ -182,14 +190,14 @@ namespace TriforceSalon.Ticket_System
                         command.Parameters.AddWithValue("@serviceVariation", sChosen);
                         command.Parameters.AddWithValue("@serviceVariationID", await salonService.GetServiceVariationID(sChosen));
                         command.Parameters.AddWithValue("@amount", amount);
+                        command.Parameters.AddWithValue("@queue", queue);
 
                         await command.ExecuteNonQueryAsync();
                     }
                 }
                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await appointment.LoadPresentCustomer();
                 transactionMethods.GeneratePDFTicket(ID, name, age);
-
+                await appointment.LoadPresentCustomer();
             }
             catch(Exception ex)
             {

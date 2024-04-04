@@ -299,6 +299,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2Panel GeneralQPanel;
         public Guna.UI2.WinForms.Guna2Panel SpecialQPanel;
         public System.Windows.Forms.Panel EmployeeLockContent;
-        private Guna.UI2.WinForms.Guna2Button RefreshBtn;
+        public Guna.UI2.WinForms.Guna2Button RefreshBtn;
     }
 }
