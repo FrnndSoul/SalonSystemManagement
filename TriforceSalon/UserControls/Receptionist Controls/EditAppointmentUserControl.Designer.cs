@@ -37,6 +37,7 @@
             this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AppointmentDateTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -44,6 +45,7 @@
             this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -138,6 +140,7 @@
             // 
             // ServiceFL
             // 
+            this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
             this.ServiceFL.Location = new System.Drawing.Point(14, 80);
             this.ServiceFL.Name = "ServiceFL";
@@ -147,6 +150,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.CancelBtn);
             this.guna2Panel1.Controls.Add(this.AppointmentDateTxtB);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.ServicesGDGVVControl);
@@ -171,6 +175,27 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(606, 820);
             this.guna2Panel1.TabIndex = 12;
+            // 
+            // CancelBtn
+            // 
+            this.CancelBtn.Animated = true;
+            this.CancelBtn.AutoRoundedCorners = true;
+            this.CancelBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CancelBtn.BorderRadius = 30;
+            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CancelBtn.FillColor = System.Drawing.Color.Red;
+            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelBtn.ForeColor = System.Drawing.Color.White;
+            this.CancelBtn.Location = new System.Drawing.Point(400, 745);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(190, 62);
+            this.CancelBtn.TabIndex = 27;
+            this.CancelBtn.Text = "Cancel Edit";
+            this.CancelBtn.UseTransparentBackground = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // AppointmentDateTxtB
             // 
@@ -229,6 +254,7 @@
             this.SNameCol,
             this.PrefEmpCol,
             this.AmountCol,
+            this.RemoveServiceCol,
             this.QueNumCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -266,6 +292,7 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.Height = 22;
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.ServicesGDGVVControl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ServicesGDGVVControl_CellContentClick);
             // 
             // ServiceTypeCol
             // 
@@ -291,18 +318,25 @@
             this.AmountCol.Name = "AmountCol";
             this.AmountCol.ReadOnly = true;
             // 
+            // RemoveServiceCol
+            // 
+            this.RemoveServiceCol.HeaderText = "X";
+            this.RemoveServiceCol.Name = "RemoveServiceCol";
+            this.RemoveServiceCol.ReadOnly = true;
+            // 
             // QueNumCol
             // 
             this.QueNumCol.HeaderText = "Queue Number";
             this.QueNumCol.Name = "QueNumCol";
             this.QueNumCol.ReadOnly = true;
+            this.QueNumCol.Visible = false;
             // 
             // AddLServiceListBtn
             // 
             this.AddLServiceListBtn.Animated = true;
             this.AddLServiceListBtn.AutoRoundedCorners = true;
             this.AddLServiceListBtn.BackColor = System.Drawing.Color.Transparent;
-            this.AddLServiceListBtn.BorderRadius = 23;
+            this.AddLServiceListBtn.BorderRadius = 30;
             this.AddLServiceListBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.AddLServiceListBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.AddLServiceListBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -310,9 +344,9 @@
             this.AddLServiceListBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.AddLServiceListBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddLServiceListBtn.ForeColor = System.Drawing.Color.White;
-            this.AddLServiceListBtn.Location = new System.Drawing.Point(36, 755);
+            this.AddLServiceListBtn.Location = new System.Drawing.Point(13, 745);
             this.AddLServiceListBtn.Name = "AddLServiceListBtn";
-            this.AddLServiceListBtn.Size = new System.Drawing.Size(256, 48);
+            this.AddLServiceListBtn.Size = new System.Drawing.Size(190, 62);
             this.AddLServiceListBtn.TabIndex = 23;
             this.AddLServiceListBtn.Text = "Add To List";
             this.AddLServiceListBtn.UseTransparentBackground = true;
@@ -505,6 +539,7 @@
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
             this.CustomerPhoneNTxtB.PlaceholderText = "";
+            this.CustomerPhoneNTxtB.ReadOnly = true;
             this.CustomerPhoneNTxtB.SelectedText = "";
             this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(181, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
@@ -528,6 +563,7 @@
             this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
             this.CustomerAgeTxtB.PasswordChar = '\0';
             this.CustomerAgeTxtB.PlaceholderText = "";
+            this.CustomerAgeTxtB.ReadOnly = true;
             this.CustomerAgeTxtB.SelectedText = "";
             this.CustomerAgeTxtB.Size = new System.Drawing.Size(83, 36);
             this.CustomerAgeTxtB.TabIndex = 2;
@@ -551,6 +587,7 @@
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
             this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.ReadOnly = true;
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(272, 36);
             this.CustomerNameTxtB.TabIndex = 1;
@@ -560,7 +597,7 @@
             this.ProcessCustomerBtn.Animated = true;
             this.ProcessCustomerBtn.AutoRoundedCorners = true;
             this.ProcessCustomerBtn.BackColor = System.Drawing.Color.Transparent;
-            this.ProcessCustomerBtn.BorderRadius = 23;
+            this.ProcessCustomerBtn.BorderRadius = 30;
             this.ProcessCustomerBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.ProcessCustomerBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -568,9 +605,9 @@
             this.ProcessCustomerBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ProcessCustomerBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessCustomerBtn.ForeColor = System.Drawing.Color.White;
-            this.ProcessCustomerBtn.Location = new System.Drawing.Point(330, 755);
+            this.ProcessCustomerBtn.Location = new System.Drawing.Point(207, 745);
             this.ProcessCustomerBtn.Name = "ProcessCustomerBtn";
-            this.ProcessCustomerBtn.Size = new System.Drawing.Size(256, 48);
+            this.ProcessCustomerBtn.Size = new System.Drawing.Size(190, 62);
             this.ProcessCustomerBtn.TabIndex = 0;
             this.ProcessCustomerBtn.Text = "Activate Appointment";
             this.ProcessCustomerBtn.UseTransparentBackground = true;
@@ -605,11 +642,6 @@
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
         private Guna.UI2.WinForms.Guna2Button AddLServiceListBtn;
         public Guna.UI2.WinForms.Guna2TextBox transactionIDTxtB;
         private System.Windows.Forms.Label label7;
@@ -628,5 +660,12 @@
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         public Guna.UI2.WinForms.Guna2TextBox AppointmentDateTxtB;
         private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2Button CancelBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
+        private System.Windows.Forms.DataGridViewButtonColumn RemoveServiceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
     }
 }

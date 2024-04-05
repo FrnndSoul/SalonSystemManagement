@@ -10,16 +10,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
+using System.Security.Policy;
 
 namespace TriforceSalon.UserControls
 {
     public partial class GeneralView_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
         public static string ItemName;
         public static int ItemRow, ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
+        public decimal SRP;
 
         public GeneralView_Inventory()
         {
@@ -41,13 +44,14 @@ namespace TriforceSalon.UserControls
                 return;
             }
             ReadRow(ItemRow);
-            if (Status <= 2)
+            /*if (Status <= 2)
             {
                 MessageBox.Show($"There is still ample supply of\n{ItemName}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
+            }*/
             requestShipment_Inventory1.Visible = true;
             requestShipment_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID, Stock);
+            manager.DisableButtons(false);
         }
 
         private void addProduct_Inventory1_VisibleChanged(object sender, EventArgs e)
@@ -105,13 +109,18 @@ namespace TriforceSalon.UserControls
             }
 
             ReadRow(itemRow);
+            manager.DisableButtons(false);
             editProduct_Inventory1.Visible = true;
-            editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
+            //editProduct_Inventory1.InitialLoading(ItemName, ItemID, Cost, Aggregate, Status, EmployeeID);
+            editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Aggregate, Stock, EmployeeID);
+
+
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
             addProduct_Inventory1.Visible = true;
+            manager.DisableButtons(false);
         }
 
         public void LoadInventory()
@@ -143,6 +152,7 @@ namespace TriforceSalon.UserControls
         {
             ItemName = InventoryDGV.Rows[itemRow].Cells["ItemName"].Value.ToString();
             ItemID = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["ItemID"].Value);
+            SRP = Convert.ToDecimal(InventoryDGV.Rows[itemRow].Cells["SRP"].Value);
             Stock = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Stock"].Value);
             Cost = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Cost"].Value);
             Aggregate = Convert.ToInt32(InventoryDGV.Rows[itemRow].Cells["Aggregate"].Value);

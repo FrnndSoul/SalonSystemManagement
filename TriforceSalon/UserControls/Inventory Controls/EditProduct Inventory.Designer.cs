@@ -374,10 +374,10 @@
             this.editSRPTxtB.Name = "editSRPTxtB";
             this.editSRPTxtB.PasswordChar = '\0';
             this.editSRPTxtB.PlaceholderText = "";
-            this.editSRPTxtB.ReadOnly = true;
             this.editSRPTxtB.SelectedText = "";
             this.editSRPTxtB.Size = new System.Drawing.Size(400, 50);
             this.editSRPTxtB.TabIndex = 95;
+            this.editSRPTxtB.TextChanged += new System.EventHandler(this.editSRPTxtB_TextChanged);
             // 
             // EditProduct_Inventory
             // 

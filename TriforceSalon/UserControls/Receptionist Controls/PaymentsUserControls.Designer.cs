@@ -62,10 +62,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.DiscountBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.CardPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -80,12 +80,10 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LoadBtn = new Guna.UI2.WinForms.Guna2Button();
             this.OtherTransactionContainer = new Guna.UI2.WinForms.Guna2Panel();
-            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // TransactionIDBox
@@ -102,16 +100,18 @@
             this.TransactionIDBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TransactionIDBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TransactionIDBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TransactionIDBox.Font = new System.Drawing.Font("Chinacat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TransactionIDBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.TransactionIDBox.ForeColor = System.Drawing.Color.Black;
             this.TransactionIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TransactionIDBox.Location = new System.Drawing.Point(677, 25);
             this.TransactionIDBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TransactionIDBox.Name = "TransactionIDBox";
             this.TransactionIDBox.PasswordChar = '\0';
-            this.TransactionIDBox.PlaceholderText = "";
+            this.TransactionIDBox.PlaceholderText = "Enter Transaction ID";
             this.TransactionIDBox.SelectedText = "";
             this.TransactionIDBox.Size = new System.Drawing.Size(408, 44);
             this.TransactionIDBox.TabIndex = 0;
+            this.TransactionIDBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransactionIDBox_KeyPress);
             // 
             // guna2HtmlLabel1
             // 
@@ -158,7 +158,6 @@
             this.PaymentPanel.Controls.Add(this.VoidBtn);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel14);
             this.PaymentPanel.Controls.Add(this.GcashPayment);
-            this.PaymentPanel.Controls.Add(this.CardPayment);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel15);
             this.PaymentPanel.Controls.Add(this.guna2Button1);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel13);
@@ -201,14 +200,14 @@
             this.TotalAmountTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TotalAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TotalAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TotalAmountTxtB.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.TotalAmountTxtB.ForeColor = System.Drawing.Color.White;
+            this.TotalAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.TotalAmountTxtB.ForeColor = System.Drawing.Color.Black;
             this.TotalAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TotalAmountTxtB.Location = new System.Drawing.Point(254, 1023);
             this.TotalAmountTxtB.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TotalAmountTxtB.Name = "TotalAmountTxtB";
             this.TotalAmountTxtB.PasswordChar = '\0';
-            this.TotalAmountTxtB.PlaceholderText = "Balance";
+            this.TotalAmountTxtB.PlaceholderText = "Total";
             this.TotalAmountTxtB.ReadOnly = true;
             this.TotalAmountTxtB.SelectedText = "";
             this.TotalAmountTxtB.Size = new System.Drawing.Size(349, 44);
@@ -296,13 +295,14 @@
             this.CustomerMoneyInput.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerMoneyInput.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerMoneyInput.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerMoneyInput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CustomerMoneyInput.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.CustomerMoneyInput.ForeColor = System.Drawing.Color.Black;
             this.CustomerMoneyInput.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerMoneyInput.Location = new System.Drawing.Point(990, 909);
             this.CustomerMoneyInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CustomerMoneyInput.Name = "CustomerMoneyInput";
             this.CustomerMoneyInput.PasswordChar = '\0';
-            this.CustomerMoneyInput.PlaceholderText = "";
+            this.CustomerMoneyInput.PlaceholderText = "Enter Cash";
             this.CustomerMoneyInput.SelectedText = "";
             this.CustomerMoneyInput.Size = new System.Drawing.Size(382, 44);
             this.CustomerMoneyInput.TabIndex = 43;
@@ -556,18 +556,38 @@
             this.DiscountBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.DiscountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.DiscountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.DiscountBox.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.DiscountBox.ForeColor = System.Drawing.Color.White;
+            this.DiscountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.DiscountBox.ForeColor = System.Drawing.Color.Black;
             this.DiscountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.DiscountBox.Location = new System.Drawing.Point(297, 967);
+            this.DiscountBox.Location = new System.Drawing.Point(307, 967);
             this.DiscountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.DiscountBox.Name = "DiscountBox";
             this.DiscountBox.PasswordChar = '\0';
             this.DiscountBox.PlaceholderText = "0.00";
             this.DiscountBox.ReadOnly = true;
             this.DiscountBox.SelectedText = "";
-            this.DiscountBox.Size = new System.Drawing.Size(306, 44);
+            this.DiscountBox.Size = new System.Drawing.Size(296, 44);
             this.DiscountBox.TabIndex = 30;
+            // 
+            // PWDCheckbox
+            // 
+            this.PWDCheckbox.AutoSize = true;
+            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.CheckedState.BorderRadius = 0;
+            this.PWDCheckbox.CheckedState.BorderThickness = 0;
+            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PWDCheckbox.Enabled = false;
+            this.PWDCheckbox.Font = new System.Drawing.Font("Stanberry", 20F);
+            this.PWDCheckbox.Location = new System.Drawing.Point(1138, 114);
+            this.PWDCheckbox.Name = "PWDCheckbox";
+            this.PWDCheckbox.Size = new System.Drawing.Size(156, 38);
+            this.PWDCheckbox.TabIndex = 29;
+            this.PWDCheckbox.Text = "is Senior?";
+            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
+            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
+            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
             // 
             // VoidBtn
             // 
@@ -609,7 +629,7 @@
             this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(1206, 1051);
+            this.GcashPayment.Location = new System.Drawing.Point(1121, 1051);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(80, 80);
@@ -618,22 +638,6 @@
             this.GcashPayment.TabStop = false;
             this.GcashPayment.UseTransparentBackground = true;
             this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
-            // 
-            // CardPayment
-            // 
-            this.CardPayment.BackColor = System.Drawing.Color.Transparent;
-            this.CardPayment.Enabled = false;
-            this.CardPayment.Image = global::TriforceSalon.Properties.Resources.Card;
-            this.CardPayment.ImageRotate = 0F;
-            this.CardPayment.Location = new System.Drawing.Point(1120, 1051);
-            this.CardPayment.Name = "CardPayment";
-            this.CardPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.CardPayment.Size = new System.Drawing.Size(80, 80);
-            this.CardPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CardPayment.TabIndex = 24;
-            this.CardPayment.TabStop = false;
-            this.CardPayment.UseTransparentBackground = true;
-            this.CardPayment.Click += new System.EventHandler(this.CardPayment_Click);
             // 
             // guna2HtmlLabel15
             // 
@@ -663,7 +667,7 @@
             this.guna2Button1.IndicateFocus = true;
             this.guna2Button1.Location = new System.Drawing.Point(1110, 1044);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(191, 95);
+            this.guna2Button1.Size = new System.Drawing.Size(103, 95);
             this.guna2Button1.TabIndex = 23;
             this.guna2Button1.UseTransparentBackground = true;
             // 
@@ -692,8 +696,8 @@
             this.AmountBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AmountBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AmountBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AmountBox.Font = new System.Drawing.Font("Chinacat", 18F);
-            this.AmountBox.ForeColor = System.Drawing.Color.White;
+            this.AmountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.AmountBox.ForeColor = System.Drawing.Color.Black;
             this.AmountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AmountBox.Location = new System.Drawing.Point(214, 909);
             this.AmountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -764,7 +768,7 @@
             this.PhoneNumberBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PhoneNumberBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumberBox.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PhoneNumberBox.ForeColor = System.Drawing.Color.White;
+            this.PhoneNumberBox.ForeColor = System.Drawing.Color.Black;
             this.PhoneNumberBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumberBox.Location = new System.Drawing.Point(227, 165);
             this.PhoneNumberBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -790,8 +794,8 @@
             this.AgeBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AgeBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AgeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AgeBox.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AgeBox.ForeColor = System.Drawing.Color.White;
+            this.AgeBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
+            this.AgeBox.ForeColor = System.Drawing.Color.Black;
             this.AgeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AgeBox.Location = new System.Drawing.Point(880, 108);
             this.AgeBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -818,7 +822,7 @@
             this.NameBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.NameBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
-            this.NameBox.ForeColor = System.Drawing.Color.White;
+            this.NameBox.ForeColor = System.Drawing.Color.Black;
             this.NameBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.NameBox.Location = new System.Drawing.Point(227, 108);
             this.NameBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -871,26 +875,6 @@
             this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
             this.OtherTransactionContainer.TabIndex = 29;
             // 
-            // PWDCheckbox
-            // 
-            this.PWDCheckbox.AutoSize = true;
-            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.CheckedState.BorderRadius = 0;
-            this.PWDCheckbox.CheckedState.BorderThickness = 0;
-            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.Enabled = false;
-            this.PWDCheckbox.Font = new System.Drawing.Font("Stanberry", 20F);
-            this.PWDCheckbox.Location = new System.Drawing.Point(1138, 114);
-            this.PWDCheckbox.Name = "PWDCheckbox";
-            this.PWDCheckbox.Size = new System.Drawing.Size(156, 38);
-            this.PWDCheckbox.TabIndex = 29;
-            this.PWDCheckbox.Text = "is Senior?";
-            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
-            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
-            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
-            // 
             // PaymentsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -911,15 +895,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CardPayment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Panel PaymentPanel;
@@ -933,7 +914,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox CardPayment;
         private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel15;
@@ -942,7 +922,7 @@
         private Guna.UI2.WinForms.Guna2Button VoidBtn;
         private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Payment_Methods.GcashProcess gcashProcess1;
+        private Payment_Methods.GcashProcessB gcashProcess1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
         private Guna.UI2.WinForms.Guna2TextBox DiscountBox;
         private System.Windows.Forms.Label label1;
@@ -966,5 +946,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox TotalAmountTxtB;
         private Guna.UI2.WinForms.Guna2CheckBox PWDCheckbox;
+        public Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
     }
 }

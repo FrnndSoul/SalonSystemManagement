@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static ServiceType_ServicePage servicePageInstance;
         private ServiceTypes serviceType = new ServiceTypes();
         private SalonServices salonServices = new SalonServices();
@@ -83,9 +84,12 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceTypeBtn_Click(object sender, EventArgs e)
         {
+            AddServiceTypeBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceTypeBtn.Enabled = true;
                 return;
             }
 
@@ -96,10 +100,13 @@ namespace TriforceSalon.UserControls
                 string serviceTypeName = ServiceTypeTxtB.Text;
                 await serviceType.AddServiceType(serviceTypeName);
             }
+            AddServiceTypeBtn.Enabled = true;
         }
 
         private async void UpdateServiceTBtn_Click(object sender, EventArgs e)
         {
+            UpdateServiceTBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -112,11 +119,18 @@ namespace TriforceSalon.UserControls
             {
                 int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
                 await serviceType.UpdateServiceType(sID);
+                //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
             }
+            UpdateServiceTBtn.Enabled = false;
+
         }
 
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
+            manager.DisableButtons(false);
+
             serviceType.EditServiceTypes();
         }
 
@@ -124,6 +138,9 @@ namespace TriforceSalon.UserControls
         {
             serviceType.ClearServiceTypes();
             serviceType.HideButton(true, true, false, false);
+            //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            manager.DisableButtons(true);
+
         }
 
 
@@ -135,13 +152,14 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceBtn_Click(object sender, EventArgs e)
         {
+            AddServiceBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-                AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-                || ServiceImagePicB.Image is null)
+                AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceBtn.Enabled = true;
                 return;
-
             }
 
             DialogResult result = MessageBox.Show("Are you sure with the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -152,15 +170,17 @@ namespace TriforceSalon.UserControls
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
                 salonServices.ClearServices();
-
+                BindedServiceItemDGV.Rows.Clear();
             }
+            AddServiceBtn.Enabled = true;
         }
 
         private async void UpdateServBtn_Click(object sender, EventArgs e)
         {
+            UpdateServBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-               AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-               || ServiceImagePicB.Image is null)
+               AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -173,25 +193,32 @@ namespace TriforceSalon.UserControls
             {
                 int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
                 await salonServices.UpdateSalonServices(servarID);
-
+                MessageBox.Show("Service has been updated", "Service Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                salonServices.ClearServices();
+                BindedServiceItemDGV.Rows.Clear();
+                manager.DisableButtons(true);
             }
+
+            UpdateServBtn.Enabled = true;
         }
 
         private void EditServBtn_Click(object sender, EventArgs e)
         {
+            manager.DisableButtons(false);
             salonServices.EditSalonServices();
         }
 
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
+            BindedServiceItemDGV.Rows.Clear();
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
-
+            manager.DisableButtons(true);
         }
 
         private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+            /*string chosenItem = InventoryItemsComB.SelectedItem.ToString();
             if (chosenItem == null)
             {
                 ItemIDTxtB.Text = string.Empty;
@@ -199,6 +226,24 @@ namespace TriforceSalon.UserControls
             else
             {
                 ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+            }*/
+
+            if (InventoryItemsComB.SelectedItem != null)
+            {
+                string chosenItem = InventoryItemsComB.SelectedItem.ToString();
+                if (chosenItem == null)
+                {
+                    ItemIDTxtB.Text = string.Empty;
+                }
+                else
+                {
+                    ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
+                }
+            }
+            else
+            {
+                // Handle the case where SelectedItem is null
+                ItemIDTxtB.Text = string.Empty;
             }
         }
 

@@ -17,12 +17,13 @@ namespace TriforceSalon.Class_Components
         private string mysqlcon;
         public byte[] servicePhoto;
         public TransactionMethods transation = new TransactionMethods();
+        public SalonServices services = new SalonServices();
         public EmployeeTicketTransaction()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
 
-        public async Task ProcessTicketAsync(int ticketID)
+        public async Task ProcessTicketAsync(int ticketID, int serviceID)
         {
             DateTime startTime = DateTime.Now;
             int accountID = Convert.ToInt32(EmployeeUserConrols.employeeUserConrolsInstance.EmpAccNumberLbl.Text);
@@ -38,14 +39,15 @@ namespace TriforceSalon.Class_Components
                     {
                         await conn.OpenAsync();
 
-                        string query = "Insert into employee_records (AccountID, TimeStart, CustomerID)" +
-                            "Value(@accountID, @timeStart, @customerID)";
+                        string query = "Insert into employee_records (AccountID, TimeStart, CustomerID, ServiceID)" +
+                            "Value(@accountID, @timeStart, @customerID, @serviceID)";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
                             command.Parameters.AddWithValue("@accountID", accountID);
                             command.Parameters.AddWithValue("@timeStart", startTime);
                             command.Parameters.AddWithValue("@customerID", ticketID);
+                            command.Parameters.AddWithValue("@serviceID", serviceID);
 
                             await command.ExecuteNonQueryAsync();
                             MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -245,12 +247,14 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
                     // Update the IsDone status for the service group
-                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE CustomerID = @customer_ID AND ServiceVariation = @serviceVariation";
+                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariation = @serviceVariation";
                     using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
                     {
                         updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                         updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
                         await updateServiceGroupCommand.ExecuteNonQueryAsync();
+
+                        GetBindedItems(serviceVariation);
                     }
 
                     // Update the end time for the employee records
@@ -279,6 +283,8 @@ namespace TriforceSalon.Class_Components
                                 updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                                 await updateCustomerCommand.ExecuteNonQueryAsync();
                             }
+                            //GetBindedItems(serviceVariation);
+
                         }
                         else
                         {
@@ -288,15 +294,57 @@ namespace TriforceSalon.Class_Components
                                 updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
                                 await updateCustomerCommand.ExecuteNonQueryAsync();
                             }
+                            //GetBindedItems(serviceVariation);
                         }
                     }
                 }
                 MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowCustomerList();
+                ShowCustomerRatings();
+                //ShowCustomerList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
+            }
+        }
+
+        public async void GetBindedItems(string serviceName)
+        {
+            string query = @"SELECT 
+                    bi.ItemID, 
+                    bi.Quantity 
+                FROM 
+                    binded_items bi 
+                INNER JOIN 
+                    salon_services ss ON ss.ItemGroupID = bi.ItemGroupID 
+                WHERE 
+                    ss.ServiceName = @serviceName";
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(mysqlcon))
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@serviceName", serviceName);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string itemID = reader["ItemID"].ToString();
+                                string quantity = reader["Quantity"].ToString();
+
+                                //deduct in the database
+                                await Inventory.DeductItems(itemID, quantity);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error.");
             }
         }
 
@@ -341,6 +389,19 @@ namespace TriforceSalon.Class_Components
 
             EmployeeLock employeeLock = new EmployeeLock();
             UserControlNavigator.ShowControl(employeeLock, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
+
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = true;
+            EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.SpecialQPanel.Visible = false;
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLogOutBtn.Visible = false;
+        }
+
+        public void ShowCustomerRatings()
+        {
+            EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Controls.Clear();
+
+            RatingsUserControl ratings = new RatingsUserControl();
+            UserControlNavigator.ShowControl(ratings, EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent);
 
             EmployeeUserConrols.employeeUserConrolsInstance.EmployeeLockContent.Visible = true;
             EmployeeUserConrols.employeeUserConrolsInstance.GeneralQPanel.Visible = false;

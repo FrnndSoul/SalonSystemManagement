@@ -85,27 +85,6 @@ namespace TriforceSalon
             }
         }
 
-        public static void LessUsedProduct(int ID)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
-                {
-                    connection.Open();
-                    string query = "UPDATE `inventory` SET `Stock` = `Stock` - 1 WHERE `ItemID` = @itemID";
-                    using (MySqlCommand querycmd = new MySqlCommand(query, connection))
-                    {
-                        querycmd.Parameters.AddWithValue("@itemID", ID);
-                        querycmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message + "\n\nat LessUsedProduct()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         public async Task <int> GetItemIDByName(string productName)
         {
             int itemID = -1;
@@ -166,5 +145,28 @@ namespace TriforceSalon
             }
         }
 
+        public async static Task DeductItems(string id, string qty)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
+                   
+                    using (MySqlCommand command = new MySqlCommand(subtractQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@quantity", qty);
+                        command.Parameters.AddWithValue("@itemID", id);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + "\n\nat DeductItems()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

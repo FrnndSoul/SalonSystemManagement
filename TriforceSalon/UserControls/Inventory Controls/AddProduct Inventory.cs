@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class AddProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static byte[] PhotoBytes;
         public static int ItemID;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -87,11 +88,25 @@ namespace TriforceSalon.UserControls
                         await querycmd.ExecuteNonQueryAsync();
                     }
                 }
+                MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ItemID = Inventory.GenerateID();
+                IDBox.Text = ItemID.ToString();
+                manager.DisableButtons(true);
+                Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\nat AddProduct_Click", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        private void Clear()
+        {
+            NameBox.Text = null;
+            CostBox.Text = null;
+            AggregateBox.Text = null;
+            SRPTxtB.Text = null;
+            PhotoBox.Image = null;
         }
 
         private void CostBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -113,6 +128,7 @@ namespace TriforceSalon.UserControls
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
         }
     }
 }

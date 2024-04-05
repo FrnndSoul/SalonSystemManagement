@@ -80,7 +80,7 @@
             this.LogoutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.LogoutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.LogoutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.LogoutBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.LogoutBtn.FillColor = System.Drawing.Color.Red;
             this.LogoutBtn.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LogoutBtn.ForeColor = System.Drawing.Color.White;
             this.LogoutBtn.Image = global::TriforceSalon.Properties.Resources.logout_icon;
@@ -188,6 +188,7 @@
             this.MinimumSize = new System.Drawing.Size(1920, 1090);
             this.Name = "ManagerPage";
             this.Size = new System.Drawing.Size(1920, 1090);
+            this.Load += new System.EventHandler(this.ManagerPage_Load);
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
