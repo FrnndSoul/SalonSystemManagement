@@ -63,7 +63,7 @@ namespace TriforceSalon.UserControls
 
         private void ServiceBtn_Click(object sender, EventArgs e)
         {
-            salonServices.GetItemInInventory();
+            //salonServices.GetItemInInventory();
             SetButtonProperties(ServiceBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
             ServiceBtn.BringToFront();
             ServicePanel.Visible = true;
@@ -170,7 +170,7 @@ namespace TriforceSalon.UserControls
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
                 salonServices.ClearServices();
-                BindedServiceItemDGV.Rows.Clear();
+                //BindedServiceItemDGV.Rows.Clear();
             }
             AddServiceBtn.Enabled = true;
         }
@@ -195,7 +195,6 @@ namespace TriforceSalon.UserControls
                 await salonServices.UpdateSalonServices(servarID);
                 MessageBox.Show("Service has been updated", "Service Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 salonServices.ClearServices();
-                BindedServiceItemDGV.Rows.Clear();
                 manager.DisableButtons(true);
             }
 
@@ -210,75 +209,9 @@ namespace TriforceSalon.UserControls
 
         private void CancelEditServiceBtn_Click(object sender, EventArgs e)
         {
-            BindedServiceItemDGV.Rows.Clear();
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
             manager.DisableButtons(true);
-        }
-
-        private async void InventoryItemsComB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*string chosenItem = InventoryItemsComB.SelectedItem.ToString();
-            if (chosenItem == null)
-            {
-                ItemIDTxtB.Text = string.Empty;
-            }
-            else
-            {
-                ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
-            }*/
-
-            if (InventoryItemsComB.SelectedItem != null)
-            {
-                string chosenItem = InventoryItemsComB.SelectedItem.ToString();
-                if (chosenItem == null)
-                {
-                    ItemIDTxtB.Text = string.Empty;
-                }
-                else
-                {
-                    ItemIDTxtB.Text = Convert.ToString(await salonServices.GetItemId(chosenItem));
-                }
-            }
-            else
-            {
-                // Handle the case where SelectedItem is null
-                ItemIDTxtB.Text = string.Empty;
-            }
-        }
-
-        private void AddItemBtn_Click(object sender, EventArgs e)
-        {
-            string chosenItem = InventoryItemsComB.SelectedItem.ToString();
-            int itemID = Convert.ToInt32(ItemIDTxtB.Text);
-
-            BindedServiceItemDGV.Rows.Add(chosenItem, itemID, "-", 1, "+", "X");
-        }
-
-        private void BindedServiceItemDGV_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < BindedServiceItemDGV.Rows.Count)
-            {
-                if(e.ColumnIndex == BindedServiceItemDGV.Columns["DecrementCol"].Index)
-                {
-                    int currentQty = int.Parse(BindedServiceItemDGV.Rows[e.RowIndex].Cells["ProdQuantityCol"].Value.ToString());
-                    if(currentQty > 1)
-                    {
-                        currentQty--;
-                        BindedServiceItemDGV.Rows[e.RowIndex].Cells[3].Value = currentQty;
-                    }
-                }
-                else if (e.ColumnIndex == BindedServiceItemDGV.Columns["IncrementCol"].Index)
-                {
-                    int currentQty = int.Parse(BindedServiceItemDGV.Rows[e.RowIndex].Cells["ProdQuantityCol"].Value.ToString());
-                    currentQty++;
-                    BindedServiceItemDGV.Rows[e.RowIndex].Cells[3].Value = currentQty;
-                }
-                else if(e.ColumnIndex == BindedServiceItemDGV.Columns["RemoveCol"].Index)
-                {
-                    BindedServiceItemDGV.Rows.RemoveAt(e.RowIndex);
-                }
-            }
         }
     }
 }

@@ -39,6 +39,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void EditAppointmentUserControl_Load(object sender, EventArgs e)
         {
+
             ServiceFilterComB.Items.Clear();
             ServiceFilterComB.Items.Add("All");
             PEmployeeComB.Items.Clear();
@@ -51,6 +52,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.GetAllEmployee(mysqlcon);
             PEmployeeComB.SelectedIndex = 0;
             //transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+            await GetEmployeeAtStart();
         }
 
         private async void AddLServiceListBtn_Click(object sender, EventArgs e)
@@ -595,7 +597,44 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
             }
         }
+        private async Task GetEmployeeAtStart()
+        {
+            string serviceChosen = ServiceTxtB.Text;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT se.Name " +
+                        "FROM salon_employees se " +
+                        "JOIN service_type st ON se.ServiceID = st.ServiceID " +
+                        "JOIN salon_services ss ON st.ServiceID = ss.ServiceTypeID " +
+                        "WHERE ss.ServiceName = @service  AND AccountAccess NOT IN ('Receptionist', 'Manager')";
 
+                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@service", serviceChosen);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string EmpName = reader["Name"].ToString();
+                                    PEmployeeComB.Items.Add(EmpName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetEmployeeAtStart()");
+
+            }
+        }
         public async Task GetAllEmployee(string mysqlcon)
         {
             PEmployeeComB.Items.Clear();

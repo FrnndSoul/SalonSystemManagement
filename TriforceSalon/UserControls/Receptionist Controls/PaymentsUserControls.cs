@@ -39,9 +39,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             paymentInstance = this;
         }
 
-        private void PaymentsUserControls_Load(object sender, EventArgs e)
+        private async void PaymentsUserControls_Load(object sender, EventArgs e)
         {
             DefaultLoad();
+            await GetCustomers(CustomerListDGV);
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
@@ -694,6 +695,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        private void CustomerListDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow selectedRow = CustomerListDGV.Rows[e.RowIndex];
+
+                string transactionID = selectedRow.Cells[0].Value.ToString();
+
+                TransactionIDBox.Text = transactionID;
+            }
+        }
+
         public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)
         {
             decimal totalPrice = 0;
@@ -775,7 +788,43 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message, "Error in SendToSales");
             }
         }
+        private async Task GetCustomers(Guna2DataGridView customerList)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT TransactionID, CustomerName, PaymentStatus " +
+                        "FROM customer_info " +
+                        "WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus != 'VOID' AND PaymentStatus != 'PAID'";
 
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string ID = reader["TransactionID"].ToString();
+                                string Name = reader["CustomerName"].ToString();
+                                string Status = reader["PaymentStatus"].ToString();
+
+                                int rowIndex = customerList.Rows.Add();
+
+                                customerList.Rows[rowIndex].Cells["TransactionIDCol"].Value = ID;
+                                customerList.Rows[rowIndex].Cells["CNameCol"].Value = Name;
+                                customerList.Rows[rowIndex].Cells["StatusCol"].Value = Status;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetCustomers");
+
+            }
+        }
 
 
         public void DefaultLoad()
