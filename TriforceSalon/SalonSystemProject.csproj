@@ -322,6 +322,12 @@
     <Compile Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.Designer.cs">
       <DependentUpon>CardProcess.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\Gcash2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Receptionist Controls\Payment Methods\Gcash2.Designer.cs">
+      <DependentUpon>Gcash2.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Receptionist Controls\Payment Methods\GcashProcess.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -441,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\CardProcess.resx">
       <DependentUpon>CardProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\Gcash2.resx">
+      <DependentUpon>Gcash2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\Payment Methods\GcashProcess.resx">
       <DependentUpon>GcashProcess.cs</DependentUpon>

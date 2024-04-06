@@ -132,6 +132,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
                     }
                     MessageBox.Show("Rating have been submitted", "Employee Rating", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ticket.ShowCustomerList();
+                    EmployeeUserConrols.employeeUserConrolsInstance.RefreshBtn.Visible = true;
                 }
             }
             catch(Exception ex)

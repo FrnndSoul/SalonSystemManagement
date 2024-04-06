@@ -66,6 +66,7 @@
             // 
             // ServiceFL
             // 
+            this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
             this.ServiceFL.Location = new System.Drawing.Point(14, 86);
             this.ServiceFL.Name = "ServiceFL";
@@ -279,6 +280,7 @@
             this.ServiceAmountTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceAmountTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceAmountTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceAmountTxtB.Location = new System.Drawing.Point(419, 598);
             this.ServiceAmountTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
@@ -314,6 +316,7 @@
             this.ServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTxtB.Location = new System.Drawing.Point(34, 598);
             this.ServiceTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
@@ -342,9 +345,9 @@
             this.label4.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.label4.Location = new System.Drawing.Point(34, 133);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(148, 38);
+            this.label4.Size = new System.Drawing.Size(195, 38);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Number";
+            this.label4.Text = "Phone Number";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
@@ -379,7 +382,7 @@
             this.PEmployeeComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PEmployeeComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PEmployeeComB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PEmployeeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.PEmployeeComB.ForeColor = System.Drawing.Color.Black;
             this.PEmployeeComB.ItemHeight = 30;
             this.PEmployeeComB.Location = new System.Drawing.Point(34, 685);
             this.PEmployeeComB.Name = "PEmployeeComB";
@@ -399,13 +402,14 @@
             this.CustomerPhoneNTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerPhoneNTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerPhoneNTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.CustomerPhoneNTxtB.ForeColor = System.Drawing.Color.Black;
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(34, 176);
             this.CustomerPhoneNTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
-            this.CustomerPhoneNTxtB.PlaceholderText = "";
+            this.CustomerPhoneNTxtB.PlaceholderText = "Enter Number";
             this.CustomerPhoneNTxtB.SelectedText = "";
             this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(181, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
@@ -423,7 +427,8 @@
             this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.CustomerAgeTxtB.ForeColor = System.Drawing.Color.Black;
             this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerAgeTxtB.Location = new System.Drawing.Point(462, 92);
             this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
@@ -447,13 +452,14 @@
             this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.CustomerNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(34, 92);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerNameTxtB.Name = "CustomerNameTxtB";
             this.CustomerNameTxtB.PasswordChar = '\0';
-            this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.PlaceholderText = "Enter Name";
             this.CustomerNameTxtB.SelectedText = "";
             this.CustomerNameTxtB.Size = new System.Drawing.Size(331, 36);
             this.CustomerNameTxtB.TabIndex = 1;
@@ -493,6 +499,7 @@
             this.SearchServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.SearchServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 15F);
+            this.SearchServiceTxtB.ForeColor = System.Drawing.Color.Black;
             this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 25);
             this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -542,7 +549,7 @@
             this.ServiceFilterComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceFilterComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceFilterComB.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.ServiceFilterComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ServiceFilterComB.ForeColor = System.Drawing.Color.Black;
             this.ServiceFilterComB.ItemHeight = 30;
             this.ServiceFilterComB.Location = new System.Drawing.Point(172, 25);
             this.ServiceFilterComB.Margin = new System.Windows.Forms.Padding(2);

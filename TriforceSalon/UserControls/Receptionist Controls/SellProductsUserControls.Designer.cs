@@ -64,12 +64,16 @@
             this.DirectTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.OtherTransactionContainer = new Guna.UI2.WinForms.Guna2Panel();
+            this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductsFL
             // 
+            this.ProductsFL.AutoScroll = true;
             this.ProductsFL.BackColor = System.Drawing.Color.White;
             this.ProductsFL.Location = new System.Drawing.Point(24, 88);
             this.ProductsFL.Name = "ProductsFL";
@@ -88,7 +92,8 @@
             this.ProductSearchTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ProductSearchTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ProductSearchTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            this.ProductSearchTxtB.ForeColor = System.Drawing.Color.Black;
             this.ProductSearchTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ProductSearchTxtB.Location = new System.Drawing.Point(802, 24);
             this.ProductSearchTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -395,6 +400,7 @@
             this.CashTxtBx.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CashTxtBx.ForeColor = System.Drawing.Color.Black;
             this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CashTxtBx.Location = new System.Drawing.Point(1435, 705);
             this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -432,6 +438,7 @@
             this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerNameTxtB.Location = new System.Drawing.Point(1578, 344);
             this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -484,7 +491,7 @@
             this.CustomerIDComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerIDComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.CustomerIDComB.ForeColor = System.Drawing.Color.Black;
             this.CustomerIDComB.ItemHeight = 30;
             this.CustomerIDComB.Location = new System.Drawing.Point(1578, 404);
             this.CustomerIDComB.Name = "CustomerIDComB";
@@ -546,7 +553,6 @@
             // GcashPayment
             // 
             this.GcashPayment.BackColor = System.Drawing.Color.Transparent;
-            this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
             this.GcashPayment.Location = new System.Drawing.Point(1841, 621);
@@ -580,11 +586,52 @@
             this.guna2Button1.TabIndex = 36;
             this.guna2Button1.UseTransparentBackground = true;
             // 
+            // guna2HtmlLabel12
+            // 
+            this.guna2HtmlLabel12.BackColor = System.Drawing.Color.DarkOrchid;
+            this.guna2HtmlLabel12.Font = new System.Drawing.Font("Stanberry", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(896, 24);
+            this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(335, 82);
+            this.guna2HtmlLabel12.TabIndex = 39;
+            this.guna2HtmlLabel12.Text = "‎ ‎ ‎Payment ‎ ‎";
+            this.guna2HtmlLabel12.Visible = false;
+            // 
+            // OtherTransactionContainer
+            // 
+            this.OtherTransactionContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.OtherTransactionContainer.Location = new System.Drawing.Point(866, 56);
+            this.OtherTransactionContainer.Name = "OtherTransactionContainer";
+            this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
+            this.OtherTransactionContainer.TabIndex = 40;
+            this.OtherTransactionContainer.Visible = false;
+            // 
+            // BackBtn
+            // 
+            this.BackBtn.AutoRoundedCorners = true;
+            this.BackBtn.BorderRadius = 23;
+            this.BackBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.BackBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackBtn.ForeColor = System.Drawing.Color.Black;
+            this.BackBtn.Location = new System.Drawing.Point(1303, 774);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(190, 49);
+            this.BackBtn.TabIndex = 41;
+            this.BackBtn.Text = "Back";
+            this.BackBtn.Visible = false;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.GcashPayment);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.DatabaseTransactionRBtn);
@@ -611,12 +658,15 @@
             this.Controls.Add(this.sbLbl);
             this.Controls.Add(this.ProductSearchTxtB);
             this.Controls.Add(this.ProductsFL);
+            this.Controls.Add(this.guna2HtmlLabel12);
+            this.Controls.Add(this.OtherTransactionContainer);
             this.Name = "SellProductsUserControls";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.SellProductsUserControls_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -655,5 +705,8 @@
         private Guna.UI2.WinForms.Guna2CustomRadioButton DirectTransactionRBtn;
         private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
+        private Guna.UI2.WinForms.Guna2Button BackBtn;
     }
 }
