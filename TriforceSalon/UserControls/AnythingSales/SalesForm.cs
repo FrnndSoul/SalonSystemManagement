@@ -17,6 +17,7 @@ namespace salesreport
 
     public partial class SalesForm : UserControl
     {
+        readonly GeneralReport report = new GeneralReport();
         readonly EmployeePerformance employeePerformance = new EmployeePerformance();
         readonly ProductsSales productsSales = new ProductsSales();
         readonly ShipmentReports shipmentReports = new ShipmentReports();
@@ -31,12 +32,13 @@ namespace salesreport
         {
             foreach (Control control in this.Controls)
             {
-                if(control is EmployeePerformance || control is ProductsSales || control is ShipmentReports || control is ServiceRetention)
+                if(control is EmployeePerformance || control is ProductsSales || control is ShipmentReports || control is ServiceRetention || control is GeneralReport)
                 {
                     this.Controls.Remove(employeePerformance);
                     this.Controls.Remove(productsSales);
                     this.Controls.Remove(shipmentReports);
                     this.Controls.Remove(serviceRetention);
+                    this.Controls.Remove(report);
                 }
             }
         }
@@ -127,6 +129,30 @@ namespace salesreport
                     break;
                 }
             }
+        }
+
+        private async void GenBtn_Click(object sender, EventArgs e)
+        {
+            await Task.Delay(500);
+            try
+            {
+                if (!this.Controls.Contains(report))
+                {
+                    ShowDefault();
+                    this.Controls.Add(report);
+                    report.Location = new Point(374, 94);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error.");
+            }
+        }
+
+        private async void SalesForm_Load(object sender, EventArgs e)
+        {
+            await Task.Delay(500);
+            GenBtn_Click(null, null);
         }
     }
 }

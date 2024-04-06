@@ -203,5 +203,46 @@ namespace salesreport
             }
             return dataTable;
         }
+
+        public static DataTable LoadSales()
+        {
+            string query = @"
+                SELECT
+	                DATE_FORMAT(ci.TimeTaken, '%m/%d/%Y') AS Date,
+	                SUM(sg.Amount) + SUM(pg.Amount) AS Sales
+                FROM
+	                customer_info ci
+                INNER JOIN
+	                service_group sg ON sg.ServiceGroupID = ci.ServiceGroupID
+                INNER JOIN
+	                product_group pg ON pg.ProductGroupID = ci.ProductsBoughtID
+                WHERE
+	                ci.PaymentStatus = 'PAID' AND sg.IsVoided = 'NO' AND pg.IsVoided = 'NO'
+                GROUP BY
+	                DATE_FORMAT(ci.TimeTaken, '%m/%d/%Y');";
+
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error.");
+            }
+            return dataTable;
+        }
     }
 }

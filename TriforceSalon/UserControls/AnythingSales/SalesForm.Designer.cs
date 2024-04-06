@@ -33,6 +33,7 @@
             this.ShipmentFilter = new Guna.UI2.WinForms.Guna2Button();
             this.ProductFilter = new Guna.UI2.WinForms.Guna2Button();
             this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.GenBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // ServiceFilter
@@ -137,7 +138,7 @@
             this.BackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.BackBtn.Font = new System.Drawing.Font("Chinacat", 18F);
             this.BackBtn.ForeColor = System.Drawing.Color.Black;
-            this.BackBtn.Location = new System.Drawing.Point(146, 877);
+            this.BackBtn.Location = new System.Drawing.Point(146, 884);
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(208, 99);
             this.BackBtn.TabIndex = 19;
@@ -145,11 +146,34 @@
             this.BackBtn.UseTransparentBackground = true;
             this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
+            // GenBtn
+            // 
+            this.GenBtn.Animated = true;
+            this.GenBtn.AutoRoundedCorners = true;
+            this.GenBtn.BackColor = System.Drawing.Color.Transparent;
+            this.GenBtn.BorderRadius = 48;
+            this.GenBtn.BorderThickness = 1;
+            this.GenBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.GenBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.GenBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.GenBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.GenBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
+            this.GenBtn.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.GenBtn.ForeColor = System.Drawing.Color.Black;
+            this.GenBtn.Location = new System.Drawing.Point(146, 728);
+            this.GenBtn.Name = "GenBtn";
+            this.GenBtn.Size = new System.Drawing.Size(208, 99);
+            this.GenBtn.TabIndex = 20;
+            this.GenBtn.Text = "Salon Total Sales";
+            this.GenBtn.UseTransparentBackground = true;
+            this.GenBtn.Click += new System.EventHandler(this.GenBtn_Click);
+            // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.GenBtn);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.ProductFilter);
             this.Controls.Add(this.ServiceFilter);
@@ -157,6 +181,7 @@
             this.Controls.Add(this.ShipmentFilter);
             this.Name = "SalesForm";
             this.Size = new System.Drawing.Size(1920, 1080);
+            this.Load += new System.EventHandler(this.SalesForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -167,5 +192,6 @@
         private Guna.UI2.WinForms.Guna2Button ShipmentFilter;
         private Guna.UI2.WinForms.Guna2Button ProductFilter;
         private Guna.UI2.WinForms.Guna2Button BackBtn;
+        private Guna.UI2.WinForms.Guna2Button GenBtn;
     }
 }
