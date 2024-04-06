@@ -108,7 +108,7 @@ namespace TriforceSalon.UserControls
             ReadRow(itemRow);
             manager.DisableButtons(false);
             editProduct_Inventory1.Visible = true;
-            editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Aggregate, Stock, EmployeeID);
+            editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Aggregate, Stock, EmployeeID, PerDay);
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
