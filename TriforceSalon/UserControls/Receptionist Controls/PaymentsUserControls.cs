@@ -211,6 +211,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     return;
                                 }
 
+                                else if (string.Equals(paymentstatus, "ONGOING", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Service/s is not yet complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+
+                                else if (string.Equals(paymentstatus, "INSESSION", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Customer is still in session", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+
                                 string Customer_name = reader["CustomerName"].ToString();
                                 //ServiceType = reader["ServiceType"].ToString();
                                 int Customer_age = Convert.ToInt32(reader["CustomerAge"]);
@@ -528,6 +540,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 /* ChangePaymentStatus("PAID");
                  await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
+                await GetCustomers(CustomerListDGV);
                 DefaultLoad();
 
                 OtherTransactionContainer.Controls.Clear();
@@ -705,6 +718,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 TransactionIDBox.Text = transactionID;
             }
+        }
+
+        private async void RefreshListBtn_Click(object sender, EventArgs e)
+        {
+            await GetCustomers(CustomerListDGV);
         }
 
         public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)

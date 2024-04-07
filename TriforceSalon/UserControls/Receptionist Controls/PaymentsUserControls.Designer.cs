@@ -87,6 +87,7 @@
             this.CNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
+            this.RefreshListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
@@ -111,7 +112,7 @@
             this.TransactionIDBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             this.TransactionIDBox.ForeColor = System.Drawing.Color.Black;
             this.TransactionIDBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TransactionIDBox.Location = new System.Drawing.Point(772, 193);
+            this.TransactionIDBox.Location = new System.Drawing.Point(664, 202);
             this.TransactionIDBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TransactionIDBox.Name = "TransactionIDBox";
             this.TransactionIDBox.PasswordChar = '\0';
@@ -845,7 +846,7 @@
             this.LoadBtn.Font = new System.Drawing.Font("Stanberry", 20F);
             this.LoadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.LoadBtn.IndicateFocus = true;
-            this.LoadBtn.Location = new System.Drawing.Point(1199, 193);
+            this.LoadBtn.Location = new System.Drawing.Point(1091, 202);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(152, 44);
             this.LoadBtn.TabIndex = 28;
@@ -902,7 +903,7 @@
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.CustomerListDGV.DefaultCellStyle = dataGridViewCellStyle11;
             this.CustomerListDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.CustomerListDGV.Location = new System.Drawing.Point(121, 117);
+            this.CustomerListDGV.Location = new System.Drawing.Point(80, 125);
             this.CustomerListDGV.Name = "CustomerListDGV";
             this.CustomerListDGV.ReadOnly = true;
             this.CustomerListDGV.RowHeadersVisible = false;
@@ -954,17 +955,40 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(765, 141);
+            this.label6.Location = new System.Drawing.Point(657, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(390, 37);
             this.label6.TabIndex = 32;
             this.label6.Text = "Enter Customer\'s Transaction ID";
+            // 
+            // RefreshListBtn
+            // 
+            this.RefreshListBtn.Animated = true;
+            this.RefreshListBtn.AutoRoundedCorners = true;
+            this.RefreshListBtn.BackColor = System.Drawing.Color.Transparent;
+            this.RefreshListBtn.BorderRadius = 21;
+            this.RefreshListBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshListBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshListBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshListBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshListBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.RefreshListBtn.Font = new System.Drawing.Font("Stanberry", 20F);
+            this.RefreshListBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.RefreshListBtn.IndicateFocus = true;
+            this.RefreshListBtn.Location = new System.Drawing.Point(1258, 202);
+            this.RefreshListBtn.Name = "RefreshListBtn";
+            this.RefreshListBtn.Size = new System.Drawing.Size(152, 44);
+            this.RefreshListBtn.TabIndex = 33;
+            this.RefreshListBtn.Text = "Refresh";
+            this.RefreshListBtn.UseTransparentBackground = true;
+            this.RefreshListBtn.Click += new System.EventHandler(this.RefreshListBtn_Click);
             // 
             // PaymentsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.RefreshListBtn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CustomerListDGV);
             this.Controls.Add(this.label5);
@@ -1038,5 +1062,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusCol;
         private System.Windows.Forms.Label label6;
+        private Guna.UI2.WinForms.Guna2Button RefreshListBtn;
     }
 }
