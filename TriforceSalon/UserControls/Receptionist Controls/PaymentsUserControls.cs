@@ -35,6 +35,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public PaymentsUserControls()
         {
             InitializeComponent();
+            CustomerListDGV.CellContentDoubleClick += CustomerListDGV_CellDoubleClick;
             AdjustCheckBoxSize(PWDCheckbox);
             paymentInstance = this;
         }
@@ -710,7 +711,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CustomerListDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 DataGridViewRow selectedRow = CustomerListDGV.Rows[e.RowIndex];
 
