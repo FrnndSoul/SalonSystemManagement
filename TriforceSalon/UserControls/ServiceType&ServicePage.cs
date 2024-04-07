@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Caching;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -13,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class ServiceType_ServicePage : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static ServiceType_ServicePage servicePageInstance;
         private ServiceTypes serviceType = new ServiceTypes();
         private SalonServices salonServices = new SalonServices();
@@ -61,7 +63,7 @@ namespace TriforceSalon.UserControls
 
         private void ServiceBtn_Click(object sender, EventArgs e)
         {
-            salonServices.GetItemInInventory();
+            //salonServices.GetItemInInventory();
             SetButtonProperties(ServiceBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
             ServiceBtn.BringToFront();
             ServicePanel.Visible = true;
@@ -82,9 +84,12 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceTypeBtn_Click(object sender, EventArgs e)
         {
+            AddServiceTypeBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceTypeBtn.Enabled = true;
                 return;
             }
 
@@ -95,10 +100,13 @@ namespace TriforceSalon.UserControls
                 string serviceTypeName = ServiceTypeTxtB.Text;
                 await serviceType.AddServiceType(serviceTypeName);
             }
+            AddServiceTypeBtn.Enabled = true;
         }
 
         private async void UpdateServiceTBtn_Click(object sender, EventArgs e)
         {
+            UpdateServiceTBtn.Enabled = false;
+
             if (ServiceTypeTxtB.Text is null || ServiceTypePicB is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -111,19 +119,28 @@ namespace TriforceSalon.UserControls
             {
                 int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
                 await serviceType.UpdateServiceType(sID);
+                //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.DisableButtons(true);
+
             }
+            UpdateServiceTBtn.Enabled = false;
+
         }
 
         private void EditServiceTBtn_Click(object sender, EventArgs e)
         {
-            serviceType.EditServiceTypes();
+            manager.DisableButtons(false);
 
+            serviceType.EditServiceTypes();
         }
 
         private void CancelEditBtn_Click(object sender, EventArgs e)
         {
             serviceType.ClearServiceTypes();
             serviceType.HideButton(true, true, false, false);
+            //MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            manager.DisableButtons(true);
+
         }
 
 
@@ -135,13 +152,14 @@ namespace TriforceSalon.UserControls
 
         private async void AddServiceBtn_Click(object sender, EventArgs e)
         {
+            AddServiceBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-                AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-                || ServiceImagePicB.Image is null)
+                AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AddServiceBtn.Enabled = true;
                 return;
-
             }
 
             DialogResult result = MessageBox.Show("Are you sure with the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -151,14 +169,18 @@ namespace TriforceSalon.UserControls
                 string serviceTypeName = AddSalonServices.SelectedItem.ToString();
                 salonServices.GetServiceTypeID(serviceTypeName);
                 await salonServices.AddSalonServices();
+                salonServices.ClearServices();
+                //BindedServiceItemDGV.Rows.Clear();
             }
+            AddServiceBtn.Enabled = true;
         }
 
         private async void UpdateServBtn_Click(object sender, EventArgs e)
         {
+            UpdateServBtn.Enabled = false;
+
             if (ServiceNameTxtB.Text is null || ServiceAmountTxtb.Text is null ||
-               AddSalonServices.SelectedItem is null || InventoryItemsComB.SelectedItem is null
-               || ServiceImagePicB.Image is null)
+               AddSalonServices.SelectedItem is null || ServiceImagePicB.Image is null)
             {
                 MessageBox.Show("Please fill all the required information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -171,12 +193,17 @@ namespace TriforceSalon.UserControls
             {
                 int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
                 await salonServices.UpdateSalonServices(servarID);
-
+                MessageBox.Show("Service has been updated", "Service Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                salonServices.ClearServices();
+                manager.DisableButtons(true);
             }
+
+            UpdateServBtn.Enabled = true;
         }
 
         private void EditServBtn_Click(object sender, EventArgs e)
         {
+            manager.DisableButtons(false);
             salonServices.EditSalonServices();
         }
 
@@ -184,9 +211,7 @@ namespace TriforceSalon.UserControls
         {
             salonServices.ClearServices();
             salonServices.HideButton(true, true, false, false);
-
+            manager.DisableButtons(true);
         }
-
-        
     }
 }

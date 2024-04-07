@@ -14,6 +14,7 @@ namespace TriforceSalon.UserControls
 {
     public partial class AddProduct_Inventory : UserControl
     {
+        ManagerPage manager = new ManagerPage();
         public static byte[] PhotoBytes;
         public static int ItemID;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -47,15 +48,16 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        private void AddProduct_Click(object sender, EventArgs e)
+        private async void AddProduct_Click(object sender, EventArgs e)
         {
             string Name = NameBox.Text;
             string ID = IDBox.Text;
             string Cost = CostBox.Text;
+            string perDay = perDayBox.Text;
             string Aggregate = AggregateBox.Text;
             string SRP = SRPTxtB.Text;
 
-            if(string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(SRP))
+            if (string.IsNullOrEmpty(perDay) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(SRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -65,32 +67,54 @@ namespace TriforceSalon.UserControls
                 MessageBox.Show("Please upload a product photo", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (Convert.ToInt32(perDay) > Convert.ToInt32(Aggregate))
+            {
+                MessageBox.Show("Stocks per day cannot be more than the aggregate!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
-                    string query = "INSERT INTO `inventory`" +
-                        "(`ItemID`, `ItemName`, `Stock`, `Cost`, 'SRP', `Aggregate`, `Status`,`Photo`) VALUES" +
-                        "(@itemID, @itemName, @stock, @cost, @srp, @aggregate, @status, @photo)";
+                    await connection.OpenAsync();
+                    string query = "INSERT INTO `inventory` " +
+                                   "(`ItemID`, `ItemName`, `Stock`, `StockPerDay`, `Cost`, `SRP`, `Aggregate`, `Status`, `Photo`) VALUES " +
+                                   "(@itemID, @itemName, @stock, @perDay, @cost, @srp, @aggregate, @status, @photo)";
+
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
                         querycmd.Parameters.AddWithValue("@itemName", Name);
                         querycmd.Parameters.AddWithValue("@stock", 0);
+                        querycmd.Parameters.AddWithValue("@perDay", perDay);
                         querycmd.Parameters.AddWithValue("@cost", Cost);
                         querycmd.Parameters.AddWithValue("@srp", SRP);
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
-                        querycmd.ExecuteNonQuery();
+                        await querycmd.ExecuteNonQueryAsync();
                     }
                 }
+
+                manager.DisableButtons(true);
+                MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n\nat AddProduct_Click", "SQL ERROR", MessageBoxButtons.OK);
             }
+        }
+
+        private void Clear()
+        {
+            NameBox.Text = null;
+            CostBox.Text = null;
+            AggregateBox.Text = null;
+            perDayBox.Text = null;
+            SRPTxtB.Text = null;
+            PhotoBox.Image = null;
         }
 
         private void CostBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -112,6 +136,15 @@ namespace TriforceSalon.UserControls
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            manager.DisableButtons(true);
+        }
+
+        private void perDayBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

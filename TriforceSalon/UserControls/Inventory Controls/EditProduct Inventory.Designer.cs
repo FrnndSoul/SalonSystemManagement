@@ -45,6 +45,8 @@
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label6 = new System.Windows.Forms.Label();
             this.editSRPTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.perDayBox = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -374,16 +376,57 @@
             this.editSRPTxtB.Name = "editSRPTxtB";
             this.editSRPTxtB.PasswordChar = '\0';
             this.editSRPTxtB.PlaceholderText = "";
-            this.editSRPTxtB.ReadOnly = true;
             this.editSRPTxtB.SelectedText = "";
             this.editSRPTxtB.Size = new System.Drawing.Size(400, 50);
             this.editSRPTxtB.TabIndex = 95;
+            this.editSRPTxtB.TextChanged += new System.EventHandler(this.editSRPTxtB_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label7.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(535, 606);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(200, 37);
+            this.label7.TabIndex = 98;
+            this.label7.Text = "Stock per Day";
+            // 
+            // perDayBox
+            // 
+            this.perDayBox.Animated = true;
+            this.perDayBox.AutoRoundedCorners = true;
+            this.perDayBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.perDayBox.BorderColor = System.Drawing.Color.Black;
+            this.perDayBox.BorderRadius = 24;
+            this.perDayBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.perDayBox.DefaultText = "";
+            this.perDayBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.perDayBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.perDayBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.perDayBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.perDayBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.perDayBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.perDayBox.ForeColor = System.Drawing.Color.Black;
+            this.perDayBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.perDayBox.Location = new System.Drawing.Point(542, 656);
+            this.perDayBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.perDayBox.Name = "perDayBox";
+            this.perDayBox.PasswordChar = '\0';
+            this.perDayBox.PlaceholderText = "";
+            this.perDayBox.SelectedText = "";
+            this.perDayBox.Size = new System.Drawing.Size(400, 50);
+            this.perDayBox.TabIndex = 97;
+            this.perDayBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.perDayBox_KeyPress);
             // 
             // EditProduct_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.perDayBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.editSRPTxtB);
             this.Controls.Add(this.UploadPhoto);
@@ -428,5 +471,7 @@
         private Guna.UI2.WinForms.Guna2PictureBox PhotoBox;
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2TextBox editSRPTxtB;
+        private System.Windows.Forms.Label label7;
+        private Guna.UI2.WinForms.Guna2TextBox perDayBox;
     }
 }

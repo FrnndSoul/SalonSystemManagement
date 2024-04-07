@@ -44,6 +44,13 @@
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.PaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductsControlDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountComB = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AllProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CashTxtBx = new Guna.UI2.WinForms.Guna2TextBox();
@@ -52,21 +59,21 @@
             this.discChckBx = new Guna.UI2.WinForms.Guna2CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CustomerIDComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountComB = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CalculateCostBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DatabaseTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.DirectTransactionRBtn = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.OtherTransactionContainer = new Guna.UI2.WinForms.Guna2Panel();
+            this.BackBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductsFL
             // 
+            this.ProductsFL.AutoScroll = true;
             this.ProductsFL.BackColor = System.Drawing.Color.White;
             this.ProductsFL.Location = new System.Drawing.Point(24, 88);
             this.ProductsFL.Name = "ProductsFL";
@@ -85,7 +92,8 @@
             this.ProductSearchTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ProductSearchTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.ProductSearchTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ProductSearchTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            this.ProductSearchTxtB.ForeColor = System.Drawing.Color.Black;
             this.ProductSearchTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ProductSearchTxtB.Location = new System.Drawing.Point(802, 24);
             this.ProductSearchTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -99,21 +107,21 @@
             // cLbl
             // 
             this.cLbl.BackColor = System.Drawing.Color.Transparent;
-            this.cLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cLbl.ForeColor = System.Drawing.Color.White;
-            this.cLbl.Location = new System.Drawing.Point(1411, 762);
+            this.cLbl.Location = new System.Drawing.Point(1407, 705);
             this.cLbl.Name = "cLbl";
             this.cLbl.Size = new System.Drawing.Size(76, 33);
             this.cLbl.TabIndex = 19;
-            this.cLbl.Text = "Php.";
+            this.cLbl.Text = "₱";
             this.cLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cashLbl
             // 
             this.cashLbl.BackColor = System.Drawing.Color.Transparent;
-            this.cashLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cashLbl.ForeColor = System.Drawing.Color.White;
-            this.cashLbl.Location = new System.Drawing.Point(1288, 762);
+            this.cashLbl.Location = new System.Drawing.Point(1284, 705);
             this.cashLbl.Name = "cashLbl";
             this.cashLbl.Size = new System.Drawing.Size(117, 33);
             this.cashLbl.TabIndex = 18;
@@ -123,21 +131,21 @@
             // TotLbl
             // 
             this.TotLbl.BackColor = System.Drawing.Color.Transparent;
-            this.TotLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotLbl.ForeColor = System.Drawing.Color.White;
-            this.TotLbl.Location = new System.Drawing.Point(1411, 711);
+            this.TotLbl.Location = new System.Drawing.Point(1407, 654);
             this.TotLbl.Name = "TotLbl";
             this.TotLbl.Size = new System.Drawing.Size(168, 33);
             this.TotLbl.TabIndex = 17;
-            this.TotLbl.Text = "Php. 0.00";
+            this.TotLbl.Text = "₱ 0.00";
             this.TotLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // totalLbl
             // 
             this.totalLbl.BackColor = System.Drawing.Color.Transparent;
-            this.totalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLbl.ForeColor = System.Drawing.Color.White;
-            this.totalLbl.Location = new System.Drawing.Point(1282, 711);
+            this.totalLbl.Location = new System.Drawing.Point(1278, 654);
             this.totalLbl.Name = "totalLbl";
             this.totalLbl.Size = new System.Drawing.Size(123, 33);
             this.totalLbl.TabIndex = 16;
@@ -147,21 +155,21 @@
             // DiscLbl
             // 
             this.DiscLbl.BackColor = System.Drawing.Color.Transparent;
-            this.DiscLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiscLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscLbl.ForeColor = System.Drawing.Color.White;
-            this.DiscLbl.Location = new System.Drawing.Point(1411, 661);
+            this.DiscLbl.Location = new System.Drawing.Point(1407, 604);
             this.DiscLbl.Name = "DiscLbl";
             this.DiscLbl.Size = new System.Drawing.Size(201, 33);
             this.DiscLbl.TabIndex = 15;
-            this.DiscLbl.Text = "Php. 0.00";
+            this.DiscLbl.Text = "₱ 0.00";
             this.DiscLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // discL
             // 
             this.discL.BackColor = System.Drawing.Color.Transparent;
-            this.discL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.discL.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discL.ForeColor = System.Drawing.Color.White;
-            this.discL.Location = new System.Drawing.Point(1282, 661);
+            this.discL.Location = new System.Drawing.Point(1278, 604);
             this.discL.Name = "discL";
             this.discL.Size = new System.Drawing.Size(123, 33);
             this.discL.TabIndex = 14;
@@ -171,21 +179,21 @@
             // SubLbl
             // 
             this.SubLbl.BackColor = System.Drawing.Color.Transparent;
-            this.SubLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubLbl.ForeColor = System.Drawing.Color.White;
-            this.SubLbl.Location = new System.Drawing.Point(1411, 612);
+            this.SubLbl.Location = new System.Drawing.Point(1407, 555);
             this.SubLbl.Name = "SubLbl";
             this.SubLbl.Size = new System.Drawing.Size(194, 33);
             this.SubLbl.TabIndex = 13;
-            this.SubLbl.Text = "Php. 0.00";
+            this.SubLbl.Text = "₱ 0.00";
             this.SubLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // sbLbl
             // 
             this.sbLbl.BackColor = System.Drawing.Color.Transparent;
-            this.sbLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sbLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sbLbl.ForeColor = System.Drawing.Color.White;
-            this.sbLbl.Location = new System.Drawing.Point(1282, 612);
+            this.sbLbl.Location = new System.Drawing.Point(1278, 555);
             this.sbLbl.Name = "sbLbl";
             this.sbLbl.Size = new System.Drawing.Size(123, 33);
             this.sbLbl.TabIndex = 12;
@@ -201,9 +209,9 @@
             this.VoidBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.VoidBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.VoidBtn.FillColor = System.Drawing.Color.Red;
-            this.VoidBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VoidBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VoidBtn.ForeColor = System.Drawing.Color.White;
-            this.VoidBtn.Location = new System.Drawing.Point(1647, 746);
+            this.VoidBtn.Location = new System.Drawing.Point(1638, 689);
             this.VoidBtn.Name = "VoidBtn";
             this.VoidBtn.Size = new System.Drawing.Size(254, 49);
             this.VoidBtn.TabIndex = 20;
@@ -219,11 +227,11 @@
             this.PaymentBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.PaymentBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.PaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.PaymentBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PaymentBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PaymentBtn.ForeColor = System.Drawing.Color.Black;
-            this.PaymentBtn.Location = new System.Drawing.Point(1647, 679);
+            this.PaymentBtn.Location = new System.Drawing.Point(1638, 623);
             this.PaymentBtn.Name = "PaymentBtn";
-            this.PaymentBtn.Size = new System.Drawing.Size(254, 49);
+            this.PaymentBtn.Size = new System.Drawing.Size(190, 49);
             this.PaymentBtn.TabIndex = 21;
             this.PaymentBtn.Text = "Place";
             this.PaymentBtn.Click += new System.EventHandler(this.PaymentBtn_Click);
@@ -236,7 +244,7 @@
             this.ProductsControlDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -293,147 +301,6 @@
             this.ProductsControlDGV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ProductsControlDGV_RowsAdded);
             this.ProductsControlDGV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ProductsControlDGV_RowsRemoved);
             // 
-            // SearchProductsBtn
-            // 
-            this.SearchProductsBtn.AutoRoundedCorners = true;
-            this.SearchProductsBtn.BorderRadius = 18;
-            this.SearchProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.SearchProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.SearchProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.SearchProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.SearchProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SearchProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchProductsBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchProductsBtn.Location = new System.Drawing.Point(616, 24);
-            this.SearchProductsBtn.Name = "SearchProductsBtn";
-            this.SearchProductsBtn.Size = new System.Drawing.Size(180, 38);
-            this.SearchProductsBtn.TabIndex = 23;
-            this.SearchProductsBtn.Text = "Search";
-            this.SearchProductsBtn.Click += new System.EventHandler(this.SearchProductsBtn_Click);
-            // 
-            // AllProductsBtn
-            // 
-            this.AllProductsBtn.AutoRoundedCorners = true;
-            this.AllProductsBtn.BorderRadius = 18;
-            this.AllProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.AllProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.AllProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.AllProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.AllProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AllProductsBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AllProductsBtn.ForeColor = System.Drawing.Color.Black;
-            this.AllProductsBtn.Location = new System.Drawing.Point(24, 24);
-            this.AllProductsBtn.Name = "AllProductsBtn";
-            this.AllProductsBtn.Size = new System.Drawing.Size(180, 38);
-            this.AllProductsBtn.TabIndex = 24;
-            this.AllProductsBtn.Text = "All Products";
-            this.AllProductsBtn.Click += new System.EventHandler(this.AllProductsBtn_Click);
-            // 
-            // CashTxtBx
-            // 
-            this.CashTxtBx.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CashTxtBx.DefaultText = "";
-            this.CashTxtBx.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CashTxtBx.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CashTxtBx.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CashTxtBx.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CashTxtBx.Location = new System.Drawing.Point(1475, 762);
-            this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CashTxtBx.Name = "CashTxtBx";
-            this.CashTxtBx.PasswordChar = '\0';
-            this.CashTxtBx.PlaceholderText = "";
-            this.CashTxtBx.SelectedText = "";
-            this.CashTxtBx.Size = new System.Drawing.Size(137, 33);
-            this.CashTxtBx.TabIndex = 25;
-            this.CashTxtBx.TextChanged += new System.EventHandler(this.CashTxtBx_TextChanged);
-            this.CashTxtBx.Enter += new System.EventHandler(this.CashTxtBx_Enter);
-            this.CashTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CashTxtBx_KeyPress);
-            this.CashTxtBx.Leave += new System.EventHandler(this.CashTxtBx_Leave);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1358, 344);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(223, 39);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Customer Name:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // CustomerNameTxtB
-            // 
-            this.CustomerNameTxtB.AutoRoundedCorners = true;
-            this.CustomerNameTxtB.BorderRadius = 18;
-            this.CustomerNameTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CustomerNameTxtB.DefaultText = "";
-            this.CustomerNameTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CustomerNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerNameTxtB.Location = new System.Drawing.Point(1587, 344);
-            this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CustomerNameTxtB.Name = "CustomerNameTxtB";
-            this.CustomerNameTxtB.PasswordChar = '\0';
-            this.CustomerNameTxtB.PlaceholderText = "";
-            this.CustomerNameTxtB.SelectedText = "";
-            this.CustomerNameTxtB.Size = new System.Drawing.Size(314, 39);
-            this.CustomerNameTxtB.TabIndex = 27;
-            // 
-            // discChckBx
-            // 
-            this.discChckBx.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.discChckBx.CheckedState.BorderRadius = 0;
-            this.discChckBx.CheckedState.BorderThickness = 0;
-            this.discChckBx.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.discChckBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.discChckBx.ForeColor = System.Drawing.Color.White;
-            this.discChckBx.Location = new System.Drawing.Point(1475, 463);
-            this.discChckBx.Name = "discChckBx";
-            this.discChckBx.Size = new System.Drawing.Size(315, 45);
-            this.discChckBx.TabIndex = 28;
-            this.discChckBx.Text = "PWD/Senior (20% off)";
-            this.discChckBx.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.discChckBx.UncheckedState.BorderRadius = 0;
-            this.discChckBx.UncheckedState.BorderThickness = 0;
-            this.discChckBx.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.discChckBx.Visible = false;
-            this.discChckBx.CheckedChanged += new System.EventHandler(this.discChckBx_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1362, 401);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(223, 39);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Transaction ID:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // CustomerIDComB
-            // 
-            this.CustomerIDComB.AutoRoundedCorners = true;
-            this.CustomerIDComB.BackColor = System.Drawing.Color.Transparent;
-            this.CustomerIDComB.BorderRadius = 17;
-            this.CustomerIDComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.CustomerIDComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CustomerIDComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerIDComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.CustomerIDComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.CustomerIDComB.ItemHeight = 30;
-            this.CustomerIDComB.Location = new System.Drawing.Point(1587, 404);
-            this.CustomerIDComB.Name = "CustomerIDComB";
-            this.CustomerIDComB.Size = new System.Drawing.Size(314, 36);
-            this.CustomerIDComB.TabIndex = 31;
-            // 
             // ProductCol
             // 
             this.ProductCol.HeaderText = "Products";
@@ -487,6 +354,150 @@
             this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // SearchProductsBtn
+            // 
+            this.SearchProductsBtn.AutoRoundedCorners = true;
+            this.SearchProductsBtn.BorderRadius = 18;
+            this.SearchProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SearchProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SearchProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SearchProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SearchProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SearchProductsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchProductsBtn.ForeColor = System.Drawing.Color.Black;
+            this.SearchProductsBtn.Location = new System.Drawing.Point(616, 24);
+            this.SearchProductsBtn.Name = "SearchProductsBtn";
+            this.SearchProductsBtn.Size = new System.Drawing.Size(180, 38);
+            this.SearchProductsBtn.TabIndex = 23;
+            this.SearchProductsBtn.Text = "Search";
+            this.SearchProductsBtn.Click += new System.EventHandler(this.SearchProductsBtn_Click);
+            // 
+            // AllProductsBtn
+            // 
+            this.AllProductsBtn.AutoRoundedCorners = true;
+            this.AllProductsBtn.BorderRadius = 18;
+            this.AllProductsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AllProductsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AllProductsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AllProductsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AllProductsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.AllProductsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllProductsBtn.ForeColor = System.Drawing.Color.Black;
+            this.AllProductsBtn.Location = new System.Drawing.Point(24, 24);
+            this.AllProductsBtn.Name = "AllProductsBtn";
+            this.AllProductsBtn.Size = new System.Drawing.Size(180, 38);
+            this.AllProductsBtn.TabIndex = 24;
+            this.AllProductsBtn.Text = "All Products";
+            this.AllProductsBtn.Click += new System.EventHandler(this.AllProductsBtn_Click);
+            // 
+            // CashTxtBx
+            // 
+            this.CashTxtBx.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CashTxtBx.DefaultText = "";
+            this.CashTxtBx.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CashTxtBx.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CashTxtBx.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CashTxtBx.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CashTxtBx.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CashTxtBx.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CashTxtBx.ForeColor = System.Drawing.Color.Black;
+            this.CashTxtBx.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CashTxtBx.Location = new System.Drawing.Point(1435, 705);
+            this.CashTxtBx.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CashTxtBx.Name = "CashTxtBx";
+            this.CashTxtBx.PasswordChar = '\0';
+            this.CashTxtBx.PlaceholderText = "";
+            this.CashTxtBx.SelectedText = "";
+            this.CashTxtBx.Size = new System.Drawing.Size(173, 33);
+            this.CashTxtBx.TabIndex = 25;
+            this.CashTxtBx.TextChanged += new System.EventHandler(this.CashTxtBx_TextChanged);
+            this.CashTxtBx.Enter += new System.EventHandler(this.CashTxtBx_Enter);
+            this.CashTxtBx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CashTxtBx_KeyPress);
+            this.CashTxtBx.Leave += new System.EventHandler(this.CashTxtBx_Leave);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(1349, 344);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(223, 39);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Customer Name:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // CustomerNameTxtB
+            // 
+            this.CustomerNameTxtB.AutoRoundedCorners = true;
+            this.CustomerNameTxtB.BorderRadius = 18;
+            this.CustomerNameTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerNameTxtB.DefaultText = "";
+            this.CustomerNameTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerNameTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerNameTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerNameTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerNameTxtB.ForeColor = System.Drawing.Color.Black;
+            this.CustomerNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerNameTxtB.Location = new System.Drawing.Point(1578, 344);
+            this.CustomerNameTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CustomerNameTxtB.Name = "CustomerNameTxtB";
+            this.CustomerNameTxtB.PasswordChar = '\0';
+            this.CustomerNameTxtB.PlaceholderText = "";
+            this.CustomerNameTxtB.SelectedText = "";
+            this.CustomerNameTxtB.Size = new System.Drawing.Size(314, 39);
+            this.CustomerNameTxtB.TabIndex = 27;
+            this.CustomerNameTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerNameTxtB_KeyPress);
+            // 
+            // discChckBx
+            // 
+            this.discChckBx.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.discChckBx.CheckedState.BorderRadius = 0;
+            this.discChckBx.CheckedState.BorderThickness = 0;
+            this.discChckBx.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.discChckBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.discChckBx.ForeColor = System.Drawing.Color.White;
+            this.discChckBx.Location = new System.Drawing.Point(1293, 446);
+            this.discChckBx.Name = "discChckBx";
+            this.discChckBx.Size = new System.Drawing.Size(315, 45);
+            this.discChckBx.TabIndex = 28;
+            this.discChckBx.Text = "PWD/Senior (20% off)";
+            this.discChckBx.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.discChckBx.UncheckedState.BorderRadius = 0;
+            this.discChckBx.UncheckedState.BorderThickness = 0;
+            this.discChckBx.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.discChckBx.Visible = false;
+            this.discChckBx.CheckedChanged += new System.EventHandler(this.discChckBx_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(1353, 401);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(223, 39);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Transaction ID:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // CustomerIDComB
+            // 
+            this.CustomerIDComB.AutoRoundedCorners = true;
+            this.CustomerIDComB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerIDComB.BorderRadius = 17;
+            this.CustomerIDComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.CustomerIDComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CustomerIDComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerIDComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerIDComB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomerIDComB.ForeColor = System.Drawing.Color.Black;
+            this.CustomerIDComB.ItemHeight = 30;
+            this.CustomerIDComB.Location = new System.Drawing.Point(1578, 404);
+            this.CustomerIDComB.Name = "CustomerIDComB";
+            this.CustomerIDComB.Size = new System.Drawing.Size(314, 36);
+            this.CustomerIDComB.TabIndex = 31;
+            // 
             // CalculateCostBtn
             // 
             this.CalculateCostBtn.AutoRoundedCorners = true;
@@ -496,9 +507,9 @@
             this.CalculateCostBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.CalculateCostBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.CalculateCostBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CalculateCostBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalculateCostBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CalculateCostBtn.ForeColor = System.Drawing.Color.Black;
-            this.CalculateCostBtn.Location = new System.Drawing.Point(1647, 612);
+            this.CalculateCostBtn.Location = new System.Drawing.Point(1638, 555);
             this.CalculateCostBtn.Name = "CalculateCostBtn";
             this.CalculateCostBtn.Size = new System.Drawing.Size(254, 47);
             this.CalculateCostBtn.TabIndex = 32;
@@ -539,11 +550,90 @@
             this.DirectTransactionRBtn.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             this.DirectTransactionRBtn.CheckedChanged += new System.EventHandler(this.DirectTransactionRBtn_CheckedChanged);
             // 
+            // GcashPayment
+            // 
+            this.GcashPayment.BackColor = System.Drawing.Color.Transparent;
+            this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
+            this.GcashPayment.ImageRotate = 0F;
+            this.GcashPayment.Location = new System.Drawing.Point(1841, 621);
+            this.GcashPayment.Name = "GcashPayment";
+            this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.GcashPayment.Size = new System.Drawing.Size(50, 50);
+            this.GcashPayment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GcashPayment.TabIndex = 38;
+            this.GcashPayment.TabStop = false;
+            this.GcashPayment.UseTransparentBackground = true;
+            this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.Animated = true;
+            this.guna2Button1.AutoRoundedCorners = true;
+            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button1.BorderRadius = 32;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Enabled = false;
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.IndicateFocus = true;
+            this.guna2Button1.Location = new System.Drawing.Point(1833, 613);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(66, 66);
+            this.guna2Button1.TabIndex = 36;
+            this.guna2Button1.UseTransparentBackground = true;
+            // 
+            // guna2HtmlLabel12
+            // 
+            this.guna2HtmlLabel12.BackColor = System.Drawing.Color.DarkOrchid;
+            this.guna2HtmlLabel12.Font = new System.Drawing.Font("Stanberry", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(896, 24);
+            this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(335, 82);
+            this.guna2HtmlLabel12.TabIndex = 39;
+            this.guna2HtmlLabel12.Text = "‎ ‎ ‎Payment ‎ ‎";
+            this.guna2HtmlLabel12.Visible = false;
+            // 
+            // OtherTransactionContainer
+            // 
+            this.OtherTransactionContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.OtherTransactionContainer.Location = new System.Drawing.Point(866, 56);
+            this.OtherTransactionContainer.Name = "OtherTransactionContainer";
+            this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
+            this.OtherTransactionContainer.TabIndex = 40;
+            this.OtherTransactionContainer.Visible = false;
+            // 
+            // BackBtn
+            // 
+            this.BackBtn.AutoRoundedCorners = true;
+            this.BackBtn.BorderRadius = 23;
+            this.BackBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.BackBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackBtn.ForeColor = System.Drawing.Color.Black;
+            this.BackBtn.Location = new System.Drawing.Point(1303, 774);
+            this.BackBtn.Name = "BackBtn";
+            this.BackBtn.Size = new System.Drawing.Size(190, 49);
+            this.BackBtn.TabIndex = 41;
+            this.BackBtn.Text = "Back";
+            this.BackBtn.Visible = false;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.BackBtn);
+            this.Controls.Add(this.GcashPayment);
+            this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.DatabaseTransactionRBtn);
             this.Controls.Add(this.DirectTransactionRBtn);
             this.Controls.Add(this.CalculateCostBtn);
@@ -568,11 +658,15 @@
             this.Controls.Add(this.sbLbl);
             this.Controls.Add(this.ProductSearchTxtB);
             this.Controls.Add(this.ProductsFL);
+            this.Controls.Add(this.guna2HtmlLabel12);
+            this.Controls.Add(this.OtherTransactionContainer);
             this.Name = "SellProductsUserControls";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.SellProductsUserControls_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -609,5 +703,10 @@
         private Guna.UI2.WinForms.Guna2Button CalculateCostBtn;
         private Guna.UI2.WinForms.Guna2CustomRadioButton DatabaseTransactionRBtn;
         private Guna.UI2.WinForms.Guna2CustomRadioButton DirectTransactionRBtn;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox GcashPayment;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
+        private Guna.UI2.WinForms.Guna2Button BackBtn;
     }
 }

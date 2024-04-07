@@ -44,6 +44,7 @@ namespace TriforceSalon.UserControls
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.EmployeeLockContent = new System.Windows.Forms.Panel();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             this.GeneralQPanel.SuspendLayout();
             this.SpecialQPanel.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -52,7 +53,7 @@ namespace TriforceSalon.UserControls
             // TimerLbl
             // 
             this.TimerLbl.BackColor = System.Drawing.Color.Transparent;
-            this.TimerLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerLbl.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimerLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.TimerLbl.Location = new System.Drawing.Point(1177, 35);
             this.TimerLbl.Name = "TimerLbl";
@@ -64,7 +65,7 @@ namespace TriforceSalon.UserControls
             // EmpNumberLbl
             // 
             this.EmpNumberLbl.BackColor = System.Drawing.Color.Transparent;
-            this.EmpNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmpNumberLbl.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpNumberLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EmpNumberLbl.Location = new System.Drawing.Point(11, 130);
             this.EmpNumberLbl.Name = "EmpNumberLbl";
@@ -83,8 +84,8 @@ namespace TriforceSalon.UserControls
             this.EmployeeLogOutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.EmployeeLogOutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.EmployeeLogOutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.EmployeeLogOutBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.EmployeeLogOutBtn.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmployeeLogOutBtn.FillColor = System.Drawing.Color.Red;
+            this.EmployeeLogOutBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmployeeLogOutBtn.ForeColor = System.Drawing.Color.White;
             this.EmployeeLogOutBtn.Location = new System.Drawing.Point(1568, 1012);
             this.EmployeeLogOutBtn.Name = "EmployeeLogOutBtn";
@@ -107,7 +108,7 @@ namespace TriforceSalon.UserControls
             // WelcomeLbl
             // 
             this.WelcomeLbl.BackColor = System.Drawing.Color.Transparent;
-            this.WelcomeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WelcomeLbl.Font = new System.Drawing.Font("Stanberry", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WelcomeLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.WelcomeLbl.Location = new System.Drawing.Point(3, 5);
             this.WelcomeLbl.Name = "WelcomeLbl";
@@ -119,7 +120,7 @@ namespace TriforceSalon.UserControls
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label1.Location = new System.Drawing.Point(596, 130);
             this.label1.Name = "label1";
@@ -131,7 +132,7 @@ namespace TriforceSalon.UserControls
             // EmpAccNumberLbl
             // 
             this.EmpAccNumberLbl.BackColor = System.Drawing.Color.Transparent;
-            this.EmpAccNumberLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmpAccNumberLbl.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpAccNumberLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EmpAccNumberLbl.Location = new System.Drawing.Point(262, 130);
             this.EmpAccNumberLbl.Name = "EmpAccNumberLbl";
@@ -143,7 +144,7 @@ namespace TriforceSalon.UserControls
             // ServiceTypeNameLbl
             // 
             this.ServiceTypeNameLbl.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceTypeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceTypeNameLbl.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServiceTypeNameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.ServiceTypeNameLbl.Location = new System.Drawing.Point(745, 130);
             this.ServiceTypeNameLbl.Name = "ServiceTypeNameLbl";
@@ -155,11 +156,11 @@ namespace TriforceSalon.UserControls
             // EmployeeNameLbl
             // 
             this.EmployeeNameLbl.BackColor = System.Drawing.Color.Transparent;
-            this.EmployeeNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmployeeNameLbl.Font = new System.Drawing.Font("Stanberry", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmployeeNameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EmployeeNameLbl.Location = new System.Drawing.Point(367, 5);
             this.EmployeeNameLbl.Name = "EmployeeNameLbl";
-            this.EmployeeNameLbl.Size = new System.Drawing.Size(372, 117);
+            this.EmployeeNameLbl.Size = new System.Drawing.Size(755, 117);
             this.EmployeeNameLbl.TabIndex = 15;
             this.EmployeeNameLbl.Text = "sample";
             this.EmployeeNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -188,7 +189,7 @@ namespace TriforceSalon.UserControls
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 50.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Stanberry", 50.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label2.Location = new System.Drawing.Point(57, 119);
             this.label2.Name = "label2";
@@ -210,7 +211,7 @@ namespace TriforceSalon.UserControls
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 50.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Stanberry", 50.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label3.Location = new System.Drawing.Point(3, 119);
             this.label3.Name = "label3";
@@ -241,11 +242,30 @@ namespace TriforceSalon.UserControls
             this.EmployeeLockContent.Size = new System.Drawing.Size(1278, 564);
             this.EmployeeLockContent.TabIndex = 19;
             // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 26;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshBtn.ForeColor = System.Drawing.Color.White;
+            this.RefreshBtn.Location = new System.Drawing.Point(1568, 228);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(327, 54);
+            this.RefreshBtn.TabIndex = 20;
+            this.RefreshBtn.Text = "Refresh List";
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
+            // 
             // EmployeeUserConrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.Controls.Add(this.RefreshBtn);
             this.Controls.Add(this.SpecialQPanel);
             this.Controls.Add(this.GeneralQPanel);
             this.Controls.Add(this.EmployeeLogOutBtn);
@@ -279,5 +299,6 @@ namespace TriforceSalon.UserControls
         public Guna.UI2.WinForms.Guna2Panel GeneralQPanel;
         public Guna.UI2.WinForms.Guna2Panel SpecialQPanel;
         public System.Windows.Forms.Panel EmployeeLockContent;
+        public Guna.UI2.WinForms.Guna2Button RefreshBtn;
     }
 }

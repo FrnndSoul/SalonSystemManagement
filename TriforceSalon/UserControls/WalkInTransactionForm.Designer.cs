@@ -87,7 +87,7 @@
             this.NServicesBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NServicesBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NServicesBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NServicesBtn.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.NServicesBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NServicesBtn.ForeColor = System.Drawing.Color.White;
             this.NServicesBtn.Location = new System.Drawing.Point(12, 138);
             this.NServicesBtn.Name = "NServicesBtn";
@@ -108,7 +108,7 @@
             this.NSellProdBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NSellProdBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NSellProdBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NSellProdBtn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NSellProdBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NSellProdBtn.ForeColor = System.Drawing.Color.White;
             this.NSellProdBtn.Location = new System.Drawing.Point(350, 138);
             this.NSellProdBtn.Name = "NSellProdBtn";
@@ -129,7 +129,7 @@
             this.NAppointmentsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NAppointmentsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NAppointmentsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NAppointmentsBtn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NAppointmentsBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NAppointmentsBtn.ForeColor = System.Drawing.Color.White;
             this.NAppointmentsBtn.Location = new System.Drawing.Point(697, 138);
             this.NAppointmentsBtn.Name = "NAppointmentsBtn";
@@ -150,7 +150,7 @@
             this.NPaymentBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NPaymentBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NPaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NPaymentBtn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NPaymentBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NPaymentBtn.ForeColor = System.Drawing.Color.White;
             this.NPaymentBtn.Location = new System.Drawing.Point(1037, 138);
             this.NPaymentBtn.Name = "NPaymentBtn";
@@ -170,8 +170,8 @@
             this.RecepLogOutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.RecepLogOutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.RecepLogOutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.RecepLogOutBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.RecepLogOutBtn.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RecepLogOutBtn.FillColor = System.Drawing.Color.Red;
+            this.RecepLogOutBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RecepLogOutBtn.ForeColor = System.Drawing.Color.White;
             this.RecepLogOutBtn.Location = new System.Drawing.Point(1586, 138);
             this.RecepLogOutBtn.Name = "RecepLogOutBtn";
@@ -220,6 +220,6 @@
         private Guna.UI2.WinForms.Guna2Button NPaymentBtn;
         private Guna.UI2.WinForms.Guna2Button RecepLogOutBtn;
         private System.Windows.Forms.Label TimerLbl;
-        private System.Windows.Forms.Panel ReceptionistContent;
+        public System.Windows.Forms.Panel ReceptionistContent;
     }
 }

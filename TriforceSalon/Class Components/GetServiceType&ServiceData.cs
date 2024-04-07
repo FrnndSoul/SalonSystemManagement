@@ -539,6 +539,8 @@ namespace TriforceSalon.Class_Components
         //Test Method
         public async Task FilterServicesByTypeAsync(string mysqlcon, string selectedServiceType, FlowLayoutPanel serviceFL, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
+            serviceFL.Controls.Clear();
+
             try
             {
                 string query;

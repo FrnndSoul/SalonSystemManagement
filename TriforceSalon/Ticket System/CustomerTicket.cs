@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls;
 using TriforceSalon.UserControls.Employee_Controls;
@@ -11,6 +12,8 @@ namespace TriforceSalon.Test
     {
         EmployeeTicketTransaction empTransaction = new EmployeeTicketTransaction();
         public static CustomerTicket customerTicketInstance;
+        SalonServices services = new SalonServices();
+
 
 
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
@@ -56,6 +59,9 @@ namespace TriforceSalon.Test
             string CAge = AgeLbl.Text;
             string PNumber = PhoneNumberLbl.Text;
             string Cserviec = ServiceVarLbl.Text;
+            string serviceName = ServiceVarLbl.Text;
+            int serviceID = await services.GetServiceVariationID(serviceName);
+            EmployeeUserConrols.employeeUserConrolsInstance.RefreshBtn.Visible = false;
             //string prio = PrioStatusLbl.Text;
 
             /*MessageBox.Show(Convert.ToString(ticketID));
@@ -66,12 +72,11 @@ namespace TriforceSalon.Test
             MessageBox.Show(prio);
 */
 
-            string serviceName = ServiceVarLbl.Text;
 
 
             try
             {
-                await empTransaction.ProcessTicketAsync(ticketID);
+                await empTransaction.ProcessTicketAsync(ticketID, serviceID);
                 //await empTransaction.FetchServiceImageAsync(serviceName);
 
                 EmployeeLock.employeeLockInstance.CustomerNameTxtB.Text = CName;

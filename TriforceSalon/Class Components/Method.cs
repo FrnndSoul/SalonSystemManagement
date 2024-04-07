@@ -17,10 +17,6 @@ namespace TriforceSalon
 {
     public class Method
     {
-        /*
-         * accounts - Username, Password, AccountlD, Status
-         * salon_employees - AccountlD, Name, Email, Birthdate, Photo, AccountStatus, ServicelD, Availability
-         */
 
         public static TransactionMethods transaction = new TransactionMethods();
 
@@ -35,6 +31,35 @@ namespace TriforceSalon
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
 
+        public static async Task RecordShipment(int ShipmentID, int ItemID, string ItemName, int Qty, int Cost, string Supplier)
+        {
+            string query = @"INSERT INTO shipments (`ManagerID`, `Date Shipped`, `ShipmentID`, `ItemID`, `ItemName`, `Quantity`, `Cost`, `Supplier`) 
+                VALUES (@ManagerID, @DateShipped, @ShipmentID, @ItemID, @ItemName, @Quantity, @Cost, @Supplier)";
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ManagerID", AccountID);
+                        cmd.Parameters.AddWithValue("@DateShipped", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@ShipmentID", ShipmentID);
+                        cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                        cmd.Parameters.AddWithValue("@ItemName", ItemName);
+                        cmd.Parameters.AddWithValue("@Quantity", Qty);
+                        cmd.Parameters.AddWithValue("@Cost", Cost);
+                        cmd.Parameters.AddWithValue("@Supplier", Supplier);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
 
         public static async Task ReadUserDataAsync(string user)
         {
@@ -76,7 +101,40 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
+
+        public async static Task<bool> IsFirstManager()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = @"
+                        SELECT COUNT(*)
+                        FROM logs 
+                        INNER JOIN salon_employees ON salon_employees.AccountID = logs.ID
+                        WHERE DATE(logs.TimeIn) = CURRENT_DATE AND salon_employees.AccountAccess = 'Manager';";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+
+                    if (count != 0)
+                    {
+                        return false;
+                    } else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+        }
+
         public static async Task ReadEmployeeData(string accountID)
         {
             try
@@ -228,10 +286,15 @@ namespace TriforceSalon
                                 {
                                     await LogInCompleteAsync(inputID);
                                     return true;
+                                } else
+                                {
+                                    MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK ,MessageBoxIcon.Warning);
+                                    WrongPassword(inputID);
+                                    return false;
                                 }
                             } else
                             {
-                                MessageBox.Show("User not found.","Warning");
+                                MessageBox.Show("User not found.","Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return false;
                             }
                         }
@@ -240,113 +303,9 @@ namespace TriforceSalon
             }
             catch (Exception exc)
             {
-
+                MessageBox.Show(exc.Message);
+                return false;
             }
-
-            return false; //up is new, down is old
-
-            await ReadUserDataAsync(inputID);
-
-            if (Status < 3)
-            {
-                await ReadEmployeeData(inputID);
-                if (AccountStatus >= 3)
-                {
-                    return false;
-                }
-
-                string hashedPass = HashString(inputPassword);
-                if (hashedPass == Password)
-                {
-                    await ReadEmployeeData(inputID);
-                    if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
-                    {
-                        ResetAttempt(inputID);
-                        await LogUser(Convert.ToInt32(inputID));
-                        MessageBox.Show($"Welcome Manager, {Username}!");
-
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForm mainForm)
-                            {
-                                ManagerPage managerPage = new ManagerPage();
-
-                                mainForm.Invoke((MethodInvoker)delegate
-                                {
-                                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
-                                });
-                                break;
-                            }
-                        }
-                    }
-                    else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
-                    {
-                        ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome Receptionist, {Username}!");
-
-                        foreach (Form openForm in Application.OpenForms)
-                        {
-                            if (openForm is MainForm mainForm)
-                            {
-                                WalkInTransactionForm walkInForm = new WalkInTransactionForm();
-                                mainForm.Invoke((MethodInvoker)delegate
-                                {
-                                    UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
-                                });
-                                break;
-                            }
-                        }
-
-                        await LogUser(AccountID);
-                        return true;
-                    }
-                    else
-                    {
-                        ResetAttempt(inputID);
-                        MessageBox.Show($"Welcome Staff, {Username}!");
-                        
-                            foreach (Form openForm in Application.OpenForms)
-                            {
-                                if (openForm is MainForm mainForm)
-                                {
-                                    EmployeeUserConrols otherRoleControl = new EmployeeUserConrols();
-                                    mainForm.Invoke((MethodInvoker)delegate
-                                    {
-                                        UserControlNavigator.ShowControl(otherRoleControl, MainForm.mainFormInstance.MainFormContent);
-                                    });
-                                    break;
-                                }
-                            }
-                        await LogUser(AccountID);
-                        return true;
-                    }
-
-                    await LogUser(AccountID);
-                    return true; // Indicate successful login
-                }
-                else
-                {
-                    if (DuplicateChecker(inputID, "AccountID", "salon_employees"))
-                    {
-                        WrongPassword(inputID);
-                    }
-                    else
-                    {
-                        MessageBox.Show("ID incorrect, please try again");
-                    }
-                }
-            }
-            else if (AccountStatus == 4)
-            {
-                MessageBox.Show($"Your account has already been archived", "Account Archived",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                MessageBox.Show($"Your account is currently inactive\ndue to multiple failed login attempts", "Account Inactive",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            return false;
         }
 
         public static async Task LogInCompleteAsync(string inputID)
@@ -358,6 +317,11 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
+                    if (await IsFirstManager())
+                    {
+                        Inventory.PullItems();
+                        Inventory.CheckStatus();
+                    }
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)
@@ -372,6 +336,7 @@ namespace TriforceSalon
                         }
                     }
                 }
+
                 else if (string.Equals(AccountAccess, "Receptionist", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Receptionist!");
@@ -411,11 +376,10 @@ namespace TriforceSalon
                 ResetAttempt(inputID);
                 await LogUser(AccountID);
 
-
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error.");
             }
         }
 
