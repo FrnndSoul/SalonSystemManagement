@@ -74,6 +74,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 return;
             }
 
+            if(ServicesGDGVVControl.Rows.Count == 0)
+            {
+                MessageBox.Show("No service has been selected. Cannot process customer", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult result = MessageBox.Show("Are you sure with the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
