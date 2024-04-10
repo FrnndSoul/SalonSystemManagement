@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         private EventHandler<AppointmentTicket.AppointmentCustomerSelectedEventArgs> AppointmentCustomerDetails;
         public string mysqlcon;
+        private bool isDateSelected = false;
 
         public AppointmentsUserControls()
         {
@@ -27,6 +29,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
         private async void AppointmentsUserControls_Load(object sender, EventArgs e)
         {
+            DateLbl.Visible = false;
+            AppointmentDatePicker.Enabled = false;
             await LoadPresentCustomer();
         }
         public async Task LoadPresentCustomer()
@@ -36,9 +40,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 using(var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-
-                    /*string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount FROM Appointments " +
-                        "WHERE AppointDate = CURDATE() AND IsCancelled != 'NO' ";*/
 
                     string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
@@ -103,20 +104,42 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void SearchIDBtn_Click(object sender, EventArgs e)
         {
-            string IDSearch = CustomerIDTxtB.Text;
+            if (isDateSelected == true)
+            {
+                string selectedDate = AppointmentDatePicker.Value.ToString("yyyy-MM-dd");
+                string dateQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                        "FROM Appointments " +
+                        "WHERE IsCancelled = 'NO' AND isActivated = 'NO' " +
+                        "AND DATE(AppointDate) LIKE CONCAT('%', @filter, '%')";
+
+                await LoadSelectedCustomer(selectedDate, dateQuery);
+
+            }
+            else if (isDateSelected == false)
+            {
+                string searchedCustomer = CustomerIDTxtB.Text;
+                string nameOrIDQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                        "FROM Appointments " +
+                        "WHERE IsCancelled = 'NO' AND isActivated = 'NO' " +
+                        "AND (ReferenceNumber LIKE CONCAT('%', @filter, '%') OR Name LIKE CONCAT('%', @filter, '%'))";
+
+
+
+                await LoadSelectedCustomer(searchedCustomer, nameOrIDQuery);
+            }
+        }
+
+        private async Task LoadSelectedCustomer(string filter, string query)
+        {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
-                        "FROM Appointments " +
-                        "WHERE DATE(AppointDate) = CURDATE() AND IsCancelled = 'NO' AND isActivated = 'NO' AND ReferenceNumber = @refNum";
-
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@refNum", "%" + IDSearch + "%");
+                        command.Parameters.AddWithValue("@filter", "%" + filter + "%");
 
                         using (var adapter = new MySqlDataAdapter(command))
                         {
@@ -150,6 +173,30 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void SearchToggleBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            Guna2ToggleSwitch searchSwitch = (Guna2ToggleSwitch)sender;
+
+            if (searchSwitch.Checked)
+            {
+                //MessageBox.Show("Switch is ON");
+                DateLbl.Visible = true;
+                NameOrIDLbl.Visible = false;
+                isDateSelected = true;
+                AppointmentDatePicker.Enabled = true;
+                CustomerIDTxtB.Enabled = false;
+            }
+            else
+            {
+                //MessageBox.Show("Switch is OFF");
+                DateLbl.Visible = false;
+                NameOrIDLbl.Visible = true;
+                isDateSelected = false;
+                AppointmentDatePicker.Enabled = false;
+                CustomerIDTxtB.Enabled = true;
 
             }
         }
