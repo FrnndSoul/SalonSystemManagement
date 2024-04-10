@@ -174,6 +174,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private async void LoadBtn_Click(object sender, EventArgs e)
         {
             long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
+            if(TransactionIDBox.Text == null || TransactionIDBox.Text == "")
+            {
+                MessageBox.Show("There is no ID selected or inputted.", "No ID", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -318,7 +323,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             //CashPayment.Enabled = true;
             GcashPayment.Enabled = true;
             ClearFieldsBtn.Enabled = true;
-            PaymentBtn.Enabled = true;
+            PaymentBtn.Enabled = false;
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
@@ -353,11 +358,50 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             continue;
                         }
 
-                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        /*int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
                         decimal amount = Convert.ToDecimal(row.Cells["TotAmountCol"].Value);
-                        int itemid = await transaction.GetItemIdAsync(itemName);
+                        int itemid = await transaction.GetItemIdAsync(itemName);*/
 
-                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @ID";
+                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ID);
+                            await command.ExecuteNonQueryAsync();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in void transaction");
+            }
+        }
+
+        private async Task VoidServices(long ID, Guna2DataGridView services)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    foreach (DataGridViewRow row in services.Rows)
+                    {
+                        string serviceName;
+                        if (row.Cells["ServiceCol"].Value != null)
+                        {
+                            serviceName = row.Cells["ServiceCol"].Value.ToString();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        decimal amount = Convert.ToDecimal(row.Cells["ServiceAmountCol"].Value);
+
+                        string query = "UPDATE service_group SET IsVoided = 'YES' WHERE ServiceGroupID = @customerID";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
@@ -410,7 +454,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     }
                                     ChangePaymentStatus("VOIDED");
                                     await VoidedItems(ID, ProductsBoughtDGV);
+                                    await VoidServices(ID, ServiceAcquiredDGV);
                                     MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    await GetCustomers(CustomerListDGV);
                                     DefaultLoad();
                                 }
                                 else
@@ -816,7 +862,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     await conn.OpenAsync();
                     string query = "SELECT TransactionID, CustomerName, PaymentStatus " +
                         "FROM customer_info " +
-                        "WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus != 'VOID' AND PaymentStatus != 'PAID'";
+                        "WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus != 'VOIDED' AND PaymentStatus != 'PAID'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
