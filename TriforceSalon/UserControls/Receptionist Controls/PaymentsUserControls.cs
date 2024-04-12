@@ -9,6 +9,7 @@ using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Data.Common;
 using System.IO;
+using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -674,12 +675,27 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CustomerMoneyInput_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
 
             if (CustomerMoneyInput.Text.Length == 0 && e.KeyChar == '0')
+            {
+                e.Handled = true;
+            }*/
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (CustomerMoneyInput.Text.Length == 0 && e.KeyChar == '0')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.' && CustomerMoneyInput.Text.Contains('.'))
             {
                 e.Handled = true;
             }
@@ -855,6 +871,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
         private async Task GetCustomers(Guna2DataGridView customerList)
         {
+            customerList.Rows.Clear();
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -887,7 +904,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in GetCustomers");
-
             }
         }
 
