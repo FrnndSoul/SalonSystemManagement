@@ -196,7 +196,6 @@ namespace TriforceSalon.Class_Components
 
 
                         await command.ExecuteNonQueryAsync();
-                        await AddItemBindedToDatabase(serviceID, ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV);
                         MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await GetSalonServicesAsync();
                     }
@@ -276,12 +275,11 @@ namespace TriforceSalon.Class_Components
                         MessageBox.Show("EditSalonServices() Error: " + ex.Message);
                     }
 
-                    await FetchBindedItems(serviceVariationID, ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV);
                 }
             }
         }
 
-        public async Task FetchBindedItems(int ID, Guna2DataGridView bindedTable)
+        /*public async Task FetchBindedItems(int ID, Guna2DataGridView bindedTable)
         {
             try
             {
@@ -320,7 +318,7 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
        
         public async Task UpdateSalonServices(int variationID)
         {
@@ -362,7 +360,6 @@ namespace TriforceSalon.Class_Components
                         }
                         await command.ExecuteNonQueryAsync();
                         await GetSalonServicesAsync();
-                        await UpdateBindedService(ServiceType_ServicePage.servicePageInstance.BindedServiceItemDGV, serviceVariationID);
                         ClearServices();
                         HideButton(true, true, false, false);
                     }
@@ -374,7 +371,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task UpdateBindedService(Guna2DataGridView newBindedItems, int ID)
+        /*public async Task UpdateBindedService(Guna2DataGridView newBindedItems, int ID)
         {
             try
             {
@@ -414,9 +411,9 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("Error: " + ex.Message, "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
-        public void GetItemInInventory()
+        /*public void GetItemInInventory()
         {
             try
             {
@@ -447,7 +444,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Error: " + ex.Message, "Error in GetItemInInventory", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-        }
+        }*/
 
         public async Task <int> GetItemId(string itemName)
         {
@@ -517,7 +514,7 @@ namespace TriforceSalon.Class_Components
 
 
 
-        private async Task AddItemBindedToDatabase(int ServiceID, Guna2DataGridView bindedItems)
+        /*private async Task AddItemBindedToDatabase(int ServiceID, Guna2DataGridView bindedItems)
         {
             try
             {
@@ -549,7 +546,7 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show("Error: " + ex.Message, "Error in AddItemBindedToDatabase", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         public async Task<int> GetServiceVariationID(string ServiceName)
         {
@@ -595,7 +592,6 @@ namespace TriforceSalon.Class_Components
             ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = null;
             ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = null;
             ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = null;
-            ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem = null;
             ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
         }
     }

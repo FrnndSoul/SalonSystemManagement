@@ -9,6 +9,7 @@ using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Data.Common;
 using System.IO;
+using System.Linq;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,13 +36,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public PaymentsUserControls()
         {
             InitializeComponent();
+            CustomerListDGV.CellContentDoubleClick += CustomerListDGV_CellDoubleClick;
             AdjustCheckBoxSize(PWDCheckbox);
             paymentInstance = this;
         }
 
-        private void PaymentsUserControls_Load(object sender, EventArgs e)
+        private async void PaymentsUserControls_Load(object sender, EventArgs e)
         {
             DefaultLoad();
+            await GetCustomers(CustomerListDGV);
         }
 
         private void GcashPayment_Click(object sender, EventArgs e)
@@ -172,6 +175,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private async void LoadBtn_Click(object sender, EventArgs e)
         {
             long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
+            if(TransactionIDBox.Text == null || TransactionIDBox.Text == "")
+            {
+                MessageBox.Show("There is no ID selected or inputted.", "No ID", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -207,6 +215,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
                                 {
                                     MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+
+                                else if (string.Equals(paymentstatus, "ONGOING", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Service/s is not yet complete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+
+                                else if (string.Equals(paymentstatus, "INSESSION", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show("Customer is still in session", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     return;
                                 }
 
@@ -304,7 +324,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             //CashPayment.Enabled = true;
             GcashPayment.Enabled = true;
             ClearFieldsBtn.Enabled = true;
-            PaymentBtn.Enabled = true;
+            PaymentBtn.Enabled = false;
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
@@ -339,11 +359,50 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             continue;
                         }
 
-                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                        /*int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
                         decimal amount = Convert.ToDecimal(row.Cells["TotAmountCol"].Value);
-                        int itemid = await transaction.GetItemIdAsync(itemName);
+                        int itemid = await transaction.GetItemIdAsync(itemName);*/
 
-                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @ID";
+                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
+
+                        using (MySqlCommand command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@customerID", ID);
+                            await command.ExecuteNonQueryAsync();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in void transaction");
+            }
+        }
+
+        private async Task VoidServices(long ID, Guna2DataGridView services)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    foreach (DataGridViewRow row in services.Rows)
+                    {
+                        string serviceName;
+                        if (row.Cells["ServiceCol"].Value != null)
+                        {
+                            serviceName = row.Cells["ServiceCol"].Value.ToString();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        decimal amount = Convert.ToDecimal(row.Cells["ServiceAmountCol"].Value);
+
+                        string query = "UPDATE service_group SET IsVoided = 'YES' WHERE ServiceGroupID = @customerID";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
@@ -396,7 +455,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     }
                                     ChangePaymentStatus("VOIDED");
                                     await VoidedItems(ID, ProductsBoughtDGV);
+                                    await VoidServices(ID, ServiceAcquiredDGV);
                                     MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    await GetCustomers(CustomerListDGV);
                                     DefaultLoad();
                                 }
                                 else
@@ -527,6 +588,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 /* ChangePaymentStatus("PAID");
                  await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
+                await GetCustomers(CustomerListDGV);
                 DefaultLoad();
 
                 OtherTransactionContainer.Controls.Clear();
@@ -613,12 +675,27 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CustomerMoneyInput_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
 
             if (CustomerMoneyInput.Text.Length == 0 && e.KeyChar == '0')
+            {
+                e.Handled = true;
+            }*/
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (CustomerMoneyInput.Text.Length == 0 && e.KeyChar == '0')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.' && CustomerMoneyInput.Text.Contains('.'))
             {
                 e.Handled = true;
             }
@@ -692,6 +769,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message, "Error in FillServiceAcquiredAsync");
 
             }
+        }
+
+        private void CustomerListDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow selectedRow = CustomerListDGV.Rows[e.RowIndex];
+
+                string transactionID = selectedRow.Cells[0].Value.ToString();
+
+                TransactionIDBox.Text = transactionID;
+            }
+        }
+
+        private async void RefreshListBtn_Click(object sender, EventArgs e)
+        {
+            await GetCustomers(CustomerListDGV);
         }
 
         public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)
@@ -775,7 +869,43 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show(ex.Message, "Error in SendToSales");
             }
         }
+        private async Task GetCustomers(Guna2DataGridView customerList)
+        {
+            customerList.Rows.Clear();
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT TransactionID, CustomerName, PaymentStatus " +
+                        "FROM customer_info " +
+                        "WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus != 'VOIDED' AND PaymentStatus != 'PAID'";
 
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string ID = reader["TransactionID"].ToString();
+                                string Name = reader["CustomerName"].ToString();
+                                string Status = reader["PaymentStatus"].ToString();
+
+                                int rowIndex = customerList.Rows.Add();
+
+                                customerList.Rows[rowIndex].Cells["TransactionIDCol"].Value = ID;
+                                customerList.Rows[rowIndex].Cells["CNameCol"].Value = Name;
+                                customerList.Rows[rowIndex].Cells["StatusCol"].Value = Status;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in GetCustomers");
+            }
+        }
 
 
         public void DefaultLoad()

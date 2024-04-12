@@ -535,22 +535,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                ValidateCashTextbox();
-            }
-
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }*/
-
-            // Allow digits, control characters, and a single period
+            /*// Allow digits, control characters, and a single period
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
@@ -571,6 +556,32 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
+            }*/
+
+            if (sender is TextBox textBox)
+            {
+                // Allow digits, control characters, and a single period
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
+                // Allow the backspace key
+                if (e.KeyChar == '\b')
+                {
+                    return;
+                }
+
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    ValidateCashTextbox();
+                }
+
+                // Prevent multiple periods
+                if ((e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
@@ -598,9 +609,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-/*            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
-            decimal extractedAmount = ExtractAmount(TotLbl.Text);
-*/            try
+            /*            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
+                        decimal extractedAmount = ExtractAmount(TotLbl.Text);
+            */
+            try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
@@ -636,7 +648,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     transaction.ClearContents();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Operation Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -716,7 +728,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
                         decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
                         int itemid = await transaction.GetItemIdAsync(itemName);
-                       
+
                         string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate, IsVoided) " +
                                         "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate, @void)";
 
@@ -732,18 +744,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             command.Parameters.AddWithValue("@void", "YES");
 
                             await command.ExecuteNonQueryAsync();
-                            
+
                         }
                         //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                   /* string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
-                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("@customerID", ID);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    transaction.ClearContents();*/
+                    /* string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
+                     using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
+                     {
+                         command.Parameters.AddWithValue("@customerID", ID);
+                         await command.ExecuteNonQueryAsync();
+                     }
+                     transaction.ClearContents();*/
                 }
                 MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 products.Rows.Clear();
@@ -828,7 +840,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
         {
             CustomerIDComB.Enabled = false;
-            
+
             ProductsControlDGV.Columns["DiscountComB"].Visible = true;
             CashTxtBx.Enabled = true;
             CalculateCostBtn.Enabled = true;

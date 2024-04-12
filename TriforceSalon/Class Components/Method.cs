@@ -101,7 +101,40 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
+
+        public async static Task<bool> IsFirstManager()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = @"
+                        SELECT COUNT(*)
+                        FROM logs 
+                        INNER JOIN salon_employees ON salon_employees.AccountID = logs.ID
+                        WHERE DATE(logs.TimeIn) = CURRENT_DATE AND salon_employees.AccountAccess = 'Manager';";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+
+                    if (count != 0)
+                    {
+                        return false;
+                    } else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+        }
+
         public static async Task ReadEmployeeData(string accountID)
         {
             try
@@ -273,7 +306,6 @@ namespace TriforceSalon
                 MessageBox.Show(exc.Message);
                 return false;
             }
-            return false;
         }
 
         public static async Task LogInCompleteAsync(string inputID)
@@ -285,9 +317,11 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
-                    /*ManagerPage managerPage = new ManagerPage();
-                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
-*/
+                    if (await IsFirstManager())
+                    {
+                        Inventory.PullItems();
+                        Inventory.CheckStatus();
+                    }
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)
