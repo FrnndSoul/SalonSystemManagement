@@ -786,6 +786,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private async void RefreshListBtn_Click(object sender, EventArgs e)
         {
             await GetCustomers(CustomerListDGV);
+            DefaultLoad();
         }
 
         public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)

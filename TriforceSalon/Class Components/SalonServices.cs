@@ -99,6 +99,38 @@ namespace TriforceSalon.Class_Components
             }
         }
 
+        public async Task PopulateServiceTypeForInsert()
+        {
+            ServiceVariationControl.serviceVariationInstance.AddSalonServices.Items.Clear();
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "select ServiceTypeName from service_type";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string serviceTypes = reader["ServiceTypeName"].ToString();
+                                    ServiceVariationControl.serviceVariationInstance.AddSalonServices.Items.Add(serviceTypes);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("2222222. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public async Task SearchService(string searchName, Guna2DataGridView serviceDatagrid)
         {
             try
@@ -120,7 +152,7 @@ namespace TriforceSalon.Class_Components
                             var dataTable = new DataTable();
                             await adapter.FillAsync(dataTable);
 
-                            serviceDatagrid.Controls.Clear();
+                            serviceDatagrid.Rows.Clear();
 
                             foreach (DataRow row in dataTable.Rows)
                             {
@@ -202,7 +234,7 @@ namespace TriforceSalon.Class_Components
                             var dataTable = new DataTable();
                             await adapter.FillAsync(dataTable);
 
-                            serviceDatagrid.Controls.Clear();
+                            serviceDatagrid.Rows.Clear();
 
                             foreach (DataRow row in dataTable.Rows)
                             {
@@ -310,10 +342,10 @@ namespace TriforceSalon.Class_Components
                 {
                     DataGridViewRow selectedRow = ServiceVariationControl.serviceVariationInstance.SalonServicesDGV.SelectedRows[0];
 
-                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceTypeID"].Value);
-                    serviceVariationID = Convert.ToInt32(selectedRow.Cells["ServiceVariationID"].Value);
-                    string serviceName = Convert.ToString(selectedRow.Cells["ServiceName"].Value);
-                    decimal serviceAmount = Convert.ToDecimal(selectedRow.Cells["ServiceAmount"].Value);
+                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiveTIDCol"].Value);
+                    serviceVariationID = Convert.ToInt32(selectedRow.Cells["ServiceVariationIDCol"].Value);
+                    string serviceName = Convert.ToString(selectedRow.Cells["ServiceNameCol"].Value);
+                    decimal serviceAmount = Convert.ToDecimal(selectedRow.Cells["ServiceAmountCol"].Value);
                     loadImages.ServicesImage(serviceVariationID);
 
                     ServiceVariationControl.serviceVariationInstance.ServiceNameTxtB.Text = serviceName;
@@ -326,14 +358,14 @@ namespace TriforceSalon.Class_Components
                     {
                         using (var conn = new MySqlConnection(mysqlcon))
                         {
-                            conn.Open();
+                            await conn.OpenAsync();
                             string query = "select ServiceTypeName from service_type where ServiceID = @service_ID";
 
                             using (MySqlCommand command = new MySqlCommand(query, conn))
                             {
                                 command.Parameters.AddWithValue("@service_ID", serviceTypeID);
 
-                                using (MySqlDataReader reader = command.ExecuteReader())
+                                using (DbDataReader reader = await command.ExecuteReaderAsync())
                                 {
                                     if (reader.Read())
                                     {

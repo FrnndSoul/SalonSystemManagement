@@ -31,6 +31,7 @@ namespace TriforceSalon.UserControls.Service_Controls
         {
             await salonServices.GetSalonServicesAsync(SalonServicesDGV);
             await salonServices.PopulateServiceType(ServiceFilterComB);
+            await salonServices.PopulateServiceTypeForInsert();
         }
 
         private void AddServiceImageBtn_Click(object sender, EventArgs e)

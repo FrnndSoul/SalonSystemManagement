@@ -191,7 +191,7 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@service_image", imageData);
 
                             await command.ExecuteNonQueryAsync();
-                            await salonServices.PopulateServiceType(ServiceVariationControl.serviceVariationInstance.ServiceFilterComB);
+                            await salonServices.PopulateServiceTypeForInsert();
                             await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                             ClearServiceTypes();
                         }
@@ -231,8 +231,8 @@ namespace TriforceSalon.Class_Components
                 {
                     DataGridViewRow selectedRow = ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV.SelectedRows[0];
 
-                    string ServiceTypeName = selectedRow.Cells["ServiceTypeName"].Value.ToString();
-                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceID"].Value);
+                    string ServiceTypeName = selectedRow.Cells["CategoryNameCol"].Value.ToString();
+                    serviceTypeID = Convert.ToInt32(selectedRow.Cells["CategoryIDCol"].Value);
 
                     ServiceTypeControl.serviceTypeInstance.ServiceTypeTxtB.Text = ServiceTypeName;
                     loadImages.ServiceTypeImage(serviceTypeID);
@@ -310,7 +310,7 @@ namespace TriforceSalon.Class_Components
                             }
 
                             await command.ExecuteNonQueryAsync();
-                            await salonServices.PopulateServiceType(ServiceVariationControl.serviceVariationInstance.ServiceFilterComB);
+                            await salonServices.PopulateServiceTypeForInsert();
                             await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                             ClearServiceTypes();
                             HideButton(true, true, false, false);
