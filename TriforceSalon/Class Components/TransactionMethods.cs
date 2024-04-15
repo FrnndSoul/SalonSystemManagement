@@ -346,8 +346,9 @@ namespace TriforceSalon.Class_Components
                             await command.ExecuteNonQueryAsync();
                             //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
                     using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
@@ -412,7 +413,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
 
-                    await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
+                    //await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
                     await InsertToSales(salesID, orderID);
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //GeneratePurchaseOnlyReceipt();
@@ -643,7 +644,7 @@ namespace TriforceSalon.Class_Components
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
-                        string numericValue = totalText.Replace("Php.", "").Trim();
+                        string numericValue = totalText.Replace("₱ ", "").Trim();
                         decimal.TryParse(numericValue, out decimal totalAmount);
 
                         command.Parameters.AddWithValue("@saleID", saleID);
