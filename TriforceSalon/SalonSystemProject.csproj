@@ -358,6 +358,18 @@
     <Compile Include="UserControls\Inventory Controls\RequestShipment Inventory.Designer.cs">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Service Controls\ServiceTypeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Service Controls\ServiceTypeControl.Designer.cs">
+      <DependentUpon>ServiceTypeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Service Controls\ServiceVariationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Service Controls\ServiceVariationControl.Designer.cs">
+      <DependentUpon>ServiceVariationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ServiceType&amp;ServicePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -465,6 +477,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\RequestShipment Inventory.resx">
       <DependentUpon>RequestShipment Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Service Controls\ServiceTypeControl.resx">
+      <DependentUpon>ServiceTypeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Service Controls\ServiceVariationControl.resx">
+      <DependentUpon>ServiceVariationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ServiceType&amp;ServicePage.resx">
       <DependentUpon>ServiceType&amp;ServicePage.cs</DependentUpon>

@@ -13,6 +13,7 @@ using iText.Signatures;
 using System.Web.WebSockets;
 using System.Deployment.Internal;
 using System.Configuration;
+using TriforceSalon.UserControls.Service_Controls;
 
 namespace TriforceSalon.Class_Components
 {
@@ -54,7 +55,7 @@ namespace TriforceSalon.Class_Components
 
                         Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
 
-                        ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = resizedImage;
+                        ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = resizedImage;
                         isNewServiceImageSelected = true; //flag ito para sa image
                     }
                     catch (Exception ex)
@@ -65,9 +66,10 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task PopulateServiceType()
+        public async Task PopulateServiceType(Guna2ComboBox comboBoxFilter)
         {
-            ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Clear();
+            comboBoxFilter.Items.Clear();
+            comboBoxFilter.Items.Add("All");
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -84,7 +86,7 @@ namespace TriforceSalon.Class_Components
                                 while (await reader.ReadAsync())
                                 {
                                     string serviceTypes = reader["ServiceTypeName"].ToString();
-                                    ServiceType_ServicePage.servicePageInstance.AddSalonServices.Items.Add(serviceTypes);
+                                    comboBoxFilter.Items.Add(serviceTypes);
                                 }
                             }
                         }
@@ -94,6 +96,59 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show("2222222. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async Task SearchService(string searchName, Guna2DataGridView serviceDatagrid)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string searchQuery = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount` " +
+                        "FROM `salon_services` " +
+                        "WHERE ServiceName LIKE @name";
+
+                    using(MySqlCommand command = new MySqlCommand(searchQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@name", "%" + searchName + "%");
+
+                        using (var adapter = new MySqlDataAdapter(command))
+                        {
+                            var dataTable = new DataTable();
+                            await adapter.FillAsync(dataTable);
+
+                            serviceDatagrid.Controls.Clear();
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                var serviceTypeID = row["ServiceTypeID"].ToString();
+                                var serviceVariationID = row["ServiceVariationID"].ToString();
+                                byte[] serviceImageBytes = row["ServiceImage"] as byte[];
+                                var serviceName = row["ServiceName"].ToString();
+                                var serviceAmount = row["ServiceAmount"].ToString();
+
+                                Image serviceImage = null;
+                                if (serviceImageBytes != null && serviceImageBytes.Length > 0)
+                                {
+                                    using (MemoryStream ms = new MemoryStream(serviceImageBytes))
+                                    {
+                                        serviceImage = Image.FromStream(ms);
+                                    }
+                                }
+
+                                serviceDatagrid.Rows.Add(serviceTypeID, serviceVariationID, null, serviceName, serviceAmount);
+                                serviceDatagrid.Rows[serviceDatagrid.Rows.Count - 1].Cells[2].Value = serviceImage;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in SearchService");
             }
         }
         public int GetServiceTypeID(string serviceType)
@@ -129,24 +184,45 @@ namespace TriforceSalon.Class_Components
 
 
 
-        public async Task GetSalonServicesAsync()
+        public async Task GetSalonServicesAsync(Guna2DataGridView serviceDatagrid)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemGroupID` FROM `salon_services`";
+                    string query = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount` " +
+                        "FROM `salon_services` " +
+                        "LIMIT 10";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        using (var adapter = new MySqlDataAdapter(command))
                         {
-                            if (reader.HasRows)
+                            var dataTable = new DataTable();
+                            await adapter.FillAsync(dataTable);
+
+                            serviceDatagrid.Controls.Clear();
+
+                            foreach (DataRow row in dataTable.Rows)
                             {
-                                DataTable dt = new DataTable();
-                                dt.Load(reader); // Use Load instead of LoadAsync
-                                ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.DataSource = dt;
+                                var serviceTypeID = row["ServiceTypeID"].ToString();
+                                var serviceVariationID = row["ServiceVariationID"].ToString();
+                                byte[] serviceImageBytes = row["ServiceImage"] as byte[];
+                                var serviceName = row["ServiceName"].ToString();
+                                var serviceAmount = row["ServiceAmount"].ToString();
+
+                                Image serviceImage = null;
+                                if (serviceImageBytes != null && serviceImageBytes.Length > 0)
+                                {
+                                    using (MemoryStream ms = new MemoryStream(serviceImageBytes))
+                                    {
+                                        serviceImage = Image.FromStream(ms);
+                                    }
+                                }
+
+                                serviceDatagrid.Rows.Add(serviceTypeID, serviceVariationID, null, serviceName, serviceAmount);
+                                serviceDatagrid.Rows[serviceDatagrid.Rows.Count - 1].Cells[2].Value = serviceImage;
                             }
                         }
                     }
@@ -166,7 +242,7 @@ namespace TriforceSalon.Class_Components
 
             return _random.Next(1000, 10000);
         }
-        public async Task AddSalonServices()
+        public async Task AddSalonServices(Guna2DataGridView serviceDatagrid)
         {
             int serviceID = Convert.ToInt32(GenerateServiceVariationID());
             try
@@ -177,7 +253,7 @@ namespace TriforceSalon.Class_Components
 
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image.Save(ms, ImageFormat.Jpeg);
+                        ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image.Save(ms, ImageFormat.Jpeg);
                         imageData = ms.ToArray();
                     }
 
@@ -188,16 +264,15 @@ namespace TriforceSalon.Class_Components
                     {
                         command.Parameters.AddWithValue("@service_type_ID", serviceInt);
                         command.Parameters.AddWithValue("@serviceVarID", serviceID);
-                        command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
-                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
+                        command.Parameters.AddWithValue("@service_name", ServiceVariationControl.serviceVariationInstance.ServiceNameTxtB.Text);
+                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceVariationControl.serviceVariationInstance.ServiceAmountTxtb.Text));
                         command.Parameters.AddWithValue("@service_image", imageData);
                         command.Parameters.AddWithValue("@itemGroupID", serviceID);
-                        //command.Parameters.AddWithValue("@itemId", GetItemId(Convert.ToString(ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.SelectedItem)));
 
 
                         await command.ExecuteNonQueryAsync();
                         MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await GetSalonServicesAsync();
+                        await GetSalonServicesAsync(serviceDatagrid);
                     }
                 }
             }
@@ -222,7 +297,7 @@ namespace TriforceSalon.Class_Components
 
         public async void EditSalonServices()
         {
-            if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 0)
+            if (ServiceVariationControl.serviceVariationInstance.SalonServicesDGV.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -231,9 +306,9 @@ namespace TriforceSalon.Class_Components
 
             if (result == DialogResult.Yes)
             {
-                if (ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows.Count == 1)
+                if (ServiceVariationControl.serviceVariationInstance.SalonServicesDGV.SelectedRows.Count == 1)
                 {
-                    DataGridViewRow selectedRow = ServiceType_ServicePage.servicePageInstance.SalonServicesDGV.SelectedRows[0];
+                    DataGridViewRow selectedRow = ServiceVariationControl.serviceVariationInstance.SalonServicesDGV.SelectedRows[0];
 
                     serviceTypeID = Convert.ToInt32(selectedRow.Cells["ServiceTypeID"].Value);
                     serviceVariationID = Convert.ToInt32(selectedRow.Cells["ServiceVariationID"].Value);
@@ -241,8 +316,8 @@ namespace TriforceSalon.Class_Components
                     decimal serviceAmount = Convert.ToDecimal(selectedRow.Cells["ServiceAmount"].Value);
                     loadImages.ServicesImage(serviceVariationID);
 
-                    ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = serviceName;
-                    ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = Convert.ToString(serviceAmount);
+                    ServiceVariationControl.serviceVariationInstance.ServiceNameTxtB.Text = serviceName;
+                    ServiceVariationControl.serviceVariationInstance.ServiceAmountTxtb.Text = Convert.ToString(serviceAmount);
 
                     HideButton(false, false, true, true);
 
@@ -263,7 +338,7 @@ namespace TriforceSalon.Class_Components
                                     if (reader.Read())
                                     {
                                         string servTypeName = reader.GetString(0);
-                                        ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = servTypeName;
+                                        ServiceVariationControl.serviceVariationInstance.AddSalonServices.SelectedItem = servTypeName;
                                     }
                                 }
 
@@ -320,9 +395,9 @@ namespace TriforceSalon.Class_Components
             }
         }*/
        
-        public async Task UpdateSalonServices(int variationID)
+        public async Task UpdateSalonServices(int variationID, Guna2DataGridView serviceDatagrid)
         {
-            string serviceType = ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem.ToString();
+            string serviceType = ServiceVariationControl.serviceVariationInstance.AddSalonServices.SelectedItem.ToString();
             int serviceTypeID = GetServiceTypeID(serviceType);
             try
             {
@@ -335,7 +410,7 @@ namespace TriforceSalon.Class_Components
 
                     if (isNewServiceImageSelected)
                     {
-                        using (Bitmap bmp = new Bitmap(ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image))
+                        using (Bitmap bmp = new Bitmap(ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image))
                         {
                             using (MemoryStream ms = new MemoryStream())
                             {
@@ -349,9 +424,9 @@ namespace TriforceSalon.Class_Components
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@service_name", ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text);
+                        command.Parameters.AddWithValue("@service_name", ServiceVariationControl.serviceVariationInstance.ServiceNameTxtB.Text);
                         command.Parameters.AddWithValue("@servicetype_ID", serviceTypeID);
-                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text));
+                        command.Parameters.AddWithValue("@service_amount", Convert.ToDecimal(ServiceVariationControl.serviceVariationInstance.ServiceAmountTxtb.Text));
                         command.Parameters.AddWithValue("@servicevar_ID", variationID);
 
                         if (isNewServiceImageSelected)
@@ -359,7 +434,7 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@service_image", imageData);
                         }
                         await command.ExecuteNonQueryAsync();
-                        await GetSalonServicesAsync();
+                        await GetSalonServicesAsync(serviceDatagrid);
                         ClearServices();
                         HideButton(true, true, false, false);
                     }
@@ -431,7 +506,7 @@ namespace TriforceSalon.Class_Components
                                 while (reader.Read())
                                 {
                                     string serviceTypes = reader["ItemName"].ToString();
-                                    ServiceType_ServicePage.servicePageInstance.InventoryItemsComB.Items.Add(serviceTypes);
+                                    ServiceVariationControl.serviceVariationInstance.InventoryItemsComB.Items.Add(serviceTypes);
                                 }
                             }
 
@@ -578,21 +653,88 @@ namespace TriforceSalon.Class_Components
             return ID;
         }
 
+        
+
+        public async Task FilterServices(string filter, Guna2DataGridView serviceDatagrid)
+        {
+            serviceDatagrid.Rows.Clear();
+            string selectQuery;
+
+            try
+            {
+                if (filter == "All")
+                {
+                    selectQuery = "SELECT `ServiceTypeID`, `ServiceVariationID`, `ServiceImage`, `ServiceName`, `ServiceAmount`, `ItemGroupID` " +
+                            "FROM `salon_services` " +
+                            "LIMIT 10";
+                }
+                else
+                {
+                    selectQuery = "SELECT se.ServiceTypeID, se.ServiceVariationID, se.ServiceImage, se.ServiceName, se.ServiceAmount " +
+                            "FROM salon_services se " +
+                            "JOIN service_type st ON se.ServiceTypeID = st.ServiceID " +
+                            "WHERE ServiceTypeName = @serviceTypeName ";
+                }
+
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    using(MySqlCommand command = new MySqlCommand(selectQuery, conn))
+                    {
+                        if(filter != "All")
+                        {
+                            command.Parameters.AddWithValue("@serviceTypeName", filter);
+                        }
+
+                        using (var adapter = new MySqlDataAdapter(command))
+                        {
+                            var dataTable = new DataTable();
+                            await adapter.FillAsync(dataTable);
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                var serviceTypeID = row["ServiceTypeID"].ToString();
+                                var serviceVariationID = row["ServiceVariationID"].ToString();
+                                byte[] serviceImageBytes = row["ServiceImage"] as byte[];
+                                var serviceName = row["ServiceName"].ToString();
+                                var serviceAmount = row["ServiceAmount"].ToString();
+
+                                Image serviceImage = null;
+                                if (serviceImageBytes != null && serviceImageBytes.Length > 0)
+                                {
+                                    using (MemoryStream ms = new MemoryStream(serviceImageBytes))
+                                    {
+                                        serviceImage = Image.FromStream(ms);
+                                    }
+                                }
+
+                                serviceDatagrid.Rows.Add(serviceTypeID, serviceVariationID, serviceImage, serviceName, serviceAmount);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in FilterServices");
+            }
+        }
+
         public void HideButton(bool add, bool edit, bool cancel, bool update)
         {
-            ServiceType_ServicePage.servicePageInstance.UpdateServBtn.Visible = update;
-            ServiceType_ServicePage.servicePageInstance.EditServBtn.Visible = edit;
-            ServiceType_ServicePage.servicePageInstance.CancelEditServiceBtn.Visible = cancel;
-            ServiceType_ServicePage.servicePageInstance.AddServiceBtn.Enabled = add;
+            ServiceVariationControl.serviceVariationInstance.UpdateServBtn.Visible = update;
+            ServiceVariationControl.serviceVariationInstance.EditServBtn.Visible = edit;
+            ServiceVariationControl.serviceVariationInstance.CancelEditServiceBtn.Visible = cancel;
+            ServiceVariationControl.serviceVariationInstance.AddServiceBtn.Enabled = add;
 
         }
 
         public void ClearServices()
         {
-            ServiceType_ServicePage.servicePageInstance.ServiceNameTxtB.Text = null;
-            ServiceType_ServicePage.servicePageInstance.ServiceAmountTxtb.Text = null;
-            ServiceType_ServicePage.servicePageInstance.AddSalonServices.SelectedItem = null;
-            ServiceType_ServicePage.servicePageInstance.ServiceImagePicB.Image = null;
+            ServiceVariationControl.serviceVariationInstance.ServiceNameTxtB.Text = null;
+            ServiceVariationControl.serviceVariationInstance.ServiceAmountTxtb.Text = null;
+            ServiceVariationControl.serviceVariationInstance.AddSalonServices.SelectedItem = null;
+            ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null;
         }
     }
 }

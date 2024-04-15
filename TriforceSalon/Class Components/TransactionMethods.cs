@@ -1,21 +1,4 @@
-﻿/*using Guna.UI2.WinForms;
-using iText.IO.Image;
-using iText.Kernel.Pdf;
-using iText.Layout.Borders;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TriforceSalon.UserControls.Receptionist_Controls;*/
-
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
 using iText.IO.Image;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
