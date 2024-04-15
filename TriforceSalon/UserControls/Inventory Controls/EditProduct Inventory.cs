@@ -121,7 +121,15 @@ namespace TriforceSalon.UserControls
                         querycmd.Parameters.AddWithValue("@itemID", newID);
                         querycmd.Parameters.AddWithValue("@stock", newStock);
                         querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
-                        querycmd.ExecuteNonQuery();
+
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            querycmd.ExecuteNonQuery();
+                        }
                     }
                 }
                 MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);

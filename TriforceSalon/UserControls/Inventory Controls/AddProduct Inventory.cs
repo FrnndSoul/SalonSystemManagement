@@ -93,10 +93,16 @@ namespace TriforceSalon.UserControls
                         querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
                         querycmd.Parameters.AddWithValue("@status", 3);
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
-                        await querycmd.ExecuteNonQueryAsync();
+
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        } else
+                        {
+                            await querycmd.ExecuteNonQueryAsync();
+                        }
                     }
                 }
-
                 manager.DisableButtons(true);
                 MessageBox.Show("Item has been added", "Item Insertion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Clear();

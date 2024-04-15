@@ -117,9 +117,16 @@ namespace TriforceSalon.UserControls
 
             int totalCost = Convert.ToInt32(CostBox.Text) * Convert.ToInt32(QuantityBox.Text);
 
-            await Method.RecordShipment(Inventory.GenerateID(), Convert.ToInt32(IDBox.Text), NameBox.Text, Convert.ToInt32(QuantityBox.Text), totalCost, SupplierBox.Text);
-            
-            Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
+
+            if (Method.AdminAccess())
+            {
+                Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
+            }
+            else
+            {
+                await Method.RecordShipment(Inventory.GenerateID(), Convert.ToInt32(IDBox.Text), NameBox.Text, Convert.ToInt32(QuantityBox.Text), totalCost, SupplierBox.Text);
+                Inventory.AddShippedItems(Convert.ToInt32(IDBox.Text), Convert.ToInt32(QuantityBox.Text));
+            }
             MessageBox.Show("Item has been added", "Restock Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SupplierBox.Text = string.Empty;
             QuantityBox.Text = "0";

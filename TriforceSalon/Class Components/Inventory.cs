@@ -75,7 +75,15 @@ namespace TriforceSalon
                     {
                         querycmd.Parameters.AddWithValue("@newStock", Stock);
                         querycmd.Parameters.AddWithValue("@itemID", ID);
-                        querycmd.ExecuteNonQuery();
+
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            querycmd.ExecuteNonQuery();
+                        }
                     }
                 }
             }
