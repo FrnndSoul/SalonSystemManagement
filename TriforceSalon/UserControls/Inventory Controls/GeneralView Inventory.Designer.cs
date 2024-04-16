@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.InventoryDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.EditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RequestBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -38,6 +38,8 @@
             this.editProduct_Inventory1 = new TriforceSalon.UserControls.EditProduct_Inventory();
             this.addProduct_Inventory1 = new TriforceSalon.UserControls.AddProduct_Inventory();
             this.requestShipment_Inventory1 = new TriforceSalon.UserControls.RequestShipment_Inventory();
+            this.PullBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.DeleteBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.InventoryDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,26 +49,26 @@
             this.InventoryDGV.AllowUserToDeleteRows = false;
             this.InventoryDGV.AllowUserToResizeColumns = false;
             this.InventoryDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.InventoryDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.InventoryDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.InventoryDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.InventoryDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.InventoryDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.InventoryDGV.ColumnHeadersHeight = 80;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InventoryDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InventoryDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.InventoryDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.InventoryDGV.Location = new System.Drawing.Point(25, 33);
             this.InventoryDGV.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
@@ -115,10 +117,10 @@
             this.EditBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditBtn.ForeColor = System.Drawing.Color.White;
             this.EditBtn.Image = global::TriforceSalon.Properties.Resources.edit_icon;
-            this.EditBtn.Location = new System.Drawing.Point(578, 863);
+            this.EditBtn.Location = new System.Drawing.Point(321, 863);
             this.EditBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(300, 70);
+            this.EditBtn.Size = new System.Drawing.Size(261, 70);
             this.EditBtn.TabIndex = 53;
             this.EditBtn.Text = " Edit";
             this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
@@ -137,10 +139,10 @@
             this.RequestBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RequestBtn.ForeColor = System.Drawing.Color.White;
             this.RequestBtn.Image = global::TriforceSalon.Properties.Resources.request1_icon;
-            this.RequestBtn.Location = new System.Drawing.Point(125, 863);
+            this.RequestBtn.Location = new System.Drawing.Point(620, 863);
             this.RequestBtn.Margin = new System.Windows.Forms.Padding(2);
             this.RequestBtn.Name = "RequestBtn";
-            this.RequestBtn.Size = new System.Drawing.Size(300, 70);
+            this.RequestBtn.Size = new System.Drawing.Size(261, 70);
             this.RequestBtn.TabIndex = 52;
             this.RequestBtn.Text = " Request";
             this.RequestBtn.Click += new System.EventHandler(this.RequestBtn_Click);
@@ -159,10 +161,10 @@
             this.AddBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddBtn.ForeColor = System.Drawing.Color.White;
             this.AddBtn.Image = global::TriforceSalon.Properties.Resources.access_icon;
-            this.AddBtn.Location = new System.Drawing.Point(1021, 863);
+            this.AddBtn.Location = new System.Drawing.Point(25, 863);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddBtn.Name = "AddBtn";
-            this.AddBtn.Size = new System.Drawing.Size(300, 70);
+            this.AddBtn.Size = new System.Drawing.Size(261, 70);
             this.AddBtn.TabIndex = 55;
             this.AddBtn.Text = " Add";
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
@@ -197,11 +199,57 @@
             this.requestShipment_Inventory1.Visible = false;
             this.requestShipment_Inventory1.VisibleChanged += new System.EventHandler(this.requestShipment_Inventory1_VisibleChanged);
             // 
+            // PullBtn
+            // 
+            this.PullBtn.Animated = true;
+            this.PullBtn.BackColor = System.Drawing.Color.Transparent;
+            this.PullBtn.BorderRadius = 20;
+            this.PullBtn.BorderThickness = 1;
+            this.PullBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.PullBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.PullBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.PullBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.PullBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.PullBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PullBtn.ForeColor = System.Drawing.Color.White;
+            this.PullBtn.Image = global::TriforceSalon.Properties.Resources.edit_icon;
+            this.PullBtn.Location = new System.Drawing.Point(912, 863);
+            this.PullBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.PullBtn.Name = "PullBtn";
+            this.PullBtn.Size = new System.Drawing.Size(261, 70);
+            this.PullBtn.TabIndex = 61;
+            this.PullBtn.Text = " Pull";
+            this.PullBtn.Click += new System.EventHandler(this.PullBtn_Click);
+            // 
+            // DeleteBtn
+            // 
+            this.DeleteBtn.Animated = true;
+            this.DeleteBtn.BackColor = System.Drawing.Color.Transparent;
+            this.DeleteBtn.BorderRadius = 20;
+            this.DeleteBtn.BorderThickness = 1;
+            this.DeleteBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.DeleteBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.DeleteBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.DeleteBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.DeleteBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.DeleteBtn.Font = new System.Drawing.Font("Chinacat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteBtn.ForeColor = System.Drawing.Color.White;
+            this.DeleteBtn.Image = global::TriforceSalon.Properties.Resources.request1_icon;
+            this.DeleteBtn.Location = new System.Drawing.Point(1214, 863);
+            this.DeleteBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.DeleteBtn.Name = "DeleteBtn";
+            this.DeleteBtn.Size = new System.Drawing.Size(261, 70);
+            this.DeleteBtn.TabIndex = 60;
+            this.DeleteBtn.Text = " Delete";
+            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
+            // 
             // GeneralView_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.PullBtn);
+            this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.RequestBtn);
@@ -226,5 +274,7 @@
         private AddProduct_Inventory addProduct_Inventory1;
         private EditProduct_Inventory editProduct_Inventory1;
         private RequestShipment_Inventory requestShipment_Inventory1;
+        private Guna.UI2.WinForms.Guna2Button PullBtn;
+        private Guna.UI2.WinForms.Guna2Button DeleteBtn;
     }
 }
