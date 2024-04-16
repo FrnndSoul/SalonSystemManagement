@@ -68,9 +68,9 @@
             // 
             this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
-            this.ServiceFL.Location = new System.Drawing.Point(14, 86);
+            this.ServiceFL.Location = new System.Drawing.Point(14, 228);
             this.ServiceFL.Name = "ServiceFL";
-            this.ServiceFL.Size = new System.Drawing.Size(1266, 750);
+            this.ServiceFL.Size = new System.Drawing.Size(1266, 608);
             this.ServiceFL.TabIndex = 1;
             // 
             // guna2Panel1
@@ -501,7 +501,7 @@
             this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.SearchServiceTxtB.ForeColor = System.Drawing.Color.Black;
             this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 25);
+            this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 185);
             this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SearchServiceTxtB.Name = "SearchServiceTxtB";
             this.SearchServiceTxtB.PasswordChar = '\0';
@@ -521,7 +521,7 @@
             this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.SearchServiceBtn.Font = new System.Drawing.Font("Stanberry", 17.25F);
             this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceBtn.Location = new System.Drawing.Point(610, 25);
+            this.SearchServiceBtn.Location = new System.Drawing.Point(610, 185);
             this.SearchServiceBtn.Name = "SearchServiceBtn";
             this.SearchServiceBtn.Size = new System.Drawing.Size(180, 36);
             this.SearchServiceBtn.TabIndex = 4;

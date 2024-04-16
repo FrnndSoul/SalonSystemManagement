@@ -43,6 +43,10 @@ namespace TriforceSalon.UserControls
             SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
             ServiceBtn.SendToBack();
 
+            SetButtonProperties(ServiceSubTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
+            ServiceSubTypeBtn.SendToBack();
+
+
             ServiceTypeControl serviceType = new ServiceTypeControl();
             UserControlNavigator.ShowControl(serviceType, ServiceManagementContainer);
         }
@@ -55,8 +59,27 @@ namespace TriforceSalon.UserControls
             SetButtonProperties(ServiceTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_type_black_icon);
             ServiceTypeBtn.SendToBack();
 
+            SetButtonProperties(ServiceSubTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
+            ServiceSubTypeBtn.SendToBack();
+
+
             ServiceVariationControl serviceVariation = new ServiceVariationControl();
             UserControlNavigator.ShowControl(serviceVariation, ServiceManagementContainer);
+        }
+
+        private void ServiceSubTypeBtn_Click(object sender, EventArgs e)
+        {
+            SetButtonProperties(ServiceSubTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
+            ServiceSubTypeBtn.BringToFront();
+
+            SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
+            ServiceBtn.SendToBack();
+
+            SetButtonProperties(ServiceTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_type_black_icon);
+            ServiceTypeBtn.SendToBack();
+
+            ServiceSubTypeControl serviceSubType = new ServiceSubTypeControl();
+            UserControlNavigator.ShowControl(serviceSubType, ServiceManagementContainer);
         }
     }
 }

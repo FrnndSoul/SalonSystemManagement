@@ -32,6 +32,7 @@
             this.ServiceTypeBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServiceBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServiceManagementContainer = new System.Windows.Forms.Panel();
+            this.ServiceSubTypeBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // backgroundShape
@@ -66,10 +67,10 @@
             this.ServiceTypeBtn.Image = global::TriforceSalon.Properties.Resources.service_type_icon__2_;
             this.ServiceTypeBtn.ImageOffset = new System.Drawing.Point(0, -15);
             this.ServiceTypeBtn.ImageSize = new System.Drawing.Size(25, 25);
-            this.ServiceTypeBtn.Location = new System.Drawing.Point(50, 13);
+            this.ServiceTypeBtn.Location = new System.Drawing.Point(50, 15);
             this.ServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceTypeBtn.Name = "ServiceTypeBtn";
-            this.ServiceTypeBtn.Size = new System.Drawing.Size(705, 108);
+            this.ServiceTypeBtn.Size = new System.Drawing.Size(475, 108);
             this.ServiceTypeBtn.TabIndex = 90;
             this.ServiceTypeBtn.Text = " Service Type";
             this.ServiceTypeBtn.TextOffset = new System.Drawing.Point(0, -15);
@@ -90,10 +91,10 @@
             this.ServiceBtn.Image = global::TriforceSalon.Properties.Resources.service_black_icon;
             this.ServiceBtn.ImageOffset = new System.Drawing.Point(0, -15);
             this.ServiceBtn.ImageSize = new System.Drawing.Size(30, 30);
-            this.ServiceBtn.Location = new System.Drawing.Point(750, 13);
+            this.ServiceBtn.Location = new System.Drawing.Point(976, 15);
             this.ServiceBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceBtn.Name = "ServiceBtn";
-            this.ServiceBtn.Size = new System.Drawing.Size(700, 108);
+            this.ServiceBtn.Size = new System.Drawing.Size(473, 108);
             this.ServiceBtn.TabIndex = 91;
             this.ServiceBtn.Text = " Service Variation";
             this.ServiceBtn.TextOffset = new System.Drawing.Point(0, -15);
@@ -108,6 +109,30 @@
             this.ServiceManagementContainer.Size = new System.Drawing.Size(1400, 800);
             this.ServiceManagementContainer.TabIndex = 92;
             // 
+            // ServiceSubTypeBtn
+            // 
+            this.ServiceSubTypeBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceSubTypeBtn.BorderRadius = 40;
+            this.ServiceSubTypeBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceSubTypeBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceSubTypeBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ServiceSubTypeBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ServiceSubTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.ServiceSubTypeBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.ServiceSubTypeBtn.ForeColor = System.Drawing.Color.Black;
+            this.ServiceSubTypeBtn.Image = global::TriforceSalon.Properties.Resources.service_type_icon__2_;
+            this.ServiceSubTypeBtn.ImageOffset = new System.Drawing.Point(0, -15);
+            this.ServiceSubTypeBtn.ImageSize = new System.Drawing.Size(25, 25);
+            this.ServiceSubTypeBtn.Location = new System.Drawing.Point(513, 15);
+            this.ServiceSubTypeBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ServiceSubTypeBtn.Name = "ServiceSubTypeBtn";
+            this.ServiceSubTypeBtn.Size = new System.Drawing.Size(475, 108);
+            this.ServiceSubTypeBtn.TabIndex = 93;
+            this.ServiceSubTypeBtn.Text = " Service Sub-Type";
+            this.ServiceSubTypeBtn.TextOffset = new System.Drawing.Point(0, -15);
+            this.ServiceSubTypeBtn.UseTransparentBackground = true;
+            this.ServiceSubTypeBtn.Click += new System.EventHandler(this.ServiceSubTypeBtn_Click);
+            // 
             // ServiceType_ServicePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +141,7 @@
             this.Controls.Add(this.ServiceManagementContainer);
             this.Controls.Add(this.backgroundShape);
             this.Controls.Add(this.ServiceBtn);
+            this.Controls.Add(this.ServiceSubTypeBtn);
             this.Controls.Add(this.ServiceTypeBtn);
             this.Name = "ServiceType_ServicePage";
             this.Size = new System.Drawing.Size(1500, 950);
@@ -129,5 +155,6 @@
         private Guna.UI2.WinForms.Guna2Button ServiceTypeBtn;
         private Guna.UI2.WinForms.Guna2Button ServiceBtn;
         private System.Windows.Forms.Panel ServiceManagementContainer;
+        private Guna.UI2.WinForms.Guna2Button ServiceSubTypeBtn;
     }
 }

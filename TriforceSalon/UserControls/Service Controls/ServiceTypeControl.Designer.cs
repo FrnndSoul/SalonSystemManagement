@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.EditServiceTBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CancelEditBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UpdateServiceTBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -132,7 +132,7 @@
             this.AddImageServiceTypeBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddImageServiceTypeBtn.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.AddImageServiceTypeBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(1060, 388);
+            this.AddImageServiceTypeBtn.Location = new System.Drawing.Point(1060, 362);
             this.AddImageServiceTypeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.AddImageServiceTypeBtn.Name = "AddImageServiceTypeBtn";
             this.AddImageServiceTypeBtn.Size = new System.Drawing.Size(210, 50);
@@ -145,7 +145,7 @@
             // 
             this.ServiceTypePicB.BackColor = System.Drawing.Color.Transparent;
             this.ServiceTypePicB.ImageRotate = 0F;
-            this.ServiceTypePicB.Location = new System.Drawing.Point(1060, 174);
+            this.ServiceTypePicB.Location = new System.Drawing.Point(1060, 148);
             this.ServiceTypePicB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceTypePicB.Name = "ServiceTypePicB";
             this.ServiceTypePicB.Size = new System.Drawing.Size(210, 210);
@@ -191,7 +191,7 @@
             this.ServiceTypeTxtB.Font = new System.Drawing.Font("Chinacat", 14.25F);
             this.ServiceTypeTxtB.ForeColor = System.Drawing.Color.Black;
             this.ServiceTypeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1060, 476);
+            this.ServiceTypeTxtB.Location = new System.Drawing.Point(1060, 450);
             this.ServiceTypeTxtB.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ServiceTypeTxtB.Name = "ServiceTypeTxtB";
             this.ServiceTypeTxtB.PasswordChar = '\0';
@@ -264,31 +264,31 @@
             // 
             this.ServiceTypeDGV.AllowUserToAddRows = false;
             this.ServiceTypeDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ServiceTypeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.ServiceTypeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.ServiceTypeDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServiceTypeDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServiceTypeDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.ServiceTypeDGV.ColumnHeadersHeight = 30;
             this.ServiceTypeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ServiceTypeDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceTImageCol,
             this.CategoryNameCol,
             this.CategoryIDCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServiceTypeDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServiceTypeDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.ServiceTypeDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceTypeDGV.Location = new System.Drawing.Point(15, 76);
             this.ServiceTypeDGV.Name = "ServiceTypeDGV";
@@ -321,7 +321,7 @@
             // 
             // ServiceTImageCol
             // 
-            this.ServiceTImageCol.HeaderText = "Category Image";
+            this.ServiceTImageCol.HeaderText = "Service Type Image";
             this.ServiceTImageCol.Name = "ServiceTImageCol";
             this.ServiceTImageCol.ReadOnly = true;
             this.ServiceTImageCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -329,13 +329,13 @@
             // 
             // CategoryNameCol
             // 
-            this.CategoryNameCol.HeaderText = "Category Name";
+            this.CategoryNameCol.HeaderText = "Service Type Name";
             this.CategoryNameCol.Name = "CategoryNameCol";
             this.CategoryNameCol.ReadOnly = true;
             // 
             // CategoryIDCol
             // 
-            this.CategoryIDCol.HeaderText = "Category ID";
+            this.CategoryIDCol.HeaderText = "Service Type ID";
             this.CategoryIDCol.Name = "CategoryIDCol";
             this.CategoryIDCol.ReadOnly = true;
             // 

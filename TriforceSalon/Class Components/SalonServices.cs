@@ -75,7 +75,7 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "select ServiceTypeName from service_type";
+                    string query = "select ServiceSubTypeName from salon_subtypes";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -107,7 +107,7 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "select ServiceTypeName from service_type";
+                    string query = "select ServiceSubTypeName from salon_subtypes";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -192,7 +192,7 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
-                    string query = "select ServiceID from service_type where ServiceTypeName = @service_name";
+                    string query = "select CategoryID from salon_subtypes where ServiceSubTypeName = @service_name";
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_name", serviceType);
