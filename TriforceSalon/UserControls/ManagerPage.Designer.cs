@@ -36,6 +36,7 @@
             this.InventoryBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.ManagerContent = new System.Windows.Forms.Panel();
+            this.ManagerReceptionistBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -45,6 +46,7 @@
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 100;
+            this.guna2Panel1.Controls.Add(this.ManagerReceptionistBtn);
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.Controls.Add(this.LogoutBtn);
             this.guna2Panel1.Controls.Add(this.ReportsBtn);
@@ -84,7 +86,7 @@
             this.LogoutBtn.Font = new System.Drawing.Font("Chinacat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LogoutBtn.ForeColor = System.Drawing.Color.White;
             this.LogoutBtn.Image = global::TriforceSalon.Properties.Resources.logout_icon;
-            this.LogoutBtn.Location = new System.Drawing.Point(106, 813);
+            this.LogoutBtn.Location = new System.Drawing.Point(107, 939);
             this.LogoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.LogoutBtn.Name = "LogoutBtn";
             this.LogoutBtn.Size = new System.Drawing.Size(197, 58);
@@ -176,6 +178,27 @@
             this.ManagerContent.Size = new System.Drawing.Size(1500, 950);
             this.ManagerContent.TabIndex = 0;
             // 
+            // ManagerReceptionistBtn
+            // 
+            this.ManagerReceptionistBtn.Animated = true;
+            this.ManagerReceptionistBtn.AutoRoundedCorners = true;
+            this.ManagerReceptionistBtn.BorderRadius = 48;
+            this.ManagerReceptionistBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerReceptionistBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerReceptionistBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ManagerReceptionistBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ManagerReceptionistBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ManagerReceptionistBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManagerReceptionistBtn.ForeColor = System.Drawing.Color.White;
+            this.ManagerReceptionistBtn.Location = new System.Drawing.Point(104, 673);
+            this.ManagerReceptionistBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ManagerReceptionistBtn.Name = "ManagerReceptionistBtn";
+            this.ManagerReceptionistBtn.Size = new System.Drawing.Size(197, 98);
+            this.ManagerReceptionistBtn.TabIndex = 10;
+            this.ManagerReceptionistBtn.Text = "Serve Customers";
+            this.ManagerReceptionistBtn.UseTransparentBackground = true;
+            this.ManagerReceptionistBtn.Click += new System.EventHandler(this.ManagerReceptionistBtn_Click);
+            // 
             // ManagerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,5 +229,6 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Panel ManagerContent;
+        private Guna.UI2.WinForms.Guna2Button ManagerReceptionistBtn;
     }
 }

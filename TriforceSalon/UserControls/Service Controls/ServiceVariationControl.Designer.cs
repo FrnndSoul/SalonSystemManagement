@@ -294,10 +294,10 @@
             this.ServiceFilterComB.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.ServiceFilterComB.ForeColor = System.Drawing.Color.Black;
             this.ServiceFilterComB.ItemHeight = 30;
-            this.ServiceFilterComB.Location = new System.Drawing.Point(173, 33);
+            this.ServiceFilterComB.Location = new System.Drawing.Point(173, 19);
             this.ServiceFilterComB.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceFilterComB.Name = "ServiceFilterComB";
-            this.ServiceFilterComB.Size = new System.Drawing.Size(213, 36);
+            this.ServiceFilterComB.Size = new System.Drawing.Size(198, 36);
             this.ServiceFilterComB.TabIndex = 68;
             this.ServiceFilterComB.SelectedIndexChanged += new System.EventHandler(this.ServiceFilterComB_SelectedIndexChanged);
             // 
@@ -305,7 +305,7 @@
             // 
             this.FilterServiceComboBox.Font = new System.Drawing.Font("Stanberry", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FilterServiceComboBox.ForeColor = System.Drawing.Color.White;
-            this.FilterServiceComboBox.Location = new System.Drawing.Point(10, 33);
+            this.FilterServiceComboBox.Location = new System.Drawing.Point(10, 19);
             this.FilterServiceComboBox.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.FilterServiceComboBox.Name = "FilterServiceComboBox";
             this.FilterServiceComboBox.Size = new System.Drawing.Size(180, 29);
@@ -323,9 +323,9 @@
             this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.SearchServiceBtn.Font = new System.Drawing.Font("Stanberry", 17.25F);
             this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceBtn.Location = new System.Drawing.Point(485, 33);
+            this.SearchServiceBtn.Location = new System.Drawing.Point(581, 19);
             this.SearchServiceBtn.Name = "SearchServiceBtn";
-            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 36);
+            this.SearchServiceBtn.Size = new System.Drawing.Size(137, 36);
             this.SearchServiceBtn.TabIndex = 66;
             this.SearchServiceBtn.Text = "Search";
             this.SearchServiceBtn.Click += new System.EventHandler(this.SearchServiceBtn_Click);
@@ -345,13 +345,13 @@
             this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.SearchServiceTxtB.ForeColor = System.Drawing.Color.Black;
             this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Location = new System.Drawing.Point(681, 33);
+            this.SearchServiceTxtB.Location = new System.Drawing.Point(724, 19);
             this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SearchServiceTxtB.Name = "SearchServiceTxtB";
             this.SearchServiceTxtB.PasswordChar = '\0';
             this.SearchServiceTxtB.PlaceholderText = "";
             this.SearchServiceTxtB.SelectedText = "";
-            this.SearchServiceTxtB.Size = new System.Drawing.Size(233, 36);
+            this.SearchServiceTxtB.Size = new System.Drawing.Size(190, 36);
             this.SearchServiceTxtB.TabIndex = 65;
             // 
             // SalonServicesDGV
@@ -386,11 +386,11 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.SalonServicesDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.SalonServicesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.SalonServicesDGV.Location = new System.Drawing.Point(13, 122);
+            this.SalonServicesDGV.Location = new System.Drawing.Point(13, 73);
             this.SalonServicesDGV.Name = "SalonServicesDGV";
             this.SalonServicesDGV.ReadOnly = true;
             this.SalonServicesDGV.RowHeadersVisible = false;
-            this.SalonServicesDGV.Size = new System.Drawing.Size(900, 581);
+            this.SalonServicesDGV.Size = new System.Drawing.Size(900, 630);
             this.SalonServicesDGV.TabIndex = 69;
             this.SalonServicesDGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.SalonServicesDGV.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -457,9 +457,9 @@
             this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 17.25F);
             this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
-            this.RefreshBtn.Location = new System.Drawing.Point(734, 76);
+            this.RefreshBtn.Location = new System.Drawing.Point(438, 19);
             this.RefreshBtn.Name = "RefreshBtn";
-            this.RefreshBtn.Size = new System.Drawing.Size(180, 36);
+            this.RefreshBtn.Size = new System.Drawing.Size(137, 36);
             this.RefreshBtn.TabIndex = 70;
             this.RefreshBtn.Text = "Refresh";
             this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
