@@ -30,6 +30,12 @@ namespace TriforceSalon.UserControls.Inventory_Controls
 
         private async void SaveBtn_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show($"Do you want to pull a new batch of {NameBox.Text}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
             await Inventory.DeductItems(IDBox.Text, QuantityBox.Text);
             DiscardBtn_Click(null, null);
         }
