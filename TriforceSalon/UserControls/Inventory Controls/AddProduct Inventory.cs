@@ -53,11 +53,10 @@ namespace TriforceSalon.UserControls
             string Name = NameBox.Text;
             string ID = IDBox.Text;
             string Cost = CostBox.Text;
-            string perDay = perDayBox.Text;
-            string Aggregate = AggregateBox.Text;
             string SRP = SRPTxtB.Text;
+            string Unit = UnitBox.Text;
 
-            if (string.IsNullOrEmpty(perDay) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(Aggregate) || string.IsNullOrEmpty(SRP))
+            if (string.IsNullOrEmpty(Unit) || string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(Cost) || string.IsNullOrEmpty(SRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -67,11 +66,6 @@ namespace TriforceSalon.UserControls
                 MessageBox.Show("Please upload a product photo", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (Convert.ToInt32(perDay) > Convert.ToInt32(Aggregate))
-            {
-                MessageBox.Show("Stocks per day cannot be more than the aggregate!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             try
             {
@@ -79,19 +73,18 @@ namespace TriforceSalon.UserControls
                 {
                     await connection.OpenAsync();
                     string query = "INSERT INTO `inventory` " +
-                                   "(`ItemID`, `ItemName`, `Stock`, `StockPerDay`, `Cost`, `SRP`, `Aggregate`, `Status`, `Photo`) VALUES " +
-                                   "(@itemID, @itemName, @stock, @perDay, @cost, @srp, @aggregate, @status, @photo)";
+                                   "(`ItemID`, `ItemName`, `Stock`, `Unit`, `Cost`, `SRP`, `Status`, `Photo`) VALUES " +
+                                   "(@itemID, @itemName, @stock, @unit, @cost, @srp, @status, @photo)";
 
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemID", ID);
                         querycmd.Parameters.AddWithValue("@itemName", Name);
                         querycmd.Parameters.AddWithValue("@stock", 0);
-                        querycmd.Parameters.AddWithValue("@perDay", perDay);
+                        querycmd.Parameters.AddWithValue("@unit", Unit);
                         querycmd.Parameters.AddWithValue("@cost", Cost);
                         querycmd.Parameters.AddWithValue("@srp", SRP);
-                        querycmd.Parameters.AddWithValue("@aggregate", Aggregate);
-                        querycmd.Parameters.AddWithValue("@status", 3);
+                        querycmd.Parameters.AddWithValue("@status", "3");
                         querycmd.Parameters.AddWithValue("@photo", PhotoBytes);
 
                         if (Method.AdminAccess())
@@ -117,8 +110,6 @@ namespace TriforceSalon.UserControls
         {
             NameBox.Text = null;
             CostBox.Text = null;
-            AggregateBox.Text = null;
-            perDayBox.Text = null;
             SRPTxtB.Text = null;
             PhotoBox.Image = null;
         }

@@ -26,13 +26,13 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `inventory` SET `Status` = " +
-                        "CASE " +
-                            "WHEN `Stock` = 0 THEN 3 " +
-                            "WHEN `Stock` = 0.25 * `StockPerDay` THEN 2 " +
-                            "WHEN `Stock` = 0.5 * `StockPerDay` THEN 1 " +
-                            "ELSE 0 " +
-                            "END; ";
+                    string query = @"UPDATE `inventory` SET `Status` = 
+                        CASE
+                            WHEN `Stock` = 0 THEN 3 
+                            WHEN `Stock` = 3 THEN 2 
+                            WHEN `Stock` = 5 THEN 1 
+                            ELSE 0 
+                            END; ";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.ExecuteNonQuery();
@@ -70,7 +70,7 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `inventory` SET `Aggregate` = `Aggregate` + @newStock WHERE `ItemID` = @itemID";
+                    string query = "UPDATE `inventory` SET `Stock` = `Stock` + @newStock WHERE `ItemID` = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@newStock", Stock);
@@ -93,7 +93,7 @@ namespace TriforceSalon
             }
         }
 
-        public async static void PullItems()
+        public async static void PullItems(int qty)
         {
             try
             {
@@ -103,11 +103,13 @@ namespace TriforceSalon
 
                     string query = @"
                         UPDATE inventory
-                        SET Stock = StockPerDay,
-                            Aggregate = Aggregate - StockPerDay;";
+                        SET Stock = Stock - @quantity";
 
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("quantity", qty);
+                        int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                    }
                 }
             }
             catch (Exception e)

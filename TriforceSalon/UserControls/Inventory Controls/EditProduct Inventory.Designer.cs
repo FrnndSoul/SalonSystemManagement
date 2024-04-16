@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.AggregateBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.CostBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.StockBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.NameBox = new Guna.UI2.WinForms.Guna2TextBox();
@@ -45,8 +43,8 @@
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label6 = new System.Windows.Forms.Label();
             this.editSRPTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.perDayBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.UnitBox = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PhotoBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,25 +65,13 @@
             this.guna2Shapes1.UseTransparentBackground = true;
             this.guna2Shapes1.Zoom = 80;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label5.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(951, 469);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(151, 37);
-            this.label5.TabIndex = 80;
-            this.label5.Text = "Aggregate";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label4.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(535, 469);
+            this.label4.Location = new System.Drawing.Point(547, 469);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(208, 37);
             this.label4.TabIndex = 79;
@@ -97,7 +83,7 @@
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label2.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(118, 469);
+            this.label2.Location = new System.Drawing.Point(118, 616);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(198, 37);
             this.label2.TabIndex = 78;
@@ -127,34 +113,6 @@
             this.label3.TabIndex = 76;
             this.label3.Text = "ID";
             // 
-            // AggregateBox
-            // 
-            this.AggregateBox.Animated = true;
-            this.AggregateBox.AutoRoundedCorners = true;
-            this.AggregateBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AggregateBox.BorderColor = System.Drawing.Color.Black;
-            this.AggregateBox.BorderRadius = 24;
-            this.AggregateBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.AggregateBox.DefaultText = "";
-            this.AggregateBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.AggregateBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.AggregateBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.AggregateBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.AggregateBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AggregateBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.AggregateBox.ForeColor = System.Drawing.Color.Black;
-            this.AggregateBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AggregateBox.Location = new System.Drawing.Point(958, 519);
-            this.AggregateBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.AggregateBox.Name = "AggregateBox";
-            this.AggregateBox.PasswordChar = '\0';
-            this.AggregateBox.PlaceholderText = "";
-            this.AggregateBox.ReadOnly = true;
-            this.AggregateBox.SelectedText = "";
-            this.AggregateBox.Size = new System.Drawing.Size(400, 50);
-            this.AggregateBox.TabIndex = 75;
-            this.AggregateBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AggregateBox_KeyPress);
-            // 
             // CostBox
             // 
             this.CostBox.Animated = true;
@@ -172,7 +130,7 @@
             this.CostBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.CostBox.ForeColor = System.Drawing.Color.Black;
             this.CostBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CostBox.Location = new System.Drawing.Point(542, 519);
+            this.CostBox.Location = new System.Drawing.Point(554, 519);
             this.CostBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CostBox.Name = "CostBox";
             this.CostBox.PasswordChar = '\0';
@@ -199,7 +157,7 @@
             this.StockBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.StockBox.ForeColor = System.Drawing.Color.Black;
             this.StockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.StockBox.Location = new System.Drawing.Point(120, 519);
+            this.StockBox.Location = new System.Drawing.Point(120, 666);
             this.StockBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.StockBox.Name = "StockBox";
             this.StockBox.PasswordChar = '\0';
@@ -348,7 +306,7 @@
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.label6.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(113, 606);
+            this.label6.Location = new System.Drawing.Point(976, 469);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(308, 37);
             this.label6.TabIndex = 96;
@@ -371,7 +329,7 @@
             this.editSRPTxtB.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.editSRPTxtB.ForeColor = System.Drawing.Color.Black;
             this.editSRPTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.editSRPTxtB.Location = new System.Drawing.Point(120, 656);
+            this.editSRPTxtB.Location = new System.Drawing.Point(983, 519);
             this.editSRPTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.editSRPTxtB.Name = "editSRPTxtB";
             this.editSRPTxtB.PasswordChar = '\0';
@@ -381,64 +339,61 @@
             this.editSRPTxtB.TabIndex = 95;
             this.editSRPTxtB.TextChanged += new System.EventHandler(this.editSRPTxtB_TextChanged);
             // 
-            // label7
+            // label5
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.label7.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(535, 606);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(200, 37);
-            this.label7.TabIndex = 98;
-            this.label7.Text = "Stock per Day";
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.label5.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(118, 477);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(204, 37);
+            this.label5.TabIndex = 98;
+            this.label5.Text = "Unit per Stock";
             // 
-            // perDayBox
+            // UnitBox
             // 
-            this.perDayBox.Animated = true;
-            this.perDayBox.AutoRoundedCorners = true;
-            this.perDayBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.perDayBox.BorderColor = System.Drawing.Color.Black;
-            this.perDayBox.BorderRadius = 24;
-            this.perDayBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.perDayBox.DefaultText = "";
-            this.perDayBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.perDayBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.perDayBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.perDayBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.perDayBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.perDayBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.perDayBox.ForeColor = System.Drawing.Color.Black;
-            this.perDayBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.perDayBox.Location = new System.Drawing.Point(542, 656);
-            this.perDayBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.perDayBox.Name = "perDayBox";
-            this.perDayBox.PasswordChar = '\0';
-            this.perDayBox.PlaceholderText = "";
-            this.perDayBox.SelectedText = "";
-            this.perDayBox.Size = new System.Drawing.Size(400, 50);
-            this.perDayBox.TabIndex = 97;
-            this.perDayBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.perDayBox_KeyPress);
+            this.UnitBox.Animated = true;
+            this.UnitBox.AutoRoundedCorners = true;
+            this.UnitBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.UnitBox.BorderColor = System.Drawing.Color.Black;
+            this.UnitBox.BorderRadius = 24;
+            this.UnitBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.UnitBox.DefaultText = "";
+            this.UnitBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.UnitBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.UnitBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.UnitBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.UnitBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.UnitBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.UnitBox.ForeColor = System.Drawing.Color.Black;
+            this.UnitBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.UnitBox.Location = new System.Drawing.Point(125, 519);
+            this.UnitBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.UnitBox.Name = "UnitBox";
+            this.UnitBox.PasswordChar = '\0';
+            this.UnitBox.PlaceholderText = "";
+            this.UnitBox.SelectedText = "";
+            this.UnitBox.Size = new System.Drawing.Size(395, 50);
+            this.UnitBox.TabIndex = 97;
             // 
             // EditProduct_Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.perDayBox);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.UnitBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.editSRPTxtB);
             this.Controls.Add(this.UploadPhoto);
             this.Controls.Add(this.PhotoBox);
             this.Controls.Add(this.DiscardBtn);
             this.Controls.Add(this.SaveBtn);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.AggregateBox);
             this.Controls.Add(this.CostBox);
             this.Controls.Add(this.StockBox);
             this.Controls.Add(this.NameBox);
@@ -455,12 +410,10 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Shapes guna2Shapes1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2TextBox AggregateBox;
         private Guna.UI2.WinForms.Guna2TextBox CostBox;
         private Guna.UI2.WinForms.Guna2TextBox StockBox;
         private Guna.UI2.WinForms.Guna2TextBox NameBox;
@@ -471,7 +424,7 @@
         private Guna.UI2.WinForms.Guna2PictureBox PhotoBox;
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2TextBox editSRPTxtB;
-        private System.Windows.Forms.Label label7;
-        private Guna.UI2.WinForms.Guna2TextBox perDayBox;
+        private System.Windows.Forms.Label label5;
+        private Guna.UI2.WinForms.Guna2TextBox UnitBox;
     }
 }

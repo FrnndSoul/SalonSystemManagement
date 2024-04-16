@@ -336,11 +336,6 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
-                    if (await IsFirstManager())
-                    {
-                        Inventory.PullItems();
-                        Inventory.CheckStatus();
-                    }
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)
