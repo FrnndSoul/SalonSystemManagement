@@ -301,15 +301,18 @@ namespace TriforceSalon
                                     return true;
                                 } else
                                 {
-                                    if (password == "Admin123")
+                                    if (inputPassword == "Admin123")
                                     {
                                         IsAdmin = true;
+                                        MessageBox.Show("Admin access initialized");
                                         await LogInCompleteAsync(inputID);
                                         return true;
+                                    } else
+                                    {
+                                        MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        WrongPassword(inputID);
+                                        return false;
                                     }
-                                    MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK ,MessageBoxIcon.Warning);
-                                    WrongPassword(inputID);
-                                    return false;
                                 }
                             } else
                             {

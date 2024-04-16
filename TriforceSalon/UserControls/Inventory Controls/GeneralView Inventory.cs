@@ -94,7 +94,23 @@ namespace TriforceSalon.UserControls
 
         private void PullBtn_Click(object sender, EventArgs e)
         {
+            if (InventoryDGV.RowCount == 0)
+            {
+                return;
+            }
 
+            int itemRow = InventoryDGV.SelectedCells[0].RowIndex;
+
+            if (itemRow < 0)
+            {
+                MessageBox.Show("Select a product first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ReadRow(itemRow);
+            manager.DisableButtons(false);
+            pullProductForm1.Visible = true;
+            pullProductForm1.InitialLoading(ItemName, ItemID, SRP, Cost, Stock, Unit, EmployeeID);
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
@@ -143,6 +159,19 @@ namespace TriforceSalon.UserControls
                 {
                     connection.Close();
                 }
+            }
+        }
+
+        private void pullProductForm1_VisibleChanged(object sender, EventArgs e)
+        {
+            LoadInventory();
+            if (!pullProductForm1.Visible)
+            {
+                ShowButtons();
+            }
+            else
+            {
+                HideButtons();
             }
         }
 
@@ -201,6 +230,15 @@ namespace TriforceSalon.UserControls
                     adapter.Fill(dataTable);
                 }
                 InventoryDGV.DataSource = dataTable;
+
+                int totalWidth = InventoryDGV.Width - SystemInformation.VerticalScrollBarWidth;
+                InventoryDGV.Columns["ItemID"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["ItemName"].Width = (int)(totalWidth * 0.3);
+                InventoryDGV.Columns["SRP"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Stock"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Unit"].Width = (int)(totalWidth * 0.2);
+                InventoryDGV.Columns["Cost"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Status"].Width = (int)(totalWidth * 0.1);
             }
             catch (Exception e)
             {

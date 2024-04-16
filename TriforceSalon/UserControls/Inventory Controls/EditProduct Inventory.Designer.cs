@@ -157,14 +157,14 @@
             this.StockBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.StockBox.ForeColor = System.Drawing.Color.Black;
             this.StockBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.StockBox.Location = new System.Drawing.Point(120, 666);
+            this.StockBox.Location = new System.Drawing.Point(125, 666);
             this.StockBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.StockBox.Name = "StockBox";
             this.StockBox.PasswordChar = '\0';
             this.StockBox.PlaceholderText = "";
             this.StockBox.ReadOnly = true;
             this.StockBox.SelectedText = "";
-            this.StockBox.Size = new System.Drawing.Size(400, 50);
+            this.StockBox.Size = new System.Drawing.Size(395, 50);
             this.StockBox.TabIndex = 73;
             this.StockBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CurentBox_KeyPress);
             // 
