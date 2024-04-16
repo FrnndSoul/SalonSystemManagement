@@ -230,6 +230,15 @@ namespace TriforceSalon.UserControls
                     adapter.Fill(dataTable);
                 }
                 InventoryDGV.DataSource = dataTable;
+
+                int totalWidth = InventoryDGV.Width - SystemInformation.VerticalScrollBarWidth;
+                InventoryDGV.Columns["ItemID"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["ItemName"].Width = (int)(totalWidth * 0.3);
+                InventoryDGV.Columns["SRP"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Stock"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Unit"].Width = (int)(totalWidth * 0.2);
+                InventoryDGV.Columns["Cost"].Width = (int)(totalWidth * 0.1);
+                InventoryDGV.Columns["Status"].Width = (int)(totalWidth * 0.1);
             }
             catch (Exception e)
             {
