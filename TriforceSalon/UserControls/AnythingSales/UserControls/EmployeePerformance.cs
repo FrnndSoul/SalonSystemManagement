@@ -21,7 +21,8 @@ namespace salesreport.UserControls
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        DataTable currentTable = SalesClass.LoadEmployeeDGV(null);
+        DataTable currentTable = SalesClass.LoadEmployeeDGV(filter);
+        public static string filter;
         public int pageSize = 15;
         public int currentPage = 1;
         public int totalPages;
@@ -183,10 +184,11 @@ namespace salesreport.UserControls
                                 {
                                     string labelText = labelTitle.Text;
                                     string[] parts = labelText.Split('\n');
-                                    string filter = parts[0];
-                                    EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(filter);
-                                    RecountPages();
+                                    filter = parts[0];
+                                    currentTable = SalesClass.LoadEmployeeDGV(filter);
+                                    EmployeeDGV.DataSource = currentTable;
                                     LoadCharts();
+                                    RecountPages();
                                 }
 
                                 panel.Click += clickHandler;
@@ -202,9 +204,11 @@ namespace salesreport.UserControls
 
         private void LabelTitle_Click(object sender, EventArgs e)
         {
-            EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(null);
-            RecountPages();
+            filter = null;
+            currentTable = SalesClass.LoadEmployeeDGV(filter);
+            EmployeeDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
         }
 
         public void ChartFontRefresh()
@@ -250,6 +254,7 @@ namespace salesreport.UserControls
             }
         }
 
+        //<date filter>
         private void DayFilter_Click(object sender, EventArgs e)
         {
             try
@@ -275,8 +280,8 @@ namespace salesreport.UserControls
                 }
 
                 EmployeeDGV.DataSource = filteredTable;
-                RecountPages();
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -293,7 +298,7 @@ namespace salesreport.UserControls
         private async void NoFilter_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(null);
+            EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(filter);
             RecountPages();
             LoadCharts();
             currentPage = 1;
@@ -342,8 +347,8 @@ namespace salesreport.UserControls
 
 
                 EmployeeDGV.DataSource = filteredTable;
-                RecountPages();
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -385,8 +390,8 @@ namespace salesreport.UserControls
                 }
 
                 EmployeeDGV.DataSource = filteredTable;
-                RecountPages();
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -399,7 +404,7 @@ namespace salesreport.UserControls
                 MessageBox.Show("An error occurred while filtering data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        //</date filter>
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
             string searchText = searchBox.Text.ToLower();
@@ -440,7 +445,6 @@ namespace salesreport.UserControls
 
             EmployeeDGV.DataSource = filteredTable;
         }
-
 
         private void BackPage_Click(object sender, EventArgs e)
         {
