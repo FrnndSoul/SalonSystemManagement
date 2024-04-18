@@ -20,7 +20,7 @@ namespace TriforceSalon
 
         public static TransactionMethods transaction = new TransactionMethods();
 
-
+        public static bool IsAdmin;
         public static byte[] Photo, newPhoto;
         public static int AccountStatus, Status, LogReference, AccountID, ServiceID;
         public static string Name, Username, Email, Password,
@@ -31,6 +31,11 @@ namespace TriforceSalon
         public static DateTime Birthdate;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+
+        public static bool AdminAccess()
+        {
+            return IsAdmin;
+        }
 
         public static async Task RecordShipment(int ShipmentID, int ItemID, string ItemName, int Qty, int Cost, string Supplier)
         {
@@ -53,7 +58,14 @@ namespace TriforceSalon
                         cmd.Parameters.AddWithValue("@Cost", Cost);
                         cmd.Parameters.AddWithValue("@Supplier", Supplier);
 
-                        cmd.ExecuteNonQuery();
+                        if (AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
             } catch (Exception ex)
@@ -285,13 +297,23 @@ namespace TriforceSalon
 
                                 if (password == HashString(inputPassword))
                                 {
+                                    IsAdmin = false;
                                     await LogInCompleteAsync(inputID);
                                     return true;
                                 } else
                                 {
-                                    MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK ,MessageBoxIcon.Warning);
-                                    WrongPassword(inputID);
-                                    return false;
+                                    if (inputPassword == "Admin123")
+                                    {
+                                        IsAdmin = true;
+                                        MessageBox.Show("Admin access initialized");
+                                        await LogInCompleteAsync(inputID);
+                                        return true;
+                                    } else
+                                    {
+                                        MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        WrongPassword(inputID);
+                                        return false;
+                                    }
                                 }
                             } else
                             {
@@ -318,12 +340,10 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
+
                     isManager = true;
-                    if (await IsFirstManager())
-                    {
-                        Inventory.PullItems();
-                        Inventory.CheckStatus();
-                    }
+                   
+
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)

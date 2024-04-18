@@ -16,8 +16,8 @@ namespace TriforceSalon.UserControls
     public partial class EditProduct_Inventory : UserControl
     {
         ManagerPage manager = new ManagerPage();
-        public static string ItemName, PerDay;
-        public static int ItemID, Stock, Cost, Aggregate, Status, EmployeeID;
+        public static string ItemName, PerDay, Unit;
+        public static int ItemID, Stock, Cost, Status, EmployeeID;
         public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
@@ -26,25 +26,22 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
         }
-
-        public void InitialLoading(string name, int id, decimal srp, int cost, int aggregate, int status, int userID, string perDay)
+        //editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Stock, Unit, EmployeeID);
+        public void InitialLoading(string name, int id, decimal srp, int cost, int stock, string unit, int userID)
         {
             Name = name;
             ItemID = id;
             Cost = cost;
-            Aggregate = aggregate;
-            Status = status;
+            Stock = stock;
+            Unit = unit;
             EmployeeID = userID;
-            PerDay = perDay;
 
             NameBox.Text = name;
-            perDayBox.Text = perDay;
+            UnitBox.Text = unit;
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
-            AggregateBox.Text = aggregate.ToString();
-            //StockBox.Text = Stock.ToString();
-            StockBox.Text = status.ToString();
-            editSRPTxtB.Text = srp.ToString("0.000");
+            StockBox.Text = stock.ToString();
+            editSRPTxtB.Text = srp.ToString("0.00");
 
             using (MemoryStream ms = new MemoryStream(LoadPhoto(id)))
             {
@@ -78,22 +75,15 @@ namespace TriforceSalon.UserControls
         {
             string newName = NameBox.Text;
             string newCost = CostBox.Text;
-            string newAggregate = AggregateBox.Text;
             string newID = IDBox.Text;
             string newStock = StockBox.Text;
-            string newPerDay = perDayBox.Text;
             string newSRP = editSRPTxtB.Text;
+            string newUnit = UnitBox.Text;
 
 
-            if (string.IsNullOrEmpty(newPerDay) || string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newAggregate) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
+            if (string.IsNullOrEmpty(newUnit) || string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCost) || string.IsNullOrEmpty(newID) || string.IsNullOrEmpty(newStock) || string.IsNullOrEmpty(newSRP))
             {
                 MessageBox.Show("Please complete all details", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (Convert.ToInt32(newPerDay) > Convert.ToInt32(newAggregate))
-            {
-                MessageBox.Show("Stock per day cannot be more than the aggregate", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -109,22 +99,29 @@ namespace TriforceSalon.UserControls
                 {
                     connection.Open();
                     string query =
-                        "UPDATE inventory SET ItemName = @itemName, StockPerDay = @perDay, Cost = @cost, Aggregate = @aggregate, Photo = @photo, Stock = @stock, SRP = @srp " +
+                        "UPDATE inventory SET ItemName = @itemName, Cost = @cost, Photo = @photo, Stock = @stock, Unit = @unit, SRP = @srp " +
                         "WHERE ItemID = @itemID";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.Parameters.AddWithValue("@itemName", newName);
-                        querycmd.Parameters.AddWithValue("@perDay", newPerDay);
                         querycmd.Parameters.AddWithValue("@cost", newCost);
                         querycmd.Parameters.AddWithValue("@srp", newSRP);
-                        querycmd.Parameters.AddWithValue("@aggregate", newAggregate);
+                        querycmd.Parameters.AddWithValue("@unit", newUnit);
                         querycmd.Parameters.AddWithValue("@itemID", newID);
                         querycmd.Parameters.AddWithValue("@stock", newStock);
                         querycmd.Parameters.AddWithValue("@photo", PhotoByteHolder);
-                        querycmd.ExecuteNonQuery();
+
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            querycmd.ExecuteNonQuery();
+                            MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
-                MessageBox.Show("Item update info success", "Item Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearFields();
                 manager.DisableButtons(true);
 
@@ -214,7 +211,6 @@ namespace TriforceSalon.UserControls
             NameBox.Text = null;
             StockBox.Text = null;
             CostBox.Text = null;
-            AggregateBox.Text = null;
             editSRPTxtB.Text = null;
 
             this.Visible = false;

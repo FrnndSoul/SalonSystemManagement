@@ -21,6 +21,7 @@ namespace salesreport.UserControls
             LoadCharts();
             RangeFilter.MaxDate = DateTime.Now;
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
+            RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
         }
