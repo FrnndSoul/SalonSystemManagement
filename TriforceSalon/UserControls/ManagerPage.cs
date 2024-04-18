@@ -17,11 +17,12 @@ namespace TriforceSalon.UserControls
     public partial class ManagerPage : UserControl
     {
         TransactionMethods transactionMethods = new TransactionMethods();
+        WalkInTransactionForm walkin = new WalkInTransactionForm();
         public ManagerPage()
         {
             InitializeComponent();
-
             InventoryBtn.Enabled = false;
+
         }
 
         private void ManagerPage_Load(object sender, EventArgs e)
@@ -31,6 +32,7 @@ namespace TriforceSalon.UserControls
         }
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
+            Method.isManager = false;
             Method.LogOutUser();
             foreach (Form openForm in Application.OpenForms)
             {
@@ -90,6 +92,10 @@ namespace TriforceSalon.UserControls
             }
         }
 
-        
+        private void ManagerReceptionistBtn_Click(object sender, EventArgs e)
+        {
+            WalkInTransactionForm walkInForm = new WalkInTransactionForm();
+            UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace salesreport.UserControls
             LoadCharts();
             RangeFilter.MaxDate = DateTime.Now;
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
+            RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
         }
@@ -154,7 +155,7 @@ namespace salesreport.UserControls
 
                                 Label labelTitle = new Label
                                 {
-                                    Text = reader["ServiceTypeName"].ToString() + "\nEmployees",
+                                    Text = reader["ServiceTypeName"].ToString() + "\nStylists",
                                     ForeColor = Color.Black,
                                     Size = new Size(250, 94),
                                     Location = new Point(0, 0),

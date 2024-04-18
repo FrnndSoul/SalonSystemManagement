@@ -37,6 +37,7 @@
             this.NPaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.RecepLogOutBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ReceptionistContent = new System.Windows.Forms.Panel();
+            this.ManagerBackBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,17 +82,17 @@
             this.NServicesBtn.Animated = true;
             this.NServicesBtn.AutoRoundedCorners = true;
             this.NServicesBtn.BackColor = System.Drawing.Color.Transparent;
-            this.NServicesBtn.BorderRadius = 37;
+            this.NServicesBtn.BorderRadius = 22;
             this.NServicesBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.NServicesBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.NServicesBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NServicesBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NServicesBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NServicesBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NServicesBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NServicesBtn.ForeColor = System.Drawing.Color.White;
-            this.NServicesBtn.Location = new System.Drawing.Point(12, 138);
+            this.NServicesBtn.Location = new System.Drawing.Point(19, 1022);
             this.NServicesBtn.Name = "NServicesBtn";
-            this.NServicesBtn.Size = new System.Drawing.Size(321, 76);
+            this.NServicesBtn.Size = new System.Drawing.Size(321, 46);
             this.NServicesBtn.TabIndex = 11;
             this.NServicesBtn.Text = "Services";
             this.NServicesBtn.UseTransparentBackground = true;
@@ -102,17 +103,17 @@
             this.NSellProdBtn.Animated = true;
             this.NSellProdBtn.AutoRoundedCorners = true;
             this.NSellProdBtn.BackColor = System.Drawing.Color.Transparent;
-            this.NSellProdBtn.BorderRadius = 37;
+            this.NSellProdBtn.BorderRadius = 22;
             this.NSellProdBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.NSellProdBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.NSellProdBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NSellProdBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NSellProdBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NSellProdBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NSellProdBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NSellProdBtn.ForeColor = System.Drawing.Color.White;
-            this.NSellProdBtn.Location = new System.Drawing.Point(350, 138);
+            this.NSellProdBtn.Location = new System.Drawing.Point(357, 1022);
             this.NSellProdBtn.Name = "NSellProdBtn";
-            this.NSellProdBtn.Size = new System.Drawing.Size(321, 76);
+            this.NSellProdBtn.Size = new System.Drawing.Size(321, 46);
             this.NSellProdBtn.TabIndex = 12;
             this.NSellProdBtn.Text = "Sell Products";
             this.NSellProdBtn.UseTransparentBackground = true;
@@ -123,17 +124,17 @@
             this.NAppointmentsBtn.Animated = true;
             this.NAppointmentsBtn.AutoRoundedCorners = true;
             this.NAppointmentsBtn.BackColor = System.Drawing.Color.Transparent;
-            this.NAppointmentsBtn.BorderRadius = 37;
+            this.NAppointmentsBtn.BorderRadius = 22;
             this.NAppointmentsBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.NAppointmentsBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.NAppointmentsBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NAppointmentsBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NAppointmentsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NAppointmentsBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NAppointmentsBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NAppointmentsBtn.ForeColor = System.Drawing.Color.White;
-            this.NAppointmentsBtn.Location = new System.Drawing.Point(697, 138);
+            this.NAppointmentsBtn.Location = new System.Drawing.Point(704, 1022);
             this.NAppointmentsBtn.Name = "NAppointmentsBtn";
-            this.NAppointmentsBtn.Size = new System.Drawing.Size(321, 76);
+            this.NAppointmentsBtn.Size = new System.Drawing.Size(321, 46);
             this.NAppointmentsBtn.TabIndex = 13;
             this.NAppointmentsBtn.Text = "Appointments";
             this.NAppointmentsBtn.UseTransparentBackground = true;
@@ -144,17 +145,17 @@
             this.NPaymentBtn.Animated = true;
             this.NPaymentBtn.AutoRoundedCorners = true;
             this.NPaymentBtn.BackColor = System.Drawing.Color.Transparent;
-            this.NPaymentBtn.BorderRadius = 37;
+            this.NPaymentBtn.BorderRadius = 22;
             this.NPaymentBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.NPaymentBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.NPaymentBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.NPaymentBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.NPaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.NPaymentBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NPaymentBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NPaymentBtn.ForeColor = System.Drawing.Color.White;
-            this.NPaymentBtn.Location = new System.Drawing.Point(1037, 138);
+            this.NPaymentBtn.Location = new System.Drawing.Point(1044, 1022);
             this.NPaymentBtn.Name = "NPaymentBtn";
-            this.NPaymentBtn.Size = new System.Drawing.Size(321, 76);
+            this.NPaymentBtn.Size = new System.Drawing.Size(321, 46);
             this.NPaymentBtn.TabIndex = 14;
             this.NPaymentBtn.Text = "Payment";
             this.NPaymentBtn.UseTransparentBackground = true;
@@ -165,17 +166,17 @@
             this.RecepLogOutBtn.Animated = true;
             this.RecepLogOutBtn.AutoRoundedCorners = true;
             this.RecepLogOutBtn.BackColor = System.Drawing.Color.Transparent;
-            this.RecepLogOutBtn.BorderRadius = 37;
+            this.RecepLogOutBtn.BorderRadius = 22;
             this.RecepLogOutBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.RecepLogOutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.RecepLogOutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.RecepLogOutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.RecepLogOutBtn.FillColor = System.Drawing.Color.Red;
-            this.RecepLogOutBtn.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RecepLogOutBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RecepLogOutBtn.ForeColor = System.Drawing.Color.White;
-            this.RecepLogOutBtn.Location = new System.Drawing.Point(1586, 138);
+            this.RecepLogOutBtn.Location = new System.Drawing.Point(1586, 114);
             this.RecepLogOutBtn.Name = "RecepLogOutBtn";
-            this.RecepLogOutBtn.Size = new System.Drawing.Size(321, 76);
+            this.RecepLogOutBtn.Size = new System.Drawing.Size(321, 46);
             this.RecepLogOutBtn.TabIndex = 15;
             this.RecepLogOutBtn.Text = "Log-Out";
             this.RecepLogOutBtn.UseTransparentBackground = true;
@@ -184,22 +185,44 @@
             // ReceptionistContent
             // 
             this.ReceptionistContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.ReceptionistContent.Location = new System.Drawing.Point(0, 237);
+            this.ReceptionistContent.Location = new System.Drawing.Point(0, 167);
             this.ReceptionistContent.Name = "ReceptionistContent";
             this.ReceptionistContent.Size = new System.Drawing.Size(1920, 843);
             this.ReceptionistContent.TabIndex = 16;
+            // 
+            // ManagerBackBtn
+            // 
+            this.ManagerBackBtn.Animated = true;
+            this.ManagerBackBtn.AutoRoundedCorners = true;
+            this.ManagerBackBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ManagerBackBtn.BorderRadius = 22;
+            this.ManagerBackBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerBackBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerBackBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ManagerBackBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ManagerBackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ManagerBackBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManagerBackBtn.ForeColor = System.Drawing.Color.White;
+            this.ManagerBackBtn.Location = new System.Drawing.Point(1586, 1022);
+            this.ManagerBackBtn.Name = "ManagerBackBtn";
+            this.ManagerBackBtn.Size = new System.Drawing.Size(321, 46);
+            this.ManagerBackBtn.TabIndex = 17;
+            this.ManagerBackBtn.Text = "Go Back";
+            this.ManagerBackBtn.UseTransparentBackground = true;
+            this.ManagerBackBtn.Click += new System.EventHandler(this.ManagerBackBtn_Click);
             // 
             // WalkInTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.Controls.Add(this.ReceptionistContent);
-            this.Controls.Add(this.RecepLogOutBtn);
+            this.Controls.Add(this.ManagerBackBtn);
             this.Controls.Add(this.NPaymentBtn);
-            this.Controls.Add(this.NAppointmentsBtn);
-            this.Controls.Add(this.NSellProdBtn);
+            this.Controls.Add(this.ReceptionistContent);
             this.Controls.Add(this.NServicesBtn);
+            this.Controls.Add(this.RecepLogOutBtn);
+            this.Controls.Add(this.NSellProdBtn);
+            this.Controls.Add(this.NAppointmentsBtn);
             this.Controls.Add(this.guna2Panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WalkInTransactionForm";
@@ -221,5 +244,6 @@
         private Guna.UI2.WinForms.Guna2Button RecepLogOutBtn;
         private System.Windows.Forms.Label TimerLbl;
         public System.Windows.Forms.Panel ReceptionistContent;
+        public Guna.UI2.WinForms.Guna2Button ManagerBackBtn;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Guna.UI2.WinForms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
@@ -35,22 +37,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
-            await serviceTypeService.GetServiceTypeAsync(mysqlcon);
             await serviceTypeService.GetAllEmployee(mysqlcon);
-            ServiceFilterComB.SelectedIndex = 0;
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+            await serviceTypeService.GetAllCategory(ServiceTypeComB, mysqlcon);
+            GetServiceTypeData();
 
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            /*await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);*/
         }
 
-        /*public void GetServiceTypeData()
+        public async void GetServiceTypeData()
         {
-            serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
+            await serviceTypeService.GetServiceTypeData(CategoryFL, mysqlcon, UpdateServiceFL);
         }
 
-        public void GetServiceData()
+        /*public void GetServiceData()
         {
             serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }*/
@@ -71,6 +73,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if(ServicesGDGVVControl.Rows.Count == 0)
+            {
+                MessageBox.Show("No service has been selected. Cannot process customer", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!IsPhoneNumberValid())
+            {
+                MessageBox.Show("Phone number must be valid.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -196,11 +210,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private async void ServiceFilterComB_SelectedIndexChanged(object sender, EventArgs e)
+        public bool IsPhoneNumberValid()
         {
-            string selectedType = ServiceFilterComB.SelectedItem.ToString();
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, selectedType, ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            string number = CustomerPhoneNTxtB.Text;
+            if (number[0] == '0' && number[1] == '9' && number.Length == 11)
+            {
+                return true;
+            }
+            return false;
         }
+
+
+        
 
         public decimal ExtractAmount(string input)
         {
@@ -243,7 +264,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
         }
 
-        private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
@@ -251,7 +272,48 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    //ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
+
+                        using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                        {
+                            await conn.OpenAsync();
+
+                            string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
+
+                            using (MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
+
+                                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                                {
+                                    if (await reader.ReadAsync())
+                                    {
+                                        string position = reader["AccountAccess"].ToString();
+
+                                        if (position != "Manager")
+                                        {
+                                            MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                                            MessageBox.Show("Service has been removed", "Remove Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

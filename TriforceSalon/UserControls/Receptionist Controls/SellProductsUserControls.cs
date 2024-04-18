@@ -1,14 +1,9 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
-using Mysqlx.Session;
-using MySqlX.XDevAPI.Common;
 using System;
-using System.Data.Common;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Transactions;
-using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods;
@@ -33,8 +28,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             AddTotalPriceDelegate addTotalPriceDelegate = AddTotalPrice;
             sellMethods = new SellProductsMethods(updateTotalPriceDelegate, addTotalPriceDelegate);
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            //ProductsControlDGV.EditingControlShowing += ProductsControlDGV_EditingControlShowing;
-            //ProductsControlDGV.CellValueChanged += ProductsControlDGV_CellValueChanged;
             DirectTransactionRBtn.Checked = true;
             CustomerIDComB.Enabled = false;
 
@@ -80,72 +73,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
         }
-        /*private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountComB"].Index && e.Control is ComboBox)
-            {
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.SelectedIndexChanged -= new EventHandler(ComboBox_SelectedIndexChanged);
-                comboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
-            }
-        }*/
-
-
-
-
-
-        /*private void ProductsControlDGV_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (ProductsControlDGV.CurrentCell.ColumnIndex == ProductsControlDGV.Columns["DiscountComB"].Index && e.Control is ComboBox)
-            {
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.SelectionChangeCommitted -= new EventHandler(ComboBox_SelectedIndexChanged);
-                comboBox.SelectionChangeCommitted += new EventHandler(ComboBox_SelectedIndexChanged);
-
-                ComboBox_SelectedIndexChanged(comboBox, EventArgs.Empty);
-            }
-        }*/
-
-
-
-
-
-
-
-
-
-
-
-
-        /*private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            totalPrice = 0.00m;
-            discount = 0.00m;
-            ComboBox comboBox = sender as ComboBox;
-            string selectedValue = comboBox.SelectedItem.ToString();
-            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
-            {
-                if (selectedValue == "Discounted")
-                {
-                    discount = 0.00m; // Reset discount to recalculate
-
-                    if (row.Cells[4].Value != null)
-                    {
-                        decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
-                        discount += DiscountFromProducts(rowTotal);
-                    }
-
-                }
-                else
-                {
-                    discount = 0.00m; // No discount
-                }
-            }
-            
-
-            UpdateTotalPrice();
-        }*/
-
+       
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             totalPrice = 0.00m;
@@ -189,90 +117,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     totalPrice += rowTotal;
                 }
             }
-
-            //SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
-
-
-            /*if (discount > 0.00m)
-            {
-                decimal discountedTotal = totalPrice - discount;
-                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
-                DiscLbl.Text = "Php. " + discount.ToString("0.00");
-            }
-            else
-            {
-                DiscLbl.Text = "Php. 0.00"; // No discount applied
-                TotLbl.Text = SubLbl.Text;
-            }*/
         }
 
-        /*private void UpdateTotalPrice()
-        {
-            totalPrice = 0.00m;
-
-            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
-            {
-                if (row.Cells[4].Value != null)
-                {
-                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
-                    totalPrice += rowTotal;
-                }
-            }
-
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
-
-            if (discount > 0.00m)
-            {
-                decimal discountedTotal = totalPrice - discount;
-                DiscLbl.Text = "Php. " + discount.ToString("0.00");
-                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
-            }
-            else
-            {
-                DiscLbl.Text = "Php. 0.00"; // No discount applied
-                TotLbl.Text = SubLbl.Text;
-            }
-        }*/
-
-
-        /*private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            totalPrice = 0.00m;
-            discount = 0.00m;
-            ComboBox comboBox = sender as ComboBox;
-            string selectedValue = comboBox.SelectedItem.ToString();
-            MessageBox.Show(selectedValue);
-
-            if (selectedValue == "Discounted")
-            {
-                foreach (DataGridViewRow row in ProductsControlDGV.Rows)
-                {
-                    if (row.Cells[4].Value != null)
-                    {
-                        decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
-                        decimal discountedPrice = rowTotal - DiscountFromProducts(rowTotal);
-                        totalPrice += discountedPrice;
-                        MessageBox.Show(discountedPrice.ToString());
-                    }
-                }
-            }
-            else
-            {
-                foreach (DataGridViewRow row in ProductsControlDGV.Rows)
-                {
-                    if (row.Cells[4].Value != null)
-                    {
-                        totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
-                    }
-                }
-            }
-
-            UpdateTotalPrice();
-        }*/
-
-
-
-        private async void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ProductsControlDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ProductsControlDGV.Rows.Count)
             {
@@ -280,50 +127,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "DisposeCol")
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Remove Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
                     {
-                        string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
-
-                        using (MySqlConnection conn = new MySqlConnection(mysqlcon))
-                        {
-                            await conn.OpenAsync();
-
-                            string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
-
-                            using (MySqlCommand command = new MySqlCommand(query, conn))
-                            {
-                                command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
-
-                                using (DbDataReader reader = await command.ExecuteReaderAsync())
-                                {
-                                    if (await reader.ReadAsync())
-                                    {
-                                        string position = reader["AccountAccess"].ToString();
-
-                                        if (position != "Manager")
-                                        {
-                                            MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
-                                            ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
-                                            totalPrice -= removedItemPrice;
-                                            UpdateTotalPrice();
-                                            PaymentBtn.Enabled = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
+                        decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
+                        ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
+                        totalPrice -= removedItemPrice;
+                        UpdateTotalPrice();
+                        PaymentBtn.Enabled = false;
                     }
                 }
                 else if (e.ColumnIndex == ProductsControlDGV.Columns["IncrementCol"].Index)
@@ -350,23 +162,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal discountPrice = PriceWithoutVAT * 0.20m;
             return discountPrice + VAT;
         }
-        /*private decimal DiscountFromProducts(decimal rowTotal)
-        {
-            decimal discountRate = 0.20m; // 20% discount for senior citizens
-            decimal vatRate = 0.12m; // 12% VAT in the Philippines
-
-            // Compute the discount
-            decimal discount = rowTotal * discountRate;
-
-            // Compute the VAT
-            decimal vat = rowTotal * vatRate;
-
-            // Subtract the discount and VAT from the row total
-            decimal discountedTotal = rowTotal - discount - vat;
-
-            return discountedTotal;
-        }*/
-
+        
         private decimal GetUnitPriceForFood(string serviceName)
         {
             decimal unitPrice = 0;
@@ -390,32 +186,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             return unitPrice;
         }
-        /*private void UpdateTotalPrice() //NEW CODE
-        {
-
-            totalPrice = 0.00m;
-
-            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
-            {
-                if (row.Cells[4].Value != null)
-                {
-                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
-                    totalPrice += rowTotal;
-                }
-
-            }
-            SubLbl.Text = "Php. " + totalPrice.ToString("0.00");
-            TotLbl.Text = SubLbl.Text;
-            if (discChckBx.Checked)
-            {
-                decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
-                decimal discount = totalPrice * 0.20m; // 20% discount
-                decimal discountedTotal = totalPrice - discount;
-                DiscLbl.Text = "Php. " + discount.ToString("0.00");
-                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
-            }
-
-        }*/
+       
 
         private void AddTotalPrice(int rowIndex)
         {
@@ -535,42 +306,31 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            
+            if (sender is TextBox textBox)
             {
-                e.Handled = true;
-            }
+                // Allow digits, control characters, and a single period
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
 
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                ValidateCashTextbox();
-            }
+                // Allow the backspace key
+                if (e.KeyChar == '\b')
+                {
+                    return;
+                }
 
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }*/
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    ValidateCashTextbox();
+                }
 
-            // Allow digits, control characters, and a single period
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // Allow the backspace key
-            if (e.KeyChar == '\b')
-            {
-                return;
-            }
-
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                ValidateCashTextbox();
-            }
-
-            // Prevent multiple periods
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
+                // Prevent multiple periods
+                if ((e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
@@ -598,9 +358,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-/*            decimal cash = Convert.ToDecimal(CashTxtBx.Text);
-            decimal extractedAmount = ExtractAmount(TotLbl.Text);
-*/            try
+            
+            try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
                 {
@@ -636,7 +395,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     transaction.ClearContents();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Operation Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -655,40 +414,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             if (result == DialogResult.Yes)
             {
-                string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
-
-                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
-
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
-
-                        using (DbDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            if (await reader.ReadAsync())
-                            {
-                                string position = reader["AccountAccess"].ToString();
-
-                                if (position != "Manager")
-                                {
-                                    MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }
-                                await VoidedPurchase(orderID, ProductsControlDGV);
-                                //insert void method here
-                            }
-                            else
-                            {
-                                MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                        }
-                    }
-                }
+                await VoidedPurchase(orderID, ProductsControlDGV); 
             }
             VoidBtn.Enabled = true;
         }
@@ -716,7 +442,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
                         decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
                         int itemid = await transaction.GetItemIdAsync(itemName);
-                       
+
                         string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate, IsVoided) " +
                                         "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate, @void)";
 
@@ -732,18 +458,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             command.Parameters.AddWithValue("@void", "YES");
 
                             await command.ExecuteNonQueryAsync();
-                            
+
                         }
                         //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                   /* string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
-                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("@customerID", ID);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    transaction.ClearContents();*/
+                    
                 }
                 MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 products.Rows.Clear();
@@ -828,7 +548,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
         {
             CustomerIDComB.Enabled = false;
-            
+
             ProductsControlDGV.Columns["DiscountComB"].Visible = true;
             CashTxtBx.Enabled = true;
             CalculateCostBtn.Enabled = true;

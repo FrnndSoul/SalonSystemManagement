@@ -1,21 +1,4 @@
-﻿/*using Guna.UI2.WinForms;
-using iText.IO.Image;
-using iText.Kernel.Pdf;
-using iText.Layout.Borders;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TriforceSalon.UserControls.Receptionist_Controls;*/
-
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
 using iText.IO.Image;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
@@ -346,8 +329,9 @@ namespace TriforceSalon.Class_Components
                             await command.ExecuteNonQueryAsync();
                             //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
                     using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
@@ -412,7 +396,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
 
-                    await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
+                    //await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
                     await InsertToSales(salesID, orderID);
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //GeneratePurchaseOnlyReceipt();
@@ -643,7 +627,7 @@ namespace TriforceSalon.Class_Components
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
-                        string numericValue = totalText.Replace("Php.", "").Trim();
+                        string numericValue = totalText.Replace("₱ ", "").Trim();
                         decimal.TryParse(numericValue, out decimal totalAmount);
 
                         command.Parameters.AddWithValue("@saleID", saleID);
