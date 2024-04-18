@@ -85,7 +85,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 while (await reader.ReadAsync())
                                 {
-                                    string serviceTypes = reader["ServiceTypeName"].ToString();
+                                    string serviceTypes = reader["ServiceSubTypeName"].ToString();
                                     comboBoxFilter.Items.Add(serviceTypes);
                                 }
                             }
