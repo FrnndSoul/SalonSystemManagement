@@ -505,16 +505,16 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(555, 50);
             this.label2.TabIndex = 38;
-            this.label2.Text = "Appointed Service";
+            this.label2.Text = "Acquired Services";
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.label1.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(48, 244);
+            this.label1.Location = new System.Drawing.Point(55, 244);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(555, 50);
+            this.label1.Size = new System.Drawing.Size(548, 50);
             this.label1.TabIndex = 37;
             this.label1.Text = "Purchased Products";
             // 
@@ -604,7 +604,7 @@
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel14.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(805, 1078);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(963, 1058);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             this.guna2HtmlLabel14.Size = new System.Drawing.Size(293, 36);
             this.guna2HtmlLabel14.TabIndex = 27;
@@ -616,7 +616,7 @@
             this.GcashPayment.Enabled = false;
             this.GcashPayment.Image = global::TriforceSalon.Properties.Resources.Gcash;
             this.GcashPayment.ImageRotate = 0F;
-            this.GcashPayment.Location = new System.Drawing.Point(1121, 1051);
+            this.GcashPayment.Location = new System.Drawing.Point(1279, 1031);
             this.GcashPayment.Name = "GcashPayment";
             this.GcashPayment.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.GcashPayment.Size = new System.Drawing.Size(80, 80);
@@ -652,7 +652,7 @@
             this.guna2Button1.Font = new System.Drawing.Font("Chinacat", 18F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.IndicateFocus = true;
-            this.guna2Button1.Location = new System.Drawing.Point(1110, 1044);
+            this.guna2Button1.Location = new System.Drawing.Point(1268, 1024);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(103, 95);
             this.guna2Button1.TabIndex = 23;
@@ -712,7 +712,7 @@
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(27, 178);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(44, 168);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(180, 36);
             this.guna2HtmlLabel5.TabIndex = 14;
@@ -723,7 +723,7 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(807, 121);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(824, 114);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(54, 36);
             this.guna2HtmlLabel4.TabIndex = 13;
@@ -734,7 +734,7 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(132, 121);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(150, 114);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(74, 36);
             this.guna2HtmlLabel3.TabIndex = 4;

@@ -280,12 +280,12 @@ namespace TriforceSalon.Class_Components
 
 
         //tulog na muna ito
-        /*public async Task GetServiceTypeData(FlowLayoutPanel serviceTypeFL, string mysqlcon, Action<string> updateServiceFL)
+        public async Task GetServiceTypeData(FlowLayoutPanel serviceTypeFL, string mysqlcon, Action<string> updateServiceFL)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
-                string query = "SELECT ServiceTypeName, ServiceTypeImage, ServiceID FROM service_type";
+                string query = "SELECT ServiceSubTypeName, ServiceSubTypeImage, CategoryID  FROM salon_subtypes";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
@@ -293,7 +293,7 @@ namespace TriforceSalon.Class_Components
                     {
                         while (await reader.ReadAsync())
                         {
-                            byte[] imageBytes = (byte[])reader["ServiceTypeImage"];
+                            byte[] imageBytes = (byte[])reader["ServiceSubTypeImage"];
 
                             using (MemoryStream ms = new MemoryStream(imageBytes))
                             {
@@ -304,7 +304,7 @@ namespace TriforceSalon.Class_Components
                                     Width = 140,
                                     Height = 140,
                                     Margin = new Padding(10),
-                                    Tag = reader["ServiceID"].ToString()
+                                    Tag = reader["CategoryID"].ToString()
                                 };
 
                                 PictureBox picBox = new PictureBox
@@ -314,17 +314,17 @@ namespace TriforceSalon.Class_Components
                                     Location = new Point(10, 10),
                                     BackgroundImage = servicetypeImage,
                                     BackgroundImageLayout = ImageLayout.Stretch,
-                                    Tag = reader["ServiceID"].ToString()
+                                    Tag = reader["CategoryID"].ToString()
                                 };
 
                                 Label labelTitle = new Label
                                 {
-                                    Text = reader["ServiceTypeName"].ToString(),
+                                    Text = reader["ServiceSubTypeName"].ToString(),
                                     Location = new Point(10, 95),
                                     ForeColor = Color.Black,
                                     AutoSize = true,
                                     Font = new Font("Stanberry", 8, FontStyle.Regular),
-                                    Tag = reader["ServiceID"].ToString()
+                                    Tag = reader["CategoryID"].ToString()
                                 };
 
                                 Func<object, EventArgs, Task> clickHandler = async (sender, e) =>
@@ -346,7 +346,7 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-        }*/
+        }
 
         /* public async Task GetServiceData(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
@@ -475,39 +475,7 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task GetServiceTypeAsync(string mysqlcon)
-        {
-            ServicesUserControl.servicesUserControlInstance.ServiceFilterComB.Items.Clear();
-            ServicesUserControl.servicesUserControlInstance.ServiceFilterComB.Items.Add("All");
 
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "Select ServiceTypeName from service_type";
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        using (DbDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (await reader.ReadAsync())
-                                {
-                                    string ServiceTypeName = reader["ServiceTypeName"].ToString();
-                                    ServicesUserControl.servicesUserControlInstance.ServiceFilterComB.Items.Add(ServiceTypeName);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in GetServiceTypeAsync()");
-
-            }
-        }
         public decimal ExtractAmount(string input)
         {
             string pattern = @"Amount:\s*₱\s*(\d+)";
@@ -880,7 +848,11 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "select Name from salon_employees where ServiceID = @service_ID AND AccountAccess NOT IN ('Receptionist','Manager')";
+                    string query = "SELECT se.Name FROM salon_employees se " +
+                        "JOIN service_type st ON se.ServiceID = st.ServiceID " +
+                        "JOIN salon_subtypes sst ON st.ServiceID = sst.ServiceTypeID " +
+                        "JOIN salon_services ss ON sst.CategoryID = ss.ServiceTypeID " +
+                        "WHERE ss.ServiceName =  @serviceName AND se.AccountAccess NOT IN ('Receptionist','Manager')";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -938,6 +910,39 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
+            }
+        }
+
+        public async Task GetAllCategory(Guna2ComboBox serviceType, string mysqlcon)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "select ServiceTypeName from service_type";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string serviceTypes = reader["ServiceTypeName"].ToString();
+                                    serviceType.Items.Add(serviceTypes);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in GetAllCategory");
             }
         }
         public async Task<int> GetLargestQueue(string date, string serviceType, string mysqlcon)
