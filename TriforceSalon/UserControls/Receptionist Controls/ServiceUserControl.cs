@@ -37,22 +37,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
         {
-            await serviceTypeService.GetServiceTypeAsync(mysqlcon);
             await serviceTypeService.GetAllEmployee(mysqlcon);
-            ServiceFilterComB.SelectedIndex = 0;
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
+            await serviceTypeService.GetAllCategory(ServiceTypeComB, mysqlcon);
+            GetServiceTypeData();
 
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            /*await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
+            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);*/
         }
 
-        /*public void GetServiceTypeData()
+        public async void GetServiceTypeData()
         {
-            serviceTypeService.GetServiceTypeData(ServiceTypeFL, mysqlcon, UpdateServiceFL);
+            await serviceTypeService.GetServiceTypeData(CategoryFL, mysqlcon, UpdateServiceFL);
         }
 
-        public void GetServiceData()
+        /*public void GetServiceData()
         {
             serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }*/
@@ -221,11 +221,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         }
 
 
-        private async void ServiceFilterComB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedType = ServiceFilterComB.SelectedItem.ToString();
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, selectedType, ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-        }
+        
 
         public decimal ExtractAmount(string input)
         {

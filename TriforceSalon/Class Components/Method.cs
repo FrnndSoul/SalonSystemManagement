@@ -27,6 +27,7 @@ namespace TriforceSalon
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
             Availability, AccountAccess, ServiceType;
+        public static bool isManager;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
@@ -339,6 +340,10 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
+
+                    isManager = true;
+                   
+
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)

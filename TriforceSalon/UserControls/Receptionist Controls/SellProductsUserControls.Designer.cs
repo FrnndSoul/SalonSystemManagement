@@ -601,7 +601,7 @@
             // OtherTransactionContainer
             // 
             this.OtherTransactionContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.OtherTransactionContainer.Location = new System.Drawing.Point(866, 56);
+            this.OtherTransactionContainer.Location = new System.Drawing.Point(860, 56);
             this.OtherTransactionContainer.Name = "OtherTransactionContainer";
             this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
             this.OtherTransactionContainer.TabIndex = 40;
