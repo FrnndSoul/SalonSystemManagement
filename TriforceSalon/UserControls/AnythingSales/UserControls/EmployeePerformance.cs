@@ -409,21 +409,31 @@ namespace salesreport.UserControls
         {
             string searchText = searchBox.Text.ToLower();
 
-            if (string.IsNullOrWhiteSpace(searchText))
+            DataTable originalDataTable = SalesClass.LoadEmployeeDGV(filter); // Load the original data
+            DataView dataView = originalDataTable.DefaultView;
+
+            if (!string.IsNullOrWhiteSpace(searchText))
             {
-                ((DataTable)EmployeeDGV.DataSource).DefaultView.RowFilter = "";
+                string filterExpression = $"Convert(RefID, 'System.String') LIKE '%{searchText}%' OR " +
+                                          $"Convert([Date], 'System.String') LIKE '%{searchText}%' OR " +
+                                          $"Convert(EmployeeID, 'System.String') LIKE '%{searchText}%' OR " +
+                                          $"ServiceType LIKE '%{searchText}%' OR " +
+                                          $"Name LIKE '%{searchText}%' OR " +
+                                          $"Convert(Sales, 'System.String') LIKE '%{searchText}%' OR " +
+                                          $"Convert(Rating, 'System.String') LIKE '%{searchText}%'";
+                dataView.RowFilter = filterExpression;
+            }
+            else
+            {
+                currentTable = SalesClass.LoadEmployeeDGV(filter);
+                EmployeeDGV.DataSource = currentTable;
+                LoadCharts();
+                RecountPages();
                 return;
             }
 
-            string filterExpression = $"Convert(RefID, 'System.String') LIKE '%{searchText}%' OR " +
-                                       $"Convert([Date], 'System.String') LIKE '%{searchText}%' OR " +
-                                       $"Convert(EmployeeID, 'System.String') LIKE '%{searchText}%' OR " +
-                                       $"ServiceType LIKE '%{searchText}%' OR " +
-                                       $"Name LIKE '%{searchText}%' OR " +
-                                       $"Convert(Sales, 'System.String') LIKE '%{searchText}%' OR " +
-                                       $"Convert(Rating, 'System.String') LIKE '%{searchText}%'";
-
-            ((DataTable)EmployeeDGV.DataSource).DefaultView.RowFilter = filterExpression;
+            currentTable = dataView.ToTable(); // Update the DataGridView with the filtered data
+            RecountPages(); // Recount pages after filtering
         }
 
         public void LoadPage()
