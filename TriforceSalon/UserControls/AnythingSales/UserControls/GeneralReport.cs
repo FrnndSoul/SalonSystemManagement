@@ -19,7 +19,7 @@ namespace salesreport.UserControls
             InitializeComponent();
             SalesDGV.DataSource = SalesClass.LoadSales();
             LoadCharts();
-            RangeFilter.MaxDate = DateTime.Now;
+            RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
             RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;

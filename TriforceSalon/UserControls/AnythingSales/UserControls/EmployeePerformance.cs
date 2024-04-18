@@ -21,6 +21,8 @@ namespace salesreport.UserControls
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+        public int pageSize = 5;
+        public int currentPage = 1;
 
         public EmployeePerformance()
         {
@@ -28,11 +30,12 @@ namespace salesreport.UserControls
             GetServiceTypeData(TypeFLP);
             EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(null);
             LoadCharts();
-            RangeFilter.MaxDate = DateTime.Now;
+            RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
             RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
+            LoadPage();
         }
 
         public void LoadCharts()
@@ -277,6 +280,8 @@ namespace salesreport.UserControls
             await Task.Delay(500);
             EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(null);
             LoadCharts();
+            currentPage = 1;
+            LoadPage();
 
             NoFilter.Enabled = false;
             DayFilter.Enabled = true;
@@ -396,6 +401,51 @@ namespace salesreport.UserControls
                                        $"Convert(Rating, 'System.String') LIKE '%{searchText}%'";
 
             ((DataTable)EmployeeDGV.DataSource).DefaultView.RowFilter = filterExpression;
+        }
+
+        public void LoadPage()
+        {
+            DataTable dataTable = (DataTable)EmployeeDGV.DataSource; // Get the DataTable from the DataSource
+            int totalData = dataTable.Rows.Count; // Get the total number of rows in the DataTable
+
+            // Create a new DataTable to hold the filtered data for the current page
+            DataTable filteredTable = dataTable.Clone();
+
+            int startIndex = (currentPage - 1) * pageSize; // Corrected calculation of startIndex
+            int endIndex = Math.Min(startIndex + pageSize - 1, totalData - 1);
+
+            // Show rows for the current page and add them to the filteredTable
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                filteredTable.ImportRow(dataTable.Rows[i]);
+            }
+
+            // Set the DataSource of the DataGridView to display the filteredTable
+            EmployeeDGV.DataSource = filteredTable;
+        }
+
+        private void BackPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage--;
+                PageBox.Text = currentPage.ToString();
+                LoadPage();
+            }
+        }
+
+        private void NextPage_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = (DataTable)EmployeeDGV.DataSource;
+            int totalData = dataTable.Rows.Count; // Get the total number of rows in the DataTable
+            int totalPages = (int)Math.Ceiling((double)totalData / pageSize);
+
+            if (currentPage <= totalPages)
+            {
+                currentPage++;
+                PageBox.Text = currentPage.ToString();
+                LoadPage();
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace salesreport.UserControls
             ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
             LoadCharts();
             GetServiceTypeData(TypeFLP);
-            RangeFilter.MaxDate = DateTime.Now;
+            RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
             RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
