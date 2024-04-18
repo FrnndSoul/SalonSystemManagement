@@ -298,11 +298,11 @@ namespace salesreport.UserControls
         private async void NoFilter_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            EmployeeDGV.DataSource = SalesClass.LoadEmployeeDGV(filter);
-            RecountPages();
-            LoadCharts();
             currentPage = 1;
-            LoadPage();
+            currentTable = SalesClass.LoadEmployeeDGV(filter);
+            EmployeeDGV.DataSource = currentTable;
+            LoadCharts();
+            RecountPages();
 
             NoFilter.Enabled = false;
             DayFilter.Enabled = true;
