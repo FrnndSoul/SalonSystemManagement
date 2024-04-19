@@ -460,9 +460,6 @@ namespace salesreport.UserControls
 
         private void BackPage_Click(object sender, EventArgs e)
         {
-            DataTable dataTable = (DataTable)EmployeeDGV.DataSource;
-            int totalData = dataTable.Rows.Count;
-
             if (currentPage != 1)
             {
                 currentPage--;
