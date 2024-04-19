@@ -100,20 +100,6 @@ namespace TriforceSalon
             }
         }
 
-        private void SignoutBtn_Click(object sender, EventArgs e)
-        {
-            DiscardFunc();
-            foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    //mainForm.ShowLogin();
-                    SigninPage signinPage = new SigninPage();
-                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
-                    break;
-                }
-            }
-        }
 
         private async void DiscardBtn_Click(object sender, EventArgs e)
         {
@@ -158,6 +144,21 @@ namespace TriforceSalon
                                        $"Convert(ServiceID, 'System.String') LIKE '%{searchText}%' OR " +
                                        $"Convert(Availability, 'System.String') LIKE '%{searchText}%'";
             ((DataTable)UserDGV.DataSource).DefaultView.RowFilter = filterExpression;
+        }
+
+        private void Logoutbtn_Click(object sender, EventArgs e)
+        {
+            DiscardFunc();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
+                    break;
+                }
+            }
         }
 
         private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SignoutBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.AccessBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.ServiceTypeBox = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -54,45 +52,10 @@
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.CreateBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SearchBox = new Guna.UI2.WinForms.Guna2TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.Logoutbtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
             this.SuspendLayout();
-            // 
-            // SignoutBtn
-            // 
-            this.SignoutBtn.Animated = true;
-            this.SignoutBtn.BackColor = System.Drawing.Color.Transparent;
-            this.SignoutBtn.BorderColor = System.Drawing.Color.Transparent;
-            this.SignoutBtn.BorderRadius = 15;
-            this.SignoutBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.SignoutBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.SignoutBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.SignoutBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.SignoutBtn.FillColor = System.Drawing.Color.Transparent;
-            this.SignoutBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
-            this.SignoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.SignoutBtn.Location = new System.Drawing.Point(-24, 1020);
-            this.SignoutBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.SignoutBtn.Name = "SignoutBtn";
-            this.SignoutBtn.Size = new System.Drawing.Size(163, 35);
-            this.SignoutBtn.TabIndex = 61;
-            this.SignoutBtn.Text = "Log Out";
-            this.SignoutBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.SignoutBtn.UseTransparentBackground = true;
-            this.SignoutBtn.Click += new System.EventHandler(this.SignoutBtn_Click);
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.Image = global::TriforceSalon.Properties.Resources.back_icon__1_;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(5, 1023);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(25, 30);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 62;
-            this.guna2PictureBox1.TabStop = false;
             // 
             // AccessBox
             // 
@@ -547,12 +510,37 @@
             this.SearchBox.TabIndex = 94;
             this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress);
             // 
+            // Logoutbtn
+            // 
+            this.Logoutbtn.Animated = true;
+            this.Logoutbtn.BackColor = System.Drawing.Color.Transparent;
+            this.Logoutbtn.BorderRadius = 20;
+            this.Logoutbtn.BorderThickness = 1;
+            this.Logoutbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Logoutbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Logoutbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Logoutbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Logoutbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.Logoutbtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
+            this.Logoutbtn.ForeColor = System.Drawing.Color.White;
+            this.Logoutbtn.Image = global::TriforceSalon.Properties.Resources.logout_icon;
+            this.Logoutbtn.Location = new System.Drawing.Point(1758, 2);
+            this.Logoutbtn.Margin = new System.Windows.Forms.Padding(2);
+            this.Logoutbtn.Name = "Logoutbtn";
+            this.Logoutbtn.Size = new System.Drawing.Size(160, 43);
+            this.Logoutbtn.TabIndex = 95;
+            this.Logoutbtn.Text = " Sign Out";
+            this.Logoutbtn.UseTransparentBackground = true;
+            this.Logoutbtn.Visible = false;
+            this.Logoutbtn.Click += new System.EventHandler(this.Logoutbtn_Click);
+            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
+            this.Controls.Add(this.Logoutbtn);
             this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.CreateBtn);
             this.Controls.Add(this.AccessBox);
@@ -577,12 +565,9 @@
             this.Controls.Add(this.DiscardBtn);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.UserDGV);
-            this.Controls.Add(this.guna2PictureBox1);
-            this.Controls.Add(this.SignoutBtn);
             this.Name = "AdminForm";
             this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.AdminForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).EndInit();
             this.ResumeLayout(false);
@@ -591,8 +576,6 @@
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2Button SignoutBtn;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2ComboBox AccessBox;
         private System.Windows.Forms.Label label8;
         private Guna.UI2.WinForms.Guna2ComboBox ServiceTypeBox;
@@ -617,5 +600,6 @@
         private System.Windows.Forms.DataGridView UserDGV;
         private Guna.UI2.WinForms.Guna2Button CreateBtn;
         private Guna.UI2.WinForms.Guna2TextBox SearchBox;
+        private Guna.UI2.WinForms.Guna2Button Logoutbtn;
     }
 }
