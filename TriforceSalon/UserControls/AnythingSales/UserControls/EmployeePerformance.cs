@@ -279,7 +279,8 @@ namespace salesreport.UserControls
                     }
                 }
 
-                EmployeeDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                EmployeeDGV.DataSource = currentTable;
                 LoadCharts();
                 RecountPages();
 
@@ -345,8 +346,8 @@ namespace salesreport.UserControls
                     }
                 }
 
-
-                EmployeeDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                EmployeeDGV.DataSource = currentTable;
                 LoadCharts();
                 RecountPages();
 
@@ -389,7 +390,8 @@ namespace salesreport.UserControls
                     }
                 }
 
-                EmployeeDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                EmployeeDGV.DataSource = currentTable;
                 LoadCharts();
                 RecountPages();
 
