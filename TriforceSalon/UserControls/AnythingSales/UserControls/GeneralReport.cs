@@ -14,11 +14,17 @@ namespace salesreport.UserControls
 {
     public partial class GeneralReport : UserControl
     {
+        DataTable currentTable = SalesClass.LoadSales();
+        public int pageSize = 15;
+        public int currentPage = 1;
+        public int totalPages;
+
         public GeneralReport()
         {
             InitializeComponent();
-            SalesDGV.DataSource = SalesClass.LoadSales();
+            SalesDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
             RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
             RangeFilter.Value = DateTime.Now;
@@ -109,7 +115,7 @@ namespace salesreport.UserControls
                 series.Font = new Font("Stanberry", 14, FontStyle.Regular);
             }*/
         }
-
+        //<date filter>
         private void DayFilter_Click(object sender, EventArgs e)
         {
             try
@@ -134,8 +140,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                SalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                SalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -152,8 +160,11 @@ namespace salesreport.UserControls
         private async void NoFilter_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            SalesDGV.DataSource = SalesClass.LoadSales();
+            currentPage = 1;
+            currentTable = SalesClass.LoadSales();
+            SalesDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
 
             NoFilter.Enabled = false;
             DayFilter.Enabled = true;
@@ -196,9 +207,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-
-                SalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                SalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -239,8 +251,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                SalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                SalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -251,6 +265,56 @@ namespace salesreport.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred while filtering data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //</date filter>
+
+        public void RecountPages()
+        {
+            currentPage = 1;
+            DataTable dataTable = (DataTable)SalesDGV.DataSource;
+            int totalData = dataTable.Rows.Count;
+            totalPages = (int)Math.Ceiling((double)totalData / pageSize);
+            PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+            LoadPage();
+        }
+
+        public void LoadPage()
+        {
+            DataTable originalDataTable = currentTable; // Get the DataTable from the DataSource
+            int totalData = originalDataTable.Rows.Count; // Get the total number of rows in the DataTable
+
+            // Create a new DataTable to hold the filtered data for the current page
+            DataTable filteredTable = originalDataTable.Clone(); // Create a clone of the original DataTable
+
+            int startIndex = (currentPage - 1) * pageSize; // Corrected calculation of startIndex
+            int endIndex = Math.Min(startIndex + pageSize - 1, totalData - 1);
+
+            // Show rows for the current page and add them to the filteredTable
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                filteredTable.ImportRow(originalDataTable.Rows[i]);
+            }
+            SalesDGV.DataSource = filteredTable;
+        }
+
+        private void BackPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage--;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
+            }
+        }
+
+        private void NextPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
             }
         }
     }

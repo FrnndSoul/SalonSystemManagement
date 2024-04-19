@@ -14,11 +14,15 @@ namespace salesreport.UserControls
 {
     public partial class ProductsSales : UserControl
     {
+        DataTable currentTable = SalesClass.LoadProductSales();
+        public int pageSize = 15;
+        public int currentPage = 1;
+        public int totalPages;
 
         public ProductsSales()
         {
             InitializeComponent();
-            ProductSalesDGV.DataSource = SalesClass.LoadProductSales();
+            ProductSalesDGV.DataSource = currentTable;
             LoadCharts();
             RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
@@ -26,7 +30,6 @@ namespace salesreport.UserControls
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
         }
-
 
         private void LoadCharts()
         {
@@ -137,8 +140,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                ProductSalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ProductSalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -155,8 +160,11 @@ namespace salesreport.UserControls
         private async void NoFilter_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            ProductSalesDGV.DataSource = SalesClass.LoadProductSales();
+            currentPage = 1;
+            currentTable = SalesClass.LoadProductSales();
+            ProductSalesDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
 
             NoFilter.Enabled = false;
             DayFilter.Enabled = true;
@@ -199,9 +207,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-
-                ProductSalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ProductSalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -242,8 +251,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                ProductSalesDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ProductSalesDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -261,20 +272,79 @@ namespace salesreport.UserControls
         {
             string searchText = searchBox.Text.ToLower();
 
-            if (string.IsNullOrWhiteSpace(searchText))
-            {
-                ((DataTable)ProductSalesDGV.DataSource).DefaultView.RowFilter = "";
-                return;
-            }
+            DataTable originalDataTable = SalesClass.LoadProductSales(); // Load the original data
+            DataView dataView = originalDataTable.DefaultView;
 
-            string filterExpression = $"Convert([Reference Number], 'System.String') LIKE '%{searchText}%' OR " +
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                string filterExpression = $"Convert([Reference Number], 'System.String') LIKE '%{searchText}%' OR " +
                            $"Convert([Date], 'System.String') LIKE '%{searchText}%' OR " +
                            $"Convert([Product ID], 'System.String') LIKE '%{searchText}%' OR " +
                            $"[Product Name] LIKE '%{searchText}%' OR " +
                            $"Convert(Quantity, 'System.String') LIKE '%{searchText}%' OR " +
                            $"Convert(Sales, 'System.String') LIKE '%{searchText}%'";
+                dataView.RowFilter = filterExpression;
+            }
+            else
+            {
+                currentTable = SalesClass.LoadProductSales();
+                ProductSalesDGV.DataSource = currentTable;
+                LoadCharts();
+                RecountPages();
+                return;
+            }
 
-            ((DataTable)ProductSalesDGV.DataSource).DefaultView.RowFilter = filterExpression;
+            currentTable = dataView.ToTable(); // Update the DataGridView with the filtered data
+            RecountPages(); // Recount pages after filtering
+        }
+
+        public void RecountPages()
+        {
+            currentPage = 1;
+            DataTable dataTable = (DataTable)ProductSalesDGV.DataSource;
+            int totalData = dataTable.Rows.Count;
+            totalPages = (int)Math.Ceiling((double)totalData / pageSize);
+            PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+            LoadPage();
+        }
+
+        public void LoadPage()
+        {
+            DataTable originalDataTable = currentTable; // Get the DataTable from the DataSource
+            int totalData = originalDataTable.Rows.Count; // Get the total number of rows in the DataTable
+
+            // Create a new DataTable to hold the filtered data for the current page
+            DataTable filteredTable = originalDataTable.Clone(); // Create a clone of the original DataTable
+
+            int startIndex = (currentPage - 1) * pageSize; // Corrected calculation of startIndex
+            int endIndex = Math.Min(startIndex + pageSize - 1, totalData - 1);
+
+            // Show rows for the current page and add them to the filteredTable
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                filteredTable.ImportRow(originalDataTable.Rows[i]);
+            }
+            ProductSalesDGV.DataSource = filteredTable;
+        }
+
+        private void BackPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage--;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
+            }
+        }
+
+        private void NextPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
+            }
         }
     }
 }
