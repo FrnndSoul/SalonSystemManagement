@@ -53,6 +53,7 @@
             this.SaveBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UserDGV = new System.Windows.Forms.DataGridView();
             this.CreateBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.SearchBox = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDGV)).BeginInit();
@@ -487,13 +488,13 @@
             this.UserDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserDGV.BackgroundColor = System.Drawing.Color.White;
             this.UserDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UserDGV.Location = new System.Drawing.Point(71, 82);
+            this.UserDGV.Location = new System.Drawing.Point(71, 136);
             this.UserDGV.MultiSelect = false;
             this.UserDGV.Name = "UserDGV";
             this.UserDGV.ReadOnly = true;
             this.UserDGV.RowHeadersWidth = 51;
             this.UserDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserDGV.Size = new System.Drawing.Size(937, 823);
+            this.UserDGV.Size = new System.Drawing.Size(937, 769);
             this.UserDGV.TabIndex = 71;
             this.UserDGV.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDGV_CellContentDoubleClick);
             // 
@@ -519,12 +520,40 @@
             this.CreateBtn.UseTransparentBackground = true;
             this.CreateBtn.Click += new System.EventHandler(this.CreateBtn_Click);
             // 
+            // SearchBox
+            // 
+            this.SearchBox.Animated = true;
+            this.SearchBox.AutoRoundedCorners = true;
+            this.SearchBox.BackColor = System.Drawing.Color.Transparent;
+            this.SearchBox.BorderColor = System.Drawing.Color.Black;
+            this.SearchBox.BorderRadius = 24;
+            this.SearchBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SearchBox.DefaultText = "";
+            this.SearchBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SearchBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SearchBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SearchBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.SearchBox.ForeColor = System.Drawing.Color.Black;
+            this.SearchBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SearchBox.Location = new System.Drawing.Point(71, 78);
+            this.SearchBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.SearchBox.Name = "SearchBox";
+            this.SearchBox.PasswordChar = '\0';
+            this.SearchBox.PlaceholderText = "Search";
+            this.SearchBox.SelectedText = "";
+            this.SearchBox.Size = new System.Drawing.Size(937, 50);
+            this.SearchBox.TabIndex = 94;
+            this.SearchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBox_KeyPress);
+            // 
             // AdminForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
+            this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.CreateBtn);
             this.Controls.Add(this.AccessBox);
             this.Controls.Add(this.label8);
@@ -587,5 +616,6 @@
         private Guna.UI2.WinForms.Guna2Button SaveBtn;
         private System.Windows.Forms.DataGridView UserDGV;
         private Guna.UI2.WinForms.Guna2Button CreateBtn;
+        private Guna.UI2.WinForms.Guna2TextBox SearchBox;
     }
 }
