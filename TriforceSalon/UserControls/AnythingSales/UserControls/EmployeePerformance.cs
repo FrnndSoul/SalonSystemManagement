@@ -41,16 +41,6 @@ namespace salesreport.UserControls
             RangeFilter.CustomFormat = "dd/MM/yyyy";
         }
 
-        public void RecountPages()
-        {
-            currentPage = 1;
-            DataTable dataTable = (DataTable)EmployeeDGV.DataSource;
-            int totalData = dataTable.Rows.Count;
-            totalPages = (int)Math.Ceiling((double)totalData / pageSize);
-            PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
-            LoadPage();
-        }
-
         public void LoadCharts()
         {
             // Sales Chart
@@ -436,6 +426,16 @@ namespace salesreport.UserControls
 
             currentTable = dataView.ToTable(); // Update the DataGridView with the filtered data
             RecountPages(); // Recount pages after filtering
+        }
+
+        public void RecountPages()
+        {
+            currentPage = 1;
+            DataTable dataTable = (DataTable)EmployeeDGV.DataSource;
+            int totalData = dataTable.Rows.Count;
+            totalPages = (int)Math.Ceiling((double)totalData / pageSize);
+            PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+            LoadPage();
         }
 
         public void LoadPage()
