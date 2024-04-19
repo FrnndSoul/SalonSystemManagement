@@ -39,7 +39,9 @@ namespace TriforceSalon.UserControls
             {
                 return;
             }
+
             ItemRow = InventoryDGV.SelectedCells[0].RowIndex;
+
             if (ItemRow < 0)
             {
                 MessageBox.Show("Select a product first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
