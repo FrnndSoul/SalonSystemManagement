@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using salesreport;
 using Guna.UI2.WinForms;
+using TriforceSalon.UserControls.Promo_Controls;
 
 namespace TriforceSalon.UserControls
 {
@@ -96,6 +97,12 @@ namespace TriforceSalon.UserControls
         {
             WalkInTransactionForm walkInForm = new WalkInTransactionForm();
             UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+        }
+
+        private void PromoBtn_Click(object sender, EventArgs e)
+        {
+            PromoUserControl promos = new PromoUserControl();
+            UserControlNavigator.ShowControl(promos, ManagerContent);
         }
     }
 }

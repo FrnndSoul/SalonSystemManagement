@@ -37,7 +37,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             InitializeComponent();
             CustomerListDGV.CellContentDoubleClick += CustomerListDGV_CellDoubleClick;
-            AdjustCheckBoxSize(PWDCheckbox);
             paymentInstance = this;
         }
 
@@ -273,10 +272,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
-            if (Age >= 60)
-            {
-                PWDCheckbox.Checked = true;
-            }
         }
 
 
@@ -423,7 +418,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 if (cash > Convert.ToDecimal(TotalAmountTxtB.Text))
                 {
-                    //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(TotalAmountTxtB.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ChangePaymentStatus("PAID");
                     GeneratePDFBothReceipt();
@@ -764,7 +758,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             ProductsBoughtDGV.Rows.Clear();
             ServiceAcquiredDGV.Rows.Clear();
-            PWDCheckbox.Checked = false;
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
            

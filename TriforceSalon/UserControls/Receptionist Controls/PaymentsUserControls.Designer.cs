@@ -63,7 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.DiscountBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.PWDCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -141,7 +140,6 @@
             this.PaymentPanel.Controls.Add(this.label1);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel16);
             this.PaymentPanel.Controls.Add(this.DiscountBox);
-            this.PaymentPanel.Controls.Add(this.PWDCheckbox);
             this.PaymentPanel.Controls.Add(this.VoidBtn);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel14);
             this.PaymentPanel.Controls.Add(this.GcashPayment);
@@ -556,26 +554,6 @@
             this.DiscountBox.Size = new System.Drawing.Size(296, 44);
             this.DiscountBox.TabIndex = 30;
             // 
-            // PWDCheckbox
-            // 
-            this.PWDCheckbox.AutoSize = true;
-            this.PWDCheckbox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.CheckedState.BorderRadius = 0;
-            this.PWDCheckbox.CheckedState.BorderThickness = 0;
-            this.PWDCheckbox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PWDCheckbox.Enabled = false;
-            this.PWDCheckbox.Font = new System.Drawing.Font("Stanberry", 20F);
-            this.PWDCheckbox.Location = new System.Drawing.Point(1138, 114);
-            this.PWDCheckbox.Name = "PWDCheckbox";
-            this.PWDCheckbox.Size = new System.Drawing.Size(156, 38);
-            this.PWDCheckbox.TabIndex = 29;
-            this.PWDCheckbox.Text = "is Senior?";
-            this.PWDCheckbox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.UncheckedState.BorderRadius = 0;
-            this.PWDCheckbox.UncheckedState.BorderThickness = 0;
-            this.PWDCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.PWDCheckbox.CheckedChanged += new System.EventHandler(this.PWDCheckbox_CheckedChanged);
-            // 
             // VoidBtn
             // 
             this.VoidBtn.Animated = true;
@@ -723,11 +701,11 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Stanberry", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(824, 114);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(689, 112);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(54, 36);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(296, 36);
             this.guna2HtmlLabel4.TabIndex = 13;
-            this.guna2HtmlLabel4.Text = "Age:";
+            this.guna2HtmlLabel4.Text = "Special ID (if applicable):";
             // 
             // guna2HtmlLabel3
             // 
@@ -784,14 +762,14 @@
             this.AgeBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             this.AgeBox.ForeColor = System.Drawing.Color.Black;
             this.AgeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AgeBox.Location = new System.Drawing.Point(880, 108);
+            this.AgeBox.Location = new System.Drawing.Point(988, 106);
             this.AgeBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.AgeBox.Name = "AgeBox";
             this.AgeBox.PasswordChar = '\0';
-            this.AgeBox.PlaceholderText = "Age";
+            this.AgeBox.PlaceholderText = "ID No.";
             this.AgeBox.ReadOnly = true;
             this.AgeBox.SelectedText = "";
-            this.AgeBox.Size = new System.Drawing.Size(239, 44);
+            this.AgeBox.Size = new System.Drawing.Size(408, 44);
             this.AgeBox.TabIndex = 5;
             // 
             // NameBox
@@ -1054,7 +1032,6 @@
         private Guna.UI2.WinForms.Guna2Button CalculateTotalBtn;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox TotalAmountTxtB;
-        private Guna.UI2.WinForms.Guna2CheckBox PWDCheckbox;
         public Guna.UI2.WinForms.Guna2TextBox TransactionIDBox;
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2DataGridView CustomerListDGV;

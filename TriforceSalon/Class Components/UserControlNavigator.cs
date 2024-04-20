@@ -15,5 +15,10 @@ namespace TriforceSalon.Class_Components
             Content.Controls.Add(control);
 
         }
+
+        public static void ClearPanel(Control Content)
+        {
+            Content.Controls.Clear();
+        }
     }
 }

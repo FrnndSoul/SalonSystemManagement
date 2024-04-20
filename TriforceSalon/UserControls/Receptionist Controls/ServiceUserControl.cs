@@ -28,7 +28,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             //serviceTypeService = new GetServiceType_ServiceData();
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
-            CustomerAgeTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
+            CustomerSpecialIDTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
 
            /* GetServiceTypeData();
@@ -68,8 +68,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
-            string age = CustomerAgeTxtB.Text;
-            if (CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
+            string specialID;
+
+            if (!string.IsNullOrEmpty(CustomerSpecialIDTxtB.Text))
+            {
+                specialID = CustomerSpecialIDTxtB.Text;
+            }
+            else
+            {
+                specialID = "NONE";
+            }
+
+            if (CustomerNameTxtB.Text is null || CustomerSpecialIDTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -96,7 +106,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 transactionMethods.GetServiceTypeID(serviceName);
                 //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
                 await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
-                transactionMethods.GeneratePDFTicket(ID, name, age);
+                transactionMethods.GeneratePDFTicket(ID, name, specialID);
                 ClearAll();
 
             }
@@ -121,7 +131,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             ServicesGDGVVControl.Rows.Clear();
             CustomerNameTxtB.Clear();
-            CustomerAgeTxtB.Clear();
+            CustomerSpecialIDTxtB.Clear();
             CustomerPhoneNTxtB.Clear();
             ServiceTxtB.Clear();
             ServiceAmountTxtB.Clear();
@@ -166,7 +176,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             // Get the current text in the TextBox
-            string currentText = CustomerAgeTxtB.Text;
+            string currentText = CustomerSpecialIDTxtB.Text;
 
             // Check if the input length will exceed 3 characters after adding the new input
             if (currentText.Length >= 3 && e.KeyChar != '\b') // '\b' represents the Backspace key

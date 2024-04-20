@@ -376,7 +376,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         else
                         {
                             MessageBox.Show($"Customer's change: {cash - extractedAmount}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                            if (Method.AdminAccess())
+                            {
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                            }
+                            else
+                            {
+                                await transaction.PurchaseToReceipt(orderID, ProductsControlDGV);
+                            }
                             transaction.ClearContents();
                         }
                     }
@@ -388,10 +395,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 else if (DatabaseTransactionRBtn.Checked == true)
                 {
-                    //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
                     int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                    //MessageBox.Show(Convert.ToString(ID));
-                    await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+
+                    if (Method.AdminAccess())
+                    {
+                        MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                    }
+                    else
+                    {
+                        await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
+                    }
                     transaction.ClearContents();
                 }
             }
@@ -414,6 +427,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             if (result == DialogResult.Yes)
             {
+                
                 await VoidedPurchase(orderID, ProductsControlDGV); 
             }
             VoidBtn.Enabled = true;
@@ -457,17 +471,22 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
                             command.Parameters.AddWithValue("@void", "YES");
 
-                            await command.ExecuteNonQueryAsync();
+                            if (Method.AdminAccess())
+                            {
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
 
+                            }
+                            else
+                            {
+                                await command.ExecuteNonQueryAsync();
+                                MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
-                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        products.Rows.Clear();
+                        SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
 
-                    
+                    }
                 }
-                MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                products.Rows.Clear();
-                SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
             }
             catch (Exception ex)
             {

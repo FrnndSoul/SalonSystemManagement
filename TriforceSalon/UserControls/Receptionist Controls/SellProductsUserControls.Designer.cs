@@ -631,6 +631,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.ProductsFL);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.GcashPayment);
             this.Controls.Add(this.guna2Button1);
@@ -657,7 +658,6 @@
             this.Controls.Add(this.SubLbl);
             this.Controls.Add(this.sbLbl);
             this.Controls.Add(this.ProductSearchTxtB);
-            this.Controls.Add(this.ProductsFL);
             this.Controls.Add(this.guna2HtmlLabel12);
             this.Controls.Add(this.OtherTransactionContainer);
             this.Name = "SellProductsUserControls";

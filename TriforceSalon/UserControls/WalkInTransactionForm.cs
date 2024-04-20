@@ -25,7 +25,7 @@ namespace TriforceSalon.UserControls
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
 
-            if(Method.isManager == false)
+            if(Method.isManager == false || Method.AdminAccess())
             {
                 ManagerBackBtn.Visible = false;
             }

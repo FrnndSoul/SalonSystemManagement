@@ -1,0 +1,194 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls.Promo_Controls.PromoRecords;
+
+namespace TriforceSalon.UserControls.Promo_Controls
+{
+    public partial class PItemsUserControls : UserControl
+    {
+        private string mysqlcon;
+        PromoFetchItemsClass promoFetch = new PromoFetchItemsClass();
+        PromoMethods promo = new PromoMethods();
+        public static PItemsUserControls Pitemsinstance;
+        public PItemsUserControls()
+        {
+            InitializeComponent();
+            Pitemsinstance = this;
+            PStartDTP.Value = DateTime.Now;
+            PEndDTP.Value = DateTime.Now;
+            GenerateRandomNumber();
+            RecordsContainer.Visible = false;
+            mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+
+        }
+
+        private async void PItemsUserControls_Load(object sender, EventArgs e)
+        {
+            await promoFetch.LoadItemsInSales(ProductsFL, mysqlcon, ProductsDGV);
+        }
+
+        private void PercentageTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool containsPercentSign = PercentageTxtB.Text.Contains("%");
+
+            if (containsPercentSign && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '%')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar == '%' && PercentageTxtB.SelectionStart != PercentageTxtB.TextLength)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            int maxLength = containsPercentSign ? 3 : 2;
+            if (PercentageTxtB.TextLength >= maxLength && e.KeyChar != '\b' && e.KeyChar != '%')
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private async void AddPromoBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(PromoNameTxtB.Text) ||
+                string.IsNullOrWhiteSpace(PercentageTxtB.Text) ||
+                string.IsNullOrWhiteSpace(PromoCodeTxtB.Text))
+            {
+                MessageBox.Show("Please fill up all the necessary details needed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (ProductsDGV.Rows.Count == 0)
+            {
+                MessageBox.Show("No items has been selected", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            long ID = Convert.ToInt64(PromoCodeTxtB.Text);
+            string Pname = PromoNameTxtB.Text;
+            DateTime startDate = PStartDTP.Value.Date;
+            DateTime endDate = PEndDTP.Value.Date;
+            string percent = PercentageTxtB.Text;
+
+            await promo.AddPromo(ProductsDGV, ID, startDate, endDate, percent, Pname);
+            ClearAllInput();
+            GenerateRandomNumber();
+        }
+
+        private void GenerateRandomNumber()
+        {
+            Random rand = new Random();
+            PromoCodeTxtB.Text =  Convert.ToString(rand.Next(1000000, 9999999));
+        }
+
+        public void ClearAllInput()
+        {
+            ProductsDGV.Rows.Clear();
+            PromoNameTxtB.Text = null;
+            PercentageTxtB.Text = null;
+            PromoCodeTxtB.Text = null;
+            PStartDTP.Value = DateTime.Now;
+            PEndDTP.Value = DateTime.Now;
+        }
+
+        private async void SearchProductsBtn_Click(object sender, EventArgs e)
+        {
+            string product = ProductSearchTxtB.Text;
+            try
+            {
+                await promoFetch.LoadItemsInSalesForSearch(ProductsFL, mysqlcon, ProductsDGV, product);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in Search");
+            }
+        }
+
+        private void EditAPromoBtn_Click(object sender, EventArgs e)
+        {
+            CancelBtn.Visible = true;
+            EditAPromoBtn.Visible = false;
+            ProductContainer.Visible = false;
+            RecordsContainer.Visible = true;
+
+            ProductsRecords Precords = new ProductsRecords();
+            UserControlNavigator.ShowControl(Precords, RecordsContainer);
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            CancelBtn.Visible = false;
+            EditAPromoBtn.Visible = true;
+            ProductContainer.Visible = true;
+            RecordsContainer.Visible = false;
+            UserControlNavigator.ClearPanel(RecordsContainer);
+        }
+
+        private async void UpdatePromoBtn_Click(object sender, EventArgs e)
+        {
+            long ID = Convert.ToInt64(IDLbl.Text);
+            await promo.UpdateBindedService(ID, ProductsDGV);
+            ClearAllInput();
+            GenerateRandomNumber();
+            UpdatePromoBtn.Visible = false;
+            DiscardBtn.Visible = false;
+            EditAPromoBtn.Visible = true;
+            AddPromoBtn.Visible = true;
+        }
+
+        private void DiscardBtn_Click(object sender, EventArgs e)
+        {
+            ClearAllInput();
+            GenerateRandomNumber();
+            UpdatePromoBtn.Visible = false;
+            DiscardBtn.Visible = false;
+            EditAPromoBtn.Visible = true;
+            AddPromoBtn.Visible = true;
+        }
+
+        private void ProductsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ProductsDGV.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ProductsDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveCol")
+                {
+                    ProductsDGV.Rows.RemoveAt(e.RowIndex);
+                }
+                else if (e.ColumnIndex == ProductsDGV.Columns["IncrementCol"].Index)
+                {
+                    int currentQty = int.Parse(ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
+                    currentQty++;
+                    ProductsDGV.Rows[e.RowIndex].Cells[2].Value = currentQty;
+                }
+                else if (e.ColumnIndex == ProductsDGV.Columns["DecrementCol"].Index)
+                {
+                    int currentQty = int.Parse(ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
+                    if (currentQty > 0)
+                    {
+                        currentQty--;
+                        ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value = currentQty;
+                    }
+                }
+            }
+        }
+    }
+}

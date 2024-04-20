@@ -53,7 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.PEmployeeComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.CustomerPhoneNTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.CustomerSpecialIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -91,7 +91,7 @@
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.PEmployeeComB);
             this.guna2Panel1.Controls.Add(this.CustomerPhoneNTxtB);
-            this.guna2Panel1.Controls.Add(this.CustomerAgeTxtB);
+            this.guna2Panel1.Controls.Add(this.CustomerSpecialIDTxtB);
             this.guna2Panel1.Controls.Add(this.CustomerNameTxtB);
             this.guna2Panel1.Controls.Add(this.ProcessCustomerBtn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -254,7 +254,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(196, 38);
             this.label7.TabIndex = 21;
-            this.label7.Text = "Transaction ID";
+            this.label7.Text = "Transaction ID:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
@@ -344,22 +344,22 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.label4.Location = new System.Drawing.Point(34, 133);
+            this.label4.Location = new System.Drawing.Point(388, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(195, 38);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Phone Number";
+            this.label4.Text = "Phone Number:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.label3.Location = new System.Drawing.Point(457, 49);
+            this.label3.Location = new System.Drawing.Point(31, 133);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 38);
+            this.label3.Size = new System.Drawing.Size(261, 38);
             this.label3.TabIndex = 14;
-            this.label3.Text = "Age";
+            this.label3.Text = "Special ID (if applicable):";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -370,7 +370,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 38);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Name";
+            this.label2.Text = "Name:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PEmployeeComB
@@ -406,7 +406,7 @@
             this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.CustomerPhoneNTxtB.ForeColor = System.Drawing.Color.Black;
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(34, 176);
+            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(388, 92);
             this.CustomerPhoneNTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
@@ -416,30 +416,30 @@
             this.CustomerPhoneNTxtB.TabIndex = 3;
             this.CustomerPhoneNTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerPhoneNTxtB_KeyPress);
             // 
-            // CustomerAgeTxtB
+            // CustomerSpecialIDTxtB
             // 
-            this.CustomerAgeTxtB.AutoRoundedCorners = true;
-            this.CustomerAgeTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.CustomerAgeTxtB.BorderRadius = 17;
-            this.CustomerAgeTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CustomerAgeTxtB.DefaultText = "";
-            this.CustomerAgeTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CustomerAgeTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.CustomerAgeTxtB.ForeColor = System.Drawing.Color.Black;
-            this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Location = new System.Drawing.Point(462, 92);
-            this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
-            this.CustomerAgeTxtB.PasswordChar = '\0';
-            this.CustomerAgeTxtB.PlaceholderText = "";
-            this.CustomerAgeTxtB.SelectedText = "";
-            this.CustomerAgeTxtB.Size = new System.Drawing.Size(83, 36);
-            this.CustomerAgeTxtB.TabIndex = 2;
-            this.CustomerAgeTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerAgeTxtB_KeyPress);
+            this.CustomerSpecialIDTxtB.AutoRoundedCorners = true;
+            this.CustomerSpecialIDTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.CustomerSpecialIDTxtB.BorderRadius = 17;
+            this.CustomerSpecialIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.CustomerSpecialIDTxtB.DefaultText = "";
+            this.CustomerSpecialIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.CustomerSpecialIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.CustomerSpecialIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerSpecialIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.CustomerSpecialIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerSpecialIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.CustomerSpecialIDTxtB.ForeColor = System.Drawing.Color.Black;
+            this.CustomerSpecialIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CustomerSpecialIDTxtB.Location = new System.Drawing.Point(36, 176);
+            this.CustomerSpecialIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.CustomerSpecialIDTxtB.Name = "CustomerSpecialIDTxtB";
+            this.CustomerSpecialIDTxtB.PasswordChar = '\0';
+            this.CustomerSpecialIDTxtB.PlaceholderText = "ID No.";
+            this.CustomerSpecialIDTxtB.SelectedText = "";
+            this.CustomerSpecialIDTxtB.Size = new System.Drawing.Size(308, 36);
+            this.CustomerSpecialIDTxtB.TabIndex = 2;
+            this.CustomerSpecialIDTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CustomerAgeTxtB_KeyPress);
             // 
             // CustomerNameTxtB
             // 
@@ -600,7 +600,7 @@
         private System.Windows.Forms.Label CServiceTxtB;
         public Guna.UI2.WinForms.Guna2ComboBox PEmployeeComB;
         public Guna.UI2.WinForms.Guna2TextBox CustomerPhoneNTxtB;
-        public Guna.UI2.WinForms.Guna2TextBox CustomerAgeTxtB;
+        public Guna.UI2.WinForms.Guna2TextBox CustomerSpecialIDTxtB;
         public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
         public Guna.UI2.WinForms.Guna2TextBox ServiceTxtB;
         private System.Windows.Forms.Label label6;
