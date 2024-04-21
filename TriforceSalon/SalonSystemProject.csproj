@@ -176,6 +176,7 @@
   <ItemGroup>
     <Compile Include="Class Components\PromoFetchItemsClass.cs" />
     <Compile Include="Class Components\PromoMethods.cs" />
+    <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
@@ -516,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.resx">
       <DependentUpon>ProductsRecords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.resx">
+      <DependentUpon>ServiceRecords.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Promo Controls\PromoUserControl.resx">
       <DependentUpon>PromoUserControl.cs</DependentUpon>

@@ -13,8 +13,10 @@ namespace TriforceSalon.UserControls.Promo_Controls
             InitializeComponent();
         }
 
-        private async void PromoUserControl_Load(object sender, EventArgs e)
+        private void PromoUserControl_Load(object sender, EventArgs e)
         {
+            PServicesUserControl servicePromo = new PServicesUserControl();
+            UserControlNavigator.ShowControl(servicePromo, PromoContainer);
         }
 
         private void SetButtonProperties(Guna.UI2.WinForms.Guna2Button button, Color fillColor, Color foreColor)
@@ -23,30 +25,10 @@ namespace TriforceSalon.UserControls.Promo_Controls
             button.ForeColor = foreColor;
         }
 
-        private void AllVouchersBtn_Click(object sender, EventArgs e)
-        {
-            SetButtonProperties(AllVouchersBtn, Color.FromArgb(52, 42, 83), Color.White);
-            AllVouchersBtn.BringToFront();
-
-
-            SetButtonProperties(PServiceBtn, Color.FromArgb(255, 228, 242), Color.Black);
-            PServiceBtn.SendToBack();
-
-            SetButtonProperties(PProductsBtn, Color.FromArgb(255, 228, 242), Color.Black);
-            PProductsBtn.SendToBack();
-
-            ViewPromosUserControls viewPromos = new ViewPromosUserControls();
-            UserControlNavigator.ShowControl(viewPromos, PromoContainer);
-        }
-
         private void PServiceBtn_Click(object sender, EventArgs e)
         {
             SetButtonProperties(PServiceBtn, Color.FromArgb(52, 42, 83), Color.White);
             PServiceBtn.BringToFront();
-
-
-            SetButtonProperties(AllVouchersBtn, Color.FromArgb(255, 228, 242), Color.Black);
-            AllVouchersBtn.SendToBack();
 
             SetButtonProperties(PProductsBtn, Color.FromArgb(255, 228, 242), Color.Black);
             PProductsBtn.SendToBack();
@@ -61,10 +43,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             SetButtonProperties(PProductsBtn, Color.FromArgb(52, 42, 83), Color.White);
             PProductsBtn.BringToFront();
 
-            SetButtonProperties(AllVouchersBtn, Color.FromArgb(255, 228, 242), Color.Black);
-            AllVouchersBtn.SendToBack();
-
-            SetButtonProperties(PProductsBtn, Color.FromArgb(255, 228, 242), Color.Black);
+            SetButtonProperties(PServiceBtn, Color.FromArgb(255, 228, 242), Color.Black);
             PProductsBtn.SendToBack();
 
             PItemsUserControls products = new PItemsUserControls();

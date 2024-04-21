@@ -22,13 +22,16 @@ namespace TriforceSalon.UserControls.Promo_Controls.PromoRecords
             promoMethods.EditProductPromo(PromoProductsDGV);
             promoMethods.HidePanel(false, true);
 
-            /*PItemsUserControls.Pitemsinstance.ProductContainer.Visible = true;
-            PItemsUserControls.Pitemsinstance.RecordsContainer.Visible = false;*/
             UserControlNavigator.ClearPanel(PItemsUserControls.Pitemsinstance.RecordsContainer);
 
             ProductsRecords Precords = new ProductsRecords();
             UserControlNavigator.ShowControl(Precords, PItemsUserControls.Pitemsinstance.RecordsContainer);
             promoMethods.HideButtons(false,false,true,true,false);
+        }
+
+        private void PromoProductsDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

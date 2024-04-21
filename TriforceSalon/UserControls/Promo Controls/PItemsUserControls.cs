@@ -136,10 +136,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         private void CancelBtn_Click(object sender, EventArgs e)
         {
-            CancelBtn.Visible = false;
-            EditAPromoBtn.Visible = true;
-            ProductContainer.Visible = true;
-            RecordsContainer.Visible = false;
             promo.HidePanel(false,true);
             promo.HideButtons(true,true,false,false,false);
 
@@ -148,20 +144,31 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         private async void UpdatePromoBtn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(PromoNameTxtB.Text) ||
+                string.IsNullOrWhiteSpace(PercentageTxtB.Text) ||
+                string.IsNullOrWhiteSpace(PromoCodeTxtB.Text))
+            {
+                MessageBox.Show("Please fill up all the necessary details needed", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (ProductsDGV.Rows.Count == 0)
+            {
+                MessageBox.Show("No items has been selected", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             long ID = Convert.ToInt64(IDLbl.Text);
             await promo.UpdateBindedService(ID, ProductsDGV);
             ClearAllInput();
             GenerateRandomNumber();
             promo.HideButtons(true, true, false, false, false);
-
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             ClearAllInput();
             GenerateRandomNumber();
-           /* RecordsContainer.Visible = false;
-            ProductContainer.Visible = true;*/
             promo.HidePanel(false, true);
             promo.HideButtons(true, true, false, false, false);
             UserControlNavigator.ClearPanel(RecordsContainer);

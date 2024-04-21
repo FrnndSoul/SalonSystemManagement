@@ -102,6 +102,7 @@
             this.PromoProductsDGV.ThemeStyle.RowsStyle.Height = 22;
             this.PromoProductsDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.PromoProductsDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.PromoProductsDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PromoProductsDGV_CellContentClick);
             // 
             // PromoNameCol
             // 

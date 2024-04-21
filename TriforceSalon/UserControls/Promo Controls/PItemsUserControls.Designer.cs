@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,12 +43,6 @@
             this.PromoCodeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.PercentageTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProductsDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ItemNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.AddPromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -61,6 +55,9 @@
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label7 = new System.Windows.Forms.Label();
             this.IDLbl = new System.Windows.Forms.Label();
+            this.ServiceNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDGV)).BeginInit();
             this.ProductContainer.SuspendLayout();
             this.SuspendLayout();
@@ -229,34 +226,31 @@
             // 
             this.ProductsDGV.AllowUserToAddRows = false;
             this.ProductsDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.ProductsDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ProductsDGV.ColumnHeadersHeight = 15;
             this.ProductsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ItemNameCol,
-            this.ItemIDCol,
-            this.DecrementCol,
-            this.QuantityCol,
-            this.IncrementCol,
+            this.ServiceNameCol,
+            this.ServiceIDCol,
             this.RemoveCol});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ProductsDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsDGV.Location = new System.Drawing.Point(932, 399);
             this.ProductsDGV.Name = "ProductsDGV";
@@ -285,45 +279,6 @@
             this.ProductsDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ProductsDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsDGV_CellClick);
-            // 
-            // ItemNameCol
-            // 
-            this.ItemNameCol.HeaderText = "ItemName";
-            this.ItemNameCol.Name = "ItemNameCol";
-            this.ItemNameCol.ReadOnly = true;
-            // 
-            // ItemIDCol
-            // 
-            this.ItemIDCol.HeaderText = "Item ID";
-            this.ItemIDCol.Name = "ItemIDCol";
-            this.ItemIDCol.ReadOnly = true;
-            this.ItemIDCol.Visible = false;
-            // 
-            // DecrementCol
-            // 
-            this.DecrementCol.HeaderText = "-";
-            this.DecrementCol.Name = "DecrementCol";
-            this.DecrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DecrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // QuantityCol
-            // 
-            this.QuantityCol.HeaderText = "Quantity";
-            this.QuantityCol.Name = "QuantityCol";
-            // 
-            // IncrementCol
-            // 
-            this.IncrementCol.HeaderText = "+";
-            this.IncrementCol.Name = "IncrementCol";
-            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // RemoveCol
-            // 
-            this.RemoveCol.HeaderText = "Remove";
-            this.RemoveCol.Name = "RemoveCol";
-            this.RemoveCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.RemoveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AddPromoBtn
             // 
@@ -509,6 +464,26 @@
             this.IDLbl.Text = "label8";
             this.IDLbl.Visible = false;
             // 
+            // ServiceNameCol
+            // 
+            this.ServiceNameCol.HeaderText = "Service Name";
+            this.ServiceNameCol.Name = "ServiceNameCol";
+            this.ServiceNameCol.ReadOnly = true;
+            // 
+            // ServiceIDCol
+            // 
+            this.ServiceIDCol.HeaderText = "Service ID";
+            this.ServiceIDCol.Name = "ServiceIDCol";
+            this.ServiceIDCol.ReadOnly = true;
+            this.ServiceIDCol.Visible = false;
+            // 
+            // RemoveCol
+            // 
+            this.RemoveCol.HeaderText = "Remove";
+            this.RemoveCol.Name = "RemoveCol";
+            this.RemoveCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // PItemsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,12 +528,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemIDCol;
-        private System.Windows.Forms.DataGridViewButtonColumn DecrementCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
-        private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
-        private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
         private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
         private Guna.UI2.WinForms.Guna2TextBox ProductSearchTxtB;
         public System.Windows.Forms.Panel ProductContainer;
@@ -577,5 +546,8 @@
         public Guna.UI2.WinForms.Guna2Button EditAPromoBtn;
         public System.Windows.Forms.Label IDLbl;
         public Guna.UI2.WinForms.Guna2Button CancelBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIDCol;
+        private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
     }
 }
