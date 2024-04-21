@@ -19,17 +19,19 @@ namespace TriforceSalon.UserControls
     {
         TransactionMethods transactionMethods = new TransactionMethods();
         WalkInTransactionForm walkin = new WalkInTransactionForm();
+        PromoMethods promo = new PromoMethods();
+        
         public ManagerPage()
         {
             InitializeComponent();
             InventoryBtn.Enabled = false;
-
         }
 
-        private void ManagerPage_Load(object sender, EventArgs e)
+        private async void ManagerPage_Load(object sender, EventArgs e)
         {
             GeneralView_Inventory viewInventory = new GeneralView_Inventory();
             UserControlNavigator.ShowControl(viewInventory, ManagerContent);
+            await promo.CheckVoucherIsValid();
         }
         private void LogoutBtn_Click(object sender, EventArgs e)
         {

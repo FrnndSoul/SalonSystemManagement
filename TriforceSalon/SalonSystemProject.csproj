@@ -319,11 +319,23 @@
     <Compile Include="UserControls\Promo Controls\PItemsUserControls.Designer.cs">
       <DependentUpon>PItemsUserControls.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoRecords\AllPromoRecords.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoRecords\AllPromoRecords.Designer.cs">
+      <DependentUpon>AllPromoRecords.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.Designer.cs">
       <DependentUpon>ProductsRecords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.Designer.cs">
+      <DependentUpon>ServiceRecords.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Promo Controls\PromoUserControl.cs">
       <SubType>UserControl</SubType>

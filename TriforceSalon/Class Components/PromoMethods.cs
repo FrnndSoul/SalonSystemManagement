@@ -155,6 +155,20 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
 
+
+                    string updateQuery = "UPDATE salon_promos SET PromoStart = @start, PromoEnd = @end, PromoName = @pName, DiscountPercent = @discount " +
+                                        "WHERE PromoCode = @promoCode";
+                    using (MySqlCommand command = new MySqlCommand(@updateQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@start", PItemsUserControls.Pitemsinstance.PStartDTP.Value.Date);
+                        command.Parameters.AddWithValue("@end", PItemsUserControls.Pitemsinstance.PEndDTP.Value.Date);
+                        command.Parameters.AddWithValue("@pName", PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text);
+                        command.Parameters.AddWithValue("@discount", PItemsUserControls.Pitemsinstance.PercentageTxtB.Text);
+                        command.Parameters.AddWithValue("@promoCode", PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+
                     string deleteQuery = "DELETE FROM `binded_items` WHERE PromoItemsID = @promoItemsID";
                     using (MySqlCommand command = new MySqlCommand(deleteQuery, conn))
                     {
@@ -185,7 +199,7 @@ namespace TriforceSalon.Class_Components
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -243,13 +257,28 @@ namespace TriforceSalon.Class_Components
                     "WHEN CURDATE() < PromoStart THEN 'NO' " +
                     "WHEN CURDATE() >= PromoStart AND CURDATE() <= PromoEnd THEN 'YES' " +
                     "ELSE 'NO' END " +
-                    "WHERE DateValid < CURDATE()";
+                    "WHERE CURDATE() <= PromoEnd AND CURDATE() >= PromoStart";
 
                 using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
                 {
                     await command.ExecuteNonQueryAsync();
                 }
             }
+        }
+
+        public void HideButtons(bool add, bool see, bool update, bool discard, bool back)
+        {
+            PItemsUserControls.Pitemsinstance.AddPromoBtn.Visible = add;
+            PItemsUserControls.Pitemsinstance.UpdatePromoBtn.Visible = update;
+            PItemsUserControls.Pitemsinstance.DiscardBtn.Visible = discard;
+            PItemsUserControls.Pitemsinstance.CancelBtn.Visible = back;
+            PItemsUserControls.Pitemsinstance.EditAPromoBtn.Visible = see;
+        }
+
+        public void HidePanel(bool records, bool products)
+        {
+            PItemsUserControls.Pitemsinstance.RecordsContainer.Visible = records;
+            PItemsUserControls.Pitemsinstance.ProductContainer.Visible = products;
         }
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -229,17 +229,17 @@
             // 
             this.ProductsDGV.AllowUserToAddRows = false;
             this.ProductsDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.ProductsDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.ProductsDGV.ColumnHeadersHeight = 15;
             this.ProductsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -249,14 +249,14 @@
             this.QuantityCol,
             this.IncrementCol,
             this.RemoveCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle12;
             this.ProductsDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsDGV.Location = new System.Drawing.Point(932, 399);
             this.ProductsDGV.Name = "ProductsDGV";
@@ -336,7 +336,7 @@
             this.AddPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.AddPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddPromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.AddPromoBtn.Location = new System.Drawing.Point(1163, 743);
+            this.AddPromoBtn.Location = new System.Drawing.Point(1163, 730);
             this.AddPromoBtn.Name = "AddPromoBtn";
             this.AddPromoBtn.Size = new System.Drawing.Size(221, 45);
             this.AddPromoBtn.TabIndex = 31;
@@ -414,11 +414,11 @@
             this.EditAPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditAPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditAPromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditAPromoBtn.Location = new System.Drawing.Point(929, 743);
+            this.EditAPromoBtn.Location = new System.Drawing.Point(929, 730);
             this.EditAPromoBtn.Name = "EditAPromoBtn";
             this.EditAPromoBtn.Size = new System.Drawing.Size(221, 45);
             this.EditAPromoBtn.TabIndex = 35;
-            this.EditAPromoBtn.Text = "Edit A Promo";
+            this.EditAPromoBtn.Text = "See Vouchers";
             this.EditAPromoBtn.Click += new System.EventHandler(this.EditAPromoBtn_Click);
             // 
             // CancelBtn
@@ -432,11 +432,11 @@
             this.CancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CancelBtn.ForeColor = System.Drawing.Color.Black;
-            this.CancelBtn.Location = new System.Drawing.Point(929, 743);
+            this.CancelBtn.Location = new System.Drawing.Point(929, 730);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(221, 45);
             this.CancelBtn.TabIndex = 36;
-            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.Text = "Back";
             this.CancelBtn.Visible = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
@@ -461,11 +461,12 @@
             this.UpdatePromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.UpdatePromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdatePromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.UpdatePromoBtn.Location = new System.Drawing.Point(929, 677);
+            this.UpdatePromoBtn.Location = new System.Drawing.Point(929, 730);
             this.UpdatePromoBtn.Name = "UpdatePromoBtn";
             this.UpdatePromoBtn.Size = new System.Drawing.Size(221, 45);
             this.UpdatePromoBtn.TabIndex = 39;
             this.UpdatePromoBtn.Text = "Update Promo";
+            this.UpdatePromoBtn.Visible = false;
             this.UpdatePromoBtn.Click += new System.EventHandler(this.UpdatePromoBtn_Click);
             // 
             // DiscardBtn
@@ -479,11 +480,12 @@
             this.DiscardBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.DiscardBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscardBtn.ForeColor = System.Drawing.Color.Black;
-            this.DiscardBtn.Location = new System.Drawing.Point(1163, 677);
+            this.DiscardBtn.Location = new System.Drawing.Point(1163, 730);
             this.DiscardBtn.Name = "DiscardBtn";
             this.DiscardBtn.Size = new System.Drawing.Size(221, 45);
             this.DiscardBtn.TabIndex = 38;
             this.DiscardBtn.Text = "Discard Edit";
+            this.DiscardBtn.Visible = false;
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
             // 
             // label7
@@ -505,6 +507,7 @@
             this.IDLbl.Size = new System.Drawing.Size(35, 13);
             this.IDLbl.TabIndex = 41;
             this.IDLbl.Text = "label8";
+            this.IDLbl.Visible = false;
             // 
             // PItemsUserControls
             // 
@@ -513,8 +516,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.Controls.Add(this.IDLbl);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.UpdatePromoBtn);
-            this.Controls.Add(this.DiscardBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.EditAPromoBtn);
             this.Controls.Add(this.AddPromoBtn);
@@ -532,6 +533,8 @@
             this.Controls.Add(this.ProductContainer);
             this.Controls.Add(this.RecordsContainer);
             this.Controls.Add(this.CancelBtn);
+            this.Controls.Add(this.UpdatePromoBtn);
+            this.Controls.Add(this.DiscardBtn);
             this.Name = "PItemsUserControls";
             this.Size = new System.Drawing.Size(1400, 800);
             this.Load += new System.EventHandler(this.PItemsUserControls_Load);
@@ -558,9 +561,8 @@
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
         private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
         private Guna.UI2.WinForms.Guna2TextBox ProductSearchTxtB;
-        private System.Windows.Forms.Panel ProductContainer;
-        private System.Windows.Forms.Panel RecordsContainer;
-        private Guna.UI2.WinForms.Guna2Button CancelBtn;
+        public System.Windows.Forms.Panel ProductContainer;
+        public System.Windows.Forms.Panel RecordsContainer;
         public Guna.UI2.WinForms.Guna2TextBox PromoNameTxtB;
         public Guna.UI2.WinForms.Guna2DateTimePicker PEndDTP;
         public Guna.UI2.WinForms.Guna2DateTimePicker PStartDTP;
@@ -574,5 +576,6 @@
         public Guna.UI2.WinForms.Guna2Button AddPromoBtn;
         public Guna.UI2.WinForms.Guna2Button EditAPromoBtn;
         public System.Windows.Forms.Label IDLbl;
+        public Guna.UI2.WinForms.Guna2Button CancelBtn;
     }
 }

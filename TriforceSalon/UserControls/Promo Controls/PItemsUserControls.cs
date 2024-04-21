@@ -128,6 +128,8 @@ namespace TriforceSalon.UserControls.Promo_Controls
             ProductContainer.Visible = false;
             RecordsContainer.Visible = true;
 
+            promo.HideButtons(true,false,false,false,true);
+
             ProductsRecords Precords = new ProductsRecords();
             UserControlNavigator.ShowControl(Precords, RecordsContainer);
         }
@@ -138,6 +140,9 @@ namespace TriforceSalon.UserControls.Promo_Controls
             EditAPromoBtn.Visible = true;
             ProductContainer.Visible = true;
             RecordsContainer.Visible = false;
+            promo.HidePanel(false,true);
+            promo.HideButtons(true,true,false,false,false);
+
             UserControlNavigator.ClearPanel(RecordsContainer);
         }
 
@@ -147,20 +152,19 @@ namespace TriforceSalon.UserControls.Promo_Controls
             await promo.UpdateBindedService(ID, ProductsDGV);
             ClearAllInput();
             GenerateRandomNumber();
-            UpdatePromoBtn.Visible = false;
-            DiscardBtn.Visible = false;
-            EditAPromoBtn.Visible = true;
-            AddPromoBtn.Visible = true;
+            promo.HideButtons(true, true, false, false, false);
+
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
         {
             ClearAllInput();
             GenerateRandomNumber();
-            UpdatePromoBtn.Visible = false;
-            DiscardBtn.Visible = false;
-            EditAPromoBtn.Visible = true;
-            AddPromoBtn.Visible = true;
+           /* RecordsContainer.Visible = false;
+            ProductContainer.Visible = true;*/
+            promo.HidePanel(false, true);
+            promo.HideButtons(true, true, false, false, false);
+            UserControlNavigator.ClearPanel(RecordsContainer);
         }
 
         private void ProductsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -177,12 +181,12 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 {
                     int currentQty = int.Parse(ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
                     currentQty++;
-                    ProductsDGV.Rows[e.RowIndex].Cells[2].Value = currentQty;
+                    ProductsDGV.Rows[e.RowIndex].Cells[3].Value = currentQty;
                 }
                 else if (e.ColumnIndex == ProductsDGV.Columns["DecrementCol"].Index)
                 {
                     int currentQty = int.Parse(ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
-                    if (currentQty > 0)
+                    if (currentQty > 1)
                     {
                         currentQty--;
                         ProductsDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value = currentQty;

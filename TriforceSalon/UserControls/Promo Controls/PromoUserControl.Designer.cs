@@ -124,7 +124,7 @@
             // 
             // PromoContainer
             // 
-            this.PromoContainer.BackColor = System.Drawing.Color.White;
+            this.PromoContainer.BackColor = System.Drawing.Color.Transparent;
             this.PromoContainer.Location = new System.Drawing.Point(50, 106);
             this.PromoContainer.Name = "PromoContainer";
             this.PromoContainer.Size = new System.Drawing.Size(1400, 800);

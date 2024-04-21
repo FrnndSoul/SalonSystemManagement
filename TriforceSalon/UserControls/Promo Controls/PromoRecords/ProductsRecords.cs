@@ -20,10 +20,15 @@ namespace TriforceSalon.UserControls.Promo_Controls.PromoRecords
         private async void EditPromoBtn_Click(object sender, EventArgs e)
         {
             promoMethods.EditProductPromo(PromoProductsDGV);
-            PItemsUserControls.Pitemsinstance.UpdatePromoBtn.Visible = true;
-            PItemsUserControls.Pitemsinstance.DiscardBtn.Visible = true;
-            PItemsUserControls.Pitemsinstance.EditAPromoBtn.Visible = false;
-            PItemsUserControls.Pitemsinstance.AddPromoBtn.Visible = false;
+            promoMethods.HidePanel(false, true);
+
+            /*PItemsUserControls.Pitemsinstance.ProductContainer.Visible = true;
+            PItemsUserControls.Pitemsinstance.RecordsContainer.Visible = false;*/
+            UserControlNavigator.ClearPanel(PItemsUserControls.Pitemsinstance.RecordsContainer);
+
+            ProductsRecords Precords = new ProductsRecords();
+            UserControlNavigator.ShowControl(Precords, PItemsUserControls.Pitemsinstance.RecordsContainer);
+            promoMethods.HideButtons(false,false,true,true,false);
         }
     }
 }
