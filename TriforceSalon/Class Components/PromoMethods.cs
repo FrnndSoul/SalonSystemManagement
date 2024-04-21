@@ -14,7 +14,7 @@ using System.Globalization;
 
 namespace TriforceSalon.Class_Components
 {
-    public  class PromoMethods
+    public class PromoMethods
     {
         private string mysqlcon;
 
@@ -22,12 +22,12 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
-        
+
         public async Task AddPromo(Guna2DataGridView itemsDataGrid, long ID, DateTime start, DateTime end, string percentage, string name)
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
@@ -52,7 +52,7 @@ namespace TriforceSalon.Class_Components
                     string insertToBindedItems = "INSERT INTO binded_items (PromoItemsID, ItemName, ItemID, Quantity) " +
                         "VALUES(@PitemsID, @itemName, @itemID, @quantity)";
 
-                    foreach(DataGridViewRow row in itemsDataGrid.Rows)
+                    foreach (DataGridViewRow row in itemsDataGrid.Rows)
                     {
                         string itemsID = Convert.ToString(row.Cells["ItemIDCol"].Value);
                         string itemName = Convert.ToString(row.Cells["ItemNameCol"].Value);
@@ -62,7 +62,7 @@ namespace TriforceSalon.Class_Components
                         {
                             command2.Parameters.AddWithValue("@PitemsID", ID);
                             command2.Parameters.AddWithValue("@itemName", itemName);
-                            command2.Parameters.AddWithValue("@itemID",itemsID );
+                            command2.Parameters.AddWithValue("@itemID", itemsID);
                             command2.Parameters.AddWithValue("@quantity", quantity);
 
                             await command2.ExecuteNonQueryAsync();
@@ -71,24 +71,24 @@ namespace TriforceSalon.Class_Components
                     MessageBox.Show("Promo has been created", "Operation Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               MessageBox.Show(ex.ToString(), "Error in AddPromo");
+                MessageBox.Show(ex.ToString(), "Error in AddPromo");
             }
         }
-        
+
         public async void EditProductPromo(Guna2DataGridView productPromoDGV)
         {
-            if(productPromoDGV.SelectedRows.Count == 0)
+            if (productPromoDGV.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if(result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
-                if(productPromoDGV.SelectedRows.Count == 1)
+                if (productPromoDGV.SelectedRows.Count == 1)
                 {
                     DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
 
@@ -197,6 +197,7 @@ namespace TriforceSalon.Class_Components
                             await command.ExecuteNonQueryAsync();
                         }
                     }
+                    MessageBox.Show("Update of promo is successful", "Promo Product Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -209,14 +210,14 @@ namespace TriforceSalon.Class_Components
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
                     string fetchQuery = "SELECT PromoName, PromoCode, DiscountPercent, " +
                         "DATE(PromoStart) AS PromoStart, DATE(PromoEnd) AS PromoEnd, PromoItemsID " +
                         "FROM salon_promos " +
-                        "WHERE isValid = 'YES' AND PromoType = 'Items'";
+                        "WHERE isValid = 'YES' AND PromoType = 'Item'";
 
 
                     using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
@@ -235,14 +236,14 @@ namespace TriforceSalon.Class_Components
                                 var PEnd = row["PromoEnd"].ToString();
                                 var PItemsID = row["PromoItemsID"].ToString();
 
-                                viewPromosDGV.Rows.Add(PName, PCode, Convert.ToDateTime(PStart).ToString("yyyy-MM-dd"), 
+                                viewPromosDGV.Rows.Add(PName, PCode, Convert.ToDateTime(PStart).ToString("yyyy-MM-dd"),
                                     Convert.ToDateTime(PEnd).ToString("yyyy-MM-dd"), PDiscount, PItemsID);
                             }
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error in GetActivePromos");
             }
@@ -383,6 +384,7 @@ namespace TriforceSalon.Class_Components
                             await command.ExecuteNonQueryAsync();
                         }
                     }
+                    MessageBox.Show("Update of promo is successful", "Promo Service Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -519,3 +521,6 @@ namespace TriforceSalon.Class_Components
         }
     }
 }
+
+        
+

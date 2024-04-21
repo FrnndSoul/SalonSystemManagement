@@ -87,12 +87,18 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 MessageBox.Show("No items has been selected", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            DialogResult result = MessageBox.Show("Is the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            long ID = Convert.ToInt64(IDLbl.Text);
-            await promo.UpdateServiceBindedService(ID, ServiceDGV);
-            ClearAllInput();
-            GenerateRandomNumber();
-            promo.SHideButtons(true, true, false, false, false);
+            if (result == DialogResult.Yes)
+            {
+
+                long ID = Convert.ToInt64(IDLbl.Text);
+                await promo.UpdateServiceBindedService(ID, ServiceDGV);
+                await promo.CheckVoucherIsValid();
+                ClearAllInput();
+                GenerateRandomNumber();
+                promo.SHideButtons(true, true, false, false, false);
+            }
         }
 
         private async void AddPromoBtn_Click(object sender, EventArgs e)
@@ -110,16 +116,21 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 MessageBox.Show("No items has been selected", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            DialogResult result = MessageBox.Show("Is the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            long ID = Convert.ToInt64(PromoCodeTxtB.Text);
-            string Pname = PromoNameTxtB.Text;
-            DateTime startDate = PStartDTP.Value.Date;
-            DateTime endDate = PEndDTP.Value.Date;
-            string percent = PercentageTxtB.Text;
+            if (result == DialogResult.Yes)
+            {
+                long ID = Convert.ToInt64(PromoCodeTxtB.Text);
+                string Pname = PromoNameTxtB.Text;
+                DateTime startDate = PStartDTP.Value.Date;
+                DateTime endDate = PEndDTP.Value.Date;
+                string percent = PercentageTxtB.Text;
 
-            await promo.AddServicePromo(ServiceDGV, ID, startDate, endDate, percent, Pname);
-            ClearAllInput();
-            GenerateRandomNumber();
+                await promo.AddServicePromo(ServiceDGV, ID, startDate, endDate, percent, Pname);
+                await promo.CheckVoucherIsValid();
+                ClearAllInput();
+                GenerateRandomNumber();
+            }
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)

@@ -274,7 +274,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
         }
 
-        private async void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
@@ -286,43 +286,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
-
-                        using (MySqlConnection conn = new MySqlConnection(mysqlcon))
-                        {
-                            await conn.OpenAsync();
-
-                            string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
-
-                            using (MySqlCommand command = new MySqlCommand(query, conn))
-                            {
-                                command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
-
-                                using (DbDataReader reader = await command.ExecuteReaderAsync())
-                                {
-                                    if (await reader.ReadAsync())
-                                    {
-                                        string position = reader["AccountAccess"].ToString();
-
-                                        if (position != "Manager")
-                                        {
-                                            MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
-                                            MessageBox.Show("Service has been removed", "Remove Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
+                        ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
                     }
                 }
             }

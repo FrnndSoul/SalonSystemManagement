@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -29,9 +30,14 @@ namespace TriforceSalon.UserControls.Promo_Controls.PromoRecords
             promoMethods.HideButtons(false,false,true,true,false);
         }
 
-        private void PromoProductsDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void PromoProductsDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == BindedItemsCol.Index && e.RowIndex >= 0)
+            {
+                long promoID = Convert.ToInt64(PromoProductsDGV.Rows[e.RowIndex].Cells["BindedItemsCol"].Value);
 
+                await Interaction.DisplayItems("Selected Items", "Items in the Promo:", promoID);
+            }
         }
     }
 }

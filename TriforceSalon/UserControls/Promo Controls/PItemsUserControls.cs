@@ -80,16 +80,21 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 MessageBox.Show("No items has been selected", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            DialogResult result = MessageBox.Show("Is the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            long ID = Convert.ToInt64(PromoCodeTxtB.Text);
-            string Pname = PromoNameTxtB.Text;
-            DateTime startDate = PStartDTP.Value.Date;
-            DateTime endDate = PEndDTP.Value.Date;
-            string percent = PercentageTxtB.Text;
+            if (result == DialogResult.Yes)
+            {
+                long ID = Convert.ToInt64(PromoCodeTxtB.Text);
+                string Pname = PromoNameTxtB.Text;
+                DateTime startDate = PStartDTP.Value.Date;
+                DateTime endDate = PEndDTP.Value.Date;
+                string percent = PercentageTxtB.Text;
 
-            await promo.AddPromo(ProductsDGV, ID, startDate, endDate, percent, Pname);
-            ClearAllInput();
-            GenerateRandomNumber();
+                await promo.AddPromo(ProductsDGV, ID, startDate, endDate, percent, Pname);
+                await promo.CheckVoucherIsValid();
+                ClearAllInput();
+                GenerateRandomNumber();
+            }
         }
 
         private void GenerateRandomNumber()
@@ -158,11 +163,18 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 return;
             }
 
-            long ID = Convert.ToInt64(IDLbl.Text);
-            await promo.UpdateBindedService(ID, ProductsDGV);
-            ClearAllInput();
-            GenerateRandomNumber();
-            promo.HideButtons(true, true, false, false, false);
+            DialogResult result = MessageBox.Show("Is the information inputted correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if(result == DialogResult.Yes)
+            {
+                long ID = Convert.ToInt64(IDLbl.Text);
+                await promo.UpdateBindedService(ID, ProductsDGV);
+                await promo.CheckVoucherIsValid();
+
+                ClearAllInput();
+                GenerateRandomNumber();
+                promo.HideButtons(true, true, false, false, false);
+            }
         }
 
         private void DiscardBtn_Click(object sender, EventArgs e)
