@@ -4,9 +4,11 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls.Admin_Controls;
 
 namespace TriforceSalon
 {
@@ -160,6 +162,20 @@ namespace TriforceSalon
                 }
             }
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            MainForm mainFormInstance = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+
+            if (mainFormInstance != null)
+            {
+                TicketView ticketView = new TicketView();
+                mainFormInstance.Controls.Add(ticketView);
+                ticketView.Location = new Point(0, 0);
+                ticketView.BringToFront();
+            }
+        }
+
 
         private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
