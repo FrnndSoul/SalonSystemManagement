@@ -1,21 +1,4 @@
-﻿/*using Guna.UI2.WinForms;
-using iText.IO.Image;
-using iText.Kernel.Pdf;
-using iText.Layout.Borders;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TriforceSalon.UserControls.Receptionist_Controls;*/
-
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
 using iText.IO.Image;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
@@ -76,7 +59,7 @@ namespace TriforceSalon.Class_Components
                         //for customer_info
                         command.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
-                        command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
+                        command.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerSpecialIDTxtB.Text));
                         command.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
 
                         //for service_group
@@ -124,14 +107,14 @@ namespace TriforceSalon.Class_Components
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
-                        " Values (@transactionID, @customer_name, @customer_age, @customer_number, @service_groupID, @priorityStatus)";
+                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, SpecialID, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
+                        " Values (@transactionID, @customer_name, @customer_sID, @customer_number, @service_groupID, @priorityStatus)";
 
                     using(MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn))
                     {
                         command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command1.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
-                        command1.Parameters.AddWithValue("@customer_age", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text));
+                        command1.Parameters.AddWithValue("@customer_sID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerSpecialIDTxtB.Text));
                         command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                         command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
@@ -163,13 +146,11 @@ namespace TriforceSalon.Class_Components
 
                             if (preferredEmployee == null || string.IsNullOrWhiteSpace(preferredEmployee) || preferredEmployee == "None")
                             {
-                                //MessageBox.Show("Preferred employee not specified.");
                                 command2.Parameters.AddWithValue("@pref_emp", 0);
                             }
                             else
                             {
                                 int employeeID = GetEmployeeID(preferredEmployee);
-                                //MessageBox.Show($"Employee ID found: {employeeID}");
                                 command2.Parameters.AddWithValue("@pref_emp", GetEmployeeID(preferredEmployee));
                             }
 
@@ -346,8 +327,9 @@ namespace TriforceSalon.Class_Components
                             await command.ExecuteNonQueryAsync();
                             //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
                     using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
@@ -412,7 +394,7 @@ namespace TriforceSalon.Class_Components
                         }
                     }
 
-                    await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
+                    //await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
                     await InsertToSales(salesID, orderID);
                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //GeneratePurchaseOnlyReceipt();
@@ -582,7 +564,7 @@ namespace TriforceSalon.Class_Components
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph($"Transaction ID: {transactionTB}                                 Date: {DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph($"Customer Name: {nameTB}").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Age: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Special ID: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph("THANK YOU FOR VISITING OUR SALON! WE HOPE TO SEE YOU AGAIN SOON.").SetTextAlignment(TextAlignment.JUSTIFIED_ALL));
                     }
@@ -643,7 +625,7 @@ namespace TriforceSalon.Class_Components
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
-                        string numericValue = totalText.Replace("Php.", "").Trim();
+                        string numericValue = totalText.Replace("₱ ", "").Trim();
                         decimal.TryParse(numericValue, out decimal totalAmount);
 
                         command.Parameters.AddWithValue("@saleID", saleID);
@@ -856,7 +838,7 @@ namespace TriforceSalon.Class_Components
         public void ClearProcess()
         {
             ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text = null;
-            ServicesUserControl.servicesUserControlInstance.CustomerAgeTxtB.Text = null;
+            ServicesUserControl.servicesUserControlInstance.CustomerSpecialIDTxtB.Text = null;
             ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text = null;
             ServicesUserControl.servicesUserControlInstance.ServiceTxtB.Text = null;
             ServicesUserControl.servicesUserControlInstance.ServiceAmountTxtB.Text = null;

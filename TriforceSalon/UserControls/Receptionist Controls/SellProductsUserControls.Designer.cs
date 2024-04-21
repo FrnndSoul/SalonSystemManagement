@@ -601,7 +601,7 @@
             // OtherTransactionContainer
             // 
             this.OtherTransactionContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.OtherTransactionContainer.Location = new System.Drawing.Point(866, 56);
+            this.OtherTransactionContainer.Location = new System.Drawing.Point(860, 56);
             this.OtherTransactionContainer.Name = "OtherTransactionContainer";
             this.OtherTransactionContainer.Size = new System.Drawing.Size(417, 767);
             this.OtherTransactionContainer.TabIndex = 40;
@@ -631,6 +631,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.ProductsFL);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.GcashPayment);
             this.Controls.Add(this.guna2Button1);
@@ -657,7 +658,6 @@
             this.Controls.Add(this.SubLbl);
             this.Controls.Add(this.sbLbl);
             this.Controls.Add(this.ProductSearchTxtB);
-            this.Controls.Add(this.ProductsFL);
             this.Controls.Add(this.guna2HtmlLabel12);
             this.Controls.Add(this.OtherTransactionContainer);
             this.Name = "SellProductsUserControls";

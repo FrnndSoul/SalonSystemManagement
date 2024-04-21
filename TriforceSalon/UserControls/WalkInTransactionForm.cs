@@ -25,6 +25,14 @@ namespace TriforceSalon.UserControls
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
 
+            if(Method.isManager == false || Method.AdminAccess())
+            {
+                ManagerBackBtn.Visible = false;
+            }
+            else if(Method.isManager == true)
+            {
+                ManagerBackBtn.Visible = true;
+            }
         }
 
         private void WalkInTransactionForm_Load(object sender, EventArgs e)
@@ -34,6 +42,7 @@ namespace TriforceSalon.UserControls
 
         private void RecepLogOutBtn_Click(object sender, EventArgs e)
         {
+            Method.isManager = false;
             Method.LogOutUser();
             foreach (Form openForm in Application.OpenForms)
             {
@@ -89,6 +98,12 @@ namespace TriforceSalon.UserControls
 
             AppointmentsUserControls appointment = new AppointmentsUserControls();
             UserControlNavigator.ShowControl(appointment, ReceptionistContent);
+        }
+
+        private void ManagerBackBtn_Click(object sender, EventArgs e)
+        {
+            ManagerPage managerPage = new ManagerPage();
+            UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
         }
     }
 }

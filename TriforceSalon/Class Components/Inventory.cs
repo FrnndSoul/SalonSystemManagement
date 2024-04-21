@@ -26,13 +26,13 @@ namespace TriforceSalon
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
                     connection.Open();
-                    string query = "UPDATE `inventory` SET `Status` = " +
-                        "CASE " +
-                            "WHEN `Stock` = 0 THEN 3 " +
-                            "WHEN `Stock` = 0.25 * `Aggregate` THEN 2 " +
-                            "WHEN `Stock` = 0.5 * `Aggregate` THEN 1 " +
-                            "ELSE 0 " +
-                            "END; ";
+                    string query = @"UPDATE `inventory` SET `Status` = 
+                        CASE
+                            WHEN `Stock` = 0 THEN 3 
+                            WHEN `Stock` = 3 THEN 2 
+                            WHEN `Stock` = 5 THEN 1 
+                            ELSE 0 
+                            END; ";
                     using (MySqlCommand querycmd = new MySqlCommand(query, connection))
                     {
                         querycmd.ExecuteNonQuery();
@@ -45,22 +45,22 @@ namespace TriforceSalon
             }
         }
 
-        public static int ShipmentID()
-        {
-            Random random = new Random();
-            do
-            {
-                ShipmentReference = random.Next(100000, 1000000);
-
-            } while (Method.DuplicateChecker(ShipmentReference.ToString(), "ShipmentID", "shipments") == true);
-            return ShipmentReference;
-        }
-
         public static int GenerateID()
         {
             Random random = new Random();
             int id = random.Next(10000, 100000);
             return id;
+        }
+
+        public static void PullStocks()
+        {
+            try
+            {
+
+            } catch (Exception e) 
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
         }
 
         public static void AddShippedItems(int ID, int Stock)
@@ -75,13 +75,46 @@ namespace TriforceSalon
                     {
                         querycmd.Parameters.AddWithValue("@newStock", Stock);
                         querycmd.Parameters.AddWithValue("@itemID", ID);
-                        querycmd.ExecuteNonQuery();
+
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            querycmd.ExecuteNonQuery();
+                        }
                     }
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n\nat AddShippedItems()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async static void PullItems(int qty)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = @"
+                        UPDATE inventory
+                        SET Stock = Stock - @quantity";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("quantity", qty);
+                        int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
             }
         }
 

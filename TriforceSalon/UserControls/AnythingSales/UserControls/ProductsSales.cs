@@ -22,24 +22,11 @@ namespace salesreport.UserControls
             LoadCharts();
             RangeFilter.MaxDate = DateTime.Now;
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
+            RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
         }
 
-        private async void ShowVoided_CheckedChanged(object sender, EventArgs e)
-        {
-            await Task.Delay(500);
-            string filterExpression;
-            if (ShowVoided.Checked)
-            {
-                filterExpression = "";
-            }
-            else
-            {
-                filterExpression = "IsVoided = 'No'";
-            }
-            ((DataTable)ProductSalesDGV.DataSource).DefaultView.RowFilter = filterExpression;
-        }
 
         private void LoadCharts()
         {

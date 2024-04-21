@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SalesChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ProductSalesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ShowVoided = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.searchBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.MonthlyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.WeeklyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.DayFilter = new Guna.UI2.WinForms.Guna2Button();
@@ -64,26 +62,26 @@
             this.ProductSalesDGV.AllowUserToDeleteRows = false;
             this.ProductSalesDGV.AllowUserToResizeColumns = false;
             this.ProductSalesDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.ProductSalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ProductSalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.ProductSalesDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductSalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductSalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ProductSalesDGV.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductSalesDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductSalesDGV.DefaultCellStyle = dataGridViewCellStyle3;
             this.ProductSalesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductSalesDGV.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.ProductSalesDGV.Location = new System.Drawing.Point(135, 154);
@@ -117,22 +115,6 @@
             this.ProductSalesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductSalesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // ShowVoided
-            // 
-            this.ShowVoided.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.Location = new System.Drawing.Point(1226, 100);
-            this.ShowVoided.Name = "ShowVoided";
-            this.ShowVoided.Size = new System.Drawing.Size(84, 42);
-            this.ShowVoided.TabIndex = 9;
-            this.ShowVoided.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.UncheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedChanged += new System.EventHandler(this.ShowVoided_CheckedChanged);
-            // 
             // searchBox
             // 
             this.searchBox.Animated = true;
@@ -158,16 +140,6 @@
             this.searchBox.Size = new System.Drawing.Size(564, 42);
             this.searchBox.TabIndex = 10;
             this.searchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Chinacat", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(828, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(392, 42);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Toggle Voided Orders:";
             // 
             // MonthlyFilter
             // 
@@ -277,9 +249,7 @@
             this.Controls.Add(this.DayFilter);
             this.Controls.Add(this.NoFilter);
             this.Controls.Add(this.RangeFilter);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.searchBox);
-            this.Controls.Add(this.ShowVoided);
             this.Controls.Add(this.SalesChart);
             this.Controls.Add(this.ProductSalesDGV);
             this.Name = "ProductsSales";
@@ -287,16 +257,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.SalesChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductSalesDGV)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.DataVisualization.Charting.Chart SalesChart;
         public Guna.UI2.WinForms.Guna2DataGridView ProductSalesDGV;
-        private Guna.UI2.WinForms.Guna2ToggleSwitch ShowVoided;
         private Guna.UI2.WinForms.Guna2TextBox searchBox;
-        private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2Button MonthlyFilter;
         private Guna.UI2.WinForms.Guna2Button WeeklyFilter;
         private Guna.UI2.WinForms.Guna2Button DayFilter;

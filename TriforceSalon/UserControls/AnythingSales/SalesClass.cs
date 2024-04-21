@@ -25,9 +25,13 @@ namespace salesreport
                 SELECT 
                     er.CustomerID AS RefID, 
                     DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, 
-                    se.AccountID AS EmployeeID, 
-                    st.ServiceTypeName AS ServiceType, 
-                    se.Name AS Name, 
+                    se.AccountID AS EmployeeID, ";
+
+            if (string.IsNullOrEmpty(filter))
+            {
+                query += "st.ServiceTypeName AS ServiceType, ";
+            }
+                 query += @" se.Name AS Name, 
                     SUM(sg.Amount) AS Sales, 
                     AVG(er.CustomerRating) AS Rating 
                 FROM 
@@ -85,7 +89,8 @@ namespace salesreport
                     DATE_FORMAT(`OrderDate`, '%m/%d/%Y') AS Date,
                     IsVoided 
                 FROM 
-                    product_group";
+                    product_group 
+                WHERE product_group.IsVoided = 'NO' ";
 
             DataTable dataTable = new DataTable();
 
@@ -155,9 +160,13 @@ namespace salesreport
             string query = @"
                 SELECT 
                     sg.ServiceGroupID AS `RefID`, 
-                    DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, 
-                    st.ServiceTypeName AS `Service Type`, 
-                    sg.ServiceVariationID AS `Service ID`, 
+                    DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, ";
+
+            if (string.IsNullOrEmpty(filter))
+            {
+                query += "st.ServiceTypeName AS ServiceType, ";
+            }
+                 query += @"sg.ServiceVariationID AS `Service ID`, 
                     sg.ServiceVariation AS `Service Name`, 
                     sg.Amount AS `Sales`, 
                     sg.IsVoided 
@@ -168,11 +177,13 @@ namespace salesreport
                 INNER JOIN 
                     `salon_services` ss ON CAST(ss.ServiceName AS CHAR CHARACTER SET utf8mb4) = CAST(sg.ServiceVariation AS CHAR CHARACTER SET utf8mb4)
                 INNER JOIN 
-                    `service_type` st ON CAST(st.ServiceID AS CHAR CHARACTER SET utf8mb4) = CAST(ss.ServiceTypeID AS CHAR CHARACTER SET utf8mb4)";
+                    `service_type` st ON CAST(st.ServiceID AS CHAR CHARACTER SET utf8mb4) = CAST(ss.ServiceTypeID AS CHAR CHARACTER SET utf8mb4) 
+                WHERE
+                    sg.IsVoided = 'NO' ";
 
             if (!string.IsNullOrEmpty(filter))
             {
-                query += " WHERE st.ServiceTypeName = @serviceTypename";
+                query += ", st.ServiceTypeName = @serviceTypename";
             }
 
             DataTable dataTable = new DataTable();
@@ -190,6 +201,47 @@ namespace salesreport
                             cmd.Parameters.AddWithValue("@serviceTypename", filter);
                         }
 
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error.");
+            }
+            return dataTable;
+        }
+
+        public static DataTable LoadSales()
+        {
+            string query = @"
+                SELECT
+	                DATE_FORMAT(ci.TimeTaken, '%m/%d/%Y') AS Date,
+	                SUM(sg.Amount) + SUM(pg.Amount) AS Sales
+                FROM
+	                customer_info ci
+                INNER JOIN
+	                service_group sg ON sg.ServiceGroupID = ci.ServiceGroupID
+                INNER JOIN
+	                product_group pg ON pg.ProductGroupID = ci.ProductsBoughtID
+                WHERE
+	                ci.PaymentStatus = 'PAID' AND sg.IsVoided = 'NO' AND pg.IsVoided = 'NO'
+                GROUP BY
+	                DATE_FORMAT(ci.TimeTaken, '%m/%d/%Y');";
+
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                {
+                    connection.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
                             adapter.Fill(dataTable);

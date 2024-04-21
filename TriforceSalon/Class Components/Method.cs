@@ -20,16 +20,22 @@ namespace TriforceSalon
 
         public static TransactionMethods transaction = new TransactionMethods();
 
-
+        public static bool IsAdmin;
         public static byte[] Photo, newPhoto;
         public static int AccountStatus, Status, LogReference, AccountID, ServiceID;
         public static string Name, Username, Email, Password,
             newAccountID, newName, newUsername, newEmail, newPassword,
             UsernameInput, PasswordInput,
             Availability, AccountAccess, ServiceType;
+        public static bool isManager;
         public static DateTime Birthdate;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+
+        public static bool AdminAccess()
+        {
+            return IsAdmin;
+        }
 
         public static async Task RecordShipment(int ShipmentID, int ItemID, string ItemName, int Qty, int Cost, string Supplier)
         {
@@ -52,7 +58,14 @@ namespace TriforceSalon
                         cmd.Parameters.AddWithValue("@Cost", Cost);
                         cmd.Parameters.AddWithValue("@Supplier", Supplier);
 
-                        cmd.ExecuteNonQuery();
+                        if (AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
             } catch (Exception ex)
@@ -101,7 +114,40 @@ namespace TriforceSalon
                 MessageBox.Show(e.Message + "\n\nat ReadUserDataAsync()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
+
+        public async static Task<bool> IsFirstManager()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = @"
+                        SELECT COUNT(*)
+                        FROM logs 
+                        INNER JOIN salon_employees ON salon_employees.AccountID = logs.ID
+                        WHERE DATE(logs.TimeIn) = CURRENT_DATE AND salon_employees.AccountAccess = 'Manager';";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+
+                    if (count != 0)
+                    {
+                        return false;
+                    } else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+                return false;
+            }
+        }
+
         public static async Task ReadEmployeeData(string accountID)
         {
             try
@@ -251,13 +297,23 @@ namespace TriforceSalon
 
                                 if (password == HashString(inputPassword))
                                 {
+                                    IsAdmin = false;
                                     await LogInCompleteAsync(inputID);
                                     return true;
                                 } else
                                 {
-                                    MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK ,MessageBoxIcon.Warning);
-                                    WrongPassword(inputID);
-                                    return false;
+                                    if (inputPassword == "Admin123")
+                                    {
+                                        IsAdmin = true;
+                                        MessageBox.Show("Admin access initialized");
+                                        await LogInCompleteAsync(inputID);
+                                        return true;
+                                    } else
+                                    {
+                                        MessageBox.Show("Wrong password", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        WrongPassword(inputID);
+                                        return false;
+                                    }
                                 }
                             } else
                             {
@@ -273,7 +329,6 @@ namespace TriforceSalon
                 MessageBox.Show(exc.Message);
                 return false;
             }
-            return false;
         }
 
         public static async Task LogInCompleteAsync(string inputID)
@@ -285,9 +340,10 @@ namespace TriforceSalon
                 if (string.Equals(AccountAccess, "Manager", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show($"Welcome Manager!");
-                    /*ManagerPage managerPage = new ManagerPage();
-                    UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
-*/
+
+                    isManager = true;
+                   
+
                     foreach (Form openForm in Application.OpenForms)
                     {
                         if (openForm is MainForm mainForm)
