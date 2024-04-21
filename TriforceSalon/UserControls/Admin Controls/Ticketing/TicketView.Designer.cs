@@ -36,6 +36,7 @@
             this.SubmitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CloseTicket = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.LoadTicket = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.TicketDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,10 +132,10 @@
             this.SubmitBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.SubmitBtn.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.SubmitBtn.ForeColor = System.Drawing.Color.White;
-            this.SubmitBtn.Location = new System.Drawing.Point(727, 886);
+            this.SubmitBtn.Location = new System.Drawing.Point(779, 886);
             this.SubmitBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SubmitBtn.Name = "SubmitBtn";
-            this.SubmitBtn.Size = new System.Drawing.Size(225, 94);
+            this.SubmitBtn.Size = new System.Drawing.Size(173, 94);
             this.SubmitBtn.TabIndex = 111;
             this.SubmitBtn.Text = "Refresh Data";
             this.SubmitBtn.UseTransparentBackground = true;
@@ -153,10 +154,10 @@
             this.CloseTicket.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.CloseTicket.Font = new System.Drawing.Font("Chinacat", 15.75F);
             this.CloseTicket.ForeColor = System.Drawing.Color.White;
-            this.CloseTicket.Location = new System.Drawing.Point(498, 886);
+            this.CloseTicket.Location = new System.Drawing.Point(602, 886);
             this.CloseTicket.Margin = new System.Windows.Forms.Padding(2);
             this.CloseTicket.Name = "CloseTicket";
-            this.CloseTicket.Size = new System.Drawing.Size(225, 94);
+            this.CloseTicket.Size = new System.Drawing.Size(173, 94);
             this.CloseTicket.TabIndex = 110;
             this.CloseTicket.Text = "Mark as Resolved";
             this.CloseTicket.UseTransparentBackground = true;
@@ -184,11 +185,34 @@
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
+            // LoadTicket
+            // 
+            this.LoadTicket.Animated = true;
+            this.LoadTicket.BackColor = System.Drawing.Color.Transparent;
+            this.LoadTicket.BorderRadius = 20;
+            this.LoadTicket.BorderThickness = 1;
+            this.LoadTicket.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.LoadTicket.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.LoadTicket.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.LoadTicket.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.LoadTicket.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.LoadTicket.Font = new System.Drawing.Font("Chinacat", 15.75F);
+            this.LoadTicket.ForeColor = System.Drawing.Color.White;
+            this.LoadTicket.Location = new System.Drawing.Point(425, 886);
+            this.LoadTicket.Margin = new System.Windows.Forms.Padding(2);
+            this.LoadTicket.Name = "LoadTicket";
+            this.LoadTicket.Size = new System.Drawing.Size(173, 94);
+            this.LoadTicket.TabIndex = 113;
+            this.LoadTicket.Text = "Load Ticket Details";
+            this.LoadTicket.UseTransparentBackground = true;
+            this.LoadTicket.Click += new System.EventHandler(this.LoadTicket_Click);
+            // 
             // TicketView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(226)))));
+            this.Controls.Add(this.LoadTicket);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.SubmitBtn);
             this.Controls.Add(this.CloseTicket);
@@ -207,5 +231,6 @@
         private Guna.UI2.WinForms.Guna2Button SubmitBtn;
         public Guna.UI2.WinForms.Guna2Button CloseTicket;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        public Guna.UI2.WinForms.Guna2Button LoadTicket;
     }
 }

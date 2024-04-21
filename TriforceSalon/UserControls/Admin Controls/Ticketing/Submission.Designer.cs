@@ -39,9 +39,9 @@
             this.ManagerCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.AdminCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.TypeBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.NoneCheckbox = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.TypeBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.SuspendLayout();
             // 
             // FileNameBox
@@ -221,38 +221,6 @@
             this.AdminCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.AdminCheckbox.CheckedChanged += new System.EventHandler(this.AdminCheckbox_CheckedChanged);
             // 
-            // TypeBox
-            // 
-            this.TypeBox.BackColor = System.Drawing.Color.Transparent;
-            this.TypeBox.BorderColor = System.Drawing.Color.Black;
-            this.TypeBox.BorderRadius = 1;
-            this.TypeBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.TypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TypeBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TypeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TypeBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.TypeBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.TypeBox.ItemHeight = 30;
-            this.TypeBox.Items.AddRange(new object[] {
-            "Concurrency Issues",
-            "Cross-Site Request Forgery (CSRF)",
-            "Data Integrity Violations",
-            "Data Loss",
-            "File Upload Errors",
-            "Form Submission Failure",
-            "Network Errors",
-            "Permission Denied",
-            "Rate Limiting",
-            "Session Expired",
-            "Session Management Errors",
-            "Timeout Errors",
-            "Unexpected Errors",
-            "Validation Errors"});
-            this.TypeBox.Location = new System.Drawing.Point(69, 75);
-            this.TypeBox.Name = "TypeBox";
-            this.TypeBox.Size = new System.Drawing.Size(600, 36);
-            this.TypeBox.TabIndex = 102;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -284,11 +252,35 @@
             this.NoneCheckbox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.NoneCheckbox.CheckedChanged += new System.EventHandler(this.NoneCheckbox_CheckedChanged);
             // 
+            // TypeBox
+            // 
+            this.TypeBox.BackColor = System.Drawing.Color.Transparent;
+            this.TypeBox.BorderColor = System.Drawing.Color.Black;
+            this.TypeBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TypeBox.DefaultText = "";
+            this.TypeBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.TypeBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.TypeBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TypeBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TypeBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TypeBox.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.TypeBox.ForeColor = System.Drawing.Color.Black;
+            this.TypeBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TypeBox.Location = new System.Drawing.Point(66, 77);
+            this.TypeBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.TypeBox.Name = "TypeBox";
+            this.TypeBox.PasswordChar = '\0';
+            this.TypeBox.PlaceholderText = "";
+            this.TypeBox.SelectedText = "";
+            this.TypeBox.Size = new System.Drawing.Size(603, 38);
+            this.TypeBox.TabIndex = 114;
+            // 
             // Submission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.TypeBox);
             this.Controls.Add(this.NoneCheckbox);
             this.Controls.Add(this.FileNameBox);
             this.Controls.Add(this.UploadBtn);
@@ -301,7 +293,6 @@
             this.Controls.Add(this.ManagerCheckbox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AdminCheckbox);
-            this.Controls.Add(this.TypeBox);
             this.Controls.Add(this.label3);
             this.Name = "Submission";
             this.Size = new System.Drawing.Size(710, 880);
@@ -323,8 +314,8 @@
         private Guna.UI2.WinForms.Guna2CheckBox ManagerCheckbox;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2CheckBox AdminCheckbox;
-        private Guna.UI2.WinForms.Guna2ComboBox TypeBox;
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2CheckBox NoneCheckbox;
+        private Guna.UI2.WinForms.Guna2TextBox TypeBox;
     }
 }

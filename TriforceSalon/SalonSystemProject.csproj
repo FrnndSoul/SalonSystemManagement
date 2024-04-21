@@ -176,6 +176,12 @@
   <ItemGroup>
     <Compile Include="Class Components\AdminTicketing.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.Designer.cs">
+      <DependentUpon>TicketDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Admin Controls\Ticketing\TicketView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -420,6 +426,9 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\TicketDetails.resx">
+      <DependentUpon>TicketDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\TicketView.resx">
       <DependentUpon>TicketView.cs</DependentUpon>
     </EmbeddedResource>

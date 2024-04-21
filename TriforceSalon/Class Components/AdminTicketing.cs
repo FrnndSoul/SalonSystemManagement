@@ -17,7 +17,7 @@ namespace TriforceSalon.Class_Components
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
-        public static string Type, Accounts, Steps;
+        public static string Type, Accounts, Steps, Status;
         public static int ReferenceNumber;
         public static byte[] Proof;
         public DataTable newData;
@@ -88,5 +88,28 @@ namespace TriforceSalon.Class_Components
             }
             return dataTable;
         }
+
+        public static void CloseTicket(int RefNumber)
+        {
+            string query = @"UPDATE `AdminTickets` SET `Status` = 'CLOSED' WHERE `ReferenceNumber` = @refNumber";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@refNumber", RefNumber);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Ticket marked as resolved.", "Resolution", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n@CloseTicket", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

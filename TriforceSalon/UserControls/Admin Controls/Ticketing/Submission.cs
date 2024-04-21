@@ -22,6 +22,7 @@ namespace TriforceSalon.UserControls.Admin_Controls.Ticketing
         public Submission()
         {
             InitializeComponent();
+            DiscardBtn_Click(null,null);
         }
 
         private void SubmitBtn_Click(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace TriforceSalon.UserControls.Admin_Controls.Ticketing
 
         public void DiscardBtn_Click(object sender, EventArgs e)
         {
-            TypeBox.SelectedIndex = -1;
+            TypeBox.Text = string.Empty;
             EssayBox.Text = string.Empty;
             NoneCheckbox.Checked = true;
             FileNameBox.Text = string.Empty;
