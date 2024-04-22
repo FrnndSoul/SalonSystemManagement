@@ -178,6 +178,7 @@
     <Compile Include="Class Components\PromoMethods.cs" />
     <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
+    <Compile Include="Microsoft\VisualBasic\BindedServices.cs" />
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
       <SubType>UserControl</SubType>

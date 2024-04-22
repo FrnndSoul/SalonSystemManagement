@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TriforceSalon.UserControls.Promo_Controls;
 using TriforceSalon.UserControls.Service_Controls;
 using System.Globalization;
+using System.Drawing;
 
 namespace TriforceSalon.Class_Components
 {
@@ -79,16 +80,7 @@ namespace TriforceSalon.Class_Components
 
         public async void EditProductPromo(Guna2DataGridView productPromoDGV)
         {
-            if (productPromoDGV.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                if (productPromoDGV.SelectedRows.Count == 1)
+              if (productPromoDGV.SelectedRows.Count == 1)
                 {
                     DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
 
@@ -107,7 +99,7 @@ namespace TriforceSalon.Class_Components
                     PItemsUserControls.Pitemsinstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
                     await FetchBindedItems(ProductIDGroup, PItemsUserControls.Pitemsinstance.ProductsDGV);
                 }
-            }
+            
         }
 
         public async Task FetchBindedItems(long ID, Guna2DataGridView bindedTable)
@@ -474,7 +466,7 @@ namespace TriforceSalon.Class_Components
         }
         public async void EditServicePromo(Guna2DataGridView productPromoDGV)
         {
-            if (productPromoDGV.SelectedRows.Count == 0)
+            /*if (productPromoDGV.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -482,7 +474,7 @@ namespace TriforceSalon.Class_Components
             DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
-            {
+            {*/
                 if (productPromoDGV.SelectedRows.Count == 1)
                 {
                     DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
@@ -502,7 +494,7 @@ namespace TriforceSalon.Class_Components
                     PServicesUserControl.pServiceInstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
                     await FetchBindedService(ProductIDGroup, PServicesUserControl.pServiceInstance.ServiceDGV);
                 }
-            }
+            //}
         }
 
         public void SHideButtons(bool add, bool see, bool update, bool discard, bool back)
@@ -519,6 +511,7 @@ namespace TriforceSalon.Class_Components
             PServicesUserControl.pServiceInstance.SRecordsContainer.Visible = records;
             PServicesUserControl.pServiceInstance.ServiceContainer.Visible = products;
         }
+        
     }
 }
 

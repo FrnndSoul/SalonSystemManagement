@@ -55,8 +55,11 @@
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label7 = new System.Windows.Forms.Label();
             this.IDLbl = new System.Windows.Forms.Label();
-            this.ServiceNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDGV)).BeginInit();
             this.ProductContainer.SuspendLayout();
@@ -240,8 +243,11 @@
             this.ProductsDGV.ColumnHeadersHeight = 15;
             this.ProductsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ServiceNameCol,
-            this.ServiceIDCol,
+            this.ProductNameCol,
+            this.ItemIDCol,
+            this.DecrementCol,
+            this.QuantityCol,
+            this.IncrementCol,
             this.RemoveCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -464,18 +470,35 @@
             this.IDLbl.Text = "label8";
             this.IDLbl.Visible = false;
             // 
-            // ServiceNameCol
+            // ProductNameCol
             // 
-            this.ServiceNameCol.HeaderText = "Service Name";
-            this.ServiceNameCol.Name = "ServiceNameCol";
-            this.ServiceNameCol.ReadOnly = true;
+            this.ProductNameCol.HeaderText = "Product Name";
+            this.ProductNameCol.Name = "ProductNameCol";
+            this.ProductNameCol.ReadOnly = true;
             // 
-            // ServiceIDCol
+            // ItemIDCol
             // 
-            this.ServiceIDCol.HeaderText = "Service ID";
-            this.ServiceIDCol.Name = "ServiceIDCol";
-            this.ServiceIDCol.ReadOnly = true;
-            this.ServiceIDCol.Visible = false;
+            this.ItemIDCol.HeaderText = "Item ID";
+            this.ItemIDCol.Name = "ItemIDCol";
+            this.ItemIDCol.ReadOnly = true;
+            this.ItemIDCol.Visible = false;
+            // 
+            // DecrementCol
+            // 
+            this.DecrementCol.HeaderText = "-";
+            this.DecrementCol.Name = "DecrementCol";
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.Name = "QuantityCol";
+            this.QuantityCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.QuantityCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IncrementCol
+            // 
+            this.IncrementCol.HeaderText = "+";
+            this.IncrementCol.Name = "IncrementCol";
             // 
             // RemoveCol
             // 
@@ -546,8 +569,11 @@
         public Guna.UI2.WinForms.Guna2Button EditAPromoBtn;
         public System.Windows.Forms.Label IDLbl;
         public Guna.UI2.WinForms.Guna2Button CancelBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIDCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemIDCol;
+        private System.Windows.Forms.DataGridViewButtonColumn DecrementCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
+        private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
     }
 }
