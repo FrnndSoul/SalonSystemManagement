@@ -892,6 +892,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         logo.SetWidth(200);
                         logo.SetHeight(200);
 
+                        ImageData pesoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.peso));
+                        iText.Layout.Element.Image peso = new iText.Layout.Element.Image(pesoImageData);
+                        peso.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
+
                         doc.Add(logo);
                         doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph(" "));
@@ -961,11 +965,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal totalAmount = subtotalAmount - discount;
                         decimal change = cashEntered - totalAmount;
 
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
 
                         int totalQuantity = totalProductQuantity + totalServiceQuantity;
                         doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));

@@ -26,13 +26,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             servicesUserControlInstance = this;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
-            //serviceTypeService = new GetServiceType_ServiceData();
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
             CustomerSpecialIDTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
-
-           /* GetServiceTypeData();
-            GetServiceData();*/
         }
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
@@ -40,28 +36,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.GetAllEmployee(mysqlcon);
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
-            await serviceTypeService.GetAllCategory(ServiceTypeComB, mysqlcon);
-            GetServiceTypeData();
-
-            /*await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);*/
+            await serviceTypeService.GetAllType(ServiceTypeComB, mysqlcon);
         }
-
-        public async void GetServiceTypeData()
+        private async void ServiceTypeComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await serviceTypeService.GetServiceTypeData(CategoryFL, mysqlcon, UpdateServiceFL);
+            string selectedServiceType = ServiceTypeComB.SelectedItem.ToString();
+            await serviceTypeService.UpdateServiceCategoryFL(selectedServiceType, CategoryFL, ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
         }
-
-        /*public void GetServiceData()
-        {
-            serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-        }*/
-
-        private async void UpdateServiceFL(string serviceTypeID)
-        {
-            await serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-        }
-
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
             ProcessCustomerBtn.Enabled = false;
@@ -313,5 +294,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 return;
             }
         }
+
+        
     }
 }

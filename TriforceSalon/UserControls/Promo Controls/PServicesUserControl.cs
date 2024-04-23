@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using TriforceSalon.UserControls.Promo_Controls.PromoRecords;
 
 namespace TriforceSalon.UserControls.Promo_Controls
 {
@@ -26,13 +25,13 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PStartDTP.Value = DateTime.Now;
             PEndDTP.Value = DateTime.Now;
             GenerateRandomNumber();
-            SRecordsContainer.Visible = false;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
 
         private async void PServicesUserControl_Load(object sender, EventArgs e)
         {
-            await fetchServices.LoadServices(ServiceFL, mysqlcon, ServiceDGV);
+            //await fetchServices.LoadServices(ServiceFL, mysqlcon, ServiceDGV);
+            await promo.GetSubCategory(CategoryComBox);
         }
         private void GenerateRandomNumber()
         {
@@ -55,22 +54,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             
         }
 
-        private void CancelBtn_Click(object sender, EventArgs e)
-        {
-            promo.SHidePanel(false, true);
-            promo.SHideButtons(true, true, false, false, false);
-
-            UserControlNavigator.ClearPanel(SRecordsContainer);
-        }
-
-        private void EditAPromoBtn_Click(object sender, EventArgs e)
-        {
-            promo.SHideButtons(true, false, false, false, true);
-            promo.SHidePanel(true, false);
-
-            ServiceRecords Srecords = new ServiceRecords();
-            UserControlNavigator.ShowControl(Srecords, SRecordsContainer);
-        }
+        
 
         private async void UpdatePromoBtn_Click(object sender, EventArgs e)
         {
@@ -97,7 +81,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 await promo.CheckVoucherIsValid();
                 ClearAllInput();
                 GenerateRandomNumber();
-                promo.SHideButtons(true, true, false, false, false);
+                promo.SHideButtons(true, true, false, false);
             }
         }
 
@@ -137,9 +121,17 @@ namespace TriforceSalon.UserControls.Promo_Controls
         {
             ClearAllInput();
             GenerateRandomNumber();
-            promo.SHidePanel(false, true);
-            promo.SHideButtons(true, true, false, false, false);
-            UserControlNavigator.ClearPanel(SRecordsContainer);
+            promo.SHideButtons(true, true, false, false);
+        }
+
+        private async void CategoryComBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string category = CategoryComBox.Text;
+            await fetchServices.LoadServices(ServiceFL, mysqlcon, ServiceDGV, category);
+        }
+
+        private async void SearchProductsBtn_Click(object sender, EventArgs e)
+        {
         }
     }
 }

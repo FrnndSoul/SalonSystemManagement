@@ -98,14 +98,15 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 {
                     case "Item":
                         promoUserControl.GoToProducts();
-                        await Task.Delay(500); // Wait for the transition to complete
-                        promoMethods.EditProductPromo(AllPromoProductsDGV); // Edit the product promo
-                        promoMethods.HideButtons(false, false, true, true, false);
+                        await Task.Delay(500);
+                        promoMethods.EditProductPromo(AllPromoProductsDGV);
+                        promoMethods.HideButtons(false, false, true, true);
                         break;
                     case "Service":
                         promoUserControl.GoToService();
-                        await Task.Delay(500); // Wait for the transition to complete
-                        promoMethods.EditServicePromo(AllPromoProductsDGV); // Edit the service promo
+                        await Task.Delay(500);
+                        promoMethods.EditServicePromo(AllPromoProductsDGV);
+                        promoMethods.SHideButtons(false, false, true, true);
                         break;
                     default:
                         MessageBox.Show("Invalid promo type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -137,6 +138,25 @@ namespace TriforceSalon.UserControls.Promo_Controls
                             break;
                     }
                 }
+            }
+        }
+
+        private async void DeactivePromoBtn_Click(object sender, EventArgs e)
+        {
+            if (AllPromoProductsDGV.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DataGridViewRow selectedRow = AllPromoProductsDGV.SelectedRows[0];
+            long ID = Convert.ToInt64(selectedRow.Cells["PromoCodeCol"].Value);
+
+            DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                await promoMethods.DeactivatePromo(ID);
             }
         }
     }

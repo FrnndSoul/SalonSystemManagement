@@ -763,83 +763,188 @@ namespace TriforceSalon.Class_Components
         public async Task UpdateServiceFL(FlowLayoutPanel serviceFL, string serviceTypeID, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
             serviceFL.Controls.Clear();
-
-            using (var conn = new MySqlConnection(mysqlcon))
+            try
             {
-                await conn.OpenAsync();
-                string query = $"SELECT ServiceName, ServiceImage, ServiceAmount, ServiceTypeID FROM salon_services WHERE ServiceTypeID = '{serviceTypeID}'";
-
-                using (MySqlCommand command = new MySqlCommand(query, conn))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    using (DbDataReader reader = await command.ExecuteReaderAsync())
+                    await conn.OpenAsync();
+                    string query = "SELECT ServiceName, ServiceImage, ServiceAmount, ServiceTypeID FROM salon_services WHERE ServiceTypeID = @ServiceTypeID";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        while (await reader.ReadAsync())
+                        command.Parameters.AddWithValue("@ServiceTypeID", serviceTypeID);
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            byte[] imageBytes = (byte[])reader["ServiceImage"];
-
-                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            while (await reader.ReadAsync())
                             {
-                                Image serviceImage = Image.FromStream(ms);
-
-                                Panel panel = new Panel
+                                byte[] imageBytes = (byte[])reader["ServiceImage"];
+                                using (MemoryStream ms = new MemoryStream(imageBytes))
                                 {
-                                    Width = 200,
-                                    Height = 200,
-                                    Margin = new Padding(10),
-                                    Tag = reader["ServiceTypeID"].ToString()
-                                };
+                                    Image serviceImage = Image.FromStream(ms);
 
-                                PictureBox picBox = new PictureBox
-                                {
-                                    Width = 200,
-                                    Height = 150,
-                                    Location = new Point(10, 10),
-                                    BackgroundImage = serviceImage,
-                                    BackgroundImageLayout = ImageLayout.Stretch,
-                                    Tag = reader["ServiceTypeID"].ToString()
-                                };
+                                    Panel panel = new Panel
+                                    {
+                                        Width = 200,
+                                        Height = 200,
+                                        Margin = new Padding(10),
+                                        Tag = reader["ServiceTypeID"].ToString()
+                                    };
 
-                                Label labelTitle = new Label
-                                {
-                                    Text = reader["ServiceName"].ToString(),
-                                    Location = new Point(10, 160),
-                                    ForeColor = Color.Black,
-                                    AutoSize = true,
-                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
-                                    Tag = reader["ServiceTypeID"].ToString()
-                                };
+                                    PictureBox picBox = new PictureBox
+                                    {
+                                        Width = 200,
+                                        Height = 150,
+                                        Location = new System.Drawing.Point(10, 10),
+                                        BackgroundImage = serviceImage,
+                                        BackgroundImageLayout = ImageLayout.Stretch,
+                                        Tag = reader["ServiceTypeID"].ToString()
+                                    };
 
-                                Label labelTitle1 = new Label
-                                {
-                                    Text = reader["ServiceAmount"].ToString(),
-                                    Location = new Point(100, 160),
-                                    ForeColor = Color.Black,
-                                    AutoSize = true,
-                                    Font = new Font("Stanberry", 12, FontStyle.Regular),
-                                    Tag = reader["ServiceTypeID"].ToString()
-                                };
+                                    Label labelTitle = new Label
+                                    {
+                                        Text = reader["ServiceName"].ToString(),
+                                        Location = new System.Drawing.Point(10, 160),
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                        Tag = reader["ServiceTypeID"].ToString()
+                                    };
 
-                                EventHandler clickHandler = (sender, e) =>
-                                {
-                                    string serviceID = ((Control)sender).Tag.ToString();
-                                    serviceTB.Text = labelTitle.Text;
-                                    amountTB.Text = labelTitle1.Text;
-                                };
+                                    Label labelAmount = new Label
+                                    {
+                                        Text = reader["ServiceAmount"].ToString(),
+                                        Location = new System.Drawing.Point(100, 160),
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 16, FontStyle.Regular),
+                                        Tag = reader["ServiceTypeID"].ToString()
+                                    };
 
-                                panel.Click += clickHandler;
-                                picBox.Click += clickHandler;
+                                    EventHandler clickHandler = (sender, e) =>
+                                    {
+                                        string serviceID = ((Control)sender).Tag.ToString();
+                                        serviceTB.Text = labelTitle.Text;
+                                        amountTB.Text = labelAmount.Text;
+                                    };
 
-                                panel.Controls.Add(picBox);
-                                panel.Controls.Add(labelTitle);
-                                panel.Controls.Add(labelTitle1);
-                                serviceFL.Controls.Add(panel);
+                                    panel.Click += clickHandler;
+                                    picBox.Click += clickHandler;
+
+                                    panel.Controls.Add(picBox);
+                                    panel.Controls.Add(labelTitle);
+                                    panel.Controls.Add(labelAmount);
+                                    serviceFL.Controls.Add(panel);
+                                }
                             }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in UpdateServiceFL");
+            }
         }
-        public async Task AddEmployeesComB(int serviceID, string mysqlcon)
+
+        public async Task UpdateServiceCategoryFL(string serviceTypeName, FlowLayoutPanel servicetypefl, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox service, Guna2TextBox amount)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+                    string query = "SELECT ServiceID FROM service_type WHERE ServiceTypeName = @ServiceTypeName";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@ServiceTypeName", serviceTypeName);
+                        object result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            string serviceTypeID = result.ToString();
+                            // Use the retrieved ServiceTypeID to filter images in ServiceTypeFL
+                            await FilterImagesByServiceType(serviceTypeID, servicetypefl, serviceFL, mysqlcon, service, amount);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("ServiceTypeID not found for selected ServiceType");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in UpdateServiceTypeFL");
+            }
+        }
+        private async Task FilterImagesByServiceType(string serviceTypeID, FlowLayoutPanel servicetypefl, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox service, Guna2TextBox amount)
+        {
+            servicetypefl.Controls.Clear();
+            serviceFL.Controls.Clear();
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT ServiceSubTypeName, ServiceSubTypeImage, CategoryID FROM salon_subtypes WHERE ServiceTypeID = @ServiceTypeID";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@ServiceTypeID", serviceTypeID);
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                byte[] imageBytes = (byte[])reader["ServiceSubTypeImage"];
+                                using (MemoryStream ms = new MemoryStream(imageBytes))
+                                {
+                                    Image servicetypeImage = Image.FromStream(ms);
+                                    Panel panel = new Panel
+                                    {
+                                        Width = 200,
+                                        Height = 200,
+                                        Margin = new Padding(10)
+                                    };
+                                    PictureBox picBox = new PictureBox
+                                    {
+                                        Width = 200,
+                                        Height = 150,
+                                        Location = new Point(10, 10),
+                                        BackgroundImage = servicetypeImage,
+                                        BackgroundImageLayout = ImageLayout.Stretch
+                                    };
+
+                                    Label labelTitle = new Label
+                                    {
+                                        Text = reader["ServiceSubTypeName"].ToString(),
+                                        Location = new Point(10, 160),
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 16, FontStyle.Regular)
+                                    };
+
+                                    picBox.Tag = reader["CategoryID"];
+                                    picBox.Click += async (sender, e) =>
+                                    {
+                                        string categoryID = ((PictureBox)sender).Tag.ToString();
+                                        MessageBox.Show(categoryID);
+                                        await UpdateServiceFL(serviceFL, categoryID, mysqlcon, service, amount);
+                                    };
+
+                                    panel.Controls.Add(picBox);
+                                    panel.Controls.Add(labelTitle);
+                                    servicetypefl.Controls.Add(panel);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in FilterImagesByServiceType");
+            }
+        }
+
+        public async Task AddEmployeesComB(string serviceName, string mysqlcon)
         {
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
@@ -856,7 +961,7 @@ namespace TriforceSalon.Class_Components
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                        command.Parameters.AddWithValue("@service_ID", serviceID);
+                        command.Parameters.AddWithValue("@serviceName", serviceName);
 
                         using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
@@ -913,7 +1018,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task GetAllCategory(Guna2ComboBox serviceType, string mysqlcon)
+        public async Task GetAllType(Guna2ComboBox serviceType, string mysqlcon)
         {
             try
             {

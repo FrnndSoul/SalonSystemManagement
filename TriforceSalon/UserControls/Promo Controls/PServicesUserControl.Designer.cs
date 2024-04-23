@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.IDLbl = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.EditAPromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AddPromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,10 +53,11 @@
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.SRecordsContainer = new System.Windows.Forms.Panel();
-            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.UpdatePromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.CategoryComBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceDGV)).BeginInit();
             this.ServiceContainer.SuspendLayout();
             this.SuspendLayout();
@@ -92,24 +92,6 @@
             this.label3.Size = new System.Drawing.Size(450, 72);
             this.label3.TabIndex = 58;
             this.label3.Text = "Promo Information";
-            // 
-            // EditAPromoBtn
-            // 
-            this.EditAPromoBtn.AutoRoundedCorners = true;
-            this.EditAPromoBtn.BorderRadius = 21;
-            this.EditAPromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.EditAPromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.EditAPromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.EditAPromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.EditAPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EditAPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditAPromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditAPromoBtn.Location = new System.Drawing.Point(931, 730);
-            this.EditAPromoBtn.Name = "EditAPromoBtn";
-            this.EditAPromoBtn.Size = new System.Drawing.Size(221, 45);
-            this.EditAPromoBtn.TabIndex = 56;
-            this.EditAPromoBtn.Text = "See Vouchers";
-            this.EditAPromoBtn.Click += new System.EventHandler(this.EditAPromoBtn_Click);
             // 
             // AddPromoBtn
             // 
@@ -283,31 +265,31 @@
             // 
             this.ServiceDGV.AllowUserToAddRows = false;
             this.ServiceDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.ServiceDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.ServiceDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.ServiceDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServiceDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServiceDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.ServiceDGV.ColumnHeadersHeight = 15;
             this.ServiceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ServiceDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceNameCol,
             this.ServiceIDCol,
             this.RemoveCol});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServiceDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServiceDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.ServiceDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceDGV.Location = new System.Drawing.Point(934, 399);
             this.ServiceDGV.Name = "ServiceDGV";
@@ -358,6 +340,8 @@
             // 
             // ServiceContainer
             // 
+            this.ServiceContainer.Controls.Add(this.CategoryComBox);
+            this.ServiceContainer.Controls.Add(this.label8);
             this.ServiceContainer.Controls.Add(this.SearchProductsBtn);
             this.ServiceContainer.Controls.Add(this.ServiceFL);
             this.ServiceContainer.Controls.Add(this.ProductSearchTxtB);
@@ -382,6 +366,7 @@
             this.SearchProductsBtn.Size = new System.Drawing.Size(122, 38);
             this.SearchProductsBtn.TabIndex = 33;
             this.SearchProductsBtn.Text = "Search";
+            this.SearchProductsBtn.Click += new System.EventHandler(this.SearchProductsBtn_Click);
             // 
             // ServiceFL
             // 
@@ -415,33 +400,6 @@
             this.ProductSearchTxtB.SelectedText = "";
             this.ProductSearchTxtB.Size = new System.Drawing.Size(226, 38);
             this.ProductSearchTxtB.TabIndex = 32;
-            // 
-            // SRecordsContainer
-            // 
-            this.SRecordsContainer.Location = new System.Drawing.Point(0, 0);
-            this.SRecordsContainer.Name = "SRecordsContainer";
-            this.SRecordsContainer.Size = new System.Drawing.Size(907, 800);
-            this.SRecordsContainer.TabIndex = 55;
-            this.SRecordsContainer.Visible = false;
-            // 
-            // CancelBtn
-            // 
-            this.CancelBtn.AutoRoundedCorners = true;
-            this.CancelBtn.BorderRadius = 21;
-            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.CancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelBtn.ForeColor = System.Drawing.Color.Black;
-            this.CancelBtn.Location = new System.Drawing.Point(931, 730);
-            this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(221, 45);
-            this.CancelBtn.TabIndex = 57;
-            this.CancelBtn.Text = "Back";
-            this.CancelBtn.Visible = false;
-            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // UpdatePromoBtn
             // 
@@ -481,15 +439,60 @@
             this.DiscardBtn.Visible = false;
             this.DiscardBtn.Click += new System.EventHandler(this.DiscardBtn_Click);
             // 
+            // CancelBtn
+            // 
+            this.CancelBtn.AutoRoundedCorners = true;
+            this.CancelBtn.BorderRadius = 21;
+            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelBtn.ForeColor = System.Drawing.Color.Black;
+            this.CancelBtn.Location = new System.Drawing.Point(931, 730);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(221, 45);
+            this.CancelBtn.TabIndex = 63;
+            this.CancelBtn.Text = "Cancel";
+            // 
+            // CategoryComBox
+            // 
+            this.CategoryComBox.AutoRoundedCorners = true;
+            this.CategoryComBox.BackColor = System.Drawing.Color.Transparent;
+            this.CategoryComBox.BorderRadius = 17;
+            this.CategoryComBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.CategoryComBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategoryComBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CategoryComBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CategoryComBox.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.CategoryComBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.CategoryComBox.ItemHeight = 30;
+            this.CategoryComBox.Location = new System.Drawing.Point(219, 16);
+            this.CategoryComBox.Name = "CategoryComBox";
+            this.CategoryComBox.Size = new System.Drawing.Size(221, 36);
+            this.CategoryComBox.TabIndex = 67;
+            this.CategoryComBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComBox_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(14, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(217, 38);
+            this.label8.TabIndex = 68;
+            this.label8.Text = "Filter By Category:";
+            // 
             // PServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.IDLbl);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.EditAPromoBtn);
             this.Controls.Add(this.AddPromoBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -502,11 +505,9 @@
             this.Controls.Add(this.PromoCodeTxtB);
             this.Controls.Add(this.PercentageTxtB);
             this.Controls.Add(this.ServiceDGV);
-            this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.UpdatePromoBtn);
             this.Controls.Add(this.DiscardBtn);
             this.Controls.Add(this.ServiceContainer);
-            this.Controls.Add(this.SRecordsContainer);
             this.Name = "PServicesUserControl";
             this.Size = new System.Drawing.Size(1400, 800);
             this.Load += new System.EventHandler(this.PServicesUserControl_Load);
@@ -522,7 +523,6 @@
         public System.Windows.Forms.Label IDLbl;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
-        public Guna.UI2.WinForms.Guna2Button EditAPromoBtn;
         public Guna.UI2.WinForms.Guna2Button AddPromoBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
@@ -539,12 +539,13 @@
         private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2TextBox ProductSearchTxtB;
-        public System.Windows.Forms.Panel SRecordsContainer;
-        public Guna.UI2.WinForms.Guna2Button CancelBtn;
         public Guna.UI2.WinForms.Guna2Button UpdatePromoBtn;
         public Guna.UI2.WinForms.Guna2Button DiscardBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIDCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
+        public Guna.UI2.WinForms.Guna2Button CancelBtn;
+        private Guna.UI2.WinForms.Guna2ComboBox CategoryComBox;
+        private System.Windows.Forms.Label label8;
     }
 }

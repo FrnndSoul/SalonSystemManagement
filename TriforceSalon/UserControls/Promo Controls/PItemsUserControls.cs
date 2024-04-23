@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using TriforceSalon.UserControls.Promo_Controls.PromoRecords;
 
 namespace TriforceSalon.UserControls.Promo_Controls
 {
@@ -25,7 +24,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PStartDTP.Value = DateTime.Now;
             PEndDTP.Value = DateTime.Now;
             GenerateRandomNumber();
-            RecordsContainer.Visible = false;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
         }
@@ -126,27 +124,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             }
         }
 
-        private void EditAPromoBtn_Click(object sender, EventArgs e)
-        {
-            CancelBtn.Visible = true;
-            EditAPromoBtn.Visible = false;
-            ProductContainer.Visible = false;
-            RecordsContainer.Visible = true;
-
-            promo.HideButtons(true,false,false,false,true);
-
-            ProductsRecords Precords = new ProductsRecords();
-            UserControlNavigator.ShowControl(Precords, RecordsContainer);
-        }
-
-        private void CancelBtn_Click(object sender, EventArgs e)
-        {
-            promo.HidePanel(false,true);
-            promo.HideButtons(true,true,false,false,false);
-
-            UserControlNavigator.ClearPanel(RecordsContainer);
-        }
-
+        
         private async void UpdatePromoBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(PromoNameTxtB.Text) ||
@@ -173,7 +151,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
                 ClearAllInput();
                 GenerateRandomNumber();
-                promo.HideButtons(true, true, false, false, false);
+                promo.HideButtons(true, true, false, false);
             }
         }
 
@@ -181,9 +159,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
         {
             ClearAllInput();
             GenerateRandomNumber();
-            promo.HidePanel(false, true);
-            promo.HideButtons(true, true, false, false, false);
-            UserControlNavigator.ClearPanel(RecordsContainer);
+            promo.HideButtons(true, true, false, false);
         }
 
         private void ProductsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -212,6 +188,11 @@ namespace TriforceSalon.UserControls.Promo_Controls
                     }
                 }
             }
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            ClearAllInput();
         }
     }
 }

@@ -321,24 +321,6 @@
     <Compile Include="UserControls\Promo Controls\PItemsUserControls.Designer.cs">
       <DependentUpon>PItemsUserControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\AllPromoRecords.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\AllPromoRecords.Designer.cs">
-      <DependentUpon>AllPromoRecords.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.Designer.cs">
-      <DependentUpon>ProductsRecords.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.Designer.cs">
-      <DependentUpon>ServiceRecords.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Promo Controls\PromoUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -515,12 +497,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Promo Controls\PItemsUserControls.resx">
       <DependentUpon>PItemsUserControls.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Promo Controls\PromoRecords\ProductsRecords.resx">
-      <DependentUpon>ProductsRecords.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Promo Controls\PromoRecords\ServiceRecords.resx">
-      <DependentUpon>ServiceRecords.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Promo Controls\PromoUserControl.resx">
       <DependentUpon>PromoUserControl.cs</DependentUpon>
@@ -707,6 +683,14 @@
   <ItemGroup>
     <None Include="Resources\Unsatisfied.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserControls\Promo Controls\PromoRecords\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\peso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

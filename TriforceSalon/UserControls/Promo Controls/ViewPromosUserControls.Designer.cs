@@ -32,9 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.AllPromoProductsDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.EditPromoBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.DeactivePromoBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.PromoNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromoCodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateStartStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +39,9 @@
             this.DiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BindedItemsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EditPromoBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.DeactivePromoBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AllPromoProductsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,51 +108,6 @@
             this.AllPromoProductsDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.AllPromoProductsDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AllPromoProductsDGV_CellContentClick);
             // 
-            // EditPromoBtn
-            // 
-            this.EditPromoBtn.AutoRoundedCorners = true;
-            this.EditPromoBtn.BorderRadius = 21;
-            this.EditPromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.EditPromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.EditPromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.EditPromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.EditPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EditPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditPromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditPromoBtn.Location = new System.Drawing.Point(22, 722);
-            this.EditPromoBtn.Name = "EditPromoBtn";
-            this.EditPromoBtn.Size = new System.Drawing.Size(647, 45);
-            this.EditPromoBtn.TabIndex = 4;
-            this.EditPromoBtn.Text = "Edit Promo";
-            this.EditPromoBtn.Click += new System.EventHandler(this.EditPromoBtn_Click);
-            // 
-            // DeactivePromoBtn
-            // 
-            this.DeactivePromoBtn.AutoRoundedCorners = true;
-            this.DeactivePromoBtn.BorderRadius = 21;
-            this.DeactivePromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.DeactivePromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.DeactivePromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.DeactivePromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.DeactivePromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.DeactivePromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeactivePromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.DeactivePromoBtn.Location = new System.Drawing.Point(728, 722);
-            this.DeactivePromoBtn.Name = "DeactivePromoBtn";
-            this.DeactivePromoBtn.Size = new System.Drawing.Size(647, 45);
-            this.DeactivePromoBtn.TabIndex = 5;
-            this.DeactivePromoBtn.Text = "Deactivate Promo";
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(480, 89);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Active Promos";
-            // 
             // PromoNameCol
             // 
             this.PromoNameCol.HeaderText = "Promo Name";
@@ -195,6 +150,52 @@
             this.TypeCol.Name = "TypeCol";
             this.TypeCol.ReadOnly = true;
             this.TypeCol.Visible = false;
+            // 
+            // EditPromoBtn
+            // 
+            this.EditPromoBtn.AutoRoundedCorners = true;
+            this.EditPromoBtn.BorderRadius = 21;
+            this.EditPromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.EditPromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.EditPromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.EditPromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.EditPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.EditPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditPromoBtn.ForeColor = System.Drawing.Color.Black;
+            this.EditPromoBtn.Location = new System.Drawing.Point(22, 722);
+            this.EditPromoBtn.Name = "EditPromoBtn";
+            this.EditPromoBtn.Size = new System.Drawing.Size(647, 45);
+            this.EditPromoBtn.TabIndex = 4;
+            this.EditPromoBtn.Text = "Edit Promo";
+            this.EditPromoBtn.Click += new System.EventHandler(this.EditPromoBtn_Click);
+            // 
+            // DeactivePromoBtn
+            // 
+            this.DeactivePromoBtn.AutoRoundedCorners = true;
+            this.DeactivePromoBtn.BorderRadius = 21;
+            this.DeactivePromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.DeactivePromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.DeactivePromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.DeactivePromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.DeactivePromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.DeactivePromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeactivePromoBtn.ForeColor = System.Drawing.Color.Black;
+            this.DeactivePromoBtn.Location = new System.Drawing.Point(728, 722);
+            this.DeactivePromoBtn.Name = "DeactivePromoBtn";
+            this.DeactivePromoBtn.Size = new System.Drawing.Size(647, 45);
+            this.DeactivePromoBtn.TabIndex = 5;
+            this.DeactivePromoBtn.Text = "Deactivate Promo";
+            this.DeactivePromoBtn.Click += new System.EventHandler(this.DeactivePromoBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(7, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(480, 89);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Active Promos";
             // 
             // ViewPromosUserControls
             // 

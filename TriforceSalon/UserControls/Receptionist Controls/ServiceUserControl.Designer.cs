@@ -565,6 +565,7 @@
             this.ServiceTypeComB.Name = "ServiceTypeComB";
             this.ServiceTypeComB.Size = new System.Drawing.Size(217, 36);
             this.ServiceTypeComB.TabIndex = 6;
+            this.ServiceTypeComB.SelectedIndexChanged += new System.EventHandler(this.ServiceTypeComB_SelectedIndexChanged);
             // 
             // ServicesUserControl
             // 

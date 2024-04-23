@@ -20,17 +20,21 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
-        public async Task LoadServices(FlowLayoutPanel sellFlowlayout, string mysqlcon, Guna2DataGridView datagrid)
+        public async Task LoadServices(FlowLayoutPanel sellFlowlayout, string mysqlcon, Guna2DataGridView datagrid, string target)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT ServiceVariationID, ServiceName, ServiceImage, ServiceAmount FROM salon_services LIMIT 20";
+                    string query = "SELECT ss.ServiceVariationID, ss.ServiceName, ss.ServiceImage, ss.ServiceAmount " +
+                        "FROM salon_services ss " +
+                        "JOIN salon_subtypes ssbt ON ss.ServiceTypeID = ssbt.CategoryID " +
+                        "WHERE ssbt.ServiceSubTypeName = @target";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
+                        command.Parameters.AddWithValue("@target", target);
                         using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
                             var tasks = new List<Task>();
