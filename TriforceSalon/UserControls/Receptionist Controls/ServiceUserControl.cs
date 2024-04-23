@@ -100,7 +100,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string search = SearchServiceTxtB.Text;
 
             try {
-                await serviceTypeService.GetServiceDataForSearch(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, search);
+                //await serviceTypeService.GetServiceDataForSearch(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, search);
             }
             catch(Exception ex)
             {

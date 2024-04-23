@@ -36,6 +36,8 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         public async Task GetActivePromos(Guna2DataGridView viewPromosDGV)
         {
+            viewPromosDGV.Rows.Clear();
+
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -158,6 +160,24 @@ namespace TriforceSalon.UserControls.Promo_Controls
             {
                 await promoMethods.DeactivatePromo(ID);
             }
+        }
+
+        private async void SearchVouchersBtn_Click(object sender, EventArgs e)
+        {
+            DateTime selectedDate = WeekDTP.Value.Date;
+
+            int diff = selectedDate.DayOfWeek - DayOfWeek.Sunday;
+            if (diff < 0) diff += 7;
+            DateTime startDate = selectedDate.AddDays(-diff);
+
+            DateTime endDate = startDate.AddDays(6);
+
+            await promoMethods.SearchPromosInWeek(startDate, endDate, AllPromoProductsDGV);
+        }
+
+        private async void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            await GetActivePromos(AllPromoProductsDGV);
         }
     }
 }

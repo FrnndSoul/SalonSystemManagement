@@ -280,7 +280,7 @@ namespace TriforceSalon.Class_Components
 
 
         //tulog na muna ito
-        public async Task GetServiceTypeData(FlowLayoutPanel serviceTypeFL, string mysqlcon, Action<string> updateServiceFL)
+        /*public async Task GetServiceTypeData(FlowLayoutPanel serviceTypeFL, string mysqlcon, Action<string> updateServiceFL)
         {
             using (var conn = new MySqlConnection(mysqlcon))
             {
@@ -346,7 +346,7 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-        }
+        }*/
 
         /* public async Task GetServiceData(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
@@ -505,7 +505,7 @@ namespace TriforceSalon.Class_Components
             }
         }
         //Test Method
-        public async Task FilterServicesByTypeAsync(string mysqlcon, string selectedServiceType, FlowLayoutPanel serviceFL, Guna2TextBox serviceTB, Guna2TextBox amountTB)
+        /*public async Task FilterServicesByTypeAsync(string mysqlcon, string selectedServiceType, FlowLayoutPanel serviceFL, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
             serviceFL.Controls.Clear();
 
@@ -606,7 +606,7 @@ namespace TriforceSalon.Class_Components
                                 }
                             }
 
-                            /*while (await reader.ReadAsync())
+                            *//*while (await reader.ReadAsync())
                             {
                                 byte[] imageBytes = (byte[])reader["ServiceImage"];
 
@@ -666,7 +666,7 @@ namespace TriforceSalon.Class_Components
                                     // Add panel to the FlowLayoutPanel
                                     serviceFL.Controls.Add(panel);
                                 }
-                            }*/
+                            }*//*
                         }
                     }
                 }
@@ -675,9 +675,9 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.Message, "Error in FilterServicesByTypeAsync()");
             }
-        }
+        }*/
 
-        public async Task GetServiceDataForSearch(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB, string search)
+        /*public async Task GetServiceDataForSearch(FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB, string search)
         {
             serviceFL.Controls.Clear();
             using (var conn = new MySqlConnection(mysqlcon))
@@ -758,7 +758,7 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-        }
+        }*/
 
         public async Task UpdateServiceFL(FlowLayoutPanel serviceFL, string serviceTypeID, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {

@@ -49,13 +49,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PEndDTP.Value = DateTime.Now;
         }
 
-        private void SearchServiceBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-
         private async void UpdatePromoBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(PromoNameTxtB.Text) ||
@@ -132,6 +125,8 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         private async void SearchProductsBtn_Click(object sender, EventArgs e)
         {
+            string target = ProductSearchTxtB.Text;
+            await fetchServices.LoadServicesForSearch(ServiceFL, mysqlcon, ServiceDGV, target);
         }
     }
 }

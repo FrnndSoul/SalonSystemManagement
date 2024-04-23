@@ -442,7 +442,7 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
 
-                    string fetchQuery = "SELECT ServiceSubTypeName FROM salon_subtypes";
+                    string fetchQuery = "SELECT ServiceSubTypeName FROM salon_subtypes ORDER BY ServiceSubTypeName ASC";
 
                     using(MySqlCommand command = new MySqlCommand(fetchQuery, conn))
                     {
@@ -707,6 +707,56 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.ToString(), "Error in DeactivatePromo");
             }
+        }
+
+        public async Task SearchPromosInWeek(DateTime start, DateTime end, Guna2DataGridView viewPromosDGV)
+        {
+            viewPromosDGV.Rows.Clear();
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string fetchQuery = "SELECT PromoName, PromoCode, DiscountPercent, " +
+                                        "DATE(PromoStart) AS PromoStart, DATE(PromoEnd) AS PromoEnd, PromoItemsID, PromoType " +
+                                        "FROM salon_promos " +
+                                        "WHERE isValid = 'YES' " +
+                                        "AND DATE(PromoEnd) BETWEEN @StartDate AND @EndDate";
+
+                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@StartDate", start);
+                        command.Parameters.AddWithValue("@@EndDate", end);
+
+                        using (var adapter = new MySqlDataAdapter(command))
+                        {
+                            var dataTable = new DataTable();
+                            await adapter.FillAsync(dataTable);
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                var PName = row["PromoName"].ToString();
+                                var PCode = row["PromoCode"].ToString();
+                                var PDiscount = row["DiscountPercent"].ToString();
+                                var PStart = row["PromoStart"].ToString();
+                                var PEnd = row["PromoEnd"].ToString();
+                                var PItemsID = row["PromoItemsID"].ToString();
+                                var Ptype = row["PromoType"].ToString();
+
+                                viewPromosDGV.Rows.Add(PName, PCode, Convert.ToDateTime(PStart).ToString("yyyy-MM-dd"),
+                                    Convert.ToDateTime(PEnd).ToString("yyyy-MM-dd"), PDiscount, PItemsID, Ptype);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in SearchPromosInWeek");
+            }
+
         }
 
         public void SHideButtons(bool add,bool cancel,bool update, bool discard)

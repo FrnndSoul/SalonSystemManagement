@@ -42,6 +42,9 @@
             this.EditPromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DeactivePromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.WeekDTP = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.SearchVouchersBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.AllPromoProductsDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -189,19 +192,74 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 32);
+            this.label1.Location = new System.Drawing.Point(7, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(480, 89);
+            this.label1.Size = new System.Drawing.Size(532, 50);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Active Promos";
+            this.label1.Text = "Find active vouchers within a week.";
+            // 
+            // WeekDTP
+            // 
+            this.WeekDTP.AutoRoundedCorners = true;
+            this.WeekDTP.BorderRadius = 21;
+            this.WeekDTP.Checked = true;
+            this.WeekDTP.FillColor = System.Drawing.Color.White;
+            this.WeekDTP.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.WeekDTP.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.WeekDTP.Location = new System.Drawing.Point(494, 89);
+            this.WeekDTP.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.WeekDTP.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.WeekDTP.Name = "WeekDTP";
+            this.WeekDTP.Size = new System.Drawing.Size(301, 45);
+            this.WeekDTP.TabIndex = 7;
+            this.WeekDTP.Value = new System.DateTime(2024, 4, 23, 21, 26, 56, 475);
+            // 
+            // SearchVouchersBtn
+            // 
+            this.SearchVouchersBtn.AutoRoundedCorners = true;
+            this.SearchVouchersBtn.BorderRadius = 21;
+            this.SearchVouchersBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SearchVouchersBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SearchVouchersBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SearchVouchersBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SearchVouchersBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.SearchVouchersBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.SearchVouchersBtn.ForeColor = System.Drawing.Color.Black;
+            this.SearchVouchersBtn.Location = new System.Drawing.Point(260, 89);
+            this.SearchVouchersBtn.Name = "SearchVouchersBtn";
+            this.SearchVouchersBtn.Size = new System.Drawing.Size(228, 45);
+            this.SearchVouchersBtn.TabIndex = 8;
+            this.SearchVouchersBtn.Text = "Search";
+            this.SearchVouchersBtn.Click += new System.EventHandler(this.SearchVouchersBtn_Click);
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 21;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
+            this.RefreshBtn.Location = new System.Drawing.Point(22, 89);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(228, 45);
+            this.RefreshBtn.TabIndex = 9;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // ViewPromosUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.RefreshBtn);
+            this.Controls.Add(this.SearchVouchersBtn);
+            this.Controls.Add(this.WeekDTP);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DeactivePromoBtn);
             this.Controls.Add(this.EditPromoBtn);
@@ -227,5 +285,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DiscountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn BindedItemsCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeCol;
+        private Guna.UI2.WinForms.Guna2DateTimePicker WeekDTP;
+        private Guna.UI2.WinForms.Guna2Button SearchVouchersBtn;
+        private Guna.UI2.WinForms.Guna2Button RefreshBtn;
     }
 }
