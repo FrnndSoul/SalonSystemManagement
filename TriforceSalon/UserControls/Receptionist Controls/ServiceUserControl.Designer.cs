@@ -56,11 +56,10 @@
             this.CustomerSpecialIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.SearchServiceBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CategoryFL = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.ServiceTypeComB = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -69,9 +68,9 @@
             // 
             this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
-            this.ServiceFL.Location = new System.Drawing.Point(14, 208);
+            this.ServiceFL.Location = new System.Drawing.Point(14, 207);
             this.ServiceFL.Name = "ServiceFL";
-            this.ServiceFL.Size = new System.Drawing.Size(1266, 628);
+            this.ServiceFL.Size = new System.Drawing.Size(1266, 629);
             this.ServiceFL.TabIndex = 1;
             // 
             // guna2Panel1
@@ -487,55 +486,13 @@
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
-            // SearchServiceTxtB
-            // 
-            this.SearchServiceTxtB.Animated = true;
-            this.SearchServiceTxtB.AutoRoundedCorners = true;
-            this.SearchServiceTxtB.BorderRadius = 17;
-            this.SearchServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.SearchServiceTxtB.DefaultText = "";
-            this.SearchServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.SearchServiceTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.SearchServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.SearchServiceTxtB.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 159);
-            this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.SearchServiceTxtB.Name = "SearchServiceTxtB";
-            this.SearchServiceTxtB.PasswordChar = '\0';
-            this.SearchServiceTxtB.PlaceholderText = "";
-            this.SearchServiceTxtB.SelectedText = "";
-            this.SearchServiceTxtB.Size = new System.Drawing.Size(474, 36);
-            this.SearchServiceTxtB.TabIndex = 3;
-            // 
-            // SearchServiceBtn
-            // 
-            this.SearchServiceBtn.AutoRoundedCorners = true;
-            this.SearchServiceBtn.BorderRadius = 17;
-            this.SearchServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.SearchServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.SearchServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.SearchServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SearchServiceBtn.Font = new System.Drawing.Font("Stanberry", 17.25F);
-            this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceBtn.Location = new System.Drawing.Point(610, 159);
-            this.SearchServiceBtn.Name = "SearchServiceBtn";
-            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 36);
-            this.SearchServiceBtn.TabIndex = 4;
-            this.SearchServiceBtn.Text = "Search";
-            this.SearchServiceBtn.Click += new System.EventHandler(this.SearchServiceBtn_Click);
-            // 
             // CategoryFL
             // 
             this.CategoryFL.AutoScroll = true;
             this.CategoryFL.BackColor = System.Drawing.Color.White;
             this.CategoryFL.Location = new System.Drawing.Point(247, 16);
             this.CategoryFL.Name = "CategoryFL";
-            this.CategoryFL.Size = new System.Drawing.Size(1033, 128);
+            this.CategoryFL.Size = new System.Drawing.Size(1033, 161);
             this.CategoryFL.TabIndex = 2;
             // 
             // label1
@@ -543,7 +500,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 46);
+            this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(197, 37);
             this.label1.TabIndex = 5;
@@ -561,22 +518,38 @@
             this.ServiceTypeComB.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ServiceTypeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ServiceTypeComB.ItemHeight = 30;
-            this.ServiceTypeComB.Location = new System.Drawing.Point(14, 86);
+            this.ServiceTypeComB.Location = new System.Drawing.Point(14, 65);
             this.ServiceTypeComB.Name = "ServiceTypeComB";
             this.ServiceTypeComB.Size = new System.Drawing.Size(217, 36);
             this.ServiceTypeComB.TabIndex = 6;
             this.ServiceTypeComB.SelectedIndexChanged += new System.EventHandler(this.ServiceTypeComB_SelectedIndexChanged);
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 21;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
+            this.RefreshBtn.Location = new System.Drawing.Point(14, 132);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(217, 45);
+            this.RefreshBtn.TabIndex = 7;
+            this.RefreshBtn.Text = "Refresh";
             // 
             // ServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.RefreshBtn);
             this.Controls.Add(this.ServiceTypeComB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CategoryFL);
-            this.Controls.Add(this.SearchServiceBtn);
-            this.Controls.Add(this.SearchServiceTxtB);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.ServiceFL);
             this.Name = "ServicesUserControl";
@@ -593,7 +566,6 @@
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
-        private Guna.UI2.WinForms.Guna2TextBox SearchServiceTxtB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -608,7 +580,6 @@
         public Guna.UI2.WinForms.Guna2TextBox ServiceAmountTxtB;
         public Guna.UI2.WinForms.Guna2TextBox transactionIDTxtB;
         private System.Windows.Forms.Label label7;
-        private Guna.UI2.WinForms.Guna2Button SearchServiceBtn;
         private Guna.UI2.WinForms.Guna2Button AddLServiceListBtn;
         private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
@@ -620,5 +591,6 @@
         private System.Windows.Forms.FlowLayoutPanel CategoryFL;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2ComboBox ServiceTypeComB;
+        private Guna.UI2.WinForms.Guna2Button RefreshBtn;
     }
 }

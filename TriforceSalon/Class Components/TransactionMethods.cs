@@ -101,7 +101,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, string specialID)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace TriforceSalon.Class_Components
                     {
                         command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command1.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
-                        command1.Parameters.AddWithValue("@customer_sID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.CustomerSpecialIDTxtB.Text));
+                        command1.Parameters.AddWithValue("@customer_sID", specialID);
                         command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                         command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                         command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
@@ -176,7 +176,10 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string query = "Select st.ServiceTypeName from service_type st Join salon_services ss ON st.ServiceID = ss.ServiceTypeID where ss.ServiceName = @serviceName ";
+                    string query = "SELECT st.ServiceTypeName FROM service_type st " +
+                        "JOIN salon_subtypes sbt ON st.ServiceID = sbt.ServiceTypeID " +
+                        "JOIN salon_services ss ON sbt.CategoryID = ss.ServiceTypeID " +
+                        "WHERE ServiceName = @serviceName";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -591,7 +594,7 @@ namespace TriforceSalon.Class_Components
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph($"Transaction ID: {transactionTB}                                 Date: {DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph($"Customer Name: {nameTB}").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Age: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
+                        doc.Add(new Paragraph($"Special ID: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph(("SERVICE RATING")).SetTextAlignment(TextAlignment.CENTER));
 
@@ -775,21 +778,26 @@ namespace TriforceSalon.Class_Components
 
             return ID;
         }
-        public int GetServiceTypeID(string serviceName)
+        public async Task <int> GetServiceTypeID(string serviceName)
         {
             TypeID = -1;
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
+                    /*string query = "SELECT st.ServiceID FROM service_type st " +
+                        "JOIN salon_subtypes sbt ON st.ServiceID = sbt.ServiceTypeID " +
+                        "JOIN salon_services ss ON sbt.CategoryID = ss.ServiceTypeID " +
+                        "WHERE ServiceName = @serviceName";*/
+
                     string query = "Select ServiceTypeID from salon_services where ServiceName = @service_name";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@service_name", serviceName);
 
-                        object result = command.ExecuteScalar();
+                        object result = await command.ExecuteScalarAsync();
                         if (result != null && int.TryParse(result.ToString(), out TypeID))
                         {
                             return TypeID;
