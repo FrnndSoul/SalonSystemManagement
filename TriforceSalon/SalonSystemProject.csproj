@@ -176,9 +176,16 @@
   <ItemGroup>
     <Compile Include="Class Components\PromoFetchItemsClass.cs" />
     <Compile Include="Class Components\PromoMethods.cs" />
+    <Compile Include="Class Components\QueueMethods.cs" />
     <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
     <Compile Include="Microsoft\VisualBasic\BindedServices.cs" />
+    <Compile Include="QueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QueueForm.Designer.cs">
+      <DependentUpon>QueueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
       <SubType>UserControl</SubType>

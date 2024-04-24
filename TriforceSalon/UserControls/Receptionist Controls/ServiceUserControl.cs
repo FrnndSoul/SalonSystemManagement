@@ -66,7 +66,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 specialID = "NONE";
             }
 
-            if (CustomerNameTxtB.Text is null || CustomerSpecialIDTxtB.Text is null || CustomerPhoneNTxtB is null
+            if (CustomerNameTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -90,28 +90,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (result == DialogResult.Yes)
             {
                 string serviceName = ServiceTxtB.Text;
-                transactionMethods.GetServiceTypeID(serviceName);
-                //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                await transactionMethods.GetServiceTypeID(serviceName);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL", specialID);
                 transactionMethods.GeneratePDFTicket(ID, name, specialID);
                 ClearAll();
 
             }
             ProcessCustomerBtn.Enabled = true ;
 
-        }
-
-        private void SearchServiceBtn_Click(object sender, EventArgs e)
-        {
-            string search = SearchServiceTxtB.Text;
-
-            try {
-                //await serviceTypeService.GetServiceDataForSearch(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, search);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void ClearAll()
@@ -257,8 +243,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
-
             ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
+            //ClearAll();
         }
 
         private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -269,7 +255,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    //ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
                     DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
@@ -300,7 +285,5 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 return;
             }
         }
-
-        
     }
 }

@@ -190,7 +190,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                         "where TransactionID = @transactionID";*/
 
-                    string query = "SELECT ci.CustomerName, ci.CustomerAge, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
+                    string query = "SELECT ci.CustomerName, ci.SpecialID, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
                                    "FROM customer_info ci " +
                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                                    "WHERE TransactionID = @transactionID";
@@ -231,11 +231,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                                 string Customer_name = reader["CustomerName"].ToString();
                                 //ServiceType = reader["ServiceType"].ToString();
-                                int Customer_age = Convert.ToInt32(reader["CustomerAge"]);
+                                string Customer_sID = Convert.ToString(reader["SpecialID"]);
                                 string Customer_phone = Convert.ToString(reader["CustomerPhoneNumber"]);
                                 //EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
 
-                                DisplayTransaction(Customer_name, Customer_age, Customer_phone);
+                                DisplayTransaction(Customer_name, Customer_sID, Customer_phone);
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
                                 //CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
@@ -250,17 +250,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\nat TransactionIDBox Key Press", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
 
             }
 
         }
 
-        private void DisplayTransaction(string name, int age, string phoneNumber)
+        private void DisplayTransaction(string name, string specialID, string phoneNumber)
         {
             NameBox.Text = name;
-            AgeBox.Text = age.ToString();
+            AgeBox.Text = specialID;
             PhoneNumberBox.Text = phoneNumber.ToString();
 
 
@@ -295,7 +295,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             continue;
                         }
 
-                       
                         string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
