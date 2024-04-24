@@ -856,7 +856,7 @@ namespace TriforceSalon.Class_Components
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@ServiceTypeName", serviceTypeName);
-                        object result = command.ExecuteScalar();
+                        object result = await command.ExecuteScalarAsync();
                         if (result != null)
                         {
                             string serviceTypeID = result.ToString();
@@ -925,7 +925,7 @@ namespace TriforceSalon.Class_Components
                                     picBox.Click += async (sender, e) =>
                                     {
                                         string categoryID = ((PictureBox)sender).Tag.ToString();
-                                        MessageBox.Show(categoryID);
+                                        //MessageBox.Show(categoryID);
                                         await UpdateServiceFL(serviceFL, categoryID, mysqlcon, service, amount);
                                     };
 
@@ -944,7 +944,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task AddEmployeesComB(string serviceName, string mysqlcon)
+        /*public async Task AddEmployeesComB(string serviceName, string mysqlcon)
         {
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Clear();
             ServicesUserControl.servicesUserControlInstance.PEmployeeComB.Items.Add("None");
@@ -980,6 +980,43 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
+            }
+        }*/
+
+        public void AddEmployeesComB(string selectedServiceType, Guna2ComboBox employeesCB, string mysqlcon)
+        {
+            employeesCB.Items.Clear();
+            employeesCB.Items.Add("None");
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    conn.Open();
+
+                    string query = "SELECT DISTINCT se.Name FROM salon_employees se " +
+                        "JOIN service_type st ON se.ServiceID = st.ServiceID " +
+                        "WHERE st.ServiceTypeName = @ServiceTypeName " +
+                        "AND se.AccountAccess NOT IN ('Receptionist', 'Manager')";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@ServiceTypeName", selectedServiceType);
+
+                        using (DbDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string employeeName = reader["Name"].ToString();
+                                employeesCB.Items.Add(employeeName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in AddEmployeesComB");
             }
         }
 
@@ -1076,6 +1113,111 @@ namespace TriforceSalon.Class_Components
                     }
                     return largestNumber;
                 }
+            }
+        }
+
+        public async Task DisplayServiceTypeFL(FlowLayoutPanel servicetypeFL, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB, Guna2ComboBox employeeCB)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+                    string query = "SELECT ServiceSubTypeName, ServiceSubTypeImage, CategoryID, ServiceTypeID FROM salon_subtypes";
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                byte[] imageBytes = (byte[])reader["ServiceSubTypeImage"];
+                                using (MemoryStream ms = new MemoryStream(imageBytes))
+                                {
+                                    Image servicetypeImage = Image.FromStream(ms);
+                                    Panel panel = new Panel
+                                    {
+                                        Width = 200,
+                                        Height = 200,
+                                        Margin = new Padding(10)
+                                    };
+                                    PictureBox picBox = new PictureBox
+                                    {
+                                        Width = 200,
+                                        Height = 150,
+                                        Location = new Point(10, 10),
+                                        BackgroundImage = servicetypeImage,
+                                        BackgroundImageLayout = ImageLayout.Stretch
+                                    };
+
+                                    Label labelTitle = new Label
+                                    {
+                                        Text = reader["ServiceSubTypeName"].ToString(),
+                                        Location = new Point(10, 160),
+                                        ForeColor = Color.Black,
+                                        AutoSize = true,
+                                        Font = new Font("Stanberry", 16, FontStyle.Regular)
+                                    };
+
+                                    picBox.Tag = new Tuple<string, string>(reader["CategoryID"].ToString(), reader["ServiceTypeID"].ToString());
+                                    picBox.Click += async(sender, e) =>
+                                    {
+                                        Tuple<string, string> tags = ((Tuple<string, string>)((PictureBox)sender).Tag);
+                                        string categoryID = tags.Item1;
+                                        string serviceTypeID = tags.Item2;
+
+                                        await AddEmployeesComB1(serviceTypeID, employeeCB, mysqlcon);
+                                        await UpdateServiceFL(serviceFL, categoryID, mysqlcon, serviceTB, amountTB);
+                                    };
+
+
+                                    panel.Controls.Add(picBox);
+                                    panel.Controls.Add(labelTitle);
+                                    servicetypeFL.Controls.Add(panel);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in FilterImagesByServiceType");
+            }
+        }
+        public async Task AddEmployeesComB1(string selectedServiceTypeID, Guna2ComboBox employeesCB, string mysqlcon)
+        {
+            employeesCB.Items.Clear();
+            employeesCB.Items.Add("None");
+
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string query = "SELECT DISTINCT se.Name FROM salon_employees se " +
+                                   "JOIN salon_subtypes st ON se.ServiceID = st.ServiceTypeID " +
+                                   "WHERE st.ServiceTypeID = @ServiceTypeID " +
+                                   "AND se.AccountAccess NOT IN ('Receptionist', 'Manager')";
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@ServiceTypeID", selectedServiceTypeID);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string employeeName = reader["Name"].ToString();
+                                employeesCB.Items.Add(employeeName);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in AddEmployeesComB1");
             }
         }
     }

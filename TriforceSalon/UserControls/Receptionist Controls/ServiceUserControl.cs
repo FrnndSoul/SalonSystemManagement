@@ -37,11 +37,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
             await serviceTypeService.GetAllType(ServiceTypeComB, mysqlcon);
+            DisplayServiceTypeFL();
+        }
+        public async void DisplayServiceTypeFL()
+        {
+            await serviceTypeService.DisplayServiceTypeFL(CategoryFL, ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, PEmployeeComB);
         }
         private async void ServiceTypeComB_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedServiceType = ServiceTypeComB.SelectedItem.ToString();
             await serviceTypeService.UpdateServiceCategoryFL(selectedServiceType, CategoryFL, ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            serviceTypeService.AddEmployeesComB(selectedServiceType, PEmployeeComB, mysqlcon);
         }
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
@@ -95,7 +101,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         }
 
-        private async void SearchServiceBtn_Click(object sender, EventArgs e)
+        private void SearchServiceBtn_Click(object sender, EventArgs e)
         {
             string search = SearchServiceTxtB.Text;
 
