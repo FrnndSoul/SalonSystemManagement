@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.PromoBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ManagerReceptionistBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.LogoutBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ReportsBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -36,7 +38,6 @@
             this.InventoryBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.ManagerContent = new System.Windows.Forms.Panel();
-            this.ManagerReceptionistBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -46,6 +47,7 @@
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 100;
+            this.guna2Panel1.Controls.Add(this.PromoBtn);
             this.guna2Panel1.Controls.Add(this.ManagerReceptionistBtn);
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.Controls.Add(this.LogoutBtn);
@@ -58,6 +60,48 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(331, 1090);
             this.guna2Panel1.TabIndex = 0;
+            // 
+            // PromoBtn
+            // 
+            this.PromoBtn.Animated = true;
+            this.PromoBtn.AutoRoundedCorners = true;
+            this.PromoBtn.BorderRadius = 48;
+            this.PromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.PromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.PromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.PromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.PromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.PromoBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PromoBtn.ForeColor = System.Drawing.Color.White;
+            this.PromoBtn.Location = new System.Drawing.Point(107, 487);
+            this.PromoBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.PromoBtn.Name = "PromoBtn";
+            this.PromoBtn.Size = new System.Drawing.Size(197, 98);
+            this.PromoBtn.TabIndex = 11;
+            this.PromoBtn.Text = "Create Promos";
+            this.PromoBtn.UseTransparentBackground = true;
+            this.PromoBtn.Click += new System.EventHandler(this.PromoBtn_Click);
+            // 
+            // ManagerReceptionistBtn
+            // 
+            this.ManagerReceptionistBtn.Animated = true;
+            this.ManagerReceptionistBtn.AutoRoundedCorners = true;
+            this.ManagerReceptionistBtn.BorderRadius = 48;
+            this.ManagerReceptionistBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerReceptionistBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ManagerReceptionistBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ManagerReceptionistBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ManagerReceptionistBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
+            this.ManagerReceptionistBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManagerReceptionistBtn.ForeColor = System.Drawing.Color.White;
+            this.ManagerReceptionistBtn.Location = new System.Drawing.Point(107, 736);
+            this.ManagerReceptionistBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ManagerReceptionistBtn.Name = "ManagerReceptionistBtn";
+            this.ManagerReceptionistBtn.Size = new System.Drawing.Size(197, 98);
+            this.ManagerReceptionistBtn.TabIndex = 10;
+            this.ManagerReceptionistBtn.Text = "Serve Customers";
+            this.ManagerReceptionistBtn.UseTransparentBackground = true;
+            this.ManagerReceptionistBtn.Click += new System.EventHandler(this.ManagerReceptionistBtn_Click);
             // 
             // guna2PictureBox1
             // 
@@ -107,7 +151,7 @@
             this.ReportsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.ReportsBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReportsBtn.ForeColor = System.Drawing.Color.White;
-            this.ReportsBtn.Location = new System.Drawing.Point(106, 527);
+            this.ReportsBtn.Location = new System.Drawing.Point(107, 613);
             this.ReportsBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ReportsBtn.Name = "ReportsBtn";
             this.ReportsBtn.Size = new System.Drawing.Size(197, 98);
@@ -128,7 +172,7 @@
             this.ServicesBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
             this.ServicesBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServicesBtn.ForeColor = System.Drawing.Color.White;
-            this.ServicesBtn.Location = new System.Drawing.Point(104, 386);
+            this.ServicesBtn.Location = new System.Drawing.Point(102, 364);
             this.ServicesBtn.Margin = new System.Windows.Forms.Padding(2);
             this.ServicesBtn.Name = "ServicesBtn";
             this.ServicesBtn.Size = new System.Drawing.Size(200, 98);
@@ -178,27 +222,6 @@
             this.ManagerContent.Size = new System.Drawing.Size(1500, 950);
             this.ManagerContent.TabIndex = 0;
             // 
-            // ManagerReceptionistBtn
-            // 
-            this.ManagerReceptionistBtn.Animated = true;
-            this.ManagerReceptionistBtn.AutoRoundedCorners = true;
-            this.ManagerReceptionistBtn.BorderRadius = 48;
-            this.ManagerReceptionistBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.ManagerReceptionistBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.ManagerReceptionistBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.ManagerReceptionistBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.ManagerReceptionistBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(39)))), ((int)(((byte)(121)))));
-            this.ManagerReceptionistBtn.Font = new System.Drawing.Font("Chinacat", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManagerReceptionistBtn.ForeColor = System.Drawing.Color.White;
-            this.ManagerReceptionistBtn.Location = new System.Drawing.Point(104, 673);
-            this.ManagerReceptionistBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.ManagerReceptionistBtn.Name = "ManagerReceptionistBtn";
-            this.ManagerReceptionistBtn.Size = new System.Drawing.Size(197, 98);
-            this.ManagerReceptionistBtn.TabIndex = 10;
-            this.ManagerReceptionistBtn.Text = "Serve Customers";
-            this.ManagerReceptionistBtn.UseTransparentBackground = true;
-            this.ManagerReceptionistBtn.Click += new System.EventHandler(this.ManagerReceptionistBtn_Click);
-            // 
             // ManagerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,5 +253,6 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Panel ManagerContent;
         private Guna.UI2.WinForms.Guna2Button ManagerReceptionistBtn;
+        private Guna.UI2.WinForms.Guna2Button PromoBtn;
     }
 }

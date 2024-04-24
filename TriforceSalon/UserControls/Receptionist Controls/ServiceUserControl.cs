@@ -26,13 +26,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             servicesUserControlInstance = this;
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
-            //serviceTypeService = new GetServiceType_ServiceData();
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
-            CustomerAgeTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
+            CustomerSpecialIDTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
-
-           /* GetServiceTypeData();
-            GetServiceData();*/
         }
 
         private async void ServicesUserControl_Load(object sender, System.EventArgs e)
@@ -40,36 +36,37 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await serviceTypeService.GetAllEmployee(mysqlcon);
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
-            await serviceTypeService.GetAllCategory(ServiceTypeComB, mysqlcon);
-            GetServiceTypeData();
-
-            /*await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);
-            await serviceTypeService.FilterServicesByTypeAsync(mysqlcon, "All", ServiceFL, ServiceTxtB, ServiceAmountTxtB);*/
+            await serviceTypeService.GetAllType(ServiceTypeComB, mysqlcon);
+            DisplayServiceTypeFL();
         }
-
-        public async void GetServiceTypeData()
+        public async void DisplayServiceTypeFL()
         {
-            await serviceTypeService.GetServiceTypeData(CategoryFL, mysqlcon, UpdateServiceFL);
+            await serviceTypeService.DisplayServiceTypeFL(CategoryFL, ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, PEmployeeComB);
         }
-
-        /*public void GetServiceData()
+        private async void ServiceTypeComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-        }*/
-
-        private async void UpdateServiceFL(string serviceTypeID)
-        {
-            await serviceTypeService.UpdateServiceFL(ServiceFL, serviceTypeID, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            string selectedServiceType = ServiceTypeComB.SelectedItem.ToString();
+            await serviceTypeService.UpdateServiceCategoryFL(selectedServiceType, CategoryFL, ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
+            serviceTypeService.AddEmployeesComB(selectedServiceType, PEmployeeComB, mysqlcon);
         }
-
         private async void ProcessCustomerBtn_Click(object sender, System.EventArgs e)
         {
             ProcessCustomerBtn.Enabled = false;
 
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
-            string age = CustomerAgeTxtB.Text;
-            if (CustomerNameTxtB.Text is null || CustomerAgeTxtB.Text is null || CustomerPhoneNTxtB is null
+            string specialID;
+
+            if (!string.IsNullOrEmpty(CustomerSpecialIDTxtB.Text))
+            {
+                specialID = CustomerSpecialIDTxtB.Text;
+            }
+            else
+            {
+                specialID = "NONE";
+            }
+
+            if (CustomerNameTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
             {
                 MessageBox.Show("Please fill all the customer information needed", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -93,10 +90,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (result == DialogResult.Yes)
             {
                 string serviceName = ServiceTxtB.Text;
-                transactionMethods.GetServiceTypeID(serviceName);
-                //transactionMethods.ProcessCustomer(serviceName, transactionMethods.GetServiceTypeID(serviceName));
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
-                transactionMethods.GeneratePDFTicket(ID, name, age);
+                await transactionMethods.GetServiceTypeID(serviceName);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL", specialID);
+                transactionMethods.GeneratePDFTicket(ID, name, specialID);
                 ClearAll();
 
             }
@@ -104,24 +100,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         }
 
-        private async void SearchServiceBtn_Click(object sender, EventArgs e)
-        {
-            string search = SearchServiceTxtB.Text;
-
-            try {
-                await serviceTypeService.GetServiceDataForSearch(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB, search);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void ClearAll()
         {
             ServicesGDGVVControl.Rows.Clear();
             CustomerNameTxtB.Clear();
-            CustomerAgeTxtB.Clear();
+            CustomerSpecialIDTxtB.Clear();
             CustomerPhoneNTxtB.Clear();
             ServiceTxtB.Clear();
             ServiceAmountTxtB.Clear();
@@ -166,7 +149,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             // Get the current text in the TextBox
-            string currentText = CustomerAgeTxtB.Text;
+            string currentText = CustomerSpecialIDTxtB.Text;
 
             // Check if the input length will exceed 3 characters after adding the new input
             if (currentText.Length >= 3 && e.KeyChar != '\b') // '\b' represents the Backspace key
@@ -260,11 +243,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
-
             ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
+            //ClearAll();
         }
 
-        private async void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
@@ -272,47 +255,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    //ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
                     DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        string enteredPassword = Method.HashString(Microsoft.VisualBasic.Interaction.InputBox("Enter manager password:", "Password Required", ""));
-
-                        using (MySqlConnection conn = new MySqlConnection(mysqlcon))
-                        {
-                            await conn.OpenAsync();
-
-                            string query = "SELECT se.AccountAccess, a.Password FROM salon_employees se JOIN accounts a ON se.AccountID = a.AccountID WHERE a.Password = @enteredPassword;";
-
-                            using (MySqlCommand command = new MySqlCommand(query, conn))
-                            {
-                                command.Parameters.AddWithValue("@enteredPassword", enteredPassword);
-
-                                using (DbDataReader reader = await command.ExecuteReaderAsync())
-                                {
-                                    if (await reader.ReadAsync())
-                                    {
-                                        string position = reader["AccountAccess"].ToString();
-
-                                        if (position != "Manager")
-                                        {
-                                            MessageBox.Show("Invalid password. You need manager permission to void items.", "Permission Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
-                                            MessageBox.Show("Service has been removed", "Remove Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Password not found. Please try again or contact your manager.", "Password Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
+                        ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
                     }
                 }
             }

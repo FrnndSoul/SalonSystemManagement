@@ -1,13 +1,13 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Data.Common;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace Microsoft.VisualBasic
+namespace TriforceSalon.Microsoft.VisualBasic
 {
-    internal class Interaction
+    internal class BindedServices
     {
         internal static async Task DisplayItems(string title, string prompt, long ID)
         {
@@ -33,13 +33,12 @@ namespace Microsoft.VisualBasic
                 dataGridView.RowHeadersVisible = false;
                 dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                dataGridView.Columns.Add("Item", "Item");
-                dataGridView.Columns.Add("Quantity", "Quantity");
+                dataGridView.Columns.Add("Service", "Service");
 
-                List<(string, int)> items = await GetBindedItems(ID);
-                foreach (var item in items)
+                List<string> services = await GetBindedServices(ID);
+                foreach (var service in services)
                 {
-                    dataGridView.Rows.Add(item.Item1, item.Item2);
+                    dataGridView.Rows.Add(service);
                 }
 
                 okButton.DialogResult = DialogResult.OK;
@@ -55,9 +54,9 @@ namespace Microsoft.VisualBasic
             }
         }
 
-        public static async Task<List<(string, int)>> GetBindedItems(long ID)
+        public static async Task<List<string>> GetBindedServices(long ID)
         {
-            List<(string, int)> itemList = new List<(string, int)>();
+            List<string> serviceList = new List<string>();
 
             try
             {
@@ -66,7 +65,7 @@ namespace Microsoft.VisualBasic
                 {
                     await conn.OpenAsync();
 
-                    string fetchQuery = "SELECT ItemName, Quantity FROM binded_items WHERE PromoItemsID = @ID";
+                    string fetchQuery = "SELECT ServiceName FROM binded_services WHERE PromoServiceID = @ID";
 
                     using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
                     {
@@ -74,15 +73,10 @@ namespace Microsoft.VisualBasic
 
                         using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            int itemNameOrdinal = reader.GetOrdinal("ItemName");
-                            int quantityOrdinal = reader.GetOrdinal("Quantity");
-
                             while (await reader.ReadAsync())
                             {
-                                string itemName = reader.GetString(itemNameOrdinal);
-                                int quantity = reader.GetInt32(quantityOrdinal);
-
-                                itemList.Add((itemName, quantity));
+                                string serviceName = reader.GetString(0);
+                                serviceList.Add(serviceName);
                             }
                         }
                     }
@@ -90,10 +84,10 @@ namespace Microsoft.VisualBasic
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error in GetBindedItems");
+                MessageBox.Show(ex.ToString(), "Error in GetBindedServices");
             }
 
-            return itemList;
+            return serviceList;
         }
     }
 }

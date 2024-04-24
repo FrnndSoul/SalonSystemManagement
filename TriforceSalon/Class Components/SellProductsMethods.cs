@@ -27,7 +27,7 @@ namespace TriforceSalon.Class_Components
             this.updateTotalPrice = updateTotalPrice;
             this.addTotalPrice = addTotalPrice;
         }
-        
+
 
         /*public async Task LoadItemsInSales(FlowLayoutPanel sellFlowlayout, string mysqlcon)
         {
@@ -199,7 +199,6 @@ namespace TriforceSalon.Class_Components
 
                                     Label labelTitle1 = new Label
                                     {
-                                        //papalitan ito at gagawing srp
                                         Text = "Amount: ₱" + reader["SRP"].ToString(),
                                         Location = new Point(10, 210), // Adjusted location to accommodate the layout
                                         ForeColor = Color.Black,
@@ -371,33 +370,114 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
+        public class ItemDetails
+        {
+            public string ItemName { get; }
+            public int Quantity { get; }
+            public decimal Cost { get; }
+
+            public decimal Discount { get; }
+
+            public ItemDetails(string itemName, int quantity, decimal cost, decimal discount)
+            {
+
+                ItemName = itemName;
+                Quantity = quantity;
+                Cost = cost * quantity;
+                Discount = discount;
+            }
+        }
+        public List<ItemDetails> GetItemDetails(int promoCode, string mysqlcon)
+        {
+            List<ItemDetails> items = new List<ItemDetails>();
+
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                conn.Open();
+                string query = @"
+                SELECT bi.ItemName, bi.Quantity, inv.Cost, sp.DiscountPercent
+                FROM binded_items bi
+                INNER JOIN inventory inv ON bi.ItemName COLLATE utf8mb4_general_ci = inv.ItemName COLLATE utf8mb4_general_ci
+                INNER JOIN salon_promos sp ON bi.PromoItemsID = sp.PromoCode
+                WHERE bi.PromoItemsID = @PromoCode";
+
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PromoCode", promoCode);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader["ItemName"].ToString();
+                            int quantity = Convert.ToInt32(reader["Quantity"]);
+                            decimal cost = Convert.ToDecimal(reader["Cost"]);
+
+                            // Remove the percentage sign (%) and convert to decimal
+                            string discountPercentString = reader["DiscountPercent"].ToString().Replace("%", "");
+                            decimal discountPercent = Convert.ToDecimal(discountPercentString) / 100m;
+
+                            items.Add(new ItemDetails(itemName, quantity, cost, discountPercent));
+                        }
+                    }
+                }
+            }
+
+            return items;
+        }
+
+        public (int promoCode, string isValid) GetPromoDetails(int promoCode, string mysqlcon)
+        {
+            int retrievedPromoCode = 0;
+            string isValid = "";
+
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                conn.Open();
+                string query = "SELECT PromoCode, isValid FROM salon_promos WHERE PromoCode = @PromoCode";
+
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PromoCode", promoCode);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            retrievedPromoCode = Convert.ToInt32(reader["PromoCode"]);
+                            isValid = reader["isValid"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return (retrievedPromoCode, isValid);
+        }
 
         private void DisplayServiceData(Panel panel, Guna2DataGridView dataGridView)
         {
-            string serviceName = panel.Controls.OfType<Label>().FirstOrDefault()?.Text;
-            //string serviceAmount = panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text;
-            decimal serviceAmount = serviceData.ExtractAmount(panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text);
+            string productName = panel.Controls.OfType<Label>().FirstOrDefault()?.Text;
+            decimal productAmount = serviceData.ExtractAmount(panel.Controls.OfType<Label>().Skip(1).FirstOrDefault()?.Text);
 
-            if (serviceName != null && serviceAmount != null)
+            if (productName != null && productAmount != null)
             {
                 bool found = false;
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    if (row.IsNewRow) continue; // Skip the new row added by DataGridView
+                    if (row.IsNewRow) continue;
 
-                    if (row.Cells[0].Value.ToString() == serviceName)
+                    if (row.Cells[0].Value.ToString() == productName && row.Cells[5].Value.ToString() == "None")
                     {
                         int currentQty = int.Parse(row.Cells[2].Value.ToString());
-                        row.Cells[2].Value = (currentQty + 1).ToString();
-                        found = true;
+                        row.Cells[2].Value = (1 + currentQty).ToString();
                         addTotalPrice?.Invoke(row.Index);
+                        found = true;
                         break;
                     }
                 }
-
                 if (!found)
                 {
-                    dataGridView.Rows.Add(serviceName, "-", "1", "+", serviceAmount, "Normal", "Bin");
+                    dataGridView.Rows.Add(productName, "-", "1", "+", productAmount, "None", "X");
                     updateTotalPrice?.Invoke();
                 }
             }

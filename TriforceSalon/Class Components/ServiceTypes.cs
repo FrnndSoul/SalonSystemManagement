@@ -190,11 +190,18 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@service_name", serviceType);
                             command.Parameters.AddWithValue("@service_image", imageData);
 
-                            await command.ExecuteNonQueryAsync();
-                            await salonServices.PopulateServiceTypeForInsert();
-                            await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
-                            ClearServiceTypes();
+                            if (Method.AdminAccess())
+                            {
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                            }
+                            else
+                            {
+                                await command.ExecuteNonQueryAsync();
+                            }
                         }
+                        await salonServices.PopulateServiceTypeForInsert();
+                        await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
+                        ClearServiceTypes();
                     }
                 }
 
@@ -309,12 +316,25 @@ namespace TriforceSalon.Class_Components
                                 command.Parameters.AddWithValue("@service_image", imageData);
                             }
 
-                            await command.ExecuteNonQueryAsync();
-                            await salonServices.PopulateServiceTypeForInsert();
-                            await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
-                            ClearServiceTypes();
-                            HideButton(true, true, false, false);
+                            else
+                            {
+
+                                if (Method.AdminAccess())
+                                {
+                                    MessageBox.Show("Working as intended.\nNo changes were made in the database");
+
+                                }
+                                else
+                                {
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
                         }
+                        await salonServices.PopulateServiceTypeForInsert();
+                        await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
+                        ClearServiceTypes();
+                        HideButton(true, true, false, false);
+
                     }
                 }
                 catch (MySqlException a)

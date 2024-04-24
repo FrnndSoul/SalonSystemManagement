@@ -174,7 +174,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Components\PromoFetchItemsClass.cs" />
+    <Compile Include="Class Components\PromoMethods.cs" />
+    <Compile Include="Class Components\QueueMethods.cs" />
+    <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
+    <Compile Include="Microsoft\VisualBasic\BindedServices.cs" />
+    <Compile Include="QueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QueueForm.Designer.cs">
+      <DependentUpon>QueueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
       <SubType>UserControl</SubType>
@@ -310,6 +321,30 @@
     </Compile>
     <Compile Include="UserControls\ManagerPage.Designer.cs">
       <DependentUpon>ManagerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PItemsUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PItemsUserControls.Designer.cs">
+      <DependentUpon>PItemsUserControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PromoUserControl.Designer.cs">
+      <DependentUpon>PromoUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PServicesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\PServicesUserControl.Designer.cs">
+      <DependentUpon>PServicesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\ViewPromosUserControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Promo Controls\ViewPromosUserControls.Designer.cs">
+      <DependentUpon>ViewPromosUserControls.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Receptionist Controls\AppointmentsUserControls.cs">
       <SubType>UserControl</SubType>
@@ -466,6 +501,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ManagerPage.resx">
       <DependentUpon>ManagerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Promo Controls\PItemsUserControls.resx">
+      <DependentUpon>PItemsUserControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Promo Controls\PromoUserControl.resx">
+      <DependentUpon>PromoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Promo Controls\PServicesUserControl.resx">
+      <DependentUpon>PServicesUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Promo Controls\ViewPromosUserControls.resx">
+      <DependentUpon>ViewPromosUserControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Receptionist Controls\AppointmentsUserControls.resx">
       <DependentUpon>AppointmentsUserControls.cs</DependentUpon>
@@ -642,6 +689,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Unsatisfied.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\Promo Controls\PromoRecords\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\peso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

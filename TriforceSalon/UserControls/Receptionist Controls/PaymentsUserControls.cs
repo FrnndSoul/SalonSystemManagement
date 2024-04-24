@@ -37,7 +37,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             InitializeComponent();
             CustomerListDGV.CellContentDoubleClick += CustomerListDGV_CellDoubleClick;
-            AdjustCheckBoxSize(PWDCheckbox);
             paymentInstance = this;
         }
 
@@ -191,7 +190,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                         "where TransactionID = @transactionID";*/
 
-                    string query = "SELECT ci.CustomerName, ci.CustomerAge, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
+                    string query = "SELECT ci.CustomerName, ci.SpecialID, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
                                    "FROM customer_info ci " +
                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                                    "WHERE TransactionID = @transactionID";
@@ -232,11 +231,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                                 string Customer_name = reader["CustomerName"].ToString();
                                 //ServiceType = reader["ServiceType"].ToString();
-                                int Customer_age = Convert.ToInt32(reader["CustomerAge"]);
+                                string Customer_sID = Convert.ToString(reader["SpecialID"]);
                                 string Customer_phone = Convert.ToString(reader["CustomerPhoneNumber"]);
                                 //EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
 
-                                DisplayTransaction(Customer_name, Customer_age, Customer_phone);
+                                DisplayTransaction(Customer_name, Customer_sID, Customer_phone);
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
                                 //CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
@@ -251,17 +250,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\nat TransactionIDBox Key Press", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
 
             }
 
         }
 
-        private void DisplayTransaction(string name, int age, string phoneNumber)
+        private void DisplayTransaction(string name, string specialID, string phoneNumber)
         {
             NameBox.Text = name;
-            AgeBox.Text = age.ToString();
+            AgeBox.Text = specialID;
             PhoneNumberBox.Text = phoneNumber.ToString();
 
 
@@ -273,10 +272,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
-            if (Age >= 60)
-            {
-                PWDCheckbox.Checked = true;
-            }
         }
 
 
@@ -300,7 +295,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             continue;
                         }
 
-                       
                         string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
@@ -423,7 +417,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 if (cash > Convert.ToDecimal(TotalAmountTxtB.Text))
                 {
-                    //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(TotalAmountTxtB.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ChangePaymentStatus("PAID");
                     GeneratePDFBothReceipt();
@@ -764,7 +757,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             ProductsBoughtDGV.Rows.Clear();
             ServiceAcquiredDGV.Rows.Clear();
-            PWDCheckbox.Checked = false;
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
            
@@ -899,6 +891,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         logo.SetWidth(200);
                         logo.SetHeight(200);
 
+                        ImageData pesoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.peso));
+                        iText.Layout.Element.Image peso = new iText.Layout.Element.Image(pesoImageData);
+                        peso.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
+
                         doc.Add(logo);
                         doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph(" "));
@@ -968,11 +964,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal totalAmount = subtotalAmount - discount;
                         decimal change = cashEntered - totalAmount;
 
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}");
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}");
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
 
                         int totalQuantity = totalProductQuantity + totalServiceQuantity;
                         doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));

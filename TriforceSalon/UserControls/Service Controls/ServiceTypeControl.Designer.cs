@@ -63,7 +63,7 @@
             this.EditServiceTBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.EditServiceTBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.EditServiceTBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditServiceTBtn.Location = new System.Drawing.Point(15, 735);
+            this.EditServiceTBtn.Location = new System.Drawing.Point(16, 736);
             this.EditServiceTBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditServiceTBtn.Name = "EditServiceTBtn";
             this.EditServiceTBtn.Size = new System.Drawing.Size(900, 50);

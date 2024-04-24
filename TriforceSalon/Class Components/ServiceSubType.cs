@@ -173,11 +173,18 @@ namespace TriforceSalon.Class_Components
                         command.Parameters.AddWithValue("@image", imageData);
                         command.Parameters.AddWithValue("@subTypeName", categoryName);
 
-                        await command.ExecuteNonQueryAsync();
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            await command.ExecuteNonQueryAsync();
+                            MessageBox.Show("Category Added Successfully", "Operation Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
 
                 }
-                MessageBox.Show("Category Added Successfully", "Operationg Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -225,13 +232,23 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@categoryImage", imageData);
 
                         }
-                        await command.ExecuteNonQueryAsync();
-                        ClearCategory();
-                        HideCategoryButtons(true, true, false, false);
-                        await GetAllCategory(categoryDGV);
+                        else
+                        {
+                            if (Method.AdminAccess())
+                            {
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                            }
+                            else
+                            {
+                                await command.ExecuteNonQueryAsync();
+                                MessageBox.Show("Category Updated Successfully", "Operationg Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
                     }
+                    ClearCategory();
+                    HideCategoryButtons(true, true, false, false);
+                    await GetAllCategory(categoryDGV);
                 }
-                MessageBox.Show("Category Updated Successfully", "Operationg Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
