@@ -32,6 +32,7 @@
             this.PServiceBtn = new Guna.UI2.WinForms.Guna2Button();
             this.backgroundShape = new Guna.UI2.WinForms.Guna2Shapes();
             this.PromoContainer = new System.Windows.Forms.Panel();
+            this.ActivePromosBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // PProductsBtn
@@ -47,10 +48,10 @@
             this.PProductsBtn.ForeColor = System.Drawing.Color.White;
             this.PProductsBtn.ImageOffset = new System.Drawing.Point(0, -15);
             this.PProductsBtn.ImageSize = new System.Drawing.Size(25, 25);
-            this.PProductsBtn.Location = new System.Drawing.Point(748, 15);
+            this.PProductsBtn.Location = new System.Drawing.Point(973, 15);
             this.PProductsBtn.Margin = new System.Windows.Forms.Padding(2);
             this.PProductsBtn.Name = "PProductsBtn";
-            this.PProductsBtn.Size = new System.Drawing.Size(700, 108);
+            this.PProductsBtn.Size = new System.Drawing.Size(475, 108);
             this.PProductsBtn.TabIndex = 92;
             this.PProductsBtn.Text = "Create Products Promo";
             this.PProductsBtn.TextOffset = new System.Drawing.Point(0, -15);
@@ -65,15 +66,15 @@
             this.PServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.PServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.PServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.PServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.PServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.PServiceBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
             this.PServiceBtn.ForeColor = System.Drawing.Color.White;
             this.PServiceBtn.ImageOffset = new System.Drawing.Point(0, -15);
             this.PServiceBtn.ImageSize = new System.Drawing.Size(25, 25);
-            this.PServiceBtn.Location = new System.Drawing.Point(50, 15);
+            this.PServiceBtn.Location = new System.Drawing.Point(510, 15);
             this.PServiceBtn.Margin = new System.Windows.Forms.Padding(2);
             this.PServiceBtn.Name = "PServiceBtn";
-            this.PServiceBtn.Size = new System.Drawing.Size(700, 108);
+            this.PServiceBtn.Size = new System.Drawing.Size(475, 108);
             this.PServiceBtn.TabIndex = 93;
             this.PServiceBtn.Text = "Create Service Promo";
             this.PServiceBtn.TextOffset = new System.Drawing.Point(0, -15);
@@ -106,6 +107,29 @@
             this.PromoContainer.Size = new System.Drawing.Size(1400, 800);
             this.PromoContainer.TabIndex = 95;
             // 
+            // ActivePromosBtn
+            // 
+            this.ActivePromosBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ActivePromosBtn.BorderRadius = 40;
+            this.ActivePromosBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ActivePromosBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ActivePromosBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ActivePromosBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ActivePromosBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ActivePromosBtn.Font = new System.Drawing.Font("Chinacat", 21.75F);
+            this.ActivePromosBtn.ForeColor = System.Drawing.Color.White;
+            this.ActivePromosBtn.ImageOffset = new System.Drawing.Point(0, -15);
+            this.ActivePromosBtn.ImageSize = new System.Drawing.Size(25, 25);
+            this.ActivePromosBtn.Location = new System.Drawing.Point(50, 15);
+            this.ActivePromosBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ActivePromosBtn.Name = "ActivePromosBtn";
+            this.ActivePromosBtn.Size = new System.Drawing.Size(475, 108);
+            this.ActivePromosBtn.TabIndex = 96;
+            this.ActivePromosBtn.Text = "Active Promos";
+            this.ActivePromosBtn.TextOffset = new System.Drawing.Point(0, -15);
+            this.ActivePromosBtn.UseTransparentBackground = true;
+            this.ActivePromosBtn.Click += new System.EventHandler(this.ActivePromosBtn_Click);
+            // 
             // PromoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +137,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.PromoContainer);
             this.Controls.Add(this.backgroundShape);
+            this.Controls.Add(this.ActivePromosBtn);
             this.Controls.Add(this.PServiceBtn);
             this.Controls.Add(this.PProductsBtn);
             this.Name = "PromoUserControl";
@@ -123,9 +148,10 @@
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2Button PProductsBtn;
-        private Guna.UI2.WinForms.Guna2Button PServiceBtn;
         private Guna.UI2.WinForms.Guna2Shapes backgroundShape;
-        private System.Windows.Forms.Panel PromoContainer;
+        public Guna.UI2.WinForms.Guna2Button PProductsBtn;
+        public Guna.UI2.WinForms.Guna2Button PServiceBtn;
+        public System.Windows.Forms.Panel PromoContainer;
+        public Guna.UI2.WinForms.Guna2Button ActivePromosBtn;
     }
 }

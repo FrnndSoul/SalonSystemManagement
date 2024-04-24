@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ProductsFL = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,21 +43,22 @@
             this.PromoCodeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.PercentageTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProductsDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ProductNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.AddPromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProductContainer = new System.Windows.Forms.Panel();
-            this.RecordsContainer = new System.Windows.Forms.Panel();
-            this.EditAPromoBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label3 = new System.Windows.Forms.Label();
             this.UpdatePromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label7 = new System.Windows.Forms.Label();
             this.IDLbl = new System.Windows.Forms.Label();
-            this.ServiceNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDGV)).BeginInit();
             this.ProductContainer.SuspendLayout();
             this.SuspendLayout();
@@ -226,31 +227,34 @@
             // 
             this.ProductsDGV.AllowUserToAddRows = false;
             this.ProductsDGV.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.ProductsDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.ProductsDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductsDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.ProductsDGV.ColumnHeadersHeight = 15;
             this.ProductsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ServiceNameCol,
-            this.ServiceIDCol,
+            this.ProductNameCol,
+            this.ItemIDCol,
+            this.DecrementCol,
+            this.QuantityCol,
+            this.IncrementCol,
             this.RemoveCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductsDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.ProductsDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsDGV.Location = new System.Drawing.Point(932, 399);
             this.ProductsDGV.Name = "ProductsDGV";
@@ -279,6 +283,43 @@
             this.ProductsDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ProductsDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsDGV_CellClick);
+            // 
+            // ProductNameCol
+            // 
+            this.ProductNameCol.HeaderText = "Product Name";
+            this.ProductNameCol.Name = "ProductNameCol";
+            this.ProductNameCol.ReadOnly = true;
+            // 
+            // ItemIDCol
+            // 
+            this.ItemIDCol.HeaderText = "Item ID";
+            this.ItemIDCol.Name = "ItemIDCol";
+            this.ItemIDCol.ReadOnly = true;
+            this.ItemIDCol.Visible = false;
+            // 
+            // DecrementCol
+            // 
+            this.DecrementCol.HeaderText = "-";
+            this.DecrementCol.Name = "DecrementCol";
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.Name = "QuantityCol";
+            this.QuantityCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.QuantityCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IncrementCol
+            // 
+            this.IncrementCol.HeaderText = "+";
+            this.IncrementCol.Name = "IncrementCol";
+            // 
+            // RemoveCol
+            // 
+            this.RemoveCol.HeaderText = "Remove";
+            this.RemoveCol.Name = "RemoveCol";
+            this.RemoveCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AddPromoBtn
             // 
@@ -350,51 +391,6 @@
             this.ProductContainer.Size = new System.Drawing.Size(907, 800);
             this.ProductContainer.TabIndex = 34;
             // 
-            // RecordsContainer
-            // 
-            this.RecordsContainer.Location = new System.Drawing.Point(0, 0);
-            this.RecordsContainer.Name = "RecordsContainer";
-            this.RecordsContainer.Size = new System.Drawing.Size(907, 800);
-            this.RecordsContainer.TabIndex = 35;
-            this.RecordsContainer.Visible = false;
-            // 
-            // EditAPromoBtn
-            // 
-            this.EditAPromoBtn.AutoRoundedCorners = true;
-            this.EditAPromoBtn.BorderRadius = 21;
-            this.EditAPromoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.EditAPromoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.EditAPromoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.EditAPromoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.EditAPromoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.EditAPromoBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditAPromoBtn.ForeColor = System.Drawing.Color.Black;
-            this.EditAPromoBtn.Location = new System.Drawing.Point(929, 730);
-            this.EditAPromoBtn.Name = "EditAPromoBtn";
-            this.EditAPromoBtn.Size = new System.Drawing.Size(221, 45);
-            this.EditAPromoBtn.TabIndex = 35;
-            this.EditAPromoBtn.Text = "See Vouchers";
-            this.EditAPromoBtn.Click += new System.EventHandler(this.EditAPromoBtn_Click);
-            // 
-            // CancelBtn
-            // 
-            this.CancelBtn.AutoRoundedCorners = true;
-            this.CancelBtn.BorderRadius = 21;
-            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.CancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelBtn.ForeColor = System.Drawing.Color.Black;
-            this.CancelBtn.Location = new System.Drawing.Point(929, 730);
-            this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(221, 45);
-            this.CancelBtn.TabIndex = 36;
-            this.CancelBtn.Text = "Back";
-            this.CancelBtn.Visible = false;
-            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
-            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -464,35 +460,33 @@
             this.IDLbl.Text = "label8";
             this.IDLbl.Visible = false;
             // 
-            // ServiceNameCol
+            // CancelBtn
             // 
-            this.ServiceNameCol.HeaderText = "Service Name";
-            this.ServiceNameCol.Name = "ServiceNameCol";
-            this.ServiceNameCol.ReadOnly = true;
-            // 
-            // ServiceIDCol
-            // 
-            this.ServiceIDCol.HeaderText = "Service ID";
-            this.ServiceIDCol.Name = "ServiceIDCol";
-            this.ServiceIDCol.ReadOnly = true;
-            this.ServiceIDCol.Visible = false;
-            // 
-            // RemoveCol
-            // 
-            this.RemoveCol.HeaderText = "Remove";
-            this.RemoveCol.Name = "RemoveCol";
-            this.RemoveCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.RemoveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.CancelBtn.AutoRoundedCorners = true;
+            this.CancelBtn.BorderRadius = 21;
+            this.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.CancelBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelBtn.ForeColor = System.Drawing.Color.Black;
+            this.CancelBtn.Location = new System.Drawing.Point(929, 730);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(221, 45);
+            this.CancelBtn.TabIndex = 64;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // PItemsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.IDLbl);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.EditAPromoBtn);
             this.Controls.Add(this.AddPromoBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -505,11 +499,9 @@
             this.Controls.Add(this.PromoCodeTxtB);
             this.Controls.Add(this.PercentageTxtB);
             this.Controls.Add(this.ProductsDGV);
-            this.Controls.Add(this.ProductContainer);
-            this.Controls.Add(this.RecordsContainer);
-            this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.UpdatePromoBtn);
             this.Controls.Add(this.DiscardBtn);
+            this.Controls.Add(this.ProductContainer);
             this.Name = "PItemsUserControls";
             this.Size = new System.Drawing.Size(1400, 800);
             this.Load += new System.EventHandler(this.PItemsUserControls_Load);
@@ -531,7 +523,6 @@
         private Guna.UI2.WinForms.Guna2Button SearchProductsBtn;
         private Guna.UI2.WinForms.Guna2TextBox ProductSearchTxtB;
         public System.Windows.Forms.Panel ProductContainer;
-        public System.Windows.Forms.Panel RecordsContainer;
         public Guna.UI2.WinForms.Guna2TextBox PromoNameTxtB;
         public Guna.UI2.WinForms.Guna2DateTimePicker PEndDTP;
         public Guna.UI2.WinForms.Guna2DateTimePicker PStartDTP;
@@ -543,11 +534,13 @@
         public Guna.UI2.WinForms.Guna2Button UpdatePromoBtn;
         public Guna.UI2.WinForms.Guna2Button DiscardBtn;
         public Guna.UI2.WinForms.Guna2Button AddPromoBtn;
-        public Guna.UI2.WinForms.Guna2Button EditAPromoBtn;
         public System.Windows.Forms.Label IDLbl;
-        public Guna.UI2.WinForms.Guna2Button CancelBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIDCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemIDCol;
+        private System.Windows.Forms.DataGridViewButtonColumn DecrementCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
+        private System.Windows.Forms.DataGridViewButtonColumn IncrementCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveCol;
+        public Guna.UI2.WinForms.Guna2Button CancelBtn;
     }
 }
