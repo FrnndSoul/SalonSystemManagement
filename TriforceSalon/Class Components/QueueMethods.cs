@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Test;
+using TriforceSalon.Ticket_System;
 using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.Class_Components
@@ -15,6 +16,8 @@ namespace TriforceSalon.Class_Components
     public class QueueMethods
     {
         private string mysqlcon;
+        private EventHandler<QueueDisplay.QueueSelectedEventArgs> TicketChanged;
+
         public QueueMethods()
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
@@ -46,7 +49,7 @@ namespace TriforceSalon.Class_Components
                                 var AccountID = row["AccountID"].ToString();
                                 var TypeName = row["ServiceTypeName"].ToString();
 
-                                employeeDGV.Rows.Add(Name, AccountID, TypeName);
+                                employeeDGV.Rows.Add(AccountID, Name, TypeName);
                             }
                         }
                     }
@@ -81,8 +84,6 @@ namespace TriforceSalon.Class_Components
                    "AND sg.EmployeeID = @employee_id " +
                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
-
-
                     using (MySqlCommand command = new MySqlCommand(prefQuery, conn))
                     {
                         command.Parameters.AddWithValue("@service_type", serviceTypeName);
@@ -97,14 +98,19 @@ namespace TriforceSalon.Class_Components
                             foreach (DataRow row in dataTable.Rows)
                             {
                                 var Name = row["CustomerName"].ToString();
-                                var Age = row["CustomerAge"].ToString();
-                                var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
                                 var Queue = row["QueueNumber"].ToString();
 
-                                //dito ka mag aadd ng mga paglalagyan
+                                if (containerFL.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
+                                {
+                                    continue;
+                                }
+                                var cutomer = new QueueDisplay(Name, Service, PrioStatus, Ticket, Queue);
+                                containerFL.Controls.Add(cutomer);
+                                cutomer.SelectedQueue += TicketChanged;
+
                             }
                         }
                     }
@@ -153,14 +159,18 @@ namespace TriforceSalon.Class_Components
                             foreach (DataRow row in dataTable.Rows)
                             {
                                 var Name = row["CustomerName"].ToString();
-                                var Age = row["CustomerAge"].ToString();
-                                var PhoneNumber = row["CustomerPhoneNumber"].ToString();
                                 var Service = row["ServiceVariation"].ToString();
                                 var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
                                 var Queue = row["QueueNumber"].ToString();
 
-                                //dito ka mag aadd ng mga paglalagyan
+                                if (containerFL.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
+                                {
+                                    continue;
+                                }
+                                var cutomer = new QueueDisplay(Name, Service, PrioStatus, Ticket, Queue);
+                                containerFL.Controls.Add(cutomer);
+                                cutomer.SelectedQueue += TicketChanged;
                             }
                         }
                     }
