@@ -185,11 +185,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    /*string query = "select ci.CustomerName, ci.CustomerAge, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken, sg.EmployeeID, sg.ServiceType " +
-                        "from customer_info ci" +
-                        "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                        "where TransactionID = @transactionID";*/
-
                     string query = "SELECT ci.CustomerName, ci.SpecialID, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
                                    "FROM customer_info ci " +
                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
@@ -485,7 +480,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "Select ProductName, Quantity, Amount from product_group where ProductGroupID = @transactionID AND IsVoided = 'NO'";
+                    string query = "Select ProductName, Quantity, Amount, Discount from product_group where ProductGroupID = @transactionID AND IsVoided = 'NO'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -498,13 +493,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 string productName = reader["ProductName"].ToString();
                                 int quantity = Convert.ToInt32(reader["Quantity"]);
                                 decimal amount = Convert.ToDecimal(reader["Amount"]);
+                                string discount = Convert.ToString(reader["Discount"]);
+
 
                                 int rowIndex = productsBoughtDGV.Rows.Add();
 
                                 productsBoughtDGV.Rows[rowIndex].Cells["ProdNameCol"].Value = productName;
                                 productsBoughtDGV.Rows[rowIndex].Cells["QuantityCol"].Value = quantity;
                                 productsBoughtDGV.Rows[rowIndex].Cells["TotAmountCol"].Value = amount;
-                                productsBoughtDGV.Rows[rowIndex].Cells["ProductsDiscountChckBoxCol"].Value = "Normal";
+                                productsBoughtDGV.Rows[rowIndex].Cells["ProductsDiscountCol"].Value = discount;
 
                             }
                         }
@@ -576,7 +573,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "Select ServiceVariation, Amount from service_group where ServiceGroupID = @transactionID";
+                    string query = "Select ServiceVariation, Amount, Discount from service_group where ServiceGroupID = @transactionID";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -588,12 +585,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             {
                                 string productName = reader["ServiceVariation"].ToString();
                                 decimal amount = Convert.ToDecimal(reader["Amount"]);
+                                string discount = Convert.ToString(reader["Discount"]);
+
 
                                 int rowIndex = serviceAcquiredDGV.Rows.Add();
 
                                 serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceCol"].Value = productName;
                                 serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceAmountCol"].Value = amount;
-                                serviceAcquiredDGV.Rows[rowIndex].Cells["ServicesDiscountChckBoxCol"].Value = "Normal";
+                                serviceAcquiredDGV.Rows[rowIndex].Cells["ServiceDiscountCol"].Value = discount;
 
                             }
                         }

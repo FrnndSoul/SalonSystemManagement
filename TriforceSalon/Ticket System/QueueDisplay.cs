@@ -12,18 +12,20 @@ namespace TriforceSalon.Ticket_System
 {
     public partial class QueueDisplay : UserControl
     {
-        public static string TransactionID;
+        public static int TransactionID = -1;
+        public static string ServiceVar;
         private bool ticketSelected = false;
 
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
 
-        
+        public string ServiceVariation => ServiceVarLbl.Text;
         public string Ticket => TransactionIDLbl.Text;
         public string Queue => QueueNumLbl.Text;
 
-        public QueueDisplay(string ticket, string queue)
+        public QueueDisplay(string ticket, string queue, string serviceVariation)
         {
             InitializeComponent();
+            ServiceVarLbl.Text = serviceVariation;
             TransactionIDLbl.Text = ticket;
             QueueNumLbl.Text = queue;
         }
@@ -39,9 +41,11 @@ namespace TriforceSalon.Ticket_System
         {
             public string TransactionID { get; }
             public string Queue { get; }
+            public string ServiceVariation { get; }
 
-            public ScheduleSelectedEventArgs(string ticket, string queue)
+            public ScheduleSelectedEventArgs(string ticket, string queue, string serviceVariation)
             {
+                ServiceVariation = serviceVariation;
                 TransactionID = ticket;
                 Queue = queue;
             }
@@ -49,12 +53,12 @@ namespace TriforceSalon.Ticket_System
 
         private void QueueTicket_Click(object sender, EventArgs e)
         {
-            TransactionID = TransactionIDLbl.Text;
-
+            TransactionID = Convert.ToInt32(TransactionIDLbl.Text);
+            ServiceVar = ServiceVarLbl.Text;
 
             if (ticketSelected)
             {
-                TransactionID = TransactionIDLbl.Text;
+                TransactionID = Convert.ToInt32(TransactionIDLbl.Text);
                 QueueTicket.FillColor = Color.White;
 
                 TransactionIDLbl.ForeColor = Color.Black;
@@ -63,7 +67,8 @@ namespace TriforceSalon.Ticket_System
             }
             else
             {
-                TransactionID = null;
+                TransactionID = -1;
+                ServiceVar = null;
                 QueueTicket.FillColor = Color.FromArgb(140, 113, 209);
 
                 TransactionIDLbl.ForeColor = Color.White;

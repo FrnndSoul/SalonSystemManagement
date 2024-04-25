@@ -28,18 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -60,6 +54,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ServiceTypeComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.PromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ServicePromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ActivateBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +80,9 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.ServicePromoTxtB);
+            this.guna2Panel1.Controls.Add(this.ActivateBtn);
+            this.guna2Panel1.Controls.Add(this.PromoTxtB);
             this.guna2Panel1.Controls.Add(this.ServicesGDGVVControl);
             this.guna2Panel1.Controls.Add(this.AddLServiceListBtn);
             this.guna2Panel1.Controls.Add(this.transactionIDTxtB);
@@ -103,16 +110,16 @@
             // 
             this.ServicesGDGVVControl.AllowUserToAddRows = false;
             this.ServicesGDGVVControl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.ServicesGDGVVControl.ColumnHeadersHeight = 28;
             this.ServicesGDGVVControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ServicesGDGVVControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -120,22 +127,23 @@
             this.SNameCol,
             this.PrefEmpCol,
             this.AmountCol,
+            this.DiscountCol,
             this.RemoveServiceCol,
             this.QueNumCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle6;
             this.ServicesGDGVVControl.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.Location = new System.Drawing.Point(34, 229);
             this.ServicesGDGVVControl.Name = "ServicesGDGVVControl";
             this.ServicesGDGVVControl.ReadOnly = true;
             this.ServicesGDGVVControl.RowHeadersVisible = false;
-            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 311);
+            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 243);
             this.ServicesGDGVVControl.TabIndex = 24;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -159,45 +167,6 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ServicesGDGVVControl.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ServicesGDGVVControl_CellClick);
-            // 
-            // ServiceTypeCol
-            // 
-            this.ServiceTypeCol.HeaderText = "ServiceType";
-            this.ServiceTypeCol.Name = "ServiceTypeCol";
-            this.ServiceTypeCol.ReadOnly = true;
-            // 
-            // SNameCol
-            // 
-            this.SNameCol.HeaderText = "Service Name";
-            this.SNameCol.Name = "SNameCol";
-            this.SNameCol.ReadOnly = true;
-            // 
-            // PrefEmpCol
-            // 
-            this.PrefEmpCol.HeaderText = "Preferred Employee";
-            this.PrefEmpCol.Name = "PrefEmpCol";
-            this.PrefEmpCol.ReadOnly = true;
-            // 
-            // AmountCol
-            // 
-            this.AmountCol.HeaderText = "Amount";
-            this.AmountCol.Name = "AmountCol";
-            this.AmountCol.ReadOnly = true;
-            // 
-            // RemoveServiceCol
-            // 
-            this.RemoveServiceCol.HeaderText = "X";
-            this.RemoveServiceCol.Name = "RemoveServiceCol";
-            this.RemoveServiceCol.ReadOnly = true;
-            this.RemoveServiceCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.RemoveServiceCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // QueNumCol
-            // 
-            this.QueNumCol.HeaderText = "Queue Number";
-            this.QueNumCol.Name = "QueNumCol";
-            this.QueNumCol.ReadOnly = true;
-            this.QueNumCol.Visible = false;
             // 
             // AddLServiceListBtn
             // 
@@ -541,6 +510,116 @@
             this.RefreshBtn.TabIndex = 7;
             this.RefreshBtn.Text = "Refresh";
             // 
+            // PromoTxtB
+            // 
+            this.PromoTxtB.AutoRoundedCorners = true;
+            this.PromoTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.PromoTxtB.BorderRadius = 30;
+            this.PromoTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PromoTxtB.DefaultText = "";
+            this.PromoTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.PromoTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.PromoTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PromoTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PromoTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PromoTxtB.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.PromoTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PromoTxtB.Location = new System.Drawing.Point(374, 818);
+            this.PromoTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.PromoTxtB.Name = "PromoTxtB";
+            this.PromoTxtB.PasswordChar = '\0';
+            this.PromoTxtB.PlaceholderText = "Enter Promo Code Here";
+            this.PromoTxtB.SelectedText = "";
+            this.PromoTxtB.Size = new System.Drawing.Size(520, 63);
+            this.PromoTxtB.TabIndex = 45;
+            // 
+            // ServicePromoTxtB
+            // 
+            this.ServicePromoTxtB.AutoRoundedCorners = true;
+            this.ServicePromoTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServicePromoTxtB.BorderRadius = 17;
+            this.ServicePromoTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ServicePromoTxtB.DefaultText = "";
+            this.ServicePromoTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ServicePromoTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ServicePromoTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicePromoTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Location = new System.Drawing.Point(234, 495);
+            this.ServicePromoTxtB.Name = "ServicePromoTxtB";
+            this.ServicePromoTxtB.PasswordChar = '\0';
+            this.ServicePromoTxtB.PlaceholderText = "Enter Promo Code Here";
+            this.ServicePromoTxtB.SelectedText = "";
+            this.ServicePromoTxtB.Size = new System.Drawing.Size(335, 36);
+            this.ServicePromoTxtB.TabIndex = 47;
+            this.ServicePromoTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ServicePromoTxtB_KeyPress);
+            // 
+            // ActivateBtn
+            // 
+            this.ActivateBtn.AutoRoundedCorners = true;
+            this.ActivateBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ActivateBtn.BorderRadius = 17;
+            this.ActivateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ActivateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ActivateBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ActivateBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ActivateBtn.ForeColor = System.Drawing.Color.White;
+            this.ActivateBtn.Location = new System.Drawing.Point(36, 495);
+            this.ActivateBtn.Name = "ActivateBtn";
+            this.ActivateBtn.Size = new System.Drawing.Size(180, 36);
+            this.ActivateBtn.TabIndex = 46;
+            this.ActivateBtn.Text = "Avail Promo";
+            this.ActivateBtn.Click += new System.EventHandler(this.ActivateBtn_Click);
+            // 
+            // ServiceTypeCol
+            // 
+            this.ServiceTypeCol.HeaderText = "ServiceType";
+            this.ServiceTypeCol.Name = "ServiceTypeCol";
+            this.ServiceTypeCol.ReadOnly = true;
+            // 
+            // SNameCol
+            // 
+            this.SNameCol.HeaderText = "Service Name";
+            this.SNameCol.Name = "SNameCol";
+            this.SNameCol.ReadOnly = true;
+            // 
+            // PrefEmpCol
+            // 
+            this.PrefEmpCol.HeaderText = "Preferred Employee";
+            this.PrefEmpCol.Name = "PrefEmpCol";
+            this.PrefEmpCol.ReadOnly = true;
+            // 
+            // AmountCol
+            // 
+            this.AmountCol.HeaderText = "Amount";
+            this.AmountCol.Name = "AmountCol";
+            this.AmountCol.ReadOnly = true;
+            // 
+            // DiscountCol
+            // 
+            this.DiscountCol.HeaderText = "Discount";
+            this.DiscountCol.Name = "DiscountCol";
+            this.DiscountCol.ReadOnly = true;
+            // 
+            // RemoveServiceCol
+            // 
+            this.RemoveServiceCol.HeaderText = "X";
+            this.RemoveServiceCol.Name = "RemoveServiceCol";
+            this.RemoveServiceCol.ReadOnly = true;
+            this.RemoveServiceCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveServiceCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // QueNumCol
+            // 
+            this.QueNumCol.HeaderText = "Queue Number";
+            this.QueNumCol.Name = "QueNumCol";
+            this.QueNumCol.ReadOnly = true;
+            this.QueNumCol.Visible = false;
+            // 
             // ServicesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -582,15 +661,19 @@
         private System.Windows.Forms.Label label7;
         private Guna.UI2.WinForms.Guna2Button AddLServiceListBtn;
         private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
-        private System.Windows.Forms.DataGridViewButtonColumn RemoveServiceCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
         private System.Windows.Forms.FlowLayoutPanel CategoryFL;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2ComboBox ServiceTypeComB;
         private Guna.UI2.WinForms.Guna2Button RefreshBtn;
+        private Guna.UI2.WinForms.Guna2TextBox PromoTxtB;
+        private Guna.UI2.WinForms.Guna2TextBox ServicePromoTxtB;
+        private Guna.UI2.WinForms.Guna2Button ActivateBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountCol;
+        private System.Windows.Forms.DataGridViewButtonColumn RemoveServiceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
     }
 }

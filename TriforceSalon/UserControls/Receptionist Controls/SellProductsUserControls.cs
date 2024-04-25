@@ -616,7 +616,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             CustomerIDComB.Enabled = true;
 
-            ProductsControlDGV.Columns["DiscountComB"].Visible = false;
+            //ProductsControlDGV.Columns["DiscountComB"].Visible = false;
             CashTxtBx.Enabled = false;
             CalculateCostBtn.Enabled = false;
             CustomerNameTxtB.Enabled = false;

@@ -1,6 +1,6 @@
 ﻿namespace TriforceSalon.Ticket_System
 {
-    partial class QueueDisplay
+    partial class InSessionDisplay
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.QueueTicket = new Guna.UI2.WinForms.Guna2Panel();
+            this.ServiceVarLbl = new System.Windows.Forms.Label();
             this.RefLbl = new System.Windows.Forms.Label();
             this.TransactionIDLbl = new System.Windows.Forms.Label();
             this.QueueNumLbl = new System.Windows.Forms.Label();
-            this.ServiceVarLbl = new System.Windows.Forms.Label();
             this.QueueTicket.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,9 +50,18 @@
             this.QueueTicket.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(113)))), ((int)(((byte)(209)))));
             this.QueueTicket.Location = new System.Drawing.Point(0, 0);
             this.QueueTicket.Name = "QueueTicket";
-            this.QueueTicket.Size = new System.Drawing.Size(209, 135);
-            this.QueueTicket.TabIndex = 0;
-            this.QueueTicket.Click += new System.EventHandler(this.QueueTicket_Click);
+            this.QueueTicket.Size = new System.Drawing.Size(209, 140);
+            this.QueueTicket.TabIndex = 1;
+            // 
+            // ServiceVarLbl
+            // 
+            this.ServiceVarLbl.AutoSize = true;
+            this.ServiceVarLbl.Location = new System.Drawing.Point(171, 113);
+            this.ServiceVarLbl.Name = "ServiceVarLbl";
+            this.ServiceVarLbl.Size = new System.Drawing.Size(35, 13);
+            this.ServiceVarLbl.TabIndex = 3;
+            this.ServiceVarLbl.Text = "label1";
+            this.ServiceVarLbl.Visible = false;
             // 
             // RefLbl
             // 
@@ -86,24 +95,14 @@
             this.QueueNumLbl.TabIndex = 0;
             this.QueueNumLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ServiceVarLbl
-            // 
-            this.ServiceVarLbl.AutoSize = true;
-            this.ServiceVarLbl.Location = new System.Drawing.Point(171, 113);
-            this.ServiceVarLbl.Name = "ServiceVarLbl";
-            this.ServiceVarLbl.Size = new System.Drawing.Size(35, 13);
-            this.ServiceVarLbl.TabIndex = 3;
-            this.ServiceVarLbl.Text = "label1";
-            this.ServiceVarLbl.Visible = false;
-            // 
-            // QueueDisplay
+            // InSessionDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.QueueTicket);
-            this.Name = "QueueDisplay";
-            this.Size = new System.Drawing.Size(209, 135);
+            this.Name = "InSessionDisplay";
+            this.Size = new System.Drawing.Size(209, 140);
             this.QueueTicket.ResumeLayout(false);
             this.QueueTicket.PerformLayout();
             this.ResumeLayout(false);
@@ -113,9 +112,9 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Panel QueueTicket;
+        private System.Windows.Forms.Label ServiceVarLbl;
         private System.Windows.Forms.Label RefLbl;
         private System.Windows.Forms.Label TransactionIDLbl;
         private System.Windows.Forms.Label QueueNumLbl;
-        private System.Windows.Forms.Label ServiceVarLbl;
     }
 }

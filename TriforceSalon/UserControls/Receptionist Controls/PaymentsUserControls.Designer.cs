@@ -51,14 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ServiceAcquiredDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ServiceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServicesDiscountChckBoxCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ProductsBoughtDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductsDiscountChckBoxCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -87,6 +80,13 @@
             this.StatusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.RefreshListBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServiceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductsDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
@@ -330,7 +330,7 @@
             this.ServiceAcquiredDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceCol,
             this.ServiceAmountCol,
-            this.ServicesDiscountChckBoxCol});
+            this.ServiceDiscountCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -376,29 +376,6 @@
             this.ServiceAcquiredDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceAcquiredDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // ServiceCol
-            // 
-            this.ServiceCol.HeaderText = "Service";
-            this.ServiceCol.MinimumWidth = 6;
-            this.ServiceCol.Name = "ServiceCol";
-            // 
-            // ServiceAmountCol
-            // 
-            this.ServiceAmountCol.HeaderText = "Amount";
-            this.ServiceAmountCol.MinimumWidth = 6;
-            this.ServiceAmountCol.Name = "ServiceAmountCol";
-            // 
-            // ServicesDiscountChckBoxCol
-            // 
-            this.ServicesDiscountChckBoxCol.HeaderText = "DIscount";
-            this.ServicesDiscountChckBoxCol.Items.AddRange(new object[] {
-            "Normal",
-            "Discounted"});
-            this.ServicesDiscountChckBoxCol.MinimumWidth = 6;
-            this.ServicesDiscountChckBoxCol.Name = "ServicesDiscountChckBoxCol";
-            this.ServicesDiscountChckBoxCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServicesDiscountChckBoxCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // ProductsBoughtDGV
             // 
             this.ProductsBoughtDGV.AllowUserToAddRows = false;
@@ -419,7 +396,7 @@
             this.ProdNameCol,
             this.QuantityCol,
             this.TotAmountCol,
-            this.ProductsDiscountChckBoxCol});
+            this.ProductsDiscountCol});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -464,35 +441,6 @@
             this.ProductsBoughtDGV.ThemeStyle.RowsStyle.Height = 22;
             this.ProductsBoughtDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsBoughtDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // ProdNameCol
-            // 
-            this.ProdNameCol.HeaderText = "Product";
-            this.ProdNameCol.MinimumWidth = 6;
-            this.ProdNameCol.Name = "ProdNameCol";
-            // 
-            // QuantityCol
-            // 
-            this.QuantityCol.HeaderText = "Quantity";
-            this.QuantityCol.MinimumWidth = 6;
-            this.QuantityCol.Name = "QuantityCol";
-            // 
-            // TotAmountCol
-            // 
-            this.TotAmountCol.HeaderText = "Total Amount";
-            this.TotAmountCol.MinimumWidth = 6;
-            this.TotAmountCol.Name = "TotAmountCol";
-            // 
-            // ProductsDiscountChckBoxCol
-            // 
-            this.ProductsDiscountChckBoxCol.HeaderText = "Discount";
-            this.ProductsDiscountChckBoxCol.Items.AddRange(new object[] {
-            "Normal",
-            "Discounted"});
-            this.ProductsDiscountChckBoxCol.MinimumWidth = 6;
-            this.ProductsDiscountChckBoxCol.Name = "ProductsDiscountChckBoxCol";
-            this.ProductsDiscountChckBoxCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductsDiscountChckBoxCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // label2
             // 
@@ -961,6 +909,50 @@
             this.RefreshListBtn.UseTransparentBackground = true;
             this.RefreshListBtn.Click += new System.EventHandler(this.RefreshListBtn_Click);
             // 
+            // ServiceCol
+            // 
+            this.ServiceCol.HeaderText = "Service";
+            this.ServiceCol.MinimumWidth = 6;
+            this.ServiceCol.Name = "ServiceCol";
+            // 
+            // ServiceAmountCol
+            // 
+            this.ServiceAmountCol.HeaderText = "Amount";
+            this.ServiceAmountCol.MinimumWidth = 6;
+            this.ServiceAmountCol.Name = "ServiceAmountCol";
+            // 
+            // ServiceDiscountCol
+            // 
+            this.ServiceDiscountCol.HeaderText = "DIscount";
+            this.ServiceDiscountCol.MinimumWidth = 6;
+            this.ServiceDiscountCol.Name = "ServiceDiscountCol";
+            this.ServiceDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ProdNameCol
+            // 
+            this.ProdNameCol.HeaderText = "Product";
+            this.ProdNameCol.MinimumWidth = 6;
+            this.ProdNameCol.Name = "ProdNameCol";
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.MinimumWidth = 6;
+            this.QuantityCol.Name = "QuantityCol";
+            // 
+            // TotAmountCol
+            // 
+            this.TotAmountCol.HeaderText = "Total Amount";
+            this.TotAmountCol.MinimumWidth = 6;
+            this.TotAmountCol.Name = "TotAmountCol";
+            // 
+            // ProductsDiscountCol
+            // 
+            this.ProductsDiscountCol.HeaderText = "Discount";
+            this.ProductsDiscountCol.MinimumWidth = 6;
+            this.ProductsDiscountCol.Name = "ProductsDiscountCol";
+            this.ProductsDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // PaymentsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1022,13 +1014,6 @@
         private Guna.UI2.WinForms.Guna2TextBox CustomerMoneyInput;
         private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2Button ClearFieldsBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceAmountCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ServicesDiscountChckBoxCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotAmountCol;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ProductsDiscountChckBoxCol;
         private Guna.UI2.WinForms.Guna2Button CalculateTotalBtn;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox TotalAmountTxtB;
@@ -1040,5 +1025,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusCol;
         private System.Windows.Forms.Label label6;
         private Guna.UI2.WinForms.Guna2Button RefreshListBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceAmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceDiscountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotAmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductsDiscountCol;
     }
 }

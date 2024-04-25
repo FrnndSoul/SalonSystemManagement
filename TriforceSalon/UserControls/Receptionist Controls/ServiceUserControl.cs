@@ -17,6 +17,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private PictureBox pic;
         private Label serviceTypeLbl;
         TransactionMethods transactionMethods = new TransactionMethods();
+        SellProductsMethods sellMethods;
         public KeypressLettersRestrictions keypressLettersRestrictions = new KeypressLettersRestrictions();
         public KeypressNumbersRestrictions keypressNumbersRestrictions = new KeypressNumbersRestrictions();
 
@@ -243,7 +244,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "None", "X", queueNumber);
             //ClearAll();
         }
 
@@ -283,6 +284,82 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 e.Handled = true;
                 return;
+            }
+        }
+
+        private void ActivateBtn_Click(object sender, EventArgs e)
+        {
+            string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
+
+            if (int.TryParse(promoInput, out int promoCode))
+            {
+                var promoDetails = transactionMethods.GetPromoDetails(promoCode, mysqlcon);
+
+                if (promoDetails.isValid == "YES")
+                {
+                    var serviceDetails = transactionMethods.GetServiceDetails(promoCode, mysqlcon);
+
+                    // Check if any of the items from the promo are already present in the DataGridView
+                    bool serviceAlreadyAdded = true; // Assume all services are already added
+                    foreach (var service in serviceDetails)
+                    {
+                        bool found = false;
+                        foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                        {
+                            if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            serviceAlreadyAdded = false;
+                            break;
+                        }
+                    }
+
+                    if (serviceAlreadyAdded)
+                    {
+                        foreach (var service in serviceDetails)
+                        {
+                            foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                            {
+                                if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                                {
+                                    row.Cells["DiscountCol"].Value = service.ServiceDiscount;
+                                }
+                            }
+                        }
+                        MessageBox.Show("Discount applied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select all the services from the promo before applying the discount.", "Service(s) not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    ServicePromoTxtB.Clear();
+                }
+                else if (promoDetails.isValid == "NO")
+                {
+                    MessageBox.Show($"Promo Code {promoDetails.promoCode} is not available right now.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid promo code.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void ServicePromoTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+            else if (ServicePromoTxtB.Text.Length >= 7 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
             }
         }
     }
