@@ -51,7 +51,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ServiceAcquiredDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ServiceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductsBoughtDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductsDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -80,13 +87,17 @@
             this.StatusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.RefreshListBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.ServiceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotAmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductsDiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.RBtn2 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn3 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn4 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn5 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
@@ -125,6 +136,17 @@
             // 
             this.PaymentPanel.AutoScroll = true;
             this.PaymentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.PaymentPanel.Controls.Add(this.label8);
+            this.PaymentPanel.Controls.Add(this.label12);
+            this.PaymentPanel.Controls.Add(this.label11);
+            this.PaymentPanel.Controls.Add(this.label10);
+            this.PaymentPanel.Controls.Add(this.label9);
+            this.PaymentPanel.Controls.Add(this.RBtn2);
+            this.PaymentPanel.Controls.Add(this.RBtn3);
+            this.PaymentPanel.Controls.Add(this.RBtn1);
+            this.PaymentPanel.Controls.Add(this.RBtn4);
+            this.PaymentPanel.Controls.Add(this.RBtn5);
+            this.PaymentPanel.Controls.Add(this.label7);
             this.PaymentPanel.Controls.Add(this.guna2HtmlLabel7);
             this.PaymentPanel.Controls.Add(this.TotalAmountTxtB);
             this.PaymentPanel.Controls.Add(this.CalculateTotalBtn);
@@ -165,7 +187,7 @@
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Stanberry", 20F);
             this.guna2HtmlLabel7.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(92, 1031);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(92, 1264);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             this.guna2HtmlLabel7.Size = new System.Drawing.Size(154, 36);
             this.guna2HtmlLabel7.TabIndex = 49;
@@ -188,7 +210,7 @@
             this.TotalAmountTxtB.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             this.TotalAmountTxtB.ForeColor = System.Drawing.Color.Black;
             this.TotalAmountTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TotalAmountTxtB.Location = new System.Drawing.Point(254, 1023);
+            this.TotalAmountTxtB.Location = new System.Drawing.Point(254, 1256);
             this.TotalAmountTxtB.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.TotalAmountTxtB.Name = "TotalAmountTxtB";
             this.TotalAmountTxtB.PasswordChar = '\0';
@@ -232,7 +254,7 @@
             this.ClearFieldsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearFieldsBtn.ForeColor = System.Drawing.Color.White;
             this.ClearFieldsBtn.IndicateFocus = true;
-            this.ClearFieldsBtn.Location = new System.Drawing.Point(50, 1140);
+            this.ClearFieldsBtn.Location = new System.Drawing.Point(50, 1373);
             this.ClearFieldsBtn.Name = "ClearFieldsBtn";
             this.ClearFieldsBtn.Size = new System.Drawing.Size(230, 37);
             this.ClearFieldsBtn.TabIndex = 46;
@@ -303,10 +325,11 @@
             this.label3.Size = new System.Drawing.Size(524, 48);
             this.label3.TabIndex = 42;
             this.label3.Text = "Cash Payment";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(686, 1200);
+            this.panel1.Location = new System.Drawing.Point(709, 1436);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(157, 58);
             this.panel1.TabIndex = 41;
@@ -376,6 +399,25 @@
             this.ServiceAcquiredDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceAcquiredDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // ServiceCol
+            // 
+            this.ServiceCol.HeaderText = "Service";
+            this.ServiceCol.MinimumWidth = 6;
+            this.ServiceCol.Name = "ServiceCol";
+            // 
+            // ServiceAmountCol
+            // 
+            this.ServiceAmountCol.HeaderText = "Amount";
+            this.ServiceAmountCol.MinimumWidth = 6;
+            this.ServiceAmountCol.Name = "ServiceAmountCol";
+            // 
+            // ServiceDiscountCol
+            // 
+            this.ServiceDiscountCol.HeaderText = "DIscount";
+            this.ServiceDiscountCol.MinimumWidth = 6;
+            this.ServiceDiscountCol.Name = "ServiceDiscountCol";
+            this.ServiceDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // ProductsBoughtDGV
             // 
             this.ProductsBoughtDGV.AllowUserToAddRows = false;
@@ -442,6 +484,31 @@
             this.ProductsBoughtDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsBoughtDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // ProdNameCol
+            // 
+            this.ProdNameCol.HeaderText = "Product";
+            this.ProdNameCol.MinimumWidth = 6;
+            this.ProdNameCol.Name = "ProdNameCol";
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.MinimumWidth = 6;
+            this.QuantityCol.Name = "QuantityCol";
+            // 
+            // TotAmountCol
+            // 
+            this.TotAmountCol.HeaderText = "Total Amount";
+            this.TotAmountCol.MinimumWidth = 6;
+            this.TotAmountCol.Name = "TotAmountCol";
+            // 
+            // ProductsDiscountCol
+            // 
+            this.ProductsDiscountCol.HeaderText = "Discount";
+            this.ProductsDiscountCol.MinimumWidth = 6;
+            this.ProductsDiscountCol.Name = "ProductsDiscountCol";
+            this.ProductsDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
@@ -469,7 +536,7 @@
             this.guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel16.Font = new System.Drawing.Font("Stanberry", 20F);
             this.guna2HtmlLabel16.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel16.Location = new System.Drawing.Point(90, 974);
+            this.guna2HtmlLabel16.Location = new System.Drawing.Point(90, 1207);
             this.guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             this.guna2HtmlLabel16.Size = new System.Drawing.Size(211, 36);
             this.guna2HtmlLabel16.TabIndex = 31;
@@ -492,7 +559,7 @@
             this.DiscountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             this.DiscountBox.ForeColor = System.Drawing.Color.Black;
             this.DiscountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.DiscountBox.Location = new System.Drawing.Point(307, 967);
+            this.DiscountBox.Location = new System.Drawing.Point(307, 1200);
             this.DiscountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.DiscountBox.Name = "DiscountBox";
             this.DiscountBox.PasswordChar = '\0';
@@ -517,7 +584,7 @@
             this.VoidBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VoidBtn.ForeColor = System.Drawing.Color.White;
             this.VoidBtn.IndicateFocus = true;
-            this.VoidBtn.Location = new System.Drawing.Point(50, 1187);
+            this.VoidBtn.Location = new System.Drawing.Point(50, 1420);
             this.VoidBtn.Name = "VoidBtn";
             this.VoidBtn.Size = new System.Drawing.Size(230, 37);
             this.VoidBtn.TabIndex = 28;
@@ -557,7 +624,7 @@
             this.guna2HtmlLabel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.guna2HtmlLabel15.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel15.ForeColor = System.Drawing.Color.White;
-            this.guna2HtmlLabel15.Location = new System.Drawing.Point(50, 843);
+            this.guna2HtmlLabel15.Location = new System.Drawing.Point(50, 1076);
             this.guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(525, 48);
             this.guna2HtmlLabel15.TabIndex = 23;
@@ -589,7 +656,7 @@
             this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Stanberry", 20F);
             this.guna2HtmlLabel13.ForeColor = System.Drawing.Color.Black;
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(92, 917);
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(92, 1150);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
             this.guna2HtmlLabel13.Size = new System.Drawing.Size(109, 36);
             this.guna2HtmlLabel13.TabIndex = 20;
@@ -612,7 +679,7 @@
             this.AmountBox.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             this.AmountBox.ForeColor = System.Drawing.Color.Black;
             this.AmountBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.AmountBox.Location = new System.Drawing.Point(214, 909);
+            this.AmountBox.Location = new System.Drawing.Point(214, 1142);
             this.AmountBox.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.AmountBox.Name = "AmountBox";
             this.AmountBox.PasswordChar = '\0';
@@ -909,49 +976,150 @@
             this.RefreshListBtn.UseTransparentBackground = true;
             this.RefreshListBtn.Click += new System.EventHandler(this.RefreshListBtn_Click);
             // 
-            // ServiceCol
+            // label7
             // 
-            this.ServiceCol.HeaderText = "Service";
-            this.ServiceCol.MinimumWidth = 6;
-            this.ServiceCol.Name = "ServiceCol";
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.label7.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(50, 843);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(525, 48);
+            this.label7.TabIndex = 50;
+            this.label7.Text = "Service Feedback";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ServiceAmountCol
+            // RBtn2
             // 
-            this.ServiceAmountCol.HeaderText = "Amount";
-            this.ServiceAmountCol.MinimumWidth = 6;
-            this.ServiceAmountCol.Name = "ServiceAmountCol";
+            this.RBtn2.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn2.CheckedState.BorderThickness = 0;
+            this.RBtn2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn2.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn2.Location = new System.Drawing.Point(173, 929);
+            this.RBtn2.Name = "RBtn2";
+            this.RBtn2.Size = new System.Drawing.Size(57, 57);
+            this.RBtn2.TabIndex = 55;
+            this.RBtn2.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn2.UncheckedState.BorderThickness = 2;
+            this.RBtn2.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn2.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // ServiceDiscountCol
+            // RBtn3
             // 
-            this.ServiceDiscountCol.HeaderText = "DIscount";
-            this.ServiceDiscountCol.MinimumWidth = 6;
-            this.ServiceDiscountCol.Name = "ServiceDiscountCol";
-            this.ServiceDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RBtn3.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn3.CheckedState.BorderThickness = 0;
+            this.RBtn3.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn3.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn3.Location = new System.Drawing.Point(290, 929);
+            this.RBtn3.Name = "RBtn3";
+            this.RBtn3.Size = new System.Drawing.Size(57, 57);
+            this.RBtn3.TabIndex = 54;
+            this.RBtn3.Text = "RBtn3";
+            this.RBtn3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn3.UncheckedState.BorderThickness = 2;
+            this.RBtn3.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn3.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // ProdNameCol
+            // RBtn1
             // 
-            this.ProdNameCol.HeaderText = "Product";
-            this.ProdNameCol.MinimumWidth = 6;
-            this.ProdNameCol.Name = "ProdNameCol";
+            this.RBtn1.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.BorderThickness = 0;
+            this.RBtn1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn1.Location = new System.Drawing.Point(49, 929);
+            this.RBtn1.Name = "RBtn1";
+            this.RBtn1.Size = new System.Drawing.Size(57, 57);
+            this.RBtn1.TabIndex = 51;
+            this.RBtn1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn1.UncheckedState.BorderThickness = 2;
+            this.RBtn1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // QuantityCol
+            // RBtn4
             // 
-            this.QuantityCol.HeaderText = "Quantity";
-            this.QuantityCol.MinimumWidth = 6;
-            this.QuantityCol.Name = "QuantityCol";
+            this.RBtn4.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn4.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn4.CheckedState.BorderThickness = 0;
+            this.RBtn4.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn4.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn4.Location = new System.Drawing.Point(408, 929);
+            this.RBtn4.Name = "RBtn4";
+            this.RBtn4.Size = new System.Drawing.Size(57, 57);
+            this.RBtn4.TabIndex = 53;
+            this.RBtn4.Text = "RBtn4";
+            this.RBtn4.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn4.UncheckedState.BorderThickness = 2;
+            this.RBtn4.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn4.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // TotAmountCol
+            // RBtn5
             // 
-            this.TotAmountCol.HeaderText = "Total Amount";
-            this.TotAmountCol.MinimumWidth = 6;
-            this.TotAmountCol.Name = "TotAmountCol";
+            this.RBtn5.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn5.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn5.CheckedState.BorderThickness = 0;
+            this.RBtn5.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn5.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn5.Location = new System.Drawing.Point(518, 929);
+            this.RBtn5.Name = "RBtn5";
+            this.RBtn5.Size = new System.Drawing.Size(57, 57);
+            this.RBtn5.TabIndex = 52;
+            this.RBtn5.Text = "RBtn5";
+            this.RBtn5.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn5.UncheckedState.BorderThickness = 2;
+            this.RBtn5.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn5.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
-            // ProductsDiscountCol
+            // label9
             // 
-            this.ProductsDiscountCol.HeaderText = "Discount";
-            this.ProductsDiscountCol.MinimumWidth = 6;
-            this.ProductsDiscountCol.Name = "ProductsDiscountCol";
-            this.ProductsDiscountCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.label9.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(153, 998);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 23);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "Bad";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(267, 998);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(100, 23);
+            this.label10.TabIndex = 58;
+            this.label10.Text = "Neutral";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(388, 998);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 23);
+            this.label11.TabIndex = 59;
+            this.label11.Text = "Good";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(503, 998);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 23);
+            this.label12.TabIndex = 60;
+            this.label12.Text = "Excellent";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(25, 998);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 23);
+            this.label8.TabIndex = 61;
+            this.label8.Text = "Worst";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PaymentsUserControls
             // 
@@ -1032,5 +1200,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotAmountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductsDiscountCol;
+        private System.Windows.Forms.Label label7;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton RBtn2;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton RBtn3;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton RBtn1;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton RBtn4;
+        private Guna.UI2.WinForms.Guna2CustomRadioButton RBtn5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }

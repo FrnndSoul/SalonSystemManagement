@@ -29,6 +29,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
         public TransactionMethods transaction = new TransactionMethods();
         CardProcess cardProcess = new CardProcess();
+        private int ratingsNumber;
 
         public decimal totalPrice = 0;
 
@@ -38,6 +39,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             InitializeComponent();
             CustomerListDGV.CellContentDoubleClick += CustomerListDGV_CellDoubleClick;
             paymentInstance = this;
+
+            RBtn1.CheckedChanged += Guna2CustomRadioButton_CheckedChanged;
+            RBtn2.CheckedChanged += Guna2CustomRadioButton_CheckedChanged;
+            RBtn3.CheckedChanged += Guna2CustomRadioButton_CheckedChanged;
+            RBtn4.CheckedChanged += Guna2CustomRadioButton_CheckedChanged;
+            RBtn5.CheckedChanged += Guna2CustomRadioButton_CheckedChanged;
         }
 
         private async void PaymentsUserControls_Load(object sender, EventArgs e)
@@ -114,7 +121,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal discountPrice = PriceWithoutVAT * 0.20m;
             return discountPrice + VAT;
         }
-        private void OverallPrice()
+        /*private void OverallPrice()
         {
             totalPrice = 0.00m;
             decimal discountedTotal = 0.00m;
@@ -163,6 +170,76 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
                     totalPrice += rowTotal;
                 }
+            }
+
+            // Update UI with totals
+            AmountBox.Text = totalPrice.ToString("0.00");
+            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
+            DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+        }*/
+
+        private void OverallPrice()
+        {
+            totalPrice = 0.00m;
+            decimal discountedTotal = 0.00m;
+            decimal normalTotal = 0.00m;
+
+            // Assuming ProductsControlDGV contains products data
+            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
+            {
+                if (row.Cells[4].Value != null && row.Cells["ProductsDiscountCol"].Value.ToString() != "None")
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
+                    string discountValue = row.Cells["ProductsDiscountCol"].Value.ToString();
+
+                    if (decimal.TryParse(discountValue, out decimal discountAmount))
+                    {
+                        // Apply discount for items with a decimal discount
+                        decimal discountedPrice = rowTotal * (1 - discountAmount);
+                        discountedTotal += discountedPrice;
+                    }
+                    else
+                    {
+                        // Add original price for items with "Normal" discount
+                        normalTotal += rowTotal;
+                    }
+                }
+                else
+                {
+                    // Add original price for items with "None" discount
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    normalTotal += rowTotal;
+                }
+                totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
+            }
+
+            // Assuming another DataGridView called SecondProductsControlDGV contains products data from another table
+            foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
+            {
+                if (row.Cells[4].Value != null && row.Cells["ServiceDiscountCol"].Value.ToString() != "None")
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[1].Value.ToString());
+                    string discountValue = row.Cells["ServiceDiscountCol"].Value.ToString();
+
+                    if (decimal.TryParse(discountValue, out decimal discountAmount))
+                    {
+                        // Apply discount for items with a decimal discount
+                        decimal discountedPrice = rowTotal * (1 - discountAmount);
+                        discountedTotal += discountedPrice;
+                    }
+                    else
+                    {
+                        // Add original price for items with "Normal" discount
+                        normalTotal += rowTotal;
+                    }
+                }
+                else
+                {
+                    // Add original price for items with "None" discount
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    normalTotal += rowTotal;
+                }
+                totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
             }
 
             // Update UI with totals
@@ -980,6 +1057,60 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     //guna2DataGridView1.Rows.Clear();
                     System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
                 }
+            }
+        }
+
+        private void Guna2CustomRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Guna2CustomRadioButton radioButton = sender as Guna2CustomRadioButton;
+
+            // Check which radio button triggered the event
+            switch (radioButton.Name)
+            {
+                case "RBtn1":
+                    if (radioButton.Checked)
+                    {
+                        // Perform actions for the first radio button
+                        ratingsNumber = 1;
+                    }
+                    break;
+
+                case "RBtn2":
+                    if (radioButton.Checked)
+                    {
+                        // Perform actions for the second radio button
+                        ratingsNumber = 2;
+                    }
+                    break;
+
+                case "RBtn3":
+                    if (radioButton.Checked)
+                    {
+                        // Perform actions for the third radio button
+                        ratingsNumber = 3;
+                    }
+                    break;
+
+                case "RBtn4":
+                    if (radioButton.Checked)
+                    {
+                        // Perform actions for the fourth radio button
+                        ratingsNumber = 4;
+                    }
+                    break;
+
+                case "RBtn5":
+                    if (radioButton.Checked)
+                    {
+                        // Perform actions for the fifth radio button
+                        ratingsNumber = 5;
+                    }
+                    break;
+
+                default:
+                    // Handle the default case if necessary
+                    MessageBox.Show("Paano ka nakarating dito");
+                    break;
             }
         }
     }
