@@ -254,7 +254,7 @@
             this.ClearFieldsBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearFieldsBtn.ForeColor = System.Drawing.Color.White;
             this.ClearFieldsBtn.IndicateFocus = true;
-            this.ClearFieldsBtn.Location = new System.Drawing.Point(50, 1373);
+            this.ClearFieldsBtn.Location = new System.Drawing.Point(1142, 1160);
             this.ClearFieldsBtn.Name = "ClearFieldsBtn";
             this.ClearFieldsBtn.Size = new System.Drawing.Size(230, 37);
             this.ClearFieldsBtn.TabIndex = 46;
@@ -329,7 +329,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(709, 1436);
+            this.panel1.Location = new System.Drawing.Point(703, 1264);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(157, 58);
             this.panel1.TabIndex = 41;
@@ -584,7 +584,7 @@
             this.VoidBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VoidBtn.ForeColor = System.Drawing.Color.White;
             this.VoidBtn.IndicateFocus = true;
-            this.VoidBtn.Location = new System.Drawing.Point(50, 1420);
+            this.VoidBtn.Location = new System.Drawing.Point(1142, 1207);
             this.VoidBtn.Name = "VoidBtn";
             this.VoidBtn.Size = new System.Drawing.Size(230, 37);
             this.VoidBtn.TabIndex = 28;
