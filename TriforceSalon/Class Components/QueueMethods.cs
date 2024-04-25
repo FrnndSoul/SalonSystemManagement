@@ -97,9 +97,7 @@ namespace TriforceSalon.Class_Components
 
                             foreach (DataRow row in dataTable.Rows)
                             {
-                                var Name = row["CustomerName"].ToString();
-                                var Service = row["ServiceVariation"].ToString();
-                                var PrioStatus = row["PriorityStatus"].ToString();
+                                
                                 var Ticket = row["TransactionID"].ToString();
                                 var Queue = row["QueueNumber"].ToString();
 
@@ -107,7 +105,7 @@ namespace TriforceSalon.Class_Components
                                 {
                                     continue;
                                 }
-                                var cutomer = new QueueDisplay(Name, Service, PrioStatus, Ticket, Queue);
+                                var cutomer = new QueueDisplay(Ticket, Queue);
                                 containerFL.Controls.Add(cutomer);
                                 cutomer.SelectedQueue += TicketChanged;
 
@@ -131,10 +129,7 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
 
-                    string generalQueue = "SELECT ci.CustomerName, " +
-                   "ci.PriorityStatus, " +
-                   "sg.ServiceVariation, " +
-                   "ci.TransactionID, " +
+                    string generalQueue = "SELECT ci.TransactionID, " +
                    "sg.QueueNumber " +
                    "FROM customer_info ci " +
                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
@@ -158,9 +153,6 @@ namespace TriforceSalon.Class_Components
 
                             foreach (DataRow row in dataTable.Rows)
                             {
-                                var Name = row["CustomerName"].ToString();
-                                var Service = row["ServiceVariation"].ToString();
-                                var PrioStatus = row["PriorityStatus"].ToString();
                                 var Ticket = row["TransactionID"].ToString();
                                 var Queue = row["QueueNumber"].ToString();
 
@@ -168,7 +160,7 @@ namespace TriforceSalon.Class_Components
                                 {
                                     continue;
                                 }
-                                var cutomer = new QueueDisplay(Name, Service, PrioStatus, Ticket, Queue);
+                                var cutomer = new QueueDisplay(Ticket, Queue);
                                 containerFL.Controls.Add(cutomer);
                                 cutomer.SelectedQueue += TicketChanged;
                             }

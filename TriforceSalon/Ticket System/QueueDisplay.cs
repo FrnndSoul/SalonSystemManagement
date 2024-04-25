@@ -12,20 +12,18 @@ namespace TriforceSalon.Ticket_System
 {
     public partial class QueueDisplay : UserControl
     {
+        public static string TransactionID;
+        private bool ticketSelected = false;
+
         public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
 
-        public string CustomerName => NameLbl.Text;
-        public string Service => ServiceLbl.Text;
-        public string Status => StatusLbl.Text;
+        
         public string Ticket => TransactionIDLbl.Text;
         public string Queue => QueueNumLbl.Text;
 
-        public QueueDisplay(string customerName, string service, string status, string ticket, string queue)
+        public QueueDisplay(string ticket, string queue)
         {
             InitializeComponent();
-            NameLbl.Text = customerName;
-            ServiceLbl.Text = service;
-            StatusLbl.Text = status;
             TransactionIDLbl.Text = ticket;
             QueueNumLbl.Text = queue;
         }
@@ -39,27 +37,41 @@ namespace TriforceSalon.Ticket_System
 
         public class ScheduleSelectedEventArgs
         {
-            public string CustomerName { get; }
-            public string Service { get; }
-            public string Status { get; }
             public string TransactionID { get; }
             public string Queue { get; }
 
-            public ScheduleSelectedEventArgs(string customerName, string service, string status, string ticket, string queue)
+            public ScheduleSelectedEventArgs(string ticket, string queue)
             {
-                CustomerName = customerName;
-                Service = service;
-                Status = status;
                 TransactionID = ticket;
                 Queue = queue;
             }
         }
 
-        private void ServeBtn_Click(object sender, EventArgs e)
+        private void QueueTicket_Click(object sender, EventArgs e)
         {
+            TransactionID = TransactionIDLbl.Text;
 
+
+            if (ticketSelected)
+            {
+                TransactionID = TransactionIDLbl.Text;
+                QueueTicket.FillColor = Color.White;
+
+                TransactionIDLbl.ForeColor = Color.Black;
+                QueueNumLbl.ForeColor = Color.Black;
+                RefLbl.ForeColor = Color.Black;
+            }
+            else
+            {
+                TransactionID = null;
+                QueueTicket.FillColor = Color.FromArgb(140, 113, 209);
+
+                TransactionIDLbl.ForeColor = Color.White;
+                QueueNumLbl.ForeColor = Color.White;
+                RefLbl.ForeColor = Color.White;
+            }
+
+            ticketSelected = !ticketSelected;
         }
     }
-
-
 }
