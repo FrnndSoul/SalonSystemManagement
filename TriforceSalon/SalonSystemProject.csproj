@@ -186,6 +186,12 @@
     <Compile Include="QueueForm.Designer.cs">
       <DependentUpon>QueueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ticket System\QueueDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticket System\QueueDisplay.Designer.cs">
+      <DependentUpon>QueueDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
       <SubType>UserControl</SubType>
@@ -442,6 +448,12 @@
     <Compile Include="UserControls\WalkInTransactionForm.Designer.cs">
       <DependentUpon>WalkInTransactionForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QueueForm.resx">
+      <DependentUpon>QueueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ticket System\QueueDisplay.resx">
+      <DependentUpon>QueueDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AnythingSales\SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,6 +16,7 @@ namespace TriforceSalon.UserControls
         public PopulateDataGridView populateMethods = new PopulateDataGridView();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
         private RealTimeClock userClock;
+        QueueForm queueForm;
         public WalkInTransactionForm()
         {
             InitializeComponent();
@@ -33,16 +34,20 @@ namespace TriforceSalon.UserControls
             {
                 ManagerBackBtn.Visible = true;
             }
+
+            queueForm = new QueueForm();
         }
 
         private void WalkInTransactionForm_Load(object sender, EventArgs e)
         {
             NServicesBtn.Enabled = false;
+            queueForm.Show();
         }
 
         private void RecepLogOutBtn_Click(object sender, EventArgs e)
         {
             Method.isManager = false;
+            queueForm.Dispose();
             Method.LogOutUser();
             foreach (Form openForm in Application.OpenForms)
             {
@@ -104,6 +109,7 @@ namespace TriforceSalon.UserControls
         {
             ManagerPage managerPage = new ManagerPage();
             UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+            queueForm.Dispose();
         }
     }
 }
