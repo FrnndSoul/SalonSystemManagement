@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.Ticket_System;
 
 namespace TriforceSalon
 {
@@ -33,10 +34,6 @@ namespace TriforceSalon
                 string EmpID = Convert.ToString(selectedRow.Cells["EmpIDCol"].Value);
                 string EmpSpecialistCol = Convert.ToString(selectedRow.Cells["EmpSpecialistCol"].Value);
 
-                MessageBox.Show(EmpName);
-                MessageBox.Show(EmpID);
-                MessageBox.Show(EmpSpecialistCol);
-
                 await queueMethods.GeneralQueue(EmpSpecialistCol, GeneralQueue);
             }
         }
@@ -48,6 +45,18 @@ namespace TriforceSalon
                 e.Cancel = true;
                 MessageBox.Show("Action not allowed", "Invalid Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void ServeBtn_Click(object sender, EventArgs e)
+        {
+            if (QueueDisplay.TransactionID == null)
+            {
+                MessageBox.Show("No customer has been selected", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            QueueDisplay.TransactionID = null;
         }
     }
 }
