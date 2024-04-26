@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.QueueTicket = new Guna.UI2.WinForms.Guna2Panel();
+            this.EmpIDLbl = new System.Windows.Forms.Label();
+            this.ServiceDoneBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServiceVarLbl = new System.Windows.Forms.Label();
             this.RefLbl = new System.Windows.Forms.Label();
             this.TransactionIDLbl = new System.Windows.Forms.Label();
             this.QueueNumLbl = new System.Windows.Forms.Label();
-            this.ServiceDoneBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.EmpIDLbl = new System.Windows.Forms.Label();
             this.QueueTicket.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,14 +57,39 @@
             this.QueueTicket.Size = new System.Drawing.Size(209, 140);
             this.QueueTicket.TabIndex = 1;
             // 
+            // EmpIDLbl
+            // 
+            this.EmpIDLbl.Location = new System.Drawing.Point(137, 30);
+            this.EmpIDLbl.Name = "EmpIDLbl";
+            this.EmpIDLbl.Size = new System.Drawing.Size(59, 18);
+            this.EmpIDLbl.TabIndex = 5;
+            this.EmpIDLbl.Text = "label1";
+            // 
+            // ServiceDoneBtn
+            // 
+            this.ServiceDoneBtn.AutoRoundedCorners = true;
+            this.ServiceDoneBtn.BorderRadius = 13;
+            this.ServiceDoneBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceDoneBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceDoneBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ServiceDoneBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ServiceDoneBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.ServiceDoneBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceDoneBtn.ForeColor = System.Drawing.Color.Black;
+            this.ServiceDoneBtn.Location = new System.Drawing.Point(44, 99);
+            this.ServiceDoneBtn.Name = "ServiceDoneBtn";
+            this.ServiceDoneBtn.Size = new System.Drawing.Size(123, 28);
+            this.ServiceDoneBtn.TabIndex = 4;
+            this.ServiceDoneBtn.Text = "Done";
+            this.ServiceDoneBtn.Click += new System.EventHandler(this.ServiceDoneBtn_Click);
+            // 
             // ServiceVarLbl
             // 
-            this.ServiceVarLbl.Location = new System.Drawing.Point(182, 12);
+            this.ServiceVarLbl.Location = new System.Drawing.Point(140, 12);
             this.ServiceVarLbl.Name = "ServiceVarLbl";
-            this.ServiceVarLbl.Size = new System.Drawing.Size(14, 18);
+            this.ServiceVarLbl.Size = new System.Drawing.Size(56, 18);
             this.ServiceVarLbl.TabIndex = 3;
             this.ServiceVarLbl.Text = "label1";
-            this.ServiceVarLbl.Visible = false;
             // 
             // RefLbl
             // 
@@ -98,33 +123,6 @@
             this.QueueNumLbl.TabIndex = 0;
             this.QueueNumLbl.Text = "10";
             this.QueueNumLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ServiceDoneBtn
-            // 
-            this.ServiceDoneBtn.AutoRoundedCorners = true;
-            this.ServiceDoneBtn.BorderRadius = 13;
-            this.ServiceDoneBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.ServiceDoneBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.ServiceDoneBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.ServiceDoneBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.ServiceDoneBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.ServiceDoneBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ServiceDoneBtn.ForeColor = System.Drawing.Color.Black;
-            this.ServiceDoneBtn.Location = new System.Drawing.Point(44, 99);
-            this.ServiceDoneBtn.Name = "ServiceDoneBtn";
-            this.ServiceDoneBtn.Size = new System.Drawing.Size(123, 28);
-            this.ServiceDoneBtn.TabIndex = 4;
-            this.ServiceDoneBtn.Text = "Done";
-            this.ServiceDoneBtn.Click += new System.EventHandler(this.ServiceDoneBtn_Click);
-            // 
-            // EmpIDLbl
-            // 
-            this.EmpIDLbl.Location = new System.Drawing.Point(179, 30);
-            this.EmpIDLbl.Name = "EmpIDLbl";
-            this.EmpIDLbl.Size = new System.Drawing.Size(17, 18);
-            this.EmpIDLbl.TabIndex = 5;
-            this.EmpIDLbl.Text = "label1";
-            this.EmpIDLbl.Visible = false;
             // 
             // InSessionDisplay
             // 

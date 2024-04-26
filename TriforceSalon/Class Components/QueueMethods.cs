@@ -247,25 +247,16 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
 
-                    /*string query = "SELECT ci.TransactionID, " +
-                                   "sg.ServiceVariation, " +
-                                   "sg.QueueNumber " +
-                                   "er.AccountID " +
-                                   "FROM customer_info ci " +
-                                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                   "JOIN employee_records er ON ci.TransactionID = er.CustomerID " +
-                                   "WHERE sg.ServiceVariationID = @serviceID " +
-                                   "AND er.ServiceID = @serviceID" +
-                                   "AND ci.TransactionID = @customerID";*/
-
                     string query = "SELECT ci.TransactionID, " +
                                     "sg.ServiceVariation, " +
-                                    "sg.QueueNumber, " + // Added comma
-                                    "er.AccountID " + // Added comma
+                                    "sg.QueueNumber, " + 
+                                    "er.AccountID " + 
                                     "FROM customer_info ci " +
                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
                                     "JOIN employee_records er ON ci.TransactionID = er.CustomerID " +
                                     "WHERE ci.PaymentStatus = 'INSESSION' " +
+                                    "AND sg.IsDone = 'DOING' " +
+                                    "AND er.ServiceID = sg.ServiceVariationID " +
                                     "AND DATE(TimeTaken) = CURDATE()";
 
 
@@ -401,7 +392,18 @@ namespace TriforceSalon.Class_Components
                                     await command3.ExecuteNonQueryAsync();
                                 }
 
-                                    transaction.Commit();
+                                string query4 = "UPDATE service_group SET IsDone = 'DOING' WHERE ServiceGroupID = @transactionID AND ServiceVariationID = @serviceVarID";
+                                using(MySqlCommand command4 = new MySqlCommand(query4 , conn))
+                                {
+                                    command4.Transaction = transaction;
+
+                                    command4.Parameters.AddWithValue("@transactionID", ticketID);
+                                    command4.Parameters.AddWithValue("@serviceVarID", serviceID);
+                                    await command4.ExecuteNonQueryAsync();
+
+
+                                }
+                                transaction.Commit();
 
                                 MessageBox.Show("You have successfully chosen this customer. Finish the service to serve more customers.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
