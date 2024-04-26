@@ -16,7 +16,7 @@ namespace TriforceSalon.Ticket_System
         public static string ServiceVar;
         private bool ticketSelected = false;
 
-        public event EventHandler<ScheduleSelectedEventArgs> TicketChanged;
+        public event EventHandler<ScheduleSelectedEventArgs> QueueChanged;
 
         public string ServiceVariation => ServiceVarLbl.Text;
         public string Ticket => TransactionIDLbl.Text;

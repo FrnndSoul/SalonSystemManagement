@@ -123,8 +123,8 @@ namespace TriforceSalon.Class_Components
                         await command1.ExecuteNonQueryAsync();
                     }
 
-                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber, AppointmentDate)"
-                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @queueNumber, @date)";
+                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, Discount, QueueNumber, AppointmentDate)"
+                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @discount, @queueNumber, @date)";
 
                     foreach (DataGridViewRow row in serviceDataGrid.Rows)
                     {
@@ -133,6 +133,7 @@ namespace TriforceSalon.Class_Components
                         string preferredEmployee = Convert.ToString(row.Cells["PrefEmpCol"].Value);
                         decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
                         int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
+                        string discount = Convert.ToString(row.Cells["DiscountCol"].Value);
 
                         //edit mo ito para mamatch mo yung hinahanap sa database
                         using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn))
@@ -142,6 +143,7 @@ namespace TriforceSalon.Class_Components
                             command2.Parameters.AddWithValue("@service_var", serviceVariation);
                             command2.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceVariation));
                             command2.Parameters.AddWithValue("@amount", serviceAMount);
+                            command2.Parameters.AddWithValue("@discount", discount);
                             command2.Parameters.AddWithValue("@queueNumber", queueNumber);
                             command2.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM-dd-yyyy dddd"));
 

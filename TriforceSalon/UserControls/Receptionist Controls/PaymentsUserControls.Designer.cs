@@ -41,6 +41,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TransactionIDBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.PaymentPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.RBtn2 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn3 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn4 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.RBtn5 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+            this.label7 = new System.Windows.Forms.Label();
             this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.TotalAmountTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CalculateTotalBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -87,17 +98,6 @@
             this.StatusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.RefreshListBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.RBtn2 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RBtn3 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RBtn1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RBtn4 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.RBtn5 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.PaymentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceAcquiredDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsBoughtDGV)).BeginInit();
@@ -181,6 +181,151 @@
             this.PaymentPanel.Name = "PaymentPanel";
             this.PaymentPanel.Size = new System.Drawing.Size(1458, 543);
             this.PaymentPanel.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(25, 998);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 23);
+            this.label8.TabIndex = 61;
+            this.label8.Text = "Worst";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(503, 998);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 23);
+            this.label12.TabIndex = 60;
+            this.label12.Text = "Excellent";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(388, 998);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 23);
+            this.label11.TabIndex = 59;
+            this.label11.Text = "Good";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(267, 998);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(100, 23);
+            this.label10.TabIndex = 58;
+            this.label10.Text = "Neutral";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(153, 998);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 23);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "Bad";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // RBtn2
+            // 
+            this.RBtn2.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn2.CheckedState.BorderThickness = 0;
+            this.RBtn2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn2.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn2.Location = new System.Drawing.Point(173, 929);
+            this.RBtn2.Name = "RBtn2";
+            this.RBtn2.Size = new System.Drawing.Size(57, 57);
+            this.RBtn2.TabIndex = 55;
+            this.RBtn2.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn2.UncheckedState.BorderThickness = 2;
+            this.RBtn2.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn2.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // RBtn3
+            // 
+            this.RBtn3.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn3.CheckedState.BorderThickness = 0;
+            this.RBtn3.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn3.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn3.Location = new System.Drawing.Point(290, 929);
+            this.RBtn3.Name = "RBtn3";
+            this.RBtn3.Size = new System.Drawing.Size(57, 57);
+            this.RBtn3.TabIndex = 54;
+            this.RBtn3.Text = "RBtn3";
+            this.RBtn3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn3.UncheckedState.BorderThickness = 2;
+            this.RBtn3.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn3.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // RBtn1
+            // 
+            this.RBtn1.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.BorderThickness = 0;
+            this.RBtn1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn1.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn1.Location = new System.Drawing.Point(49, 929);
+            this.RBtn1.Name = "RBtn1";
+            this.RBtn1.Size = new System.Drawing.Size(57, 57);
+            this.RBtn1.TabIndex = 51;
+            this.RBtn1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn1.UncheckedState.BorderThickness = 2;
+            this.RBtn1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // RBtn4
+            // 
+            this.RBtn4.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn4.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn4.CheckedState.BorderThickness = 0;
+            this.RBtn4.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn4.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn4.Location = new System.Drawing.Point(408, 929);
+            this.RBtn4.Name = "RBtn4";
+            this.RBtn4.Size = new System.Drawing.Size(57, 57);
+            this.RBtn4.TabIndex = 53;
+            this.RBtn4.Text = "RBtn4";
+            this.RBtn4.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn4.UncheckedState.BorderThickness = 2;
+            this.RBtn4.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn4.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // RBtn5
+            // 
+            this.RBtn5.BackColor = System.Drawing.Color.Transparent;
+            this.RBtn5.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn5.CheckedState.BorderThickness = 0;
+            this.RBtn5.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.RBtn5.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.RBtn5.Location = new System.Drawing.Point(518, 929);
+            this.RBtn5.Name = "RBtn5";
+            this.RBtn5.Size = new System.Drawing.Size(57, 57);
+            this.RBtn5.TabIndex = 52;
+            this.RBtn5.Text = "RBtn5";
+            this.RBtn5.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.RBtn5.UncheckedState.BorderThickness = 2;
+            this.RBtn5.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.RBtn5.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.label7.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(50, 843);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(525, 48);
+            this.label7.TabIndex = 50;
+            this.label7.Text = "Service Feedback";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2HtmlLabel7
             // 
@@ -341,8 +486,8 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.ServiceAcquiredDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -425,8 +570,8 @@
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             this.ProductsBoughtDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -874,14 +1019,14 @@
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
             this.CustomerListDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.CustomerListDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.CustomerListDGV.ColumnHeadersHeight = 15;
+            this.CustomerListDGV.ColumnHeadersHeight = 25;
             this.CustomerListDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.CustomerListDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TransactionIDCol,
@@ -914,7 +1059,7 @@
             this.CustomerListDGV.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerListDGV.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.CustomerListDGV.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.CustomerListDGV.ThemeStyle.HeaderStyle.Height = 15;
+            this.CustomerListDGV.ThemeStyle.HeaderStyle.Height = 25;
             this.CustomerListDGV.ThemeStyle.ReadOnly = true;
             this.CustomerListDGV.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.CustomerListDGV.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -975,151 +1120,6 @@
             this.RefreshListBtn.Text = "Refresh";
             this.RefreshListBtn.UseTransparentBackground = true;
             this.RefreshListBtn.Click += new System.EventHandler(this.RefreshListBtn_Click);
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.label7.Font = new System.Drawing.Font("Stanberry", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(50, 843);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(525, 48);
-            this.label7.TabIndex = 50;
-            this.label7.Text = "Service Feedback";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // RBtn2
-            // 
-            this.RBtn2.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn2.CheckedState.BorderThickness = 0;
-            this.RBtn2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn2.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn2.Location = new System.Drawing.Point(173, 929);
-            this.RBtn2.Name = "RBtn2";
-            this.RBtn2.Size = new System.Drawing.Size(57, 57);
-            this.RBtn2.TabIndex = 55;
-            this.RBtn2.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn2.UncheckedState.BorderThickness = 2;
-            this.RBtn2.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn2.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // RBtn3
-            // 
-            this.RBtn3.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn3.CheckedState.BorderThickness = 0;
-            this.RBtn3.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn3.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn3.Location = new System.Drawing.Point(290, 929);
-            this.RBtn3.Name = "RBtn3";
-            this.RBtn3.Size = new System.Drawing.Size(57, 57);
-            this.RBtn3.TabIndex = 54;
-            this.RBtn3.Text = "RBtn3";
-            this.RBtn3.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn3.UncheckedState.BorderThickness = 2;
-            this.RBtn3.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn3.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // RBtn1
-            // 
-            this.RBtn1.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn1.CheckedState.BorderThickness = 0;
-            this.RBtn1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn1.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn1.Location = new System.Drawing.Point(49, 929);
-            this.RBtn1.Name = "RBtn1";
-            this.RBtn1.Size = new System.Drawing.Size(57, 57);
-            this.RBtn1.TabIndex = 51;
-            this.RBtn1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn1.UncheckedState.BorderThickness = 2;
-            this.RBtn1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // RBtn4
-            // 
-            this.RBtn4.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn4.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn4.CheckedState.BorderThickness = 0;
-            this.RBtn4.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn4.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn4.Location = new System.Drawing.Point(408, 929);
-            this.RBtn4.Name = "RBtn4";
-            this.RBtn4.Size = new System.Drawing.Size(57, 57);
-            this.RBtn4.TabIndex = 53;
-            this.RBtn4.Text = "RBtn4";
-            this.RBtn4.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn4.UncheckedState.BorderThickness = 2;
-            this.RBtn4.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn4.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // RBtn5
-            // 
-            this.RBtn5.BackColor = System.Drawing.Color.Transparent;
-            this.RBtn5.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn5.CheckedState.BorderThickness = 0;
-            this.RBtn5.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.RBtn5.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.RBtn5.Location = new System.Drawing.Point(518, 929);
-            this.RBtn5.Name = "RBtn5";
-            this.RBtn5.Size = new System.Drawing.Size(57, 57);
-            this.RBtn5.TabIndex = 52;
-            this.RBtn5.Text = "RBtn5";
-            this.RBtn5.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.RBtn5.UncheckedState.BorderThickness = 2;
-            this.RBtn5.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.RBtn5.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(153, 998);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 23);
-            this.label9.TabIndex = 57;
-            this.label9.Text = "Bad";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(267, 998);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(100, 23);
-            this.label10.TabIndex = 58;
-            this.label10.Text = "Neutral";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(388, 998);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 23);
-            this.label11.TabIndex = 59;
-            this.label11.Text = "Good";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(503, 998);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 23);
-            this.label12.TabIndex = 60;
-            this.label12.Text = "Excellent";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(25, 998);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 23);
-            this.label8.TabIndex = 61;
-            this.label8.Text = "Worst";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PaymentsUserControls
             // 

@@ -41,12 +41,6 @@
             this.AppointmentDateTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ServicesGDGVVControl = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
             this.transactionIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -63,6 +57,15 @@
             this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServicePromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ActivateBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServiceTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -150,6 +153,8 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.ServicePromoTxtB);
+            this.guna2Panel1.Controls.Add(this.ActivateBtn);
             this.guna2Panel1.Controls.Add(this.CancelBtn);
             this.guna2Panel1.Controls.Add(this.AppointmentDateTxtB);
             this.guna2Panel1.Controls.Add(this.label1);
@@ -254,6 +259,7 @@
             this.SNameCol,
             this.PrefEmpCol,
             this.AmountCol,
+            this.DiscountCol,
             this.RemoveServiceCol,
             this.QueNumCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -269,7 +275,7 @@
             this.ServicesGDGVVControl.Name = "ServicesGDGVVControl";
             this.ServicesGDGVVControl.ReadOnly = true;
             this.ServicesGDGVVControl.RowHeadersVisible = false;
-            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 311);
+            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 243);
             this.ServicesGDGVVControl.TabIndex = 24;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -293,43 +299,6 @@
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ServicesGDGVVControl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ServicesGDGVVControl_CellContentClick);
-            // 
-            // ServiceTypeCol
-            // 
-            this.ServiceTypeCol.HeaderText = "ServiceType";
-            this.ServiceTypeCol.Name = "ServiceTypeCol";
-            this.ServiceTypeCol.ReadOnly = true;
-            // 
-            // SNameCol
-            // 
-            this.SNameCol.HeaderText = "Service Name";
-            this.SNameCol.Name = "SNameCol";
-            this.SNameCol.ReadOnly = true;
-            // 
-            // PrefEmpCol
-            // 
-            this.PrefEmpCol.HeaderText = "Preferred Employee";
-            this.PrefEmpCol.Name = "PrefEmpCol";
-            this.PrefEmpCol.ReadOnly = true;
-            // 
-            // AmountCol
-            // 
-            this.AmountCol.HeaderText = "Amount";
-            this.AmountCol.Name = "AmountCol";
-            this.AmountCol.ReadOnly = true;
-            // 
-            // RemoveServiceCol
-            // 
-            this.RemoveServiceCol.HeaderText = "X";
-            this.RemoveServiceCol.Name = "RemoveServiceCol";
-            this.RemoveServiceCol.ReadOnly = true;
-            // 
-            // QueNumCol
-            // 
-            this.QueNumCol.HeaderText = "Queue Number";
-            this.QueNumCol.Name = "QueNumCol";
-            this.QueNumCol.ReadOnly = true;
-            this.QueNumCol.Visible = false;
             // 
             // AddLServiceListBtn
             // 
@@ -613,6 +582,91 @@
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
+            // ServicePromoTxtB
+            // 
+            this.ServicePromoTxtB.AutoRoundedCorners = true;
+            this.ServicePromoTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServicePromoTxtB.BorderRadius = 17;
+            this.ServicePromoTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ServicePromoTxtB.DefaultText = "";
+            this.ServicePromoTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ServicePromoTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ServicePromoTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicePromoTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Location = new System.Drawing.Point(234, 502);
+            this.ServicePromoTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ServicePromoTxtB.Name = "ServicePromoTxtB";
+            this.ServicePromoTxtB.PasswordChar = '\0';
+            this.ServicePromoTxtB.PlaceholderText = "Enter Promo Code Here";
+            this.ServicePromoTxtB.SelectedText = "";
+            this.ServicePromoTxtB.Size = new System.Drawing.Size(335, 36);
+            this.ServicePromoTxtB.TabIndex = 49;
+            // 
+            // ActivateBtn
+            // 
+            this.ActivateBtn.AutoRoundedCorners = true;
+            this.ActivateBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ActivateBtn.BorderRadius = 17;
+            this.ActivateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ActivateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ActivateBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ActivateBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ActivateBtn.ForeColor = System.Drawing.Color.White;
+            this.ActivateBtn.Location = new System.Drawing.Point(36, 502);
+            this.ActivateBtn.Name = "ActivateBtn";
+            this.ActivateBtn.Size = new System.Drawing.Size(180, 36);
+            this.ActivateBtn.TabIndex = 48;
+            this.ActivateBtn.Text = "Avail Promo";
+            this.ActivateBtn.Click += new System.EventHandler(this.ActivateBtn_Click);
+            // 
+            // ServiceTypeCol
+            // 
+            this.ServiceTypeCol.HeaderText = "ServiceType";
+            this.ServiceTypeCol.Name = "ServiceTypeCol";
+            this.ServiceTypeCol.ReadOnly = true;
+            // 
+            // SNameCol
+            // 
+            this.SNameCol.HeaderText = "Service Name";
+            this.SNameCol.Name = "SNameCol";
+            this.SNameCol.ReadOnly = true;
+            // 
+            // PrefEmpCol
+            // 
+            this.PrefEmpCol.HeaderText = "Preferred Employee";
+            this.PrefEmpCol.Name = "PrefEmpCol";
+            this.PrefEmpCol.ReadOnly = true;
+            // 
+            // AmountCol
+            // 
+            this.AmountCol.HeaderText = "Amount";
+            this.AmountCol.Name = "AmountCol";
+            this.AmountCol.ReadOnly = true;
+            // 
+            // DiscountCol
+            // 
+            this.DiscountCol.HeaderText = "Discount";
+            this.DiscountCol.Name = "DiscountCol";
+            this.DiscountCol.ReadOnly = true;
+            // 
+            // RemoveServiceCol
+            // 
+            this.RemoveServiceCol.HeaderText = "X";
+            this.RemoveServiceCol.Name = "RemoveServiceCol";
+            this.RemoveServiceCol.ReadOnly = true;
+            // 
+            // QueNumCol
+            // 
+            this.QueNumCol.HeaderText = "Queue Number";
+            this.QueNumCol.Name = "QueNumCol";
+            this.QueNumCol.ReadOnly = true;
+            this.QueNumCol.Visible = false;
+            // 
             // EditAppointmentUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,10 +715,13 @@
         public Guna.UI2.WinForms.Guna2TextBox AppointmentDateTxtB;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Button CancelBtn;
+        private Guna.UI2.WinForms.Guna2TextBox ServicePromoTxtB;
+        private Guna.UI2.WinForms.Guna2Button ActivateBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveServiceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
     }

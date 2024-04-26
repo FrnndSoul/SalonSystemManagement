@@ -18,6 +18,8 @@ namespace TriforceSalon.Class_Components
     {
         private string mysqlcon;
         private EventHandler<QueueDisplay.QueueSelectedEventArgs> TicketChanged;
+        private EventHandler<InSessionDisplay.QueueSelectedEventArgs> QueueChanged;
+
 
         public QueueMethods()
         {
@@ -26,6 +28,7 @@ namespace TriforceSalon.Class_Components
 
         public async Task GetEmployee(Guna2DataGridView employeeDGV)
         {
+            employeeDGV.Rows.Clear();
             try
             {
                 using(var conn = new MySqlConnection(mysqlcon))
@@ -63,7 +66,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task PreferredQueue(string serviceTypeName, int ID, FlowLayoutPanel containerFL)
+       /* public async Task PreferredQueue(string serviceTypeName, int ID, FlowLayoutPanel containerFL)
         {
             try
             {
@@ -178,7 +181,7 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.ToString(), "Error in GeneralQueue");
             }
-        }
+        }*/
 
         public async Task CombinedQueue(string serviceTypeName, FlowLayoutPanel containerFL, int employeeID)
         {
@@ -225,6 +228,70 @@ namespace TriforceSalon.Class_Components
                                 var customer = new QueueDisplay(Ticket, Queue, Service);
                                 containerFL.Controls.Add(customer);
                                 customer.SelectedQueue += TicketChanged;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in CombinedQueue");
+            }
+        }
+
+        public async Task InSessionDisplay(FlowLayoutPanel containerFL)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    /*string query = "SELECT ci.TransactionID, " +
+                                   "sg.ServiceVariation, " +
+                                   "sg.QueueNumber " +
+                                   "er.AccountID " +
+                                   "FROM customer_info ci " +
+                                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                   "JOIN employee_records er ON ci.TransactionID = er.CustomerID " +
+                                   "WHERE sg.ServiceVariationID = @serviceID " +
+                                   "AND er.ServiceID = @serviceID" +
+                                   "AND ci.TransactionID = @customerID";*/
+
+                    string query = "SELECT ci.TransactionID, " +
+                                    "sg.ServiceVariation, " +
+                                    "sg.QueueNumber, " + // Added comma
+                                    "er.AccountID " + // Added comma
+                                    "FROM customer_info ci " +
+                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                                    "JOIN employee_records er ON ci.TransactionID = er.CustomerID " +
+                                    "WHERE ci.PaymentStatus = 'INSESSION' " +
+                                    "AND DATE(TimeTaken) = CURDATE()";
+
+
+                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    {
+                        using (var adapter = new MySqlDataAdapter(command))
+                        {
+                            var dataTable = new DataTable();
+                            await adapter.FillAsync(dataTable);
+
+                            containerFL.Controls.Clear();
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                var Service = row["ServiceVariation"].ToString();
+                                var Ticket = row["TransactionID"].ToString();
+                                var Queue = row["QueueNumber"].ToString();
+                                var EmpID = row["AccountID"].ToString();
+
+                                if (containerFL.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
+                                {
+                                    continue;
+                                }
+                                var customer = new InSessionDisplay(Ticket, Queue, Service, EmpID);
+                                containerFL.Controls.Add(customer);
+                                customer.InSessionQueue += QueueChanged;
                             }
                         }
                     }
@@ -382,20 +449,19 @@ namespace TriforceSalon.Class_Components
             return ID;
         }
 
-        public async Task EmployeeProcessCompleteAsync(long CustomerID, string serviceVariation)
+        /*public async Task EmployeeProcessCompleteAsync(long CustomerID, int serviceVariationID, string accountID)
         {
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariation = @serviceVariation";
+                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariationID = @serviceVariationID";
                     using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
                     {
                         updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariation", serviceVariation);
+                        updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariationID", serviceVariationID);
                         await updateServiceGroupCommand.ExecuteNonQueryAsync();
-
                     }
 
                     string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
@@ -405,6 +471,12 @@ namespace TriforceSalon.Class_Components
                         updateEmployeeRecordsCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
 
                         await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
+                    }
+                    string updateEmployeeAvailability = "UPDATE salon_employees SET Availability = 'Available' WHERE AccountID = @accountID";
+                    using (MySqlCommand command = new MySqlCommand(updateEmployeeAvailability, conn))
+                    {
+                        command.Parameters.AddWithValue("@accountID", accountID);
+                        await command.ExecuteNonQueryAsync();
                     }
 
                     string checkServicesQuery = "SELECT COUNT(*) FROM service_group WHERE ServiceGroupID = @customer_ID AND IsDone != 'DONE'";
@@ -434,6 +506,84 @@ namespace TriforceSalon.Class_Components
                     }
                 }
                 MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
+            }
+        }*/
+
+        public async Task EmployeeProcessCompleteAsync(long CustomerID, int serviceVariationID, string accountID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariationID = @serviceVariationID";
+                            using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
+                            {
+                                updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariationID", serviceVariationID);
+                                await updateServiceGroupCommand.ExecuteNonQueryAsync();
+                            }
+
+                            string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
+                            using (MySqlCommand updateEmployeeRecordsCommand = new MySqlCommand(updateEmployeeRecordsQuery, conn))
+                            {
+                                updateEmployeeRecordsCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                updateEmployeeRecordsCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
+
+                                await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
+                            }
+                            string updateEmployeeAvailability = "UPDATE salon_employees SET Availability = 'Available' WHERE AccountID = @accountID";
+                            using (MySqlCommand command = new MySqlCommand(updateEmployeeAvailability, conn))
+                            {
+                                command.Parameters.AddWithValue("@accountID", accountID);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            string checkServicesQuery = "SELECT COUNT(*) FROM service_group WHERE ServiceGroupID = @customer_ID AND IsDone != 'DONE'";
+                            using (MySqlCommand checkServicesCommand = new MySqlCommand(checkServicesQuery, conn))
+                            {
+                                checkServicesCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                int pendingServicesCount = Convert.ToInt32(await checkServicesCommand.ExecuteScalarAsync());
+
+                                if (pendingServicesCount == 0)
+                                {
+                                    string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
+                                    using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                                    {
+                                        updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                        await updateCustomerCommand.ExecuteNonQueryAsync();
+                                    }
+                                }
+                                else
+                                {
+                                    string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'ONGOING' WHERE TransactionID = @customer_ID";
+                                    using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
+                                    {
+                                        updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
+                                        await updateCustomerCommand.ExecuteNonQueryAsync();
+                                    }
+                                }
+                            }
+                            transaction.Commit();
+                            MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Rollback transaction if any query fails
+                            transaction.Rollback();
+                            MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

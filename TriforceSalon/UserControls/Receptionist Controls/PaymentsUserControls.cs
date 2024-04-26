@@ -701,54 +701,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DefaultLoad();
         }
 
-        public decimal CalculateTotalPriceOfProd(DataGridView dataGridView)
-        {
-            decimal totalPrice = 0;
-
-            // Iterate over the rows of the DataGridView
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                // Assuming the price is in a column named "PriceCol"
-                if (row.Cells["TotAmountCol"].Value != null && decimal.TryParse(row.Cells["TotAmountCol"].Value.ToString(), out decimal price))
-                {
-                    // Extract the price from the current row and add it to the total price
-                    totalPrice += price;
-                }
-            }
-
-            return totalPrice;
-        }
-
-        public decimal CalculateTotalPriceOfService(DataGridView dataGridView)
-        {
-            decimal totalPrice = 0;
-
-            // Iterate over the rows of the DataGridView
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                // Assuming the price is in a column named "PriceCol"
-                if (row.Cells["ServiceAmountCol"].Value != null && decimal.TryParse(row.Cells["ServiceAmountCol"].Value.ToString(), out decimal price))
-                {
-                    // Extract the price from the current row and add it to the total price
-                    totalPrice += price;
-                }
-            }
-
-            return totalPrice;
-        }
-
-        public void CalculateTotalCombinedPrice(DataGridView dataGridView1, DataGridView dataGridView2)
-        {
-            // Calculate the total price for each DataGridView
-            decimal totalPrice1 = CalculateTotalPriceOfProd(dataGridView1);
-            decimal totalPrice2 = CalculateTotalPriceOfService(dataGridView2);
-
-            // Compute the sum of the total prices
-            decimal totalCombinedPrice = totalPrice1 + totalPrice2;
-
-            AmountBox.Text = Convert.ToString(totalCombinedPrice);
-        }
-
         public async Task SendToSales(long transactionID, int salesID)
         {
             try
@@ -761,8 +713,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
-                       
-
                         decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
 
                         command.Parameters.AddWithValue("@saleID", salesID);

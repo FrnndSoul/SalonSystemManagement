@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.InsessionFL = new System.Windows.Forms.FlowLayoutPanel();
             this.QueueFL = new System.Windows.Forms.FlowLayoutPanel();
             this.EmployeeDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.EmpIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,14 +46,14 @@
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // InsessionFL
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(515, 102);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(670, 158);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.InsessionFL.AutoScroll = true;
+            this.InsessionFL.BackColor = System.Drawing.Color.White;
+            this.InsessionFL.Location = new System.Drawing.Point(515, 102);
+            this.InsessionFL.Name = "InsessionFL";
+            this.InsessionFL.Size = new System.Drawing.Size(670, 158);
+            this.InsessionFL.TabIndex = 1;
             // 
             // QueueFL
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmployeeDGV);
             this.Controls.Add(this.QueueFL);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.InsessionFL);
             this.Controls.Add(this.guna2Panel1);
             this.Name = "QueueForm";
             this.Text = "Customer Queue";
@@ -225,9 +225,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel QueueFL;
-        private Guna.UI2.WinForms.Guna2DataGridView EmployeeDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpIDCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpSpecialistCol;
@@ -236,5 +234,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.FlowLayoutPanel InsessionFL;
+        public Guna.UI2.WinForms.Guna2DataGridView EmployeeDGV;
     }
 }

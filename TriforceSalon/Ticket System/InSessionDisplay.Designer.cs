@@ -33,6 +33,8 @@
             this.RefLbl = new System.Windows.Forms.Label();
             this.TransactionIDLbl = new System.Windows.Forms.Label();
             this.QueueNumLbl = new System.Windows.Forms.Label();
+            this.ServiceDoneBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.EmpIDLbl = new System.Windows.Forms.Label();
             this.QueueTicket.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +44,8 @@
             this.QueueTicket.BorderColor = System.Drawing.Color.Black;
             this.QueueTicket.BorderRadius = 30;
             this.QueueTicket.BorderThickness = 2;
+            this.QueueTicket.Controls.Add(this.EmpIDLbl);
+            this.QueueTicket.Controls.Add(this.ServiceDoneBtn);
             this.QueueTicket.Controls.Add(this.ServiceVarLbl);
             this.QueueTicket.Controls.Add(this.RefLbl);
             this.QueueTicket.Controls.Add(this.TransactionIDLbl);
@@ -55,10 +59,9 @@
             // 
             // ServiceVarLbl
             // 
-            this.ServiceVarLbl.AutoSize = true;
-            this.ServiceVarLbl.Location = new System.Drawing.Point(171, 113);
+            this.ServiceVarLbl.Location = new System.Drawing.Point(182, 12);
             this.ServiceVarLbl.Name = "ServiceVarLbl";
-            this.ServiceVarLbl.Size = new System.Drawing.Size(35, 13);
+            this.ServiceVarLbl.Size = new System.Drawing.Size(14, 18);
             this.ServiceVarLbl.TabIndex = 3;
             this.ServiceVarLbl.Text = "label1";
             this.ServiceVarLbl.Visible = false;
@@ -68,7 +71,7 @@
             this.RefLbl.AutoSize = true;
             this.RefLbl.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RefLbl.ForeColor = System.Drawing.Color.White;
-            this.RefLbl.Location = new System.Drawing.Point(13, 93);
+            this.RefLbl.Location = new System.Drawing.Point(15, 72);
             this.RefLbl.Name = "RefLbl";
             this.RefLbl.Size = new System.Drawing.Size(103, 20);
             this.RefLbl.TabIndex = 2;
@@ -79,7 +82,7 @@
             this.TransactionIDLbl.AutoSize = true;
             this.TransactionIDLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TransactionIDLbl.ForeColor = System.Drawing.Color.White;
-            this.TransactionIDLbl.Location = new System.Drawing.Point(112, 92);
+            this.TransactionIDLbl.Location = new System.Drawing.Point(114, 71);
             this.TransactionIDLbl.Name = "TransactionIDLbl";
             this.TransactionIDLbl.Size = new System.Drawing.Size(82, 21);
             this.TransactionIDLbl.TabIndex = 1;
@@ -87,13 +90,41 @@
             // 
             // QueueNumLbl
             // 
-            this.QueueNumLbl.Font = new System.Drawing.Font("Segoe UI", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QueueNumLbl.Font = new System.Drawing.Font("Segoe UI", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QueueNumLbl.ForeColor = System.Drawing.Color.White;
-            this.QueueNumLbl.Location = new System.Drawing.Point(57, 16);
+            this.QueueNumLbl.Location = new System.Drawing.Point(70, 12);
             this.QueueNumLbl.Name = "QueueNumLbl";
-            this.QueueNumLbl.Size = new System.Drawing.Size(92, 65);
+            this.QueueNumLbl.Size = new System.Drawing.Size(79, 57);
             this.QueueNumLbl.TabIndex = 0;
+            this.QueueNumLbl.Text = "10";
             this.QueueNumLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ServiceDoneBtn
+            // 
+            this.ServiceDoneBtn.AutoRoundedCorners = true;
+            this.ServiceDoneBtn.BorderRadius = 13;
+            this.ServiceDoneBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceDoneBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ServiceDoneBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ServiceDoneBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ServiceDoneBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.ServiceDoneBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServiceDoneBtn.ForeColor = System.Drawing.Color.Black;
+            this.ServiceDoneBtn.Location = new System.Drawing.Point(44, 99);
+            this.ServiceDoneBtn.Name = "ServiceDoneBtn";
+            this.ServiceDoneBtn.Size = new System.Drawing.Size(123, 28);
+            this.ServiceDoneBtn.TabIndex = 4;
+            this.ServiceDoneBtn.Text = "Done";
+            this.ServiceDoneBtn.Click += new System.EventHandler(this.ServiceDoneBtn_Click);
+            // 
+            // EmpIDLbl
+            // 
+            this.EmpIDLbl.Location = new System.Drawing.Point(179, 30);
+            this.EmpIDLbl.Name = "EmpIDLbl";
+            this.EmpIDLbl.Size = new System.Drawing.Size(17, 18);
+            this.EmpIDLbl.TabIndex = 5;
+            this.EmpIDLbl.Text = "label1";
+            this.EmpIDLbl.Visible = false;
             // 
             // InSessionDisplay
             // 
@@ -116,5 +147,7 @@
         private System.Windows.Forms.Label RefLbl;
         private System.Windows.Forms.Label TransactionIDLbl;
         private System.Windows.Forms.Label QueueNumLbl;
+        private Guna.UI2.WinForms.Guna2Button ServiceDoneBtn;
+        private System.Windows.Forms.Label EmpIDLbl;
     }
 }
