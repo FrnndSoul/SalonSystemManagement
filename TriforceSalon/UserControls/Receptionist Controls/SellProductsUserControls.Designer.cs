@@ -68,6 +68,7 @@
             this.ActivateBtn = new Guna.UI2.WinForms.Guna2Button();
             this.PromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.ItemPromoComB = new Guna.UI2.WinForms.Guna2ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             this.SuspendLayout();
@@ -599,7 +600,7 @@
             this.ActivateBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.ActivateBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.ActivateBtn.ForeColor = System.Drawing.Color.Black;
-            this.ActivateBtn.Location = new System.Drawing.Point(1379, 474);
+            this.ActivateBtn.Location = new System.Drawing.Point(1382, 474);
             this.ActivateBtn.Name = "ActivateBtn";
             this.ActivateBtn.Size = new System.Drawing.Size(180, 36);
             this.ActivateBtn.TabIndex = 42;
@@ -609,7 +610,7 @@
             // PromoTxtB
             // 
             this.PromoTxtB.AutoRoundedCorners = true;
-            this.PromoTxtB.BorderRadius = 17;
+            this.PromoTxtB.BorderRadius = 16;
             this.PromoTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PromoTxtB.DefaultText = "";
             this.PromoTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -619,13 +620,15 @@
             this.PromoTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PromoTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PromoTxtB.Location = new System.Drawing.Point(1578, 474);
+            this.PromoTxtB.Location = new System.Drawing.Point(1327, 474);
+            this.PromoTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.PromoTxtB.Name = "PromoTxtB";
             this.PromoTxtB.PasswordChar = '\0';
             this.PromoTxtB.PlaceholderText = "Enter Promo Code Here";
             this.PromoTxtB.SelectedText = "";
-            this.PromoTxtB.Size = new System.Drawing.Size(314, 36);
+            this.PromoTxtB.Size = new System.Drawing.Size(34, 36);
             this.PromoTxtB.TabIndex = 43;
+            this.PromoTxtB.Visible = false;
             this.PromoTxtB.TextChanged += new System.EventHandler(this.PromoTxtB_TextChanged);
             // 
             // GcashPayment
@@ -643,11 +646,30 @@
             this.GcashPayment.UseTransparentBackground = true;
             this.GcashPayment.Click += new System.EventHandler(this.GcashPayment_Click);
             // 
+            // ItemPromoComB
+            // 
+            this.ItemPromoComB.AutoRoundedCorners = true;
+            this.ItemPromoComB.BackColor = System.Drawing.Color.Transparent;
+            this.ItemPromoComB.BorderRadius = 17;
+            this.ItemPromoComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ItemPromoComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ItemPromoComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ItemPromoComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ItemPromoComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ItemPromoComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ItemPromoComB.ItemHeight = 30;
+            this.ItemPromoComB.Location = new System.Drawing.Point(1578, 474);
+            this.ItemPromoComB.Name = "ItemPromoComB";
+            this.ItemPromoComB.Size = new System.Drawing.Size(313, 36);
+            this.ItemPromoComB.TabIndex = 49;
+            this.ItemPromoComB.SelectedIndexChanged += new System.EventHandler(this.ItemPromoComB_SelectedIndexChanged);
+            // 
             // SellProductsUserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.ItemPromoComB);
             this.Controls.Add(this.PromoTxtB);
             this.Controls.Add(this.ActivateBtn);
             this.Controls.Add(this.ProductsFL);
@@ -727,5 +749,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CostCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiscountComB;
         private System.Windows.Forms.DataGridViewButtonColumn DisposeCol;
+        private Guna.UI2.WinForms.Guna2ComboBox ItemPromoComB;
     }
 }
