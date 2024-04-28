@@ -49,7 +49,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
                         "FROM salon_promos " +
                         "WHERE isValid = 'YES'";
 
-
                     using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
                     {
                         using (var adapter = new MySqlDataAdapter(command))

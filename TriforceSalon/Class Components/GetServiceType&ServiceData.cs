@@ -255,13 +255,13 @@ namespace TriforceSalon.Class_Components
                                     Panel panel = new Panel
                                     {
                                         Width = 200, // Adjusted panel width
-                                        Height = 230, // Adjusted panel height
+                                        Height = 200, // Adjusted panel height
                                         Margin = new Padding(10)
                                     };
                                     PictureBox picBox = new PictureBox
                                     {
-                                        Width = 50,
-                                        Height = 50,
+                                        Width = 150,
+                                        Height = 100,
                                         Location = new Point(10, 10),
                                         BackgroundImage = servicetypeImage,
                                         BackgroundImageLayout = ImageLayout.Stretch
@@ -270,10 +270,10 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle = new Label
                                     {
                                         Text = reader["ServiceSubTypeName"].ToString(),
-                                        Location = new Point(10, 170), // Adjusted label location
+                                        Location = new Point(10, 120), // Adjusted label location
                                         ForeColor = Color.Black,
                                         AutoSize = true,
-                                        Font = new Font("Stanberry", 14, FontStyle.Regular) // Adjusted font size
+                                        Font = new Font("Stanberry", 16, FontStyle.Regular) // Adjusted font size
                                     };
 
                                     picBox.Tag = reader["CategoryID"];
@@ -459,8 +459,8 @@ namespace TriforceSalon.Class_Components
                                     };
                                     PictureBox picBox = new PictureBox
                                     {
-                                        Width = 200,
-                                        Height = 150,
+                                        Width = 150,
+                                        Height = 100,
                                         Location = new Point(10, 10),
                                         BackgroundImage = servicetypeImage,
                                         BackgroundImageLayout = ImageLayout.Stretch
@@ -469,7 +469,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle = new Label
                                     {
                                         Text = reader["ServiceSubTypeName"].ToString(),
-                                        Location = new Point(10, 160),
+                                        Location = new Point(10, 120),
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 16, FontStyle.Regular)

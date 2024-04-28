@@ -361,7 +361,7 @@ namespace TriforceSalon.Class_Components
         }
 
 
-        public async Task GetActivePromos(Guna2DataGridView viewPromosDGV)
+        public async Task GetActiveProductPromos(Guna2ComboBox productPromoComB)
         {
             try
             {
@@ -369,30 +369,22 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
 
-                    string fetchQuery = "SELECT PromoName, PromoCode, DiscountPercent, " +
-                        "DATE(PromoStart) AS PromoStart, DATE(PromoEnd) AS PromoEnd, PromoItemsID " +
+                    string fetchQuery = "SELECT PromoName " +
                         "FROM salon_promos " +
                         "WHERE isValid = 'YES' AND PromoType = 'Item'";
 
 
                     using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
                     {
-                        using (var adapter = new MySqlDataAdapter(command))
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            var dataTable = new DataTable();
-                            await adapter.FillAsync(dataTable);
-
-                            foreach (DataRow row in dataTable.Rows)
+                            if (reader.HasRows)
                             {
-                                var PName = row["PromoName"].ToString();
-                                var PCode = row["PromoCode"].ToString();
-                                var PDiscount = row["DiscountPercent"].ToString();
-                                var PStart = row["PromoStart"].ToString();
-                                var PEnd = row["PromoEnd"].ToString();
-                                var PItemsID = row["PromoItemsID"].ToString();
-
-                                viewPromosDGV.Rows.Add(PName, PCode, Convert.ToDateTime(PStart).ToString("yyyy-MM-dd"),
-                                    Convert.ToDateTime(PEnd).ToString("yyyy-MM-dd"), PDiscount, PItemsID);
+                                while (await reader.ReadAsync())
+                                {
+                                    string promoName = reader["PromoName"].ToString();
+                                    productPromoComB.Items.Add(promoName);
+                                }
                             }
                         }
                     }
@@ -401,6 +393,77 @@ namespace TriforceSalon.Class_Components
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error in GetActivePromos");
+            }
+        }
+
+        public async Task GetActiveServicePromos(Guna2ComboBox servicePromoComB)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string fetchQuery = "SELECT PromoName " +
+                        "FROM salon_promos " +
+                        "WHERE isValid = 'YES' AND PromoType = 'Service'";
+
+
+                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
+                    {
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string promoName = reader["PromoName"].ToString();
+                                    servicePromoComB.Items.Add(promoName);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in GetActiveServicePromos");
+            }
+        }
+
+        public async Task GetPromoCode(string promoName, Guna2TextBox promoCodeTxtB)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string fetchQuery = "SELECT PromoCode " +
+                        "FROM salon_promos " +
+                        "WHERE PromoName = @name";
+
+                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@name", promoName);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    string code = reader["PromoCode"].ToString();
+                                    promoCodeTxtB.Text = code;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in GetActiveServicePromos");
             }
         }
 
@@ -610,48 +673,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public async Task GetActiveServicePromos(Guna2DataGridView viewPromosDGV)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string fetchQuery = "SELECT PromoName, PromoCode, DiscountPercent, " +
-                        "DATE(PromoStart) AS PromoStart, DATE(PromoEnd) AS PromoEnd, PromoItemsID " +
-                        "FROM salon_promos " +
-                        "WHERE isValid = 'YES' AND PromoType = 'Service'";
-
-
-                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
-                    {
-                        using (var adapter = new MySqlDataAdapter(command))
-                        {
-                            var dataTable = new DataTable();
-                            await adapter.FillAsync(dataTable);
-
-                            foreach (DataRow row in dataTable.Rows)
-                            {
-                                var PName = row["PromoName"].ToString();
-                                var PCode = row["PromoCode"].ToString();
-                                var PDiscount = row["DiscountPercent"].ToString();
-                                var PStart = row["PromoStart"].ToString();
-                                var PEnd = row["PromoEnd"].ToString();
-                                var PItemsID = row["PromoItemsID"].ToString();
-
-                                viewPromosDGV.Rows.Add(PName, PCode, Convert.ToDateTime(PStart).ToString("yyyy-MM-dd"),
-                                    Convert.ToDateTime(PEnd).ToString("yyyy-MM-dd"), PDiscount, PItemsID);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error in GetActiveServicePromos");
-            }
-        }
+        
         public async void EditServicePromo(Guna2DataGridView productPromoDGV)
         {
             /*if (productPromoDGV.SelectedRows.Count == 0)

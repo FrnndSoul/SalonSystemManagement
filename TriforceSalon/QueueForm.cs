@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using System.Web.UI.WebControls.Adapters;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.Ticket_System;
@@ -14,15 +16,20 @@ namespace TriforceSalon
 {
     public partial class QueueForm : Form
     {
+        public static QueueForm queueInstance;
         QueueMethods queueMethods = new QueueMethods();
+        int EmpID = 0;
+        public string EmpSpecialist;
 
         public QueueForm()
         {
             InitializeComponent();
+            queueInstance = this;
         }
         private async void QueueForm_Load(object sender, EventArgs e)
         {
             await queueMethods.GetEmployee(EmployeeDGV);
+            await queueMethods.InSessionDisplay(InsessionFL);
         }
         private async void EmployeeDGV_CellContentDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
@@ -31,10 +38,10 @@ namespace TriforceSalon
                 DataGridViewRow selectedRow = EmployeeDGV.Rows[e.RowIndex];
 
                 string EmpName = Convert.ToString(selectedRow.Cells["EmpNameCol"].Value);
-                string EmpID = Convert.ToString(selectedRow.Cells["EmpIDCol"].Value);
-                string EmpSpecialistCol = Convert.ToString(selectedRow.Cells["EmpSpecialistCol"].Value);
+                EmpID = Convert.ToInt32(selectedRow.Cells["EmpIDCol"].Value);
+                EmpSpecialist = Convert.ToString(selectedRow.Cells["EmpSpecialistCol"].Value);
 
-                await queueMethods.GeneralQueue(EmpSpecialistCol, GeneralQueue);
+                await queueMethods.CombinedQueue(EmpSpecialist, QueueFL, EmpID);
             }
         }
 
@@ -43,20 +50,28 @@ namespace TriforceSalon
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                MessageBox.Show("Action not allowed", "Invalid Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Closing this form is not allowed", "Invalid Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void ServeBtn_Click(object sender, EventArgs e)
+        private async void ServeBtn_Click(object sender, EventArgs e)
         {
-            if (QueueDisplay.TransactionID == null)
+            if (QueueDisplay.TransactionID == -1 || QueueDisplay.ServiceVar == null)
             {
                 MessageBox.Show("No customer has been selected", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-
-            QueueDisplay.TransactionID = null;
+            else
+            {
+                int serviceID = await queueMethods.GetServiceVariationID(QueueDisplay.ServiceVar);
+                await queueMethods.ProcessCustomerAsync(QueueDisplay.TransactionID, serviceID, EmpID);
+                await queueMethods.GetEmployee(EmployeeDGV);
+                await queueMethods.CombinedQueue(EmpSpecialist, QueueFL, EmpID);
+                await queueMethods.InSessionDisplay(InsessionFL);
+            }
+            QueueDisplay.TransactionID = -1;
+            QueueDisplay.ServiceVar = null;
         }
     }
 }

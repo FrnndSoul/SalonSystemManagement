@@ -13,10 +13,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static ServicesUserControl servicesUserControlInstance;
         private readonly GetServiceType_ServiceData serviceTypeService = new GetServiceType_ServiceData();
+        private readonly PromoMethods promoMethods = new PromoMethods();
         public readonly string mysqlcon;
         private PictureBox pic;
         private Label serviceTypeLbl;
         TransactionMethods transactionMethods = new TransactionMethods();
+        SellProductsMethods sellMethods;
         public KeypressLettersRestrictions keypressLettersRestrictions = new KeypressLettersRestrictions();
         public KeypressNumbersRestrictions keypressNumbersRestrictions = new KeypressNumbersRestrictions();
 
@@ -27,7 +29,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
-            CustomerSpecialIDTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
         }
 
@@ -37,6 +38,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
             await serviceTypeService.GetAllType(ServiceTypeComB, mysqlcon);
+            await promoMethods.GetActiveServicePromos(ServicePromoComB);
             DisplayServiceTypeFL();
         }
         public async void DisplayServiceTypeFL()
@@ -55,16 +57,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
-            string specialID;
-
-            if (!string.IsNullOrEmpty(CustomerSpecialIDTxtB.Text))
-            {
-                specialID = CustomerSpecialIDTxtB.Text;
-            }
-            else
-            {
-                specialID = "NONE";
-            }
 
             if (CustomerNameTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
@@ -91,8 +83,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string serviceName = ServiceTxtB.Text;
                 await transactionMethods.GetServiceTypeID(serviceName);
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL", specialID);
-                transactionMethods.GeneratePDFTicket(ID, name, specialID);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                transactionMethods.GeneratePDFTicket(ID, name);
                 ClearAll();
 
             }
@@ -104,7 +96,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             ServicesGDGVVControl.Rows.Clear();
             CustomerNameTxtB.Clear();
-            CustomerSpecialIDTxtB.Clear();
             CustomerPhoneNTxtB.Clear();
             ServiceTxtB.Clear();
             ServiceAmountTxtB.Clear();
@@ -125,40 +116,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }*/
 
-        private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            string currentText = CustomerAgeTxtB.Text;
-
-            int totalLength = currentText.Length + 1;
-            if (totalLength >= 2)
-            {
-                e.Handled = true;
-                return;
-            }*/
-
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Get the current text in the TextBox
-            string currentText = CustomerSpecialIDTxtB.Text;
-
-            // Check if the input length will exceed 3 characters after adding the new input
-            if (currentText.Length >= 3 && e.KeyChar != '\b') // '\b' represents the Backspace key
-            {
-                e.Handled = true; // Ignore the input
-                return;
-            }
-        }
-
+       
         private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -243,8 +201,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal amountService = Convert.ToDecimal(ServiceAmountTxtB.Text);
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
-            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "X", queueNumber);
-            //ClearAll();
+            ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "None", "X", queueNumber);
+
+            ServiceTxtB.Clear();
+            ServiceAmountTxtB.Clear();
+            PEmployeeComB.SelectedIndex = 0;
         }
 
         private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -284,6 +245,104 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void ActivateBtn_Click(object sender, EventArgs e)
+        {
+            string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
+
+            if (string.IsNullOrWhiteSpace(promoInput))
+            {
+                MessageBox.Show("No code has been entered", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (int.TryParse(promoInput, out int promoCode))
+            {
+                var promoDetails = transactionMethods.GetPromoDetails(promoCode, mysqlcon);
+
+                if (promoDetails.isValid == "YES")
+                {
+                    var serviceDetails = transactionMethods.GetServiceDetails(promoCode, mysqlcon);
+
+                    // Check if any of the items from the promo are already present in the DataGridView
+                    bool serviceAlreadyAdded = true; // Assume all services are already added
+                    foreach (var service in serviceDetails)
+                    {
+                        bool found = false;
+                        foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                        {
+                            if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            serviceAlreadyAdded = false;
+                            break;
+                        }
+                    }
+
+                    if (serviceAlreadyAdded)
+                    {
+                        foreach (var service in serviceDetails)
+                        {
+                            foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                            {
+                                if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                                {
+                                    row.Cells["DiscountCol"].Value = service.ServiceDiscount;
+                                }
+                            }
+                        }
+                        MessageBox.Show("Discount applied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select all the services from the promo before applying the discount.", "Service(s) not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    ServicePromoTxtB.Clear();
+                }
+                else if (promoDetails.isValid == "NO")
+                {
+                    MessageBox.Show($"Promo Code {promoDetails.promoCode} is not available right now.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid promo code.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void ServicePromoTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+            else if (ServicePromoTxtB.Text.Length >= 7 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private async void ServicePromoComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            DisplayServiceTypeFL();
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            ClearAll();
         }
     }
 }

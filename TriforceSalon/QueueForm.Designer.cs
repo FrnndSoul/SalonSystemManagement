@@ -31,38 +31,38 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.GeneralQueue = new System.Windows.Forms.FlowLayoutPanel();
+            this.InsessionFL = new System.Windows.Forms.FlowLayoutPanel();
+            this.QueueFL = new System.Windows.Forms.FlowLayoutPanel();
             this.EmployeeDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.EmpIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmpNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmpSpecialistCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServeBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeDGV)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // InsessionFL
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(515, 102);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(670, 147);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.InsessionFL.AutoScroll = true;
+            this.InsessionFL.BackColor = System.Drawing.Color.White;
+            this.InsessionFL.Location = new System.Drawing.Point(515, 102);
+            this.InsessionFL.Name = "InsessionFL";
+            this.InsessionFL.Size = new System.Drawing.Size(670, 158);
+            this.InsessionFL.TabIndex = 1;
             // 
-            // GeneralQueue
+            // QueueFL
             // 
-            this.GeneralQueue.AutoScroll = true;
-            this.GeneralQueue.BackColor = System.Drawing.Color.White;
-            this.GeneralQueue.Location = new System.Drawing.Point(515, 348);
-            this.GeneralQueue.Name = "GeneralQueue";
-            this.GeneralQueue.Size = new System.Drawing.Size(670, 302);
-            this.GeneralQueue.TabIndex = 3;
+            this.QueueFL.AutoScroll = true;
+            this.QueueFL.BackColor = System.Drawing.Color.White;
+            this.QueueFL.Location = new System.Drawing.Point(515, 348);
+            this.QueueFL.Name = "QueueFL";
+            this.QueueFL.Size = new System.Drawing.Size(670, 302);
+            this.QueueFL.TabIndex = 3;
             // 
             // EmployeeDGV
             // 
@@ -86,7 +86,7 @@
             this.EmpSpecialistCol});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
@@ -168,40 +168,40 @@
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.guna2Panel1.Location = new System.Drawing.Point(497, -1);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(721, 718);
+            this.guna2Panel1.Size = new System.Drawing.Size(727, 718);
             this.guna2Panel1.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(467, 90);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Employee List";
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(15, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(467, 64);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "In-Session ";
             // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(15, 282);
+            this.label3.Location = new System.Drawing.Point(7, 282);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(467, 64);
             this.label3.TabIndex = 10;
             this.label3.Text = "Customer Queue";
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(7, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(467, 64);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "In-Session ";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(-3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(467, 90);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Employee List";
             // 
             // QueueForm
             // 
@@ -211,8 +211,8 @@
             this.ClientSize = new System.Drawing.Size(1197, 716);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmployeeDGV);
-            this.Controls.Add(this.GeneralQueue);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.QueueFL);
+            this.Controls.Add(this.InsessionFL);
             this.Controls.Add(this.guna2Panel1);
             this.Name = "QueueForm";
             this.Text = "Customer Queue";
@@ -225,9 +225,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel GeneralQueue;
-        private Guna.UI2.WinForms.Guna2DataGridView EmployeeDGV;
+        private System.Windows.Forms.FlowLayoutPanel QueueFL;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpIDCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpSpecialistCol;
@@ -236,5 +234,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.FlowLayoutPanel InsessionFL;
+        public Guna.UI2.WinForms.Guna2DataGridView EmployeeDGV;
     }
 }

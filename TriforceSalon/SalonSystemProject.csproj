@@ -186,6 +186,12 @@
     <Compile Include="QueueForm.Designer.cs">
       <DependentUpon>QueueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ticket System\InSessionDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ticket System\InSessionDisplay.Designer.cs">
+      <DependentUpon>InSessionDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ticket System\QueueDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -450,6 +456,9 @@
     </Compile>
     <EmbeddedResource Include="QueueForm.resx">
       <DependentUpon>QueueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ticket System\InSessionDisplay.resx">
+      <DependentUpon>InSessionDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ticket System\QueueDisplay.resx">
       <DependentUpon>QueueDisplay.cs</DependentUpon>

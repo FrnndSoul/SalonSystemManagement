@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ using TriforceSalon.Class_Components;
 using TriforceSalon.Test;
 using TriforceSalon.UserControls;
 using TriforceSalon.UserControls.Receptionist_Controls;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 using static TriforceSalon.Test.CustomerTicket;
 
 namespace TriforceSalon.Ticket_System
@@ -31,20 +33,18 @@ namespace TriforceSalon.Ticket_System
         public string transactionID => CustID.Text;
         public string appointmentDate => CustDate.Text;
         public string customerName => CustName.Text;
-        public string customerAge => CustAge.Text;
-        public string customerNumber => CustNumber.Text;
+        public string customerPNumber => CustNumber.Text;
         public string serviceChosen => ServiceChosen.Text;
         public string serviceAmount => SAmount.Text;
 
         public string mysqlcon;
 
-        public AppointmentTicket(string transactionID, string appointmentDate, string customerName, string customerAge, string customerNumber, string serviceChosen, string serviceAmount)
+        public AppointmentTicket(string transactionID, string appointmentDate, string customerName, string customerNumber, string serviceChosen, string serviceAmount)
         {
             InitializeComponent();
             CustID.Text = transactionID;
             CustDate.Text = appointmentDate;
             CustName.Text = customerName;
-            CustAge.Text = customerAge;
             CustNumber.Text = customerNumber;
             ServiceChosen.Text = serviceChosen;
             SAmount.Text = serviceAmount;
@@ -54,7 +54,7 @@ namespace TriforceSalon.Ticket_System
         internal EventHandler<AppointmentCustomerSelectedEventArgs> AppointmentCustomerSelected { get; set; }
         internal class AppointmentCustomerSelectedEventArgs { }
 
-        private async void CancelAppointBtn_Click(object sender, EventArgs e)
+        /*private async void CancelAppointBtn_Click(object sender, EventArgs e)
         {
             CancelAppointBtn.Enabled = false;
 
@@ -79,7 +79,62 @@ namespace TriforceSalon.Ticket_System
                 MessageBox.Show(ex.Message, "Error in CancelAppointBtn()");
             }
             CancelAppointBtn.Enabled = true;
+        }*/
+
+        private async void CancelAppointBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CancelAppointBtn.Enabled = false;
+
+                string custID = CustID.Text;
+
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string query = "UPDATE Appointment SET IsCancelled = 'YES' WHERE ReferenceNumber = @ID";
+                            using (MySqlCommand command = new MySqlCommand(query, conn, transaction))
+                            {
+                                command.Parameters.AddWithValue("@ID", custID);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Appointment cancellation is working as intended, Proceeding to rollback", "Appointment activation function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Appointment Cancelled", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an exception occurs
+                            transaction.Rollback();
+                            MessageBox.Show("Error in CancelAppointBtn(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error connecting to database: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                CancelAppointBtn.Enabled = true;
+            }
         }
+
 
         private void EditInfoBtn_Click(object sender, EventArgs e)
         {
@@ -93,7 +148,6 @@ namespace TriforceSalon.Ticket_System
             string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             string ID = CustID.Text;
             string name = Convert.ToString(CustName.Text);
-            string age = CustAge.Text;
             string pNumber = CustNumber.Text;
             string sChosen = ServiceChosen.Text;
             string amount = SAmount.Text;
@@ -109,7 +163,7 @@ namespace TriforceSalon.Ticket_System
             EditAppointmentUserControl editAppointment= new EditAppointmentUserControl();
             UserControlNavigator.ShowControl(editAppointment, WalkInTransactionForm.walkInTransactionFormInstance.ReceptionistContent);
 
-            editAppointment.GetCustomerInfo(name, age, pNumber, ID, appointmentDate, sChosen, amount, timeNow, isOnTime);
+            editAppointment.GetCustomerInfo(name, ID, appointmentDate,pNumber, sChosen, amount, timeNow, isOnTime);
         }
 
         private async void ActivateCustomerBtn_Click(object sender, EventArgs e)
@@ -117,16 +171,17 @@ namespace TriforceSalon.Ticket_System
             ActivateCustomerBtn.Enabled = false;
 
             TimeSpan allowedWindow = TimeSpan.FromMinutes(5);
+            TimeSpan lateWindow = TimeSpan.FromMinutes(30);
             string appointmentDate = CustDate.Text;
             DateTime appointmentTime = Convert.ToDateTime(appointmentDate);
             DateTime earliestArrivalTime = appointmentTime.Subtract(allowedWindow);
+            DateTime latestArrivalTime = appointmentTime.Add(lateWindow);
             string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             string dateNow = DateTime.Now.ToString("MM-dd-yyyy dddd");
 
             string serviceType = await transactionMethods.GetServiceType(ServiceChosen.Text);
             string ID = CustID.Text;
             string name = Convert.ToString(CustName.Text);
-            string age = CustAge.Text;
             string pNumber = CustNumber.Text;
 
             string sChosen = ServiceChosen.Text;
@@ -138,7 +193,7 @@ namespace TriforceSalon.Ticket_System
             bool isCustomerOnTime = false;
 
 
-            if (Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= appointmentTime)
+            if (Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= latestArrivalTime)
             {
                 isCustomerOnTime = true;
                 priority = "PRIORITY";
@@ -155,49 +210,72 @@ namespace TriforceSalon.Ticket_System
                 using(var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-
-                    string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE  ReferenceNumber = @refNum";
-                    using(MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        command.Parameters.AddWithValue("@refNum", ID);
-                        await command.ExecuteNonQueryAsync();
-                    }
+                        try
+                        {
+                            string updateQuery = "UPDATE Appointments SET isActivated = 'YES' WHERE  ReferenceNumber = @refNum";
+                            using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                            {
+                                command.Parameters.AddWithValue("@refNum", ID);
+                                await command.ExecuteNonQueryAsync();
+                            }
 
 
-                    string query = "Insert into customer_info (TransactionID, CustomerName, CustomerAge, CustomerPhoneNumber, PriorityStatus, ServiceGroupID) " +
-                        "VALUES (@transactionID, @customerName, @customerAge, @customerNumber, @prioStatus, @serviceGroupID)";
+                            string query = "Insert into customer_info (TransactionID, CustomerName, CustomerPhoneNumber, PriorityStatus, IsAppointment, ServiceGroupID) " +
+                                "VALUES (@transactionID, @customerName, @customerNumber, @prioStatus, @isAppointment, @serviceGroupID)";
 
-                    using(MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        command.Parameters.AddWithValue("@transactionID", ID);
-                        command.Parameters.AddWithValue("@customerName", name);
-                        command.Parameters.AddWithValue("@customerAge", age);
-                        command.Parameters.AddWithValue("@prioStatus", priority);
-                        command.Parameters.AddWithValue("@customerNumber", pNumber);
-                        command.Parameters.AddWithValue("@serviceGroupID", ID);
+                            using (MySqlCommand command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@transactionID", ID);
+                                command.Parameters.AddWithValue("@customerName", name);
+                                command.Parameters.AddWithValue("@prioStatus", priority);
+                                command.Parameters.AddWithValue("@customerNumber", pNumber);
+                                command.Parameters.AddWithValue("@isAppointment", "YES");
+                                command.Parameters.AddWithValue("@serviceGroupID", ID);
 
-                        await command.ExecuteNonQueryAsync();
-                    }
+                                await command.ExecuteNonQueryAsync();
+                            }
 
-                    string query2 = "Insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber) " +
-                        "VALUES (@serviceGroupID, @serviceType, @employeeID, @serviceVariation, @serviceVariationID, @amount, @queue)";
+                            string query2 = "Insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber) " +
+                                "VALUES (@serviceGroupID, @serviceType, @employeeID, @serviceVariation, @serviceVariationID, @amount, @queue)";
 
-                    using(MySqlCommand command = new MySqlCommand(query2, conn))
-                    {
-                        command.Parameters.AddWithValue("@serviceGroupID", ID);
-                        command.Parameters.AddWithValue("@serviceType", await salonService.GetServiceTypeByName(sChosen));
-                        command.Parameters.AddWithValue("@employeeID", 0);
-                        command.Parameters.AddWithValue("@serviceVariation", sChosen);
-                        command.Parameters.AddWithValue("@serviceVariationID", await salonService.GetServiceVariationID(sChosen));
-                        command.Parameters.AddWithValue("@amount", amount);
-                        command.Parameters.AddWithValue("@queue", queue);
+                            using (MySqlCommand command = new MySqlCommand(query2, conn))
+                            {
+                                command.Parameters.AddWithValue("@serviceGroupID", ID);
+                                command.Parameters.AddWithValue("@serviceType", await salonService.GetServiceTypeByName(sChosen));
+                                command.Parameters.AddWithValue("@employeeID", 0);
+                                command.Parameters.AddWithValue("@serviceVariation", sChosen);
+                                command.Parameters.AddWithValue("@serviceVariationID", await salonService.GetServiceVariationID(sChosen));
+                                command.Parameters.AddWithValue("@amount", amount);
+                                command.Parameters.AddWithValue("@queue", queue);
 
-                        await command.ExecuteNonQueryAsync();
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Appointment activation is working as intended, Proceeding to rollback", "Appointment activation function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //transactionMethods.GeneratePDFTicket(ID, name, age);
+                            }
+                            await appointment.LoadPresentCustomer();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-                MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                /*MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 transactionMethods.GeneratePDFTicket(ID, name, age);
-                await appointment.LoadPresentCustomer();
+                await appointment.LoadPresentCustomer();*/
             }
             catch(Exception ex)
             {
@@ -212,18 +290,16 @@ namespace TriforceSalon.Ticket_System
         public string transactionID { get; }
         public string appointmentDate { get; }
         public string customerName { get; }
-        public string customerAge { get; }
         public string customerNumber { get; }
         public string serviceChosen { get; }
         public string serviceAmount { get; }
 
-        public ScheduleSelectedEventArgs(string TransactionID, string AppointmentDate, string CustomerName, string CustomerAge, string CustomerNumber, string ServiceChosen, string ServiceAmount)
+        public ScheduleSelectedEventArgs(string TransactionID, string AppointmentDate, string CustomerName, string CustomerPNumber, string ServiceChosen, string ServiceAmount)
         {
             transactionID = TransactionID;
             appointmentDate = AppointmentDate;
             customerName = CustomerName;
-            customerAge = CustomerAge;
-            customerNumber = CustomerNumber;
+            customerNumber = CustomerPNumber;
             serviceChosen = ServiceChosen;
             serviceAmount = ServiceAmount;
         }
