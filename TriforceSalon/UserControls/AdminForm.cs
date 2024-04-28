@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
 using System;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -30,14 +31,10 @@ namespace TriforceSalon
 
         private async void AdminForm_Load(object sender, EventArgs e)
         {
-            //            await LoadUserData();
-
+            await LoadUserData();
             object select = UserDGV;
             DataGridViewCellEventArgs args = new DataGridViewCellEventArgs(1, 3);
             UserDGV_CellContentDoubleClick(select, args);
-
-            await LoadUserData();
-
         }
 
         public static void SetRoles(Guna.UI2.WinForms.Guna2ComboBox roleBox)
@@ -64,38 +61,6 @@ namespace TriforceSalon
                 }
             }
         }
-
-        /*public void LoadUserData()
-        {
-            foreach (DataGridViewRow row in UserDGV.SelectedRows)
-            {
-                UserDGV.Rows.Remove(row);
-            }
-            try
-            {
-                connection.Open();
-                string sql = "SELECT accounts.Username, accounts.AccountID, " +
-                             "salon_employees.AccountAccess, salon_employees.Name, salon_employees.Email, " +
-                             "salon_employees.Birthdate, salon_employees.AccountStatus, " +
-                             "salon_employees.ServiceID, salon_employees.Availability FROM accounts " +
-                             "JOIN salon_employees ON accounts.AccountID = salon_employees.AccountID";
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
-                System.Data.DataTable dataTable = new System.Data.DataTable();
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
-                {
-                    adapter.Fill(dataTable);
-                }
-                UserDGV.DataSource = dataTable;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message + "\n\nat LoadUserData()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }*/
 
         public async Task LoadUserData()
         {
@@ -167,12 +132,32 @@ namespace TriforceSalon
             {
                 if (openForm is MainForm mainForm)
                 {
-                    //mainForm.ShowSignUp();
                     SignUpForm signUp = new SignUpForm();
                     UserControlNavigator.ShowControl(signUp, MainForm.mainFormInstance.MainFormContent);
                     break;
                 }
             }
+        }
+
+        private void SearchBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string searchText = SearchBox.Text.ToLower();
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                ((DataTable)UserDGV.DataSource).DefaultView.RowFilter = "";
+                return;
+            }
+
+            string filterExpression = $"Convert(Username, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(AccountAccess, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(Name, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(Email, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert([Birthdate], 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(AccountStatus, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(ServiceID, 'System.String') LIKE '%{searchText}%' OR " +
+                                       $"Convert(Availability, 'System.String') LIKE '%{searchText}%'";
+            ((DataTable)UserDGV.DataSource).DefaultView.RowFilter = filterExpression;
         }
 
         private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

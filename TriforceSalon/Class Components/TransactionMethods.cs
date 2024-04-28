@@ -123,8 +123,8 @@ namespace TriforceSalon.Class_Components
                         await command1.ExecuteNonQueryAsync();
                     }
 
-                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber, AppointmentDate)"
-                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @queueNumber, @date)";
+                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, Discount, QueueNumber, AppointmentDate)"
+                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @discount, @queueNumber, @date)";
 
                     foreach (DataGridViewRow row in serviceDataGrid.Rows)
                     {
@@ -133,6 +133,7 @@ namespace TriforceSalon.Class_Components
                         string preferredEmployee = Convert.ToString(row.Cells["PrefEmpCol"].Value);
                         decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
                         int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
+                        string discount = Convert.ToString(row.Cells["DiscountCol"].Value);
 
                         //edit mo ito para mamatch mo yung hinahanap sa database
                         using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn))
@@ -142,6 +143,7 @@ namespace TriforceSalon.Class_Components
                             command2.Parameters.AddWithValue("@service_var", serviceVariation);
                             command2.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceVariation));
                             command2.Parameters.AddWithValue("@amount", serviceAMount);
+                            command2.Parameters.AddWithValue("@discount", discount);
                             command2.Parameters.AddWithValue("@queueNumber", queueNumber);
                             command2.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM-dd-yyyy dddd"));
 
@@ -312,11 +314,12 @@ namespace TriforceSalon.Class_Components
                         int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
                         decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
                         int itemid = await GetItemIdAsync(itemName);
+                        string discount = Convert.ToString(row.Cells["DiscountComB"].Value);
                         //update customer_info set (ProductsBoughtID) values(@customerID)
                         //Insert into customer_info (ProductsBoughtID) values (@customerID)
 
-                        string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate) " +
-                                        "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate)";
+                        string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, Discount, EmployeeID, OrderDate) " +
+                                        "values (@customerID, @productName, @productID, @quantity, @amount, @discount, @employeeID, @orderDate)";
 
                         using (MySqlCommand command = new MySqlCommand(query, conn))
                         {
@@ -325,6 +328,7 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@productID", itemid);
                             command.Parameters.AddWithValue("@quantity", qty);
                             command.Parameters.AddWithValue("@amount", amount);
+                            command.Parameters.AddWithValue("@discount", discount);
                             command.Parameters.AddWithValue("@employeeID", Method.AccountID);
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
 
@@ -870,6 +874,86 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in GetServiceType");
             }
             return VariationID;
+        }
+
+        public class ServiceDetails
+        {
+            public string ServiceName { get; }
+            public decimal ServiceCost { get; }
+            public decimal ServiceDiscount { get; }
+
+            public ServiceDetails(string itemName, decimal cost, decimal discount)
+            {
+
+                ServiceName = itemName;
+                ServiceCost = cost;
+                ServiceDiscount = discount;
+            }
+        }
+        public List<ServiceDetails> GetServiceDetails(int promoCode, string mysqlcon)
+        {
+            List<ServiceDetails> items = new List<ServiceDetails>();
+
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                conn.Open();
+                string query = @"
+                SELECT bs.ServiceName, ss.ServiceAmount, sp.DiscountPercent
+                FROM binded_services bs
+                INNER JOIN salon_services ss ON bs.ServiceID = ss.ServiceVariationID
+                INNER JOIN salon_promos sp ON bs.PromoServiceID = sp.PromoCode
+                WHERE bs.PromoServiceID = @PromoCode";
+
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PromoCode", promoCode);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string serviceName = reader["ServiceName"].ToString();
+                            decimal serviceCost = Convert.ToDecimal(reader["ServiceAmount"]);
+
+                            // Remove the percentage sign (%) and convert to decimal
+                            string discountPercentString = reader["DiscountPercent"].ToString().Replace("%", "");
+                            decimal discountPercent = Convert.ToDecimal(discountPercentString) / 100m;
+
+                            items.Add(new ServiceDetails(serviceName, serviceCost, discountPercent));
+                        }
+                    }
+                }
+            }
+
+            return items;
+        }
+
+        public (int promoCode, string isValid) GetPromoDetails(int promoCode, string mysqlcon)
+        {
+            int retrievedPromoCode = 0;
+            string isValid = "";
+
+            using (var conn = new MySqlConnection(mysqlcon))
+            {
+                conn.Open();
+                string query = "SELECT PromoCode, isValid FROM salon_promos WHERE PromoCode = @PromoCode";
+
+                using (MySqlCommand command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PromoCode", promoCode);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            retrievedPromoCode = Convert.ToInt32(reader["PromoCode"]);
+                            isValid = reader["isValid"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return (retrievedPromoCode, isValid);
         }
 
         public void LockTransactionNavigation(List<Guna2Button> buttons, Guna2Button clickedButton)

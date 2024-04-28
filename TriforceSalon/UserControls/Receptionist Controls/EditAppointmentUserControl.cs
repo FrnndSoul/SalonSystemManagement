@@ -134,7 +134,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (result == DialogResult.Yes)
             {
                 string serviceName = ServiceTxtB.Text;
-                transactionMethods.GetServiceTypeID(serviceName);
+                await transactionMethods.GetServiceTypeID(serviceName);
 
                 if (isOnTime == true)
                 {
@@ -187,16 +187,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         await command1.ExecuteNonQueryAsync();
                     }
 
-                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, QueueNumber, AppointmentDate)"
-                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @queueNumber, @date)";
+                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, Discount, QueueNumber, AppointmentDate)"
+                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @discount, @queueNumber, @date)";
 
                     foreach (DataGridViewRow row in serviceDataGrid.Rows)
                     {
                         string serviceType = Convert.ToString(row.Cells["ServiceTypeCol"].Value);
                         string serviceVariation = Convert.ToString(row.Cells["SNameCol"].Value);
                         string preferredEmployee = Convert.ToString(row.Cells["PrefEmpCol"].Value);
-                        decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
+                        decimal serviceAmount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
                         int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
+                        string discount = Convert.ToString(row.Cells["DiscountCol"].Value);
 
                         //edit mo ito para mamatch mo yung hinahanap sa database
                         using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn))
@@ -205,7 +206,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             command2.Parameters.AddWithValue("@service_type", await transactionMethods.GetServiceType(serviceVariation));
                             command2.Parameters.AddWithValue("@service_var", serviceVariation);
                             command2.Parameters.AddWithValue("@service_varID", transactionMethods.GetServiceVariationID(serviceVariation));
-                            command2.Parameters.AddWithValue("@amount", serviceAMount);
+                            command2.Parameters.AddWithValue("@amount", serviceAmount);
+                            command2.Parameters.AddWithValue("@discount", discount);
                             command2.Parameters.AddWithValue("@queueNumber", queueNumber);
                             command2.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM-dd-yyyy dddd"));
 
@@ -667,6 +669,70 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in AddEmployeesComBAsync()");
+            }
+        }
+
+        private void ActivateBtn_Click(object sender, EventArgs e)
+        {
+            string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
+
+            if (int.TryParse(promoInput, out int promoCode))
+            {
+                var promoDetails = transactionMethods.GetPromoDetails(promoCode, mysqlcon);
+
+                if (promoDetails.isValid == "YES")
+                {
+                    var serviceDetails = transactionMethods.GetServiceDetails(promoCode, mysqlcon);
+
+                    // Check if any of the items from the promo are already present in the DataGridView
+                    bool serviceAlreadyAdded = true; // Assume all services are already added
+                    foreach (var service in serviceDetails)
+                    {
+                        bool found = false;
+                        foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                        {
+                            if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            serviceAlreadyAdded = false;
+                            break;
+                        }
+                    }
+
+                    if (serviceAlreadyAdded)
+                    {
+                        foreach (var service in serviceDetails)
+                        {
+                            foreach (DataGridViewRow row in ServicesGDGVVControl.Rows)
+                            {
+                                if (row.Cells["SNameCol"].Value != null && row.Cells["SNameCol"].Value.ToString() == service.ServiceName)
+                                {
+                                    row.Cells["DiscountCol"].Value = service.ServiceDiscount;
+                                }
+                            }
+                        }
+                        MessageBox.Show("Discount applied successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select all the services from the promo before applying the discount.", "Service(s) not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    ServicePromoTxtB.Clear();
+                }
+                else if (promoDetails.isValid == "NO")
+                {
+                    MessageBox.Show($"Promo Code {promoDetails.promoCode} is not available right now.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid promo code.", "Invalid Promo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
     }

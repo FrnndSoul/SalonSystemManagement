@@ -482,6 +482,5 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-
     }
 }

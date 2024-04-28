@@ -69,11 +69,7 @@ namespace TriforceSalon.Test
             MessageBox.Show(CAge);
             MessageBox.Show(PNumber);
             MessageBox.Show(Cserviec);
-            MessageBox.Show(prio);
-*/
-
-
-
+            MessageBox.Show(prio);*/
             try
             {
                 await empTransaction.ProcessTicketAsync(ticketID, serviceID);
