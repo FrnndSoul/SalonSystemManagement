@@ -363,6 +363,16 @@ namespace TriforceSalon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shadow_shit {
+            get {
+                object obj = ResourceManager.GetObject("shadow shit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SignInDesign {
             get {
                 object obj = ResourceManager.GetObject("SignInDesign", resourceCulture);
