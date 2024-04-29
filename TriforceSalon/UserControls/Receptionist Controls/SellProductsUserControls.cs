@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods;
+using ZstdSharp.Unsafe;
 using static TriforceSalon.Class_Components.SellProductsMethods;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
@@ -17,6 +18,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         TransactionMethods transaction = new TransactionMethods();
         Inventory inventoryMethods = new Inventory();
         SellProductsMethods sellMethods;
+        private readonly PromoMethods promoMethods = new PromoMethods();
         private readonly string mysqlcon;
         private decimal totalPrice = 0.00m;
         private decimal discount = 0.00m;
@@ -39,6 +41,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 await sellMethods.LoadItemsInSales(ProductsFL, mysqlcon, ProductsControlDGV);
                 await transaction.GetAllUnfinishedTickets();
+                await promoMethods.GetActiveProductPromos(ItemPromoComB);
             }
             catch (Exception ex)
             {
@@ -73,8 +76,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             }
         }
-       
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+
+        /*private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             totalPrice = 0.00m;
             discount = 0.00m;
@@ -103,7 +106,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
 
             UpdateTotalPrice();
-        }
+        }*/
 
         private void UpdateTotalPrice()
         {
@@ -127,18 +130,34 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (clickedCell.OwningColumn.Name == "DisposeCol")
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Remove Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string removedItemDiscountLabel = ProductsControlDGV.Rows[e.RowIndex].Cells["DiscountComB"].Value.ToString();
+                    decimal removedItemDiscount;
 
-                    if (result == DialogResult.Yes)
+                    if (removedItemDiscountLabel == "None")
                     {
                         decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
                         ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
                         totalPrice -= removedItemPrice;
-                        UpdateTotalPrice();
-                        PaymentBtn.Enabled = false;
+                    }
+                    else if (decimal.TryParse(removedItemDiscountLabel, out removedItemDiscount))
+                    {
+                        for (int i = 0; i < ProductsControlDGV.Rows.Count; i++)
+                        {
+                            decimal currentDiscount;
+                            if (decimal.TryParse(ProductsControlDGV.Rows[i].Cells["DiscountComB"].Value.ToString(), out currentDiscount))
+                            {
+                                if (currentDiscount == removedItemDiscount)
+                                {
+                                    decimal currentItemPrice = decimal.Parse(ProductsControlDGV.Rows[i].Cells["CostCol"].Value.ToString());
+                                    totalPrice -= currentItemPrice;
+                                    ProductsControlDGV.Rows.RemoveAt(i);
+                                    i--; // Adjust the index after removal
+                                }
+                            }
+                        }
                     }
                 }
-                else if (e.ColumnIndex == ProductsControlDGV.Columns["IncrementCol"].Index)
+                else if (e.ColumnIndex == ProductsControlDGV.Columns["IncrementCol"].Index && ProductsControlDGV.Rows[e.RowIndex].Cells["DiscountComB"].Value.ToString() == "None")
                 {
                     int currentQty = int.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
                     currentQty++;
@@ -146,7 +165,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     AddTotalPrice(e.RowIndex);
                     PaymentBtn.Enabled = false;
                 }
-                else if (e.ColumnIndex == ProductsControlDGV.Columns["DecrementCol"].Index)
+                else if (e.ColumnIndex == ProductsControlDGV.Columns["DecrementCol"].Index && ProductsControlDGV.Rows[e.RowIndex].Cells["DiscountComB"].Value.ToString() == "None")
                 {
                     int currentQty = int.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["QuantityCol"].Value.ToString());
                     SubtractTotalPrice(e.RowIndex);
@@ -155,14 +174,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private decimal DiscountFromProducts(decimal amount)
+        /*private decimal DiscountFromProducts(decimal amount)
         {
             decimal VAT = amount * 0.12m;
             decimal PriceWithoutVAT = amount - VAT;
             decimal discountPrice = PriceWithoutVAT * 0.20m;
             return discountPrice + VAT;
-        }
-        
+        }*/
+
         private decimal GetUnitPriceForFood(string serviceName)
         {
             decimal unitPrice = 0;
@@ -186,7 +205,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             return unitPrice;
         }
-       
+
 
         private void AddTotalPrice(int rowIndex)
         {
@@ -213,24 +232,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 ProductsControlDGV.Rows[rowIndex].Cells[4].Value = totalPrice.ToString();
             }
             UpdateTotalPrice();
-        }
-
-        private void discChckBx_CheckedChanged(object sender, EventArgs e)
-        {
-            if (discChckBx.Checked)
-            {
-                decimal totalPrice = decimal.Parse(SubLbl.Text.Replace("Php. ", ""));
-                decimal discount = totalPrice * 0.20m;
-                decimal discountedTotal = totalPrice - discount;
-
-                DiscLbl.Text = "Php. " + discount.ToString("0.00");
-                TotLbl.Text = "Php. " + discountedTotal.ToString("0.00");
-            }
-            else
-            {
-                DiscLbl.Text = "Php. 0.00";
-                UpdateTotalPrice();
-            }
         }
 
         private void RefreshPlaceButtonState()
@@ -306,7 +307,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CashTxtBx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (sender is TextBox textBox)
             {
                 // Allow digits, control characters, and a single period
@@ -358,7 +359,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             int orderID = transaction.GenerateTransactionID();
             PaymentBtn.Enabled = false;
-            
+
             try
             {
                 if (DatabaseTransactionRBtn.Checked == false || CustomerIDComB == null || CustomerIDComB.SelectedIndex == -1)
@@ -388,9 +389,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
                 else if (DatabaseTransactionRBtn.Checked == true)
                 {
-                    //dito ialagat yung method na ialalgay muna sa database for single resibo nalang
                     int ID = Convert.ToInt32(CustomerIDComB.SelectedItem);
-                    //MessageBox.Show(Convert.ToString(ID));
                     await transaction.PurchaseToDatabase(Convert.ToInt32(ID), ProductsControlDGV);
                     transaction.ClearContents();
                 }
@@ -414,12 +413,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             if (result == DialogResult.Yes)
             {
-                await VoidedPurchase(orderID, ProductsControlDGV); 
+                await VoidedPurchase(orderID, ProductsControlDGV);
             }
             VoidBtn.Enabled = true;
         }
 
-        public async Task VoidedPurchase(int ID, Guna2DataGridView products)
+        /*public async Task VoidedPurchase(int ID, Guna2DataGridView products)
         {
             try
             {
@@ -457,23 +456,99 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
                             command.Parameters.AddWithValue("@void", "YES");
 
-                            await command.ExecuteNonQueryAsync();
-
+                            
+                                await command.ExecuteNonQueryAsync();
+                                MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            
                         }
-                        //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        products.Rows.Clear();
+                        SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
 
-                    
+                    }
                 }
-                MessageBox.Show("Products has been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                products.Rows.Clear();
-                SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
             }
+        }*/
+        public async Task VoidedPurchase(int ID, Guna2DataGridView products)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            var transactionMethod = new TransactionMethods();
+                            foreach (DataGridViewRow row in products.Rows)
+                            {
+                                string itemName;
+                                if (row.Cells["ProductCol"].Value != null)
+                                {
+                                    itemName = row.Cells["ProductCol"].Value.ToString();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                                int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                                decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
+                                int itemid = await transactionMethod.GetItemIdAsync(itemName);
+
+                                string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate, IsVoided) " +
+                                                "values (@customerID, @productName, @productID, @quantity, @amount, @employeeID, @orderDate, @void)";
+
+                                using (MySqlCommand command = new MySqlCommand(query, conn, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@customerID", ID);
+                                    command.Parameters.AddWithValue("@productName", itemName);
+                                    command.Parameters.AddWithValue("@productID", itemid);
+                                    command.Parameters.AddWithValue("@quantity", qty);
+                                    command.Parameters.AddWithValue("@amount", amount);
+                                    command.Parameters.AddWithValue("@employeeID", Method.AccountID);
+                                    command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+                                    command.Parameters.AddWithValue("@void", "YES");
+
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Customer process working as intended", "Voided Purchase function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Product/s have been voided", "Void Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                            // Clear the products grid and reset customer name
+                            products.Rows.Clear();
+                            SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = "";
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show($"Error in VoidedPurchase: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         public decimal ExtractAmount(string input)
         {
             string pattern = @"₱\ (\d+(\.\d+)?)";
@@ -511,7 +586,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             GcashPayment.Enabled = true;
 
         }
-        private void CalculateTotalPrice()
+        /*private void CalculateTotalPrice()
         {
             totalPrice = 0.00m;
             decimal discountedTotal = 0.00m;
@@ -543,6 +618,45 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             SubLbl.Text = "₱ " + totalPrice.ToString("0.00");
             TotLbl.Text = "₱ " + (discountedTotal + normalTotal).ToString("0.00");
             DiscLbl.Text = "₱ " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
+        }*/
+
+        private void CalculateTotalPrice()
+        {
+            totalPrice = 0.00m;
+            decimal discountedTotal = 0.00m;
+            decimal normalTotal = 0.00m;
+
+            foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+            {
+                if (row.Cells[4].Value != null && row.Cells["DiscountComB"].Value.ToString() != "None")
+                {
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    string discountValue = row.Cells["DiscountComB"].Value.ToString();
+
+                    if (decimal.TryParse(discountValue, out decimal discountAmount))
+                    {
+                        // Apply discount for items with a decimal discount
+                        decimal discountedPrice = rowTotal * (1 - discountAmount);
+                        discountedTotal += discountedPrice;
+                    }
+                    else
+                    {
+                        // Add original price for items with "Normal" discount
+                        normalTotal += rowTotal;
+                    }
+                }
+                else
+                {
+                    // Add original price for items with "None" discount
+                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    normalTotal += rowTotal;
+                }
+                totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
+            }
+
+            SubLbl.Text = "₱ " + totalPrice.ToString("0.00");
+            TotLbl.Text = "₱ " + (discountedTotal + normalTotal).ToString("0.00");
+            DiscLbl.Text = "₱ " + (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
         private void DirectTransactionRBtn_CheckedChanged(object sender, EventArgs e)
@@ -559,7 +673,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             CustomerIDComB.Enabled = true;
 
-            ProductsControlDGV.Columns["DiscountComB"].Visible = false;
+            //ProductsControlDGV.Columns["DiscountComB"].Visible = false;
             CashTxtBx.Enabled = false;
             CalculateCostBtn.Enabled = false;
             CustomerNameTxtB.Enabled = false;
@@ -608,6 +722,82 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             OtherTransactionContainer.Visible = false;
             guna2HtmlLabel12.Visible = false;
             BackBtn.Visible = false;
+        }
+
+        private void PromoTxtB_TextChanged(object sender, EventArgs e)
+        {
+            if (PromoTxtB.Text.Length == 7)
+            {
+                ActivateBtn.Enabled = true;
+            }
+            else if (PromoTxtB.Text.Length > 7)
+            {
+                PromoTxtB.Text = PromoTxtB.Text.Substring(0, 7);
+                PromoTxtB.SelectionStart = 7;
+            }
+            else if (PromoTxtB.Text.Length < 7)
+            {
+                ActivateBtn.Enabled = false;
+            }
+        }
+
+        private void ActivateBtn_Click(object sender, EventArgs e)
+        {
+            string promoInput = PromoTxtB.Text.Substring(0, 7);
+
+            if (int.TryParse(promoInput, out int promoCode))
+            {
+                var promoDetails = sellMethods.GetPromoDetails(promoCode, mysqlcon);
+
+                if (promoDetails.isValid == "YES")
+                {
+                    var itemDetails = sellMethods.GetItemDetails(promoCode, mysqlcon);
+
+                    // Check if any of the items from the promo are already present in the DataGridView
+                    bool itemsAlreadyAdded = false;
+                    foreach (var item in itemDetails)
+                    {
+                        foreach (DataGridViewRow row in ProductsControlDGV.Rows)
+                        {
+                            if (row.Cells["ProductCol"].Value != null && row.Cells["ProductCol"].Value.ToString() == item.ItemName && row.Cells["DiscountComB"].Value != "None")
+                            {
+                                itemsAlreadyAdded = true;
+                                break;
+                            }
+                        }
+                        if (itemsAlreadyAdded)
+                            break; 
+                    }
+
+                    if (!itemsAlreadyAdded)
+                    {
+                        foreach (var item in itemDetails)
+                        {
+                            ProductsControlDGV.Rows.Add(item.ItemName, "", item.Quantity, "", item.Cost, item.Discount, "X");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Promo items are already added.");
+                    }
+
+                    PromoTxtB.Clear();
+                }
+                else if (promoDetails.isValid == "NO")
+                {
+                    MessageBox.Show($"Promo Code {promoDetails.promoCode} is not available right now.");
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid promo code.");
+                }
+            }
+        }
+
+        private async void ItemPromoComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string promoName = ItemPromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, PromoTxtB);
         }
     }
 }

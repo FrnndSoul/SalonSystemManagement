@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.ServiceFilterComB = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.FilterServiceComboBox = new System.Windows.Forms.Label();
-            this.SearchServiceBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.SearchServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ServicePromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.ActivateBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AppointmentDateTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,6 +43,7 @@
             this.SNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrefEmpCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AmountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RemoveServiceCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.QueNumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLServiceListBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -56,100 +55,35 @@
             this.ServiceTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.PEmployeeComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.CustomerPhoneNTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.CustomerAgeTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.CustomerNameTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProcessCustomerBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServicePromoComB = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.ServiceTypeComB = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CategoryFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ServiceFilterComB
-            // 
-            this.ServiceFilterComB.AutoRoundedCorners = true;
-            this.ServiceFilterComB.BackColor = System.Drawing.Color.Transparent;
-            this.ServiceFilterComB.BorderRadius = 17;
-            this.ServiceFilterComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ServiceFilterComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ServiceFilterComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceFilterComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceFilterComB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ServiceFilterComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.ServiceFilterComB.ItemHeight = 30;
-            this.ServiceFilterComB.Location = new System.Drawing.Point(172, 19);
-            this.ServiceFilterComB.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceFilterComB.Name = "ServiceFilterComB";
-            this.ServiceFilterComB.Size = new System.Drawing.Size(347, 36);
-            this.ServiceFilterComB.TabIndex = 11;
-            this.ServiceFilterComB.SelectedIndexChanged += new System.EventHandler(this.ServiceFilterComB_SelectedIndexChanged);
-            // 
-            // FilterServiceComboBox
-            // 
-            this.FilterServiceComboBox.Font = new System.Drawing.Font("Stanberry", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterServiceComboBox.ForeColor = System.Drawing.Color.White;
-            this.FilterServiceComboBox.Location = new System.Drawing.Point(10, 23);
-            this.FilterServiceComboBox.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.FilterServiceComboBox.Name = "FilterServiceComboBox";
-            this.FilterServiceComboBox.Size = new System.Drawing.Size(180, 29);
-            this.FilterServiceComboBox.TabIndex = 10;
-            this.FilterServiceComboBox.Text = "Filter Services: ";
-            // 
-            // SearchServiceBtn
-            // 
-            this.SearchServiceBtn.AutoRoundedCorners = true;
-            this.SearchServiceBtn.BorderRadius = 17;
-            this.SearchServiceBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.SearchServiceBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.SearchServiceBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.SearchServiceBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.SearchServiceBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.SearchServiceBtn.Font = new System.Drawing.Font("Stanberry", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchServiceBtn.ForeColor = System.Drawing.Color.Black;
-            this.SearchServiceBtn.Location = new System.Drawing.Point(620, 19);
-            this.SearchServiceBtn.Name = "SearchServiceBtn";
-            this.SearchServiceBtn.Size = new System.Drawing.Size(180, 36);
-            this.SearchServiceBtn.TabIndex = 9;
-            this.SearchServiceBtn.Text = "Search";
-            this.SearchServiceBtn.Click += new System.EventHandler(this.SearchServiceBtn_Click);
-            // 
-            // SearchServiceTxtB
-            // 
-            this.SearchServiceTxtB.Animated = true;
-            this.SearchServiceTxtB.AutoRoundedCorners = true;
-            this.SearchServiceTxtB.BorderRadius = 17;
-            this.SearchServiceTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.SearchServiceTxtB.DefaultText = "";
-            this.SearchServiceTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.SearchServiceTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.SearchServiceTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchServiceTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SearchServiceTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.SearchServiceTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SearchServiceTxtB.Location = new System.Drawing.Point(806, 19);
-            this.SearchServiceTxtB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.SearchServiceTxtB.Name = "SearchServiceTxtB";
-            this.SearchServiceTxtB.PasswordChar = '\0';
-            this.SearchServiceTxtB.PlaceholderText = "";
-            this.SearchServiceTxtB.SelectedText = "";
-            this.SearchServiceTxtB.Size = new System.Drawing.Size(474, 36);
-            this.SearchServiceTxtB.TabIndex = 8;
             // 
             // ServiceFL
             // 
             this.ServiceFL.AutoScroll = true;
             this.ServiceFL.BackColor = System.Drawing.Color.White;
-            this.ServiceFL.Location = new System.Drawing.Point(14, 80);
+            this.ServiceFL.Location = new System.Drawing.Point(14, 201);
             this.ServiceFL.Name = "ServiceFL";
-            this.ServiceFL.Size = new System.Drawing.Size(1266, 750);
+            this.ServiceFL.Size = new System.Drawing.Size(1266, 629);
             this.ServiceFL.TabIndex = 7;
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BorderRadius = 50;
+            this.guna2Panel1.Controls.Add(this.ServicePromoComB);
+            this.guna2Panel1.Controls.Add(this.ServicePromoTxtB);
+            this.guna2Panel1.Controls.Add(this.ActivateBtn);
             this.guna2Panel1.Controls.Add(this.CancelBtn);
             this.guna2Panel1.Controls.Add(this.AppointmentDateTxtB);
             this.guna2Panel1.Controls.Add(this.label1);
@@ -163,11 +97,9 @@
             this.guna2Panel1.Controls.Add(this.ServiceTxtB);
             this.guna2Panel1.Controls.Add(this.label5);
             this.guna2Panel1.Controls.Add(this.label4);
-            this.guna2Panel1.Controls.Add(this.label3);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.PEmployeeComB);
             this.guna2Panel1.Controls.Add(this.CustomerPhoneNTxtB);
-            this.guna2Panel1.Controls.Add(this.CustomerAgeTxtB);
             this.guna2Panel1.Controls.Add(this.CustomerNameTxtB);
             this.guna2Panel1.Controls.Add(this.ProcessCustomerBtn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -175,6 +107,48 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(606, 820);
             this.guna2Panel1.TabIndex = 12;
+            // 
+            // ServicePromoTxtB
+            // 
+            this.ServicePromoTxtB.AutoRoundedCorners = true;
+            this.ServicePromoTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.ServicePromoTxtB.BorderRadius = 13;
+            this.ServicePromoTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ServicePromoTxtB.DefaultText = "";
+            this.ServicePromoTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.ServicePromoTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.ServicePromoTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.ServicePromoTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ServicePromoTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoTxtB.Location = new System.Drawing.Point(540, 552);
+            this.ServicePromoTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ServicePromoTxtB.Name = "ServicePromoTxtB";
+            this.ServicePromoTxtB.PasswordChar = '\0';
+            this.ServicePromoTxtB.PlaceholderText = "Enter Promo Code Here";
+            this.ServicePromoTxtB.SelectedText = "";
+            this.ServicePromoTxtB.Size = new System.Drawing.Size(29, 36);
+            this.ServicePromoTxtB.TabIndex = 49;
+            // 
+            // ActivateBtn
+            // 
+            this.ActivateBtn.AutoRoundedCorners = true;
+            this.ActivateBtn.BackColor = System.Drawing.Color.Transparent;
+            this.ActivateBtn.BorderRadius = 17;
+            this.ActivateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ActivateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ActivateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ActivateBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.ActivateBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.ActivateBtn.ForeColor = System.Drawing.Color.White;
+            this.ActivateBtn.Location = new System.Drawing.Point(36, 502);
+            this.ActivateBtn.Name = "ActivateBtn";
+            this.ActivateBtn.Size = new System.Drawing.Size(180, 36);
+            this.ActivateBtn.TabIndex = 48;
+            this.ActivateBtn.Text = "Avail Promo";
+            this.ActivateBtn.Click += new System.EventHandler(this.ActivateBtn_Click);
             // 
             // CancelBtn
             // 
@@ -237,16 +211,16 @@
             // 
             this.ServicesGDGVVControl.AllowUserToAddRows = false;
             this.ServicesGDGVVControl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.ServicesGDGVVControl.ColumnHeadersHeight = 28;
             this.ServicesGDGVVControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ServicesGDGVVControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -254,22 +228,23 @@
             this.SNameCol,
             this.PrefEmpCol,
             this.AmountCol,
+            this.DiscountCol,
             this.RemoveServiceCol,
             this.QueNumCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle18;
             this.ServicesGDGVVControl.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.Location = new System.Drawing.Point(34, 229);
             this.ServicesGDGVVControl.Name = "ServicesGDGVVControl";
             this.ServicesGDGVVControl.ReadOnly = true;
             this.ServicesGDGVVControl.RowHeadersVisible = false;
-            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 311);
+            this.ServicesGDGVVControl.Size = new System.Drawing.Size(535, 243);
             this.ServicesGDGVVControl.TabIndex = 24;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.ServicesGDGVVControl.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -317,6 +292,12 @@
             this.AmountCol.HeaderText = "Amount";
             this.AmountCol.Name = "AmountCol";
             this.AmountCol.ReadOnly = true;
+            // 
+            // DiscountCol
+            // 
+            this.DiscountCol.HeaderText = "Discount";
+            this.DiscountCol.Name = "DiscountCol";
+            this.DiscountCol.ReadOnly = true;
             // 
             // RemoveServiceCol
             // 
@@ -473,23 +454,12 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(405, 49);
+            this.label4.Location = new System.Drawing.Point(343, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(141, 38);
             this.label4.TabIndex = 15;
             this.label4.Text = "Number";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(300, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 38);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Age";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -534,7 +504,7 @@
             this.CustomerPhoneNTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CustomerPhoneNTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomerPhoneNTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(405, 92);
+            this.CustomerPhoneNTxtB.Location = new System.Drawing.Point(343, 92);
             this.CustomerPhoneNTxtB.Margin = new System.Windows.Forms.Padding(5);
             this.CustomerPhoneNTxtB.Name = "CustomerPhoneNTxtB";
             this.CustomerPhoneNTxtB.PasswordChar = '\0';
@@ -543,30 +513,6 @@
             this.CustomerPhoneNTxtB.SelectedText = "";
             this.CustomerPhoneNTxtB.Size = new System.Drawing.Size(181, 36);
             this.CustomerPhoneNTxtB.TabIndex = 3;
-            // 
-            // CustomerAgeTxtB
-            // 
-            this.CustomerAgeTxtB.AutoRoundedCorners = true;
-            this.CustomerAgeTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.CustomerAgeTxtB.BorderRadius = 17;
-            this.CustomerAgeTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.CustomerAgeTxtB.DefaultText = "";
-            this.CustomerAgeTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.CustomerAgeTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.CustomerAgeTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerAgeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.CustomerAgeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CustomerAgeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CustomerAgeTxtB.Location = new System.Drawing.Point(305, 92);
-            this.CustomerAgeTxtB.Margin = new System.Windows.Forms.Padding(5);
-            this.CustomerAgeTxtB.Name = "CustomerAgeTxtB";
-            this.CustomerAgeTxtB.PasswordChar = '\0';
-            this.CustomerAgeTxtB.PlaceholderText = "";
-            this.CustomerAgeTxtB.ReadOnly = true;
-            this.CustomerAgeTxtB.SelectedText = "";
-            this.CustomerAgeTxtB.Size = new System.Drawing.Size(83, 36);
-            this.CustomerAgeTxtB.TabIndex = 2;
             // 
             // CustomerNameTxtB
             // 
@@ -613,32 +559,102 @@
             this.ProcessCustomerBtn.UseTransparentBackground = true;
             this.ProcessCustomerBtn.Click += new System.EventHandler(this.ProcessCustomerBtn_Click);
             // 
+            // ServicePromoComB
+            // 
+            this.ServicePromoComB.AutoRoundedCorners = true;
+            this.ServicePromoComB.BackColor = System.Drawing.Color.Transparent;
+            this.ServicePromoComB.BorderRadius = 17;
+            this.ServicePromoComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ServicePromoComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ServicePromoComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServicePromoComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServicePromoComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ServicePromoComB.ItemHeight = 30;
+            this.ServicePromoComB.Location = new System.Drawing.Point(222, 502);
+            this.ServicePromoComB.Name = "ServicePromoComB";
+            this.ServicePromoComB.Size = new System.Drawing.Size(347, 36);
+            this.ServicePromoComB.TabIndex = 50;
+            this.ServicePromoComB.SelectedIndexChanged += new System.EventHandler(this.ServicePromoComB_SelectedIndexChanged);
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 21;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
+            this.RefreshBtn.Location = new System.Drawing.Point(14, 131);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(217, 45);
+            this.RefreshBtn.TabIndex = 54;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
+            // 
+            // ServiceTypeComB
+            // 
+            this.ServiceTypeComB.AutoRoundedCorners = true;
+            this.ServiceTypeComB.BackColor = System.Drawing.Color.Transparent;
+            this.ServiceTypeComB.BorderRadius = 17;
+            this.ServiceTypeComB.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ServiceTypeComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ServiceTypeComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceTypeComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.ServiceTypeComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServiceTypeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.ServiceTypeComB.ItemHeight = 30;
+            this.ServiceTypeComB.Location = new System.Drawing.Point(14, 64);
+            this.ServiceTypeComB.Name = "ServiceTypeComB";
+            this.ServiceTypeComB.Size = new System.Drawing.Size(217, 36);
+            this.ServiceTypeComB.TabIndex = 53;
+            this.ServiceTypeComB.SelectedIndexChanged += new System.EventHandler(this.ServiceTypeComB_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(7, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(197, 37);
+            this.label3.TabIndex = 52;
+            this.label3.Text = "Filter Category:";
+            // 
+            // CategoryFL
+            // 
+            this.CategoryFL.AutoScroll = true;
+            this.CategoryFL.BackColor = System.Drawing.Color.White;
+            this.CategoryFL.Location = new System.Drawing.Point(247, 15);
+            this.CategoryFL.Name = "CategoryFL";
+            this.CategoryFL.Size = new System.Drawing.Size(1033, 161);
+            this.CategoryFL.TabIndex = 51;
+            // 
             // EditAppointmentUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.RefreshBtn);
             this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.ServiceFilterComB);
-            this.Controls.Add(this.FilterServiceComboBox);
-            this.Controls.Add(this.SearchServiceBtn);
-            this.Controls.Add(this.SearchServiceTxtB);
+            this.Controls.Add(this.ServiceTypeComB);
             this.Controls.Add(this.ServiceFL);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CategoryFL);
             this.Name = "EditAppointmentUserControl";
             this.Size = new System.Drawing.Size(1920, 843);
             this.Load += new System.EventHandler(this.EditAppointmentUserControl_Load);
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        public Guna.UI2.WinForms.Guna2ComboBox ServiceFilterComB;
-        private System.Windows.Forms.Label FilterServiceComboBox;
-        private Guna.UI2.WinForms.Guna2Button SearchServiceBtn;
-        private Guna.UI2.WinForms.Guna2TextBox SearchServiceTxtB;
         private System.Windows.Forms.FlowLayoutPanel ServiceFL;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2DataGridView ServicesGDGVVControl;
@@ -651,21 +667,27 @@
         public Guna.UI2.WinForms.Guna2TextBox ServiceTxtB;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         public Guna.UI2.WinForms.Guna2ComboBox PEmployeeComB;
         public Guna.UI2.WinForms.Guna2TextBox CustomerPhoneNTxtB;
-        public Guna.UI2.WinForms.Guna2TextBox CustomerAgeTxtB;
         public Guna.UI2.WinForms.Guna2TextBox CustomerNameTxtB;
         private Guna.UI2.WinForms.Guna2Button ProcessCustomerBtn;
         public Guna.UI2.WinForms.Guna2TextBox AppointmentDateTxtB;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Button CancelBtn;
+        private Guna.UI2.WinForms.Guna2TextBox ServicePromoTxtB;
+        private Guna.UI2.WinForms.Guna2Button ActivateBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceTypeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn SNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrefEmpCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountCol;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveServiceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn QueNumCol;
+        private Guna.UI2.WinForms.Guna2ComboBox ServicePromoComB;
+        private Guna.UI2.WinForms.Guna2Button RefreshBtn;
+        private Guna.UI2.WinForms.Guna2ComboBox ServiceTypeComB;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel CategoryFL;
     }
 }

@@ -301,11 +301,17 @@ namespace TriforceSalon.Class_Components
                         command.Parameters.AddWithValue("@service_image", imageData);
                         command.Parameters.AddWithValue("@itemGroupID", serviceID);
 
-
-                        await command.ExecuteNonQueryAsync();
-                        MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await GetSalonServicesAsync(serviceDatagrid);
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
+                        else
+                        {
+                            await command.ExecuteNonQueryAsync();
+                            MessageBox.Show("Addition of Service Complete", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
+                    await GetSalonServicesAsync(serviceDatagrid);
                 }
             }
             catch (MySqlException a)
@@ -465,7 +471,17 @@ namespace TriforceSalon.Class_Components
                         {
                             command.Parameters.AddWithValue("@service_image", imageData);
                         }
-                        await command.ExecuteNonQueryAsync();
+                        else
+                        {
+                            if (Method.AdminAccess())
+                            {
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                            }
+                            else
+                            {
+                                await command.ExecuteNonQueryAsync();
+                            }
+                        }
                         await GetSalonServicesAsync(serviceDatagrid);
                         ClearServices();
                         HideButton(true, true, false, false);
@@ -553,37 +569,7 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task <int> GetItemId(string itemName)
-        {
-            item_id = -1;
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "select ItemID from inventory where ItemName = @item_name";
-
-                    using(MySqlCommand command = new MySqlCommand( query, conn))
-                    {
-                        command.Parameters.AddWithValue("@item_name", itemName);
-
-                        object result = await command.ExecuteScalarAsync();
-                        if (result != null && int.TryParse(result.ToString(), out item_id))
-                        {
-
-                            return item_id;
-                        }
-                    }
-
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error in GetItemId", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            return item_id;
-        }
+        
 
         public async Task<string> GetServiceTypeByName(string serviceVariation)
         {
@@ -594,7 +580,8 @@ namespace TriforceSalon.Class_Components
                 {
                     await conn.OpenAsync();
                     string query = "SELECT st.ServiceTypeName FROM service_type st " +
-                        "JOIN salon_services ss ON st.ServiceID = ss.ServiceTypeID " +
+                        "JOIN salon_subtypes ssb ON st.ServiceID = ssb.ServiceTypeID " +
+                        "JOIN salon_services ss ON ssb.CategoryID = ss.ServiceTypeID " +
                         "WHERE ss.ServiceName = @serviceVariation";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))

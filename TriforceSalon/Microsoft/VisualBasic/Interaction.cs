@@ -1,54 +1,99 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace Microsoft.VisualBasic
 {
     internal class Interaction
     {
-        internal static string InputBox(string prompt, string title, string defaultResponse)
+        internal static async Task DisplayItems(string title, string prompt, long ID)
         {
-            using (Form inputForm = new Form())
-            using (TextBox textBox = new TextBox())
-            using (CheckBox showPasswordCheckBox = new CheckBox())
+            using (Form displayForm = new Form())
+            using (DataGridView dataGridView = new DataGridView())
             using (Button okButton = new Button())
             using (Label label = new Label())
             {
-                inputForm.Text = title;
-                inputForm.Size = new System.Drawing.Size(300, 200);
-                inputForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-                inputForm.StartPosition = FormStartPosition.CenterScreen;
+                displayForm.Text = title;
+                displayForm.Size = new System.Drawing.Size(400, 300);
+                displayForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+                displayForm.StartPosition = FormStartPosition.CenterScreen;
 
                 label.Text = prompt;
                 label.Size = new System.Drawing.Size(200, 20);
                 label.Location = new System.Drawing.Point(50, 10);
 
-                textBox.Size = new System.Drawing.Size(200, 20);
-                textBox.Location = new System.Drawing.Point(50, 30);
-                textBox.Text = defaultResponse;
-                textBox.UseSystemPasswordChar = true; // Set to true to display password characters
+                dataGridView.Size = new System.Drawing.Size(300, 150);
+                dataGridView.Location = new System.Drawing.Point(50, 30);
+                dataGridView.ReadOnly = true;
+                dataGridView.AllowUserToAddRows = false;
+                dataGridView.AllowUserToDeleteRows = false;
+                dataGridView.RowHeadersVisible = false;
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                showPasswordCheckBox.Text = "Show Password";
-                showPasswordCheckBox.Size = new System.Drawing.Size(150, 20);
-                showPasswordCheckBox.Location = new System.Drawing.Point(50, 60);
-                showPasswordCheckBox.CheckedChanged += (sender, e) =>
+                dataGridView.Columns.Add("Item", "Item");
+                dataGridView.Columns.Add("Quantity", "Quantity");
+
+                List<(string, int)> items = await GetBindedItems(ID);
+                foreach (var item in items)
                 {
-                    textBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;
-                };
+                    dataGridView.Rows.Add(item.Item1, item.Item2);
+                }
 
                 okButton.DialogResult = DialogResult.OK;
                 okButton.Name = "okButton";
                 okButton.Size = new System.Drawing.Size(75, 23);
-                okButton.Location = new System.Drawing.Point(50, 100);
+                okButton.Location = new System.Drawing.Point(50, 200);
                 okButton.Text = "OK";
+                okButton.Click += (sender, e) => displayForm.Close();
 
-                inputForm.Controls.AddRange(new Control[] { label, textBox, showPasswordCheckBox, okButton });
+                displayForm.Controls.AddRange(new Control[] { label, dataGridView, okButton });
 
-                inputForm.AcceptButton = okButton;
-
-                DialogResult result = inputForm.ShowDialog();
-
-                return result == DialogResult.OK ? textBox.Text : string.Empty;
+                DialogResult result = displayForm.ShowDialog();
             }
+        }
+
+        public static async Task<List<(string, int)>> GetBindedItems(long ID)
+        {
+            List<(string, int)> itemList = new List<(string, int)>();
+
+            try
+            {
+                string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    string fetchQuery = "SELECT ItemName, Quantity FROM binded_items WHERE PromoItemsID = @ID";
+
+                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
+                    {
+                        command.Parameters.AddWithValue("@ID", ID);
+
+                        using (DbDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            int itemNameOrdinal = reader.GetOrdinal("ItemName");
+                            int quantityOrdinal = reader.GetOrdinal("Quantity");
+
+                            while (await reader.ReadAsync())
+                            {
+                                string itemName = reader.GetString(itemNameOrdinal);
+                                int quantity = reader.GetInt32(quantityOrdinal);
+
+                                itemList.Add((itemName, quantity));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in GetBindedItems");
+            }
+
+            return itemList;
         }
     }
 }

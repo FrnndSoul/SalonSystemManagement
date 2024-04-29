@@ -41,7 +41,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                    string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
                         "WHERE DATE(AppointDate) = CURDATE() AND IsCancelled = 'NO' AND isActivated = 'NO'";
 
@@ -60,7 +60,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 var AppointDate = row["AppointDate"].ToString();
                                 var CName = row["Name"].ToString();
                                 var CNumber = row["PhoneNumber"].ToString();
-                                var CAge = row["Age"].ToString();
                                 var SName = row["ServiceName"].ToString();
                                 var SAmount = row["ServiceAmount"].ToString();
 
@@ -68,7 +67,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 {
                                     continue;
                                 }
-                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CAge, CNumber, SName, SAmount);
+                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CNumber, SName, SAmount);
                                 AppointmentLIstFL.Controls.Add(cutomer);
                                 cutomer.AppointmentCustomerSelected += AppointmentCustomerDetails;
                             }
@@ -107,7 +106,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (isDateSelected == true)
             {
                 string selectedDate = AppointmentDatePicker.Value.ToString("yyyy-MM-dd");
-                string dateQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                string dateQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
                         "WHERE IsCancelled = 'NO' AND isActivated = 'NO' " +
                         "AND DATE(AppointDate) LIKE CONCAT('%', @filter, '%')";
@@ -118,7 +117,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             else if (isDateSelected == false)
             {
                 string searchedCustomer = CustomerIDTxtB.Text;
-                string nameOrIDQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, Age, ServiceName, ServiceAmount " +
+                string nameOrIDQuery = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
                         "WHERE IsCancelled = 'NO' AND isActivated = 'NO' " +
                         "AND (ReferenceNumber LIKE CONCAT('%', @filter, '%') OR Name LIKE CONCAT('%', @filter, '%'))";
@@ -154,7 +153,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 var AppointDate = row["AppointDate"].ToString();
                                 var CName = row["Name"].ToString();
                                 var CNumber = row["PhoneNumber"].ToString();
-                                var CAge = row["Age"].ToString();
                                 var SName = row["ServiceName"].ToString();
                                 var SAmount = row["ServiceAmount"].ToString();
 
@@ -162,7 +160,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 {
                                     continue;
                                 }
-                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CAge, CNumber, SName, SAmount);
+                                var cutomer = new AppointmentTicket(ID, AppointDate, CName, CNumber, SName, SAmount);
                                 AppointmentLIstFL.Controls.Add(cutomer);
                                 cutomer.AppointmentCustomerSelected += AppointmentCustomerDetails;
                             }

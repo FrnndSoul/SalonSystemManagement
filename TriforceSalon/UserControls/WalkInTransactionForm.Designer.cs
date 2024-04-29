@@ -92,7 +92,7 @@
             this.NServicesBtn.ForeColor = System.Drawing.Color.White;
             this.NServicesBtn.Location = new System.Drawing.Point(19, 1022);
             this.NServicesBtn.Name = "NServicesBtn";
-            this.NServicesBtn.Size = new System.Drawing.Size(321, 46);
+            this.NServicesBtn.Size = new System.Drawing.Size(451, 46);
             this.NServicesBtn.TabIndex = 11;
             this.NServicesBtn.Text = "Services";
             this.NServicesBtn.UseTransparentBackground = true;
@@ -111,9 +111,9 @@
             this.NSellProdBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.NSellProdBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NSellProdBtn.ForeColor = System.Drawing.Color.White;
-            this.NSellProdBtn.Location = new System.Drawing.Point(357, 1022);
+            this.NSellProdBtn.Location = new System.Drawing.Point(497, 1022);
             this.NSellProdBtn.Name = "NSellProdBtn";
-            this.NSellProdBtn.Size = new System.Drawing.Size(321, 46);
+            this.NSellProdBtn.Size = new System.Drawing.Size(451, 46);
             this.NSellProdBtn.TabIndex = 12;
             this.NSellProdBtn.Text = "Sell Products";
             this.NSellProdBtn.UseTransparentBackground = true;
@@ -132,9 +132,9 @@
             this.NAppointmentsBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.NAppointmentsBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NAppointmentsBtn.ForeColor = System.Drawing.Color.White;
-            this.NAppointmentsBtn.Location = new System.Drawing.Point(704, 1022);
+            this.NAppointmentsBtn.Location = new System.Drawing.Point(979, 1022);
             this.NAppointmentsBtn.Name = "NAppointmentsBtn";
-            this.NAppointmentsBtn.Size = new System.Drawing.Size(321, 46);
+            this.NAppointmentsBtn.Size = new System.Drawing.Size(451, 46);
             this.NAppointmentsBtn.TabIndex = 13;
             this.NAppointmentsBtn.Text = "Appointments";
             this.NAppointmentsBtn.UseTransparentBackground = true;
@@ -153,9 +153,9 @@
             this.NPaymentBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.NPaymentBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NPaymentBtn.ForeColor = System.Drawing.Color.White;
-            this.NPaymentBtn.Location = new System.Drawing.Point(1044, 1022);
+            this.NPaymentBtn.Location = new System.Drawing.Point(1456, 1022);
             this.NPaymentBtn.Name = "NPaymentBtn";
-            this.NPaymentBtn.Size = new System.Drawing.Size(321, 46);
+            this.NPaymentBtn.Size = new System.Drawing.Size(451, 46);
             this.NPaymentBtn.TabIndex = 14;
             this.NPaymentBtn.Text = "Payment";
             this.NPaymentBtn.UseTransparentBackground = true;
@@ -203,7 +203,7 @@
             this.ManagerBackBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
             this.ManagerBackBtn.Font = new System.Drawing.Font("Stanberry", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManagerBackBtn.ForeColor = System.Drawing.Color.White;
-            this.ManagerBackBtn.Location = new System.Drawing.Point(1586, 1022);
+            this.ManagerBackBtn.Location = new System.Drawing.Point(1247, 114);
             this.ManagerBackBtn.Name = "ManagerBackBtn";
             this.ManagerBackBtn.Size = new System.Drawing.Size(321, 46);
             this.ManagerBackBtn.TabIndex = 17;

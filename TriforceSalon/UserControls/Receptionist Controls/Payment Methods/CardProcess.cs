@@ -114,7 +114,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         if (control is PaymentsUserControls paymentUserControl)
                         {
-                            paymentUserControl.ChangePaymentStatus("PAID");
+                            //paymentUserControl.ChangePaymentStatus("PAID");
                             break;
                         } else
                         {

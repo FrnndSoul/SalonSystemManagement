@@ -48,70 +48,7 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-                    /* string query = "SELECT t.CustomerName," +
-                                     " t.CustomerAge, " +
-                                     " t.CustomerPhoneNumber, " +
-                                     " t.ServiceVariation, " +
-                                     " t.PriorityStatus, " +
-                                     " t.TransactionID" +
-                                     " FROM transaction t" +
-                                     " WHERE ServiceType = @service_type" +
-                                     " AND PaymentStatus = 'UNPAID'" +
-                                     " AND EmployeeID = @employee_id" +
-                                     " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
-
-                    //sleep na muna
-                    /* string testQuery = "SELECT ci.CustomerName, " +
-                                     "ci.CustomerAge, " +
-                                     "ci.CustomerPhoneNumber, " +
-                                     "ci.PriorityStatus, " +
-                                     "sg.ServiceVariation, " +
-                                     "ci.TransactionID " + 
-                                     "sg.QueueNumber, " +
-                                     "FROM customer_info ci " + 
-                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " + 
-                                     "WHERE ci.ServiceType = @service_type " + 
-                                     "AND ci.PaymentStatus = 'UNPAID' " + 
-                                     "AND ci.EmployeeID = @employee_id " + 
-                                     "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken"; */
-
-                    //latest
-                    /* string testQuery = "SELECT ci.CustomerName, " +
-                                    "ci.CustomerAge, " +
-                                    "ci.CustomerPhoneNumber, " +
-                                    "ci.PriorityStatus, " +
-                                    "sg.ServiceVariation, " +
-                                    "ci.TransactionID, " +
-                                    "sg.QueueNumber " +  // Removed the comma here
-                                    "FROM customer_info ci " +
-                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                    "WHERE sg.ServiceType = @service_type " +
-                                    "AND DATE(TimeTaken) = CURDATE() " +
-                                    "AND ci.PaymentStatus = 'UNPAID' " +
-                                    "AND sg.IsDone = 'NO' " +
-                                    "OR ci.PaymentStatus = 'ONGOING' " +
-                                    "AND sg.EmployeeID = @employee_id " +
-                                    "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";*/
-
-                    //dfauled attempt
-                    /*string testQuery = "SELECT ci.CustomerName, " +
-                   "ci.CustomerAge, " +
-                   "ci.CustomerPhoneNumber, " +
-                   "ci.PriorityStatus, " +
-                   "sg.ServiceVariation, " +
-                   "ci.TransactionID, " +
-                   "sg.QueueNumber " +
-                   "FROM customer_info ci " +
-                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                   "WHERE sg.ServiceType = @service_type " +
-                   "AND DATE(TimeTaken) = CURDATE() " +
-                   "AND (ci.PaymentStatus = 'UNPAID' " + // Grouping PaymentStatus conditions here
-                   "OR ci.PaymentStatus = 'ONGOING') " +
-                   "AND sg.IsDone = 'NO' " +
-                   "AND (ci.PaymentStatus = 'ONGOING' " + // Grouping OR condition here
-                   "OR sg.EmployeeID = @employee_id) " +   // Grouping OR condition here
-                   "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";*/
-
+                   
                     string testQuery = "SELECT ci.CustomerName, " +
                    "ci.CustomerAge, " +
                    "ci.CustomerPhoneNumber, " +
@@ -179,67 +116,23 @@ namespace TriforceSalon.UserControls
                 using (var conn = new MySqlConnection("server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI"))
                 {
                     await conn.OpenAsync();
-                    /*string query = "SELECT t.CustomerName," +
-                                    " t.CustomerAge, " +
-                                    " t.CustomerPhoneNumber, " +
-                                    " t.ServiceVariation, " +
-                                    " t.PriorityStatus, " +
-                                    " t.TransactionID" +
-                                    " FROM transaction t" +
-                                    " WHERE ServiceType = @service_type" +
-                                    " AND PaymentStatus = 'UNPAID'" +
-                                    " AND EmployeeID = 0" +
-                                    " ORDER BY CASE WHEN t.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, t.TimeTaken";*/
-
-                    //sleep muna
-                    /* string testQuery = "SELECT ci.CustomerName, " +
-                                     "ci.CustomerAge, " +
-                                     "ci.CustomerPhoneNumber, " +
-                                     "ci.PriorityStatus, " +
-                                     "sg.ServiceVariation, " +
-                                     "ci.TransactionID " +
-                                     "sg.QueueNumber, " +
-                                     "FROM customer_info ci " +
-                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                     "WHERE ci.ServiceType = @service_type " +
-                                     "AND ci.PaymentStatus = 'UNPAID' " +
-                                     "AND ci.EmployeeID = 0 " +
-                                     "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";*/
-
-                    //latest
-                    /* string testQuery = "SELECT ci.CustomerName, " +
-                                     "ci.CustomerAge, " +
-                                     "ci.CustomerPhoneNumber, " +
-                                     "ci.PriorityStatus, " +
-                                     "sg.ServiceVariation, " +
-                                     "ci.TransactionID, " + // Added comma here
-                                     "sg.QueueNumber " + // Removed extra comma here
-                                     "FROM customer_info ci " +
-                                     "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                     "WHERE sg.ServiceType = @service_type " +
-                                     "AND DATE(TimeTaken) = CURDATE() " +
-                                     "AND ci.PaymentStatus = 'UNPAID' " +
-                                     "AND sg.IsDone = 'NO' " +
-                                     "OR ci.PaymentStatus = 'ONGOING' " +
-                                     "AND sg.EmployeeID = 0 " +
-                                     "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";*/
 
                     string testQuery = "SELECT ci.CustomerName, " +
-                "ci.CustomerAge, " +
-                "ci.CustomerPhoneNumber, " +
-                "ci.PriorityStatus, " +
-                "sg.ServiceVariation, " +
-                "ci.TransactionID, " +
-                "sg.QueueNumber " +
-                "FROM customer_info ci " +
-                "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                "WHERE sg.ServiceType = @service_type " +
-                "AND DATE(TimeTaken) = CURDATE() " +
-                "AND (ci.PaymentStatus = 'UNPAID' " + // Grouping PaymentStatus conditions here
-                "OR ci.PaymentStatus = 'ONGOING') " +
-                "AND sg.IsDone = 'NO' " +
-                "AND sg.EmployeeID = 0 " + // Grouping OR condition here
-                "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
+                        "ci.CustomerAge, " +
+                        "ci.CustomerPhoneNumber, " +
+                        "ci.PriorityStatus, " +
+                        "sg.ServiceVariation, " +
+                        "ci.TransactionID, " +
+                        "sg.QueueNumber " +
+                        "FROM customer_info ci " +
+                        "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
+                        "WHERE sg.ServiceType = @service_type " +
+                        "AND DATE(TimeTaken) = CURDATE() " +
+                        "AND (ci.PaymentStatus = 'UNPAID' " + // Grouping PaymentStatus conditions here
+                        "OR ci.PaymentStatus = 'ONGOING') " +
+                        "AND sg.IsDone = 'NO' " +
+                        "AND sg.EmployeeID = 0 " + // Grouping OR condition here
+                        "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
 
 
 

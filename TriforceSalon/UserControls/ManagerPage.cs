@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using salesreport;
 using Guna.UI2.WinForms;
+using TriforceSalon.UserControls.Promo_Controls;
 
 namespace TriforceSalon.UserControls
 {
@@ -18,17 +19,19 @@ namespace TriforceSalon.UserControls
     {
         TransactionMethods transactionMethods = new TransactionMethods();
         WalkInTransactionForm walkin = new WalkInTransactionForm();
+        PromoMethods promo = new PromoMethods();
+        
         public ManagerPage()
         {
             InitializeComponent();
             InventoryBtn.Enabled = false;
-
         }
 
-        private void ManagerPage_Load(object sender, EventArgs e)
+        private async void ManagerPage_Load(object sender, EventArgs e)
         {
             GeneralView_Inventory viewInventory = new GeneralView_Inventory();
             UserControlNavigator.ShowControl(viewInventory, ManagerContent);
+            await promo.CheckVoucherIsValid();
         }
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
@@ -96,6 +99,12 @@ namespace TriforceSalon.UserControls
         {
             WalkInTransactionForm walkInForm = new WalkInTransactionForm();
             UserControlNavigator.ShowControl(walkInForm, MainForm.mainFormInstance.MainFormContent);
+        }
+
+        private void PromoBtn_Click(object sender, EventArgs e)
+        {
+            PromoUserControl promos = new PromoUserControl();
+            UserControlNavigator.ShowControl(promos, ManagerContent);
         }
     }
 }
