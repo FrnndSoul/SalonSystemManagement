@@ -163,7 +163,7 @@
             this.guna2Shapes1.PolygonSkip = 1;
             this.guna2Shapes1.Rotate = 0F;
             this.guna2Shapes1.Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle;
-            this.guna2Shapes1.Size = new System.Drawing.Size(508, 390);
+            this.guna2Shapes1.Size = new System.Drawing.Size(510, 390);
             this.guna2Shapes1.TabIndex = 9;
             this.guna2Shapes1.Text = "guna2Shapes1";
             this.guna2Shapes1.UseTransparentBackground = true;
@@ -216,9 +216,9 @@
             this.guna2PictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox4.Image = global::TriforceSalon.Properties.Resources.shadow_shit;
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(75, 376);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(72, 376);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
-            this.guna2PictureBox4.Size = new System.Drawing.Size(429, 332);
+            this.guna2PictureBox4.Size = new System.Drawing.Size(432, 331);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox4.TabIndex = 10;
             this.guna2PictureBox4.TabStop = false;
