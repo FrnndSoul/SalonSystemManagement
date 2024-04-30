@@ -21,7 +21,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
         PromoMethods promoMethods = new PromoMethods();
         PromoUserControl promoUserControl;
 
-        //PromoUserControl transition = new PromoUserControl();
         public ViewPromosUserControls(PromoUserControl promoUserControl)
         {
             InitializeComponent();

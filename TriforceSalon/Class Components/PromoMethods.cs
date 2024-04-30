@@ -80,78 +80,78 @@ namespace TriforceSalon.Class_Components
 
         public async Task AddPromo(Guna2DataGridView itemsDataGrid, long ID, DateTime start, DateTime end, string percentage, string name)
         {
-            MySqlConnection conn = null;
-            MySqlTransaction transaction = null;
-
             try
             {
-                conn = new MySqlConnection(mysqlcon);
-                await conn.OpenAsync();
-
-                // Begin transaction
-                transaction = await conn.BeginTransactionAsync();
-
-                // Insert into salon_promos table
-                string insertToPromoTable = "INSERT INTO salon_promos (PromoStart, PromoEnd, PromoCode, PromoName, PromoItemsID, DiscountPercent, PromoType) " +
-                    "VALUES (@dateStart, @dateEnd, @promoCode, @promoName, @PitemsID, @discount, @type)";
-
-                using (MySqlCommand command = new MySqlCommand(insertToPromoTable, conn, transaction))
+                using(var conn = new MySqlConnection(mysqlcon))
                 {
-                    command.Parameters.AddWithValue("@dateStart", start);
-                    command.Parameters.AddWithValue("@dateEnd", end);
-                    command.Parameters.AddWithValue("@promoCode", ID);
-                    command.Parameters.AddWithValue("@promoName", name);
-                    command.Parameters.AddWithValue("@PitemsID", ID);
-                    command.Parameters.AddWithValue("@discount", percentage);
-                    command.Parameters.AddWithValue("@type", "Item");
-
-                    // Execute the insert query
-                    await command.ExecuteNonQueryAsync();
-                }
-
-                // Insert into binded_items table
-                string insertToBindedItems = "INSERT INTO binded_items (PromoItemsID, ItemName, ItemID, Quantity) " +
-                    "VALUES (@PitemsID, @itemName, @itemID, @quantity)";
-
-                foreach (DataGridViewRow row in itemsDataGrid.Rows)
-                {
-                    string itemsID = Convert.ToString(row.Cells["ProductNameCol"].Value);
-                    string itemName = Convert.ToString(row.Cells["ItemNameCol"].Value);
-                    string quantity = Convert.ToString(row.Cells["QuantityCol"].Value);
-
-                    using (MySqlCommand command2 = new MySqlCommand(insertToBindedItems, conn, transaction))
+                    await conn.OpenAsync();
+                    using(var transaction = conn.BeginTransaction())
                     {
-                        command2.Parameters.AddWithValue("@PitemsID", ID);
-                        command2.Parameters.AddWithValue("@itemName", itemName);
-                        command2.Parameters.AddWithValue("@itemID", itemsID);
-                        command2.Parameters.AddWithValue("@quantity", quantity);
+                        try
+                        {
+                            string insertToPromoTable = "INSERT INTO salon_promos (PromoStart, PromoEnd, PromoCode, PromoName, PromoItemsID, DiscountPercent, PromoType) " +
+                                "VALUES (@dateStart, @dateEnd, @promoCode, @promoName, @PitemsID, @discount, @type)";
 
-                        // Execute the insert query
-                        await command2.ExecuteNonQueryAsync();
+                            using (MySqlCommand command = new MySqlCommand(insertToPromoTable, conn, transaction))
+                            {
+                                command.Parameters.AddWithValue("@dateStart", start);
+                                command.Parameters.AddWithValue("@dateEnd", end);
+                                command.Parameters.AddWithValue("@promoCode", ID);
+                                command.Parameters.AddWithValue("@promoName", name);
+                                command.Parameters.AddWithValue("@PitemsID", ID);
+                                command.Parameters.AddWithValue("@discount", percentage);
+                                command.Parameters.AddWithValue("@type", "Item");
+
+                                // Execute the insert query
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            // Insert into binded_items table
+                            string insertToBindedItems = "INSERT INTO binded_items (PromoItemsID, ItemName, ItemID, Quantity) " +
+                                "VALUES (@PitemsID, @itemName, @itemID, @quantity)";
+
+                            foreach (DataGridViewRow row in itemsDataGrid.Rows)
+                            {
+                                string itemsID = Convert.ToString(row.Cells["ProductNameCol"].Value);
+                                string itemName = Convert.ToString(row.Cells["ItemNameCol"].Value);
+                                string quantity = Convert.ToString(row.Cells["QuantityCol"].Value);
+
+                                using (MySqlCommand command2 = new MySqlCommand(insertToBindedItems, conn, transaction))
+                                {
+                                    command2.Parameters.AddWithValue("@PitemsID", ID);
+                                    command2.Parameters.AddWithValue("@itemName", itemName);
+                                    command2.Parameters.AddWithValue("@itemID", itemsID);
+                                    command2.Parameters.AddWithValue("@quantity", quantity);
+
+                                    // Execute the insert query
+                                    await command2.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            if (!Method.AdminAccess())
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Promo has been created", "Promo Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                // If admin, rollback the transaction
+                                transaction.Rollback();
+                                MessageBox.Show("promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-
-                // Commit transaction
-                await transaction.CommitAsync();
-
-                MessageBox.Show("Promo has been created", "Operation Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                // Rollback transaction if an exception occurs
-                if (transaction != null)
-                {
-                    await transaction.RollbackAsync();
-                }
-                MessageBox.Show(ex.ToString(), "Error in AddPromo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // Close connection
-                if (conn != null)
-                {
-                    conn.Close();
-                }
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -276,7 +276,7 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task UpdateBindedService(long ID, Guna2DataGridView newBindedItems)
+        /*public async Task UpdateBindedService(long ID, Guna2DataGridView newBindedItems)
         {
             MySqlConnection conn = null;
             MySqlTransaction transaction = null;
@@ -340,6 +340,97 @@ namespace TriforceSalon.Class_Components
                 await transaction.CommitAsync();
 
                 MessageBox.Show("Update of promo is successful", "Promo Product Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Rollback transaction if an exception occurs
+                if (transaction != null)
+                {
+                    await transaction.RollbackAsync();
+                }
+                MessageBox.Show(ex.ToString(), "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Close connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }*/
+
+        public async Task UpdateBindedService(long ID, Guna2DataGridView newBindedItems)
+        {
+            MySqlConnection conn = null;
+            MySqlTransaction transaction = null;
+
+            try
+            {
+                conn = new MySqlConnection(mysqlcon);
+                await conn.OpenAsync();
+
+                // Begin transaction
+                transaction = await conn.BeginTransactionAsync();
+
+                string updateQuery = "UPDATE salon_promos SET PromoStart = @start, PromoEnd = @end, PromoName = @pName, DiscountPercent = @discount " +
+                                    "WHERE PromoCode = @promoCode";
+                using (MySqlCommand command = new MySqlCommand(updateQuery, conn, transaction))
+                {
+                    // Set parameters
+                    command.Parameters.AddWithValue("@start", PItemsUserControls.Pitemsinstance.PStartDTP.Value.Date);
+                    command.Parameters.AddWithValue("@end", PItemsUserControls.Pitemsinstance.PEndDTP.Value.Date);
+                    command.Parameters.AddWithValue("@pName", PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text);
+                    command.Parameters.AddWithValue("@discount", PItemsUserControls.Pitemsinstance.PercentageTxtB.Text);
+                    command.Parameters.AddWithValue("@promoCode", PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text);
+
+                    // Execute the update query
+                    await command.ExecuteNonQueryAsync();
+                }
+
+                string deleteQuery = "DELETE FROM `binded_items` WHERE PromoItemsID = @promoItemsID";
+                using (MySqlCommand command = new MySqlCommand(deleteQuery, conn, transaction))
+                {
+                    // Set parameters
+                    command.Parameters.AddWithValue("@promoItemsID", ID);
+
+                    // Execute the delete query
+                    await command.ExecuteNonQueryAsync();
+                }
+
+                string insertQuery = "INSERT INTO binded_items (PromoItemsID, ItemName, ItemID, Quantity) " +
+                                    "VALUES (@promoItemsID, @itemName, @itemID, @quantity)";
+
+                foreach (DataGridViewRow row in newBindedItems.Rows)
+                {
+                    string itemName = Convert.ToString(row.Cells["ProductNameCol"].Value);
+                    int itemID = Convert.ToInt32(row.Cells["ItemIDCol"].Value);
+                    int quantity = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn, transaction))
+                    {
+                        // Set parameters
+                        command.Parameters.AddWithValue("@promoItemsID", ID);
+                        command.Parameters.AddWithValue("@itemName", itemName);
+                        command.Parameters.AddWithValue("@itemID", itemID);
+                        command.Parameters.AddWithValue("@quantity", quantity);
+
+                        // Execute the insert query
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                if (!Method.AdminAccess())
+                {
+                    transaction.Commit();
+                    MessageBox.Show("Update of promo is successful", "Promo Product Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // If admin, rollback the transaction
+                    transaction.Rollback();
+                    MessageBox.Show("Update process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -529,7 +620,7 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        public async Task AddServicePromo(Guna2DataGridView itemsDataGrid, long ID, DateTime start, DateTime end, string percentage, string name)
+        /*public async Task AddServicePromo(Guna2DataGridView itemsDataGrid, long ID, DateTime start, DateTime end, string percentage, string name)
         {
             try
             {
@@ -579,9 +670,84 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.ToString(), "Error in AddPromo");
             }
+        }*/
+
+        public async Task AddServicePromo(Guna2DataGridView itemsDataGrid, long ID, DateTime start, DateTime end, string percentage, string name)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string insertToPromoTable = "INSERT INTO salon_promos (PromoStart, PromoEnd, PromoCode, PromoName, PromoItemsID, DiscountPercent, PromoType) " +
+                                "VALUE(@dateStart, @dateEnd, @promoCode, @promoName, @PitemsID, @discount, @type)";
+
+                            using (MySqlCommand command = new MySqlCommand(insertToPromoTable, conn, transaction))
+                            {
+                                command.Parameters.AddWithValue("@dateStart", start);
+                                command.Parameters.AddWithValue("@dateEnd", end);
+                                command.Parameters.AddWithValue("@promoCode", ID);
+                                command.Parameters.AddWithValue("@promoName", name);
+                                command.Parameters.AddWithValue("@PitemsID", ID);
+                                command.Parameters.AddWithValue("@discount", percentage);
+                                command.Parameters.AddWithValue("@type", "Service");
+
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            string insertToBindedItems = "INSERT INTO binded_services (PromoServiceID, ServiceName, ServiceID) " +
+                                "VALUES(@PServiceID, @serviceName, @serviceID)";
+
+                            foreach (DataGridViewRow row in itemsDataGrid.Rows)
+                            {
+                                string itemsID = Convert.ToString(row.Cells["ServiceIDCol"].Value);
+                                string itemName = Convert.ToString(row.Cells["ServiceNameCol"].Value);
+
+                                using (MySqlCommand command2 = new MySqlCommand(insertToBindedItems, conn, transaction))
+                                {
+                                    command2.Parameters.AddWithValue("@PServiceID", ID);
+                                    command2.Parameters.AddWithValue("@serviceName", itemName);
+                                    command2.Parameters.AddWithValue("@serviceID", itemsID);
+
+                                    await command2.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            if (!Method.AdminAccess())
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Promo has been created", "Operation Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                // If admin, rollback the transaction
+                                transaction.Rollback();
+                                MessageBox.Show("Promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // If an error occurs, roll back the transaction
+                            transaction.Rollback();
+                            MessageBox.Show(ex.ToString(), "Error in AddPromo");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error in AddPromo");
+            }
         }
 
-        public async Task UpdateServiceBindedService(long ID, Guna2DataGridView newBindedItems)
+
+        /*public async Task UpdateServiceBindedService(long ID, Guna2DataGridView newBindedItems)
         {
             try
             {
@@ -634,7 +800,86 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.ToString(), "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }*/
+
+        public async Task UpdateServiceBindedService(long ID, Guna2DataGridView newBindedItems)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string updateQuery = "UPDATE salon_promos SET PromoStart = @start, PromoEnd = @end, PromoName = @pName, DiscountPercent = @discount " +
+                                                "WHERE PromoCode = @promoCode";
+                            using (MySqlCommand command = new MySqlCommand(updateQuery, conn, transaction))
+                            {
+                                command.Parameters.AddWithValue("@start", PServicesUserControl.pServiceInstance.PStartDTP.Value.Date);
+                                command.Parameters.AddWithValue("@end", PServicesUserControl.pServiceInstance.PEndDTP.Value.Date);
+                                command.Parameters.AddWithValue("@pName", PServicesUserControl.pServiceInstance.PromoNameTxtB.Text);
+                                command.Parameters.AddWithValue("@discount", PServicesUserControl.pServiceInstance.PercentageTxtB.Text);
+                                command.Parameters.AddWithValue("@promoCode", PServicesUserControl.pServiceInstance.PromoCodeTxtB.Text);
+
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            string deleteQuery = "DELETE FROM `binded_services` WHERE PromoServiceID = @promoItemsID";
+                            using (MySqlCommand command = new MySqlCommand(deleteQuery, conn, transaction))
+                            {
+                                command.Parameters.AddWithValue("@promoItemsID", ID);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            string insertQuery = "INSERT INTO binded_services (PromoServiceID, ServiceName, ServiceID)" +
+                                "VALUES (@PServiceID, @serviceName, @serviceID)";
+
+                            foreach (DataGridViewRow row in newBindedItems.Rows)
+                            {
+                                string itemsID = Convert.ToString(row.Cells["ServiceIDCol"].Value);
+                                string itemName = Convert.ToString(row.Cells["ServiceNameCol"].Value);
+
+                                using (MySqlCommand command = new MySqlCommand(insertQuery, conn, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@PServiceID", ID);
+                                    command.Parameters.AddWithValue("@serviceName", itemName);
+                                    command.Parameters.AddWithValue("@serviceID", itemsID);
+
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            if (!Method.AdminAccess())
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Update of promo is successful", "Promo Service Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                // If admin, rollback the transaction
+                                transaction.Rollback();
+                                MessageBox.Show("Update promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // If an error occurs, roll back the transaction
+                            transaction.Rollback();
+                            MessageBox.Show(ex.ToString(), "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         public async Task FetchBindedService(long ID, Guna2DataGridView bindedTable)
         {
