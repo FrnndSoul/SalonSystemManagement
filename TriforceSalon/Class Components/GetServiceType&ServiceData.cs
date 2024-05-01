@@ -435,6 +435,7 @@ namespace TriforceSalon.Class_Components
 
         public async Task DisplayServiceTypeFL(FlowLayoutPanel servicetypeFL, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB, Guna2ComboBox employeeCB)
         {
+            servicetypeFL.Controls.Clear();
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))

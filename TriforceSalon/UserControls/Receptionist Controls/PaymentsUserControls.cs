@@ -30,7 +30,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
         public TransactionMethods transaction = new TransactionMethods();
         CardProcess cardProcess = new CardProcess();
-        private int ratingsNumber;
+        private int ratingsNumber = 0;
 
         public decimal totalPrice = 0;
 
@@ -249,7 +249,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");*/
 
             AmountBox.Text = totalPrice.ToString("0.00");
-            TotalAmountTxtB.Text = ((discountedTotal + normalTotal) - downpayment).ToString("0.00");
+            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
@@ -696,13 +696,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 cash = Convert.ToDecimal(CustomerMoneyInput.Text);
             }
 
-            if (ratingsNumber == -1)
-            {
-                MessageBox.Show("Please select a rating for the service!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PaymentBtn.Enabled = true;
-                return;
-            }
-
             if (cash < Convert.ToDecimal(TotalAmountTxtB.Text))
             {
                 MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1122,296 +1115,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CalculateTotalBtn.Enabled = false;
             guna2Button1.Enabled = false;
             OtherTransactionContainer.Controls.Clear();
-            ratingsNumber = -1;
+            ratingsNumber = 0;
         }
-
-        /*public void GeneratePDFBothReceipt()
-        {
-            decimal subtotalAmount = decimal.Parse(AmountBox.Text);
-            decimal totAmount = decimal.Parse(TotalAmountTxtB.Text);
-            decimal discount = decimal.Parse(DiscountBox.Text);
-            decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
-            int totalProductQuantity = 0;
-            int totalServiceQuantity = ServiceAcquiredDGV.Rows.Count;
-            string nameText = NameBox.Text;
-
-            if (!decimal.TryParse(CustomerMoneyInput.Text, out cashEntered))
-            {
-                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (cashEntered < totAmount)
-            {
-                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
-            {
-                saveFileDialog1.Filter = "PDF Files|*.pdf";
-                saveFileDialog1.Title = "Save PDF File";
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    string pdfFilePath = saveFileDialog1.FileName;
-
-                    using (PdfWriter writer = new PdfWriter(new FileStream(pdfFilePath, FileMode.Create)))
-                    using (PdfDocument pdf = new PdfDocument(writer))
-                    using (iText.Layout.Document doc = new iText.Layout.Document(pdf))
-                    {
-                        doc.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.JUSTIFIED_ALL);
-                        ImageData logoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.SalonLogo));
-                        iText.Layout.Element.Image logo = new iText.Layout.Element.Image(logoImageData);
-                        logo.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
-                        logo.SetWidth(200);
-                        logo.SetHeight(200);
-
-                        ImageData pesoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.peso));
-                        iText.Layout.Element.Image peso = new iText.Layout.Element.Image(pesoImageData);
-                        peso.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
-
-                        doc.Add(logo);
-                        doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph("Tel NO : (02) 4568-2996").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("Mobile NO : (0993) 369-4904").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Served by: " + Method.Name).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Served to: {nameText}").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Order #" + TransactionIDBox.Text).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-
-                        // Table for products bought
-                        if (ProductsBoughtDGV.Rows.Count > 0)
-                        {
-                            Table productTable = new Table(4);
-                            productTable.SetWidth(UnitValue.CreatePercentValue(100));
-                            productTable.SetTextAlignment(TextAlignment.CENTER);
-                            productTable.AddCell(new Cell().Add(new Paragraph("QUANTITY")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("PRODUCT")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
-
-                            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
-                            {
-                                string product = row.Cells[0].Value.ToString();
-                                string quantity = row.Cells[1].Value.ToString();
-                                string totalprice = row.Cells[2].Value.ToString();
-                                string variationCost = transaction.GetVariationCost(product);
-                                if (int.TryParse(quantity, out int quantityValue))
-                                {
-                                    totalProductQuantity += quantityValue;
-                                }
-
-                                productTable.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER));
-                            }
-                            doc.Add(productTable);
-                            doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-                        }
-
-                        // Table for services acquired
-                        Table serviceTable = new Table(3);
-                        serviceTable.SetWidth(UnitValue.CreatePercentValue(100));
-                        serviceTable.SetTextAlignment(TextAlignment.CENTER);
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("SERVICE")).SetBorder(Border.NO_BORDER));
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
-
-                        foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
-                        {
-                            string service = row.Cells["ServiceCol"].Value.ToString();
-                            string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
-                            serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                        }
-
-                        doc.Add(serviceTable);
-
-                        Table summaryTable = new Table(2);
-                        summaryTable.SetWidth(UnitValue.CreatePercentValue(100));
-                        summaryTable.SetTextAlignment(TextAlignment.LEFT);
-                        decimal totalAmount = subtotalAmount - discount;
-                        decimal change = cashEntered - totalAmount;
-
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
-
-                        int totalQuantity = totalProductQuantity + totalServiceQuantity;
-                        doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
-                        doc.Add(summaryTable);
-                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-                        doc.Add(new Paragraph("THIS RECEIPT SERVES AS YOUR PROOF OF PURCHASE").SetTextAlignment(TextAlignment.CENTER));
-                    }
-
-                    MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "🎉 Congrats on your purchase at TriCharm Salon! 🎉", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //guna2DataGridView1.Rows.Clear();
-                    System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
-                }
-            }
-        }*/
-
-        /*public void GeneratePDFBothReceipt()
-        {
-            decimal subtotalAmount = decimal.Parse(AmountBox.Text);
-            decimal totAmount = decimal.Parse(TotalAmountTxtB.Text);
-            decimal discount = decimal.Parse(DiscountBox.Text);
-            decimal downpayment = decimal.Parse(DownpaymentTxtB.Text);
-            decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
-            int totalProductQuantity = 0;
-            int totalServiceQuantity = ServiceAcquiredDGV.Rows.Count;
-            string nameText = NameBox.Text;
-
-            if (!decimal.TryParse(CustomerMoneyInput.Text, out cashEntered))
-            {
-                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (cashEntered < totAmount)
-            {
-                MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
-            {
-                saveFileDialog1.Filter = "PDF Files|*.pdf";
-                saveFileDialog1.Title = "Save PDF File";
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    string pdfFilePath = saveFileDialog1.FileName;
-
-                    using (PdfWriter writer = new PdfWriter(new FileStream(pdfFilePath, FileMode.Create)))
-                    using (PdfDocument pdf = new PdfDocument(writer))
-                    using (iText.Layout.Document doc = new iText.Layout.Document(pdf))
-                    {
-                        doc.SetProperty(Property.TEXT_ALIGNMENT, TextAlignment.JUSTIFIED_ALL);
-                        ImageData logoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.SalonLogo));
-                        iText.Layout.Element.Image logo = new iText.Layout.Element.Image(logoImageData);
-                        logo.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
-                        logo.SetWidth(200);
-                        logo.SetHeight(200);
-
-                        ImageData pesoImageData = ImageDataFactory.Create(transaction.GetBytesFromImage(Properties.Resources.peso));
-                        iText.Layout.Element.Image peso = new iText.Layout.Element.Image(pesoImageData);
-                        peso.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
-
-                        doc.Add(logo);
-                        doc.Add(new Paragraph("BLOCK 5,  ORANGE STREET, LAKEVIEW, PINAGBUHATAN, PASIG CITY").SetTextAlignment(TextAlignment.CENTER));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph(" "));
-                        doc.Add(new Paragraph("Tel NO : (02) 4568-2996").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("Mobile NO : (0993) 369-4904").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Served by: " + Method.Name).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Served to: {nameText}").SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph($"Order #" + TransactionIDBox.Text).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")).SetTextAlignment(TextAlignment.LEFT));
-                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-
-                        // Table for products bought
-                        if (ProductsBoughtDGV.Rows.Count > 0)
-                        {
-                            Table productTable = new Table(4);
-                            productTable.SetWidth(UnitValue.CreatePercentValue(100));
-                            productTable.SetTextAlignment(TextAlignment.CENTER);
-                            productTable.AddCell(new Cell().Add(new Paragraph("QUANTITY")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("PRODUCT")).SetBorder(Border.NO_BORDER));
-                            productTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
-
-                            Dictionary<string, int> productQuantityMap = new Dictionary<string, int>(); // Map to store product quantity
-
-                            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
-                            {
-                                string product = row.Cells[0].Value.ToString();
-                                string quantity = row.Cells[1].Value.ToString();
-                                string totalprice = row.Cells[2].Value.ToString();
-                                string variationCost = transaction.GetVariationCost(product);
-                                if (int.TryParse(quantity, out int quantityValue))
-                                {
-                                    totalProductQuantity += quantityValue;
-                                }
-
-                                // Check if the product already exists in the dictionary
-                                if (productQuantityMap.ContainsKey(product))
-                                {
-                                    // If the product exists, update the quantity and total price
-                                    productQuantityMap[product] += quantityValue; // Increment quantity
-                                    totalprice = (decimal.Parse(totalprice) * productQuantityMap[product]).ToString(); // Update total price
-                                }
-                                else
-                                {
-                                    // If the product does not exist, add it to the dictionary
-                                    productQuantityMap.Add(product, quantityValue);
-                                }
-
-                                productTable.AddCell(new Cell().Add(new Paragraph(productQuantityMap[product].ToString())).SetBorder(Border.NO_BORDER)); // Quantity
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER)); // Price
-                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER)); // Product
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER)); // Total price
-                            }
-
-                            doc.Add(productTable);
-                            doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-                        }
-
-                        // Table for services acquired
-                        Table serviceTable = new Table(3);
-                        serviceTable.SetWidth(UnitValue.CreatePercentValue(100));
-                        serviceTable.SetTextAlignment(TextAlignment.CENTER);
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("SERVICE")).SetBorder(Border.NO_BORDER));
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("PRICE")).SetBorder(Border.NO_BORDER));
-                        serviceTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
-
-                        foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
-                        {
-                            string service = row.Cells["ServiceCol"].Value.ToString();
-                            string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
-                            serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                        }
-
-                        doc.Add(serviceTable);
-
-                        Table summaryTable = new Table(2);
-                        summaryTable.SetWidth(UnitValue.CreatePercentValue(100));
-                        summaryTable.SetTextAlignment(TextAlignment.LEFT);
-                        decimal totalAmount = subtotalAmount - discount;
-                        decimal change = cashEntered - totalAmount;
-
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DOWNPAYMENT:", $"Php. {downpayment.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
-
-                        int totalQuantity = totalProductQuantity + totalServiceQuantity;
-                        doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
-                        doc.Add(summaryTable);
-                        doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
-                        doc.Add(new Paragraph("THIS RECEIPT SERVES AS YOUR PROOF OF PURCHASE").SetTextAlignment(TextAlignment.CENTER));
-                    }
-
-                    MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "🎉 Congrats on your purchase at TriCharm Salon! 🎉", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //guna2DataGridView1.Rows.Clear();
-                    System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
-                }
-            }
-        }*/
 
         public void GeneratePDFBothReceipt()
         {
@@ -1495,27 +1200,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             productTable.AddCell(new Cell().Add(new Paragraph("PRODUCT")).SetBorder(Border.NO_BORDER));
                             productTable.AddCell(new Cell().Add(new Paragraph("TOTAL")).SetBorder(Border.NO_BORDER));
 
-                            foreach (var row in ProductsBoughtDGV.Rows.Cast<DataGridViewRow>())
+                            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
                             {
-                                string product = row.Cells[0].Value.ToString();
                                 string quantity = row.Cells[1].Value.ToString();
-                                string totalprice = row.Cells[2].Value.ToString();
-                                string variationCost = transaction.GetVariationCost(product);
+                                if (int.TryParse(quantity, out int quantityValue))
+                                {
+                                    totalProductQuantity += quantityValue;
+                                }
+                            }
+                            foreach (var summary in productSummaries)
+                            {
+                                string variationCost = transaction.GetVariationCost(summary.ProductName);
 
-                                totalProductQuantity += int.Parse(quantity);
+                                Paragraph variationcost1 = new Paragraph();
+                                variationcost1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                                variationcost1.Add(new Text($"{variationCost}"));
+                                Paragraph totalprice1 = new Paragraph();
+                                totalprice1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                                totalprice1.Add(new Text($"{summary.TotalPrice.ToString("0.00")}"));
 
-                                Paragraph variationCostParagraph = new Paragraph();
-                                variationCostParagraph.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
-                                variationCostParagraph.Add(new Text($"{variationCost}"));
-
-                                Paragraph totalPriceParagraph = new Paragraph();
-                                totalPriceParagraph.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
-                                totalPriceParagraph.Add(new Text($"Php. {totalprice}"));
-
-                                productTable.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add((variationCostParagraph)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add((totalPriceParagraph)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(summary.Quantity.ToString())).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add((variationcost1)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(summary.ProductName)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add((totalprice1)).SetBorder(Border.NO_BORDER));
                             }
                             doc.Add(productTable);
                             doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
@@ -1534,9 +1241,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         {
                             string service = row.Cells["ServiceCol"].Value.ToString();
                             string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
+
+                            Paragraph serviceCostParagraph = new Paragraph();
+                            serviceCostParagraph.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                            serviceCostParagraph.Add(new Text($"{serviceAmount}"));
+
                             serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
                         }
 
                         doc.Add(serviceTable);
@@ -1547,12 +1259,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal totalAmount = subtotalAmount - discount;
                         decimal change = cashEntered - totalAmount;
 
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DOWNPAYMENT:", $"Php. {downpayment.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"{subtotalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"{discount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DOWNPAYMENT:", $"{downpayment.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"{totalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"{cashEntered.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"{change.ToString("0.00")}", pesoImageData);
 
                         int totalQuantity = totalProductQuantity + totalServiceQuantity;
                         doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));

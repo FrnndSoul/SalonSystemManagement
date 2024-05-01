@@ -32,7 +32,6 @@ namespace TriforceSalon.UserControls.Service_Controls
         {
             await salonServices.PopulateServiceType(ServiceFilterComB);
             await salonServices.PopulateServiceTypeForInsert();
-            MessageBox.Show(Convert.ToString(ServiceType_ServicePage.isFiltered));
 
             if (ServiceType_ServicePage.isFiltered == false)
             {

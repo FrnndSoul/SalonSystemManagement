@@ -15,6 +15,7 @@ namespace TriforceSalon.UserControls
         public static WalkInTransactionForm walkInTransactionFormInstance;
         public PopulateDataGridView populateMethods = new PopulateDataGridView();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
+        PromoMethods promo = new PromoMethods();
         private RealTimeClock userClock;
         QueueForm queueForm;
         public WalkInTransactionForm()
@@ -38,10 +39,11 @@ namespace TriforceSalon.UserControls
             queueForm = new QueueForm();
         }
 
-        private void WalkInTransactionForm_Load(object sender, EventArgs e)
+        private async void WalkInTransactionForm_Load(object sender, EventArgs e)
         {
             NServicesBtn.Enabled = false;
             queueForm.Show();
+            await promo.CheckVoucherIsValid();
         }
 
         private void RecepLogOutBtn_Click(object sender, EventArgs e)

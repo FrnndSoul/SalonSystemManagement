@@ -82,10 +82,10 @@ namespace TriforceSalon.Class_Components
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    using(var transaction = conn.BeginTransaction())
+                    using (var transaction = conn.BeginTransaction())
                     {
                         try
                         {
@@ -140,7 +140,7 @@ namespace TriforceSalon.Class_Components
                                 MessageBox.Show("promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             transaction.Rollback();
                             MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -148,7 +148,7 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -158,26 +158,26 @@ namespace TriforceSalon.Class_Components
 
         public async void EditProductPromo(Guna2DataGridView productPromoDGV)
         {
-              if (productPromoDGV.SelectedRows.Count == 1)
-                {
-                    DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
+            if (productPromoDGV.SelectedRows.Count == 1)
+            {
+                DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
 
-                    string Pname = Convert.ToString(selectedRow.Cells["PromoNameCol"].Value);
-                    string Pcode = Convert.ToString(selectedRow.Cells["PromoCodeCol"].Value);
-                    DateTime PstartDate = Convert.ToDateTime(selectedRow.Cells["DateStartStart"].Value);
-                    DateTime PendDate = Convert.ToDateTime(selectedRow.Cells["DateEndCol"].Value);
-                    string PDiscount = Convert.ToString(selectedRow.Cells["DiscountCol"].Value);
-                    long ProductIDGroup = Convert.ToInt64(selectedRow.Cells["BindedItemsCol"].Value);
+                string Pname = Convert.ToString(selectedRow.Cells["PromoNameCol"].Value);
+                string Pcode = Convert.ToString(selectedRow.Cells["PromoCodeCol"].Value);
+                DateTime PstartDate = Convert.ToDateTime(selectedRow.Cells["DateStartStart"].Value);
+                DateTime PendDate = Convert.ToDateTime(selectedRow.Cells["DateEndCol"].Value);
+                string PDiscount = Convert.ToString(selectedRow.Cells["DiscountCol"].Value);
+                long ProductIDGroup = Convert.ToInt64(selectedRow.Cells["BindedItemsCol"].Value);
 
-                    PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text = Pname;
-                    PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text = Pcode;
-                    PItemsUserControls.Pitemsinstance.PercentageTxtB.Text = PDiscount;
-                    PItemsUserControls.Pitemsinstance.PStartDTP.Value = PstartDate;
-                    PItemsUserControls.Pitemsinstance.PEndDTP.Value = PendDate;
-                    PItemsUserControls.Pitemsinstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
-                    await FetchBindedItems(ProductIDGroup, PItemsUserControls.Pitemsinstance.ProductsDGV);
-                }
-            
+                PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text = Pname;
+                PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text = Pcode;
+                PItemsUserControls.Pitemsinstance.PercentageTxtB.Text = PDiscount;
+                PItemsUserControls.Pitemsinstance.PStartDTP.Value = PstartDate;
+                PItemsUserControls.Pitemsinstance.PEndDTP.Value = PendDate;
+                PItemsUserControls.Pitemsinstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
+                await FetchBindedItems(ProductIDGroup, PItemsUserControls.Pitemsinstance.ProductsDGV);
+            }
+
         }
 
         public async Task FetchBindedItems(long ID, Guna2DataGridView bindedTable)
@@ -454,6 +454,7 @@ namespace TriforceSalon.Class_Components
 
         public async Task GetActiveProductPromos(Guna2ComboBox productPromoComB)
         {
+
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -566,11 +567,11 @@ namespace TriforceSalon.Class_Components
 
                 string updateQuery = "UPDATE salon_promos " +
                     "SET isValid = CASE " +
-                    "WHEN CURDATE() < PromoStart THEN 'NO' " +
-                    "WHEN CURDATE() >= PromoStart AND CURDATE() <= PromoEnd THEN 'YES' " +
-                    "ELSE 'NO' END " +
-                    "WHERE CURDATE() <= PromoEnd AND CURDATE() >= PromoStart " +
-                    "AND isValid <> 'DEACTIVATED'";
+                    "WHEN CURDATE() < DATE(PromoStart) THEN 'NO' " +
+                    "WHEN CURDATE() BETWEEN DATE(PromoStart) AND DATE(PromoEnd) THEN 'YES' " +
+                    "ELSE 'NO' " +
+                    "END " +
+                    "WHERE isValid <> 'DEACTIVATED'";
 
                 using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
                 {
@@ -587,18 +588,18 @@ namespace TriforceSalon.Class_Components
             PItemsUserControls.Pitemsinstance.CancelBtn.Visible = cancel;
         }
 
-       
+
         public async Task GetSubCategory(Guna2ComboBox category)
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
                     string fetchQuery = "SELECT ServiceSubTypeName FROM salon_subtypes ORDER BY ServiceSubTypeName ASC";
 
-                    using(MySqlCommand command = new MySqlCommand(fetchQuery, conn))
+                    using (MySqlCommand command = new MySqlCommand(fetchQuery, conn))
                     {
                         using (DbDataReader reader = await command.ExecuteReaderAsync())
                         {
@@ -614,7 +615,7 @@ namespace TriforceSalon.Class_Components
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error in GetSubCategory");
             }
@@ -918,7 +919,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         public async void EditServicePromo(Guna2DataGridView productPromoDGV)
         {
             /*if (productPromoDGV.SelectedRows.Count == 0)
@@ -930,25 +931,25 @@ namespace TriforceSalon.Class_Components
 
             if (result == DialogResult.Yes)
             {*/
-                if (productPromoDGV.SelectedRows.Count == 1)
-                {
-                    DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
+            if (productPromoDGV.SelectedRows.Count == 1)
+            {
+                DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
 
-                    string Pname = Convert.ToString(selectedRow.Cells["PromoNameCol"].Value);
-                    string Pcode = Convert.ToString(selectedRow.Cells["PromoCodeCol"].Value);
-                    DateTime PstartDate = Convert.ToDateTime(selectedRow.Cells["DateStartStart"].Value);
-                    DateTime PendDate = Convert.ToDateTime(selectedRow.Cells["DateEndCol"].Value);
-                    string PDiscount = Convert.ToString(selectedRow.Cells["DiscountCol"].Value);
-                    long ProductIDGroup = Convert.ToInt64(selectedRow.Cells["BindedItemsCol"].Value);
+                string Pname = Convert.ToString(selectedRow.Cells["PromoNameCol"].Value);
+                string Pcode = Convert.ToString(selectedRow.Cells["PromoCodeCol"].Value);
+                DateTime PstartDate = Convert.ToDateTime(selectedRow.Cells["DateStartStart"].Value);
+                DateTime PendDate = Convert.ToDateTime(selectedRow.Cells["DateEndCol"].Value);
+                string PDiscount = Convert.ToString(selectedRow.Cells["DiscountCol"].Value);
+                long ProductIDGroup = Convert.ToInt64(selectedRow.Cells["BindedItemsCol"].Value);
 
-                    PServicesUserControl.pServiceInstance.PromoNameTxtB.Text = Pname;
-                    PServicesUserControl.pServiceInstance.PromoCodeTxtB.Text = Pcode;
-                    PServicesUserControl.pServiceInstance.PercentageTxtB.Text = PDiscount;
-                    PServicesUserControl.pServiceInstance.PStartDTP.Value = PstartDate;
-                    PServicesUserControl.pServiceInstance.PEndDTP.Value = PendDate;
-                    PServicesUserControl.pServiceInstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
-                    await FetchBindedService(ProductIDGroup, PServicesUserControl.pServiceInstance.ServiceDGV);
-                }
+                PServicesUserControl.pServiceInstance.PromoNameTxtB.Text = Pname;
+                PServicesUserControl.pServiceInstance.PromoCodeTxtB.Text = Pcode;
+                PServicesUserControl.pServiceInstance.PercentageTxtB.Text = PDiscount;
+                PServicesUserControl.pServiceInstance.PStartDTP.Value = PstartDate;
+                PServicesUserControl.pServiceInstance.PEndDTP.Value = PendDate;
+                PServicesUserControl.pServiceInstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
+                await FetchBindedService(ProductIDGroup, PServicesUserControl.pServiceInstance.ServiceDGV);
+            }
             //}
         }
 
@@ -956,21 +957,46 @@ namespace TriforceSalon.Class_Components
         {
             try
             {
-                using(var conn = new MySqlConnection(mysqlcon))
+                using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-
-                    string deactivateQuery = "UPDATE salon_promo " +
-                        "SET isValid = 'DEACTIVATED' " +
-                        "WHERE PromoCode = @ID";
-
-                    using(MySqlCommand command = new MySqlCommand(deactivateQuery, conn))
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        await command.ExecuteNonQueryAsync();
+                        try
+                        {
+                            string deactivateQuery = "UPDATE salon_promo " +
+                                "SET isValid = 'DEACTIVATED' " +
+                                "WHERE PromoCode = @ID";
+
+                            using (MySqlCommand command = new MySqlCommand(deactivateQuery, conn))
+                            {
+                                command.Parameters.AddWithValue("@ID", ID);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Promo deactivation is working as intended, Proceeding to rollback", "Appointment activation function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Promo has been deactivated", "Deactivated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
                     }
+
                 }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error in DeactivatePromo");
             }
@@ -1026,7 +1052,7 @@ namespace TriforceSalon.Class_Components
 
         }
 
-        public void SHideButtons(bool add,bool cancel,bool update, bool discard)
+        public void SHideButtons(bool add, bool cancel, bool update, bool discard)
         {
             PServicesUserControl.pServiceInstance.AddPromoBtn.Visible = add;
             PServicesUserControl.pServiceInstance.UpdatePromoBtn.Visible = update;
@@ -1038,9 +1064,9 @@ namespace TriforceSalon.Class_Components
         {
             PServicesUserControl.pServiceInstance.ServiceContainer.Visible = products;
         }
-        
+
     }
 }
 
-        
+
 

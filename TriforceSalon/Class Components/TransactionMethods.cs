@@ -266,7 +266,9 @@ namespace TriforceSalon.Class_Components
 
         public async Task GetAllUnfinishedTickets()
         {
-            using(var conn = new MySqlConnection(mysqlcon))
+            SellProductsUserControls.sellProductsUserControlsInstance.CustomerIDComB.Items.Clear();
+
+            using (var conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
 
@@ -367,7 +369,7 @@ namespace TriforceSalon.Class_Components
                             //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                    MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Products has been binded", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";

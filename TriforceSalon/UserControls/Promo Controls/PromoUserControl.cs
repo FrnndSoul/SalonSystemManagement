@@ -53,7 +53,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             SetButtonProperties(ActivePromosBtn, Color.FromArgb(255, 228, 242), Color.Black);
             ActivePromosBtn.SendToBack();
 
-            PServicesUserControl servicesP = new PServicesUserControl();
+            PServicesUserControl servicesP = new PServicesUserControl(this);
             UserControlNavigator.ShowControl(servicesP, PromoContainer);
         }
 
@@ -68,7 +68,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             SetButtonProperties(PServiceBtn, Color.FromArgb(255, 228, 242), Color.Black);
             PServiceBtn.SendToBack();
 
-            PItemsUserControls products = new PItemsUserControls();
+            PItemsUserControls products = new PItemsUserControls(this);
             UserControlNavigator.ShowControl(products, PromoContainer);
         }
 
