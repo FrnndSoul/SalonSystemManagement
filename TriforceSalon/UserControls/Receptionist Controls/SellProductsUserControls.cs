@@ -151,6 +151,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     decimal currentItemPrice = decimal.Parse(ProductsControlDGV.Rows[i].Cells["CostCol"].Value.ToString());
                                     totalPrice -= currentItemPrice;
                                     ProductsControlDGV.Rows.RemoveAt(i);
+                                    ItemPromoComB.Text = null;
+                                    PromoTxtB.Text = null;
                                     i--; // Adjust the index after removal
                                 }
                             }

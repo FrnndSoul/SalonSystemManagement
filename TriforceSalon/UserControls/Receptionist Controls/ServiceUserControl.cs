@@ -100,6 +100,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceTxtB.Clear();
             ServiceAmountTxtB.Clear();
             PEmployeeComB.SelectedIndex = 0;
+            ServicePromoComB.Text = null;
+            PromoTxtB.Text = null;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
         }
         /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
@@ -213,13 +215,31 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
                 DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
+                    string disountLabel = ServicesGDGVVControl.Rows[e.RowIndex].Cells["DiscountCol"].Value.ToString();
+                    decimal removedServiceDiscount;
+
+                    if (disountLabel == "None")
                     {
                         ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else if(decimal.TryParse(disountLabel, out removedServiceDiscount))
+                    {
+                        for (int i = 0; i < ServicesGDGVVControl.Rows.Count; i++)
+                        {
+                            decimal currentDiscount;
+                            if (decimal.TryParse(ServicesGDGVVControl.Rows[i].Cells["DiscountComB"].Value.ToString(), out currentDiscount))
+                            {
+                                if (currentDiscount == removedServiceDiscount)
+                                {
+                                    ServicesGDGVVControl.Rows.RemoveAt(i);
+                                    ServicePromoComB.Text = null;
+                                    PromoTxtB.Text = null;
+                                    i--; 
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -338,6 +358,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             DisplayServiceTypeFL();
+            ServiceFL.Controls.Clear();
+            ServiceTypeComB.Text = null;
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)

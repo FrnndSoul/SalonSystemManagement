@@ -136,7 +136,7 @@
             this.ServicePromoComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ServicePromoComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServicePromoComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServicePromoComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServicePromoComB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.ServicePromoComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ServicePromoComB.ItemHeight = 30;
             this.ServicePromoComB.Location = new System.Drawing.Point(222, 495);
@@ -599,7 +599,7 @@
             this.ServiceTypeComB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ServiceTypeComB.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ServiceTypeComB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ServiceTypeComB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ServiceTypeComB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.ServiceTypeComB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ServiceTypeComB.ItemHeight = 30;
             this.ServiceTypeComB.Location = new System.Drawing.Point(14, 65);

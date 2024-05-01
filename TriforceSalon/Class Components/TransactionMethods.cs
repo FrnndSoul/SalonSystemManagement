@@ -266,7 +266,9 @@ namespace TriforceSalon.Class_Components
 
         public async Task GetAllUnfinishedTickets()
         {
-            using(var conn = new MySqlConnection(mysqlcon))
+            SellProductsUserControls.sellProductsUserControlsInstance.CustomerIDComB.Items.Clear();
+
+            using (var conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
 
@@ -367,7 +369,7 @@ namespace TriforceSalon.Class_Components
                             //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                    MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Products has been binded", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                     string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
@@ -754,7 +756,7 @@ namespace TriforceSalon.Class_Components
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 conn.Open();
-                string query = "SELECT Cost FROM inventory WHERE ItemName = @ItemName";
+                string query = "SELECT SRP FROM inventory WHERE ItemName = @ItemName";
                 using (MySqlCommand command = new MySqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@ItemName", variationName);
@@ -763,7 +765,7 @@ namespace TriforceSalon.Class_Components
                         string variationCost = "0.00";
                         while (reader.Read())
                         {
-                            variationCost = reader["Cost"].ToString();
+                            variationCost = reader["SRP"].ToString();
                         }
                         return variationCost;
                     }
@@ -887,9 +889,9 @@ namespace TriforceSalon.Class_Components
             SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB.Text = null;
             SellProductsUserControls.sellProductsUserControlsInstance.CustomerIDComB.SelectedItem = null;
             SellProductsUserControls.sellProductsUserControlsInstance.CashTxtBx.Text = null;
+            SellProductsUserControls.sellProductsUserControlsInstance.ItemPromoComB.Text = null;
+            SellProductsUserControls.sellProductsUserControlsInstance.PromoTxtB.Text = null;
         }
-
-
 
         public int GenerateTransactionID()
         {

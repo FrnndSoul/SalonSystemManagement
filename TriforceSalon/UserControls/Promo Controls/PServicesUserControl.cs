@@ -17,8 +17,9 @@ namespace TriforceSalon.UserControls.Promo_Controls
         public static PServicesUserControl pServiceInstance;
         PromoMethods promo = new PromoMethods();
         ServiceFetchClass fetchServices = new ServiceFetchClass();
+        PromoUserControl promoUserControl;
 
-        public PServicesUserControl()
+        public PServicesUserControl(PromoUserControl promoUserControl)
         {
             InitializeComponent();
             pServiceInstance = this;
@@ -26,6 +27,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PEndDTP.Value = DateTime.Now;
             GenerateRandomNumber();
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
+            this.promoUserControl = promoUserControl;
         }
 
         private async void PServicesUserControl_Load(object sender, EventArgs e)
@@ -115,6 +117,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             ClearAllInput();
             GenerateRandomNumber();
             promo.SHideButtons(true, true, false, false);
+            promoUserControl.GoToAll();
         }
 
         private async void CategoryComBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -16,6 +16,7 @@ namespace TriforceSalon.UserControls.Service_Controls
         ManagerPage manager = new ManagerPage();
         private SalonServices salonServices = new SalonServices();
         public static ServiceVariationControl serviceVariationInstance;
+        ServiceTransitions serviceTransitions = new ServiceTransitions();
         public KeypressLettersRestrictions keypressLettersRestrictions = new KeypressLettersRestrictions();
         public KeypressNumbersRestrictions keypressNumbersRestrictions = new KeypressNumbersRestrictions();
 
@@ -29,9 +30,17 @@ namespace TriforceSalon.UserControls.Service_Controls
         }
         private async void ServiceVariationControl_Load(object sender, EventArgs e)
         {
-            await salonServices.GetSalonServicesAsync(SalonServicesDGV);
             await salonServices.PopulateServiceType(ServiceFilterComB);
             await salonServices.PopulateServiceTypeForInsert();
+
+            if (ServiceType_ServicePage.isFiltered == false)
+            {
+                await salonServices.GetSalonServicesAsync(SalonServicesDGV);
+            }
+            else if (ServiceType_ServicePage.isFiltered == true)
+            {
+                await serviceTransitions.GetFilteredServices(SalonServicesDGV, ServiceSubTypeControl.categoryName);
+            }
         }
 
         private void AddServiceImageBtn_Click(object sender, EventArgs e)
