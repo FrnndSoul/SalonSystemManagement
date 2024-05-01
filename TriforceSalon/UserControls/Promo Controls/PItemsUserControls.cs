@@ -17,9 +17,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
         PromoFetchItemsClass promoFetch = new PromoFetchItemsClass();
         PromoMethods promo = new PromoMethods();
         public static PItemsUserControls Pitemsinstance;
-        PromoUserControl promoUserControl;
-
-        public PItemsUserControls(PromoUserControl promoUserControl)
+        public PItemsUserControls()
         {
             InitializeComponent();
             Pitemsinstance = this;
@@ -27,7 +25,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PEndDTP.Value = DateTime.Now;
             GenerateRandomNumber();
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
-            this.promoUserControl = promoUserControl;
+
         }
 
         private async void PItemsUserControls_Load(object sender, EventArgs e)
@@ -162,7 +160,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
             ClearAllInput();
             GenerateRandomNumber();
             promo.HideButtons(true, true, false, false);
-            promoUserControl.GoToAll();
         }
 
         private void ProductsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -196,11 +193,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             ClearAllInput();
-        }
-
-        private async void RefreshBtn_Click(object sender, EventArgs e)
-        {
-            await promoFetch.LoadItemsInSales(ProductsFL, mysqlcon, ProductsDGV);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace TriforceSalon.Class_Components
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error in PopulateServiceType", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("2222222. Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -117,7 +117,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 while (await reader.ReadAsync())
                                 {
-                                    string serviceTypes = reader["ServiceSubTypeName"].ToString();
+                                    string serviceTypes = reader["ServiceTypeName"].ToString();
                                     ServiceVariationControl.serviceVariationInstance.AddSalonServices.Items.Add(serviceTypes);
                                 }
                             }
@@ -691,8 +691,8 @@ namespace TriforceSalon.Class_Components
                 {
                     selectQuery = "SELECT se.ServiceTypeID, se.ServiceVariationID, se.ServiceImage, se.ServiceName, se.ServiceAmount " +
                             "FROM salon_services se " +
-                            "JOIN salon_subtypes ssbt ON se.ServiceTypeID = ssbt.CategoryID " +
-                            "WHERE ssbt.ServiceSubTypeName = @categoryName ";
+                            "JOIN service_type st ON se.ServiceTypeID = st.ServiceID " +
+                            "WHERE ServiceTypeName = @serviceTypeName ";
                 }
 
                 using (var conn = new MySqlConnection(mysqlcon))
@@ -703,7 +703,7 @@ namespace TriforceSalon.Class_Components
                     {
                         if(filter != "All")
                         {
-                            command.Parameters.AddWithValue("@categoryName", filter);
+                            command.Parameters.AddWithValue("@serviceTypeName", filter);
                         }
 
                         using (var adapter = new MySqlDataAdapter(command))
