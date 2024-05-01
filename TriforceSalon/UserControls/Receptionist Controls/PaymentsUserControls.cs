@@ -7,6 +7,7 @@ using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
         public TransactionMethods transaction = new TransactionMethods();
         CardProcess cardProcess = new CardProcess();
-        private int ratingsNumber;
+        private int ratingsNumber = 0;
 
         public decimal totalPrice = 0;
 
@@ -178,7 +179,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }*/
 
-        private void OverallPrice()
+        private void OverallPrice(decimal downpayment)
         {
             totalPrice = 0.00m;
             decimal discountedTotal = 0.00m;
@@ -187,7 +188,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             // Assuming ProductsControlDGV contains products data
             foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
             {
-                if (row.Cells[4].Value != null && row.Cells["ProductsDiscountCol"].Value.ToString() != "None")
+                if (row.Cells[3].Value != null && row.Cells["ProductsDiscountCol"].Value.ToString() != "None")
                 {
                     decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
                     string discountValue = row.Cells["ProductsDiscountCol"].Value.ToString();
@@ -207,16 +208,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 else
                 {
                     // Add original price for items with "None" discount
-                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
                     normalTotal += rowTotal;
                 }
-                totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
+                totalPrice += decimal.Parse(row.Cells[2].Value.ToString());
             }
 
             // Assuming another DataGridView called SecondProductsControlDGV contains products data from another table
             foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
             {
-                if (row.Cells[4].Value != null && row.Cells["ServiceDiscountCol"].Value.ToString() != "None")
+                if (row.Cells[2].Value != null && row.Cells["ServiceDiscountCol"].Value.ToString() != "None")
                 {
                     decimal rowTotal = decimal.Parse(row.Cells[1].Value.ToString());
                     string discountValue = row.Cells["ServiceDiscountCol"].Value.ToString();
@@ -236,13 +237,17 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 else
                 {
                     // Add original price for items with "None" discount
-                    decimal rowTotal = decimal.Parse(row.Cells[4].Value.ToString());
+                    decimal rowTotal = decimal.Parse(row.Cells[1].Value.ToString());
                     normalTotal += rowTotal;
                 }
-                totalPrice += decimal.Parse(row.Cells[4].Value.ToString());
+                totalPrice += decimal.Parse(row.Cells[1].Value.ToString());
             }
 
             // Update UI with totals
+            /*AmountBox.Text = totalPrice.ToString("0.00");
+            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
+            DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");*/
+
             AmountBox.Text = totalPrice.ToString("0.00");
             TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
@@ -262,11 +267,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT ci.CustomerName, ci.SpecialID, ci.CustomerPhoneNumber, ci.PriorityStatus, ci.PaymentStatus, ci.TimeTaken " +
+                    string query = "SELECT DISTINCT ci.CustomerName, ci.CustomerPhoneNumber, ci.PaymentStatus, " +
+                                   "CASE " +
+                                   "WHEN ci.IsAppointment = 'YES' THEN a.Downpayment " +
+                                   "ELSE 0.00 " +
+                                   "END AS Downpayment " +
                                    "FROM customer_info ci " +
                                    "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                                   "WHERE TransactionID = @transactionID";
-
+                                   "LEFT JOIN Appointments a ON ci.TransactionID = a.ReferenceNumber " +
+                                   "WHERE ci.TransactionID = @transactionID";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -279,13 +288,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 string paymentstatus = reader["PaymentStatus"].ToString();
                                 if (string.Equals(paymentstatus, "PAID", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    MessageBox.Show("Transaction ID is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("Customer is already paid", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     return;
                                 }
 
                                 else if (string.Equals(paymentstatus, "VOIDED", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    MessageBox.Show("Transaction ID was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("Transaction was voided", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     return;
                                 }
 
@@ -302,15 +311,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                 }
 
                                 string Customer_name = reader["CustomerName"].ToString();
-                                //ServiceType = reader["ServiceType"].ToString();
-                                string Customer_sID = Convert.ToString(reader["SpecialID"]);
                                 string Customer_phone = Convert.ToString(reader["CustomerPhoneNumber"]);
-                                //EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
+                                string Customer_downpayment = Convert.ToString(reader["Downpayment"]);
 
-                                DisplayTransaction(Customer_name, Customer_sID, Customer_phone);
+                                DisplayTransaction(Customer_name, Customer_phone, Customer_downpayment);
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
-                                //CalculateTotalCombinedPrice(ProductsBoughtDGV, ServiceAcquiredDGV);
+                                decimal downpayment = Convert.ToDecimal(DownpaymentTxtB.Text);
+
+                                OverallPrice(downpayment);
                             }
                             else
                             {
@@ -324,30 +333,29 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-
             }
 
         }
 
-        private void DisplayTransaction(string name, string specialID, string phoneNumber)
+        private void DisplayTransaction(string name, string phoneNumber, string downpayment)
         {
             NameBox.Text = name;
-            AgeBox.Text = specialID;
-            PhoneNumberBox.Text = phoneNumber.ToString();
+            PhoneNumberBox.Text = phoneNumber;
+            DownpaymentTxtB.Text = downpayment;
 
 
             TransactionIDBox.Enabled = false;
             LoadBtn.Enabled = false;
             GcashPayment.Enabled = true;
             ClearFieldsBtn.Enabled = true;
-            PaymentBtn.Enabled = false;
+            PaymentBtn.Enabled = true;
             VoidBtn.Enabled = true;
             CalculateTotalBtn.Enabled = true;
 
         }
 
 
-        public async Task VoidedItems(long ID, Guna2DataGridView products)
+        /*public async Task VoidedItems(long ID, Guna2DataGridView products)
         {
             try
             {
@@ -382,9 +390,71 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message, "Error in void transaction");
             }
+        }*/
+
+        public async Task VoidedItems(long ID, Guna2DataGridView products)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            foreach (DataGridViewRow row in products.Rows)
+                            {
+                                string itemName;
+                                if (row.Cells["ProdNameCol"].Value != null)
+                                {
+                                    itemName = row.Cells["ProdNameCol"].Value.ToString();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                                string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
+
+                                using (MySqlCommand command = new MySqlCommand(query, conn, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@customerID", ID);
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            // If not admin, commit the transaction
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Voiding of items rolled back. No changes were made.", "Void Items", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                // If admin, rollback the transaction
+                                transaction.Commit();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an exception occurs
+                            transaction.Rollback();
+                            MessageBox.Show($"Error voiding items: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private async Task VoidServices(long ID, Guna2DataGridView services)
+
+        /*private async Task VoidServices(long ID, Guna2DataGridView services)
         {
             try
             {
@@ -421,7 +491,72 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message, "Error in void transaction");
             }
+        }*/
+
+        private async Task VoidServices(long ID, Guna2DataGridView services)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            foreach (DataGridViewRow row in services.Rows)
+                            {
+                                string serviceName;
+                                if (row.Cells["ServiceCol"].Value != null)
+                                {
+                                    serviceName = row.Cells["ServiceCol"].Value.ToString();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                                decimal amount = Convert.ToDecimal(row.Cells["ServiceAmountCol"].Value);
+
+                                string query = "UPDATE service_group SET IsVoided = 'YES' WHERE ServiceGroupID = @customerID";
+
+                                using (MySqlCommand command = new MySqlCommand(query, conn, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@customerID", ID);
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            // If not admin, commit the transaction
+                            if (!Method.AdminAccess())
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Services voided successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                // If admin, rollback the transaction
+                                transaction.Rollback();
+                                MessageBox.Show("Voiding of service rolled back. No changes were made.", "Void Service", MessageBoxButtons.OK);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an exception occurs
+                            transaction.Rollback();
+                            MessageBox.Show($"Error voiding services: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private async void VoidBtn_Click(object sender, EventArgs e)
         {
 
@@ -434,13 +569,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                 if (result == DialogResult.Yes)
                 {
-                    ChangePaymentStatus("VOIDED");
+                    await ChangePaymentStatus("VOIDED", 0);
                     await VoidedItems(ID, ProductsBoughtDGV);
                     await VoidServices(ID, ServiceAcquiredDGV);
                     MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await GetCustomers(CustomerListDGV);
                     DefaultLoad();
-                               
+
                 }
             }
             catch (Exception ex)
@@ -451,25 +586,95 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             VoidBtn.Enabled = true;
         }
 
-        public void ChangePaymentStatus(string newStatus)
+        /* public async Task ChangePaymentStatus(string newStatus, int ratings)
+         {
+             try
+             {
+                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
+                 {
+                     await connection.OpenAsync();
+
+                     string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
+                     using (MySqlCommand command = new MySqlCommand(query, connection))
+                     {
+                         command.Parameters.AddWithValue("@NewStatus", newStatus);
+                         command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
+                         int rowsAffected = await command.ExecuteNonQueryAsync();
+                     }
+
+                     string ratingsQuery = "UPDATE employee_records SET CustomerRating = @ratings WHERE CustomerID = @customerID";
+                     using (MySqlCommand command2 = new MySqlCommand(ratingsQuery, connection))
+                     {
+                         command2.Parameters.AddWithValue("@customerID", TransactionIDBox.Text);
+                         command2.Parameters.AddWithValue("@ratings", ratings);
+                         await command2.ExecuteNonQueryAsync();
+
+                     }
+                 }
+             }
+             catch (Exception e)
+             {
+                 MessageBox.Show($"Error updating payment status: {e.Message}", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+         }*/
+
+        public async Task ChangePaymentStatus(string newStatus, int ratings)
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
                 {
-                    connection.Open();
-                    string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    await connection.OpenAsync();
+
+                    // Start a transaction
+                    using (MySqlTransaction transaction = connection.BeginTransaction())
                     {
-                        command.Parameters.AddWithValue("@NewStatus", newStatus);
-                        command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
-                        int rowsAffected = command.ExecuteNonQuery();
+                        try
+                        {
+                            // Update payment status query
+                            string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
+                            using (MySqlCommand command = new MySqlCommand(query, connection, transaction))
+                            {
+                                command.Transaction = transaction;
+
+                                command.Parameters.AddWithValue("@NewStatus", newStatus);
+                                command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            // Update ratings query
+                            string ratingsQuery = "UPDATE employee_records SET CustomerRating = @ratings WHERE CustomerID = @customerID";
+                            using (MySqlCommand command2 = new MySqlCommand(ratingsQuery, connection, transaction))
+                            {
+                                command2.Transaction = transaction;
+
+                                command2.Parameters.AddWithValue("@customerID", TransactionIDBox.Text);
+                                command2.Parameters.AddWithValue("@ratings", ratings);
+                                await command2.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database", "Change Payment Status Function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an exception occurs
+                            transaction.Rollback();
+                            MessageBox.Show($"Error updating payment status: {ex.Message}", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Error updating payment status: {e.Message}", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error connecting to database: {e.Message}", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -478,11 +683,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PaymentBtn.Enabled = false;
 
             long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
-            decimal cash = Convert.ToDecimal(CustomerMoneyInput.Text);
+            decimal cash;
+
+            if (string.IsNullOrWhiteSpace(CustomerMoneyInput.Text))
+            {
+                MessageBox.Show("Please enter an amount!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                PaymentBtn.Enabled = true;
+                return;
+            }
+            else
+            {
+                cash = Convert.ToDecimal(CustomerMoneyInput.Text);
+            }
 
             if (cash < Convert.ToDecimal(TotalAmountTxtB.Text))
             {
                 MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                PaymentBtn.Enabled = true;
                 return;
             }
             else
@@ -490,29 +707,28 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 if (cash > Convert.ToDecimal(TotalAmountTxtB.Text))
                 {
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(TotalAmountTxtB.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ChangePaymentStatus("PAID");
+                    await ChangePaymentStatus("PAID", ratingsNumber);
                     GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
+                    MessageBox.Show("Payment successful");
                 }
                 else
                 {
                     MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ChangePaymentStatus("PAID");
+                    await ChangePaymentStatus("PAID", ratingsNumber);
                     GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
+                    MessageBox.Show("Payment successful");
                 }
-                /* ChangePaymentStatus("PAID");
-                 await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
                 await GetCustomers(CustomerListDGV);
                 DefaultLoad();
 
-                OtherTransactionContainer.Controls.Clear();
             }
             PaymentBtn.Enabled = true;
         }
-        public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
+        /*public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
         {
             try
             {
@@ -540,7 +756,60 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.ToString() + "\n\nat SubtractItemsInInventoryForPurchase()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }*/
+        public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
+
+                            foreach (DataGridViewRow row in productsDataGrid.Rows)
+                            {
+                                int quantity = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                                string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
+                                int productID = await inventory.GetItemIDByName(itemName);
+
+                                using (MySqlCommand command = new MySqlCommand(subtractQuery, conn, transaction))
+                                {
+                                    command.Parameters.AddWithValue("@quantity", quantity);
+                                    command.Parameters.AddWithValue("@itemID", productID);
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Inventory update rolled back. No changes were made.", "Inventory Check Function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show($"Error updating inventory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private void ClearFieldsBtn_Click(object sender, EventArgs e)
         {
             DefaultLoad();
@@ -594,7 +863,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CustomerMoneyInput_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
@@ -613,7 +882,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CalculateTotalBtn_Click(object sender, EventArgs e)
         {
-            OverallPrice();
+            decimal downpayment = Convert.ToDecimal(DownpaymentTxtB.Text);
+            OverallPrice(downpayment);
             PaymentBtn.Enabled = true;
             guna2Button1.Enabled = true;
         }
@@ -701,7 +971,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DefaultLoad();
         }
 
-        public async Task SendToSales(long transactionID, int salesID)
+        /*public async Task SendToSales(long transactionID, int salesID)
         {
             try
             {
@@ -729,7 +999,60 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 MessageBox.Show(ex.Message, "Error in SendToSales");
             }
+        }*/
+
+        public async Task SendToSales(long transactionID, int salesID)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string query = "INSERT INTO sales (SaleID, OrderID, SaleDate, Amount) VALUES (@saleID, @orderID, @saleDate, @totAmount)";
+
+                            using (MySqlCommand command = new MySqlCommand(query, conn, transaction))
+                            {
+                                decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
+                                command.Transaction = transaction;
+
+                                command.Parameters.AddWithValue("@saleID", salesID);
+                                command.Parameters.AddWithValue("@orderID", transactionID);
+                                command.Parameters.AddWithValue("@saleDate", DateTime.Now);
+                                command.Parameters.AddWithValue("@totAmount", totalAmount);
+
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database", "Send To Sales Function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show($"Error sending transaction to sales: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private async Task GetCustomers(Guna2DataGridView customerList)
         {
             customerList.Rows.Clear();
@@ -773,9 +1096,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             TransactionIDBox.Text = "";
             NameBox.Text = "";
-            AgeBox.Text = "";
             PhoneNumberBox.Text = "";
-           
+
             AmountBox.Text = "";
             DiscountBox.Text = "";
             TotalAmountTxtB.Text = "";
@@ -785,94 +1107,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceAcquiredDGV.Rows.Clear();
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
-           
+
             GcashPayment.Enabled = false;
             VoidBtn.Enabled = false;
             PaymentBtn.Enabled = false;
             ClearFieldsBtn.Enabled = false;
             CalculateTotalBtn.Enabled = false;
             guna2Button1.Enabled = false;
-        }
-
-        private void cardProcess1_VisibleChanged(object sender, EventArgs e)
-        {
-            if (cardProcess1.Visible == false)
-            {
-                cardProcess1.DefaultLoad();
-            }
-        }
-
-        private async void CashPayment_Click(object sender, EventArgs e)
-        {
-            long CustomerID = Convert.ToInt64(TransactionIDBox.Text);
-
-            string userInput = ShowInputDialog("Enter the amount of customer's money:", "Cash Payment");
-
-            if (!string.IsNullOrEmpty(userInput))
-            {
-                decimal cash = Convert.ToDecimal(userInput);
-                if (cash < Convert.ToDecimal(AmountBox.Text))
-                {
-                    MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    if (cash > Convert.ToDecimal(AmountBox.Text))
-                    {
-                        //MessageBox.Show($"Customer's change: {Convert.ToInt32(AmountBox.Text) - cash}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(AmountBox.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ChangePaymentStatus("PAID");
-                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
-                    }
-                    else
-                    {
-                        MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ChangePaymentStatus("PAID");
-                        await SendToSales(CustomerID, transaction.GenerateTransactionID());
-                    }
-                    /* ChangePaymentStatus("PAID");
-                     await SendToSales(CustomerID, transaction.GenerateTransactionID());*/
-                    DefaultLoad();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Transaction cancelled, please press the OKAY button", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private string ShowInputDialog(string prompt, string title)
-        {
-            Form promptForm = new Form()
-            {
-                Width = 250,
-                Height = 150,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = title,
-                StartPosition = FormStartPosition.CenterScreen
-            };
-            Label textLabel = new Label() { Left = 20, Top = 20, Text = prompt };
-            TextBox inputBox = new TextBox() { Left = 20, Top = 50, Width = 200 };
-            inputBox.KeyPress += (s, e) =>
-            {
-                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-                {
-                    e.Handled = true;
-                }
-
-                if (e.KeyChar == '\b')
-                {
-                    e.Handled = false;
-                }
-            };
-            Button confirmation = new Button() { Text = "OK", Left = 20, Width = 100, Top = 75, DialogResult = DialogResult.OK };
-            confirmation.Click += (sender, e) => { promptForm.Close(); };
-            promptForm.Controls.Add(confirmation);
-            promptForm.Controls.Add(textLabel);
-            promptForm.Controls.Add(inputBox);
-            promptForm.AcceptButton = confirmation;
-
-            return promptForm.ShowDialog() == DialogResult.OK ? inputBox.Text : "0";
+            OtherTransactionContainer.Controls.Clear();
+            ratingsNumber = 0;
         }
 
         public void GeneratePDFBothReceipt()
@@ -880,6 +1123,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal subtotalAmount = decimal.Parse(AmountBox.Text);
             decimal totAmount = decimal.Parse(TotalAmountTxtB.Text);
             decimal discount = decimal.Parse(DiscountBox.Text);
+            decimal downpayment = decimal.Parse(DownpaymentTxtB.Text);
             decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
             int totalProductQuantity = 0;
             int totalServiceQuantity = ServiceAcquiredDGV.Rows.Count;
@@ -896,6 +1140,16 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            var productSummaries = ProductsBoughtDGV.Rows.Cast<DataGridViewRow>()
+                        .GroupBy(row => row.Cells["ProdNameCol"].Value.ToString())
+                        .Select(group => new
+                        {
+                            ProductName = group.Key,
+                            Quantity = group.Sum(row => Convert.ToInt32(row.Cells["QuantityCol"].Value)),
+                            TotalPrice = group.Sum(row => Convert.ToDecimal(row.Cells["TotAmountCol"].Value))
+                        })
+                        .ToList();
 
             using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
             {
@@ -935,6 +1189,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
 
                         // Table for products bought
+                        // Table for products bought
                         if (ProductsBoughtDGV.Rows.Count > 0)
                         {
                             Table productTable = new Table(4);
@@ -947,23 +1202,32 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                             foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
                             {
-                                string product = row.Cells[0].Value.ToString();
                                 string quantity = row.Cells[1].Value.ToString();
-                                string totalprice = row.Cells[2].Value.ToString();
-                                string variationCost = transaction.GetVariationCost(product);
                                 if (int.TryParse(quantity, out int quantityValue))
                                 {
                                     totalProductQuantity += quantityValue;
                                 }
+                            }
+                            foreach (var summary in productSummaries)
+                            {
+                                string variationCost = transaction.GetVariationCost(summary.ProductName);
 
-                                productTable.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER));
+                                Paragraph variationcost1 = new Paragraph();
+                                variationcost1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                                variationcost1.Add(new Text($"{variationCost}"));
+                                Paragraph totalprice1 = new Paragraph();
+                                totalprice1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                                totalprice1.Add(new Text($"{summary.TotalPrice.ToString("0.00")}"));
+
+                                productTable.AddCell(new Cell().Add(new Paragraph(summary.Quantity.ToString())).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add((variationcost1)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(summary.ProductName)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add((totalprice1)).SetBorder(Border.NO_BORDER));
                             }
                             doc.Add(productTable);
                             doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
                         }
+
 
                         // Table for services acquired
                         Table serviceTable = new Table(3);
@@ -977,9 +1241,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         {
                             string service = row.Cells["ServiceCol"].Value.ToString();
                             string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
+
+                            Paragraph serviceCostParagraph = new Paragraph();
+                            serviceCostParagraph.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
+                            serviceCostParagraph.Add(new Text($"{serviceAmount}"));
+
                             serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
                         }
 
                         doc.Add(serviceTable);
@@ -990,11 +1259,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal totalAmount = subtotalAmount - discount;
                         decimal change = cashEntered - totalAmount;
 
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"{subtotalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"{discount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DOWNPAYMENT:", $"{downpayment.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"{totalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"{cashEntered.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"{change.ToString("0.00")}", pesoImageData);
 
                         int totalQuantity = totalProductQuantity + totalServiceQuantity;
                         doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
@@ -1009,6 +1279,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
             }
         }
+
 
         private void Guna2CustomRadioButton_CheckedChanged(object sender, EventArgs e)
         {

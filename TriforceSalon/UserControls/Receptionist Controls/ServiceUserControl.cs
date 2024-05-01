@@ -13,6 +13,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
     {
         public static ServicesUserControl servicesUserControlInstance;
         private readonly GetServiceType_ServiceData serviceTypeService = new GetServiceType_ServiceData();
+        private readonly PromoMethods promoMethods = new PromoMethods();
         public readonly string mysqlcon;
         private PictureBox pic;
         private Label serviceTypeLbl;
@@ -28,7 +29,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
 
             CustomerNameTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
-            CustomerSpecialIDTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
             CustomerPhoneNTxtB.KeyPress += keypressLettersRestrictions.KeyPress;
         }
 
@@ -38,6 +38,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PEmployeeComB.SelectedIndex = 0;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
             await serviceTypeService.GetAllType(ServiceTypeComB, mysqlcon);
+            await promoMethods.GetActiveServicePromos(ServicePromoComB);
             DisplayServiceTypeFL();
         }
         public async void DisplayServiceTypeFL()
@@ -56,16 +57,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
-            string specialID;
-
-            if (!string.IsNullOrEmpty(CustomerSpecialIDTxtB.Text))
-            {
-                specialID = CustomerSpecialIDTxtB.Text;
-            }
-            else
-            {
-                specialID = "NONE";
-            }
 
             if (CustomerNameTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
@@ -92,8 +83,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 string serviceName = ServiceTxtB.Text;
                 await transactionMethods.GetServiceTypeID(serviceName);
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL", specialID);
-                transactionMethods.GeneratePDFTicket(ID, name, specialID);
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                transactionMethods.GeneratePDFTicket(ID, name);
                 ClearAll();
 
             }
@@ -105,11 +96,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             ServicesGDGVVControl.Rows.Clear();
             CustomerNameTxtB.Clear();
-            CustomerSpecialIDTxtB.Clear();
             CustomerPhoneNTxtB.Clear();
             ServiceTxtB.Clear();
             ServiceAmountTxtB.Clear();
             PEmployeeComB.SelectedIndex = 0;
+            ServicePromoComB.Text = null;
+            PromoTxtB.Text = null;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
         }
         /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
@@ -126,40 +118,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }*/
 
-        private void CustomerAgeTxtB_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            string currentText = CustomerAgeTxtB.Text;
-
-            int totalLength = currentText.Length + 1;
-            if (totalLength >= 2)
-            {
-                e.Handled = true;
-                return;
-            }*/
-
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Get the current text in the TextBox
-            string currentText = CustomerSpecialIDTxtB.Text;
-
-            // Check if the input length will exceed 3 characters after adding the new input
-            if (currentText.Length >= 3 && e.KeyChar != '\b') // '\b' represents the Backspace key
-            {
-                e.Handled = true; // Ignore the input
-                return;
-            }
-        }
-
+       
         private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
             /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -245,7 +204,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             string serviceType = await transactionMethods.GetServiceType(ServiceTxtB.Text);
             int queueNumber = await serviceTypeService.GetLargestQueue(dateNow, serviceType, mysqlcon);
             ServicesGDGVVControl.Rows.Add(serviceType, serviceName, prefEmp, amountService, "None", "X", queueNumber);
-            //ClearAll();
+
+            ServiceTxtB.Clear();
+            ServiceAmountTxtB.Clear();
+            PEmployeeComB.SelectedIndex = 0;
         }
 
         private void ServicesGDGVVControl_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -253,13 +215,31 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
                 DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove these item?", "Void Items", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
+                    string disountLabel = ServicesGDGVVControl.Rows[e.RowIndex].Cells["DiscountCol"].Value.ToString();
+                    decimal removedServiceDiscount;
+
+                    if (disountLabel == "None")
                     {
                         ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else if(decimal.TryParse(disountLabel, out removedServiceDiscount))
+                    {
+                        for (int i = 0; i < ServicesGDGVVControl.Rows.Count; i++)
+                        {
+                            decimal currentDiscount;
+                            if (decimal.TryParse(ServicesGDGVVControl.Rows[i].Cells["DiscountComB"].Value.ToString(), out currentDiscount))
+                            {
+                                if (currentDiscount == removedServiceDiscount)
+                                {
+                                    ServicesGDGVVControl.Rows.RemoveAt(i);
+                                    ServicePromoComB.Text = null;
+                                    PromoTxtB.Text = null;
+                                    i--; 
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -290,6 +270,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void ActivateBtn_Click(object sender, EventArgs e)
         {
             string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
+
+            if (string.IsNullOrWhiteSpace(promoInput))
+            {
+                MessageBox.Show("No code has been entered", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (int.TryParse(promoInput, out int promoCode))
             {
@@ -361,6 +347,24 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             {
                 e.Handled = true;
             }
+        }
+
+        private async void ServicePromoComB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            DisplayServiceTypeFL();
+            ServiceFL.Controls.Clear();
+            ServiceTypeComB.Text = null;
+        }
+
+        private void CancelBtn_Click(object sender, EventArgs e)
+        {
+            ClearAll();
         }
     }
 }

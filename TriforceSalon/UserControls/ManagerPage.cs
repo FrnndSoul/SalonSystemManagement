@@ -59,7 +59,7 @@ namespace TriforceSalon.UserControls
 
         private void InventoryBtn_Click(object sender, EventArgs e)
         {
-            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, ReportsBtn };
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, PromoBtn, ReportsBtn };
 
             transactionMethods.LockTransactionNavigation(NavigationButtons, InventoryBtn);
             transactionMethods.EnableTransactionNavigation(NavigationButtons, InventoryBtn);
@@ -70,7 +70,7 @@ namespace TriforceSalon.UserControls
 
         private void ServicesBtn_Click(object sender, EventArgs e)
         {
-            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, ReportsBtn };
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, PromoBtn, ReportsBtn };
 
             transactionMethods.LockTransactionNavigation(NavigationButtons, ServicesBtn);
             transactionMethods.EnableTransactionNavigation(NavigationButtons, ServicesBtn);
@@ -103,6 +103,11 @@ namespace TriforceSalon.UserControls
 
         private void PromoBtn_Click(object sender, EventArgs e)
         {
+            List<Guna2Button> NavigationButtons = new List<Guna2Button> { InventoryBtn, ServicesBtn, PromoBtn, ReportsBtn };
+
+            transactionMethods.LockTransactionNavigation(NavigationButtons, PromoBtn);
+            transactionMethods.EnableTransactionNavigation(NavigationButtons, PromoBtn);
+
             PromoUserControl promos = new PromoUserControl();
             UserControlNavigator.ShowControl(promos, ManagerContent);
         }

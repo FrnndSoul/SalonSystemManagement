@@ -21,12 +21,12 @@ namespace TriforceSalon.UserControls.Promo_Controls
         PromoMethods promoMethods = new PromoMethods();
         PromoUserControl promoUserControl;
 
-        //PromoUserControl transition = new PromoUserControl();
         public ViewPromosUserControls(PromoUserControl promoUserControl)
         {
             InitializeComponent();
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
             this.promoUserControl = promoUserControl;
+            WeekDTP.Value = DateTime.Now;
         }
 
         private async void ViewPromosUserControls_Load(object sender, EventArgs e)

@@ -66,123 +66,6 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-       /* public async Task PreferredQueue(string serviceTypeName, int ID, FlowLayoutPanel containerFL)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string prefQuery = "SELECT ci.CustomerName, " +
-                   "sg.ServiceVariation, " +
-                   "ci.PriorityStatus, " +
-                   "sg.ServiceVariation, " +
-                   "ci.TransactionID, " +
-                   "sg.QueueNumber " +
-                   "FROM customer_info ci " +
-                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                   "WHERE sg.ServiceType = @service_type " +
-                   "AND DATE(TimeTaken) = CURDATE() " +
-                   "AND (ci.PaymentStatus = 'UNPAID' " +
-                   "OR ci.PaymentStatus = 'ONGOING') " +
-                   "AND sg.IsDone = 'NO' " +
-                   "AND sg.EmployeeID = @employee_id " +
-                   "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
-
-                    using (MySqlCommand command = new MySqlCommand(prefQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("@service_type", serviceTypeName);
-                        command.Parameters.AddWithValue("@employee_id", ID);
-                        using (var adapter = new MySqlDataAdapter(command))
-                        {
-                            var dataTable = new DataTable();
-                            await adapter.FillAsync(dataTable);
-
-                            containerFL.Controls.Clear();
-
-                            foreach (DataRow row in dataTable.Rows)
-                            {
-                                var Service = row["ServiceVariation"].ToString();
-                                var Ticket = row["TransactionID"].ToString();
-                                var Queue = row["QueueNumber"].ToString();
-
-                                if (containerFL.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
-                                {
-                                    continue;
-                                }
-                                var cutomer = new QueueDisplay(Ticket, Queue, Service);
-                                containerFL.Controls.Add(cutomer);
-                                cutomer.SelectedQueue += TicketChanged;
-
-                            }
-                        }
-                    }
-                }
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in LoadSpecialCustomersAsync()");
-            }
-        }
-
-        public async Task GeneralQueue(string serviceTypeName, FlowLayoutPanel containerFL)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string generalQueue = "SELECT ci.TransactionID, " +
-                   "sg.ServiceVariation, " +
-                   "sg.QueueNumber " +
-                   "FROM customer_info ci " +
-                   "JOIN service_group sg ON ci.ServiceGroupID = sg.ServiceGroupID " +
-                   "WHERE sg.ServiceType = @service_type " +
-                   "AND DATE(TimeTaken) = CURDATE() " +
-                   "AND (ci.PaymentStatus = 'UNPAID' " +
-                   "OR ci.PaymentStatus = 'ONGOING') " +
-                   "AND sg.IsDone = 'NO' " +
-                   "AND sg.EmployeeID = 0 " +
-                   "ORDER BY CASE WHEN ci.PriorityStatus = 'PRIORITY' THEN 1 ELSE 2 END, ci.TimeTaken";
-
-                    using (MySqlCommand command = new MySqlCommand(generalQueue, conn))
-                    {
-                        command.Parameters.AddWithValue("@service_type", serviceTypeName);
-                        using (var adapter = new MySqlDataAdapter(command))
-                        {
-                            var dataTable = new DataTable();
-                            await adapter.FillAsync(dataTable);
-
-                            containerFL.Controls.Clear();
-
-                            foreach (DataRow row in dataTable.Rows)
-                            {
-                                var Service = row["ServiceVariation"].ToString();
-                                var Ticket = row["TransactionID"].ToString();
-                                var Queue = row["QueueNumber"].ToString();
-
-                                if (containerFL.Controls.OfType<CustomerTicket>().Any(P => P.Ticket == Ticket))
-                                {
-                                    continue;
-                                }
-                                var cutomer = new QueueDisplay(Ticket, Queue, Service);
-                                containerFL.Controls.Add(cutomer);
-                                cutomer.SelectedQueue += TicketChanged;
-                            }
-                        }
-                    }
-
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error in GeneralQueue");
-            }
-        }*/
-
         public async Task CombinedQueue(string serviceTypeName, FlowLayoutPanel containerFL, int employeeID)
         {
             try
@@ -403,9 +286,17 @@ namespace TriforceSalon.Class_Components
 
 
                                 }
-                                transaction.Commit();
 
-                                MessageBox.Show("You have successfully chosen this customer. Finish the service to serve more customers.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                if (Method.AdminAccess())
+                                {
+                                    transaction.Rollback();
+                                    MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                                }
+                                else
+                                {
+                                    transaction.Commit();
+                                    MessageBox.Show("You have successfully chosen this customer. Finish the service to serve more customers.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -575,12 +466,19 @@ namespace TriforceSalon.Class_Components
                                     }
                                 }
                             }
-                            transaction.Commit();
-                            MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                         catch (Exception ex)
                         {
-                            // Rollback transaction if any query fails
                             transaction.Rollback();
                             MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
                         }

@@ -17,14 +17,16 @@ namespace TriforceSalon.UserControls
     {
         ManagerPage manager = new ManagerPage();
         public static ServiceType_ServicePage servicePageInstance;
-        
+        public static bool isFiltered = false;
+
 
         public ServiceType_ServicePage()
         {
             InitializeComponent();
             servicePageInstance = this;
-            ServiceTypeControl serviceType = new ServiceTypeControl();
+            ServiceTypeControl serviceType = new ServiceTypeControl(this);
             UserControlNavigator.ShowControl(serviceType, ServiceManagementContainer);
+
         }
 
         private void SetButtonProperties(Guna.UI2.WinForms.Guna2Button button, Color fillColor, Color foreColor, Image image)
@@ -34,11 +36,12 @@ namespace TriforceSalon.UserControls
             button.Image = image;
         }
 
-        private void ServiceTypeBtn_Click(object sender, EventArgs e)
+        public void GoToType()
         {
+            isFiltered = false;
             SetButtonProperties(ServiceTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_type_icon__2_);
             ServiceTypeBtn.BringToFront();
-            
+
 
             SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
             ServiceBtn.SendToBack();
@@ -47,12 +50,29 @@ namespace TriforceSalon.UserControls
             ServiceSubTypeBtn.SendToBack();
 
 
-            ServiceTypeControl serviceType = new ServiceTypeControl();
+            ServiceTypeControl serviceType = new ServiceTypeControl(this);
             UserControlNavigator.ShowControl(serviceType, ServiceManagementContainer);
         }
 
-        private void ServiceBtn_Click(object sender, EventArgs e)
+        public void GoToCategory()
         {
+            isFiltered = false;
+            SetButtonProperties(ServiceSubTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
+            ServiceSubTypeBtn.BringToFront();
+
+            SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
+            ServiceBtn.SendToBack();
+
+            SetButtonProperties(ServiceTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_type_black_icon);
+            ServiceTypeBtn.SendToBack();
+
+            ServiceSubTypeControl serviceSubType = new ServiceSubTypeControl(this);
+            UserControlNavigator.ShowControl(serviceSubType, ServiceManagementContainer);
+        }
+
+        public void GoToVariation()
+        {
+            isFiltered = false;
             SetButtonProperties(ServiceBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
             ServiceBtn.BringToFront();
 
@@ -67,19 +87,22 @@ namespace TriforceSalon.UserControls
             UserControlNavigator.ShowControl(serviceVariation, ServiceManagementContainer);
         }
 
+        private void ServiceTypeBtn_Click(object sender, EventArgs e)
+        {
+            GoToType();
+            
+        }
+
+        private void ServiceBtn_Click(object sender, EventArgs e)
+        {
+            GoToVariation();
+            
+        }
+
         private void ServiceSubTypeBtn_Click(object sender, EventArgs e)
         {
-            SetButtonProperties(ServiceSubTypeBtn, Color.FromArgb(52, 42, 83), Color.White, Properties.Resources.service_icon);
-            ServiceSubTypeBtn.BringToFront();
-
-            SetButtonProperties(ServiceBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_black_icon);
-            ServiceBtn.SendToBack();
-
-            SetButtonProperties(ServiceTypeBtn, Color.FromArgb(255, 228, 242), Color.Black, Properties.Resources.service_type_black_icon);
-            ServiceTypeBtn.SendToBack();
-
-            ServiceSubTypeControl serviceSubType = new ServiceSubTypeControl();
-            UserControlNavigator.ShowControl(serviceSubType, ServiceManagementContainer);
+            GoToCategory();
+            
         }
     }
 }
