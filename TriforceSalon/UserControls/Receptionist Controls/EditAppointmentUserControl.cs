@@ -840,8 +840,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             DisplayServiceTypeFL();
-            ServiceFL.Controls.Clear();
-            ServiceTypeComB.Text = null;
         }
     }
 }

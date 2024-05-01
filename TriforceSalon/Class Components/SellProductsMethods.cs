@@ -395,7 +395,7 @@ namespace TriforceSalon.Class_Components
             {
                 conn.Open();
                 string query = @"
-                SELECT bi.ItemName, bi.Quantity, inv.SRP, sp.DiscountPercent
+                SELECT bi.ItemName, bi.Quantity, inv.Cost, sp.DiscountPercent
                 FROM binded_items bi
                 INNER JOIN inventory inv ON bi.ItemName COLLATE utf8mb4_general_ci = inv.ItemName COLLATE utf8mb4_general_ci
                 INNER JOIN salon_promos sp ON bi.PromoItemsID = sp.PromoCode
@@ -411,7 +411,7 @@ namespace TriforceSalon.Class_Components
                         {
                             string itemName = reader["ItemName"].ToString();
                             int quantity = Convert.ToInt32(reader["Quantity"]);
-                            decimal cost = Convert.ToDecimal(reader["SRP"]);
+                            decimal cost = Convert.ToDecimal(reader["Cost"]);
 
                             // Remove the percentage sign (%) and convert to decimal
                             string discountPercentString = reader["DiscountPercent"].ToString().Replace("%", "");

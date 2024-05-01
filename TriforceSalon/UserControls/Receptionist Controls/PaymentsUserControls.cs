@@ -7,7 +7,6 @@ using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
 using System;
-using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
@@ -30,7 +29,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         public static int TransactionID, Age, EmployeeID, VariationID, Amount;
         public TransactionMethods transaction = new TransactionMethods();
         CardProcess cardProcess = new CardProcess();
-        private int ratingsNumber = 0;
+        private int ratingsNumber;
 
         public decimal totalPrice = 0;
 
@@ -249,7 +248,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");*/
 
             AmountBox.Text = totalPrice.ToString("0.00");
-            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
+            TotalAmountTxtB.Text = ((discountedTotal + normalTotal) - downpayment).ToString("0.00");
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
         }
 
@@ -575,7 +574,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     MessageBox.Show("Transaction has been voided", "Void Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await GetCustomers(CustomerListDGV);
                     DefaultLoad();
-
+                               
                 }
             }
             catch (Exception ex)
@@ -688,7 +687,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (string.IsNullOrWhiteSpace(CustomerMoneyInput.Text))
             {
                 MessageBox.Show("Please enter an amount!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PaymentBtn.Enabled = true;
                 return;
             }
             else
@@ -696,10 +694,15 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 cash = Convert.ToDecimal(CustomerMoneyInput.Text);
             }
 
+            if (ratingsNumber == -1)
+            {
+                MessageBox.Show("Please select a rating for the service!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (cash < Convert.ToDecimal(TotalAmountTxtB.Text))
             {
                 MessageBox.Show("Not enough cash entered!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PaymentBtn.Enabled = true;
                 return;
             }
             else
@@ -863,7 +866,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void CustomerMoneyInput_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+           
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
@@ -1097,7 +1100,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             TransactionIDBox.Text = "";
             NameBox.Text = "";
             PhoneNumberBox.Text = "";
-
+           
             AmountBox.Text = "";
             DiscountBox.Text = "";
             TotalAmountTxtB.Text = "";
@@ -1107,7 +1110,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             ServiceAcquiredDGV.Rows.Clear();
             TransactionIDBox.Enabled = true;
             LoadBtn.Enabled = true;
-
+           
             GcashPayment.Enabled = false;
             VoidBtn.Enabled = false;
             PaymentBtn.Enabled = false;
@@ -1115,7 +1118,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CalculateTotalBtn.Enabled = false;
             guna2Button1.Enabled = false;
             OtherTransactionContainer.Controls.Clear();
-            ratingsNumber = 0;
+            ratingsNumber = -1;
         }
 
         public void GeneratePDFBothReceipt()
@@ -1123,7 +1126,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal subtotalAmount = decimal.Parse(AmountBox.Text);
             decimal totAmount = decimal.Parse(TotalAmountTxtB.Text);
             decimal discount = decimal.Parse(DiscountBox.Text);
-            decimal downpayment = decimal.Parse(DownpaymentTxtB.Text);
             decimal cashEntered = decimal.Parse(CustomerMoneyInput.Text);
             int totalProductQuantity = 0;
             int totalServiceQuantity = ServiceAcquiredDGV.Rows.Count;
@@ -1140,16 +1142,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show("Please enter a valid amount for payment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            var productSummaries = ProductsBoughtDGV.Rows.Cast<DataGridViewRow>()
-                        .GroupBy(row => row.Cells["ProdNameCol"].Value.ToString())
-                        .Select(group => new
-                        {
-                            ProductName = group.Key,
-                            Quantity = group.Sum(row => Convert.ToInt32(row.Cells["QuantityCol"].Value)),
-                            TotalPrice = group.Sum(row => Convert.ToDecimal(row.Cells["TotAmountCol"].Value))
-                        })
-                        .ToList();
 
             using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
             {
@@ -1189,7 +1181,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
 
                         // Table for products bought
-                        // Table for products bought
                         if (ProductsBoughtDGV.Rows.Count > 0)
                         {
                             Table productTable = new Table(4);
@@ -1202,32 +1193,23 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                             foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
                             {
+                                string product = row.Cells[0].Value.ToString();
                                 string quantity = row.Cells[1].Value.ToString();
+                                string totalprice = row.Cells[2].Value.ToString();
+                                string variationCost = transaction.GetVariationCost(product);
                                 if (int.TryParse(quantity, out int quantityValue))
                                 {
                                     totalProductQuantity += quantityValue;
                                 }
-                            }
-                            foreach (var summary in productSummaries)
-                            {
-                                string variationCost = transaction.GetVariationCost(summary.ProductName);
 
-                                Paragraph variationcost1 = new Paragraph();
-                                variationcost1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
-                                variationcost1.Add(new Text($"{variationCost}"));
-                                Paragraph totalprice1 = new Paragraph();
-                                totalprice1.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
-                                totalprice1.Add(new Text($"{summary.TotalPrice.ToString("0.00")}"));
-
-                                productTable.AddCell(new Cell().Add(new Paragraph(summary.Quantity.ToString())).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add((variationcost1)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add(new Paragraph(summary.ProductName)).SetBorder(Border.NO_BORDER));
-                                productTable.AddCell(new Cell().Add((totalprice1)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(quantity)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {variationCost}")).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph(product)).SetBorder(Border.NO_BORDER));
+                                productTable.AddCell(new Cell().Add(new Paragraph($"Php. {totalprice}")).SetBorder(Border.NO_BORDER));
                             }
                             doc.Add(productTable);
                             doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
                         }
-
 
                         // Table for services acquired
                         Table serviceTable = new Table(3);
@@ -1241,14 +1223,9 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         {
                             string service = row.Cells["ServiceCol"].Value.ToString();
                             string serviceAmount = row.Cells["ServiceAmountCol"].Value.ToString();
-
-                            Paragraph serviceCostParagraph = new Paragraph();
-                            serviceCostParagraph.Add(new iText.Layout.Element.Image(pesoImageData).SetHeight(9).SetWidth(9));
-                            serviceCostParagraph.Add(new Text($"{serviceAmount}"));
-
                             serviceTable.AddCell(new Cell().Add(new Paragraph(service)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
-                            serviceTable.AddCell(new Cell().Add((serviceCostParagraph)).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
+                            serviceTable.AddCell(new Cell().Add(new Paragraph($"Php. {serviceAmount}")).SetBorder(Border.NO_BORDER));
                         }
 
                         doc.Add(serviceTable);
@@ -1259,12 +1236,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal totalAmount = subtotalAmount - discount;
                         decimal change = cashEntered - totalAmount;
 
-                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"{subtotalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"{discount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "DOWNPAYMENT:", $"{downpayment.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"{totalAmount.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"{cashEntered.ToString("0.00")}", pesoImageData);
-                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"{change.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "SUBTOTAL:", $"Php. {subtotalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "DISCOUNT:", $"Php. {discount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "TOTAL:", $"Php. {totalAmount.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CASH:", $"Php. {cashEntered.ToString("0.00")}", pesoImageData);
+                        transaction.AddReceiptDetailRow(summaryTable, "CHANGE:", $"Php. {change.ToString("0.00")}", pesoImageData);
 
                         int totalQuantity = totalProductQuantity + totalServiceQuantity;
                         doc.Add(new Paragraph($"---------------------------------------{totalQuantity} Item(s)-----------------------------------------"));
@@ -1279,7 +1255,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 }
             }
         }
-
 
         private void Guna2CustomRadioButton_CheckedChanged(object sender, EventArgs e)
         {

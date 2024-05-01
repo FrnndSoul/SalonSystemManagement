@@ -15,15 +15,10 @@ namespace TriforceSalon.UserControls.Service_Controls
     {
         public static ServiceSubTypeControl categoryInstance;
         ServiceSubType categoryMethods = new ServiceSubType();
-        ServiceTransitions serviceTransitions = new ServiceTransitions();
-        ServiceType_ServicePage transitionSelection;
-        public static string categoryName;
-
-        public ServiceSubTypeControl(ServiceType_ServicePage serviceUC)
+        public ServiceSubTypeControl()
         {
             InitializeComponent();
             categoryInstance = this;
-            transitionSelection = serviceUC;
         }
 
         private void AddImageCategoryBtn_Click(object sender, EventArgs e)
@@ -34,14 +29,7 @@ namespace TriforceSalon.UserControls.Service_Controls
         private async void ServiceSubTypeControl_Load(object sender, EventArgs e)
         {
             await categoryMethods.GetAllServiceType(ServiceTypeComB);
-            if(ServiceType_ServicePage.isFiltered == false)
-            {
-                await categoryMethods.GetAllCategory(CategoryDGV);
-            }
-            else if(ServiceType_ServicePage.isFiltered == true)
-            {
-                await serviceTransitions.GetFilteredCategory(CategoryDGV, ServiceTypeControl.serviceTypeName);
-            }
+            await categoryMethods.GetAllCategory(CategoryDGV);
         }
 
         private async void AddCategoryBtn_Click(object sender, EventArgs e)
@@ -116,17 +104,6 @@ namespace TriforceSalon.UserControls.Service_Controls
             string search = SearchCategoryTxtB.Text;
             await categoryMethods.SearchCategory(search, CategoryDGV);
 
-        }
-
-        private void CategoryDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < CategoryDGV.Rows.Count)
-            {
-                DataGridViewRow selectedRow = CategoryDGV.Rows[e.RowIndex];
-                categoryName = Convert.ToString(selectedRow.Cells["CategoryNameCol"].Value);
-                transitionSelection.GoToVariation();
-                ServiceType_ServicePage.isFiltered = true;
-            }
         }
     }
 }

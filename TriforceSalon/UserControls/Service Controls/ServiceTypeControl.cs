@@ -1,5 +1,4 @@
-﻿using Org.BouncyCastle.Tls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,15 +15,13 @@ namespace TriforceSalon.UserControls.Service_Controls
     {
         ManagerPage manager = new ManagerPage();
         private ServiceTypes serviceType = new ServiceTypes();
-        ServiceType_ServicePage transitionSelection;
         public static ServiceTypeControl serviceTypeInstance;
         public KeypressNumbersRestrictions keypressNumbersRestrictions = new KeypressNumbersRestrictions();
-        public static string serviceTypeName;
-        public ServiceTypeControl(ServiceType_ServicePage serviceUC)
+
+        public ServiceTypeControl()
         {
             InitializeComponent();
             serviceTypeInstance = this;
-            transitionSelection = serviceUC;
             ServiceTypeTxtB.KeyPress += keypressNumbersRestrictions.KeyPress;
         }
 
@@ -107,17 +104,6 @@ namespace TriforceSalon.UserControls.Service_Controls
         private async void RefreshBtn_Click(object sender, EventArgs e)
         {
             await serviceType.ServiceTypeInfoDGV(ServiceTypeDGV);
-        }
-
-        private async void ServiceTypeDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < ServiceTypeDGV.Rows.Count)
-            {
-                DataGridViewRow selectedRow = ServiceTypeDGV.Rows[e.RowIndex];
-                serviceTypeName = Convert.ToString(selectedRow.Cells["CategoryNameCol"].Value);
-                transitionSelection.GoToCategory();
-                ServiceType_ServicePage.isFiltered = true;
-            }
         }
     }
 }

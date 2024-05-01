@@ -179,7 +179,6 @@
     <Compile Include="Class Components\QueueMethods.cs" />
     <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
-    <Compile Include="Class Components\ServiceTransitions.cs" />
     <Compile Include="Microsoft\VisualBasic\BindedServices.cs" />
     <Compile Include="Class Components\AdminTicketing.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
