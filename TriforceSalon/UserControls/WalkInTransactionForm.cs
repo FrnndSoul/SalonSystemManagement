@@ -15,7 +15,9 @@ namespace TriforceSalon.UserControls
         public static WalkInTransactionForm walkInTransactionFormInstance;
         public PopulateDataGridView populateMethods = new PopulateDataGridView();
         private EventHandler<CustomerTicket.CustomerSelectedEventArgs> CustomerDetails;
+        PromoMethods promo = new PromoMethods();
         private RealTimeClock userClock;
+        QueueForm queueForm;
         public WalkInTransactionForm()
         {
             InitializeComponent();
@@ -25,15 +27,29 @@ namespace TriforceSalon.UserControls
             ServicesUserControl serviecUC = new ServicesUserControl();
             UserControlNavigator.ShowControl(serviecUC, ReceptionistContent);
 
+            if(Method.isManager == false || Method.AdminAccess())
+            {
+                ManagerBackBtn.Visible = false;
+            }
+            else if(Method.isManager == true)
+            {
+                ManagerBackBtn.Visible = true;
+            }
+
+            queueForm = new QueueForm();
         }
 
-        private void WalkInTransactionForm_Load(object sender, EventArgs e)
+        private async void WalkInTransactionForm_Load(object sender, EventArgs e)
         {
             NServicesBtn.Enabled = false;
+            queueForm.Show();
+            await promo.CheckVoucherIsValid();
         }
 
         private void RecepLogOutBtn_Click(object sender, EventArgs e)
         {
+            Method.isManager = false;
+            queueForm.Dispose();
             Method.LogOutUser();
             foreach (Form openForm in Application.OpenForms)
             {
@@ -89,6 +105,13 @@ namespace TriforceSalon.UserControls
 
             AppointmentsUserControls appointment = new AppointmentsUserControls();
             UserControlNavigator.ShowControl(appointment, ReceptionistContent);
+        }
+
+        private void ManagerBackBtn_Click(object sender, EventArgs e)
+        {
+            ManagerPage managerPage = new ManagerPage();
+            UserControlNavigator.ShowControl(managerPage, MainForm.mainFormInstance.MainFormContent);
+            queueForm.Dispose();
         }
     }
 }

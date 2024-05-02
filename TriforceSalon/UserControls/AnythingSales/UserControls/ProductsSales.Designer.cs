@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SalesChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ProductSalesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ShowVoided = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.searchBox = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.MonthlyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.WeeklyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.DayFilter = new Guna.UI2.WinForms.Guna2Button();
             this.NoFilter = new Guna.UI2.WinForms.Guna2Button();
             this.RangeFilter = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.PageBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.NextPage = new Guna.UI2.WinForms.Guna2Button();
+            this.BackPage = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.SalesChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductSalesDGV)).BeginInit();
             this.SuspendLayout();
@@ -64,26 +65,26 @@
             this.ProductSalesDGV.AllowUserToDeleteRows = false;
             this.ProductSalesDGV.AllowUserToResizeColumns = false;
             this.ProductSalesDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.ProductSalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.ProductSalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.ProductSalesDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProductSalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProductSalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.ProductSalesDGV.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProductSalesDGV.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProductSalesDGV.DefaultCellStyle = dataGridViewCellStyle9;
             this.ProductSalesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductSalesDGV.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.ProductSalesDGV.Location = new System.Drawing.Point(135, 154);
@@ -117,22 +118,6 @@
             this.ProductSalesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductSalesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // ShowVoided
-            // 
-            this.ShowVoided.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.Location = new System.Drawing.Point(1226, 100);
-            this.ShowVoided.Name = "ShowVoided";
-            this.ShowVoided.Size = new System.Drawing.Size(84, 42);
-            this.ShowVoided.TabIndex = 9;
-            this.ShowVoided.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.UncheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedChanged += new System.EventHandler(this.ShowVoided_CheckedChanged);
-            // 
             // searchBox
             // 
             this.searchBox.Animated = true;
@@ -155,19 +140,9 @@
             this.searchBox.PasswordChar = '\0';
             this.searchBox.PlaceholderText = "Search";
             this.searchBox.SelectedText = "";
-            this.searchBox.Size = new System.Drawing.Size(564, 42);
+            this.searchBox.Size = new System.Drawing.Size(937, 42);
             this.searchBox.TabIndex = 10;
             this.searchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Chinacat", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(828, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(392, 42);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Toggle Voided Orders:";
             // 
             // MonthlyFilter
             // 
@@ -267,19 +242,78 @@
             this.RangeFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.RangeFilter.Value = new System.DateTime(2024, 3, 20, 0, 0, 0, 0);
             // 
+            // PageBox
+            // 
+            this.PageBox.BorderColor = System.Drawing.Color.Black;
+            this.PageBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PageBox.DefaultText = "";
+            this.PageBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.PageBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.PageBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.PageBox.ForeColor = System.Drawing.Color.Black;
+            this.PageBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Location = new System.Drawing.Point(1132, 100);
+            this.PageBox.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.PageBox.Name = "PageBox";
+            this.PageBox.PasswordChar = '\0';
+            this.PageBox.PlaceholderText = "#/#";
+            this.PageBox.ReadOnly = true;
+            this.PageBox.SelectedText = "";
+            this.PageBox.Size = new System.Drawing.Size(127, 42);
+            this.PageBox.TabIndex = 19;
+            this.PageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // NextPage
+            // 
+            this.NextPage.BorderThickness = 1;
+            this.NextPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.NextPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.NextPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.NextPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.NextPage.ForeColor = System.Drawing.Color.Black;
+            this.NextPage.Location = new System.Drawing.Point(1268, 100);
+            this.NextPage.Name = "NextPage";
+            this.NextPage.Size = new System.Drawing.Size(42, 42);
+            this.NextPage.TabIndex = 18;
+            this.NextPage.Text = ">";
+            this.NextPage.Click += new System.EventHandler(this.NextPage_Click);
+            // 
+            // BackPage
+            // 
+            this.BackPage.BorderThickness = 1;
+            this.BackPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BackPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.BackPage.ForeColor = System.Drawing.Color.Black;
+            this.BackPage.Location = new System.Drawing.Point(1081, 100);
+            this.BackPage.Name = "BackPage";
+            this.BackPage.Size = new System.Drawing.Size(42, 42);
+            this.BackPage.TabIndex = 17;
+            this.BackPage.Text = "<";
+            this.BackPage.Click += new System.EventHandler(this.BackPage_Click);
+            // 
             // ProductsSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.PageBox);
+            this.Controls.Add(this.NextPage);
+            this.Controls.Add(this.BackPage);
             this.Controls.Add(this.MonthlyFilter);
             this.Controls.Add(this.WeeklyFilter);
             this.Controls.Add(this.DayFilter);
             this.Controls.Add(this.NoFilter);
             this.Controls.Add(this.RangeFilter);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.searchBox);
-            this.Controls.Add(this.ShowVoided);
             this.Controls.Add(this.SalesChart);
             this.Controls.Add(this.ProductSalesDGV);
             this.Name = "ProductsSales";
@@ -287,20 +321,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.SalesChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductSalesDGV)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.DataVisualization.Charting.Chart SalesChart;
         public Guna.UI2.WinForms.Guna2DataGridView ProductSalesDGV;
-        private Guna.UI2.WinForms.Guna2ToggleSwitch ShowVoided;
         private Guna.UI2.WinForms.Guna2TextBox searchBox;
-        private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2Button MonthlyFilter;
         private Guna.UI2.WinForms.Guna2Button WeeklyFilter;
         private Guna.UI2.WinForms.Guna2Button DayFilter;
         private Guna.UI2.WinForms.Guna2Button NoFilter;
         private Guna.UI2.WinForms.Guna2DateTimePicker RangeFilter;
+        private Guna.UI2.WinForms.Guna2TextBox PageBox;
+        private Guna.UI2.WinForms.Guna2Button NextPage;
+        private Guna.UI2.WinForms.Guna2Button BackPage;
     }
 }

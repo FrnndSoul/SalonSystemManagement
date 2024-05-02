@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TypeFLP = new System.Windows.Forms.FlowLayoutPanel();
             this.LoadAllPanel = new System.Windows.Forms.Panel();
             this.LabelTitle = new System.Windows.Forms.Label();
-            this.searchBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.ServiceChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ServiceDGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.MonthlyFilter = new Guna.UI2.WinForms.Guna2Button();
@@ -42,8 +41,9 @@
             this.DayFilter = new Guna.UI2.WinForms.Guna2Button();
             this.NoFilter = new Guna.UI2.WinForms.Guna2Button();
             this.RangeFilter = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ShowVoided = new Guna.UI2.WinForms.Guna2ToggleSwitch();
+            this.PageBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.NextPage = new Guna.UI2.WinForms.Guna2Button();
+            this.BackPage = new Guna.UI2.WinForms.Guna2Button();
             this.TypeFLP.SuspendLayout();
             this.LoadAllPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceChart)).BeginInit();
@@ -56,9 +56,9 @@
             this.TypeFLP.BackColor = System.Drawing.Color.White;
             this.TypeFLP.Controls.Add(this.LoadAllPanel);
             this.TypeFLP.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.TypeFLP.Location = new System.Drawing.Point(4, 86);
+            this.TypeFLP.Location = new System.Drawing.Point(4, 56);
             this.TypeFLP.Name = "TypeFLP";
-            this.TypeFLP.Size = new System.Drawing.Size(256, 779);
+            this.TypeFLP.Size = new System.Drawing.Size(256, 809);
             this.TypeFLP.TabIndex = 14;
             // 
             // LoadAllPanel
@@ -84,31 +84,6 @@
             this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelTitle.Click += new System.EventHandler(this.LabelTitle_Click);
             // 
-            // searchBox
-            // 
-            this.searchBox.Animated = true;
-            this.searchBox.AutoRoundedCorners = true;
-            this.searchBox.BorderColor = System.Drawing.Color.Black;
-            this.searchBox.BorderRadius = 20;
-            this.searchBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.searchBox.DefaultText = "";
-            this.searchBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.searchBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.searchBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.searchBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.searchBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchBox.Font = new System.Drawing.Font("Stanberry", 20.25F);
-            this.searchBox.ForeColor = System.Drawing.Color.Black;
-            this.searchBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchBox.Location = new System.Drawing.Point(934, 6);
-            this.searchBox.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.PasswordChar = '\0';
-            this.searchBox.PlaceholderText = "Search";
-            this.searchBox.SelectedText = "";
-            this.searchBox.Size = new System.Drawing.Size(504, 42);
-            this.searchBox.TabIndex = 13;
-            // 
             // ServiceChart
             // 
             this.ServiceChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -128,26 +103,26 @@
             this.ServiceDGV.AllowUserToDeleteRows = false;
             this.ServiceDGV.AllowUserToResizeColumns = false;
             this.ServiceDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            this.ServiceDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            this.ServiceDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.ServiceDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServiceDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServiceDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.ServiceDGV.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServiceDGV.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServiceDGV.DefaultCellStyle = dataGridViewCellStyle18;
             this.ServiceDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServiceDGV.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.ServiceDGV.Location = new System.Drawing.Point(265, 56);
@@ -279,41 +254,73 @@
             this.RangeFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.RangeFilter.Value = new System.DateTime(2024, 3, 20, 0, 0, 0, 0);
             // 
-            // label2
+            // PageBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Stanberry", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 24);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Toggle Voided Orders:";
+            this.PageBox.BorderColor = System.Drawing.Color.Black;
+            this.PageBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PageBox.DefaultText = "";
+            this.PageBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.PageBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.PageBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.PageBox.ForeColor = System.Drawing.Color.Black;
+            this.PageBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Location = new System.Drawing.Point(1241, 8);
+            this.PageBox.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.PageBox.Name = "PageBox";
+            this.PageBox.PasswordChar = '\0';
+            this.PageBox.PlaceholderText = "#/#";
+            this.PageBox.ReadOnly = true;
+            this.PageBox.SelectedText = "";
+            this.PageBox.Size = new System.Drawing.Size(148, 42);
+            this.PageBox.TabIndex = 22;
+            this.PageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // ShowVoided
+            // NextPage
             // 
-            this.ShowVoided.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ShowVoided.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.Location = new System.Drawing.Point(211, 56);
-            this.ShowVoided.Name = "ShowVoided";
-            this.ShowVoided.Size = new System.Drawing.Size(47, 24);
-            this.ShowVoided.TabIndex = 21;
-            this.ShowVoided.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.ShowVoided.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.ShowVoided.UncheckedState.InnerColor = System.Drawing.Color.White;
-            this.ShowVoided.CheckedChanged += new System.EventHandler(this.ShowVoided_CheckedChanged);
+            this.NextPage.BorderThickness = 1;
+            this.NextPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.NextPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.NextPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.NextPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.NextPage.ForeColor = System.Drawing.Color.Black;
+            this.NextPage.Location = new System.Drawing.Point(1398, 8);
+            this.NextPage.Name = "NextPage";
+            this.NextPage.Size = new System.Drawing.Size(42, 42);
+            this.NextPage.TabIndex = 21;
+            this.NextPage.Text = ">";
+            this.NextPage.Click += new System.EventHandler(this.NextPage_Click);
+            // 
+            // BackPage
+            // 
+            this.BackPage.BorderThickness = 1;
+            this.BackPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BackPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.BackPage.ForeColor = System.Drawing.Color.Black;
+            this.BackPage.Location = new System.Drawing.Point(1190, 8);
+            this.BackPage.Name = "BackPage";
+            this.BackPage.Size = new System.Drawing.Size(42, 42);
+            this.BackPage.TabIndex = 20;
+            this.BackPage.Text = "<";
+            this.BackPage.Click += new System.EventHandler(this.BackPage_Click);
             // 
             // ServiceRetention
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.ShowVoided);
             this.Controls.Add(this.TypeFLP);
-            this.Controls.Add(this.searchBox);
+            this.Controls.Add(this.PageBox);
+            this.Controls.Add(this.NextPage);
+            this.Controls.Add(this.BackPage);
             this.Controls.Add(this.ServiceChart);
             this.Controls.Add(this.ServiceDGV);
             this.Controls.Add(this.MonthlyFilter);
@@ -329,7 +336,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ServiceChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceDGV)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -338,7 +344,6 @@
         private System.Windows.Forms.FlowLayoutPanel TypeFLP;
         private System.Windows.Forms.Panel LoadAllPanel;
         private System.Windows.Forms.Label LabelTitle;
-        private Guna.UI2.WinForms.Guna2TextBox searchBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart ServiceChart;
         public Guna.UI2.WinForms.Guna2DataGridView ServiceDGV;
         private Guna.UI2.WinForms.Guna2Button MonthlyFilter;
@@ -346,7 +351,8 @@
         private Guna.UI2.WinForms.Guna2Button DayFilter;
         private Guna.UI2.WinForms.Guna2Button NoFilter;
         private Guna.UI2.WinForms.Guna2DateTimePicker RangeFilter;
-        private System.Windows.Forms.Label label2;
-        private Guna.UI2.WinForms.Guna2ToggleSwitch ShowVoided;
+        private Guna.UI2.WinForms.Guna2TextBox PageBox;
+        private Guna.UI2.WinForms.Guna2Button NextPage;
+        private Guna.UI2.WinForms.Guna2Button BackPage;
     }
 }

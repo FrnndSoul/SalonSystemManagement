@@ -19,32 +19,24 @@ namespace salesreport.UserControls
     {
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
+        DataTable currentTable = SalesClass.LoadServiceRetention(filter);
+        public static string filter;
+        public int pageSize = 15;
+        public int currentPage = 1;
+        public int totalPages;
 
         public ServiceRetention()
         {
             InitializeComponent();
-            ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
+            ServiceDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
             GetServiceTypeData(TypeFLP);
-            RangeFilter.MaxDate = DateTime.Now;
+            RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
+            RangeFilter.Value = DateTime.Now;
             RangeFilter.Format = DateTimePickerFormat.Custom;
             RangeFilter.CustomFormat = "dd/MM/yyyy";
-        }
-
-        private async void ShowVoided_CheckedChanged(object sender, EventArgs e)
-        {
-            await Task.Delay(500);
-            string filterExpression;
-            if (ShowVoided.Checked)
-            {
-                filterExpression = "";
-            }
-            else
-            {
-                filterExpression = "IsVoided = 'No'";
-            }
-            ((DataTable)ServiceDGV.DataSource).DefaultView.RowFilter = filterExpression;
         }
 
         public void GetServiceTypeData(FlowLayoutPanel serviceTypeFL)
@@ -91,9 +83,12 @@ namespace salesreport.UserControls
                                 {
                                     string labelText = labelTitle.Text;
                                     string[] parts = labelText.Split('\n');
-                                    string filter = parts[0];
-                                    ServiceDGV.DataSource = SalesClass.LoadServiceRetention(filter);
+                                    filter = parts[0];
+
+                                    currentTable = SalesClass.LoadServiceRetention(filter);
+                                    ServiceDGV.DataSource = currentTable;
                                     LoadCharts();
+                                    RecountPages();
                                 }
 
                                 panel.Click += clickHandler;
@@ -109,8 +104,11 @@ namespace salesreport.UserControls
 
         private void LoadAllPanel_Click(object sender, EventArgs e)
         {
-            ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
+            filter = null;
+            DataTable currentTable = SalesClass.LoadServiceRetention(filter);
+            ServiceDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
         }
 
         public void LoadCharts()
@@ -156,7 +154,6 @@ namespace salesreport.UserControls
             ChartFontRefresh();
         }
 
-
         public void ChartFontRefresh()
         {
             if (ServiceChart.Titles.Count > 0)
@@ -181,8 +178,7 @@ namespace salesreport.UserControls
 
         private void LabelTitle_Click(object sender, EventArgs e)
         {
-            ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
-            LoadCharts();
+            LoadAllPanel_Click(null, null);
         }
 
         private void DayFilter_Click(object sender, EventArgs e)
@@ -209,8 +205,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                ServiceDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ServiceDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -227,8 +225,11 @@ namespace salesreport.UserControls
         private async void NoFilter_Click(object sender, EventArgs e)
         {
             await Task.Delay(500);
-            ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
+            currentPage = 1;
+            currentTable = SalesClass.LoadServiceRetention(filter);
+            ServiceDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
 
             NoFilter.Enabled = false;
             DayFilter.Enabled = true;
@@ -271,9 +272,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-
-                ServiceDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ServiceDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -314,8 +316,10 @@ namespace salesreport.UserControls
                     }
                 }
 
-                ServiceDGV.DataSource = filteredTable;
+                currentTable = filteredTable;
+                ServiceDGV.DataSource = currentTable;
                 LoadCharts();
+                RecountPages();
 
                 NoFilter.Enabled = true;
                 DayFilter.Enabled = false;
@@ -326,6 +330,56 @@ namespace salesreport.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred while filtering data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RecountPages()
+        {
+            currentPage = 1;
+            DataTable dataTable = (DataTable)ServiceDGV.DataSource;
+            int totalData = dataTable.Rows.Count;
+            totalPages = (int)Math.Ceiling((double)totalData / pageSize);
+            PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+            LoadPage();
+        }
+
+        public void LoadPage()
+        {
+            DataTable originalDataTable = currentTable; // Get the DataTable from the DataSource
+            int totalData = originalDataTable.Rows.Count; // Get the total number of rows in the DataTable
+
+            // Create a new DataTable to hold the filtered data for the current page
+            DataTable filteredTable = originalDataTable.Clone(); // Create a clone of the original DataTable
+
+            int startIndex = (currentPage - 1) * pageSize; // Corrected calculation of startIndex
+            int endIndex = Math.Min(startIndex + pageSize - 1, totalData - 1);
+
+            // Show rows for the current page and add them to the filteredTable
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                filteredTable.ImportRow(originalDataTable.Rows[i]);
+            }
+
+            ServiceDGV.DataSource = filteredTable;
+        }
+
+        private void BackPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage != 1)
+            {
+                currentPage--;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
+            }
+        }
+
+        private void NextPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                PageBox.Text = currentPage.ToString() + "/" + totalPages.ToString();
+                LoadPage();
             }
         }
     }

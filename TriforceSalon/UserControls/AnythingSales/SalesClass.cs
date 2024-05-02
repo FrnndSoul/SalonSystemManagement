@@ -25,9 +25,13 @@ namespace salesreport
                 SELECT 
                     er.CustomerID AS RefID, 
                     DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, 
-                    se.AccountID AS EmployeeID, 
-                    st.ServiceTypeName AS ServiceType, 
-                    se.Name AS Name, 
+                    se.AccountID AS EmployeeID, ";
+
+            if (string.IsNullOrEmpty(filter))
+            {
+                query += "st.ServiceTypeName AS ServiceType, ";
+            }
+                 query += @" se.Name AS Name, 
                     SUM(sg.Amount) AS Sales, 
                     AVG(er.CustomerRating) AS Rating 
                 FROM 
@@ -82,10 +86,10 @@ namespace salesreport
                     ProductID AS `Product ID`, 
                     Quantity, 
                     Amount AS `Sales`, 
-                    DATE_FORMAT(`OrderDate`, '%m/%d/%Y') AS Date,
-                    IsVoided 
+                    DATE_FORMAT(`OrderDate`, '%m/%d/%Y') AS Date
                 FROM 
-                    product_group";
+                    product_group 
+                WHERE product_group.IsVoided = 'NO' ";
 
             DataTable dataTable = new DataTable();
 
@@ -155,24 +159,31 @@ namespace salesreport
             string query = @"
                 SELECT 
                     sg.ServiceGroupID AS `RefID`, 
-                    DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, 
-                    st.ServiceTypeName AS `Service Type`, 
-                    sg.ServiceVariationID AS `Service ID`, 
+                    DATE_FORMAT(er.TimeStart, '%m/%d/%Y') AS Date, ";
+
+            if (string.IsNullOrEmpty(filter))
+            {
+                query += "st.ServiceTypeName AS ServiceType, ";
+            }
+            query += @"sg.ServiceVariationID AS `Service ID`, 
                     sg.ServiceVariation AS `Service Name`, 
-                    sg.Amount AS `Sales`, 
-                    sg.IsVoided 
+                    sg.Amount AS `Sales` 
                 FROM 
                     `service_group` sg
                 INNER JOIN 
                     `employee_records` er ON CAST(er.CustomerID AS CHAR CHARACTER SET utf8mb4) = CAST(sg.ServiceGroupID AS CHAR CHARACTER SET utf8mb4)
                 INNER JOIN 
-                    `salon_services` ss ON CAST(ss.ServiceName AS CHAR CHARACTER SET utf8mb4) = CAST(sg.ServiceVariation AS CHAR CHARACTER SET utf8mb4)
+                    `salon_services` ss ON CAST(ss.ServiceName AS CHAR CHARACTER SET utf8mb4) = CAST(sg.ServiceVariation AS CHAR CHARACTER SET utf8mb4) 
                 INNER JOIN 
-                    `service_type` st ON CAST(st.ServiceID AS CHAR CHARACTER SET utf8mb4) = CAST(ss.ServiceTypeID AS CHAR CHARACTER SET utf8mb4)";
+                    `salon_subtypes` sst ON CAST(sst.CategoryID AS CHAR CHARACTER SET utf8mb4) = CAST(ss.ServiceTypeID AS CHAR CHARACTER SET utf8mb4) 
+                INNER JOIN 
+                    `service_type` st ON CAST(st.ServiceID AS CHAR CHARACTER SET utf8mb4) = CAST(sst.ServiceTypeID AS CHAR CHARACTER SET utf8mb4) 
+                WHERE
+                    sg.IsVoided = 'NO' ";
 
             if (!string.IsNullOrEmpty(filter))
             {
-                query += " WHERE st.ServiceTypeName = @serviceTypename";
+                query += " AND st.ServiceTypeName = @serviceTypename";
             }
 
             DataTable dataTable = new DataTable();

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MonthlyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.WeeklyFilter = new Guna.UI2.WinForms.Guna2Button();
             this.DayFilter = new Guna.UI2.WinForms.Guna2Button();
@@ -38,6 +38,9 @@
             this.RangeFilter = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.SalesChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SalesDGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.PageBox = new Guna.UI2.WinForms.Guna2TextBox();
+            this.NextPage = new Guna.UI2.WinForms.Guna2Button();
+            this.BackPage = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.SalesChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SalesDGV)).BeginInit();
             this.SuspendLayout();
@@ -159,26 +162,26 @@
             this.SalesDGV.AllowUserToDeleteRows = false;
             this.SalesDGV.AllowUserToResizeColumns = false;
             this.SalesDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.SalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.SalesDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.SalesDGV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SalesDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.SalesDGV.ColumnHeadersHeight = 30;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.SalesDGV.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SalesDGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.SalesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalesDGV.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.SalesDGV.Location = new System.Drawing.Point(139, 116);
@@ -212,11 +215,72 @@
             this.SalesDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.SalesDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // PageBox
+            // 
+            this.PageBox.BorderColor = System.Drawing.Color.Black;
+            this.PageBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PageBox.DefaultText = "";
+            this.PageBox.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.PageBox.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.PageBox.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.PageBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.PageBox.ForeColor = System.Drawing.Color.Black;
+            this.PageBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.PageBox.Location = new System.Drawing.Point(1133, 66);
+            this.PageBox.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.PageBox.Name = "PageBox";
+            this.PageBox.PasswordChar = '\0';
+            this.PageBox.PlaceholderText = "#/#";
+            this.PageBox.ReadOnly = true;
+            this.PageBox.SelectedText = "";
+            this.PageBox.Size = new System.Drawing.Size(130, 42);
+            this.PageBox.TabIndex = 36;
+            this.PageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // NextPage
+            // 
+            this.NextPage.BorderThickness = 1;
+            this.NextPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.NextPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.NextPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.NextPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.NextPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.NextPage.ForeColor = System.Drawing.Color.Black;
+            this.NextPage.Location = new System.Drawing.Point(1272, 66);
+            this.NextPage.Name = "NextPage";
+            this.NextPage.Size = new System.Drawing.Size(42, 42);
+            this.NextPage.TabIndex = 35;
+            this.NextPage.Text = ">";
+            this.NextPage.Click += new System.EventHandler(this.NextPage_Click);
+            // 
+            // BackPage
+            // 
+            this.BackPage.BorderThickness = 1;
+            this.BackPage.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BackPage.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BackPage.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BackPage.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.BackPage.Font = new System.Drawing.Font("Stanberry", 20.25F);
+            this.BackPage.ForeColor = System.Drawing.Color.Black;
+            this.BackPage.Location = new System.Drawing.Point(1082, 66);
+            this.BackPage.Name = "BackPage";
+            this.BackPage.Size = new System.Drawing.Size(42, 42);
+            this.BackPage.TabIndex = 34;
+            this.BackPage.Text = "<";
+            this.BackPage.Click += new System.EventHandler(this.BackPage_Click);
+            // 
             // GeneralReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.PageBox);
+            this.Controls.Add(this.NextPage);
+            this.Controls.Add(this.BackPage);
             this.Controls.Add(this.MonthlyFilter);
             this.Controls.Add(this.WeeklyFilter);
             this.Controls.Add(this.DayFilter);
@@ -241,5 +305,8 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker RangeFilter;
         private System.Windows.Forms.DataVisualization.Charting.Chart SalesChart;
         public Guna.UI2.WinForms.Guna2DataGridView SalesDGV;
+        private Guna.UI2.WinForms.Guna2TextBox PageBox;
+        private Guna.UI2.WinForms.Guna2Button NextPage;
+        private Guna.UI2.WinForms.Guna2Button BackPage;
     }
 }

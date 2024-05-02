@@ -203,6 +203,16 @@ namespace TriforceSalon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap peso {
+            get {
+                object obj = ResourceManager.GetObject("peso", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_2024_03_04_03_03_56 {
             get {
                 object obj = ResourceManager.GetObject("photo_2024-03-04_03-03-56", resourceCulture);
@@ -386,6 +396,16 @@ namespace TriforceSalon.Properties {
         internal static System.Drawing.Bitmap SignUpDesignBackGround {
             get {
                 object obj = ResourceManager.GetObject("SignUpDesignBackGround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star {
+            get {
+                object obj = ResourceManager.GetObject("star", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
