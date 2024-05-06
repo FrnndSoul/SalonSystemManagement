@@ -533,7 +533,6 @@
             this.Logoutbtn.TabIndex = 95;
             this.Logoutbtn.Text = " Sign Out";
             this.Logoutbtn.UseTransparentBackground = true;
-            this.Logoutbtn.Visible = false;
             this.Logoutbtn.Click += new System.EventHandler(this.Logoutbtn_Click);
             // 
             // label9
