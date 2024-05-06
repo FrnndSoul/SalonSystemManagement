@@ -44,6 +44,7 @@ namespace TriforceSalon.UserControls
 
             NameBox.Text = name;
             UnitBox.Text = unit;
+            StatusBox.Text = status;
             IDBox.Text = id.ToString();
             CostBox.Text = cost.ToString();
             StockBox.Text = stock.ToString();

@@ -180,8 +180,13 @@
     <Compile Include="Class Components\ServiceFetchClass.cs" />
     <Compile Include="Class Components\ServiceSubType.cs" />
     <Compile Include="Microsoft\VisualBasic\BindedServices.cs" />
+    <Compile Include="Class Components\AdminTicketing.cs" />
+    <Compile Include="Class Components\ServiceSubType.cs" />
     <Compile Include="QueueForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="QueueForm.Designer.cs">
       <DependentUpon>QueueForm.cs</DependentUpon>
@@ -195,6 +200,20 @@
     <Compile Include="Ticket System\QueueDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.Designer.cs">
+      <DependentUpon>TicketDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketView.Designer.cs">
+      <DependentUpon>TicketView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\Submission.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\Submission.Designer.cs">
+      <DependentUpon>Submission.cs</DependentUpon>
     <Compile Include="Ticket System\QueueDisplay.Designer.cs">
       <DependentUpon>QueueDisplay.cs</DependentUpon>
     </Compile>
@@ -288,10 +307,10 @@
     <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.Designer.cs">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AdminForm.cs">
+    <Compile Include="UserControls\Admin Controls\AdminForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\AdminForm.Designer.cs">
+    <Compile Include="UserControls\Admin Controls\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class Components\Inventory.cs" />
@@ -459,6 +478,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ticket System\InSessionDisplay.resx">
       <DependentUpon>InSessionDisplay.cs</DependentUpon>
+    </EmbeddedResource>\
+    <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\TicketView.resx">
+      <DependentUpon>TicketView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\TicketDetails.resx">
+      <DependentUpon>TicketDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\Submission.resx">
+      <DependentUpon>Submission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ticket System\QueueDisplay.resx">
       <DependentUpon>QueueDisplay.cs</DependentUpon>
@@ -496,7 +524,7 @@
     <EmbeddedResource Include="UserControls\Inventory Controls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AdminForm.resx">
+    <EmbeddedResource Include="UserControls\Admin Controls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\EditProduct Inventory.resx">

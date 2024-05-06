@@ -4,9 +4,11 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
+using TriforceSalon.UserControls.Admin_Controls;
 
 namespace TriforceSalon
 {
@@ -100,20 +102,6 @@ namespace TriforceSalon
             }
         }
 
-        private void SignoutBtn_Click(object sender, EventArgs e)
-        {
-            DiscardFunc();
-            foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    //mainForm.ShowLogin();
-                    SigninPage signinPage = new SigninPage();
-                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
-                    break;
-                }
-            }
-        }
 
         private async void DiscardBtn_Click(object sender, EventArgs e)
         {
@@ -159,6 +147,35 @@ namespace TriforceSalon
                                        $"Convert(Availability, 'System.String') LIKE '%{searchText}%'";
             ((DataTable)UserDGV.DataSource).DefaultView.RowFilter = filterExpression;
         }
+
+        private void Logoutbtn_Click(object sender, EventArgs e)
+        {
+            DiscardFunc();
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (openForm is MainForm mainForm)
+                {
+                    //mainForm.ShowLogin();
+                    SigninPage signinPage = new SigninPage();
+                    UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
+                    break;
+                }
+            }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            MainForm mainFormInstance = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+
+            if (mainFormInstance != null)
+            {
+                TicketView ticketView = new TicketView();
+                mainFormInstance.Controls.Add(ticketView);
+                ticketView.Location = new Point(0, 0);
+                ticketView.BringToFront();
+            }
+        }
+
 
         private void UserDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
