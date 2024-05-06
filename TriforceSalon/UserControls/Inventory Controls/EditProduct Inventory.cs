@@ -16,8 +16,8 @@ namespace TriforceSalon.UserControls
     public partial class EditProduct_Inventory : UserControl
     {
         ManagerPage manager = new ManagerPage();
-        public static string ItemName, PerDay, Unit;
-        public static int ItemID, Stock, Cost, Status, EmployeeID;
+        public static string ItemName, Status, Unit;
+        public static int ItemID, Stock, Cost, EmployeeID;
         public static byte[] PhotoByteHolder;
         public static string mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         public MySqlConnection connection = new MySqlConnection(mysqlcon);
