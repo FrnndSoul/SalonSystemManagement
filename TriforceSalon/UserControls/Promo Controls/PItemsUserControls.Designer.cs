@@ -53,13 +53,13 @@
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductSearchTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.ProductContainer = new System.Windows.Forms.Panel();
+            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label3 = new System.Windows.Forms.Label();
             this.UpdatePromoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.DiscardBtn = new Guna.UI2.WinForms.Guna2Button();
             this.label7 = new System.Windows.Forms.Label();
             this.IDLbl = new System.Windows.Forms.Label();
             this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDGV)).BeginInit();
             this.ProductContainer.SuspendLayout();
             this.SuspendLayout();
@@ -139,8 +139,10 @@
             this.PromoNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PromoNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoNameTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PromoNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.PromoNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoNameTxtB.Location = new System.Drawing.Point(929, 132);
+            this.PromoNameTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PromoNameTxtB.Name = "PromoNameTxtB";
             this.PromoNameTxtB.PasswordChar = '\0';
             this.PromoNameTxtB.PlaceholderText = "";
@@ -192,8 +194,10 @@
             this.PromoCodeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PromoCodeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoCodeTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PromoCodeTxtB.ForeColor = System.Drawing.Color.Black;
             this.PromoCodeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoCodeTxtB.Location = new System.Drawing.Point(929, 227);
+            this.PromoCodeTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PromoCodeTxtB.Name = "PromoCodeTxtB";
             this.PromoCodeTxtB.PasswordChar = '\0';
             this.PromoCodeTxtB.PlaceholderText = "";
@@ -214,8 +218,10 @@
             this.PercentageTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PercentageTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PercentageTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PercentageTxtB.ForeColor = System.Drawing.Color.Black;
             this.PercentageTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PercentageTxtB.Location = new System.Drawing.Point(1275, 227);
+            this.PercentageTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PercentageTxtB.Name = "PercentageTxtB";
             this.PercentageTxtB.PasswordChar = '\0';
             this.PercentageTxtB.PlaceholderText = "";
@@ -393,6 +399,24 @@
             this.ProductContainer.Size = new System.Drawing.Size(907, 800);
             this.ProductContainer.TabIndex = 34;
             // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.AutoRoundedCorners = true;
+            this.RefreshBtn.BorderRadius = 18;
+            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
+            this.RefreshBtn.Location = new System.Drawing.Point(16, 16);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(221, 38);
+            this.RefreshBtn.TabIndex = 65;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
+            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Stanberry", 36F, System.Drawing.FontStyle.Underline);
@@ -479,24 +503,6 @@
             this.CancelBtn.TabIndex = 64;
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
-            // 
-            // RefreshBtn
-            // 
-            this.RefreshBtn.AutoRoundedCorners = true;
-            this.RefreshBtn.BorderRadius = 18;
-            this.RefreshBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.RefreshBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.RefreshBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.RefreshBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.RefreshBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.RefreshBtn.Font = new System.Drawing.Font("Stanberry", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
-            this.RefreshBtn.Location = new System.Drawing.Point(16, 16);
-            this.RefreshBtn.Name = "RefreshBtn";
-            this.RefreshBtn.Size = new System.Drawing.Size(221, 38);
-            this.RefreshBtn.TabIndex = 65;
-            this.RefreshBtn.Text = "Refresh";
-            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // PItemsUserControls
             // 

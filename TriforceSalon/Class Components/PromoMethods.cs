@@ -112,8 +112,8 @@ namespace TriforceSalon.Class_Components
 
                             foreach (DataGridViewRow row in itemsDataGrid.Rows)
                             {
-                                string itemsID = Convert.ToString(row.Cells["ProductNameCol"].Value);
-                                string itemName = Convert.ToString(row.Cells["ItemNameCol"].Value);
+                                string itemsID = Convert.ToString(row.Cells["ItemIDCol"].Value);
+                                string itemName = Convert.ToString(row.Cells["ProductNameCol"].Value);
                                 string quantity = Convert.ToString(row.Cells["QuantityCol"].Value);
 
                                 using (MySqlCommand command2 = new MySqlCommand(insertToBindedItems, conn, transaction))

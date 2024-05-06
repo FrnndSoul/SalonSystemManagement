@@ -177,8 +177,10 @@
             this.PromoNameTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PromoNameTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoNameTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PromoNameTxtB.ForeColor = System.Drawing.Color.Black;
             this.PromoNameTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoNameTxtB.Location = new System.Drawing.Point(931, 132);
+            this.PromoNameTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PromoNameTxtB.Name = "PromoNameTxtB";
             this.PromoNameTxtB.PasswordChar = '\0';
             this.PromoNameTxtB.PlaceholderText = "";
@@ -230,8 +232,10 @@
             this.PromoCodeTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PromoCodeTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoCodeTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PromoCodeTxtB.ForeColor = System.Drawing.Color.Black;
             this.PromoCodeTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PromoCodeTxtB.Location = new System.Drawing.Point(931, 227);
+            this.PromoCodeTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PromoCodeTxtB.Name = "PromoCodeTxtB";
             this.PromoCodeTxtB.PasswordChar = '\0';
             this.PromoCodeTxtB.PlaceholderText = "";
@@ -252,8 +256,10 @@
             this.PercentageTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.PercentageTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PercentageTxtB.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.PercentageTxtB.ForeColor = System.Drawing.Color.Black;
             this.PercentageTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PercentageTxtB.Location = new System.Drawing.Point(1277, 227);
+            this.PercentageTxtB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PercentageTxtB.Name = "PercentageTxtB";
             this.PercentageTxtB.PasswordChar = '\0';
             this.PercentageTxtB.PlaceholderText = "";
@@ -360,7 +366,7 @@
             this.CategoryComBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CategoryComBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CategoryComBox.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.CategoryComBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.CategoryComBox.ForeColor = System.Drawing.Color.Black;
             this.CategoryComBox.ItemHeight = 30;
             this.CategoryComBox.Location = new System.Drawing.Point(223, 16);
             this.CategoryComBox.Name = "CategoryComBox";

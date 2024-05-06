@@ -153,7 +153,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                                     ProductsControlDGV.Rows.RemoveAt(i);
                                     ItemPromoComB.Text = null;
                                     PromoTxtB.Text = null;
-                                    i--; // Adjust the index after removal
+                                    ActivateBtn.Enabled = true;
+                                    i--; 
                                 }
                             }
                         }
@@ -743,8 +744,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void ActivateBtn_Click(object sender, EventArgs e)
+        private async void ActivateBtn_Click(object sender, EventArgs e)
         {
+            string promoName = ItemPromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, PromoTxtB);
             string promoInput = PromoTxtB.Text.Substring(0, 7);
 
             if (int.TryParse(promoInput, out int promoCode))
@@ -798,8 +801,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ItemPromoComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string promoName = ItemPromoComB.Text;
-            await promoMethods.GetPromoCode(promoName, PromoTxtB);
+            /*string promoName = ItemPromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, PromoTxtB);*/
         }
     }
 }
