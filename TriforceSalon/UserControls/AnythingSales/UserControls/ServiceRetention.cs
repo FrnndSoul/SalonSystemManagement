@@ -30,6 +30,7 @@ namespace salesreport.UserControls
             InitializeComponent();
             ServiceDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
             GetServiceTypeData(TypeFLP);
             RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
@@ -104,7 +105,7 @@ namespace salesreport.UserControls
         private void LoadAllPanel_Click(object sender, EventArgs e)
         {
             filter = null;
-            currentTable = SalesClass.LoadEmployeeDGV(filter);
+            DataTable currentTable = SalesClass.LoadServiceRetention(filter);
             ServiceDGV.DataSource = currentTable;
             LoadCharts();
             RecountPages();
@@ -177,8 +178,7 @@ namespace salesreport.UserControls
 
         private void LabelTitle_Click(object sender, EventArgs e)
         {
-            ServiceDGV.DataSource = SalesClass.LoadServiceRetention(null);
-            LoadCharts();
+            LoadAllPanel_Click(null, null);
         }
 
         private void DayFilter_Click(object sender, EventArgs e)

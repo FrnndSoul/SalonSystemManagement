@@ -15,7 +15,7 @@ namespace salesreport.UserControls
     public partial class ProductsSales : UserControl
     {
         DataTable currentTable = SalesClass.LoadProductSales();
-        public int pageSize = 15;
+        public int pageSize = 13;
         public int currentPage = 1;
         public int totalPages;
 
@@ -24,6 +24,7 @@ namespace salesreport.UserControls
             InitializeComponent();
             ProductSalesDGV.DataSource = currentTable;
             LoadCharts();
+            RecountPages();
             RangeFilter.MaxDate = DateTime.Now.AddDays(1);
             RangeFilter.MinDate = DateTime.Now.AddYears(-2);
             RangeFilter.Value = DateTime.Now;
