@@ -23,11 +23,7 @@ namespace TriforceSalon.UserControls.Employee_Controls
             employeeLockInstance = this;
 
         }
-        private async void EmployeeLock_Load(object sender, EventArgs e)
-        {
-            //await transaction.GetServicesAsync(salonServices.GetServiceTypeID(EmployeeUserConrols.employeeUserConrolsInstance.ServiceTypeNameLbl.Text));
-        }
-
+       
         //Need ayusin ang tamang refresh hindi narereset ang list
         private async void EmployeeDoneBtn_Click(object sender, EventArgs e)
         {
@@ -75,12 +71,6 @@ namespace TriforceSalon.UserControls.Employee_Controls
                      AddServicePanel.Enabled = false; 
                  }
              }*/
-        }
-
-        private async void ServiceListComB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //string serviceName = Convert.ToString(ServiceListComB.SelectedItem);
-            //await transaction.GetServiceAmountAsync(serviceName);
         }
 
         private void AddServiceChckB_Click(object sender, EventArgs e)
