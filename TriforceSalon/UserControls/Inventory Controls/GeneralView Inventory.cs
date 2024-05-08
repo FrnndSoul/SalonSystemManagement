@@ -150,6 +150,7 @@ namespace TriforceSalon.UserControls
                             querycmd.ExecuteNonQuery();
                         }
                     }
+                    LoadInventory();
                 }
                 catch (Exception ex)
                 {

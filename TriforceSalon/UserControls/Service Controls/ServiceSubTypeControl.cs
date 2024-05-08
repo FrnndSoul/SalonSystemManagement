@@ -92,6 +92,8 @@ namespace TriforceSalon.UserControls.Service_Controls
                 await categoryMethods.UpdateCategory(categoryID, serviceTypeID, categoryName, CategoryDGV);
 
             }
+            UpdateCategoryBtn.Enabled = true;
+
         }
 
         private async void EditCategoryBtn_Click(object sender, EventArgs e)

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.QueueTicket = new Guna.UI2.WinForms.Guna2Panel();
+            this.ServiceVarLbl = new System.Windows.Forms.Label();
             this.RefLbl = new System.Windows.Forms.Label();
             this.TransactionIDLbl = new System.Windows.Forms.Label();
             this.QueueNumLbl = new System.Windows.Forms.Label();
-            this.ServiceVarLbl = new System.Windows.Forms.Label();
             this.QueueTicket.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +53,17 @@
             this.QueueTicket.Size = new System.Drawing.Size(209, 135);
             this.QueueTicket.TabIndex = 0;
             this.QueueTicket.Click += new System.EventHandler(this.QueueTicket_Click);
+            this.QueueTicket.Paint += new System.Windows.Forms.PaintEventHandler(this.QueueTicket_Paint);
+            // 
+            // ServiceVarLbl
+            // 
+            this.ServiceVarLbl.AutoSize = true;
+            this.ServiceVarLbl.Location = new System.Drawing.Point(171, 113);
+            this.ServiceVarLbl.Name = "ServiceVarLbl";
+            this.ServiceVarLbl.Size = new System.Drawing.Size(35, 13);
+            this.ServiceVarLbl.TabIndex = 3;
+            this.ServiceVarLbl.Text = "label1";
+            this.ServiceVarLbl.Visible = false;
             // 
             // RefLbl
             // 
@@ -85,16 +96,6 @@
             this.QueueNumLbl.Size = new System.Drawing.Size(92, 65);
             this.QueueNumLbl.TabIndex = 0;
             this.QueueNumLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ServiceVarLbl
-            // 
-            this.ServiceVarLbl.AutoSize = true;
-            this.ServiceVarLbl.Location = new System.Drawing.Point(171, 113);
-            this.ServiceVarLbl.Name = "ServiceVarLbl";
-            this.ServiceVarLbl.Size = new System.Drawing.Size(35, 13);
-            this.ServiceVarLbl.TabIndex = 3;
-            this.ServiceVarLbl.Text = "label1";
-            this.ServiceVarLbl.Visible = false;
             // 
             // QueueDisplay
             // 
