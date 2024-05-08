@@ -199,7 +199,7 @@ namespace TriforceSalon.Class_Components
                                 await command.ExecuteNonQueryAsync();
                             }
                         }
-                        await salonServices.PopulateServiceTypeForInsert();
+                        //await salonServices.PopulateServiceTypeForInsert();
                         await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                         ClearServiceTypes();
                     }
@@ -330,7 +330,7 @@ namespace TriforceSalon.Class_Components
                                 }
                             }
                         }
-                        await salonServices.PopulateServiceTypeForInsert();
+                        //await salonServices.PopulateServiceTypeForInsert();
                         await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                         ClearServiceTypes();
                         HideButton(true, true, false, false);

@@ -365,7 +365,7 @@ namespace TriforceSalon.Class_Components
                         using (var conn = new MySqlConnection(mysqlcon))
                         {
                             await conn.OpenAsync();
-                            string query = "select ServiceTypeName from service_type where ServiceID = @service_ID";
+                            string query = "select ServiceSubTypeName from salon_subtypes where CategoryID = @service_ID";
 
                             using (MySqlCommand command = new MySqlCommand(query, conn))
                             {
@@ -471,17 +471,16 @@ namespace TriforceSalon.Class_Components
                         {
                             command.Parameters.AddWithValue("@service_image", imageData);
                         }
+                        
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
                         else
                         {
-                            if (Method.AdminAccess())
-                            {
-                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
-                            }
-                            else
-                            {
-                                await command.ExecuteNonQueryAsync();
-                            }
+                            await command.ExecuteNonQueryAsync();
                         }
+                        
                         await GetSalonServicesAsync(serviceDatagrid);
                         ClearServices();
                         HideButton(true, true, false, false);

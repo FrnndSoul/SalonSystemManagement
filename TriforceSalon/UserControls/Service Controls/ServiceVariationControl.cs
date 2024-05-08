@@ -95,7 +95,7 @@ namespace TriforceSalon.UserControls.Service_Controls
 
             if (result == DialogResult.Yes)
             {
-                int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationID"].Value);
+                int servarID = Convert.ToInt32(SalonServicesDGV.SelectedRows[0].Cells["ServiceVariationIDCol"].Value);
                 await salonServices.UpdateSalonServices(servarID, SalonServicesDGV);
                 MessageBox.Show("Service has been updated", "Service Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 salonServices.ClearServices();

@@ -82,7 +82,7 @@ namespace TriforceSalon.UserControls.Service_Controls
 
             if (result == DialogResult.Yes)
             {
-                int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["ServiceID"].Value);
+                int sID = Convert.ToInt32(ServiceTypeDGV.SelectedRows[0].Cells["CategoryIDCol"].Value);
                 await serviceType.UpdateServiceType(sID);
                 manager.DisableButtons(true);
 

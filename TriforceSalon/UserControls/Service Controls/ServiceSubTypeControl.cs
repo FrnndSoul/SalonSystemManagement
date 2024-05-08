@@ -64,8 +64,8 @@ namespace TriforceSalon.UserControls.Service_Controls
                 string categoryName = ServiceCategoryTxtB.Text;
                 await categoryMethods.AddCategory(categoryName);
             }
-
-            AddCategoryBtn.Enabled = false;
+            categoryMethods.ClearCategory();
+            AddCategoryBtn.Enabled = true;
         }
 
         private async void UpdateCategoryBtn_Click(object sender, EventArgs e)

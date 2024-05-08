@@ -137,7 +137,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 // If admin, rollback the transaction
                                 transaction.Rollback();
-                                MessageBox.Show("promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Working as intended. No changes were made in the database.", "Add Promo Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)
@@ -171,7 +171,7 @@ namespace TriforceSalon.Class_Components
 
                 PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text = Pname;
                 PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text = Pcode;
-                PItemsUserControls.Pitemsinstance.PercentageTxtB.Text = PDiscount;
+                PItemsUserControls.Pitemsinstance.PercentageTxtB.Text = PDiscount.Replace("%", "");
                 PItemsUserControls.Pitemsinstance.PStartDTP.Value = PstartDate;
                 PItemsUserControls.Pitemsinstance.PEndDTP.Value = PendDate;
                 PItemsUserControls.Pitemsinstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
@@ -381,7 +381,7 @@ namespace TriforceSalon.Class_Components
                     command.Parameters.AddWithValue("@start", PItemsUserControls.Pitemsinstance.PStartDTP.Value.Date);
                     command.Parameters.AddWithValue("@end", PItemsUserControls.Pitemsinstance.PEndDTP.Value.Date);
                     command.Parameters.AddWithValue("@pName", PItemsUserControls.Pitemsinstance.PromoNameTxtB.Text);
-                    command.Parameters.AddWithValue("@discount", PItemsUserControls.Pitemsinstance.PercentageTxtB.Text);
+                    command.Parameters.AddWithValue("@discount", PItemsUserControls.Pitemsinstance.PercentageTxtB.Text + "%");
                     command.Parameters.AddWithValue("@promoCode", PItemsUserControls.Pitemsinstance.PromoCodeTxtB.Text);
 
                     // Execute the update query
@@ -429,7 +429,7 @@ namespace TriforceSalon.Class_Components
                 {
                     // If admin, rollback the transaction
                     transaction.Rollback();
-                    MessageBox.Show("Update process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Working as intended. No changes were made in the database.", "Promo Product Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -729,7 +729,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 // If admin, rollback the transaction
                                 transaction.Rollback();
-                                MessageBox.Show("Promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Working as intended. No changes were made in the database.", "Add Service Promo Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)
@@ -823,7 +823,7 @@ namespace TriforceSalon.Class_Components
                                 command.Parameters.AddWithValue("@start", PServicesUserControl.pServiceInstance.PStartDTP.Value.Date);
                                 command.Parameters.AddWithValue("@end", PServicesUserControl.pServiceInstance.PEndDTP.Value.Date);
                                 command.Parameters.AddWithValue("@pName", PServicesUserControl.pServiceInstance.PromoNameTxtB.Text);
-                                command.Parameters.AddWithValue("@discount", PServicesUserControl.pServiceInstance.PercentageTxtB.Text);
+                                command.Parameters.AddWithValue("@discount", PServicesUserControl.pServiceInstance.PercentageTxtB.Text + "%");
                                 command.Parameters.AddWithValue("@promoCode", PServicesUserControl.pServiceInstance.PromoCodeTxtB.Text);
 
                                 await command.ExecuteNonQueryAsync();
@@ -863,7 +863,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 // If admin, rollback the transaction
                                 transaction.Rollback();
-                                MessageBox.Show("Update promo process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Working as intended. No changes were made in the database.", "Update Service Promo Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)
@@ -922,15 +922,7 @@ namespace TriforceSalon.Class_Components
 
         public async void EditServicePromo(Guna2DataGridView productPromoDGV)
         {
-            /*if (productPromoDGV.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a row for editing.", "Try again", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {*/
+           
             if (productPromoDGV.SelectedRows.Count == 1)
             {
                 DataGridViewRow selectedRow = productPromoDGV.SelectedRows[0];
@@ -944,7 +936,7 @@ namespace TriforceSalon.Class_Components
 
                 PServicesUserControl.pServiceInstance.PromoNameTxtB.Text = Pname;
                 PServicesUserControl.pServiceInstance.PromoCodeTxtB.Text = Pcode;
-                PServicesUserControl.pServiceInstance.PercentageTxtB.Text = PDiscount;
+                PServicesUserControl.pServiceInstance.PercentageTxtB.Text = PDiscount.Replace("%", "");
                 PServicesUserControl.pServiceInstance.PStartDTP.Value = PstartDate;
                 PServicesUserControl.pServiceInstance.PEndDTP.Value = PendDate;
                 PServicesUserControl.pServiceInstance.IDLbl.Text = Convert.ToString(ProductIDGroup);
@@ -964,7 +956,7 @@ namespace TriforceSalon.Class_Components
                     {
                         try
                         {
-                            string deactivateQuery = "UPDATE salon_promo " +
+                            string deactivateQuery = "UPDATE salon_promos " +
                                 "SET isValid = 'DEACTIVATED' " +
                                 "WHERE PromoCode = @ID";
 
@@ -977,7 +969,7 @@ namespace TriforceSalon.Class_Components
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Promo deactivation is working as intended, Proceeding to rollback", "Appointment activation function", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended, No changes in the database were made", "Promo deactivation function", MessageBoxButtons.OK);
                             }
                             else
                             {

@@ -103,7 +103,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 string Pname = PromoNameTxtB.Text;
                 DateTime startDate = PStartDTP.Value.Date;
                 DateTime endDate = PEndDTP.Value.Date;
-                string percent = PercentageTxtB.Text;
+                string percent = PercentageTxtB.Text + "%";
 
                 await promo.AddServicePromo(ServiceDGV, ID, startDate, endDate, percent, Pname);
                 await promo.CheckVoucherIsValid();
@@ -130,6 +130,25 @@ namespace TriforceSalon.UserControls.Promo_Controls
         {
             string target = ProductSearchTxtB.Text;
             await fetchServices.LoadServicesForSearch(ServiceFL, mysqlcon, ServiceDGV, target);
+        }
+
+        private void PercentageTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Check if the key is a digit or backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                // If not a digit or backspace, handle the keypress
+                e.Handled = true;
+                return;
+            }
+
+            // Check if the current length of the text is already 2
+            if (PercentageTxtB.TextLength >= 2 && e.KeyChar != '\b')
+            {
+                // If so, handle the keypress
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

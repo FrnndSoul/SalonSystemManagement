@@ -264,7 +264,6 @@ namespace TriforceSalon.Ticket_System
                                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //transactionMethods.GeneratePDFTicket(ID, name, age);
                             }
-                            await appointment.LoadPresentCustomer();
                         }
                         catch (Exception ex)
                         {
@@ -273,11 +272,9 @@ namespace TriforceSalon.Ticket_System
                         }
                     }
                 }
-                /*MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                transactionMethods.GeneratePDFTicket(ID, name, age);
-                await appointment.LoadPresentCustomer();*/
+                await appointment.LoadPresentCustomer();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

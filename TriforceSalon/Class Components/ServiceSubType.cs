@@ -206,10 +206,10 @@ namespace TriforceSalon.Class_Components
                         "ServiceSubTypeName = @typeName";
 
                     byte[] imageData = null;
-
+                    
                     if (isNewServiceImageSelected)
                     {
-                        using (Bitmap bmp = new Bitmap(ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image))
+                        using (Bitmap bmp = new Bitmap(ServiceSubTypeControl.categoryInstance.CategoryPicB.Image))
                         {
                             using (MemoryStream ms = new MemoryStream())
                             {
@@ -232,18 +232,17 @@ namespace TriforceSalon.Class_Components
                             command.Parameters.AddWithValue("@categoryImage", imageData);
 
                         }
+                        
+                        if (Method.AdminAccess())
+                        {
+                            MessageBox.Show("Working as intended.\nNo changes were made in the database");
+                        }
                         else
                         {
-                            if (Method.AdminAccess())
-                            {
-                                MessageBox.Show("Working as intended.\nNo changes were made in the database");
-                            }
-                            else
-                            {
-                                await command.ExecuteNonQueryAsync();
-                                MessageBox.Show("Category Updated Successfully", "Operationg Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
+                            await command.ExecuteNonQueryAsync();
+                            MessageBox.Show("Category Updated Successfully", "Operationg Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
+                        
                     }
                     ClearCategory();
                     HideCategoryButtons(true, true, false, false);
