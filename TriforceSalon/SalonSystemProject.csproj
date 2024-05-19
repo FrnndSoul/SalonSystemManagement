@@ -174,6 +174,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Components\AdminTicketing.cs" />
     <Compile Include="Class Components\PromoFetchItemsClass.cs" />
     <Compile Include="Class Components\PromoMethods.cs" />
     <Compile Include="Class Components\QueueMethods.cs" />
@@ -198,6 +199,30 @@
     </Compile>
     <Compile Include="Ticket System\QueueDisplay.Designer.cs">
       <DependentUpon>QueueDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\AdminForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\Submission.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\Submission.Designer.cs">
+      <DependentUpon>Submission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketDetails.Designer.cs">
+      <DependentUpon>TicketDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Admin Controls\Ticketing\TicketView.Designer.cs">
+      <DependentUpon>TicketView.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AnythingSales\SalesClass.cs" />
     <Compile Include="UserControls\AnythingSales\SalesForm.cs">
@@ -288,12 +313,6 @@
     </Compile>
     <Compile Include="UserControls\Inventory Controls\AddProduct Inventory.Designer.cs">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\AdminForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class Components\Inventory.cs" />
     <Compile Include="UserControls\Inventory Controls\EditProduct Inventory.cs">
@@ -464,6 +483,9 @@
     <EmbeddedResource Include="Ticket System\QueueDisplay.resx">
       <DependentUpon>QueueDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin Controls\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AnythingSales\SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -496,9 +518,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\AddProduct Inventory.resx">
       <DependentUpon>AddProduct Inventory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\AdminForm.resx">
-      <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Inventory Controls\EditProduct Inventory.resx">
       <DependentUpon>EditProduct Inventory.cs</DependentUpon>
@@ -720,6 +739,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shadow shit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

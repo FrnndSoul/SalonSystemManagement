@@ -64,6 +64,7 @@
             this.EmpIDLbl.Size = new System.Drawing.Size(59, 18);
             this.EmpIDLbl.TabIndex = 5;
             this.EmpIDLbl.Text = "label1";
+            this.EmpIDLbl.Visible = false;
             // 
             // ServiceDoneBtn
             // 
@@ -90,6 +91,7 @@
             this.ServiceVarLbl.Size = new System.Drawing.Size(56, 18);
             this.ServiceVarLbl.TabIndex = 3;
             this.ServiceVarLbl.Text = "label1";
+            this.ServiceVarLbl.Visible = false;
             // 
             // RefLbl
             // 

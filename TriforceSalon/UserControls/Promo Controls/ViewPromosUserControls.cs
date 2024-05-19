@@ -153,7 +153,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
             DataGridViewRow selectedRow = AllPromoProductsDGV.SelectedRows[0];
             long ID = Convert.ToInt64(selectedRow.Cells["PromoCodeCol"].Value);
 
-            DialogResult result = MessageBox.Show("Are you sure you want to edit this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to deactivate this promo?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {

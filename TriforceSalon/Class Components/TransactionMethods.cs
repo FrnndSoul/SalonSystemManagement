@@ -7,6 +7,7 @@ using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -183,7 +184,7 @@ namespace TriforceSalon.Class_Components
                             {
                                 // If admin, rollback the transaction
                                 transaction.Rollback();
-                                MessageBox.Show("Service process rolled back. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Working as intended. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)
@@ -322,7 +323,7 @@ namespace TriforceSalon.Class_Components
         }
 
 
-        public async Task PurchaseToDatabase(int ID, Guna2DataGridView products)
+        /*public async Task PurchaseToDatabase(int ID, Guna2DataGridView products)
         {
             //bool itemNameFound = false;
             try
@@ -385,7 +386,96 @@ namespace TriforceSalon.Class_Components
             {
                 MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
             }
+        }*/
+
+        public async Task PurchaseToDatabase(int ID, Guna2DataGridView products)
+        {
+            //bool itemNameFound = false;
+            try
+            {
+                using (var conn = new MySqlConnection(mysqlcon))
+                {
+                    await conn.OpenAsync();
+
+                    // Start a transaction
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            foreach (DataGridViewRow row in products.Rows)
+                            {
+                                string itemName;
+                                if (row.Cells["ProductCol"].Value != null)
+                                {
+                                    itemName = row.Cells["ProductCol"].Value.ToString();
+                                    //itemNameFound = true;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+
+                                int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
+                                decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
+                                int itemid = await GetItemIdAsync(itemName);
+                                string discount = Convert.ToString(row.Cells["DiscountComB"].Value);
+                                //update customer_info set (ProductsBoughtID) values(@customerID)
+                                //Insert into customer_info (ProductsBoughtID) values (@customerID)
+
+                                string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, Discount, EmployeeID, OrderDate) " +
+                                                "values (@customerID, @productName, @productID, @quantity, @amount, @discount, @employeeID, @orderDate)";
+
+                                using (MySqlCommand command = new MySqlCommand(query, conn))
+                                {
+                                    command.Parameters.AddWithValue("@customerID", ID);
+                                    command.Parameters.AddWithValue("@productName", itemName);
+                                    command.Parameters.AddWithValue("@productID", itemid);
+                                    command.Parameters.AddWithValue("@quantity", qty);
+                                    command.Parameters.AddWithValue("@amount", amount);
+                                    command.Parameters.AddWithValue("@discount", discount);
+                                    command.Parameters.AddWithValue("@employeeID", Method.AccountID);
+                                    command.Parameters.AddWithValue("@orderDate", DateTime.Now);
+
+                                    await command.ExecuteNonQueryAsync();
+                                    //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+
+                            // Update ProductsBoughtID in customer_info table
+                            string updateQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
+                            using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
+                            {
+                                command.Parameters.AddWithValue("@customerID", ID);
+                                await command.ExecuteNonQueryAsync();
+                            }
+
+                            if (Method.AdminAccess())
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Working as intended. Proceeding to Rollback data", "Purchase To Database function", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                transaction.Commit();
+                                MessageBox.Show("Products has been binded", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            ClearContents();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Rollback the transaction if an exception occurs
+                            transaction.Rollback();
+                            MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
+            }
         }
+
 
         /* public async Task PurchaseToReceipt(int ID, Guna2DataGridView products)
          {
@@ -507,7 +597,7 @@ namespace TriforceSalon.Class_Components
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Customer process working as intended", "Purchase to receipt function", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Proceeding to Rollback data", "Purchase to receipt function", MessageBoxButtons.OK);
                             }
                             else
                             {

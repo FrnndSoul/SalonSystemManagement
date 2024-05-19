@@ -225,7 +225,7 @@ namespace TriforceSalon.Class_Components
         {
             DateTime startTime = DateTime.Now;
 
-            DialogResult choices = MessageBox.Show("Are you sure you want to serve this customer?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult choices = MessageBox.Show("Confirm customer selection?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (choices == DialogResult.Yes)
             {
@@ -474,7 +474,7 @@ namespace TriforceSalon.Class_Components
                             else
                             {
                                 transaction.Commit();
-                                MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Customer's Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)

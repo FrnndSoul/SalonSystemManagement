@@ -430,7 +430,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Voiding of items rolled back. No changes were made.", "Void Items", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Process 2 out of 3", "Void Items", MessageBoxButtons.OK);
                             }
                             else
                             {
@@ -539,7 +539,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             {
                                 // If admin, rollback the transaction
                                 transaction.Rollback();
-                                MessageBox.Show("Voiding of service rolled back. No changes were made.", "Void Service", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Process 3 out of 3.", "Void Service", MessageBoxButtons.OK);
                             }
                         }
                         catch (Exception ex)
@@ -656,7 +656,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Working as intended.\nNo changes were made in the database", "Change Payment Status Function", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Process 1 out of 3", "Change Payment Status Function", MessageBoxButtons.OK);
                             }
                             else
                             {
@@ -708,18 +708,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     MessageBox.Show($"Customer's change: {cash - Convert.ToDecimal(TotalAmountTxtB.Text)}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await ChangePaymentStatus("PAID", ratingsNumber);
-                    GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
+                    GeneratePDFBothReceipt();
                     MessageBox.Show("Payment successful");
                 }
                 else
                 {
                     MessageBox.Show("No change needed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await ChangePaymentStatus("PAID", ratingsNumber);
-                    GeneratePDFBothReceipt();
                     await SendToSales(CustomerID, transaction.GenerateTransactionID());
                     await SubtractItemsInInventoryForPurchase(ProductsBoughtDGV);
+                    GeneratePDFBothReceipt();
                     MessageBox.Show("Payment successful");
                 }
                 await GetCustomers(CustomerListDGV);
@@ -789,7 +789,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Inventory update rolled back. No changes were made.", "Inventory Check Function", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Process 3 out of 3. No changes were made.", "Inventory Check Function", MessageBoxButtons.OK);
                             }
                             else
                             {
@@ -1032,7 +1032,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                             if (Method.AdminAccess())
                             {
                                 transaction.Rollback();
-                                MessageBox.Show("Working as intended.\nNo changes were made in the database", "Send To Sales Function", MessageBoxButtons.OK);
+                                MessageBox.Show("Working as intended. Process 2 out of 3", "Send To Sales Function", MessageBoxButtons.OK);
                             }
                             else
                             {

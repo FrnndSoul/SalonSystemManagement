@@ -78,5 +78,10 @@ namespace TriforceSalon.Ticket_System
 
             ticketSelected = !ticketSelected;
         }
+
+        private void QueueTicket_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

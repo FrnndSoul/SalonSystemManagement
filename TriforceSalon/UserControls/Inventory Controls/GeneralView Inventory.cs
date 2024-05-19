@@ -150,6 +150,7 @@ namespace TriforceSalon.UserControls
                             querycmd.ExecuteNonQuery();
                         }
                     }
+                    LoadInventory();
                 }
                 catch (Exception ex)
                 {
@@ -267,6 +268,8 @@ namespace TriforceSalon.UserControls
             AddBtn.Visible = false;
             EditBtn.Visible = false;
             InventoryDGV.Visible = false;
+            PullBtn.Visible = false;
+            DeleteBtn.Visible = false;
         }
 
         public void ShowButtons()
@@ -275,6 +278,9 @@ namespace TriforceSalon.UserControls
             AddBtn.Visible = true;
             EditBtn.Visible = true;
             InventoryDGV.Visible = true;
+            PullBtn.Visible = true;
+            DeleteBtn.Visible = true;
+
         }
     }
 }

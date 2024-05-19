@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,29 +38,18 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         private void PercentageTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            bool containsPercentSign = PercentageTxtB.Text.Contains("%");
-
-            if (containsPercentSign && e.KeyChar != '\b')
+            // Check if the key is a digit or backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
+                // If not a digit or backspace, handle the keypress
                 e.Handled = true;
                 return;
             }
 
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '%')
+            // Check if the current length of the text is already 2
+            if (PercentageTxtB.TextLength >= 2 && e.KeyChar != '\b')
             {
-                e.Handled = true;
-                return;
-            }
-
-            if (e.KeyChar == '%' && PercentageTxtB.SelectionStart != PercentageTxtB.TextLength)
-            {
-                e.Handled = true;
-                return;
-            }
-
-            int maxLength = containsPercentSign ? 3 : 2;
-            if (PercentageTxtB.TextLength >= maxLength && e.KeyChar != '\b' && e.KeyChar != '%')
-            {
+                // If so, handle the keypress
                 e.Handled = true;
                 return;
             }
@@ -88,7 +78,7 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 string Pname = PromoNameTxtB.Text;
                 DateTime startDate = PStartDTP.Value.Date;
                 DateTime endDate = PEndDTP.Value.Date;
-                string percent = PercentageTxtB.Text;
+                string percent = PercentageTxtB.Text + "%";
 
                 await promo.AddPromo(ProductsDGV, ID, startDate, endDate, percent, Pname);
                 await promo.CheckVoucherIsValid();

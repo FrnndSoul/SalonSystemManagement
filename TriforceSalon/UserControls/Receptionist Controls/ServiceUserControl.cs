@@ -229,13 +229,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         for (int i = 0; i < ServicesGDGVVControl.Rows.Count; i++)
                         {
                             decimal currentDiscount;
-                            if (decimal.TryParse(ServicesGDGVVControl.Rows[i].Cells["DiscountComB"].Value.ToString(), out currentDiscount))
+                            if (decimal.TryParse(ServicesGDGVVControl.Rows[i].Cells["DiscountCol"].Value.ToString(), out currentDiscount))
                             {
                                 if (currentDiscount == removedServiceDiscount)
                                 {
                                     ServicesGDGVVControl.Rows.RemoveAt(i);
                                     ServicePromoComB.Text = null;
                                     PromoTxtB.Text = null;
+                                    ActivateBtn.Enabled = true;
                                     i--; 
                                 }
                             }
@@ -267,8 +268,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void ActivateBtn_Click(object sender, EventArgs e)
+        private async void ActivateBtn_Click(object sender, EventArgs e)
         {
+            ActivateBtn.Enabled = false;
+
+            string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+
             string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
 
             if (string.IsNullOrWhiteSpace(promoInput))
@@ -351,8 +357,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicePromoComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string promoName = ServicePromoComB.Text;
-            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+            /*string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);*/
         }
 
         private void RefreshBtn_Click(object sender, EventArgs e)

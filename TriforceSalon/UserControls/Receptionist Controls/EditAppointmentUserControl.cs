@@ -338,10 +338,33 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServicesGDGVVControl.Rows.Count)
             {
                 DataGridViewCell clickedCell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
                 if (clickedCell.OwningColumn.Name == "RemoveServiceCol")
                 {
-                    ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    string disountLabel = ServicesGDGVVControl.Rows[e.RowIndex].Cells["DiscountCol"].Value.ToString();
+                    decimal removedServiceDiscount;
+
+                    if (disountLabel == "None")
+                    {
+                        ServicesGDGVVControl.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else if (decimal.TryParse(disountLabel, out removedServiceDiscount))
+                    {
+                        for (int i = 0; i < ServicesGDGVVControl.Rows.Count; i++)
+                        {
+                            decimal currentDiscount;
+                            if (decimal.TryParse(ServicesGDGVVControl.Rows[i].Cells["DiscountCol"].Value.ToString(), out currentDiscount))
+                            {
+                                if (currentDiscount == removedServiceDiscount)
+                                {
+                                    ServicesGDGVVControl.Rows.RemoveAt(i);
+                                    ServicePromoComB.Text = null;
+                                    //PromoTxtB.Text = null;
+                                    ActivateBtn.Enabled = true;
+                                    i--;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -759,8 +782,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void ActivateBtn_Click(object sender, EventArgs e)
+        private async void ActivateBtn_Click(object sender, EventArgs e)
         {
+            string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+
             string promoInput = ServicePromoTxtB.Text.Substring(0, 7);
 
             if (int.TryParse(promoInput, out int promoCode))
@@ -825,8 +851,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private async void ServicePromoComB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string promoName = ServicePromoComB.Text;
-            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);
+           /* string promoName = ServicePromoComB.Text;
+            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);*/
         }
 
         private async void ServiceTypeComB_SelectedIndexChanged(object sender, EventArgs e)

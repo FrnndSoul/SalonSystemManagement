@@ -42,9 +42,9 @@
             // AppointmentLIstFL
             // 
             this.AppointmentLIstFL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-            this.AppointmentLIstFL.Location = new System.Drawing.Point(33, 97);
+            this.AppointmentLIstFL.Location = new System.Drawing.Point(88, 100);
             this.AppointmentLIstFL.Name = "AppointmentLIstFL";
-            this.AppointmentLIstFL.Size = new System.Drawing.Size(1848, 682);
+            this.AppointmentLIstFL.Size = new System.Drawing.Size(1747, 682);
             this.AppointmentLIstFL.TabIndex = 0;
             // 
             // label1
