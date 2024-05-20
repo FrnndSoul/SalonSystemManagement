@@ -57,6 +57,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             string ID = transactionIDTxtB.Text;
             string name = CustomerNameTxtB.Text;
+            string specialID;
 
             if (CustomerNameTxtB.Text is null || CustomerPhoneNTxtB is null
                 || ServiceAmountTxtB.Text is null || ServiceTxtB.Text is null)
@@ -81,9 +82,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             if (result == DialogResult.Yes)
             {
+                if(SpecialIDTxtB.Text == "")
+                {
+                    specialID = "NONE";
+                }
+                else
+                {
+                    specialID = SpecialIDTxtB.Text;
+                }
+
                 string serviceName = ServiceTxtB.Text;
                 await transactionMethods.GetServiceTypeID(serviceName);
-                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL");
+                await transactionMethods.TestProcessCustomer(ServicesGDGVVControl, "NORMAL", specialID);
                 transactionMethods.GeneratePDFTicket(ID, name);
                 ClearAll();
 
@@ -98,6 +108,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CustomerNameTxtB.Clear();
             CustomerPhoneNTxtB.Clear();
             ServiceTxtB.Clear();
+            SpecialIDTxtB.Clear();
             ServiceAmountTxtB.Clear();
             PEmployeeComB.SelectedIndex = 0;
             ServicePromoComB.Text = null;
@@ -328,6 +339,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     else
                     {
                         MessageBox.Show("Please select all the services from the promo before applying the discount.", "Service(s) not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        ActivateBtn.Enabled = true;
                     }
 
                     ServicePromoTxtB.Clear();
@@ -371,6 +383,27 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             ClearAll();
+        }
+
+        private void ServicesGDGVVControl_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the double-clicked cell is in the "DiscountComB" column and the row index is valid
+            if (e.ColumnIndex == ServicesGDGVVControl.Columns["DiscountComB"].Index && e.RowIndex >= 0)
+            {
+                var cell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewTextBoxCell;
+
+                if (cell != null)
+                {
+                    // Get the current value of the cell
+                    string currentValue = cell.Value?.ToString() ?? "None";
+
+                    // Determine the next value to set
+                    string nextValue = currentValue == "Senior/PWD" ? "None" : "Senior/PWD";
+
+                    // Update the cell value
+                    cell.Value = nextValue;
+                }
+            }
         }
     }
 }

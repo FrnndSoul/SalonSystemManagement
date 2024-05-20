@@ -44,13 +44,6 @@
             this.VoidBtn = new Guna.UI2.WinForms.Guna2Button();
             this.PaymentBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ProductsControlDGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountComB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.SearchProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.AllProductsBtn = new Guna.UI2.WinForms.Guna2Button();
             this.CashTxtBx = new Guna.UI2.WinForms.Guna2TextBox();
@@ -69,6 +62,13 @@
             this.PromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
             this.GcashPayment = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.ItemPromoComB = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.ProductCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DecrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.QuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncrementCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CostCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountComB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DisposeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsControlDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GcashPayment)).BeginInit();
             this.SuspendLayout();
@@ -273,6 +273,7 @@
             this.ProductsControlDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsControlDGV.Location = new System.Drawing.Point(1294, 24);
             this.ProductsControlDGV.Name = "ProductsControlDGV";
+            this.ProductsControlDGV.ReadOnly = true;
             this.ProductsControlDGV.RowHeadersVisible = false;
             this.ProductsControlDGV.RowHeadersWidth = 51;
             this.ProductsControlDGV.Size = new System.Drawing.Size(598, 291);
@@ -290,7 +291,7 @@
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ProductsControlDGV.ThemeStyle.HeaderStyle.Height = 15;
-            this.ProductsControlDGV.ThemeStyle.ReadOnly = false;
+            this.ProductsControlDGV.ThemeStyle.ReadOnly = true;
             this.ProductsControlDGV.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.ProductsControlDGV.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.ProductsControlDGV.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -299,58 +300,10 @@
             this.ProductsControlDGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ProductsControlDGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.ProductsControlDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsControlDGV_CellClick);
+            this.ProductsControlDGV.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsControlDGV_CellContentDoubleClick);
             this.ProductsControlDGV.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsControlDGV_CellValueChanged);
             this.ProductsControlDGV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ProductsControlDGV_RowsAdded);
             this.ProductsControlDGV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ProductsControlDGV_RowsRemoved);
-            // 
-            // ProductCol
-            // 
-            this.ProductCol.HeaderText = "Products";
-            this.ProductCol.MinimumWidth = 6;
-            this.ProductCol.Name = "ProductCol";
-            // 
-            // DecrementCol
-            // 
-            this.DecrementCol.HeaderText = "-";
-            this.DecrementCol.MinimumWidth = 6;
-            this.DecrementCol.Name = "DecrementCol";
-            this.DecrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DecrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // QuantityCol
-            // 
-            this.QuantityCol.HeaderText = "Quantity";
-            this.QuantityCol.MinimumWidth = 6;
-            this.QuantityCol.Name = "QuantityCol";
-            // 
-            // IncrementCol
-            // 
-            this.IncrementCol.HeaderText = "+";
-            this.IncrementCol.MinimumWidth = 6;
-            this.IncrementCol.Name = "IncrementCol";
-            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // CostCol
-            // 
-            this.CostCol.HeaderText = "Amount";
-            this.CostCol.MinimumWidth = 6;
-            this.CostCol.Name = "CostCol";
-            this.CostCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // DiscountComB
-            // 
-            this.DiscountComB.HeaderText = "Discount";
-            this.DiscountComB.Name = "DiscountComB";
-            this.DiscountComB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // DisposeCol
-            // 
-            this.DisposeCol.HeaderText = "Bin";
-            this.DisposeCol.MinimumWidth = 6;
-            this.DisposeCol.Name = "DisposeCol";
-            this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // SearchProductsBtn
             // 
@@ -662,7 +615,62 @@
             this.ItemPromoComB.Name = "ItemPromoComB";
             this.ItemPromoComB.Size = new System.Drawing.Size(313, 36);
             this.ItemPromoComB.TabIndex = 49;
-            this.ItemPromoComB.SelectedIndexChanged += new System.EventHandler(this.ItemPromoComB_SelectedIndexChanged);
+            // 
+            // ProductCol
+            // 
+            this.ProductCol.HeaderText = "Products";
+            this.ProductCol.MinimumWidth = 6;
+            this.ProductCol.Name = "ProductCol";
+            this.ProductCol.ReadOnly = true;
+            // 
+            // DecrementCol
+            // 
+            this.DecrementCol.HeaderText = "-";
+            this.DecrementCol.MinimumWidth = 6;
+            this.DecrementCol.Name = "DecrementCol";
+            this.DecrementCol.ReadOnly = true;
+            this.DecrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DecrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // QuantityCol
+            // 
+            this.QuantityCol.HeaderText = "Quantity";
+            this.QuantityCol.MinimumWidth = 6;
+            this.QuantityCol.Name = "QuantityCol";
+            this.QuantityCol.ReadOnly = true;
+            // 
+            // IncrementCol
+            // 
+            this.IncrementCol.HeaderText = "+";
+            this.IncrementCol.MinimumWidth = 6;
+            this.IncrementCol.Name = "IncrementCol";
+            this.IncrementCol.ReadOnly = true;
+            this.IncrementCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IncrementCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // CostCol
+            // 
+            this.CostCol.HeaderText = "Amount";
+            this.CostCol.MinimumWidth = 6;
+            this.CostCol.Name = "CostCol";
+            this.CostCol.ReadOnly = true;
+            this.CostCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // DiscountComB
+            // 
+            this.DiscountComB.HeaderText = "Discount";
+            this.DiscountComB.Name = "DiscountComB";
+            this.DiscountComB.ReadOnly = true;
+            this.DiscountComB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // DisposeCol
+            // 
+            this.DisposeCol.HeaderText = "Bin";
+            this.DisposeCol.MinimumWidth = 6;
+            this.DisposeCol.Name = "DisposeCol";
+            this.DisposeCol.ReadOnly = true;
+            this.DisposeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DisposeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // SellProductsUserControls
             // 
@@ -741,6 +749,8 @@
         private Guna.UI2.WinForms.Guna2Panel OtherTransactionContainer;
         private Guna.UI2.WinForms.Guna2Button BackBtn;
         private Guna.UI2.WinForms.Guna2Button ActivateBtn;
+        public Guna.UI2.WinForms.Guna2TextBox PromoTxtB;
+        public Guna.UI2.WinForms.Guna2ComboBox ItemPromoComB;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductCol;
         private System.Windows.Forms.DataGridViewButtonColumn DecrementCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantityCol;
@@ -748,7 +758,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CostCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiscountComB;
         private System.Windows.Forms.DataGridViewButtonColumn DisposeCol;
-        public Guna.UI2.WinForms.Guna2TextBox PromoTxtB;
-        public Guna.UI2.WinForms.Guna2ComboBox ItemPromoComB;
     }
 }

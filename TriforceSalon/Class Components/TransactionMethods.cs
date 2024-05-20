@@ -109,7 +109,7 @@ namespace TriforceSalon.Class_Components
             }
         }*/
 
-        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus)
+        public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, string ID)
         {
             try
             {
@@ -122,13 +122,14 @@ namespace TriforceSalon.Class_Components
                     {
                         try
                         {
-                            string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
-                                " Values (@transactionID, @customer_name, @customer_number, @service_groupID, @priorityStatus)";
+                            string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, SpecialID, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
+                                " Values (@transactionID, @customer_name, @specialID, @customer_number, @service_groupID, @priorityStatus)";
 
                             using (MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn, transaction))
                             {
                                 command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                                 command1.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
+                                command1.Parameters.AddWithValue("@specialID", ID);
                                 command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                                 command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                                 command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);

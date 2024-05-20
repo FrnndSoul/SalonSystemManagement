@@ -139,6 +139,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
                         totalPrice -= removedItemPrice;
                     }
+                    else if (removedItemDiscountLabel == "Senior/PWD")
+                    {
+                        decimal removedItemPrice = decimal.Parse(ProductsControlDGV.Rows[e.RowIndex].Cells["CostCol"].Value.ToString());
+                        ProductsControlDGV.Rows.RemoveAt(e.RowIndex);
+                        totalPrice -= removedItemPrice;
+                    }
                     else if (decimal.TryParse(removedItemDiscountLabel, out removedItemDiscount))
                     {
                         for (int i = 0; i < ProductsControlDGV.Rows.Count; i++)
@@ -177,13 +183,13 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        /*private decimal DiscountFromProducts(decimal amount)
+        private decimal DiscountFromProducts(decimal amount)
         {
             decimal VAT = amount * 0.12m;
             decimal PriceWithoutVAT = amount - VAT;
             decimal discountPrice = PriceWithoutVAT * 0.20m;
             return discountPrice + VAT;
-        }*/
+        }
 
         private decimal GetUnitPriceForFood(string serviceName)
         {
@@ -642,6 +648,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         decimal discountedPrice = rowTotal * (1 - discountAmount);
                         discountedTotal += discountedPrice;
                     }
+                    else if(discountValue == "Senior/PWD")
+                    {
+                        decimal discountedPrice = rowTotal - DiscountFromProducts(rowTotal);
+                        discountedTotal += discountedPrice;
+                    }
                     else
                     {
                         // Add original price for items with "Normal" discount
@@ -778,7 +789,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     {
                         foreach (var item in itemDetails)
                         {
-                            ProductsControlDGV.Rows.Add(item.ItemName, "", item.Quantity, "", item.Cost, item.Discount, "X");
+                            ProductsControlDGV.Rows.Add(item.ItemName, "", item.Quantity, "", item.Cost, item.Discount.ToString(), "X");
                         }
                     }
                     else
@@ -799,10 +810,25 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private async void ItemPromoComB_SelectedIndexChanged(object sender, EventArgs e)
+        private void ProductsControlDGV_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*string promoName = ItemPromoComB.Text;
-            await promoMethods.GetPromoCode(promoName, PromoTxtB);*/
+            // Check if the double-clicked cell is in the "DiscountComB" column and the row index is valid
+            if (e.ColumnIndex == ProductsControlDGV.Columns["DiscountComB"].Index && e.RowIndex >= 0)
+            {
+                var cell = ProductsControlDGV.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewTextBoxCell;
+
+                if (cell != null)
+                {
+                    // Get the current value of the cell
+                    string currentValue = cell.Value?.ToString() ?? "None";
+
+                    // Determine the next value to set
+                    string nextValue = currentValue == "Senior/PWD" ? "None" : "Senior/PWD";
+
+                    // Update the cell value
+                    cell.Value = nextValue;
+                }
+            }
         }
     }
 }

@@ -140,9 +140,12 @@ namespace TriforceSalon.Ticket_System
         {
             bool isOnTime = false;
             TimeSpan allowedWindow = TimeSpan.FromMinutes(5);
+            TimeSpan lateWindow = TimeSpan.FromMinutes(30);
+
             string appointmentDate = CustDate.Text;
             DateTime appointmentTime = Convert.ToDateTime(appointmentDate);
             DateTime earliestArrivalTime = appointmentTime.Subtract(allowedWindow);
+            DateTime latestArrivalTime = appointmentTime.Add(lateWindow);
 
 
             string timeNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
@@ -152,7 +155,8 @@ namespace TriforceSalon.Ticket_System
             string sChosen = ServiceChosen.Text;
             string amount = SAmount.Text;
 
-            if(Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= appointmentTime)
+            //if(Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= appointmentTime)
+            if (Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= latestArrivalTime)
             {
                 isOnTime = true;
             }

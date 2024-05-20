@@ -150,5 +150,18 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 return;
             }
         }
+
+        private void ServiceDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex < ServiceDGV.Rows.Count)
+            {
+                DataGridViewCell clickedCell = ServiceDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (clickedCell.OwningColumn.Name == "RemoveCol")
+                {
+                    ServiceDGV.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                     string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
-                        "WHERE DATE(AppointDate) = CURDATE() AND IsCancelled = 'NO' AND isActivated = 'NO'";
+                        "WHERE DATE(AppointDate) = '2024-05-13' AND IsCancelled = 'NO' AND isActivated = 'NO'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {

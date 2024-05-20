@@ -880,6 +880,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
+        private void PaymentPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void CalculateTotalBtn_Click(object sender, EventArgs e)
         {
             decimal downpayment = Convert.ToDecimal(DownpaymentTxtB.Text);
