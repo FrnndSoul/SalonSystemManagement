@@ -177,50 +177,6 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        /*public async Task ProcessCustomerAsync(int ticketID, int serviceID, int accountID)
-        {
-            DateTime startTime = DateTime.Now;
-
-            DialogResult choices = MessageBox.Show("Are you sure you want to serve this customer?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (choices == DialogResult.Yes)
-            {
-                try
-                {
-                    using (var conn = new MySqlConnection(mysqlcon))
-                    {
-                        await conn.OpenAsync();
-
-                        string query = "Insert into employee_records (AccountID, TimeStart, CustomerID, ServiceID)" +
-                            "Value(@accountID, @timeStart, @customerID, @serviceID)";
-
-                        using (MySqlCommand command = new MySqlCommand(query, conn))
-                        {
-                            command.Parameters.AddWithValue("@accountID", accountID);
-                            command.Parameters.AddWithValue("@timeStart", startTime);
-                            command.Parameters.AddWithValue("@customerID", ticketID);
-                            command.Parameters.AddWithValue("@serviceID", serviceID);
-
-                            await command.ExecuteNonQueryAsync();
-                            MessageBox.Show("you have successfully have chosen this customer, Finish the service to servce more customer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-
-                        string query2 = "UPDATE customer_info SET PaymentStatus = 'INSESSION' WHERE TransactionID = @customerID";
-
-                        using (MySqlCommand command = new MySqlCommand(query2, conn))
-                        {
-                            command.Parameters.AddWithValue("@customerID", ticketID);
-                            await command.ExecuteNonQueryAsync();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error in ProcessTicket()");
-                }
-            }
-        }*/
-
         public async Task ProcessCustomerAsync(int ticketID, int serviceID, int accountID)
         {
             DateTime startTime = DateTime.Now;
@@ -341,70 +297,6 @@ namespace TriforceSalon.Class_Components
             }
             return ID;
         }
-
-        /*public async Task EmployeeProcessCompleteAsync(long CustomerID, int serviceVariationID, string accountID)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string updateServiceGroupQuery = "UPDATE service_group SET IsDone = 'DONE' WHERE ServiceGroupID = @customer_ID AND ServiceVariationID = @serviceVariationID";
-                    using (MySqlCommand updateServiceGroupCommand = new MySqlCommand(updateServiceGroupQuery, conn))
-                    {
-                        updateServiceGroupCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        updateServiceGroupCommand.Parameters.AddWithValue("@serviceVariationID", serviceVariationID);
-                        await updateServiceGroupCommand.ExecuteNonQueryAsync();
-                    }
-
-                    string updateEmployeeRecordsQuery = "UPDATE employee_records SET TimeEnd = @endTime WHERE CustomerID = @customer_ID";
-                    using (MySqlCommand updateEmployeeRecordsCommand = new MySqlCommand(updateEmployeeRecordsQuery, conn))
-                    {
-                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        updateEmployeeRecordsCommand.Parameters.AddWithValue("@endTime", DateTime.Now);
-
-                        await updateEmployeeRecordsCommand.ExecuteNonQueryAsync();
-                    }
-                    string updateEmployeeAvailability = "UPDATE salon_employees SET Availability = 'Available' WHERE AccountID = @accountID";
-                    using (MySqlCommand command = new MySqlCommand(updateEmployeeAvailability, conn))
-                    {
-                        command.Parameters.AddWithValue("@accountID", accountID);
-                        await command.ExecuteNonQueryAsync();
-                    }
-
-                    string checkServicesQuery = "SELECT COUNT(*) FROM service_group WHERE ServiceGroupID = @customer_ID AND IsDone != 'DONE'";
-                    using (MySqlCommand checkServicesCommand = new MySqlCommand(checkServicesQuery, conn))
-                    {
-                        checkServicesCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                        int pendingServicesCount = Convert.ToInt32(await checkServicesCommand.ExecuteScalarAsync());
-
-                        if (pendingServicesCount == 0)
-                        {
-                            string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'PROCESSED' WHERE TransactionID = @customer_ID";
-                            using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
-                            {
-                                updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                                await updateCustomerCommand.ExecuteNonQueryAsync();
-                            }
-                        }
-                        else
-                        {
-                            string updateCustomerQuery = "UPDATE customer_info SET PaymentStatus = 'ONGOING' WHERE TransactionID = @customer_ID";
-                            using (MySqlCommand updateCustomerCommand = new MySqlCommand(updateCustomerQuery, conn))
-                            {
-                                updateCustomerCommand.Parameters.AddWithValue("@customer_ID", CustomerID);
-                                await updateCustomerCommand.ExecuteNonQueryAsync();
-                            }
-                        }
-                    }
-                }
-                MessageBox.Show("Customer Service Complete. Thank You For Your Service!", "Process Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in EmployeeProcessComplete()");
-            }
-        }*/
 
         public async Task EmployeeProcessCompleteAsync(long CustomerID, int serviceVariationID, string accountID)
         {

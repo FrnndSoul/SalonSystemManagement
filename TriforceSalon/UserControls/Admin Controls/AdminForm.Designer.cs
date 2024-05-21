@@ -121,9 +121,9 @@
             this.label7.Font = new System.Drawing.Font("Stanberry", 15.75F);
             this.label7.Location = new System.Drawing.Point(1056, 904);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 26);
+            this.label7.Size = new System.Drawing.Size(101, 26);
             this.label7.TabIndex = 89;
-            this.label7.Text = "Email";
+            this.label7.Text = "Birthdate";
             // 
             // label6
             // 

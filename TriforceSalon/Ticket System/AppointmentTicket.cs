@@ -1,22 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.WebSockets;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using TriforceSalon.Test;
 using TriforceSalon.UserControls;
 using TriforceSalon.UserControls.Receptionist_Controls;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
-using static TriforceSalon.Test.CustomerTicket;
 
 namespace TriforceSalon.Ticket_System
 {
@@ -54,33 +41,6 @@ namespace TriforceSalon.Ticket_System
         internal EventHandler<AppointmentCustomerSelectedEventArgs> AppointmentCustomerSelected { get; set; }
         internal class AppointmentCustomerSelectedEventArgs { }
 
-        /*private async void CancelAppointBtn_Click(object sender, EventArgs e)
-        {
-            CancelAppointBtn.Enabled = false;
-
-            string custID = CustID.Text;
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "UPDATE Appointment SET IsCancelled = 'YES' WHERE ReferenceNumber = @ID";
-
-                    using(MySqlCommand command = new MySqlCommand(query, conn)) 
-                    {
-                        command.Parameters.AddWithValue("@ID", custID);
-
-                        await command.ExecuteNonQueryAsync();
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in CancelAppointBtn()");
-            }
-            CancelAppointBtn.Enabled = true;
-        }*/
-
         private async void CancelAppointBtn_Click(object sender, EventArgs e)
         {
             try
@@ -93,7 +53,6 @@ namespace TriforceSalon.Ticket_System
                 {
                     await conn.OpenAsync();
 
-                    // Start a transaction
                     using (var transaction = conn.BeginTransaction())
                     {
                         try
@@ -118,7 +77,6 @@ namespace TriforceSalon.Ticket_System
                         }
                         catch (Exception ex)
                         {
-                            // Roll back the transaction if an exception occurs
                             transaction.Rollback();
                             MessageBox.Show("Error in CancelAppointBtn(): " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -155,7 +113,6 @@ namespace TriforceSalon.Ticket_System
             string sChosen = ServiceChosen.Text;
             string amount = SAmount.Text;
 
-            //if(Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= appointmentTime)
             if (Convert.ToDateTime(timeNow) >= earliestArrivalTime && Convert.ToDateTime(timeNow) <= latestArrivalTime)
             {
                 isOnTime = true;
@@ -266,7 +223,6 @@ namespace TriforceSalon.Ticket_System
                             {
                                 transaction.Commit();
                                 MessageBox.Show("Customer Activated", "Customer Appointment", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                //transactionMethods.GeneratePDFTicket(ID, name, age);
                             }
                         }
                         catch (Exception ex)

@@ -53,7 +53,6 @@
             this.QueueTicket.Size = new System.Drawing.Size(209, 135);
             this.QueueTicket.TabIndex = 0;
             this.QueueTicket.Click += new System.EventHandler(this.QueueTicket_Click);
-            this.QueueTicket.Paint += new System.Windows.Forms.PaintEventHandler(this.QueueTicket_Paint);
             // 
             // ServiceVarLbl
             // 

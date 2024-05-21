@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ServiceFL = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.SpecialIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.CancelBtn = new Guna.UI2.WinForms.Guna2Button();
             this.ServicePromoComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.ServicePromoTxtB = new Guna.UI2.WinForms.Guna2TextBox();
@@ -64,8 +66,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ServiceTypeComB = new Guna.UI2.WinForms.Guna2ComboBox();
             this.RefreshBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.SpecialIDTxtB = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesGDGVVControl)).BeginInit();
             this.SuspendLayout();
@@ -110,6 +110,41 @@
             this.guna2Panel1.Size = new System.Drawing.Size(606, 820);
             this.guna2Panel1.TabIndex = 2;
             // 
+            // SpecialIDTxtB
+            // 
+            this.SpecialIDTxtB.AutoRoundedCorners = true;
+            this.SpecialIDTxtB.BackColor = System.Drawing.Color.Transparent;
+            this.SpecialIDTxtB.BorderRadius = 17;
+            this.SpecialIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.SpecialIDTxtB.DefaultText = "";
+            this.SpecialIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.SpecialIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.SpecialIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SpecialIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.SpecialIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SpecialIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.SpecialIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.SpecialIDTxtB.Location = new System.Drawing.Point(343, 179);
+            this.SpecialIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.SpecialIDTxtB.Name = "SpecialIDTxtB";
+            this.SpecialIDTxtB.PasswordChar = '\0';
+            this.SpecialIDTxtB.PlaceholderText = "Senior/PWD ID";
+            this.SpecialIDTxtB.SelectedText = "";
+            this.SpecialIDTxtB.Size = new System.Drawing.Size(226, 36);
+            this.SpecialIDTxtB.TabIndex = 51;
+            this.SpecialIDTxtB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SpecialIDTxtB_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Stanberry", 15.75F);
+            this.label3.Location = new System.Drawing.Point(338, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(207, 38);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "Special ID:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // CancelBtn
             // 
             this.CancelBtn.Animated = true;
@@ -147,7 +182,6 @@
             this.ServicePromoComB.Name = "ServicePromoComB";
             this.ServicePromoComB.Size = new System.Drawing.Size(347, 36);
             this.ServicePromoComB.TabIndex = 48;
-            this.ServicePromoComB.SelectedIndexChanged += new System.EventHandler(this.ServicePromoComB_SelectedIndexChanged);
             // 
             // ServicePromoTxtB
             // 
@@ -220,16 +254,16 @@
             // 
             this.ServicesGDGVVControl.AllowUserToAddRows = false;
             this.ServicesGDGVVControl.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.ServicesGDGVVControl.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ServicesGDGVVControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ServicesGDGVVControl.ColumnHeadersHeight = 28;
             this.ServicesGDGVVControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ServicesGDGVVControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -240,14 +274,14 @@
             this.DiscountCol,
             this.RemoveServiceCol,
             this.QueNumCol});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ServicesGDGVVControl.DefaultCellStyle = dataGridViewCellStyle3;
             this.ServicesGDGVVControl.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.ServicesGDGVVControl.Location = new System.Drawing.Point(34, 229);
             this.ServicesGDGVVControl.Name = "ServicesGDGVVControl";
@@ -502,7 +536,6 @@
             this.PEmployeeComB.Name = "PEmployeeComB";
             this.PEmployeeComB.Size = new System.Drawing.Size(328, 36);
             this.PEmployeeComB.TabIndex = 9;
-            this.PEmployeeComB.SelectedIndexChanged += new System.EventHandler(this.PEmployeeComB_SelectedIndexChanged);
             // 
             // CustomerPhoneNTxtB
             // 
@@ -630,40 +663,6 @@
             this.RefreshBtn.TabIndex = 7;
             this.RefreshBtn.Text = "Refresh";
             this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
-            // 
-            // SpecialIDTxtB
-            // 
-            this.SpecialIDTxtB.AutoRoundedCorners = true;
-            this.SpecialIDTxtB.BackColor = System.Drawing.Color.Transparent;
-            this.SpecialIDTxtB.BorderRadius = 17;
-            this.SpecialIDTxtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.SpecialIDTxtB.DefaultText = "";
-            this.SpecialIDTxtB.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.SpecialIDTxtB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.SpecialIDTxtB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SpecialIDTxtB.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.SpecialIDTxtB.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SpecialIDTxtB.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.SpecialIDTxtB.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.SpecialIDTxtB.Location = new System.Drawing.Point(343, 179);
-            this.SpecialIDTxtB.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.SpecialIDTxtB.Name = "SpecialIDTxtB";
-            this.SpecialIDTxtB.PasswordChar = '\0';
-            this.SpecialIDTxtB.PlaceholderText = "Senior/PWD ID";
-            this.SpecialIDTxtB.SelectedText = "";
-            this.SpecialIDTxtB.Size = new System.Drawing.Size(226, 36);
-            this.SpecialIDTxtB.TabIndex = 51;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Stanberry", 15.75F);
-            this.label3.Location = new System.Drawing.Point(338, 136);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(207, 38);
-            this.label3.TabIndex = 50;
-            this.label3.Text = "Special ID:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ServicesUserControl
             // 

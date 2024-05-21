@@ -390,7 +390,6 @@ namespace TriforceSalon
             this.RoleBox.Name = "RoleBox";
             this.RoleBox.Size = new System.Drawing.Size(450, 36);
             this.RoleBox.TabIndex = 23;
-            this.RoleBox.SelectedIndexChanged += new System.EventHandler(this.RoleBox_SelectedIndexChanged);
             // 
             // guna2PictureBox1
             // 
@@ -405,7 +404,6 @@ namespace TriforceSalon
             this.guna2PictureBox1.TabIndex = 37;
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
-            this.guna2PictureBox1.Click += new System.EventHandler(this.Guna2PictureBox1_Click);
             // 
             // Photo
             // 
@@ -478,7 +476,6 @@ namespace TriforceSalon
             this.Controls.Add(this.guna2PictureBox1);
             this.Name = "SignUpForm";
             this.Size = new System.Drawing.Size(1900, 1060);
-            this.Load += new System.EventHandler(this.SignUpForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Photo)).EndInit();
             this.ResumeLayout(false);

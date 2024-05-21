@@ -1,16 +1,10 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.Cmp;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TriforceSalon.Test;
 using TriforceSalon.Ticket_System;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
@@ -43,7 +37,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                     string query = "SELECT ReferenceNumber, AppointDate, Name, PhoneNumber, ServiceName, ServiceAmount " +
                         "FROM Appointments " +
-                        "WHERE DATE(AppointDate) = '2024-05-13' AND IsCancelled = 'NO' AND isActivated = 'NO'";
+                        "WHERE DATE(AppointDate) = '2024-05-21' AND IsCancelled = 'NO' AND isActivated = 'NO'";
 
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
@@ -88,16 +82,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             await LoadPresentCustomer();
 
             RefreshBtn.Enabled = true;
-
-        }
-
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox1_TextChanged_1(object sender, EventArgs e)
-        {
 
         }
 
@@ -180,7 +164,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             if (searchSwitch.Checked)
             {
-                //MessageBox.Show("Switch is ON");
                 DateLbl.Visible = true;
                 NameOrIDLbl.Visible = false;
                 isDateSelected = true;
@@ -189,7 +172,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             else
             {
-                //MessageBox.Show("Switch is OFF");
                 DateLbl.Visible = false;
                 NameOrIDLbl.Visible = true;
                 isDateSelected = false;

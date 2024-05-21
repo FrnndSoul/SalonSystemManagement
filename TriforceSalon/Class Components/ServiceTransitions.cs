@@ -1,15 +1,11 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TriforceSalon.UserControls.Service_Controls;
 
 namespace TriforceSalon.Class_Components
 {

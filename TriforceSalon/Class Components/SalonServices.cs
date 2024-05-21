@@ -4,15 +4,10 @@ using System;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
-using TriforceSalon.UserControls;
 using System.Data;
 using System.Threading.Tasks;
 using System.Data.Common;
 using Guna.UI2.WinForms;
-using iText.Signatures;
-using System.Web.WebSockets;
-using System.Deployment.Internal;
-using System.Configuration;
 using TriforceSalon.UserControls.Service_Controls;
 
 namespace TriforceSalon.Class_Components
@@ -49,14 +44,13 @@ namespace TriforceSalon.Class_Components
                     {
                         Image selectedImage = Image.FromFile(openFileDialog.FileName);
 
-                        // Resize the selected image
                         int newWidth = 163;
                         int newHeight = 128;
 
                         Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
 
                         ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = resizedImage;
-                        isNewServiceImageSelected = true; //flag ito para sa image
+                        isNewServiceImageSelected = true; 
                     }
                     catch (Exception ex)
                     {
@@ -392,47 +386,6 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        /*public async Task FetchBindedItems(int ID, Guna2DataGridView bindedTable)
-        {
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "SELECT ItemName, ItemID, Quantity FROM binded_items WHERE ItemGroupID = @id";
-
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        command.Parameters.AddWithValue("@id", ID);
-
-                        using(DbDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dataTable = new DataTable();
-                            dataTable.Load(reader);
-
-                            bindedTable.Rows.Clear();
-
-                            foreach (DataRow row in dataTable.Rows)
-                            {
-                                string itemName = row["ItemName"].ToString();
-                                int itemID = Convert.ToInt32(row["ItemID"]);
-                                int quantity = Convert.ToInt32(row["Quantity"]);
-
-                                // Add a new row with the fetched data and buttons
-                                bindedTable.Rows.Add(itemName, itemID, "-", quantity, "+", "X");
-                            }
-
-                            //bindedTable.DataSource = dataTable;
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error FetchBindedItems", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-       
         public async Task UpdateSalonServices(int variationID, Guna2DataGridView serviceDatagrid)
         {
             string serviceType = ServiceVariationControl.serviceVariationInstance.AddSalonServices.SelectedItem.ToString();
@@ -493,83 +446,6 @@ namespace TriforceSalon.Class_Components
             }
         }
 
-        /*public async Task UpdateBindedService(Guna2DataGridView newBindedItems, int ID)
-        {
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string deleteQuery = "DELETE FROM `binded_items` WHERE ItemGroupID = @itemGroupID";
-                    using (MySqlCommand command = new MySqlCommand(deleteQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("@itemGroupID", ID);
-                        await command.ExecuteNonQueryAsync();
-                    }
-
-                    string insertQuery = "INSERT INTO binded_items (ItemGroupID, ItemName, ItemID, Quantity)" +
-                        "VALUES (@itemGroupID, @itemName, @itemID, @quantity)";
-
-                    foreach (DataGridViewRow row in newBindedItems.Rows)
-                    {
-                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
-                        int itemID = Convert.ToInt32(row.Cells["ItemIDCol"].Value);
-                        int quantity = Convert.ToInt32(row.Cells["ProdQuantityCol"].Value);
-
-                        using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
-                        {
-                            command.Parameters.AddWithValue("@itemGroupID", ID);
-                            command.Parameters.AddWithValue("@itemName", itemName);
-                            command.Parameters.AddWithValue("@itemID", itemID);
-                            command.Parameters.AddWithValue("@quantity", quantity);
-
-                            await command.ExecuteNonQueryAsync();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error UpdateBindedService", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-
-        /*public void GetItemInInventory()
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    conn.Open();
-                    string query = "Select ItemName from inventory";
-
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        using(MySqlDataReader reader =  command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    string serviceTypes = reader["ItemName"].ToString();
-                                    ServiceVariationControl.serviceVariationInstance.InventoryItemsComB.Items.Add(serviceTypes);
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error in GetItemInInventory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }*/
-
-        
-
         public async Task<string> GetServiceTypeByName(string serviceVariation)
         {
             string serviceTypeName = null;
@@ -605,42 +481,6 @@ namespace TriforceSalon.Class_Components
             return serviceTypeName;
         }
 
-
-
-        /*private async Task AddItemBindedToDatabase(int ServiceID, Guna2DataGridView bindedItems)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "INSERT INTO binded_items (ItemGroupID, ItemName, ItemID, Quantity)" +
-                        "VALUES (@itemGroupID, @itemName, @itemID, @quantity)";
-
-                    foreach (DataGridViewRow row in bindedItems.Rows)
-                    {
-                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
-                        int itemID = Convert.ToInt32(row.Cells["ItemIDCol"].Value);
-                        int quantity = Convert.ToInt32(row.Cells["ProdQuantityCol"].Value);
-
-                        using (MySqlCommand command = new MySqlCommand(query, conn))
-                        {
-                            command.Parameters.AddWithValue("@itemGroupID", ServiceID);
-                            command.Parameters.AddWithValue("@itemName", itemName);
-                            command.Parameters.AddWithValue("@itemID", itemID);
-                            command.Parameters.AddWithValue("@quantity", quantity);
-
-                            await command.ExecuteNonQueryAsync();
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error in AddItemBindedToDatabase", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-
         public async Task<int> GetServiceVariationID(string ServiceName)
         {
             int ID = -1;
@@ -670,8 +510,6 @@ namespace TriforceSalon.Class_Components
             }
             return ID;
         }
-
-        
 
         public async Task FilterServices(string filter, Guna2DataGridView serviceDatagrid)
         {

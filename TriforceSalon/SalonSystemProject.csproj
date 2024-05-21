@@ -486,6 +486,9 @@
     <EmbeddedResource Include="UserControls\Admin Controls\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Admin Controls\Ticketing\TicketView.resx">
+      <DependentUpon>TicketView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\AnythingSales\SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </EmbeddedResource>

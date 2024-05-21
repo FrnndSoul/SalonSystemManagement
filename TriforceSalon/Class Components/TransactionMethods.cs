@@ -7,12 +7,9 @@ using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -38,77 +35,6 @@ namespace TriforceSalon.Class_Components
         {
             mysqlcon = "server=153.92.15.3;user=u139003143_salondatabase;database=u139003143_salondatabase;password=M0g~:^GqpI";
         }
-
-        /*public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, string specialID)
-        {
-            try
-            {
-                using(var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, SpecialID, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
-                        " Values (@transactionID, @customer_name, @customer_sID, @customer_number, @service_groupID, @priorityStatus)";
-
-                    using(MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn))
-                    {
-                        command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
-                        command1.Parameters.AddWithValue("@customer_name", ServicesUserControl.servicesUserControlInstance.CustomerNameTxtB.Text);
-                        command1.Parameters.AddWithValue("@customer_sID", specialID);
-                        command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
-                        command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
-                        command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
-
-                        await command1.ExecuteNonQueryAsync();
-                    }
-
-                    string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, Discount, QueueNumber, AppointmentDate)"
-                    + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @discount, @queueNumber, @date)";
-
-                    foreach (DataGridViewRow row in serviceDataGrid.Rows)
-                    {
-                        string serviceType = Convert.ToString(row.Cells["ServiceTypeCol"].Value);
-                        string serviceVariation = Convert.ToString(row.Cells["SNameCol"].Value);
-                        string preferredEmployee = Convert.ToString(row.Cells["PrefEmpCol"].Value);
-                        decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
-                        int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
-                        string discount = Convert.ToString(row.Cells["DiscountCol"].Value);
-
-                        //edit mo ito para mamatch mo yung hinahanap sa database
-                        using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn))
-                        {
-                            command2.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
-                            command2.Parameters.AddWithValue("@service_type", await GetServiceType(serviceVariation));
-                            command2.Parameters.AddWithValue("@service_var", serviceVariation);
-                            command2.Parameters.AddWithValue("@service_varID", GetServiceVariationID(serviceVariation));
-                            command2.Parameters.AddWithValue("@amount", serviceAMount);
-                            command2.Parameters.AddWithValue("@discount", discount);
-                            command2.Parameters.AddWithValue("@queueNumber", queueNumber);
-                            command2.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM-dd-yyyy dddd"));
-
-                            if (preferredEmployee == null || string.IsNullOrWhiteSpace(preferredEmployee) || preferredEmployee == "None")
-                            {
-                                command2.Parameters.AddWithValue("@pref_emp", 0);
-                            }
-                            else
-                            {
-                                int employeeID = GetEmployeeID(preferredEmployee);
-                                command2.Parameters.AddWithValue("@pref_emp", GetEmployeeID(preferredEmployee));
-                            }
-
-
-                            await command2.ExecuteNonQueryAsync();
-                        }
-                    }
-                }
-                MessageBox.Show("Customer has been processed", "Process Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error in TestProcessCustomer");
-
-            }
-        }*/
-
         public async Task TestProcessCustomer(Guna2DataGridView serviceDataGrid, string priorityStatus, string ID)
         {
             try
@@ -116,15 +42,12 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-
-                    // Start a transaction
                     using (var transaction = conn.BeginTransaction())
                     {
                         try
                         {
                             string insertToCustomerInfo = "insert into customer_info (TransactionID, CustomerName, SpecialID, CustomerPhoneNumber, ServiceGroupID, PriorityStatus)" +
                                 " Values (@transactionID, @customer_name, @specialID, @customer_number, @service_groupID, @priorityStatus)";
-
                             using (MySqlCommand command1 = new MySqlCommand(insertToCustomerInfo, conn, transaction))
                             {
                                 command1.Parameters.AddWithValue("@transactionID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
@@ -133,13 +56,10 @@ namespace TriforceSalon.Class_Components
                                 command1.Parameters.AddWithValue("@customer_number", Convert.ToString(ServicesUserControl.servicesUserControlInstance.CustomerPhoneNTxtB.Text));
                                 command1.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
                                 command1.Parameters.AddWithValue("@priorityStatus", priorityStatus);
-
                                 await command1.ExecuteNonQueryAsync();
                             }
-
                             string insertToServiceGroup = "insert into service_group (ServiceGroupID, ServiceType, EmployeeID, ServiceVariation, ServiceVariationID, Amount, Discount, QueueNumber, AppointmentDate)"
                                 + " values(@service_groupID, @service_type, @pref_emp, @service_var, @service_varID, @amount, @discount, @queueNumber, @date)";
-
                             foreach (DataGridViewRow row in serviceDataGrid.Rows)
                             {
                                 string serviceType = Convert.ToString(row.Cells["ServiceTypeCol"].Value);
@@ -148,8 +68,6 @@ namespace TriforceSalon.Class_Components
                                 decimal serviceAMount = Convert.ToDecimal(row.Cells["AmountCol"].Value);
                                 int queueNumber = Convert.ToInt32(row.Cells["QueNumCol"].Value);
                                 string discount = Convert.ToString(row.Cells["DiscountCol"].Value);
-
-                                //edit mo ito para mamatch mo yung hinahanap sa database
                                 using (MySqlCommand command2 = new MySqlCommand(insertToServiceGroup, conn, transaction))
                                 {
                                     command2.Parameters.AddWithValue("@service_groupID", Convert.ToInt32(ServicesUserControl.servicesUserControlInstance.transactionIDTxtB.Text));
@@ -174,8 +92,6 @@ namespace TriforceSalon.Class_Components
                                     await command2.ExecuteNonQueryAsync();
                                 }
                             }
-
-                            // If not admin, commit the transaction
                             if (!Method.AdminAccess())
                             {
                                 transaction.Commit();
@@ -183,14 +99,12 @@ namespace TriforceSalon.Class_Components
                             }
                             else
                             {
-                                // If admin, rollback the transaction
                                 transaction.Rollback();
                                 MessageBox.Show("Working as intended. No changes were made.", "Process Customer Function", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (Exception ex)
                         {
-                            // Roll back the transaction if an exception occurs
                             transaction.Rollback();
                             MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -202,8 +116,6 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         public async Task<string> GetServiceType(string serviceName)
         {
             try
@@ -215,7 +127,6 @@ namespace TriforceSalon.Class_Components
                         "JOIN salon_subtypes sbt ON st.ServiceID = sbt.ServiceTypeID " +
                         "JOIN salon_services ss ON sbt.CategoryID = ss.ServiceTypeID " +
                         "WHERE ServiceName = @serviceName";
-
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@serviceName", serviceName);
@@ -234,28 +145,23 @@ namespace TriforceSalon.Class_Components
             }
             return null;
         }
-
         public int GetEmployeeID(string name)
         {
             EmpID = -1;
-
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     conn.Open();
                     string query = "Select AccountID from salon_employees where Name = @name";
-
                     using (MySqlCommand command = new MySqlCommand(query, conn))
                     {
                         command.Parameters.AddWithValue("@name", name);
-                       
                         object result = command.ExecuteScalar();
                         if (result != null && int.TryParse(result.ToString(), out EmpID))
                         {
                             return EmpID;
                         }
-                        
                     }
                 }
             }
@@ -274,7 +180,6 @@ namespace TriforceSalon.Class_Components
             {
                 await conn.OpenAsync();
 
-                //string query = "SELECT TransactionID FROM customer_info WHERE DATE(TimeTaken) = CURDATE() AND PaymentStatus = 'PROCESSED' or PaymentStatus = 'UNPAID' ";
                 string query = "SELECT TransactionID FROM customer_info WHERE DATE(TimeTaken) = CURDATE() AND (PaymentStatus = 'PROCESSED' OR PaymentStatus = 'UNPAID')";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))
@@ -323,82 +228,14 @@ namespace TriforceSalon.Class_Components
             return item_id;
         }
 
-
-        /*public async Task PurchaseToDatabase(int ID, Guna2DataGridView products)
-        {
-            //bool itemNameFound = false;
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    foreach(DataGridViewRow row in products.Rows)
-                    {
-                        string itemName;
-                        if (row.Cells["ProductCol"].Value != null)
-                        {
-                            itemName = row.Cells["ProductCol"].Value.ToString();
-                            //itemNameFound = true;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                        int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
-                        decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
-                        int itemid = await GetItemIdAsync(itemName);
-                        string discount = Convert.ToString(row.Cells["DiscountComB"].Value);
-                        //update customer_info set (ProductsBoughtID) values(@customerID)
-                        //Insert into customer_info (ProductsBoughtID) values (@customerID)
-
-                        string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, Discount, EmployeeID, OrderDate) " +
-                                        "values (@customerID, @productName, @productID, @quantity, @amount, @discount, @employeeID, @orderDate)";
-
-                        using (MySqlCommand command = new MySqlCommand(query, conn))
-                        {
-                            command.Parameters.AddWithValue("@customerID", ID);
-                            command.Parameters.AddWithValue("@productName", itemName);
-                            command.Parameters.AddWithValue("@productID", itemid);
-                            command.Parameters.AddWithValue("@quantity", qty);
-                            command.Parameters.AddWithValue("@amount", amount);
-                            command.Parameters.AddWithValue("@discount", discount);
-                            command.Parameters.AddWithValue("@employeeID", Method.AccountID);
-                            command.Parameters.AddWithValue("@orderDate", DateTime.Now);
-
-                            await command.ExecuteNonQueryAsync();
-                            //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    MessageBox.Show("Products has been binded", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                    string insertQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
-                    using (MySqlCommand command = new MySqlCommand(insertQuery, conn))
-                    {
-                        command.Parameters.AddWithValue("@customerID", ID);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    ClearContents();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
-            }
-        }*/
-
         public async Task PurchaseToDatabase(int ID, Guna2DataGridView products)
         {
-            //bool itemNameFound = false;
             try
             {
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
 
-                    // Start a transaction
                     using (var transaction = conn.BeginTransaction())
                     {
                         try
@@ -420,8 +257,6 @@ namespace TriforceSalon.Class_Components
                                 decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
                                 int itemid = await GetItemIdAsync(itemName);
                                 string discount = Convert.ToString(row.Cells["DiscountComB"].Value);
-                                //update customer_info set (ProductsBoughtID) values(@customerID)
-                                //Insert into customer_info (ProductsBoughtID) values (@customerID)
 
                                 string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, Discount, EmployeeID, OrderDate) " +
                                                 "values (@customerID, @productName, @productID, @quantity, @amount, @discount, @employeeID, @orderDate)";
@@ -438,11 +273,9 @@ namespace TriforceSalon.Class_Components
                                     command.Parameters.AddWithValue("@orderDate", DateTime.Now);
 
                                     await command.ExecuteNonQueryAsync();
-                                    //MessageBox.Show("Products has been sent to the database", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
 
-                            // Update ProductsBoughtID in customer_info table
                             string updateQuery = "update customer_info set ProductsBoughtID = @customerID where TransactionID = @customerID";
                             using (MySqlCommand command = new MySqlCommand(updateQuery, conn))
                             {
@@ -464,7 +297,6 @@ namespace TriforceSalon.Class_Components
                         }
                         catch (Exception ex)
                         {
-                            // Rollback the transaction if an exception occurs
                             transaction.Rollback();
                             MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
                         }
@@ -476,73 +308,6 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.Message, "Error in PurchaseToDatabase");
             }
         }
-
-
-        /* public async Task PurchaseToReceipt(int ID, Guna2DataGridView products)
-         {
-             int salesID = GenerateTransactionID();
-             int orderID = GenerateTransactionID();
-             try
-             {
-                 using (var conn = new MySqlConnection(mysqlcon))
-                 {
-                     await conn.OpenAsync();
-
-                     foreach (DataGridViewRow row in products.Rows)
-                     {
-                         string itemName;
-                         if (row.Cells["ProductCol"].Value != null)
-                         {
-                             itemName = row.Cells["ProductCol"].Value.ToString();
-                             //itemNameFound = true;
-                         }
-                         else
-                         {
-                             continue;
-                         }
-
-                         int qty = Convert.ToInt32(row.Cells["QuantityCol"].Value);
-                         decimal amount = Convert.ToDecimal(row.Cells["CostCol"].Value);
-                         int itemid = await GetItemIdAsync(itemName);
-
-                         string query = "Insert into product_group (ProductGroupID, ProductName, ProductID, Quantity, Amount, EmployeeID, OrderDate) " +
-                         "values (@productGroupID, @productName, @productID, @quantity, @productGAmount, @employeeID, @orderDate)";
-
-                         using (MySqlCommand command = new MySqlCommand(query, conn))
-                         {
-                             string totalText = SellProductsUserControls.sellProductsUserControlsInstance.TotLbl.Text;
-                             string numericValue = totalText.Replace("₱ ", "").Trim();
-                             decimal.TryParse(numericValue, out decimal totalAmount);
-
-
-                             command.Parameters.AddWithValue("@productGroupID", ID);
-                             command.Parameters.AddWithValue("@productName", itemName);
-                             command.Parameters.AddWithValue("@productID", itemid);
-                             command.Parameters.AddWithValue("@quantity", qty);
-                             command.Parameters.AddWithValue("@productGAmount", amount);
-                             command.Parameters.AddWithValue("@employeeID", Method.AccountID);
-                             command.Parameters.AddWithValue("@orderDate", DateTime.Now);
-                             await command.ExecuteNonQueryAsync();
-                         }
-                     }
-
-                     await inventoryMethods.SubtractItemsInInventoryForPurchase(products);
-                     await InsertToSales(salesID, orderID);
-                     MessageBox.Show("Purchase Complete, Handling Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                     GeneratePDFReceipt(SellProductsUserControls.sellProductsUserControlsInstance.ProductsControlDGV,
-                         SellProductsUserControls.sellProductsUserControlsInstance.SubLbl,
-                         SellProductsUserControls.sellProductsUserControlsInstance.DiscLbl,
-                         SellProductsUserControls.sellProductsUserControlsInstance.TotLbl,
-                         SellProductsUserControls.sellProductsUserControlsInstance.CashTxtBx,
-                         SellProductsUserControls.sellProductsUserControlsInstance.CustomerNameTxtB,
-                         ID);
-                 }
-             }
-             catch(Exception ex)
-             {
-                 MessageBox.Show(ex.ToString(), "Error in PurchaseToReceipt");
-             }
-         }*/
 
         public async Task PurchaseToReceipt(int ID, Guna2DataGridView products)
         {
@@ -771,7 +536,6 @@ namespace TriforceSalon.Class_Components
         {
             string transactionTB = ID;
             string nameTB = name;
-            //string ageTB = age;
 
             using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
             {
@@ -807,8 +571,8 @@ namespace TriforceSalon.Class_Components
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
                         doc.Add(new Paragraph($"Transaction ID: {transactionTB}                                 Date: {DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph($"Customer Name: {nameTB}").SetTextAlignment(TextAlignment.LEFT));
-                        //doc.Add(new Paragraph($"Special ID: {ageTB}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph(("---------------------------------------------")).SetTextAlignment(TextAlignment.CENTER));
+                        doc.Add(new Paragraph($"Transaction ID: {transactionTB}").SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph(("SERVICE RATING")).SetTextAlignment(TextAlignment.CENTER));
 
                         Table starsTable = new Table(5).UseAllAvailableWidth();
@@ -999,10 +763,6 @@ namespace TriforceSalon.Class_Components
                 using (var conn = new MySqlConnection(mysqlcon))
                 {
                     await conn.OpenAsync();
-                    /*string query = "SELECT st.ServiceID FROM service_type st " +
-                        "JOIN salon_subtypes sbt ON st.ServiceID = sbt.ServiceTypeID " +
-                        "JOIN salon_services ss ON sbt.CategoryID = ss.ServiceTypeID " +
-                        "WHERE ServiceName = @serviceName";*/
 
                     string query = "Select ServiceTypeID from salon_services where ServiceName = @service_name";
 
@@ -1124,7 +884,6 @@ namespace TriforceSalon.Class_Components
                             string serviceName = reader["ServiceName"].ToString();
                             decimal serviceCost = Convert.ToDecimal(reader["ServiceAmount"]);
 
-                            // Remove the percentage sign (%) and convert to decimal
                             string discountPercentString = reader["DiscountPercent"].ToString().Replace("%", "");
                             decimal discountPercent = Convert.ToDecimal(discountPercentString) / 100m;
 

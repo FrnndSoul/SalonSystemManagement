@@ -46,25 +46,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods
         private void PaymentBtn_Click(object sender, EventArgs e)
         {
             long TransactionID = Convert.ToInt64(PaymentsUserControls.paymentInstance.TransactionIDBox.Text);
-            /*foreach (Form openForm in Application.OpenForms)
-            {
-                if (openForm is MainForm mainForm)
-                {
-                    foreach (Control control in mainForm.Controls)
-                    {
-                        if (control is PaymentsUserControls paymentUserControl)
-                        {
-                            //paymentUserControl.ChangePaymentStatus("PAID");
-                            break;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                }
-            }*/
-
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))

@@ -1,8 +1,5 @@
 ﻿using Guna.UI2.WinForms;
-using MySql.Data.MySqlClient;
 using System;
-using System.Data;
-using System.Data.Common;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
@@ -115,51 +112,18 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             PromoTxtB.Text = null;
             transactionIDTxtB.Text = Convert.ToString(transactionMethods.GenerateTransactionID());
         }
-        /*private async void GetAllServiceBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ServiceFL.Controls.Clear();
-                await serviceTypeService.GetServiceData(ServiceFL, mysqlcon, ServiceTxtB, ServiceAmountTxtB);
-                await serviceTypeService.GetAllEmployee(mysqlcon);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }*/
-
        
         private void CustomerPhoneNTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            string currentText = CustomerAgeTxtB.Text;
-
-            int totalLength = currentText.Length + 1;
-            if (totalLength >= 11)
-            {
-                e.Handled = true;
-                return;
-            }*/
-
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 return;
             }
-
-            // Get the current text in the TextBox
             string currentText = CustomerPhoneNTxtB.Text;
-
-            // Check if the input length will exceed 11 characters after adding the new input
-            if (currentText.Length >= 11 && e.KeyChar != '\b') // '\b' represents the Backspace key
+            if (currentText.Length >= 11 && e.KeyChar != '\b') 
             {
-                e.Handled = true; // Ignore the input
+                e.Handled = true; 
                 return;
             }
         }
@@ -173,39 +137,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             return false;
         }
-
-
-        
-
-        public decimal ExtractAmount(string input)
-        {
-            string pattern = @"Amount:\s*₱\s*(\d+)";
-
-            // Match the pattern in the input string
-            Match match = Regex.Match(input, pattern);
-
-            // Check if a match is found
-            if (match.Success)
-            {
-                // Extract the amount from the match
-                string amountString = match.Groups[1].Value;
-
-                // Convert the amount to a decimal
-                if (decimal.TryParse(amountString, out decimal extractedAmount))
-                {
-                    return extractedAmount;
-                }
-                else
-                {
-                    throw new ArgumentException("Failed to parse amount.");
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Pattern not found in input string.");
-            }
-        }
-
+       
         private async void AddLServiceListBtn_Click(object sender, EventArgs e)
         {
             string dateNow = DateTime.Now.ToString("MM-dd-yyyy dddd");
@@ -257,21 +189,14 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private void PEmployeeComB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void CustomerNameTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow letters, space, and backspace
             if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
                 return;
             }
 
-            // Check if the length exceeds the maximum allowed length (30 characters)
             if (CustomerNameTxtB.Text.Length >= 30 && e.KeyChar != '\b')
             {
                 e.Handled = true;
@@ -302,7 +227,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     var serviceDetails = transactionMethods.GetServiceDetails(promoCode, mysqlcon);
 
-                    // Check if any of the items from the promo are already present in the DataGridView
                     bool serviceAlreadyAdded = true; // Assume all services are already added
                     foreach (var service in serviceDetails)
                     {
@@ -367,12 +291,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
         }
 
-        private async void ServicePromoComB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*string promoName = ServicePromoComB.Text;
-            await promoMethods.GetPromoCode(promoName, ServicePromoTxtB);*/
-        }
-
+        
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             DisplayServiceTypeFL();
@@ -387,22 +306,32 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void ServicesGDGVVControl_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Check if the double-clicked cell is in the "DiscountComB" column and the row index is valid
-            if (e.ColumnIndex == ServicesGDGVVControl.Columns["DiscountComB"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == ServicesGDGVVControl.Columns["DiscountCol"].Index && e.RowIndex >= 0)
             {
                 var cell = ServicesGDGVVControl.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewTextBoxCell;
 
                 if (cell != null)
                 {
-                    // Get the current value of the cell
                     string currentValue = cell.Value?.ToString() ?? "None";
 
-                    // Determine the next value to set
                     string nextValue = currentValue == "Senior/PWD" ? "None" : "Senior/PWD";
 
-                    // Update the cell value
                     cell.Value = nextValue;
                 }
+            }
+        }
+
+        private void SpecialIDTxtB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '-')
+            {
+                e.Handled = true; 
+            }
+
+            Guna2TextBox textBox = sender as Guna2TextBox;
+            if (textBox != null && textBox.Text.Length >= 12 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; 
             }
         }
     }

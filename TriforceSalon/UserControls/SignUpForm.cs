@@ -1,18 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TriforceSalon
 {
@@ -67,18 +58,6 @@ namespace TriforceSalon
 
         public void BackBtn_Click(object sender, EventArgs e)
         {
-            /*NameBox.Text = "";
-            UsernameBox.Text = "";
-            EmailBox.Text = "";
-            PasswordBox.Text = "";
-            PasswordBox1.Text = "";
-            Photo.Image = null;
-            PhotoByteHolder = null;
-            TogglePassword.Checked = false;
-            BirthdayPicker.Value = BirthdayPicker.MaxDate;
-
-            this.Visible = false;*/
-
             foreach (Form openForm in Application.OpenForms)
             {
                 if (openForm is MainForm mainForm)
@@ -108,19 +87,6 @@ namespace TriforceSalon
                     image.Save(ms, image.RawFormat);
                     PhotoByteHolder = ms.ToArray();
                 }
-            }
-        }
-
-        private void SignUpForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EmailBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Space)
-            {
-                e.Handled = true;
             }
         }
 
@@ -193,16 +159,6 @@ namespace TriforceSalon
             object BackFunction = BackBtn;
             BackBtn_Click(BackFunction, e);
             
-
-        }
-
-        public void RoleBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Guna2PictureBox1_Click(object sender, EventArgs e)
-        {
 
         }
     }

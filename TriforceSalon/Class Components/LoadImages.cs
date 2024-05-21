@@ -55,20 +55,16 @@ namespace TriforceSalon.Class_Components
             }
             catch (ArgumentException ex)
             {
-                // Handle the exception if the byte array does not represent a valid image format
                 MessageBox.Show("Error loading image: Invalid image data format.");
                 MessageBox.Show("Exception Details: " + ex.Message);
 
-                // Set PictureBox image to a default image or show an error image
-                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; 
             }
             catch (Exception ex)
             {
-                // Handle other exceptions
                 MessageBox.Show("Error loading image: " + ex.Message);
 
-                // Set PictureBox image to a default image or show an error image
-                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null;
             }
         }
         public byte[] GetServiceTypeID(int ServiceTypeID)
@@ -105,7 +101,7 @@ namespace TriforceSalon.Class_Components
 
         public void ServicesImage(int serviceVarID)
         {
-            byte[] imageData = GetServiceVarID(serviceVarID); // Call a new method to get image data
+            byte[] imageData = GetServiceVarID(serviceVarID);
 
             try
             {
@@ -115,32 +111,25 @@ namespace TriforceSalon.Class_Components
                     {
                         Image image = Image.FromStream(ms);
 
-                        // Set the PictureBox image only if the conversion succeeds
                         ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = image;
                     }
                 }
                 else
                 {
-                    // Set PictureBox image to a default image or null if there's no image data
                     ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null;
                 }
             }
             catch (ArgumentException ex)
             {
-                // Handle the exception if the byte array does not represent a valid image format
                 MessageBox.Show("Error loading image: Invalid image data format.");
                 MessageBox.Show("Exception Details: " + ex.Message);
 
-                // Set PictureBox image to a default image or show an error image
-                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; 
             }
             catch (Exception ex)
             {
-                // Handle other exceptions
                 MessageBox.Show("Error loading image: " + ex.Message);
-
-                // Set PictureBox image to a default image or show an error image
-                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceVariationControl.serviceVariationInstance.ServiceImagePicB.Image = null; 
             }
         }
 
@@ -175,7 +164,7 @@ namespace TriforceSalon.Class_Components
 
         public void CategoryImage(int categoryID)
         {
-            byte[] imageData = GetCategoryVarID(categoryID); // Call a new method to get image data
+            byte[] imageData = GetCategoryVarID(categoryID); 
 
             try
             {
@@ -185,32 +174,26 @@ namespace TriforceSalon.Class_Components
                     {
                         Image image = Image.FromStream(ms);
 
-                        // Set the PictureBox image only if the conversion succeeds
                         ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = image;
                     }
                 }
                 else
                 {
-                    // Set PictureBox image to a default image or null if there's no image data
                     ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = null;
                 }
             }
             catch (ArgumentException ex)
             {
-                // Handle the exception if the byte array does not represent a valid image format
                 MessageBox.Show("Error loading image: Invalid image data format.");
                 MessageBox.Show("Exception Details: " + ex.Message);
 
-                // Set PictureBox image to a default image or show an error image
-                ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = null; 
             }
             catch (Exception ex)
             {
-                // Handle other exceptions
                 MessageBox.Show("Error loading image: " + ex.Message);
 
-                // Set PictureBox image to a default image or show an error image
-                ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = null; // Set pictureBox image to default or show an error image
+                ServiceSubTypeControl.categoryInstance.CategoryPicB.Image = null;
             }
         }
 

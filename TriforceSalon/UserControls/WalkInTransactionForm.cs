@@ -55,7 +55,6 @@ namespace TriforceSalon.UserControls
             {
                 if (openForm is MainForm mainForm)
                 {
-                    //mainForm.ShowLogin();
                     SigninPage signinPage = new SigninPage();
                     UserControlNavigator.ShowControl(signinPage, MainForm.mainFormInstance.MainFormContent);
                     break;

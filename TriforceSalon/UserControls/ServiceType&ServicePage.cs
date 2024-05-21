@@ -26,7 +26,6 @@ namespace TriforceSalon.UserControls
             servicePageInstance = this;
             ServiceTypeControl serviceType = new ServiceTypeControl(this);
             UserControlNavigator.ShowControl(serviceType, ServiceManagementContainer);
-
         }
 
         private void SetButtonProperties(Guna.UI2.WinForms.Guna2Button button, Color fillColor, Color foreColor, Image image)
@@ -90,19 +89,16 @@ namespace TriforceSalon.UserControls
         private void ServiceTypeBtn_Click(object sender, EventArgs e)
         {
             GoToType();
-            
         }
 
         private void ServiceBtn_Click(object sender, EventArgs e)
         {
             GoToVariation();
-            
         }
 
         private void ServiceSubTypeBtn_Click(object sender, EventArgs e)
         {
             GoToCategory();
-            
         }
     }
 }

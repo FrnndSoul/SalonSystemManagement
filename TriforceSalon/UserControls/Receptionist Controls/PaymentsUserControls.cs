@@ -5,18 +5,14 @@ using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.X509;
 using System;
-using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls.Receptionist_Controls.Payment_Methods;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace TriforceSalon.UserControls.Receptionist_Controls
 {
@@ -33,7 +29,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         private int ratingsNumber = 0;
 
         public decimal totalPrice = 0;
-
 
         public PaymentsUserControls()
         {
@@ -56,64 +51,8 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         private void GcashPayment_Click(object sender, EventArgs e)
         {
-            //gcashProcess1.Visible = true;
             GcashProcessB gcash = new GcashProcessB();
             UserControlNavigator.ShowControl(gcash, OtherTransactionContainer);
-        }
-
-        private void gcashProcess1_VisibleChanged(object sender, EventArgs e)
-        {
-            if (cardProcess1.Visible == false)
-            {
-                cardProcess1.DefaultLoad();
-            }
-        }
-
-        private void AdjustCheckBoxSize(CheckBox checkBox)
-        {
-            int largerCheckBoxSize = 20;
-            checkBox.Width = largerCheckBoxSize;
-            checkBox.Height = largerCheckBoxSize;
-            checkBox.Invalidate();
-        }
-
-        private void guna2HtmlLabel18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void PWDCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            /*int amountValue = Convert.ToInt32(Amount);
-            Amount = (int)(amountValue * 0.8);
-            int discount = (int)(amountValue * 0.2);
-            DiscountBox.Text = discount.ToString();*/
-
-            /*
-                        decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
-                        Amount = (decimal)(totalAmount * 0.8);
-                        int discount = (decimal)(amountValue * 0.2);
-                        DiscountBox.Text = discount.ToString();*/
-
-            decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
-            decimal discountedAmount = totalAmount * 0.8m; // Apply 20% discount
-            decimal discount = totalAmount - discountedAmount; // Calculate the discount
-            AmountBox.Text = discountedAmount.ToString(); // Update the amount with the discounted value
-            DiscountBox.Text = discount.ToString(); // Display the discount
-        }
-
-        private void CardPayment_Click(object sender, EventArgs e)
-        {
-            //cardProcess1.Visible = true;
-            CardProcess cardProcess = new CardProcess();
-            UserControlNavigator.ShowControl(cardProcess, OtherTransactionContainer);
-
-            cardProcess.ThrowData(CustomerName, EmployeeName, ServiceVariation, PaymentStatus, Age, Phone, Amount, Convert.ToInt32(TransactionIDBox.Text));
         }
         private decimal DiscountFromProducts(decimal amount)
         {
@@ -122,62 +61,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal discountPrice = PriceWithoutVAT * 0.20m;
             return discountPrice + VAT;
         }
-        /*private void OverallPrice()
-        {
-            totalPrice = 0.00m;
-            decimal discountedTotal = 0.00m;
-            decimal normalTotal = 0.00m;
-
-            // Assuming ProductsControlDGV contains products data
-            foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
-            {
-                if (row.Cells[2].Value != null)
-                {
-                    decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
-                    string selectedValue = row.Cells["ProductsDiscountChckBoxCol"].Value.ToString();
-
-                    if (selectedValue == "Discounted")
-                    {
-                        // Apply discount for discounted products
-                        discountedTotal += rowTotal - DiscountFromProducts(rowTotal);
-                    }
-                    else
-                    {
-                        // Add original price for normal products
-                        normalTotal += rowTotal;
-                    }
-
-                    totalPrice += rowTotal; // Add to total regardless
-                }
-            }
-
-            // Assuming another DataGridView called SecondProductsControlDGV contains products data from another table
-            foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
-            {
-                if (row.Cells[1].Value != null)
-                {
-                    decimal rowTotal = decimal.Parse(row.Cells[1].Value.ToString());
-                    string selectedValue = row.Cells["ServicesDiscountChckBoxCol"].Value.ToString();
-
-                    if (selectedValue == "Discounted")
-                    {
-                        // Apply discount for discounted products
-                        discountedTotal += rowTotal - DiscountFromProducts(rowTotal);
-                    }
-                    else
-                    {
-                        // Add original price for normal products
-                        normalTotal += rowTotal;
-                    }
-                    totalPrice += rowTotal;
-                }
-            }
-
-            // Update UI with totals
-            AmountBox.Text = totalPrice.ToString("0.00");
-            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
-            DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
-        }*/
 
         private void OverallPrice(decimal downpayment)
         {
@@ -185,7 +68,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             decimal discountedTotal = 0.00m;
             decimal normalTotal = 0.00m;
 
-            // Assuming ProductsControlDGV contains products data
             foreach (DataGridViewRow row in ProductsBoughtDGV.Rows)
             {
                 if (row.Cells[3].Value != null && row.Cells["ProductsDiscountCol"].Value.ToString() != "None")
@@ -195,26 +77,27 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                     if (decimal.TryParse(discountValue, out decimal discountAmount))
                     {
-                        // Apply discount for items with a decimal discount
                         decimal discountedPrice = rowTotal * (1 - discountAmount);
+                        discountedTotal += discountedPrice;
+                    }
+                    else if (discountValue == "Senior/PWD")
+                    {
+                        decimal discountedPrice = rowTotal - DiscountFromProducts(rowTotal);
                         discountedTotal += discountedPrice;
                     }
                     else
                     {
-                        // Add original price for items with "Normal" discount
                         normalTotal += rowTotal;
                     }
                 }
                 else
                 {
-                    // Add original price for items with "None" discount
                     decimal rowTotal = decimal.Parse(row.Cells[2].Value.ToString());
                     normalTotal += rowTotal;
                 }
                 totalPrice += decimal.Parse(row.Cells[2].Value.ToString());
             }
 
-            // Assuming another DataGridView called SecondProductsControlDGV contains products data from another table
             foreach (DataGridViewRow row in ServiceAcquiredDGV.Rows)
             {
                 if (row.Cells[2].Value != null && row.Cells["ServiceDiscountCol"].Value.ToString() != "None")
@@ -243,11 +126,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 totalPrice += decimal.Parse(row.Cells[1].Value.ToString());
             }
 
-            // Update UI with totals
-            /*AmountBox.Text = totalPrice.ToString("0.00");
-            TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
-            DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");*/
-
             AmountBox.Text = totalPrice.ToString("0.00");
             TotalAmountTxtB.Text = (discountedTotal + normalTotal).ToString("0.00");
             DiscountBox.Text = (totalPrice - (discountedTotal + normalTotal)).ToString("0.00");
@@ -267,7 +145,7 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 {
                     await conn.OpenAsync();
 
-                    string query = "SELECT DISTINCT ci.CustomerName, ci.CustomerPhoneNumber, ci.PaymentStatus, " +
+                    string query = "SELECT DISTINCT ci.CustomerName, ci.SpecialID, ci.CustomerPhoneNumber, ci.PaymentStatus, " +
                                    "CASE " +
                                    "WHEN ci.IsAppointment = 'YES' THEN a.Downpayment " +
                                    "ELSE 0.00 " +
@@ -312,9 +190,10 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
                                 string Customer_name = reader["CustomerName"].ToString();
                                 string Customer_phone = Convert.ToString(reader["CustomerPhoneNumber"]);
+                                string Customer_ID = Convert.ToString(reader["SpecialID"]);
                                 string Customer_downpayment = Convert.ToString(reader["Downpayment"]);
 
-                                DisplayTransaction(Customer_name, Customer_phone, Customer_downpayment);
+                                DisplayTransaction(Customer_name, Customer_phone, Customer_downpayment, Customer_ID);
                                 await FillProductsBoughtAsync(CustomerID, ProductsBoughtDGV);
                                 await FillServiceAcquiredAsync(CustomerID, ServiceAcquiredDGV);
                                 decimal downpayment = Convert.ToDecimal(DownpaymentTxtB.Text);
@@ -337,11 +216,12 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
         }
 
-        private void DisplayTransaction(string name, string phoneNumber, string downpayment)
+        private void DisplayTransaction(string name, string phoneNumber, string downpayment, string specialID)
         {
             NameBox.Text = name;
             PhoneNumberBox.Text = phoneNumber;
             DownpaymentTxtB.Text = downpayment;
+            SpecialIDTxtB.Text = specialID;
 
 
             TransactionIDBox.Enabled = false;
@@ -353,44 +233,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             CalculateTotalBtn.Enabled = true;
 
         }
-
-
-        /*public async Task VoidedItems(long ID, Guna2DataGridView products)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    foreach (DataGridViewRow row in products.Rows)
-                    {
-                        string itemName;
-                        if (row.Cells["ProdNameCol"].Value != null)
-                        {
-                            itemName = row.Cells["ProdNameCol"].Value.ToString();
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                        string query = "UPDATE product_group SET isVoided = 'YES' WHERE ProductGroupID = @customerID";
-
-                        using (MySqlCommand command = new MySqlCommand(query, conn))
-                        {
-                            command.Parameters.AddWithValue("@customerID", ID);
-                            await command.ExecuteNonQueryAsync();
-
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in void transaction");
-            }
-        }*/
 
         public async Task VoidedItems(long ID, Guna2DataGridView products)
         {
@@ -452,46 +294,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 MessageBox.Show($"Error connecting to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        /*private async Task VoidServices(long ID, Guna2DataGridView services)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    foreach (DataGridViewRow row in services.Rows)
-                    {
-                        string serviceName;
-                        if (row.Cells["ServiceCol"].Value != null)
-                        {
-                            serviceName = row.Cells["ServiceCol"].Value.ToString();
-                        }
-                        else
-                        {
-                            continue;
-                        }
-
-                        decimal amount = Convert.ToDecimal(row.Cells["ServiceAmountCol"].Value);
-
-                        string query = "UPDATE service_group SET IsVoided = 'YES' WHERE ServiceGroupID = @customerID";
-
-                        using (MySqlCommand command = new MySqlCommand(query, conn))
-                        {
-                            command.Parameters.AddWithValue("@customerID", ID);
-                            await command.ExecuteNonQueryAsync();
-
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in void transaction");
-            }
-        }*/
 
         private async Task VoidServices(long ID, Guna2DataGridView services)
         {
@@ -585,38 +387,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
 
             VoidBtn.Enabled = true;
         }
-
-        /* public async Task ChangePaymentStatus(string newStatus, int ratings)
-         {
-             try
-             {
-                 using (MySqlConnection connection = new MySqlConnection(mysqlcon))
-                 {
-                     await connection.OpenAsync();
-
-                     string query = "UPDATE customer_info SET PaymentStatus = @NewStatus WHERE TransactionID = @TransactionID";
-                     using (MySqlCommand command = new MySqlCommand(query, connection))
-                     {
-                         command.Parameters.AddWithValue("@NewStatus", newStatus);
-                         command.Parameters.AddWithValue("@TransactionID", TransactionIDBox.Text);
-                         int rowsAffected = await command.ExecuteNonQueryAsync();
-                     }
-
-                     string ratingsQuery = "UPDATE employee_records SET CustomerRating = @ratings WHERE CustomerID = @customerID";
-                     using (MySqlCommand command2 = new MySqlCommand(ratingsQuery, connection))
-                     {
-                         command2.Parameters.AddWithValue("@customerID", TransactionIDBox.Text);
-                         command2.Parameters.AddWithValue("@ratings", ratings);
-                         await command2.ExecuteNonQueryAsync();
-
-                     }
-                 }
-             }
-             catch (Exception e)
-             {
-                 MessageBox.Show($"Error updating payment status: {e.Message}", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-         }*/
 
         public async Task ChangePaymentStatus(string newStatus, int ratings)
         {
@@ -728,35 +498,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             }
             PaymentBtn.Enabled = true;
         }
-        /*public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string subtractQuery = "UPDATE inventory SET Stock = Stock - @quantity WHERE ItemID = @itemID";
-
-                    foreach (DataGridViewRow row in productsDataGrid.Rows)
-                    {
-                        int quantity = Convert.ToInt32(row.Cells["QuantityCol"].Value);
-                        string itemName = Convert.ToString(row.Cells["ProdNameCol"].Value);
-                        int productID = await inventory.GetItemIDByName(itemName);
-                        using (MySqlCommand command = new MySqlCommand(subtractQuery, conn))
-                        {
-                            command.Parameters.AddWithValue("@quantity", quantity);
-                            command.Parameters.AddWithValue("@itemID", productID);
-
-                            await command.ExecuteNonQueryAsync();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString() + "\n\nat SubtractItemsInInventoryForPurchase()", "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
         public async Task SubtractItemsInInventoryForPurchase(Guna2DataGridView productsDataGrid)
         {
             try
@@ -976,36 +717,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
             DefaultLoad();
         }
 
-        /*public async Task SendToSales(long transactionID, int salesID)
-        {
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-
-                    string query = "Insert into sales (SaleID, OrderID, SaleDate, Amount) values (@saleID, @orderID, @saleDate, @totAmount)";
-
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        decimal totalAmount = Convert.ToDecimal(AmountBox.Text);
-
-                        command.Parameters.AddWithValue("@saleID", salesID);
-                        command.Parameters.AddWithValue("@orderID", transactionID);
-                        command.Parameters.AddWithValue("@saleDate", DateTime.Now);
-                        command.Parameters.AddWithValue("@totAmount", totalAmount);
-
-                        await command.ExecuteNonQueryAsync();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error in SendToSales");
-            }
-        }*/
-
         public async Task SendToSales(long transactionID, int salesID)
         {
             try
@@ -1193,8 +904,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                         doc.Add(new Paragraph("Date: " + DateTime.Now.ToString("MM/dd/yyyy   hh:mm:ss tt")).SetTextAlignment(TextAlignment.LEFT));
                         doc.Add(new Paragraph("--------------------------------------------------------------------------------------------------"));
 
-                        // Table for products bought
-                        // Table for products bought
                         if (ProductsBoughtDGV.Rows.Count > 0)
                         {
                             Table productTable = new Table(4);
@@ -1279,7 +988,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                     }
 
                     MessageBox.Show("Receipt generated successfully and saved to:\n" + pdfFilePath, "🎉 Congrats on your purchase at TriCharm Salon! 🎉", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //guna2DataGridView1.Rows.Clear();
                     System.Diagnostics.Process.Start("cmd", $"/c start {pdfFilePath}");
                 }
             }
@@ -1290,13 +998,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
         {
             Guna2CustomRadioButton radioButton = sender as Guna2CustomRadioButton;
 
-            // Check which radio button triggered the event
             switch (radioButton.Name)
             {
                 case "RBtn1":
                     if (radioButton.Checked)
                     {
-                        // Perform actions for the first radio button
                         ratingsNumber = 1;
                     }
                     break;
@@ -1304,7 +1010,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 case "RBtn2":
                     if (radioButton.Checked)
                     {
-                        // Perform actions for the second radio button
                         ratingsNumber = 2;
                     }
                     break;
@@ -1312,7 +1017,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 case "RBtn3":
                     if (radioButton.Checked)
                     {
-                        // Perform actions for the third radio button
                         ratingsNumber = 3;
                     }
                     break;
@@ -1320,7 +1024,6 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 case "RBtn4":
                     if (radioButton.Checked)
                     {
-                        // Perform actions for the fourth radio button
                         ratingsNumber = 4;
                     }
                     break;
@@ -1328,13 +1031,11 @@ namespace TriforceSalon.UserControls.Receptionist_Controls
                 case "RBtn5":
                     if (radioButton.Checked)
                     {
-                        // Perform actions for the fifth radio button
                         ratingsNumber = 5;
                     }
                     break;
 
                 default:
-                    // Handle the default case if necessary
                     MessageBox.Show("Paano ka nakarating dito");
                     break;
             }

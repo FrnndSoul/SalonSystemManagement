@@ -20,16 +20,10 @@ namespace TriforceSalon.Class_Components
         public decimal ExtractAmount(string input)
         {
             string pattern = @"Amount:\s*₱\s*(\d+(\.\d+)?)";
-            // Match the pattern in the input string
             Match match = Regex.Match(input, pattern);
-
-            // Check if a match is found
             if (match.Success)
             {
-                // Extract the amount from the match
                 string amountString = match.Groups[1].Value;
-
-                // Convert the amount to a decimal
                 if (decimal.TryParse(amountString, out decimal extractedAmount))
                 {
                     return extractedAmount;
@@ -44,7 +38,6 @@ namespace TriforceSalon.Class_Components
                 throw new ArgumentException("Pattern not found in input string.");
             }
         }
-
        
         public async Task UpdateServiceFL(FlowLayoutPanel serviceFL, string serviceTypeID, string mysqlcon, Guna2TextBox serviceTB, Guna2TextBox amountTB)
         {
@@ -147,9 +140,7 @@ namespace TriforceSalon.Class_Components
                         if (result != null)
                         {
                             string serviceTypeID = result.ToString();
-                            // Use the retrieved ServiceTypeID to filter images in ServiceTypeFL
                             await FilterImagesByServiceType(serviceTypeID, servicetypefl, serviceFL, mysqlcon, service, amount);
-
                         }
                         else
                         {
@@ -163,74 +154,7 @@ namespace TriforceSalon.Class_Components
                 MessageBox.Show(ex.ToString(), "Error in UpdateServiceTypeFL");
             }
         }
-        /*private async Task FilterImagesByServiceType(string serviceTypeID, FlowLayoutPanel servicetypefl, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox service, Guna2TextBox amount)
-        {
-            servicetypefl.Controls.Clear();
-            serviceFL.Controls.Clear();
-            try
-            {
-                using (var conn = new MySqlConnection(mysqlcon))
-                {
-                    await conn.OpenAsync();
-                    string query = "SELECT ServiceSubTypeName, ServiceSubTypeImage, CategoryID FROM salon_subtypes WHERE ServiceTypeID = @ServiceTypeID";
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
-                    {
-                        command.Parameters.AddWithValue("@ServiceTypeID", serviceTypeID);
-                        using (DbDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                byte[] imageBytes = (byte[])reader["ServiceSubTypeImage"];
-                                using (MemoryStream ms = new MemoryStream(imageBytes))
-                                {
-                                    Image servicetypeImage = Image.FromStream(ms);
-                                    Panel panel = new Panel
-                                    {
-                                        Width = 200,
-                                        Height = 200,
-                                        Margin = new Padding(10)
-                                    };
-                                    PictureBox picBox = new PictureBox
-                                    {
-                                        Width = 200,
-                                        Height = 150,
-                                        Location = new Point(10, 10),
-                                        BackgroundImage = servicetypeImage,
-                                        BackgroundImageLayout = ImageLayout.Stretch
-                                    };
-
-                                    Label labelTitle = new Label
-                                    {
-                                        Text = reader["ServiceSubTypeName"].ToString(),
-                                        Location = new Point(10, 160),
-                                        ForeColor = Color.Black,
-                                        AutoSize = true,
-                                        Font = new Font("Stanberry", 16, FontStyle.Regular)
-                                    };
-
-                                    picBox.Tag = reader["CategoryID"];
-                                    picBox.Click += async (sender, e) =>
-                                    {
-                                        string categoryID = ((PictureBox)sender).Tag.ToString();
-                                        //MessageBox.Show(categoryID);
-                                        await UpdateServiceFL(serviceFL, categoryID, mysqlcon, service, amount);
-                                    };
-
-                                    panel.Controls.Add(picBox);
-                                    panel.Controls.Add(labelTitle);
-                                    servicetypefl.Controls.Add(panel);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error in FilterImagesByServiceType");
-            }
-        }*/
-
+        
         private async Task FilterImagesByServiceType(string serviceTypeID, FlowLayoutPanel servicetypefl, FlowLayoutPanel serviceFL, string mysqlcon, Guna2TextBox service, Guna2TextBox amount)
         {
             servicetypefl.Controls.Clear();
@@ -409,7 +333,6 @@ namespace TriforceSalon.Class_Components
             using (MySqlConnection conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
-                //string query = "SELECT MAX (QueueNumber) FROM service_group WHERE AppointmentDate = @appointment AND ServiceType = @serviceType";
                 string query = "SELECT MAX(CAST(QueueNumber AS UNSIGNED)) FROM service_group WHERE AppointmentDate = @appointment AND ServiceType = @serviceType";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))

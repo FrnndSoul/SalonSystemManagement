@@ -71,25 +71,18 @@ namespace TriforceSalon.UserControls.Promo_Controls
             PItemsUserControls products = new PItemsUserControls(this);
             UserControlNavigator.ShowControl(products, PromoContainer);
         }
-
-
         private void ActivePromosBtn_Click(object sender, EventArgs e)
         {
-
             GoToAll();
-
         }
 
         private void PServiceBtn_Click(object sender, EventArgs e)
         {
-
             GoToService();
-
         }
 
         private void PProductsBtn_Click(object sender, EventArgs e)
         {
-           
             GoToProducts();
         }
     }

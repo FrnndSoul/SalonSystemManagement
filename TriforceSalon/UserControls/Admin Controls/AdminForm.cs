@@ -1,6 +1,4 @@
-﻿using Google.Protobuf.Reflection;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.X509;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Drawing;
@@ -10,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 using TriforceSalon.UserControls.Admin_Controls;
-using TriforceSalon.UserControls.Admin_Controls.Ticketing;
 
 namespace TriforceSalon
 {

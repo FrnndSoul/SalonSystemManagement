@@ -102,5 +102,10 @@ namespace TriforceSalon.UserControls.Admin_Controls
                 }
             }
         }
+
+        private void TicketView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

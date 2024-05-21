@@ -53,7 +53,7 @@ namespace TriforceSalon.Class_Components
                                     Panel panel = new Panel
                                     {
                                         Width = 200,
-                                        Height = 250, // Adjusted height to accommodate the layout
+                                        Height = 250, 
                                         Margin = new Padding(10),
                                         Tag = reader["ServiceVariationID"].ToString()
                                     };
@@ -70,7 +70,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle = new Label
                                     {
                                         Text = reader["ServiceName"].ToString(),
-                                        Location = new Point(10, 160), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 160), 
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -80,7 +80,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle1 = new Label
                                     {
                                         Text = "Amount: ₱" + reader["ServiceAmount"].ToString(),
-                                        Location = new Point(10, 210), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 210), 
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -137,7 +137,7 @@ namespace TriforceSalon.Class_Components
                                     Panel panel = new Panel
                                     {
                                         Width = 200,
-                                        Height = 250, // Adjusted height to accommodate the layout
+                                        Height = 250, 
                                         Margin = new Padding(10),
                                         Tag = reader["ServiceVariationID"].ToString()
                                     };
@@ -154,7 +154,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle = new Label
                                     {
                                         Text = reader["ServiceName"].ToString(),
-                                        Location = new Point(10, 160), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 160), 
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -164,7 +164,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle1 = new Label
                                     {
                                         Text = "Amount: ₱" + reader["ServiceAmount"].ToString(),
-                                        Location = new Point(10, 210), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 210), 
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -218,7 +218,7 @@ namespace TriforceSalon.Class_Components
                 bool found = false;
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    if (row.IsNewRow) continue; // Skip the new row added by DataGridView
+                    if (row.IsNewRow) continue; 
 
                     if (row.Cells[0].Value.ToString() == serviceName)
                     {

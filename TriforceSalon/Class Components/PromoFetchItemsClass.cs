@@ -49,7 +49,7 @@ namespace TriforceSalon.Class_Components
                                     Panel panel = new Panel
                                     {
                                         Width = 200,
-                                        Height = 250, // Adjusted height to accommodate the layout
+                                        Height = 250,
                                         Margin = new Padding(10),
                                         Tag = reader["ItemID"].ToString()
                                     };
@@ -66,7 +66,7 @@ namespace TriforceSalon.Class_Components
                                     Label labelTitle = new Label
                                     {
                                         Text = reader["ItemName"].ToString(),
-                                        Location = new Point(10, 160), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 160), 
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -77,7 +77,7 @@ namespace TriforceSalon.Class_Components
                                     {
                                         //papalitan ito at gagawing srp
                                         Text = "Amount: ₱" + reader["SRP"].ToString(),
-                                        Location = new Point(10, 210), // Adjusted location to accommodate the layout
+                                        Location = new Point(10, 210),
                                         ForeColor = Color.Black,
                                         AutoSize = true,
                                         Font = new Font("Stanberry", 12, FontStyle.Regular),
@@ -107,8 +107,6 @@ namespace TriforceSalon.Class_Components
             using (var conn = new MySqlConnection(mysqlcon))
             {
                 await conn.OpenAsync();
-                //string query = "select ItemID, ItemName, Photo, Cost from inventory where ItemName Like @search LIMIT 100";
-                //string query = "SELECT ItemID, ItemName, Photo, SRP FROM inventory WHERE ItemName Like @search AND STOCK != 0 LIMIT 100";
                 string query = "SELECT ItemID, ItemName, Photo, SRP FROM inventory WHERE ItemName LIKE @search AND STOCK <> 0 LIMIT 100";
 
                 using (MySqlCommand command = new MySqlCommand(query, conn))

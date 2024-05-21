@@ -124,7 +124,6 @@
             this.ServicePromoComB.Name = "ServicePromoComB";
             this.ServicePromoComB.Size = new System.Drawing.Size(347, 36);
             this.ServicePromoComB.TabIndex = 50;
-            this.ServicePromoComB.SelectedIndexChanged += new System.EventHandler(this.ServicePromoComB_SelectedIndexChanged);
             // 
             // ServicePromoTxtB
             // 

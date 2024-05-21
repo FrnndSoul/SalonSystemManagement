@@ -1,12 +1,4 @@
-﻿using Guna.UI2.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using TriforceSalon.Class_Components;
 
@@ -38,18 +30,13 @@ namespace TriforceSalon.UserControls.Promo_Controls
 
         private void PercentageTxtB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Check if the key is a digit or backspace
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
-                // If not a digit or backspace, handle the keypress
                 e.Handled = true;
                 return;
             }
-
-            // Check if the current length of the text is already 2
             if (PercentageTxtB.TextLength >= 2 && e.KeyChar != '\b')
             {
-                // If so, handle the keypress
                 e.Handled = true;
                 return;
             }
@@ -115,8 +102,6 @@ namespace TriforceSalon.UserControls.Promo_Controls
                 MessageBox.Show(ex.ToString(), "Error in Search");
             }
         }
-
-        
         private async void UpdatePromoBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(PromoNameTxtB.Text) ||

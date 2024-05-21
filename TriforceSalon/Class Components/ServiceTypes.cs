@@ -1,16 +1,12 @@
 ﻿using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TriforceSalon.UserControls;
 using TriforceSalon.UserControls.Service_Controls;
 
 namespace TriforceSalon.Class_Components
@@ -24,7 +20,6 @@ namespace TriforceSalon.Class_Components
         private bool isNewServiceImageSelected = false;
         public int serviceTypeID;
         SalonServices salonServices = new SalonServices();
-        //public List<ServiceTypesInfo> serviceTypes;
 
         public ServiceTypes()
         {
@@ -136,14 +131,13 @@ namespace TriforceSalon.Class_Components
                     {
                         Image selectedImage = Image.FromFile(openFileDialog.FileName);
 
-                        // Resize the selected image
                         int newWidth = 163;
                         int newHeight = 128;
 
                         Image resizedImage = newImageSIze.ResizeImages(selectedImage, newWidth, newHeight);
 
                         ServiceTypeControl.serviceTypeInstance.ServiceTypePicB.Image = resizedImage;
-                        isNewServiceImageSelected = true; //flag ito para sa image
+                        isNewServiceImageSelected = true;
                     }
                     catch (Exception ex)
                     {
@@ -199,7 +193,6 @@ namespace TriforceSalon.Class_Components
                                 await command.ExecuteNonQueryAsync();
                             }
                         }
-                        //await salonServices.PopulateServiceTypeForInsert();
                         await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                         ClearServiceTypes();
                     }
@@ -270,7 +263,6 @@ namespace TriforceSalon.Class_Components
             }
             serviceTypeID = 0;
         }
-
         public async Task UpdateServiceType(int serviceID)
         {
 
@@ -330,7 +322,6 @@ namespace TriforceSalon.Class_Components
                                 }
                             }
                         }
-                        //await salonServices.PopulateServiceTypeForInsert();
                         await ServiceTypeInfoDGV(ServiceTypeControl.serviceTypeInstance.ServiceTypeDGV);
                         ClearServiceTypes();
                         HideButton(true, true, false, false);
@@ -354,15 +345,12 @@ namespace TriforceSalon.Class_Components
                 }
             }
         }
-
         public void ClearServiceTypes()
         {
             ServiceTypeControl.serviceTypeInstance.ServiceTypeTxtB.Text = null;
             ServiceTypeControl.serviceTypeInstance.ServiceTypePicB.Image = null;
 
         }
-
-
         public void HideButton(bool add, bool edit, bool cancel, bool update)
         {
             ServiceTypeControl.serviceTypeInstance.UpdateServiceTBtn.Visible = update;

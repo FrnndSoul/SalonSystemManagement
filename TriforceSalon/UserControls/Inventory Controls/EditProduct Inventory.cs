@@ -26,7 +26,6 @@ namespace TriforceSalon.UserControls
         {
             InitializeComponent();
         }
-        //editProduct_Inventory1.InitialLoading(ItemName, ItemID, SRP, Cost, Stock, Unit, EmployeeID);
         public void InitialLoading(string name, int id, decimal srp, int cost, int stock, string unit, int userID)
         {
             Name = name;
